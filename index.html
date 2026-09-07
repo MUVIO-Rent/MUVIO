@@ -130,7 +130,7 @@
             <div class="flex items-center justify-between h-20">
 
                 <!-- Логотип MUVIO -->
-                <a href="#" class="flex items-center gap-3 group">
+                <a href="index.html" class="flex items-center gap-3 group">
                     <img src="images/logo.jpg" alt="MUVIO"
                         class="h-10 md:h-12 w-auto object-contain border border-[#1D5D3B]/20 p-1 bg-white">
                     <div class="hidden sm:flex flex-col">
@@ -142,33 +142,43 @@
                 </a>
 
                 <!-- Навігація -->
-                <nav class="hidden md:flex items-center space-x-1 lg:space-x-5">
-                    <a href="#catalog"
-                        class="font-brand font-semibold text-xs lg:text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] px-2 py-1 transition-colors">
+                <nav class="hidden md:flex items-center space-x-1 lg:space-x-4">
+                    <a href="index.html#catalog"
+                        class="font-brand font-bold text-xs lg:text-sm uppercase tracking-wider text-[#1D5D3B] border-b-2 border-[#1D5D3B] px-2 py-1 transition-colors">
                         КАТАЛОГ
                     </a>
-                    <a href="#calculator"
+                    <a href="franchise.html"
                         class="font-brand font-semibold text-xs lg:text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] px-2 py-1 transition-colors">
-                        КАЛЬКУЛЯТОР ВИКУПУ
+                        ФРАНШИЗА
                     </a>
-                    <a href="#tariffs"
+                    <a href="cabinet.html"
                         class="font-brand font-semibold text-xs lg:text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] px-2 py-1 transition-colors">
-                        ТАРИФИ ТА УМОВИ
+                        ОСОБИСТИЙ КАБІНЕТ
                     </a>
-                    <a href="#service"
+                    <a href="index.html#calculator"
                         class="font-brand font-semibold text-xs lg:text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] px-2 py-1 transition-colors">
-                        СЕРВІС (ОДЕСА)
+                        КАЛЬКУЛЯТОР
                     </a>
-                    <a href="#contacts"
+                    <a href="index.html#service"
+                        class="font-brand font-semibold text-xs lg:text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] px-2 py-1 transition-colors">
+                        СЕРВІС
+                    </a>
+                    <a href="index.html#contacts"
                         class="font-brand font-semibold text-xs lg:text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] px-2 py-1 transition-colors">
                         КОНТАКТИ
                     </a>
                 </nav>
 
-                <!-- Кнопка Telegram бота -->
-                <div class="flex items-center gap-3">
+                <!-- Кнопки дій -->
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <a href="cabinet.html"
+                        class="hidden sm:inline-flex items-center gap-1.5 font-brand font-semibold text-xs uppercase tracking-wider text-[#1D5D3B] hover:text-[#24754A] px-3 py-2 border border-[#1D5D3B]/30 hover:border-[#1D5D3B] chamfer-badge bg-[#1D5D3B]/5 hover:bg-[#1D5D3B]/10 transition-colors">
+                        <i data-lucide="user" class="w-4 h-4 text-[#1D5D3B]"></i>
+                        <span>КАБІНЕТ</span>
+                    </a>
+
                     <a href="https://t.me/muviobot" target="_blank" rel="noopener noreferrer"
-                        class="chamfer-btn bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs md:text-sm uppercase tracking-widest px-4 md:px-6 py-2.5 flex items-center gap-2 border border-[#1D5D3B]">
+                        class="chamfer-btn bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs md:text-sm uppercase tracking-widest px-4 md:px-5 py-2.5 flex items-center gap-2 border border-[#1D5D3B]">
                         <i data-lucide="send" class="w-4 h-4"></i>
                         <span>TELEGRAM BOT</span>
                     </a>
@@ -184,32 +194,47 @@
         </div>
 
         <!-- Mobile Drawer -->
-        <div id="mobileMenu" class="hidden md:hidden border-t-2 border-[#1D5D3B] bg-white px-4 py-4 space-y-3">
-            <a href="#catalog"
-                class="mobile-nav-link block font-brand font-semibold text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] py-2">
-                КАТАЛОГ
+        <div id="mobileMenu" class="hidden md:hidden border-t-2 border-[#1D5D3B] bg-white px-4 py-4 space-y-2">
+            <a href="index.html#catalog"
+                class="mobile-nav-link block font-brand font-bold text-sm uppercase tracking-wider text-[#1D5D3B] py-2 border-l-2 border-[#1D5D3B] pl-2">
+                КАТАЛОГ СКУТЕРІВ
             </a>
-            <a href="#calculator"
-                class="mobile-nav-link block font-brand font-semibold text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] py-2">
+            <a href="franchise.html"
+                class="mobile-nav-link block font-brand font-semibold text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] py-2 pl-2">
+                ФРАНШИЗА ТА ПАРТНЕРСТВО
+            </a>
+            <a href="cabinet.html"
+                class="mobile-nav-link block font-brand font-semibold text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] py-2 pl-2">
+                ОСОБИСТИЙ КАБІНЕТ
+            </a>
+            <a href="index.html#calculator"
+                class="mobile-nav-link block font-brand font-semibold text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] py-2 pl-2">
                 КАЛЬКУЛЯТОР ВИКУПУ (RENT-TO-OWN)
             </a>
-            <a href="#tariffs"
-                class="mobile-nav-link block font-brand font-semibold text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] py-2">
+            <a href="index.html#tariffs"
+                class="mobile-nav-link block font-brand font-semibold text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] py-2 pl-2">
                 ТАРИФИ ТА УМОВИ
             </a>
-            <a href="#service"
-                class="mobile-nav-link block font-brand font-semibold text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] py-2">
+            <a href="index.html#service"
+                class="mobile-nav-link block font-brand font-semibold text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] py-2 pl-2">
                 СЕРВІС: ВУЛ. ПРИМОРСЬКА, 22
             </a>
-            <a href="#contacts"
-                class="mobile-nav-link block font-brand font-semibold text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] py-2">
+            <a href="index.html#contacts"
+                class="mobile-nav-link block font-brand font-semibold text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] py-2 pl-2">
                 КОНТАКТИ
             </a>
-            <a href="https://t.me/muviobot" target="_blank"
-                class="chamfer-btn w-full bg-[#1D5D3B] text-white font-brand font-bold text-center py-3 flex items-center justify-center gap-2">
-                <i data-lucide="send" class="w-4 h-4"></i>
-                <span>ВІДКРИТИ TELEGRAM BOT</span>
-            </a>
+            <div class="pt-2 flex flex-col gap-2">
+                <a href="cabinet.html"
+                    class="chamfer-btn w-full bg-slate-100 hover:bg-slate-200 text-[#1D5D3B] font-brand font-bold text-center py-2.5 flex items-center justify-center gap-2 border border-[#1D5D3B]/30">
+                    <i data-lucide="user" class="w-4 h-4"></i>
+                    <span>УВІЙТИ В ОСОБИСТИЙ КАБІНЕТ</span>
+                </a>
+                <a href="https://t.me/muviobot" target="_blank"
+                    class="chamfer-btn w-full bg-[#1D5D3B] text-white font-brand font-bold text-center py-3 flex items-center justify-center gap-2">
+                    <i data-lucide="send" class="w-4 h-4"></i>
+                    <span>ВІДКРИТИ TELEGRAM BOT</span>
+                </a>
+            </div>
         </div>
     </header>
 
@@ -874,12 +899,20 @@
                         НАВІГАЦІЯ
                     </div>
                     <ul class="space-y-2 text-xs font-brand tracking-wide">
-                        <li><a href="#catalog" class="hover:text-emerald-300 transition-colors">КАТАЛОГ</a>
-                        </li>
-                        <li><a href="#calculator" class="hover:text-emerald-300 transition-colors">КАЛЬКУЛЯТОР
+                        <li><a href="index.html#catalog" class="hover:text-emerald-300 transition-colors">КАТАЛОГ
+                                ТРАНСПОРТУ</a></li>
+                        <li><a href="franchise.html"
+                                class="hover:text-emerald-300 transition-colors text-emerald-400 font-bold">ФРАНШИЗА ТА
+                                ПАРТНЕРСТВО</a></li>
+                        <li><a href="cabinet.html"
+                                class="hover:text-emerald-300 transition-colors text-emerald-400 font-bold">ОСОБИСТИЙ
+                                КАБІНЕТ</a></li>
+                        <li><a href="index.html#calculator" class="hover:text-emerald-300 transition-colors">КАЛЬКУЛЯТОР
                                 ВИКУПУ</a></li>
-                        <li><a href="#tariffs" class="hover:text-emerald-300 transition-colors">ТАРИФИ ТА УМОВИ</a></li>
-                        <li><a href="#service" class="hover:text-emerald-300 transition-colors">СЕРВІС В ОДЕСІ</a></li>
+                        <li><a href="index.html#tariffs" class="hover:text-emerald-300 transition-colors">ТАРИФИ ТА
+                                УМОВИ</a></li>
+                        <li><a href="index.html#service" class="hover:text-emerald-300 transition-colors">СЕРВІС В
+                                ОДЕСІ</a></li>
                     </ul>
                 </div>
 

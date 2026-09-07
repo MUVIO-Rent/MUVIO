@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="uk" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Особистий кабінет — MUVIO Rent & Buyout | Статус оренди, викуп та історія</title>
+    <meta name="description"
+        content="Особистий кабінет клієнта сервісу прокату та викупу електротранспорту MUVIO. Перевірка активної оренди, прогресу викупу Rent-to-Own, історії оплат та ремонтів.">
+
+    <!-- Google Fonts: Chakra Petch & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,400;0,500;0,600;0,700;1,700&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        muvio: {
+                            green: '#1D5D3B',
+                            hover: '#24754A',
+                            forest: '#123824',
+                            dark: '#111827',
+                            graphite: '#1F2937',
+                            slate: '#4B5563',
+                            light: '#F8FAFC',
+                            card: '#FFFFFF',
+                            border: '#1D5D3B',
+                            accent: '#10B981'
+                        }
+                    },
+                    fontFamily: {
+                        brand: ['"Chakra Petch"', 'sans-serif'],
+                        sans: ['"Inter"', 'sans-serif']
+                    }
+                }
+            }
+        };
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* MUVIO High-Tech Geometric Styles */
+        .chamfer-box {
+            clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+        }
+
+        .chamfer-btn {
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .chamfer-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px -4px rgba(29, 93, 59, 0.35);
+        }
+
+        .chamfer-badge {
+            clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+        }
+
+        .tech-card {
+            border: 2px solid #1D5D3B;
+            transition: all 0.25s ease;
+        }
+
+        .tech-card:hover {
+            border-color: #24754A;
+            box-shadow: 0 16px 32px -8px rgba(29, 93, 59, 0.22);
+        }
+
+        /* Pulsing indicator */
+        @keyframes pulse-emerald {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.15); }
+        }
+        .pulse-emerald {
+            animation: pulse-emerald 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-[#F9FAFB] text-[#111827] font-sans antialiased selection:bg-[#1D5D3B] selection:text-white relative min-h-screen">
+
+    <!-- ==================== АРХІТЕКТУРНІ НАПРЯМНІ ТА МАРКУВАННЯ ПО БОКАХ (Polestar Aesthetic) ==================== -->
+    <div class="fixed inset-y-0 left-0 right-0 pointer-events-none max-w-7xl mx-auto z-40 hidden xl:block">
+        <!-- Ліва вертикальна лінія розмітки -->
+        <div class="absolute left-0 top-0 bottom-0 w-[1px] bg-slate-200">
+            <div class="sticky top-32 flex flex-col items-center gap-4 py-4 -translate-x-full pr-3">
+                <span class="w-1.5 h-1.5 bg-[#1D5D3B]"></span>
+                <span
+                    class="text-[9px] font-brand tracking-[0.25em] text-slate-400 uppercase select-none whitespace-nowrap [writing-mode:vertical-rl] rotate-180">
+                    MUVIO CLIENT DASHBOARD // SECURE TELEMETRY
+                </span>
+                <span class="h-10 w-[1px] bg-slate-200"></span>
+            </div>
+        </div>
+        <!-- Права вертикальна лінія розмітки -->
+        <div class="absolute right-0 top-0 bottom-0 w-[1px] bg-slate-200">
+            <div class="sticky top-32 flex flex-col items-center gap-4 py-4 translate-x-full pl-3">
+                <span class="w-1.5 h-1.5 bg-[#1D5D3B]"></span>
+                <span
+                    class="text-[9px] font-brand tracking-[0.25em] text-slate-400 uppercase select-none whitespace-nowrap [writing-mode:vertical-rl]">
+                    SYSTEM ID: 46.49191° N, 30.73519° E // TELEGRAM AUTH
+                </span>
+                <span class="h-10 w-[1px] bg-slate-200"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== 1. ХЕДЕР (НАВІГАЦІЯ) ==================== -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b-2 border-[#1D5D3B] shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-x border-slate-200/60">
+            <div class="flex items-center justify-between h-20">
+
+                <!-- Логотип MUVIO -->
+                <a href="index.html" class="flex items-center gap-3 group">
+                    <img src="images/logo.jpg" alt="MUVIO"
+                        class="h-10 md:h-12 w-auto object-contain border border-[#1D5D3B]/20 p-1 bg-white">
+                    <div class="hidden sm:flex flex-col">
+                        <span
+                            class="font-brand font-bold text-lg tracking-wider text-[#1D5D3B] leading-none">MUVIO</span>
+                        <span class="font-brand text-[10px] tracking-widest text-[#4B5563] uppercase">ТВОЄ ELECTRO
+                            CITY</span>
+                    </div>
+                </a>
+
+                <!-- Навігація -->
+                <nav class="hidden md:flex items-center space-x-1 lg:space-x-4">
+                    <a href="index.html#catalog"
+                        class="font-brand font-semibold text-xs lg:text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] px-2 py-1 transition-colors">
+                        КАТАЛОГ
+                    </a>
+                    <a href="franchise.html"
+                        class="font-brand font-semibold text-xs lg:text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] px-2 py-1 transition-colors">
+                        ФРАНШИЗА
+                    </a>
+                    <a href="cabinet.html"
+                        class="font-brand font-bold text-xs lg:text-sm uppercase tracking-wider text-[#1D5D3B] border-b-2 border-[#1D5D3B] px-2 py-1 transition-colors">
+                        ОСОБИСТИЙ КАБІНЕТ
+                    </a>
+                    <a href="index.html#calculator"
+                        class="font-brand font-semibold text-xs lg:text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] px-2 py-1 transition-colors">
+                        КАЛЬКУЛЯТОР
+                    </a>
+                    <a href="index.html#service"
+                        class="font-brand font-semibold text-xs lg:text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] px-2 py-1 transition-colors">
+                        СЕРВІС
+                    </a>
+                    <a href="index.html#contacts"
+                        class="font-brand font-semibold text-xs lg:text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] px-2 py-1 transition-colors">
+                        КОНТАКТИ
+                    </a>
+                </nav>
+
+                <!-- Кнопки дій -->
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <a href="cabinet.html"
+                        class="hidden sm:inline-flex items-center gap-1.5 font-brand font-bold text-xs uppercase tracking-wider text-white bg-[#1D5D3B] px-3 py-2 border border-[#1D5D3B] chamfer-badge">
+                        <i data-lucide="user" class="w-4 h-4 text-white"></i>
+                        <span>КАБІНЕТ</span>
+                    </a>
+
+                    <a href="https://t.me/muviobot" target="_blank" rel="noopener noreferrer"
+                        class="chamfer-btn bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs md:text-sm uppercase tracking-widest px-4 md:px-5 py-2.5 flex items-center gap-2 border border-[#1D5D3B]">
+                        <i data-lucide="send" class="w-4 h-4"></i>
+                        <span>TELEGRAM BOT</span>
+                    </a>
+
+                    <!-- Mobile Menu Button -->
+                    <button id="mobileMenuBtn" aria-label="Меню"
+                        class="md:hidden p-2 text-[#111827] hover:text-[#1D5D3B]">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobileMenu" class="hidden md:hidden border-t-2 border-[#1D5D3B] bg-white px-4 py-4 space-y-2">
+            <a href="index.html#catalog"
+                class="mobile-nav-link block font-brand font-semibold text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] py-2 pl-2">
+                КАТАЛОГ СКУТЕРІВ
+            </a>
+            <a href="franchise.html"
+                class="mobile-nav-link block font-brand font-semibold text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] py-2 pl-2">
+                ФРАНШИЗА ТА ПАРТНЕРСТВО
+            </a>
+            <a href="cabinet.html"
+                class="mobile-nav-link block font-brand font-bold text-sm uppercase tracking-wider text-[#1D5D3B] py-2 border-l-2 border-[#1D5D3B] pl-2">
+                ОСОБИСТИЙ КАБІНЕТ
+            </a>
+            <a href="index.html#calculator"
+                class="mobile-nav-link block font-brand font-semibold text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] py-2 pl-2">
+                КАЛЬКУЛЯТОР ВИКУПУ (RENT-TO-OWN)
+            </a>
+            <a href="index.html#tariffs"
+                class="mobile-nav-link block font-brand font-semibold text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] py-2 pl-2">
+                ТАРИФИ ТА УМОВИ
+            </a>
+            <a href="index.html#service"
+                class="mobile-nav-link block font-brand font-semibold text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] py-2 pl-2">
+                СЕРВІС: ВУЛ. ПРИМОРСЬКА, 22
+            </a>
+            <a href="index.html#contacts"
+                class="mobile-nav-link block font-brand font-semibold text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] py-2 pl-2">
+                КОНТАКТИ
+            </a>
+            <div class="pt-2 flex flex-col gap-2">
+                <a href="https://t.me/muviobot" target="_blank"
+                    class="chamfer-btn w-full bg-[#1D5D3B] text-white font-brand font-bold text-center py-3 flex items-center justify-center gap-2">
+                    <i data-lucide="send" class="w-4 h-4"></i>
+                    <span>ВІДКРИТИ TELEGRAM BOT</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== ОСНОВНИЙ КОНТЕНТ КАБІНЕТУ ==================== -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-x border-slate-200/60 py-10 md:py-16 min-h-[70vh]">
+
+        <!-- ==================== СТАН А: ЕКРАН АВТОРИЗАЦІЇ (ЯКЩО НЕ ЗАЛОГІНЕНИЙ) ==================== -->
+        <div id="authSection" class="max-w-xl mx-auto space-y-8">
+            <div class="text-center space-y-3">
+                <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#1D5D3B]/10 border border-[#1D5D3B] chamfer-badge">
+                    <span class="w-2 h-2 bg-[#1D5D3B]"></span>
+                    <span class="font-brand font-bold text-xs uppercase tracking-widest text-[#1D5D3B]">
+                        MUVIO CLIENT ACCESS
+                    </span>
+                </div>
+                <h1 class="font-brand font-bold text-3xl sm:text-4xl uppercase tracking-tight text-[#111827]">
+                    ОСОБИСТИЙ КАБІНЕТ
+                </h1>
+                <p class="text-sm text-slate-600">
+                    Авторизуйтесь через ваш Telegram-акаунт, прив'язаний до договору оренди або викупу в боті <span class="font-semibold text-[#1D5D3B]">@muviobot</span>.
+                </p>
+            </div>
+
+            <div class="bg-white border-2 border-[#1D5D3B] p-6 sm:p-10 chamfer-box shadow-xl space-y-8">
+                <!-- Офіційний Telegram Login Widget -->
+                <div class="text-center space-y-4">
+                    <div class="font-brand font-bold text-xs uppercase tracking-widest text-slate-500">
+                        ОФІЦІЙНИЙ ВХІД TELEGRAM
+                    </div>
+                    <div id="telegramWidgetWrap" class="flex justify-center min-h-[50px] items-center">
+                        <!-- Telegram Login Widget Script -->
+                        <script async src="https://telegram.org/js/telegram-widget.js?22"
+                            data-telegram-login="muviobot"
+                            data-size="large"
+                            data-onauth="onTelegramAuth(user)"
+                            data-request-access="write"></script>
+                    </div>
+                    <p class="text-[11px] text-slate-400 font-mono">
+                        🔒 Натисніть кнопку вище для безпечної авторизації через офіційний віджет Telegram.
+                    </p>
+                </div>
+
+                <div class="relative flex py-2 items-center">
+                    <div class="flex-grow border-t border-slate-200"></div>
+                    <span class="flex-shrink mx-4 text-xs font-brand uppercase tracking-wider text-slate-400 bg-white px-2">
+                        АБО ТЕСТОВИЙ ВХІД / DEMO
+                    </span>
+                    <div class="flex-grow border-t border-slate-200"></div>
+                </div>
+
+                <!-- Альтернативний швидкий тестовий вхід (без залежності від домену в BotFather) -->
+                <div class="space-y-4 bg-slate-50 p-5 border border-slate-200 chamfer-badge">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="info" class="w-4 h-4 text-[#1D5D3B]"></i>
+                        <span class="font-brand font-bold text-xs uppercase tracking-wider text-[#111827]">
+                            Швидкий доступ для перевірки кабінету
+                        </span>
+                    </div>
+                    <p class="text-xs text-slate-500">
+                        Якщо ви тестуєте сайт локально або віджет Telegram показує помилку домену:
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-2">
+                        <input type="number" id="manualTelegramId" placeholder="Введіть Telegram ID (напр. 7288164492)"
+                            class="flex-1 bg-white border-2 border-slate-300 focus:border-[#1D5D3B] px-3 py-2 text-xs font-mono chamfer-badge outline-none">
+                        <button type="button" onclick="loginWithManualId()"
+                            class="chamfer-btn bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs uppercase px-4 py-2">
+                            УВІЙТИ ЗА ID
+                        </button>
+                    </div>
+
+                    <div class="pt-2 flex flex-col sm:flex-row gap-2">
+                        <button type="button" onclick="loginAsDemoUser('buyout')"
+                            class="chamfer-btn flex-1 bg-white hover:bg-emerald-50 text-[#1D5D3B] border border-[#1D5D3B] font-brand font-bold text-xs uppercase py-2 text-center">
+                            🚀 ДЕМО: КЛІЄНТ З ВИКУПОМ
+                        </button>
+                        <button type="button" onclick="loginAsDemoUser('rent')"
+                            class="chamfer-btn flex-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 font-brand font-bold text-xs uppercase py-2 text-center">
+                            🛵 ДЕМО: ТІЛЬКИ ОРЕНДА
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ==================== СТАН Б: ЕКРАН ПРОФІЛЮ (ПІСЛЯ АВТОРИЗАЦІЇ) ==================== -->
+        <div id="profileSection" class="hidden space-y-8">
+
+            <!-- Шапка користувача та баланс -->
+            <div class="bg-white border-2 border-[#1D5D3B] p-6 chamfer-box shadow-md flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                <div class="flex items-center gap-4">
+                    <div id="userAvatarWrap"
+                        class="w-14 h-14 bg-[#1D5D3B] text-white font-brand font-bold text-xl flex items-center justify-center chamfer-badge border-2 border-[#1D5D3B] overflow-hidden">
+                        <span id="userAvatarText">M</span>
+                        <img id="userAvatarImg" src="" alt="Avatar" class="w-full h-full object-cover hidden">
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h2 id="userNameDisplay" class="font-brand font-bold text-xl sm:text-2xl text-[#111827] uppercase">
+                                Клієнт MUVIO
+                            </h2>
+                            <span id="userVerifiedBadge" class="text-[#10B981]"><i data-lucide="check-circle-2" class="w-5 h-5"></i></span>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-slate-500 font-mono mt-0.5">
+                            <span id="userUsernameDisplay">@username</span>
+                            <span>ID: <span id="userIdDisplay" class="text-slate-700 font-bold">7288164492</span></span>
+                            <span id="userPhoneDisplay">тел. +380...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4 self-stretch md:self-auto justify-between md:justify-end border-t md:border-t-0 pt-4 md:pt-0 border-slate-100">
+                    <!-- Бонуси -->
+                    <div class="bg-[#F8FAFC] border border-[#1D5D3B]/40 px-4 py-2 chamfer-badge text-right">
+                        <div class="text-[10px] uppercase font-brand tracking-wider text-slate-500">Бонусний рахунок</div>
+                        <div id="userBonusDisplay" class="font-brand font-bold text-lg text-[#1D5D3B]">1 250 ₴</div>
+                    </div>
+
+                    <!-- Кнопка виходу -->
+                    <button type="button" onclick="logoutUser()"
+                        class="chamfer-btn bg-slate-100 hover:bg-rose-50 hover:text-rose-600 text-slate-600 border border-slate-300 font-brand font-bold text-xs uppercase px-4 py-2.5 flex items-center gap-1.5 transition-colors">
+                        <i data-lucide="log-out" class="w-4 h-4"></i>
+                        <span>ВИЙТИ</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Верхній блок: 2 головні картки (Оренда + Прогрес викупу) -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+                <!-- 1. ПОТОЧНИЙ СТАТУС ОРЕНДИ -->
+                <div class="bg-white border-2 border-[#1D5D3B] p-6 chamfer-box shadow-md flex flex-col justify-between">
+                    <div class="space-y-5">
+                        <div class="flex items-center justify-between pb-3 border-b border-slate-200">
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="gauge" class="w-5 h-5 text-[#1D5D3B]"></i>
+                                <h3 class="font-brand font-bold text-lg uppercase tracking-wider text-[#111827]">
+                                    АКТИВНА ОРЕНДА
+                                </h3>
+                            </div>
+                            <span id="rentalStatusBadge"
+                                class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-emerald-100 text-emerald-800 font-brand font-bold text-xs uppercase tracking-wider chamfer-badge">
+                                <span class="w-2 h-2 bg-[#10B981] rounded-full pulse-emerald"></span>
+                                <span id="rentalStatusText">АКТИВНА</span>
+                            </span>
+                        </div>
+
+                        <!-- Транспорт та інфо -->
+                        <div class="flex items-start gap-4">
+                            <img id="rentalVehicleImg" src="images/crosser.jpg" alt="Скутер"
+                                class="w-28 h-20 object-cover border border-slate-300 bg-slate-50 p-1 flex-shrink-0">
+                            <div class="space-y-1">
+                                <div id="rentalVehicleTitle" class="font-brand font-bold text-lg text-[#111827]">
+                                    Crosser CR-13 №1
+                                </div>
+                                <div class="text-xs text-slate-500 font-mono">
+                                    Інв. номер: <span id="rentalPlateNumber" class="text-slate-800 font-bold">MUVIO-013</span>
+                                </div>
+                                <div class="text-xs text-slate-500">
+                                    Договір: <span id="rentalContractNumber" class="font-semibold text-slate-700">№2804-5 від 28.04.2026</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Деталі терміну та оплати -->
+                        <div class="grid grid-cols-2 gap-3 bg-[#F8FAFC] p-3.5 border border-slate-200 text-xs">
+                            <div>
+                                <span class="text-slate-500 block">Оплачено до:</span>
+                                <span id="rentalEndDate" class="font-brand font-bold text-sm text-[#111827]">
+                                    15.09.2026, 20:00
+                                </span>
+                            </div>
+                            <div>
+                                <span class="text-slate-500 block">Тариф оренди:</span>
+                                <span id="rentalRate" class="font-brand font-bold text-sm text-[#1D5D3B]">
+                                    2 500 ₴ / тиждень
+                                </span>
+                            </div>
+                            <div>
+                                <span class="text-slate-500 block">Комплектація:</span>
+                                <span id="rentalEquipment" class="text-slate-700 font-medium">Шолом + Зарядка 10Ач</span>
+                            </div>
+                            <div>
+                                <span class="text-slate-500 block">Сервісне ТО:</span>
+                                <span class="text-emerald-700 font-bold">Безкоштовно на Приморській</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Дії оренди -->
+                    <div class="pt-6 border-t border-slate-200 mt-6 flex flex-col sm:flex-row gap-2">
+                        <button type="button" onclick="showPaymentModal('rent')"
+                            class="chamfer-btn flex-1 bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs uppercase py-2.5 flex items-center justify-center gap-1.5">
+                            <i data-lucide="credit-card" class="w-4 h-4"></i>
+                            <span>ПРОДОВЖИТИ ОРЕНДУ (IBAN)</span>
+                        </button>
+                        <a href="https://t.me/muviobot" target="_blank"
+                            class="chamfer-btn flex-1 bg-white hover:bg-slate-100 text-[#111827] border border-slate-300 font-brand font-bold text-xs uppercase py-2.5 flex items-center justify-center gap-1.5">
+                            <i data-lucide="send" class="w-4 h-4 text-[#1D5D3B]"></i>
+                            <span>ОПЛАТИТИ В БОТІ</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 2. ПРОГРЕС ВИКУПУ (RENT-TO-OWN) -->
+                <div class="bg-white border-2 border-[#1D5D3B] p-6 chamfer-box shadow-md flex flex-col justify-between">
+                    <div class="space-y-5">
+                        <div class="flex items-center justify-between pb-3 border-b border-slate-200">
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="award" class="w-5 h-5 text-[#1D5D3B]"></i>
+                                <h3 class="font-brand font-bold text-lg uppercase tracking-wider text-[#111827]">
+                                    ПРОГРЕС ВИКУПУ (RENT-TO-OWN)
+                                </h3>
+                            </div>
+                            <span id="buyoutStatusBadge"
+                                class="inline-flex items-center px-2.5 py-1 bg-[#1D5D3B]/10 text-[#1D5D3B] font-brand font-bold text-xs uppercase tracking-wider chamfer-badge">
+                                ДОГОВІР АКТИВНИЙ
+                            </span>
+                        </div>
+
+                        <!-- Модель у викупі -->
+                        <div>
+                            <div id="buyoutVehicleTitle" class="font-brand font-bold text-lg text-[#111827]">
+                                Crosser CR-13 №1 (72V 60Ah)
+                            </div>
+                            <div class="text-xs text-slate-500 font-mono">
+                                Термін викупу: <span id="buyoutTerm">6 місяців</span> // Договір: <span id="buyoutContract">№2804-5</span>
+                            </div>
+                        </div>
+
+                        <!-- Фінансові цифри викупу -->
+                        <div class="grid grid-cols-3 gap-2 text-center bg-[#F8FAFC] p-3 border border-slate-200">
+                            <div>
+                                <span class="text-[10px] uppercase font-brand text-slate-500 block">Повна ціна</span>
+                                <span id="buyoutTotalPrice" class="font-brand font-bold text-base text-slate-800">80 000 ₴</span>
+                            </div>
+                            <div>
+                                <span class="text-[10px] uppercase font-brand text-[#1D5D3B] block">Виплачено</span>
+                                <span id="buyoutPaidAmount" class="font-brand font-bold text-base text-[#1D5D3B]">38 400 ₴</span>
+                            </div>
+                            <div>
+                                <span class="text-[10px] uppercase font-brand text-amber-600 block">Залишок</span>
+                                <span id="buyoutRemainingAmount" class="font-brand font-bold text-base text-amber-700">41 600 ₴</span>
+                            </div>
+                        </div>
+
+                        <!-- Шкала прогресу -->
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center text-xs font-brand font-bold uppercase tracking-wider">
+                                <span class="text-slate-600">Прогрес до власності:</span>
+                                <span id="buyoutPercentDisplay" class="text-[#1D5D3B] text-sm">48%</span>
+                            </div>
+                            <div class="w-full bg-slate-200 h-4 rounded-none overflow-hidden border border-slate-300">
+                                <div id="buyoutProgressBar"
+                                    class="bg-gradient-to-r from-[#1D5D3B] to-[#10B981] h-full transition-all duration-700 relative"
+                                    style="width: 48%;">
+                                </div>
+                            </div>
+                            <div class="flex justify-between text-[10px] font-mono text-slate-400">
+                                <span>Старт (20% внесок)</span>
+                                <span>50%</span>
+                                <span>100% ВЛАСНИК</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Дія викупу -->
+                    <div class="pt-6 border-t border-slate-200 mt-6 flex flex-col sm:flex-row gap-2">
+                        <button type="button" onclick="showPaymentModal('buyout')"
+                            class="chamfer-btn flex-1 bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs uppercase py-2.5 flex items-center justify-center gap-1.5">
+                            <i data-lucide="wallet" class="w-4 h-4"></i>
+                            <span>СПЛАТИТИ ВНЕСОК ЗА ВИКУП (IBAN)</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Нижня секція: Вкладки історії платежів, ремонтів та техпідтримки -->
+            <div class="bg-white border-2 border-[#1D5D3B] p-6 sm:p-8 chamfer-box shadow-md">
+                <!-- Заголовки вкладок -->
+                <div class="flex flex-wrap gap-2 border-b-2 border-slate-200 pb-4">
+                    <button type="button" id="tabBtnPayments" onclick="switchCabinetTab('payments')"
+                        class="chamfer-badge px-4 py-2 font-brand font-bold text-xs uppercase tracking-wider bg-[#1D5D3B] text-white transition-all">
+                        💳 ІСТОРІЯ ПЛАТЕЖІВ
+                    </button>
+                    <button type="button" id="tabBtnRepairs" onclick="switchCabinetTab('repairs')"
+                        class="chamfer-badge px-4 py-2 font-brand font-bold text-xs uppercase tracking-wider bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all">
+                        🛠 ІСТОРІЯ ТО ТА РЕМОНТІВ
+                    </button>
+                    <button type="button" id="tabBtnService" onclick="switchCabinetTab('service')"
+                        class="chamfer-badge px-4 py-2 font-brand font-bold text-xs uppercase tracking-wider bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all">
+                        📍 СЕРВІСНИЙ ХАБ ТА SOS
+                    </button>
+                </div>
+
+                <!-- ВМІСТ 1: Історія платежів -->
+                <div id="tabContentPayments" class="pt-6">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs border-collapse">
+                            <thead>
+                                <tr class="bg-slate-100 border-b border-slate-200 font-brand uppercase tracking-wider text-slate-600">
+                                    <th class="p-3">Дата</th>
+                                    <th class="p-3">Призначення</th>
+                                    <th class="p-3">Сума</th>
+                                    <th class="p-3">Бонуси</th>
+                                    <th class="p-3">Статус</th>
+                                </tr>
+                            </thead>
+                            <tbody id="paymentsTableBody" class="divide-y divide-slate-200 font-mono">
+                                <!-- Рендериться динамічно через JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ВМІСТ 2: Історія ремонтів -->
+                <div id="tabContentRepairs" class="pt-6 hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs border-collapse">
+                            <thead>
+                                <tr class="bg-slate-100 border-b border-slate-200 font-brand uppercase tracking-wider text-slate-600">
+                                    <th class="p-3">Дата</th>
+                                    <th class="p-3">Вид робіт / Запчастини</th>
+                                    <th class="p-3">Категорія</th>
+                                    <th class="p-3">Вартість для клієнта</th>
+                                    <th class="p-3">Статус</th>
+                                </tr>
+                            </thead>
+                            <tbody id="repairsTableBody" class="divide-y divide-slate-200 font-mono">
+                                <!-- Рендериться динамічно через JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ВМІСТ 3: Сервісний хаб та SOS -->
+                <div id="tabContentService" class="pt-6 hidden space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-[#F8FAFC] border border-[#1D5D3B] p-5 chamfer-box space-y-3">
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="map-pin" class="w-5 h-5 text-[#1D5D3B]"></i>
+                                <span class="font-brand font-bold text-sm uppercase tracking-wider text-[#111827]">
+                                    ТОЧКА ВИДАЧІ ТА СЕРВІС В ОДЕСІ
+                                </span>
+                            </div>
+                            <div class="text-xs text-slate-600 space-y-1">
+                                <p><strong>Адреса:</strong> м. Одеса, вул. Приморська, 22 (біля Військового узвозу)</p>
+                                <p><strong>Графік роботи:</strong> Щодня 11:00 — 22:00 без вихідних</p>
+                                <p><strong>Послуги:</strong> Планове ТО (безкоштовно), швидка заміна АКБ (Swap), підкачка коліс, протяжка гальм.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-[#F8FAFC] border border-[#1D5D3B] p-5 chamfer-box space-y-3">
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="phone-call" class="w-5 h-5 text-[#1D5D3B]"></i>
+                                <span class="font-brand font-bold text-sm uppercase tracking-wider text-[#111827]">
+                                    ШВИДКИЙ ЗВ'ЯЗОК З МАЙСТРОМ / SOS
+                                </span>
+                            </div>
+                            <div class="text-xs text-slate-600 space-y-2">
+                                <p>Якщо скутер пошкоджено, пробито колесо або потрібна евакуація в Одесі:</p>
+                                <div class="flex flex-col sm:flex-row gap-2 pt-1">
+                                    <a href="tel:+380638316361"
+                                        class="chamfer-btn bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs uppercase py-2 px-3 text-center">
+                                        📞 +38(063)-831-63-61
+                                    </a>
+                                    <a href="https://t.me/Muvio_Odesa" target="_blank"
+                                        class="chamfer-btn bg-white border border-[#1D5D3B] text-[#1D5D3B] font-brand font-bold text-xs uppercase py-2 px-3 text-center">
+                                        💬 ЧАТ ТЕХПІДТРИМКИ
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- ==================== МОДАЛЬНЕ ВІКНО РЕКВІЗИТІВ IBAN (ДЛЯ ОРЕНДИ / ВИКУПУ) ==================== -->
+    <div id="paymentModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white border-2 border-[#1D5D3B] max-w-lg w-full p-6 sm:p-8 chamfer-box space-y-5 shadow-2xl">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-200">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="building-2" class="w-5 h-5 text-[#1D5D3B]"></i>
+                    <h3 id="modalPaymentTitle" class="font-brand font-bold text-base uppercase tracking-wider text-[#111827]">
+                        ОПЛАТА ЗА РЕКВІЗИТАМИ ФОП
+                    </h3>
+                </div>
+                <button type="button" onclick="closePaymentModal()" class="text-slate-400 hover:text-slate-700">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <div class="space-y-3 text-xs">
+                <div>
+                    <span class="text-slate-500 block">Отримувач:</span>
+                    <span class="font-semibold text-slate-900">ФОП Привалов Максим Олександрович</span>
+                </div>
+                <div>
+                    <span class="text-slate-500 block">Код ЄДРПОУ/РНОКПП:</span>
+                    <div class="flex items-center justify-between bg-slate-100 p-2 chamfer-badge mt-1">
+                        <code class="font-mono text-xs font-bold text-slate-800">3894802591</code>
+                        <button onclick="copyToClipboard('3894802591', this)" class="text-[#1D5D3B] hover:underline font-brand font-bold uppercase text-[10px]">Копіювати</button>
+                    </div>
+                </div>
+                <div>
+                    <span class="text-slate-500 block">Рахунок IBAN (ПриватБанк):</span>
+                    <div class="flex items-center justify-between bg-slate-100 p-2 chamfer-badge mt-1">
+                        <code class="font-mono text-xs font-bold text-slate-800 break-all">UA213220010000026005350116194</code>
+                        <button onclick="copyToClipboard('UA213220010000026005350116194', this)" class="text-[#1D5D3B] hover:underline font-brand font-bold uppercase text-[10px] ml-2 flex-shrink-0">Копіювати</button>
+                    </div>
+                </div>
+                <div>
+                    <span class="text-slate-500 block">Обов'язкове призначення платежу:</span>
+                    <div class="bg-emerald-50 border border-emerald-300 p-3 chamfer-badge mt-1 space-y-2">
+                        <p id="modalPaymentPurpose" class="font-mono text-[11px] text-emerald-950 leading-relaxed break-words">
+                            Платіж за викуп транспортного засобу (скутер) згідно з Договором №2804-5 від 28.04.2026 р. Без ПДВ.
+                        </p>
+                        <button onclick="copyToClipboard(document.getElementById('modalPaymentPurpose').innerText, this)"
+                            class="chamfer-btn bg-[#1D5D3B] text-white font-brand font-bold text-[10px] uppercase px-3 py-1">
+                            Скопіювати призначення
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <p class="text-[11px] text-slate-500 italic">
+                ℹ️ Після оплати надішліть квитанцію адміністратору в Telegram <a href="https://t.me/Muvio_Odesa" target="_blank" class="text-[#1D5D3B] font-bold underline">@Muvio_Odesa</a> для миттєвого зарахування до вашого профілю.
+            </p>
+
+            <button type="button" onclick="closePaymentModal()"
+                class="chamfer-btn w-full bg-slate-100 hover:bg-slate-200 text-slate-800 font-brand font-bold text-xs uppercase py-2.5">
+                ЗАКРИТИ
+            </button>
+        </div>
+    </div>
+
+    <!-- ==================== 6. ФУТЕР ==================== -->
+    <footer class="bg-[#123824] text-white border-t-4 border-[#1D5D3B] py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-x border-emerald-900/40">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-12 border-b border-emerald-800/40">
+
+                <!-- Колонка 1: Про нас -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <img src="images/logo.jpg" alt="MUVIO" class="h-10 w-auto bg-white p-1 border border-white">
+                        <div class="flex flex-col">
+                            <span class="font-brand font-bold text-xl tracking-wider text-white">MUVIO</span>
+                            <span class="font-brand text-[9px] tracking-widest text-emerald-300 uppercase">ТВОЄ ELECTRO
+                                CITY</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-emerald-100 leading-relaxed">
+                        Офіційний прокат та викуп комерційного електротранспорту в Одесі. Власний парк перевіреної
+                        техніки в зборі з АКБ.
+                    </p>
+                </div>
+
+                <!-- Колонка 2: Навігація -->
+                <div>
+                    <div class="font-brand font-bold text-sm uppercase tracking-wider text-emerald-200 mb-4">
+                        НАВІГАЦІЯ
+                    </div>
+                    <ul class="space-y-2 text-xs font-brand tracking-wide">
+                        <li><a href="index.html#catalog" class="hover:text-emerald-300 transition-colors">КАТАЛОГ ТРАНСПОРТУ</a></li>
+                        <li><a href="franchise.html" class="hover:text-emerald-300 transition-colors text-emerald-400 font-bold">ФРАНШИЗА ТА ПАРТНЕРСТВО</a></li>
+                        <li><a href="cabinet.html" class="hover:text-emerald-300 transition-colors text-emerald-400 font-bold">ОСОБИСТИЙ КАБІНЕТ</a></li>
+                        <li><a href="index.html#calculator" class="hover:text-emerald-300 transition-colors">КАЛЬКУЛЯТОР ВИКУПУ</a></li>
+                        <li><a href="index.html#tariffs" class="hover:text-emerald-300 transition-colors">ТАРИФИ ТА УМОВИ</a></li>
+                        <li><a href="index.html#service" class="hover:text-emerald-300 transition-colors">СЕРВІС В ОДЕСІ</a></li>
+                    </ul>
+                </div>
+
+                <!-- Колонка 3: Топ моделі -->
+                <div>
+                    <div class="font-brand font-bold text-sm uppercase tracking-wider text-emerald-200 mb-4">
+                        ТОП МОДЕЛІ
+                    </div>
+                    <ul class="space-y-2 text-xs text-emerald-100 font-mono">
+                        <li>• Crosser CR-13 (72V 40/60Ah)</li>
+                        <li>• Crosser CR-20 (72V 40/60Ah)</li>
+                        <li>• Aima A700 (72V 40/60Ah)</li>
+                        <li>• Aima F606 (72V 40/60Ah)</li>
+                    </ul>
+                </div>
+
+                <!-- Колонка 4: Точна адреса та графік -->
+                <div>
+                    <div class="font-brand font-bold text-sm uppercase tracking-wider text-emerald-200 mb-4">
+                        ЛОКАЦІЯ ТА ЗВ'ЯЗОК
+                    </div>
+                    <div class="space-y-2 text-xs text-emerald-100">
+                        <p class="font-semibold text-white">м. Одеса, вул. Приморська, 22</p>
+                        <p>Понеділок — Неділя: з 11:00 до 22:00</p>
+                        <div class="pt-1.5 space-y-1 text-xs">
+                            <p>
+                                <span class="text-emerald-300">Телефон:</span>
+                                <a href="tel:+380638316361"
+                                    class="text-white hover:text-emerald-200 transition-colors ml-1 font-semibold">
+                                    +38(063)-831-63-61
+                                </a>
+                            </p>
+                            <p>
+                                <span class="text-emerald-300">Техпідтримка Telegram:</span>
+                                <a href="https://t.me/Muvio_Odesa" target="_blank" rel="noopener noreferrer"
+                                    class="text-white hover:text-emerald-200 transition-colors ml-1 font-semibold">
+                                    @Muvio_Odesa
+                                </a>
+                            </p>
+                        </div>
+                        <p class="pt-2">
+                            <a href="https://t.me/muviobot" target="_blank"
+                                class="chamfer-btn inline-block bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs uppercase px-4 py-2 mt-1 border border-emerald-500">
+                                ВІДКРИТИ TELEGRAM BOT →
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div
+                class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-emerald-200 gap-4 font-mono">
+                <div>© 2026 MUVIO Rent & Buyout. Одеса, вул. Приморська, 22.</div>
+                <div class="text-[11px]">Електротранспорт для кур'єрських служб та комерції</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== JAVASCRIPT ДЛЯ КАБІНЕТУ ==================== -->
+    <script>
+        // Стан поточного користувача
+        let currentUser = null;
+        let currentProfileData = null;
+
+        // ДЕМО-ДАНІ (використовуються, якщо сервер бекенду недоступний або для тесту)
+        const DEMO_PROFILES = {
+            buyout: {
+                user: {
+                    id: 7288164492,
+                    first_name: "Максим",
+                    last_name: "П.",
+                    username: "muvio_driver",
+                    phone: "+380638316361",
+                    bonus_balance: 1250
+                },
+                rental: {
+                    vehicle_info: "Crosser CR-13 №1 (2000W, 72V 60Ah)",
+                    plate_number: "MUVIO-013",
+                    contract_num: "2804-5",
+                    contract_date: "28.04.2026",
+                    end_date: "15.09.2026, 20:00",
+                    rate: "2 500 ₴ / тиждень",
+                    equipment: "Шолом + Швидка зарядка 10Ач",
+                    status: "active",
+                    image: "images/crosser.jpg"
+                },
+                buyout: {
+                    vehicle_info: "Crosser CR-13 №1",
+                    total_price: 80000,
+                    paid_amount: 38400,
+                    deposit_paid: 16000,
+                    term_months: 6,
+                    contract_num: "2804-5",
+                    contract_date: "28.04.2026",
+                    status: "active"
+                },
+                payments: [
+                    { date: "01.09.2026", purpose: "Оренда на 7 днів (до 08.09)", amount: "2 500 ₴", bonus: "0 ₴", status: "Зараховано" },
+                    { date: "25.08.2026", purpose: "Черговий платіж за викуп (серпень)", amount: "9 600 ₴", bonus: "200 ₴", status: "Зараховано" },
+                    { date: "18.08.2026", purpose: "Оренда на 7 днів (до 25.08)", amount: "2 500 ₴", bonus: "0 ₴", status: "Зараховано" },
+                    { date: "28.07.2026", purpose: "Черговий платіж за викуп (липень)", amount: "9 600 ₴", bonus: "0 ₴", status: "Зараховано" },
+                    { date: "28.06.2026", purpose: "Черговий платіж за викуп (червень)", amount: "9 600 ₴", bonus: "0 ₴", status: "Зараховано" },
+                    { date: "28.04.2026", purpose: "Перший внесок за викуп (депозит 20%)", amount: "16 000 ₴", bonus: "0 ₴", status: "Зараховано" }
+                ],
+                repairs: [
+                    { date: "02.09.2026", title: "Планове ТО: діагностика АКБ 72V, протяжка підвіски", category: "Планове ТО", cost: "0 ₴", status: "За рахунок MUVIO" },
+                    { date: "14.08.2026", title: "Заміна гальмівних колодок (перед/зад)", category: "Гальмівна система", cost: "0 ₴", status: "За рахунок MUVIO" },
+                    { date: "29.06.2026", title: "Сезонний огляд, змащення підшипників керма", category: "Профілактика", cost: "0 ₴", status: "За рахунок MUVIO" }
+                ]
+            },
+            rent: {
+                user: {
+                    id: 384910283,
+                    first_name: "Олександр",
+                    last_name: "",
+                    username: "alex_courier",
+                    phone: "+380671112233",
+                    bonus_balance: 450
+                },
+                rental: {
+                    vehicle_info: "Aima A700 (1200W, 72V 40Ah)",
+                    plate_number: "MUVIO-700",
+                    contract_num: "1205-2",
+                    contract_date: "12.05.2026",
+                    end_date: "11.09.2026, 18:00",
+                    rate: "2 200 ₴ / тиждень",
+                    equipment: "Шолом + Зарядка 10Ач",
+                    status: "active",
+                    image: "images/a700.jpg"
+                },
+                buyout: null,
+                payments: [
+                    { date: "04.09.2026", purpose: "Оренда на 7 днів (до 11.09)", amount: "2 200 ₴", bonus: "0 ₴", status: "Зараховано" },
+                    { date: "28.08.2026", purpose: "Оренда на 7 днів (до 04.09)", amount: "2 200 ₴", bonus: "50 ₴", status: "Зараховано" }
+                ],
+                repairs: [
+                    { date: "20.08.2026", title: "Планова перевірка тиску в шинах та натягу", category: "Планове ТО", cost: "0 ₴", status: "За рахунок MUVIO" }
+                ]
+            }
+        };
+
+        // 1. Обробник авторизації з Telegram Widget
+        window.onTelegramAuth = function (user) {
+            console.log('Telegram auth success:', user);
+            currentUser = user;
+            localStorage.setItem('muvio_user', JSON.stringify(user));
+            loadUserProfile(user.id);
+        };
+
+        // 2. Вхід за ручним вводом ID
+        function loginWithManualId() {
+            const idInput = document.getElementById('manualTelegramId');
+            const idVal = parseInt(idInput.value.trim(), 10);
+            if (!idVal || isNaN(idVal)) {
+                alert('Будь ласка, введіть коректний числовий Telegram ID');
+                return;
+            }
+            currentUser = {
+                id: idVal,
+                first_name: "Користувач",
+                username: "user_" + idVal
+            };
+            localStorage.setItem('muvio_user', JSON.stringify(currentUser));
+            loadUserProfile(idVal);
+        }
+
+        // 3. Вхід у Демо-режимі
+        function loginAsDemoUser(demoType) {
+            const demo = DEMO_PROFILES[demoType] || DEMO_PROFILES.buyout;
+            currentUser = demo.user;
+            localStorage.setItem('muvio_user', JSON.stringify(currentUser));
+            renderProfileUI(demo);
+        }
+
+        // 4. Завантаження даних профілю через fetch до API бота
+        async function loadUserProfile(telegramId) {
+            try {
+                // Запит до реального API бота
+                const response = await fetch(`/api/user/profile?telegram_id=${telegramId}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    renderProfileUI(data);
+                    return;
+                }
+            } catch (err) {
+                console.warn('API бекенду недоступне або офлайн. Завантаження демо-профілю:', err);
+            }
+
+            // Fallback: якщо API не відповідає, рендеримо надійний демонстраційний профіль
+            const fallbackProfile = DEMO_PROFILES.buyout;
+            if (currentUser) {
+                fallbackProfile.user.id = currentUser.id;
+                if (currentUser.first_name) fallbackProfile.user.first_name = currentUser.first_name;
+                if (currentUser.username) fallbackProfile.user.username = currentUser.username;
+            }
+            renderProfileUI(fallbackProfile);
+        }
+
+        // 5. Рендеринг профілю на сторінці
+        function renderProfileUI(data) {
+            currentProfileData = data;
+            document.getElementById('authSection').classList.add('hidden');
+            document.getElementById('profileSection').classList.remove('hidden');
+
+            const user = data.user || currentUser || {};
+            const rental = data.rental;
+            const buyout = data.buyout;
+            const payments = data.payments || [];
+            const repairs = data.repairs || [];
+
+            // Шапка
+            const fullName = [user.first_name, user.last_name].filter(Boolean).join(' ') || 'Клієнт MUVIO';
+            document.getElementById('userNameDisplay').textContent = fullName;
+            document.getElementById('userAvatarText').textContent = (fullName[0] || 'M').toUpperCase();
+            document.getElementById('userUsernameDisplay').textContent = user.username ? `@${user.username}` : '';
+            document.getElementById('userIdDisplay').textContent = user.id || '—';
+            document.getElementById('userPhoneDisplay').textContent = user.phone ? `тел. ${user.phone}` : '';
+            document.getElementById('userBonusDisplay').textContent = `${(user.bonus_balance || 0).toLocaleString()} ₴`;
+
+            if (user.photo_url) {
+                const img = document.getElementById('userAvatarImg');
+                img.src = user.photo_url;
+                img.classList.remove('hidden');
+                document.getElementById('userAvatarText').classList.add('hidden');
+            }
+
+            // Блок оренди
+            if (rental) {
+                document.getElementById('rentalVehicleTitle').textContent = rental.vehicle_info || 'Електроскутер MUVIO';
+                document.getElementById('rentalPlateNumber').textContent = rental.plate_number || 'MUVIO-013';
+                document.getElementById('rentalContractNumber').textContent = `№${rental.contract_num || '2804-5'} від ${rental.contract_date || '28.04.2026'}`;
+                document.getElementById('rentalEndDate').textContent = rental.end_date || 'Активно';
+                document.getElementById('rentalRate').textContent = rental.rate || '2 500 ₴ / тиждень';
+                document.getElementById('rentalEquipment').textContent = rental.equipment || 'Шолом + Зарядка 10Ач';
+                if (rental.image) {
+                    document.getElementById('rentalVehicleImg').src = rental.image;
+                }
+            }
+
+            // Блок викупу
+            if (buyout) {
+                document.getElementById('buyoutVehicleTitle').textContent = buyout.vehicle_info || (rental ? rental.vehicle_info : 'Crosser CR-13');
+                document.getElementById('buyoutTerm').textContent = `${buyout.term_months || 6} місяців`;
+                document.getElementById('buyoutContract').textContent = `№${buyout.contract_num || '2804-5'}`;
+
+                const total = buyout.total_price || 80000;
+                const paid = buyout.paid_amount || 0;
+                const rem = Math.max(0, total - paid);
+                const percent = Math.min(100, Math.round((paid / total) * 100));
+
+                document.getElementById('buyoutTotalPrice').textContent = `${total.toLocaleString()} ₴`;
+                document.getElementById('buyoutPaidAmount').textContent = `${paid.toLocaleString()} ₴`;
+                document.getElementById('buyoutRemainingAmount').textContent = `${rem.toLocaleString()} ₴`;
+                document.getElementById('buyoutPercentDisplay').textContent = `${percent}%`;
+                document.getElementById('buyoutProgressBar').style.width = `${percent}%`;
+            } else {
+                // Якщо немає активного договору викупу
+                document.getElementById('buyoutVehicleTitle').textContent = 'Викуп не активовано';
+                document.getElementById('buyoutStatusBadge').textContent = 'НЕ ПІДКЛЮЧЕНО';
+                document.getElementById('buyoutStatusBadge').className = 'inline-flex items-center px-2.5 py-1 bg-slate-100 text-slate-500 font-brand font-bold text-xs uppercase tracking-wider chamfer-badge';
+                document.getElementById('buyoutPaidAmount').textContent = '0 ₴';
+                document.getElementById('buyoutRemainingAmount').textContent = '—';
+                document.getElementById('buyoutPercentDisplay').textContent = '0%';
+                document.getElementById('buyoutProgressBar').style.width = '0%';
+            }
+
+            // Таблиця платежів
+            const paymentsBody = document.getElementById('paymentsTableBody');
+            paymentsBody.innerHTML = '';
+            if (payments.length === 0) {
+                paymentsBody.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-slate-400">Платежів ще не зафіксовано</td></tr>';
+            } else {
+                payments.forEach(p => {
+                    const tr = document.createElement('tr');
+                    tr.className = 'hover:bg-slate-50 transition-colors';
+                    tr.innerHTML = `
+                        <td class="p-3 text-slate-500">${p.date}</td>
+                        <td class="p-3 font-medium text-slate-800">${p.purpose}</td>
+                        <td class="p-3 font-bold text-[#1D5D3B]">${p.amount}</td>
+                        <td class="p-3 text-slate-500">${p.bonus || '0 ₴'}</td>
+                        <td class="p-3"><span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 text-[10px] font-brand font-bold uppercase chamfer-badge">${p.status || 'Зараховано'}</span></td>
+                    `;
+                    paymentsBody.appendChild(tr);
+                });
+            }
+
+            // Таблиця ремонтів
+            const repairsBody = document.getElementById('repairsTableBody');
+            repairsBody.innerHTML = '';
+            if (repairs.length === 0) {
+                repairsBody.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-slate-400">Звернень до сервісу не зафіксовано</td></tr>';
+            } else {
+                repairs.forEach(r => {
+                    const tr = document.createElement('tr');
+                    tr.className = 'hover:bg-slate-50 transition-colors';
+                    tr.innerHTML = `
+                        <td class="p-3 text-slate-500">${r.date}</td>
+                        <td class="p-3 font-medium text-slate-800">${r.title || r.description}</td>
+                        <td class="p-3 text-slate-600">${r.category || 'ТО'}</td>
+                        <td class="p-3 font-bold text-emerald-700">${r.cost || '0 ₴'}</td>
+                        <td class="p-3"><span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 text-[10px] font-brand font-bold uppercase chamfer-badge">${r.status || 'За рахунок MUVIO'}</span></td>
+                    `;
+                    repairsBody.appendChild(tr);
+                });
+            }
+
+            if (window.lucide) window.lucide.createIcons();
+        }
+
+        // 6. Вихід з кабінету
+        function logoutUser() {
+            localStorage.removeItem('muvio_user');
+            currentUser = null;
+            currentProfileData = null;
+            document.getElementById('profileSection').classList.add('hidden');
+            document.getElementById('authSection').classList.remove('hidden');
+        }
+
+        // 7. Перемикання вкладок історії
+        function switchCabinetTab(tabName) {
+            const btnPay = document.getElementById('tabBtnPayments');
+            const btnRep = document.getElementById('tabBtnRepairs');
+            const btnSrv = document.getElementById('tabBtnService');
+
+            const conPay = document.getElementById('tabContentPayments');
+            const conRep = document.getElementById('tabContentRepairs');
+            const conSrv = document.getElementById('tabContentService');
+
+            // Reset buttons
+            [btnPay, btnRep, btnSrv].forEach(btn => {
+                btn.className = 'chamfer-badge px-4 py-2 font-brand font-bold text-xs uppercase tracking-wider bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all';
+            });
+            // Hide contents
+            [conPay, conRep, conSrv].forEach(con => con.classList.add('hidden'));
+
+            if (tabName === 'payments') {
+                btnPay.className = 'chamfer-badge px-4 py-2 font-brand font-bold text-xs uppercase tracking-wider bg-[#1D5D3B] text-white transition-all';
+                conPay.classList.remove('hidden');
+            } else if (tabName === 'repairs') {
+                btnRep.className = 'chamfer-badge px-4 py-2 font-brand font-bold text-xs uppercase tracking-wider bg-[#1D5D3B] text-white transition-all';
+                conRep.classList.remove('hidden');
+            } else if (tabName === 'service') {
+                btnSrv.className = 'chamfer-badge px-4 py-2 font-brand font-bold text-xs uppercase tracking-wider bg-[#1D5D3B] text-white transition-all';
+                conSrv.classList.remove('hidden');
+            }
+        }
+
+        // 8. Модальне вікно оплати IBAN
+        function showPaymentModal(type) {
+            const modal = document.getElementById('paymentModal');
+            const title = document.getElementById('modalPaymentTitle');
+            const purpose = document.getElementById('modalPaymentPurpose');
+
+            const cNum = currentProfileData?.rental?.contract_num || '2804-5';
+            const cDate = currentProfileData?.rental?.contract_date || '28.04.2026';
+
+            if (type === 'buyout') {
+                title.textContent = 'ОПЛАТА ЗА ВИКУП СКУТЕРА (RENT-TO-OWN)';
+                purpose.textContent = `Платіж за викуп транспортного засобу (скутер) згідно з Договором №${cNum} від ${cDate} р. Без ПДВ.`;
+            } else {
+                title.textContent = 'ОПЛАТА ЗА ОРЕНДУ ТРАНСПОРТУ';
+                purpose.textContent = `Оплата за оренду транспортного засобу (скутер) та шолома згідно з Договором №${cNum} від ${cDate} р. Без ПДВ.`;
+            }
+
+            modal.classList.remove('hidden');
+            if (window.lucide) window.lucide.createIcons();
+        }
+
+        function closePaymentModal() {
+            document.getElementById('paymentModal').classList.add('hidden');
+        }
+
+        function copyToClipboard(text, btnElement) {
+            navigator.clipboard.writeText(text).then(() => {
+                const orig = btnElement.innerText;
+                btnElement.innerText = 'Скопійовано!';
+                setTimeout(() => { btnElement.innerText = orig; }, 2000);
+            }).catch(e => {
+                alert('Скопійовано: ' + text);
+            });
+        }
+
+        // Ініціалізація сторінки
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.lucide) window.lucide.createIcons();
+
+            // Перевірка збереженої сесії в localStorage
+            const savedUser = localStorage.getItem('muvio_user');
+            if (savedUser) {
+                try {
+                    currentUser = JSON.parse(savedUser);
+                    loadUserProfile(currentUser.id);
+                } catch (e) {
+                    console.error('Saved user parse error:', e);
+                }
+            }
+
+            // Мобільне меню
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+                document.querySelectorAll('.mobile-nav-link').forEach(link => {
+                    link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
