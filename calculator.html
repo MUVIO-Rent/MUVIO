@@ -270,8 +270,9 @@
                         <!-- 3. Зарядка -->
                         <div>
                             <label
-                                class="block font-brand font-bold text-sm uppercase tracking-wider text-[#111827] mb-2">
-                                3. Зарядний пристрій:
+                                class="block font-brand font-bold text-sm uppercase tracking-wider text-[#111827] mb-2 flex items-center justify-between">
+                                <span>3. Зарядний пристрій:</span>
+                                <span id="chargerSelectedBadge" class="text-xs font-mono font-normal text-[#4B5563]">Не обрано (+0 грн)</span>
                             </label>
                             <div id="chargerOptionsContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 <!-- Опції генеруються JS -->
@@ -522,19 +523,69 @@
 
     <!-- ==================== JAVASCRIPT ==================== -->
     <script>
-        // 1. АВТОПАРК З РЕАЛЬНИМИ ЦІНАМИ В ЗБОРІ
-        const FLEET = [{ "key": "crosser_cr13_1", "name": "Crosser CR-13 №1", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 160 км", "speed": "85 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 1000, "price_week": 2500, "price_month": 8500, "deposit": 4500, "buyout_available": true, "buyout_base_price": 80000, "image": "images/crosser.jpg", "badge": "ФЛАГМАН | 85 КМ/ГОД", "is_top": true, "power": "2000W" }, { "key": "crosser_cr20", "name": "Crosser CR-20", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 160 км", "speed": "75 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 1000, "price_week": 2400, "price_month": 8300, "deposit": 4000, "buyout_available": true, "buyout_base_price": 77000, "image": "images/crosser-cr-20.jpg", "badge": "ТОП ПОТУЖНІСТЬ", "is_top": true, "power": "2500W" }, { "key": "aima_a700", "name": "Aima A700", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 150 км", "speed": "47 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 70000, "image": "images/a700.jpg", "badge": "ПРЕМІУМ КОМФОРТ", "is_top": true, "power": "1200W" }, { "key": "aima_f606_1", "name": "Aima F606 №1", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 100 км", "speed": "70 км/год", "charging": "10Ач (4 години)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 60000, "image": "images/f606.jpg", "badge": "ХІТ ПРОКАТУ", "is_top": true, "power": "1200W" }, { "key": "aima_a715", "name": "Aima A715", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 150 км", "speed": "65 км/год", "charging": "10Ач (4 години)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 68000, "image": "images/a715.jpg", "badge": "НАДІЙНИЙ", "is_top": false, "power": "1200W" }, { "key": "aima_journey", "name": "Aima Journey", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 160 км", "speed": "60 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2300, "price_month": 8300, "deposit": 4000, "buyout_available": true, "buyout_base_price": 68000, "image": "images/journey.jpg", "badge": "ДАЛЕКІ ДИСТАНЦІЇ", "is_top": false, "power": "1200W" }, { "key": "aima_f606_2", "name": "Aima F606 №2", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 130 км", "speed": "70 км/год", "charging": "10Ач (4 години)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 60000, "image": "images/f606-2.jpg", "badge": "ЗБІЛЬШЕНИЙ ХІД", "is_top": false, "power": "1200W" }, { "key": "crosser_cr13_2", "name": "Crosser CR-13 №2", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 160 км", "speed": "85 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 1000, "price_week": 2500, "price_month": 8500, "deposit": 4500, "buyout_available": true, "buyout_base_price": 80000, "image": "images/crosser-cr-13-2.jpg", "badge": "85 КМ/ГОД", "is_top": false, "power": "2000W" }, { "key": "aima_mine", "name": "Aima Mine", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "60V", "range": "до 130 км", "speed": "55 км/год", "charging": "7Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 60000, "image": "images/mine.jpg", "badge": "КОМПАКТНИЙ", "is_top": false, "power": "800W" }, { "key": "like_bike_n5", "name": "Like Bike N5", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "60V", "range": "до 130 км", "speed": "65 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 57000, "image": "images/like-bike-n5.jpg", "badge": "МАНЕВРЕНИЙ", "is_top": false, "power": "1000W" }, { "key": "aima_mine_plus", "name": "Aima Mine Plus", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "60V", "range": "до 130 км", "speed": "60 км/год", "charging": "7Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 55000, "image": "images/mine-plus.jpg", "badge": "PLUS СЕРІЯ", "is_top": false, "power": "800W" }, { "key": "aima_leopard", "name": "Aima Leopard", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 150 км", "speed": "48 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 50000, "image": "images/leopard.jpg", "badge": "КЛАСИКА", "is_top": false, "power": "1200W" }, { "key": "like_bike_bruser_1", "name": "Like Bike Bruiser №1", "category": "bike", "type": "🚲 Електровелосипед", "voltage": "48V", "range": "до 80 км", "speed": "45 км/год", "charging": "7Ач (4 години)", "battery": "10Ah-40Ah (Знімна)", "price_day": 800, "price_week": 1800, "price_month": 6000, "deposit": 3000, "buyout_available": true, "buyout_base_price": 28000, "image": "images/like-bike-bruiser-1.jpg", "badge": "РАМА 180 КГ", "is_top": false, "power": "500W" }, { "key": "like_bike_bruser_2", "name": "Like Bike Bruiser №2", "category": "bike", "type": "🚲 Електровелосипед", "voltage": "48V", "range": "до 80 км", "speed": "45 км/год", "charging": "7Ач (4 години)", "battery": "10Ah-40Ah (Знімна)", "price_day": 800, "price_week": 1800, "price_month": 6000, "deposit": 3000, "buyout_available": true, "buyout_base_price": 28000, "image": "images/like-bike-bruiser-2.jpg", "badge": "РАМА 180 КГ", "is_top": false, "power": "500W" }, { "key": "ado_a20f", "name": "ADO A20F", "category": "bike", "type": "🚲 Електровелосипед", "voltage": "48V", "range": "до 150 км", "speed": "40 км/год", "charging": "10Ач (4 години)", "battery": "10Ah-40Ah (Знімна)", "price_day": 800, "price_week": 1800, "price_month": 6000, "deposit": 3000, "buyout_available": true, "buyout_base_price": 28000, "image": "images/ado-a20f.jpg", "badge": "ФЕТБАЙК", "is_top": false, "power": "250W" }];
+        // 1. АВТОПАРК ТА РЕАЛЬНІ ЦІНИ ВИКУПУ З БАЗИ
+        const FLEET_PRICING = {
+            "aima-a700": { name: "Aima A700", base: 70000, volt: 72, extra_battery: 15000, ch5: 1600, ch10: 2500 },
+            "aima-a715": { name: "Aima A715", base: 68000, volt: 72, extra_battery: 17000, ch5: 1600, ch10: 2500 },
+            "aima-f606-1": { name: "Aima F606 №1", base: 60000, volt: 72, extra_battery: 13000, ch5: 1600, ch10: 2500 },
+            "aima-journey": { name: "Aima Journey", base: 68000, volt: 72, extra_battery: 12000, ch5: 1600, ch10: 2500 },
+            "aima-leopard": { name: "Aima Leopard", base: 50000, volt: 72, extra_battery: 15000, ch5: 1600, ch10: 2500 },
+            "aima-mine": { name: "Aima Mine", base: 60000, volt: 60, extra_battery: 10000, ch5: 1600, ch10: 2500 },
+            "aima-mine-plus": { name: "Aima Mine Plus", base: 55000, volt: 60, extra_battery: 12000, ch5: 1600, ch10: 2500 },
+            "like-bike-n5": { name: "Like Bike N5", base: 57000, volt: 60, extra_battery: 12000, ch5: 1600, ch10: 2500 },
+            "crosser-cr-13-1": { name: "Crosser CR-13 №1", base: 80000, volt: 72, extra_battery: 12000, ch5: 2000, ch10: 3000 },
+            "crosser-cr-13-2": { name: "Crosser CR-13 №2", base: 80000, volt: 72, extra_battery: 12000, ch5: 2000, ch10: 3000 },
+            "crosser-cr-20": { name: "Crosser CR-20", base: 77000, volt: 72, extra_battery: 12000, ch5: 1600, ch10: 2500 },
+            "like-bike-bruser-1": { name: "Like Bike Bruser №1", base: 28000, volt: 48, extra_battery: 14000, ch5: 1500, ch10: 2000 },
+            "like-bike-bruser-2": { name: "Like Bike Bruser №2", base: 28000, volt: 48, extra_battery: 14000, ch5: 1500, ch10: 2000 }
+        };
 
-        // 2. ДЕЛЬТИ АКУМУЛЯТОРІВ (+0 грн за базовий, +7 000 грн за збільшений 60Ah)
-        const BATTERY_UPGRADES = { "72V_40Ah": 0, "72V_60Ah": 7000, "60V_40Ah": 0, "60V_60Ah": 7000, "48V_10Ah": 0, "48V_20Ah": 3500, "48V_30Ah": 7000, "48V_40Ah": 10500 };
-        const CHARGER_UPGRADES = { "standard": 0, "fast": 1400 };
+        const MODEL_POWER = {
+            "crosser-cr-13-1": "2000W",
+            "crosser-cr-13-2": "2000W",
+            "crosser-cr-20": "2500W",
+            "aima-a700": "1200W",
+            "aima-a715": "1200W",
+            "aima-f606-1": "1200W",
+            "aima-journey": "1200W",
+            "aima-leopard": "1200W",
+            "aima-mine": "800W",
+            "aima-mine-plus": "800W",
+            "like-bike-n5": "1000W",
+            "like-bike-bruser-1": "500W",
+            "like-bike-bruser-2": "500W"
+        };
 
         let calcState = {
-            modelKey: 'crosser_cr13_1',
-            batteryCode: '72V_40Ah',
-            chargerCode: 'standard',
+            modelKey: 'crosser-cr-13-1',
+            batteryType: 'base', // 'base' (40Ah / 10Ah) or 'extra' (60Ah / 40Ah)
+            chargerCode: null,   // null (без зарядки), 'ch5' (5A), або 'ch10' (10A)
             termMonths: 6
         };
+
+        function normalizeModelKey(rawKey) {
+            if (!rawKey) return null;
+            if (FLEET_PRICING[rawKey]) return rawKey;
+            const normalized = rawKey.toLowerCase().replace(/_/g, '-');
+            if (FLEET_PRICING[normalized]) return normalized;
+            const manualMap = {
+                'crosser_cr13_1': 'crosser-cr-13-1',
+                'crosser_cr13_2': 'crosser-cr-13-2',
+                'crosser_cr20': 'crosser-cr-20',
+                'aima_a700': 'aima-a700',
+                'aima_f606_1': 'aima-f606-1',
+                'aima_a715': 'aima-a715',
+                'aima_journey': 'aima-journey',
+                'aima_f606_2': 'aima-f606-1',
+                'aima_mine': 'aima-mine',
+                'like_bike_n5': 'like-bike-n5',
+                'aima_mine_plus': 'aima-mine-plus',
+                'aima_leopard': 'aima-leopard',
+                'like_bike_bruser_1': 'like-bike-bruser-1',
+                'like_bike_bruser_2': 'like-bike-bruser-2'
+            };
+            return manualMap[rawKey] || null;
+        }
 
         // Ініціалізація вибору моделі в калькуляторі
         function initCalcSelect() {
@@ -545,14 +596,16 @@
             // Перевірка query-параметра ?model=...
             const urlParams = new URLSearchParams(window.location.search);
             const requestedModel = urlParams.get('model');
-            if (requestedModel && FLEET.some(f => f.key === requestedModel)) {
-                calcState.modelKey = requestedModel;
+            const matchedKey = normalizeModelKey(requestedModel);
+            if (matchedKey) {
+                calcState.modelKey = matchedKey;
             }
 
-            FLEET.forEach(item => {
+            Object.entries(FLEET_PRICING).forEach(([key, item]) => {
                 const opt = document.createElement('option');
-                opt.value = item.key;
-                opt.textContent = `${item.name} (${item.power}, ${item.voltage}, у зборі: ${item.buyout_base_price.toLocaleString()} грн)`;
+                opt.value = key;
+                const power = MODEL_POWER[key] || '1200W';
+                opt.textContent = `${item.name} (${power}, ${item.volt}V, у зборі: ${item.base.toLocaleString('uk-UA')} грн)`;
                 select.appendChild(opt);
             });
 
@@ -561,9 +614,10 @@
         }
 
         function selectModelInCalc(modelKey) {
-            calcState.modelKey = modelKey;
+            const matched = normalizeModelKey(modelKey);
+            if (matched) calcState.modelKey = matched;
             const select = document.getElementById('calcModelSelect');
-            if (select) select.value = modelKey;
+            if (select) select.value = calcState.modelKey;
             updateCalcOptions();
         }
 
@@ -574,94 +628,110 @@
             updateCalcOptions();
         }
 
+        function clearCharger() {
+            calcState.chargerCode = null;
+            updateCalcOptions();
+        }
+
         // Оновлення батарей та зарядок
         function updateCalcOptions() {
-            const model = FLEET.find(m => m.key === calcState.modelKey) || FLEET[0];
-            const volt = model.voltage;
+            const model = FLEET_PRICING[calcState.modelKey] || FLEET_PRICING['crosser-cr-13-1'];
+            const volt = `${model.volt}V`;
+            const power = MODEL_POWER[calcState.modelKey] || '1200W';
 
             if (document.getElementById('modelVoltBadge')) document.getElementById('modelVoltBadge').textContent = volt;
-            if (document.getElementById('modelPowerBadge')) document.getElementById('modelPowerBadge').textContent = model.power;
-            if (document.getElementById('calcBasePriceTxt')) document.getElementById('calcBasePriceTxt').textContent = `${model.buyout_base_price.toLocaleString()} грн`;
+            if (document.getElementById('modelPowerBadge')) document.getElementById('modelPowerBadge').textContent = power;
+            if (document.getElementById('calcBasePriceTxt')) document.getElementById('calcBasePriceTxt').textContent = `${model.base.toLocaleString('uk-UA')} грн`;
 
-            // Батареї
+            // Батареї: чіткі доплати з бази (0 грн за базовий, exact extra_battery за посилений)
             const batContainer = document.getElementById('batteryOptionsContainer');
-            if (!batContainer) return;
-            batContainer.innerHTML = '';
+            if (batContainer) {
+                batContainer.innerHTML = '';
 
-            let batteryList = [];
-            if (volt === '72V' || volt === '60V') {
-                const prefix = volt === '72V' ? '72V' : '60V';
-                batteryList = [
-                    { code: `${prefix}_40Ah`, name: `${prefix} 40Ah (Базовий)`, priceText: '+0 грн (включено у вартість)', diff: 0 },
-                    { code: `${prefix}_60Ah`, name: `${prefix} 60Ah [Посилений]`, priceText: '+7 000 грн', diff: 7000 }
-                ];
-            } else {
-                // 48V велосипеди
-                batteryList = [
-                    { code: '48V_10Ah', name: '48V 10Ah (Базовий)', priceText: '+0 грн (включено у вартість)', diff: 0 },
-                    { code: '48V_20Ah', name: '48V 20Ah (+Хід)', priceText: '+3 500 грн', diff: 3500 },
-                    { code: '48V_30Ah', name: '48V 30Ah (+Хід)', priceText: '+7 000 грн', diff: 7000 },
-                    { code: '48V_40Ah', name: '48V 40Ah (Максимальний)', priceText: '+10 500 грн', diff: 10500 }
-                ];
+                let batteryList = [];
+                if (model.volt === 48) {
+                    batteryList = [
+                        { type: 'base', name: '48V 10Ah (Базовий)', priceText: '+0 грн (включено у вартість)', diff: 0 },
+                        { type: 'extra', name: '48V 40Ah [Посилений]', priceText: `+${model.extra_battery.toLocaleString('uk-UA')} грн`, diff: model.extra_battery }
+                    ];
+                } else {
+                    batteryList = [
+                        { type: 'base', name: `${volt} 40Ah (Базовий)`, priceText: '+0 грн (включено у вартість)', diff: 0 },
+                        { type: 'extra', name: `${volt} 60Ah [Посилений]`, priceText: `+${model.extra_battery.toLocaleString('uk-UA')} грн`, diff: model.extra_battery }
+                    ];
+                }
+
+                if (calcState.batteryType !== 'base' && calcState.batteryType !== 'extra') {
+                    calcState.batteryType = 'base';
+                }
+
+                batteryList.forEach(b => {
+                    const isChecked = (b.type === calcState.batteryType);
+                    const btn = document.createElement('div');
+                    btn.className = `p-3.5 border-2 cursor-pointer chamfer-badge transition-all flex items-center justify-between ${isChecked ? 'border-[#1D5D3B] bg-[#1D5D3B]/10 font-bold' : 'border-slate-300 bg-white hover:border-[#1D5D3B]/50'}`;
+                    btn.onclick = () => {
+                        calcState.batteryType = b.type;
+                        updateCalcOptions();
+                    };
+                    btn.innerHTML = `
+                        <div>
+                            <div class="text-xs font-brand uppercase text-[#111827]">${b.name}</div>
+                            <div class="text-[11px] ${b.diff > 0 ? 'text-[#1D5D3B] font-bold' : 'text-[#4B5563]'} font-mono">${b.priceText}</div>
+                        </div>
+                        <div class="w-4 h-4 rounded-full border-2 border-[#1D5D3B] flex items-center justify-center ${isChecked ? 'bg-[#1D5D3B]' : 'bg-white'}">
+                            ${isChecked ? '<div class="w-1.5 h-1.5 bg-white rounded-full"></div>' : ''}
+                        </div>
+                    `;
+                    batContainer.appendChild(btn);
+                });
             }
 
-            if (!batteryList.some(b => b.code === calcState.batteryCode)) {
-                calcState.batteryCode = batteryList[0].code;
-            }
-
-            batteryList.forEach(b => {
-                const isChecked = (b.code === calcState.batteryCode);
-                const btn = document.createElement('div');
-                btn.className = `p-3.5 border-2 cursor-pointer chamfer-badge transition-all flex items-center justify-between ${isChecked ? 'border-[#1D5D3B] bg-[#1D5D3B]/10 font-bold' : 'border-slate-300 bg-white hover:border-[#1D5D3B]/50'}`;
-                btn.onclick = () => {
-                    calcState.batteryCode = b.code;
-                    updateCalcOptions();
-                };
-                btn.innerHTML = `
-                    <div>
-                        <div class="text-xs font-brand uppercase text-[#111827]">${b.name}</div>
-                        <div class="text-[11px] ${b.diff > 0 ? 'text-[#1D5D3B] font-bold' : 'text-[#4B5563]'} font-mono">${b.priceText}</div>
-                    </div>
-                    <div class="w-4 h-4 rounded-full border-2 border-[#1D5D3B] flex items-center justify-center ${isChecked ? 'bg-[#1D5D3B]' : 'bg-white'}">
-                        ${isChecked ? '<div class="w-1.5 h-1.5 bg-white rounded-full"></div>' : ''}
-                    </div>
-                `;
-                batContainer.appendChild(btn);
-            });
-
-            // Зарядні пристрої
+            // Зарядні пристрої: точні ціни ch5 та ch10 під обрану модель
             const chContainer = document.getElementById('chargerOptionsContainer');
-            if (!chContainer) return;
-            chContainer.innerHTML = '';
+            if (chContainer) {
+                chContainer.innerHTML = '';
 
-            const chargerList = [
-                { code: 'standard', name: 'Базовий зарядний пристрій', priceText: '+0 грн (у комплекті)', diff: 0 },
-                { code: 'fast', name: 'Швидка зарядка (10A / 5A)', priceText: '+1 400 грн', diff: 1400 }
-            ];
+                const chargerList = [
+                    { code: 'ch5', name: 'Зарядний пристрій 5A', priceText: `+${model.ch5.toLocaleString('uk-UA')} грн`, diff: model.ch5 },
+                    { code: 'ch10', name: 'Швидка зарядка 10A', priceText: `+${model.ch10.toLocaleString('uk-UA')} грн`, diff: model.ch10 }
+                ];
 
-            if (!chargerList.some(c => c.code === calcState.chargerCode)) {
-                calcState.chargerCode = chargerList[0].code;
+                chargerList.forEach(c => {
+                    const isChecked = (c.code === calcState.chargerCode);
+                    const btn = document.createElement('div');
+                    btn.className = `p-3.5 border-2 cursor-pointer chamfer-badge transition-all flex items-center justify-between ${isChecked ? 'border-[#1D5D3B] bg-[#1D5D3B]/10 font-bold' : 'border-slate-300 bg-white hover:border-[#1D5D3B]/50'}`;
+                    btn.onclick = () => {
+                        // Повторний клік знімає вибір (опціонально)
+                        if (calcState.chargerCode === c.code) {
+                            calcState.chargerCode = null;
+                        } else {
+                            calcState.chargerCode = c.code;
+                        }
+                        updateCalcOptions();
+                    };
+                    btn.innerHTML = `
+                        <div>
+                            <div class="text-xs font-brand uppercase text-[#111827]">${c.name}</div>
+                            <div class="text-[11px] ${isChecked ? 'text-[#1D5D3B] font-bold' : 'text-[#4B5563]'} font-mono">${isChecked ? 'Обрано: ' + c.priceText : c.priceText}</div>
+                        </div>
+                        <div class="w-4 h-4 rounded-full border-2 border-[#1D5D3B] flex items-center justify-center ${isChecked ? 'bg-[#1D5D3B]' : 'bg-white'}">
+                            ${isChecked ? '<div class="w-1.5 h-1.5 bg-white rounded-full"></div>' : ''}
+                        </div>
+                    `;
+                    chContainer.appendChild(btn);
+                });
+
+                const badge = document.getElementById('chargerSelectedBadge');
+                if (badge) {
+                    if (calcState.chargerCode === 'ch5') {
+                        badge.innerHTML = `<span class="text-[#1D5D3B] font-bold">5A (+${model.ch5.toLocaleString('uk-UA')} грн)</span> • <button type="button" onclick="clearCharger()" class="underline text-slate-500 hover:text-red-500">Скинути</button>`;
+                    } else if (calcState.chargerCode === 'ch10') {
+                        badge.innerHTML = `<span class="text-[#1D5D3B] font-bold">10A (+${model.ch10.toLocaleString('uk-UA')} грн)</span> • <button type="button" onclick="clearCharger()" class="underline text-slate-500 hover:text-red-500">Скинути</button>`;
+                    } else {
+                        badge.innerHTML = `<span class="text-[#4B5563]">Не обрано (+0 грн)</span>`;
+                    }
+                }
             }
-
-            chargerList.forEach(c => {
-                const isChecked = (c.code === calcState.chargerCode);
-                const btn = document.createElement('div');
-                btn.className = `p-3.5 border-2 cursor-pointer chamfer-badge transition-all flex items-center justify-between ${isChecked ? 'border-[#1D5D3B] bg-[#1D5D3B]/10 font-bold' : 'border-slate-300 bg-white hover:border-[#1D5D3B]/50'}`;
-                btn.onclick = () => {
-                    calcState.chargerCode = c.code;
-                    updateCalcOptions();
-                };
-                btn.innerHTML = `
-                    <div>
-                        <div class="text-xs font-brand uppercase text-[#111827]">${c.name}</div>
-                        <div class="text-[11px] ${c.diff > 0 ? 'text-[#1D5D3B] font-bold' : 'text-[#4B5563]'} font-mono">${c.priceText}</div>
-                    </div>
-                    <div class="w-4 h-4 rounded-full border-2 border-[#1D5D3B] flex items-center justify-center ${isChecked ? 'bg-[#1D5D3B]' : 'bg-white'}">
-                        ${isChecked ? '<div class="w-1.5 h-1.5 bg-white rounded-full"></div>' : ''}
-                    </div>
-                `;
-                chContainer.appendChild(btn);
-            });
 
             calculateBuyout();
         }
@@ -683,55 +753,72 @@
         }
 
         function calculateBuyout() {
-            const model = FLEET.find(m => m.key === calcState.modelKey) || FLEET[0];
-            const basePrice = model.buyout_base_price;
-            const batDiff = BATTERY_UPGRADES[calcState.batteryCode] || 0;
-            const chDiff = CHARGER_UPGRADES[calcState.chargerCode] || 0;
-            const months = calcState.termMonths;
+            const model = FLEET_PRICING[calcState.modelKey] || FLEET_PRICING['crosser-cr-13-1'];
+            const power = MODEL_POWER[calcState.modelKey] || '1200W';
+            const basePrice = model.base;
+            const batDiff = (calcState.batteryType === 'extra') ? model.extra_battery : 0;
+            const chDiff = calcState.chargerCode === 'ch5' ? model.ch5 : (calcState.chargerCode === 'ch10' ? model.ch10 : 0);
+            const months = calcState.termMonths || 6;
 
-            // Повна вартість = базова ціна комплекту + різниця батареї + різниця зарядки
+            // Формула:
+            // Повна вартість = База + Доплата за обраний АКБ + Обрана зарядка (якщо обрана)
             const totalPrice = basePrice + batDiff + chDiff;
+            // Завдаток 20% = Повна вартість * 0.20
             const deposit = totalPrice * 0.20;
+            // Щомісячний платіж = (Повна вартість - Завдаток) / Термін у місяцях
             const monthlyPayment = (totalPrice - deposit) / months;
             const weeklyGuide = monthlyPayment / 4;
 
             if (document.getElementById('resModelTitle')) document.getElementById('resModelTitle').textContent = model.name;
+
+            const batLabel = (calcState.batteryType === 'extra')
+                ? (model.volt === 48 ? 'Посилений АКБ 40Ah' : 'Посилений АКБ 60Ah') + ` (+${batDiff.toLocaleString('uk-UA')} грн)`
+                : (model.volt === 48 ? 'Базовий АКБ 10Ah' : 'Базовий АКБ 40Ah');
+
+            const chLabel = calcState.chargerCode === 'ch5'
+                ? `Зарядка 5A (+${model.ch5.toLocaleString('uk-UA')} грн)`
+                : (calcState.chargerCode === 'ch10' ? `Швидка 10A (+${model.ch10.toLocaleString('uk-UA')} грн)` : 'Без дод. зарядки');
+
             if (document.getElementById('resConfigSummary')) {
                 document.getElementById('resConfigSummary').textContent =
-                    `${model.power} | ${model.voltage} | ${calcState.batteryCode.replace('_', ' ')} ${batDiff > 0 ? '(+' + batDiff + ' грн)' : '(базовий)'} | ${months} міс.`;
+                    `${power} | ${model.volt}V | ${batLabel} | ${chLabel} | ${months} міс.`;
             }
 
-            if (document.getElementById('resTotalPrice')) document.getElementById('resTotalPrice').textContent = `${Math.round(totalPrice).toLocaleString()} грн`;
-            if (document.getElementById('resDeposit')) document.getElementById('resDeposit').textContent = `${Math.round(deposit).toLocaleString()} грн`;
+            if (document.getElementById('resTotalPrice')) document.getElementById('resTotalPrice').textContent = `${Math.round(totalPrice).toLocaleString('uk-UA')} грн`;
+            if (document.getElementById('resDeposit')) document.getElementById('resDeposit').textContent = `${Math.round(deposit).toLocaleString('uk-UA')} грн`;
             if (document.getElementById('resMonthly')) {
-                document.getElementById('resMonthly').innerHTML = `~${Math.round(monthlyPayment).toLocaleString()} грн<span class="text-base text-emerald-100 font-sans font-normal"> / міс.</span>`;
+                document.getElementById('resMonthly').innerHTML = `~${Math.round(monthlyPayment).toLocaleString('uk-UA')} грн<span class="text-base text-emerald-100 font-sans font-normal"> / міс.</span>`;
             }
             if (document.getElementById('resWeekly')) {
-                document.getElementById('resWeekly').innerHTML = `<span>Орієнтовно за тиждень:</span><span class="font-bold text-white">~${Math.round(weeklyGuide).toLocaleString()} грн/тижд</span>`;
+                document.getElementById('resWeekly').innerHTML = `<span>Орієнтовно за тиждень:</span><span class="font-bold text-white">~${Math.round(weeklyGuide).toLocaleString('uk-UA')} грн/тижд</span>`;
             }
 
-            // Посилання на бот
-            updateTelegramLink();
+            // Оновлення посилання на бот та суми на кнопці
+            updateTelegramLink(totalPrice);
         }
 
-        // Генерація deep link для Telegram бота
-        function updateTelegramLink() {
-            const model = FLEET.find(m => m.key === calcState.modelKey) || FLEET[0];
-            const modelSlug = model.name
-                .replace(/№\s*\d+/g, '')
-                .trim()
-                .toLowerCase()
-                .replace(/[^a-z0-9]+/g, '-')
-                .replace(/^-+|-+$/g, '');
-            const batMatch = (calcState.batteryCode || '').match(/(\d+ah)/i);
-            const batSlug = batMatch ? batMatch[1].toLowerCase() : (calcState.batteryCode || '').toLowerCase();
+        // Генерація deep link для Telegram бота: https://t.me/muviobot?start=buy_{slug}_{battery}_{months}m
+        function updateTelegramLink(totalPrice) {
+            const model = FLEET_PRICING[calcState.modelKey] || FLEET_PRICING['crosser-cr-13-1'];
+            const slug = calcState.modelKey;
+            const battery = (calcState.batteryType === 'extra')
+                ? (model.volt === 48 ? '40ah' : '60ah')
+                : (model.volt === 48 ? '10ah' : '40ah');
             const months = calcState.termMonths || 6;
-            const botUrl = `https://t.me/muviobot?start=buy_${modelSlug}_${batSlug}_${months}m`;
+            const botUrl = `https://t.me/muviobot?start=buy_${slug}_${battery}_${months}m`;
 
             const tgBtn = document.getElementById('calcTelegramBtn');
             if (tgBtn) {
                 tgBtn.href = botUrl;
                 tgBtn.target = "_blank";
+                const formattedPrice = Math.round(totalPrice || model.base).toLocaleString('uk-UA');
+                tgBtn.innerHTML = `
+                    <i data-lucide="send" class="w-5 h-5"></i>
+                    <span>НАДІСЛАТИ ЗАЯВКУ В TELEGRAM (${formattedPrice} грн)</span>
+                `;
+                if (window.lucide) {
+                    try { window.lucide.createIcons(); } catch (e) { }
+                }
             }
             return botUrl;
         }
