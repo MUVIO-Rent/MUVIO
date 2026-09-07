@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="uk" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор викупу (Rent-to-Own) та оренди | MUVIO — ТВОЄ ELECTRO CITY</title>
+    <meta name="description"
+        content="Онлайн калькулятор викупу (Rent-to-Own) комерційних електроскутерів та велосипедів в Одесі. Точний розрахунок щотижневого та щомісячного платежу без прихованих комісій. MUVIO.">
+
+    <!-- Google Fonts: Chakra Petch & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,400;0,500;0,600;0,700;1,700&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        muvio: {
+                            green: '#1D5D3B',
+                            hover: '#24754A',
+                            forest: '#123824',
+                            dark: '#111827',
+                            graphite: '#1F2937',
+                            slate: '#4B5563',
+                            light: '#F8FAFC',
+                            card: '#FFFFFF',
+                            border: '#1D5D3B',
+                            accent: '#10B981'
+                        }
+                    },
+                    fontFamily: {
+                        brand: ['"Chakra Petch"', 'sans-serif'],
+                        sans: ['"Inter"', 'sans-serif']
+                    }
+                }
+            }
+        };
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* MUVIO High-Tech Geometric Styles */
+        .chamfer-box {
+            clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+        }
+
+        .chamfer-btn {
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .chamfer-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px -4px rgba(29, 93, 59, 0.35);
+        }
+
+        .chamfer-badge {
+            clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+        }
+
+        .tech-card {
+            border: 2px solid #1D5D3B;
+            transition: all 0.25s ease;
+        }
+
+        .tech-card:hover {
+            border-color: #24754A;
+            transform: translateY(-4px);
+            box-shadow: 0 16px 32px -8px rgba(29, 93, 59, 0.22);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-[#F9FAFB] text-[#111827] font-sans antialiased selection:bg-[#1D5D3B] selection:text-white relative min-h-screen flex flex-col justify-between">
+
+    <!-- ==================== АРХІТЕКТУРНІ НАПРЯМНІ ТА МАРКУВАННЯ ПО БОКАХ (Polestar Aesthetic) ==================== -->
+    <div class="fixed inset-y-0 left-0 right-0 pointer-events-none max-w-7xl mx-auto z-40 hidden xl:block">
+        <!-- Ліва вертикальна лінія розмітки -->
+        <div class="absolute left-0 top-0 bottom-0 w-[1px] bg-slate-200">
+            <div class="sticky top-32 flex flex-col items-center gap-4 py-4 -translate-x-full pr-3">
+                <span class="w-1.5 h-1.5 bg-[#1D5D3B]"></span>
+                <span
+                    class="text-[9px] font-brand tracking-[0.25em] text-slate-400 uppercase select-none whitespace-nowrap [writing-mode:vertical-rl] rotate-180">
+                    MUVIO CALCULATOR // RENT-TO-OWN ENGINE
+                </span>
+                <span class="h-10 w-[1px] bg-slate-200"></span>
+            </div>
+        </div>
+        <!-- Права вертикальна лінія розмітки -->
+        <div class="absolute right-0 top-0 bottom-0 w-[1px] bg-slate-200">
+            <div class="sticky top-32 flex flex-col items-center gap-4 py-4 translate-x-full pl-3">
+                <span class="w-1.5 h-1.5 bg-[#1D5D3B]"></span>
+                <span
+                    class="text-[9px] font-brand tracking-[0.25em] text-slate-400 uppercase select-none whitespace-nowrap [writing-mode:vertical-rl]">
+                    TRANSPARENT FINANCIAL CALCULATIONS // 0% HIDDEN FEES
+                </span>
+                <span class="h-10 w-[1px] bg-slate-200"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== 1. ХЕДЕР (НАВІГАЦІЯ) ==================== -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b-2 border-[#1D5D3B] shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-x border-slate-200/60">
+            <div class="flex items-center justify-between h-20">
+
+                <!-- Ліва частина: Логотип MUVIO + Лівий блок посилань -->
+                <div class="flex items-center gap-6 lg:gap-8">
+                    <a href="index.html" class="flex items-center gap-3 group shrink-0">
+                        <img src="images/logo.jpg" alt="MUVIO"
+                            class="h-10 md:h-12 w-auto object-contain border border-[#1D5D3B]/20 p-1 bg-white">
+                        <div class="hidden sm:flex flex-col">
+                            <span
+                                class="font-brand font-bold text-lg tracking-wider text-[#1D5D3B] leading-none">MUVIO</span>
+                            <span class="font-brand text-[10px] tracking-widest text-[#4B5563] uppercase">ТВОЄ ELECTRO
+                                CITY</span>
+                        </div>
+                    </a>
+
+                    <!-- Лівий блок посилань -->
+                    <nav class="hidden md:flex items-center space-x-1 lg:space-x-3">
+                        <a href="catalog.html"
+                            class="font-brand font-semibold text-xs lg:text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] px-2 py-1 transition-colors">
+                            КАТАЛОГ
+                        </a>
+                        <a href="calculator.html"
+                            class="font-brand font-bold text-xs lg:text-sm uppercase tracking-wider text-[#1D5D3B] border-b-2 border-[#1D5D3B] px-2 py-1 transition-colors">
+                            КАЛЬКУЛЯТОР
+                        </a>
+                        <a href="service.html"
+                            class="font-brand font-semibold text-xs lg:text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] px-2 py-1 transition-colors">
+                            СЕРВІС
+                        </a>
+                    </nav>
+                </div>
+
+                <!-- Права частина: Правий блок посилань + Telegram Bot -->
+                <div class="flex items-center gap-2 sm:gap-3 lg:gap-4">
+                    <!-- Правий блок посилань -->
+                    <nav class="hidden md:flex items-center space-x-1 lg:space-x-3">
+                        <a href="franchise.html"
+                            class="font-brand font-semibold text-xs lg:text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] px-2 py-1 transition-colors">
+                            ФРАНШИЗА
+                        </a>
+                        <a href="cabinet.html"
+                            class="font-brand font-semibold text-xs lg:text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] px-2 py-1 transition-colors">
+                            ОСОБИСТИЙ КАБІНЕТ
+                        </a>
+                    </nav>
+
+                    <a href="https://t.me/muviobot" target="_blank" rel="noopener noreferrer"
+                        class="chamfer-btn bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs md:text-sm uppercase tracking-widest px-3 sm:px-4 md:px-5 py-2.5 flex items-center gap-2 border border-[#1D5D3B] shrink-0">
+                        <i data-lucide="send" class="w-4 h-4"></i>
+                        <span>TELEGRAM BOT</span>
+                    </a>
+
+                    <!-- Mobile Menu Button -->
+                    <button id="mobileMenuBtn" aria-label="Меню"
+                        class="md:hidden p-2 text-[#111827] hover:text-[#1D5D3B]">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobileMenu" class="hidden md:hidden border-t-2 border-[#1D5D3B] bg-white px-4 py-4 space-y-2">
+            <a href="catalog.html"
+                class="mobile-nav-link block font-brand font-semibold text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] py-2 pl-2">
+                КАТАЛОГ ТРАНСПОРТУ
+            </a>
+            <a href="calculator.html"
+                class="mobile-nav-link block font-brand font-bold text-sm uppercase tracking-wider text-[#1D5D3B] py-2 border-l-2 border-[#1D5D3B] pl-2">
+                КАЛЬКУЛЯТОР ВИКУПУ
+            </a>
+            <a href="service.html"
+                class="mobile-nav-link block font-brand font-semibold text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] py-2 pl-2">
+                СЕРВІС: ВУЛ. ПРИМОРСЬКА, 22
+            </a>
+            <a href="franchise.html"
+                class="mobile-nav-link block font-brand font-semibold text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] py-2 pl-2">
+                ФРАНШИЗА ТА ПАРТНЕРСТВО
+            </a>
+            <a href="cabinet.html"
+                class="mobile-nav-link block font-brand font-semibold text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] py-2 pl-2">
+                ОСОБИСТИЙ КАБІНЕТ
+            </a>
+            <div class="pt-2 flex flex-col gap-2">
+                <a href="https://t.me/muviobot" target="_blank"
+                    class="chamfer-btn w-full bg-[#1D5D3B] text-white font-brand font-bold text-center py-3 flex items-center justify-center gap-2">
+                    <i data-lucide="send" class="w-4 h-4"></i>
+                    <span>ВІДКРИТИ TELEGRAM BOT</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== ОСНОВНИЙ КОНТЕНТ КАЛЬКУЛЯТОРА ==================== -->
+    <main class="flex-1">
+
+        <!-- Верхній заголовок -->
+        <section class="bg-white border-b-2 border-[#1D5D3B] py-12 md:py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-x border-slate-200/60">
+                <div class="max-w-3xl space-y-4">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1 bg-[#1D5D3B]/10 border border-[#1D5D3B] chamfer-badge">
+                        <span class="w-2 h-2 rounded-full bg-[#10B981]"></span>
+                        <span class="font-brand font-bold text-xs tracking-wider text-[#1D5D3B] uppercase">
+                            MUVIO RENT-TO-OWN // ФІНАНСОВИЙ КАЛЬКУЛЯТОР
+                        </span>
+                    </div>
+                    <h1 class="font-brand font-bold text-3xl sm:text-4xl md:text-5xl uppercase tracking-tight text-[#111827]">
+                        КАЛЬКУЛЯТОР ВИКУПУ ТА ОРЕНДИ СКУТЕРА
+                    </h1>
+                    <p class="text-sm sm:text-base text-[#4B5563] leading-relaxed">
+                        Розрахуйте комфортний щотижневий та щомісячний платіж для будь-якої моделі з автопарку MUVIO. 
+                        Перший внесок — лише 20%, решта розподіляється рівними частинами на 3–8 місяців. Після фінального платежу техніка переходить у вашу повну власність.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Інтерактивний калькулятор -->
+        <section class="py-12 md:py-16 bg-[#F8FAFC] border-b-2 border-[#1D5D3B]">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-x border-slate-200/60">
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+                    <!-- Ліва колонка: Параметри конфігурації (7 колонок) -->
+                    <div class="lg:col-span-7 bg-white border-2 border-[#1D5D3B] p-6 sm:p-8 chamfer-box shadow-sm space-y-8">
+
+                        <!-- Крок 1: Вибір моделі -->
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <label for="calcModelSelect" class="font-brand font-bold text-sm uppercase tracking-wider text-[#111827] flex items-center gap-2">
+                                    <span class="w-5 h-5 bg-[#1D5D3B] text-white rounded-full flex items-center justify-center text-xs">1</span>
+                                    <span>Оберіть модель транспорту:</span>
+                                </label>
+                                <span id="modelVoltBadge" class="text-xs font-brand font-bold text-[#1D5D3B] border border-[#1D5D3B] px-2 py-0.5 chamfer-badge">72V</span>
+                            </div>
+                            <select id="calcModelSelect" onchange="onModelChange()"
+                                class="w-full bg-[#F8FAFC] border-2 border-slate-300 focus:border-[#1D5D3B] text-sm font-brand font-bold text-[#111827] p-3.5 chamfer-badge outline-none transition-colors">
+                                <!-- Опції генеруються через JS -->
+                            </select>
+                            <div class="flex justify-between items-center text-xs text-slate-500 font-mono pt-1">
+                                <span>Базова вартість скутера в зборі:</span>
+                                <span id="calcBasePriceTxt" class="font-bold text-[#1D5D3B]">80 000 грн</span>
+                            </div>
+                        </div>
+
+                        <!-- Крок 2: Акумуляторна батарея -->
+                        <div class="space-y-3 pt-6 border-t border-slate-200">
+                            <label class="font-brand font-bold text-sm uppercase tracking-wider text-[#111827] flex items-center gap-2">
+                                <span class="w-5 h-5 bg-[#1D5D3B] text-white rounded-full flex items-center justify-center text-xs">2</span>
+                                <span>Ємність акумулятора (Li-ion Smart BMS):</span>
+                            </label>
+                            <div id="batteryOptionsContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <!-- Генерується через JS -->
+                            </div>
+                        </div>
+
+                        <!-- Крок 3: Зарядний пристрій -->
+                        <div class="space-y-3 pt-6 border-t border-slate-200">
+                            <label class="font-brand font-bold text-sm uppercase tracking-wider text-[#111827] flex items-center gap-2">
+                                <span class="w-5 h-5 bg-[#1D5D3B] text-white rounded-full flex items-center justify-center text-xs">3</span>
+                                <span>Зарядний пристрій:</span>
+                            </label>
+                            <div id="chargerOptionsContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <!-- Генерується через JS -->
+                            </div>
+                        </div>
+
+                        <!-- Крок 4: Термін викупу -->
+                        <div class="space-y-3 pt-6 border-t border-slate-200">
+                            <div class="flex justify-between items-center">
+                                <label class="font-brand font-bold text-sm uppercase tracking-wider text-[#111827] flex items-center gap-2">
+                                    <span class="w-5 h-5 bg-[#1D5D3B] text-white rounded-full flex items-center justify-center text-xs">4</span>
+                                    <span>Термін програми викупу (місяців):</span>
+                                </label>
+                                <span class="text-xs font-mono text-slate-500">Без відсотків банку</span>
+                            </div>
+                            <div class="grid grid-cols-3 sm:grid-cols-6 gap-2">
+                                <button onclick="setCalcTerm(3)" id="term-btn-3" class="chamfer-btn py-3 text-center border-2 border-[#1D5D3B] bg-white text-[#111827] font-brand font-bold text-xs uppercase transition-all">3 міс.</button>
+                                <button onclick="setCalcTerm(4)" id="term-btn-4" class="chamfer-btn py-3 text-center border-2 border-[#1D5D3B] bg-white text-[#111827] font-brand font-bold text-xs uppercase transition-all">4 міс.</button>
+                                <button onclick="setCalcTerm(5)" id="term-btn-5" class="chamfer-btn py-3 text-center border-2 border-[#1D5D3B] bg-white text-[#111827] font-brand font-bold text-xs uppercase transition-all">5 міс.</button>
+                                <button onclick="setCalcTerm(6)" id="term-btn-6" class="chamfer-btn py-3 text-center border-2 border-[#1D5D3B] bg-[#1D5D3B] text-white font-brand font-bold text-xs uppercase transition-all">6 міс.</button>
+                                <button onclick="setCalcTerm(7)" id="term-btn-7" class="chamfer-btn py-3 text-center border-2 border-[#1D5D3B] bg-white text-[#111827] font-brand font-bold text-xs uppercase transition-all">7 міс.</button>
+                                <button onclick="setCalcTerm(8)" id="term-btn-8" class="chamfer-btn py-3 text-center border-2 border-[#1D5D3B] bg-white text-[#111827] font-brand font-bold text-xs uppercase transition-all">8 міс.</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Права колонка: Підсумковий розрахунок та бронювання (5 колонок) -->
+                    <div class="lg:col-span-5 space-y-6">
+
+                        <!-- Фінансовий підсумок -->
+                        <div class="bg-gradient-to-br from-[#123824] via-[#1D5D3B] to-[#123824] text-white p-6 sm:p-8 chamfer-box shadow-xl border-2 border-[#1D5D3B] space-y-6">
+
+                            <div class="border-b border-emerald-400/30 pb-4">
+                                <div class="text-xs font-brand uppercase tracking-widest text-emerald-300">ПІДСУМКОВИЙ РОЗРАХУНОК</div>
+                                <h3 id="resModelTitle" class="font-brand font-bold text-2xl uppercase tracking-tight text-white mt-1">
+                                    Crosser CR-13 №1
+                                </h3>
+                                <div id="resConfigSummary" class="text-xs font-mono text-emerald-200 mt-1">
+                                    2000W | 72V | 40Ah (базовий) | 6 міс.
+                                </div>
+                            </div>
+
+                            <!-- Вартість та перший внесок -->
+                            <div class="space-y-3 font-mono text-sm border-b border-emerald-400/30 pb-5">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-emerald-100">Повна вартість у зборі:</span>
+                                    <span id="resTotalPrice" class="font-bold text-white text-base">80 000 грн</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-emerald-100">Перший внесок (20%):</span>
+                                    <span id="resDeposit" class="font-bold text-emerald-300 text-base">16 000 грн</span>
+                                </div>
+                                <div class="flex justify-between items-center text-xs text-emerald-200">
+                                    <span>Залишок до виплати:</span>
+                                    <span id="resRemainingPrice" class="font-semibold">64 000 грн</span>
+                                </div>
+                            </div>
+
+                            <!-- Щомісячний та щотижневий платіж -->
+                            <div class="bg-black/30 p-4 border border-emerald-400/30 chamfer-badge space-y-2">
+                                <div class="text-xs font-brand uppercase tracking-wider text-emerald-300">
+                                    Щомісячний платіж:
+                                </div>
+                                <div id="resMonthly" class="font-brand font-bold text-3xl sm:text-4xl text-[#10B981]">
+                                    ~10 667 грн<span class="text-sm font-sans font-normal text-emerald-200"> / міс.</span>
+                                </div>
+                                <div id="resWeekly" class="flex justify-between items-center text-xs font-mono text-emerald-100 pt-2 border-t border-emerald-500/20">
+                                    <span>Орієнтовно за тиждень:</span>
+                                    <span class="font-bold text-white">~2 667 грн/тижд</span>
+                                </div>
+                            </div>
+
+                            <!-- Перевага викупу -->
+                            <div class="text-xs text-emerald-100 leading-relaxed bg-white/5 p-3 border border-white/10 text-justify">
+                                💡 <strong>Чому викуп вигідний:</strong> Після завершення обраного терміну транспорт та батарея переходять у вашу приватну власність. Без переплат банкам та кредитів.
+                            </div>
+
+                            <!-- Кнопка оформлення -->
+                            <div class="space-y-3">
+                                <a id="calcTelegramBtn" href="https://t.me/muviobot" target="_blank" rel="noopener noreferrer"
+                                    class="chamfer-btn w-full bg-[#10B981] hover:bg-emerald-400 text-slate-950 font-brand font-bold text-sm uppercase tracking-widest py-4 flex items-center justify-center gap-2 shadow-lg">
+                                    <i data-lucide="send" class="w-4 h-4"></i>
+                                    <span>ОФОРМИТИ ВИКУП У TELEGRAM</span>
+                                </a>
+                                <div class="text-center text-[10px] font-mono text-emerald-200">
+                                    Миттєвий перехід до бота з попередньо заповненими параметрами
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Швидка заявка для консультації з менеджером -->
+                        <div class="bg-white border-2 border-slate-300 p-6 chamfer-box space-y-4">
+                            <div class="space-y-1">
+                                <h4 class="font-brand font-bold text-sm uppercase text-[#111827]">Потрібна допомога з розрахунком?</h4>
+                                <p class="text-xs text-slate-600">Залиште номер — менеджер зв'яжеться з вами за 15 хвилин.</p>
+                            </div>
+                            <form id="calcLeadForm" class="space-y-3">
+                                <input type="text" id="leadName" required placeholder="Ваше ім'я"
+                                    class="w-full bg-[#F8FAFC] border border-slate-300 focus:border-[#1D5D3B] px-3 py-2 text-xs chamfer-badge outline-none">
+                                <input type="tel" id="leadPhone" required placeholder="+38 (063) 123-45-67"
+                                    class="w-full bg-[#F8FAFC] border border-slate-300 focus:border-[#1D5D3B] px-3 py-2 text-xs chamfer-badge outline-none">
+                                <button type="submit" id="btnSubmitCalcLead"
+                                    class="chamfer-btn w-full bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs uppercase py-2.5">
+                                    НАДІСЛАТИ ЗАПИТ МЕНЕДЖЕРУ
+                                </button>
+                                <div id="leadFeedback" class="hidden text-[11px] font-bold text-center text-[#1D5D3B]">
+                                    ✓ Дякуємо! Менеджер зателефонує вам найближчим часом.
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==================== ПІДВАЛ (FOOTER) ==================== -->
+    <footer class="bg-[#123824] text-white border-t-4 border-[#1D5D3B] py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-x border-emerald-900/40">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-12 border-b border-emerald-800/40">
+
+                <!-- Колонка 1: Про нас -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <img src="images/logo.jpg" alt="MUVIO" class="h-10 w-auto bg-white p-1 border border-white">
+                        <div class="flex flex-col">
+                            <span class="font-brand font-bold text-xl tracking-wider text-white">MUVIO</span>
+                            <span class="font-brand text-[9px] tracking-widest text-emerald-300 uppercase">ТВОЄ ELECTRO CITY</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-emerald-100 leading-relaxed">
+                        Офіційний прокат, викуп (Rent-to-Own) та сервісне обслуговування комерційного електротранспорту в Одесі. Власний хаб на вул. Приморській, 22.
+                    </p>
+                </div>
+
+                <!-- Колонка 2: Навігація -->
+                <div>
+                    <div class="font-brand font-bold text-sm uppercase tracking-wider text-emerald-200 mb-4">
+                        НАВІГАЦІЯ
+                    </div>
+                    <ul class="space-y-2 text-xs font-brand tracking-wide">
+                        <li><a href="catalog.html" class="hover:text-emerald-300 transition-colors">КАТАЛОГ ТРАНСПОРТУ</a></li>
+                        <li><a href="calculator.html" class="hover:text-emerald-300 transition-colors text-emerald-400 font-bold">КАЛЬКУЛЯТОР ВИКУПУ</a></li>
+                        <li><a href="service.html" class="hover:text-emerald-300 transition-colors">СЕРВІС В ОДЕСІ</a></li>
+                        <li><a href="franchise.html" class="hover:text-emerald-300 transition-colors">ФРАНШИЗА ТА ПАРТНЕРСТВО</a></li>
+                        <li><a href="cabinet.html" class="hover:text-emerald-300 transition-colors">ОСОБИСТИЙ КАБІНЕТ</a></li>
+                    </ul>
+                </div>
+
+                <!-- Колонка 3: Топ моделі флоту -->
+                <div>
+                    <div class="font-brand font-bold text-sm uppercase tracking-wider text-emerald-200 mb-4">
+                        ТОП МОДЕЛІ ФЛОТУ
+                    </div>
+                    <ul class="space-y-2 text-xs text-emerald-100 font-mono">
+                        <li>• <a href="catalog.html" class="hover:underline">Crosser CR-13 (72V 60Ah, 2000W)</a></li>
+                        <li>• <a href="catalog.html" class="hover:underline">Crosser CR-20 (72V 60Ah, 2500W)</a></li>
+                        <li>• <a href="catalog.html" class="hover:underline">Aima A700 (72V 60Ah, 1200W)</a></li>
+                        <li>• <a href="catalog.html" class="hover:underline">Aima F606 (72V 60Ah, 1200W)</a></li>
+                    </ul>
+                </div>
+
+                <!-- Колонка 4: Локація та Контакти -->
+                <div>
+                    <div class="font-brand font-bold text-sm uppercase tracking-wider text-emerald-200 mb-4">
+                        ЛОКАЦІЯ ТА ЗВ'ЯЗОК
+                    </div>
+                    <div class="space-y-2 text-xs text-emerald-100">
+                        <p class="font-semibold text-white">м. Одеса, вул. Приморська, 22</p>
+                        <p class="text-[11px] text-emerald-200">Понеділок — Неділя: з 11:00 до 22:00</p>
+                        <div class="pt-1.5 space-y-1 text-xs">
+                            <p>
+                                <span class="text-emerald-300">Телефон:</span>
+                                <a href="tel:+380638316361" class="text-white hover:text-emerald-200 transition-colors ml-1 font-semibold">
+                                    +38(063)-831-63-61
+                                </a>
+                            </p>
+                            <p>
+                                <span class="text-emerald-300">Telegram зв'язок:</span>
+                                <a href="https://t.me/Muvio_Odesa" target="_blank" rel="noopener noreferrer" class="text-white hover:text-emerald-200 transition-colors ml-1 font-semibold">
+                                    @Muvio_Odesa
+                                </a>
+                            </p>
+                        </div>
+                        <p class="pt-2">
+                            <a href="https://t.me/muviobot" target="_blank" class="chamfer-btn inline-block bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs uppercase px-4 py-2 mt-1 border border-emerald-500">
+                                ВІДКРИТИ TELEGRAM BOT →
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-emerald-200 gap-4 font-mono">
+                <div>© 2026 MUVIO CITY. Одеса, вул. Приморська, 22.</div>
+                <div class="text-[11px]">B2B екосистема прокату, викупу та сервісу комерційного електротранспорту</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== JAVASCRIPT ==================== -->
+    <script>
+        const FLEET = [
+            { "key": "crosser_cr13_1", "name": "Crosser CR-13 №1", "category": "scooter", "voltage": "72V", "power": "2000W", "buyout_base_price": 80000 },
+            { "key": "crosser_cr20", "name": "Crosser CR-20", "category": "scooter", "voltage": "72V", "power": "2500W", "buyout_base_price": 77000 },
+            { "key": "aima_a700", "name": "Aima A700", "category": "scooter", "voltage": "72V", "power": "1200W", "buyout_base_price": 70000 },
+            { "key": "aima_f606_1", "name": "Aima F606 №1", "category": "scooter", "voltage": "72V", "power": "1200W", "buyout_base_price": 60000 },
+            { "key": "aima_a715", "name": "Aima A715", "category": "scooter", "voltage": "72V", "power": "1200W", "buyout_base_price": 68000 },
+            { "key": "aima_journey", "name": "Aima Journey", "category": "scooter", "voltage": "72V", "power": "1200W", "buyout_base_price": 68000 },
+            { "key": "aima_f606_2", "name": "Aima F606 №2", "category": "scooter", "voltage": "72V", "power": "1200W", "buyout_base_price": 60000 },
+            { "key": "crosser_cr13_2", "name": "Crosser CR-13 №2", "category": "scooter", "voltage": "72V", "power": "2000W", "buyout_base_price": 80000 },
+            { "key": "aima_mine", "name": "Aima Mine", "category": "scooter", "voltage": "60V", "power": "800W", "buyout_base_price": 60000 },
+            { "key": "like_bike_n5", "name": "Like Bike N5", "category": "scooter", "voltage": "60V", "power": "1000W", "buyout_base_price": 57000 },
+            { "key": "aima_mine_plus", "name": "Aima Mine Plus", "category": "scooter", "voltage": "60V", "power": "800W", "buyout_base_price": 55000 },
+            { "key": "aima_leopard", "name": "Aima Leopard", "category": "scooter", "voltage": "72V", "power": "1200W", "buyout_base_price": 50000 },
+            { "key": "like_bike_bruser_1", "name": "Like Bike Bruiser №1", "category": "bike", "voltage": "48V", "power": "500W", "buyout_base_price": 28000 },
+            { "key": "like_bike_bruser_2", "name": "Like Bike Bruiser №2", "category": "bike", "voltage": "48V", "power": "500W", "buyout_base_price": 28000 },
+            { "key": "ado_a20f", "name": "ADO A20F", "category": "bike", "voltage": "48V", "power": "250W", "buyout_base_price": 28000 }
+        ];
+
+        const BATTERY_UPGRADES = {
+            "72V_40Ah": 0, "72V_60Ah": 7000,
+            "60V_40Ah": 0, "60V_60Ah": 7000,
+            "48V_10Ah": 0, "48V_20Ah": 3500, "48V_30Ah": 7000, "48V_40Ah": 10500
+        };
+
+        const CHARGER_UPGRADES = {
+            "standard": 0,
+            "fast": 1400
+        };
+
+        let calcState = {
+            modelKey: 'crosser_cr13_1',
+            batteryCode: '72V_40Ah',
+            chargerCode: 'standard',
+            termMonths: 6
+        };
+
+        function initCalculator() {
+            // Читання URL параметра (?model=...)
+            const urlParams = new URLSearchParams(window.location.search);
+            const modelParam = urlParams.get('model');
+            if (modelParam && FLEET.some(f => f.key === modelParam)) {
+                calcState.modelKey = modelParam;
+            }
+
+            const select = document.getElementById('calcModelSelect');
+            select.innerHTML = '';
+
+            FLEET.forEach(item => {
+                const opt = document.createElement('option');
+                opt.value = item.key;
+                opt.textContent = `${item.name} (${item.power}, ${item.voltage} | Базова ціна: ${item.buyout_base_price.toLocaleString('uk-UA')} грн)`;
+                select.appendChild(opt);
+            });
+
+            select.value = calcState.modelKey;
+            updateCalcOptions();
+        }
+
+        function onModelChange() {
+            const select = document.getElementById('calcModelSelect');
+            calcState.modelKey = select.value;
+            updateCalcOptions();
+        }
+
+        function updateCalcOptions() {
+            const model = FLEET.find(m => m.key === calcState.modelKey) || FLEET[0];
+            const volt = model.voltage;
+
+            document.getElementById('modelVoltBadge').textContent = volt;
+            document.getElementById('calcBasePriceTxt').textContent = `${model.buyout_base_price.toLocaleString('uk-UA')} грн`;
+
+            // Батареї
+            const batContainer = document.getElementById('batteryOptionsContainer');
+            batContainer.innerHTML = '';
+
+            let batteryList = [];
+            if (volt === '72V' || volt === '60V') {
+                const prefix = volt === '72V' ? '72V' : '60V';
+                batteryList = [
+                    { code: `${prefix}_40Ah`, name: `${prefix} 40Ah (Базовий)`, priceText: '+0 грн (у комплекті)', diff: 0 },
+                    { code: `${prefix}_60Ah`, name: `${prefix} 60Ah [Посилений]`, priceText: '+7 000 грн', diff: 7000 }
+                ];
+            } else {
+                batteryList = [
+                    { code: '48V_10Ah', name: '48V 10Ah (Базовий)', priceText: '+0 грн (у комплекті)', diff: 0 },
+                    { code: '48V_20Ah', name: '48V 20Ah (+Хід)', priceText: '+3 500 грн', diff: 3500 },
+                    { code: '48V_30Ah', name: '48V 30Ah (+Хід)', priceText: '+7 000 грн', diff: 7000 },
+                    { code: '48V_40Ah', name: '48V 40Ah (Максимальний)', priceText: '+10 500 грн', diff: 10500 }
+                ];
+            }
+
+            if (!batteryList.some(b => b.code === calcState.batteryCode)) {
+                calcState.batteryCode = batteryList[0].code;
+            }
+
+            batteryList.forEach(b => {
+                const isChecked = (b.code === calcState.batteryCode);
+                const btn = document.createElement('div');
+                btn.className = `p-3.5 border-2 cursor-pointer chamfer-badge transition-all flex items-center justify-between ${isChecked ? 'border-[#1D5D3B] bg-[#1D5D3B]/10 font-bold' : 'border-slate-300 bg-white hover:border-[#1D5D3B]/50'}`;
+                btn.onclick = () => {
+                    calcState.batteryCode = b.code;
+                    updateCalcOptions();
+                };
+                btn.innerHTML = `
+                    <div>
+                        <div class="text-xs font-brand uppercase text-[#111827]">${b.name}</div>
+                        <div class="text-[11px] ${b.diff > 0 ? 'text-[#1D5D3B] font-bold' : 'text-[#4B5563]'} font-mono">${b.priceText}</div>
+                    </div>
+                    <div class="w-4 h-4 rounded-full border-2 border-[#1D5D3B] flex items-center justify-center ${isChecked ? 'bg-[#1D5D3B]' : 'bg-white'}">
+                        ${isChecked ? '<div class="w-1.5 h-1.5 bg-white rounded-full"></div>' : ''}
+                    </div>
+                `;
+                batContainer.appendChild(btn);
+            });
+
+            // Зарядки
+            const chContainer = document.getElementById('chargerOptionsContainer');
+            chContainer.innerHTML = '';
+
+            const chargerList = [
+                { code: 'standard', name: 'Базовий зарядний пристрій', priceText: '+0 грн (у комплекті)', diff: 0 },
+                { code: 'fast', name: 'Швидка зарядка (10A / 5A)', priceText: '+1 400 грн', diff: 1400 }
+            ];
+
+            if (!chargerList.some(c => c.code === calcState.chargerCode)) {
+                calcState.chargerCode = chargerList[0].code;
+            }
+
+            chargerList.forEach(c => {
+                const isChecked = (c.code === calcState.chargerCode);
+                const btn = document.createElement('div');
+                btn.className = `p-3.5 border-2 cursor-pointer chamfer-badge transition-all flex items-center justify-between ${isChecked ? 'border-[#1D5D3B] bg-[#1D5D3B]/10 font-bold' : 'border-slate-300 bg-white hover:border-[#1D5D3B]/50'}`;
+                btn.onclick = () => {
+                    calcState.chargerCode = c.code;
+                    updateCalcOptions();
+                };
+                btn.innerHTML = `
+                    <div>
+                        <div class="text-xs font-brand uppercase text-[#111827]">${c.name}</div>
+                        <div class="text-[11px] ${c.diff > 0 ? 'text-[#1D5D3B] font-bold' : 'text-[#4B5563]'} font-mono">${c.priceText}</div>
+                    </div>
+                    <div class="w-4 h-4 rounded-full border-2 border-[#1D5D3B] flex items-center justify-center ${isChecked ? 'bg-[#1D5D3B]' : 'bg-white'}">
+                        ${isChecked ? '<div class="w-1.5 h-1.5 bg-white rounded-full"></div>' : ''}
+                    </div>
+                `;
+                chContainer.appendChild(btn);
+            });
+
+            calculateBuyout();
+        }
+
+        function setCalcTerm(months) {
+            calcState.termMonths = months;
+            [3, 4, 5, 6, 7, 8].forEach(m => {
+                const btn = document.getElementById(`term-btn-${m}`);
+                if (m === months) {
+                    btn.classList.add('bg-[#1D5D3B]', 'text-white');
+                    btn.classList.remove('bg-white', 'text-[#111827]');
+                } else {
+                    btn.classList.remove('bg-[#1D5D3B]', 'text-white');
+                    btn.classList.add('bg-white', 'text-[#111827]');
+                }
+            });
+            calculateBuyout();
+        }
+
+        function calculateBuyout() {
+            const model = FLEET.find(m => m.key === calcState.modelKey) || FLEET[0];
+            const basePrice = model.buyout_base_price;
+            const batDiff = BATTERY_UPGRADES[calcState.batteryCode] || 0;
+            const chDiff = CHARGER_UPGRADES[calcState.chargerCode] || 0;
+            const months = calcState.termMonths;
+
+            const totalPrice = basePrice + batDiff + chDiff;
+            const deposit = totalPrice * 0.20;
+            const remaining = totalPrice - deposit;
+            const monthlyPayment = remaining / months;
+            const weeklyGuide = monthlyPayment / 4;
+
+            document.getElementById('resModelTitle').textContent = model.name;
+            document.getElementById('resConfigSummary').textContent =
+                `${model.power} | ${model.voltage} | ${calcState.batteryCode.replace('_', ' ')} ${batDiff > 0 ? '(+' + batDiff.toLocaleString() + ' грн)' : '(базовий)'} | ${months} міс.`;
+
+            document.getElementById('resTotalPrice').textContent = `${Math.round(totalPrice).toLocaleString('uk-UA')} грн`;
+            document.getElementById('resDeposit').textContent = `${Math.round(deposit).toLocaleString('uk-UA')} грн`;
+            document.getElementById('resRemainingPrice').textContent = `${Math.round(remaining).toLocaleString('uk-UA')} грн`;
+            document.getElementById('resMonthly').innerHTML = `~${Math.round(monthlyPayment).toLocaleString('uk-UA')} грн<span class="text-sm font-sans font-normal text-emerald-200"> / міс.</span>`;
+            document.getElementById('resWeekly').innerHTML = `<span>Орієнтовно за тиждень:</span><span class="font-bold text-white">~${Math.round(weeklyGuide).toLocaleString('uk-UA')} грн/тижд</span>`;
+
+            // Посилання на бот із параметрами
+            const botUrl = `https://t.me/muviobot?start=buyout_${model.key}_${months}m`;
+            document.getElementById('calcTelegramBtn').href = botUrl;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initCalculator();
+
+            if (window.lucide) window.lucide.createIcons();
+
+            // Мобільне меню
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+                document.querySelectorAll('.mobile-nav-link').forEach(link => {
+                    link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+                });
+            }
+
+            // Форма швидкого ліда
+            const leadForm = document.getElementById('calcLeadForm');
+            if (leadForm) {
+                leadForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const btn = document.getElementById('btnSubmitCalcLead');
+                    btn.disabled = true;
+                    btn.textContent = 'ВІДПРАВКА...';
+
+                    const nameVal = document.getElementById('leadName').value.trim();
+                    const phoneVal = document.getElementById('leadPhone').value.trim();
+                    const model = FLEET.find(m => m.key === calcState.modelKey) || FLEET[0];
+
+                    const payload = {
+                        name: nameVal,
+                        phone: phoneVal,
+                        city: 'Одеса (Калькулятор)',
+                        budget: 'Rent-to-Own',
+                        scooters_count: model.name,
+                        comment: `Викуп: ${model.name}, термін ${calcState.termMonths} міс., АКБ ${calcState.batteryCode}`
+                    };
+
+                    try {
+                        await fetch('/api/franchise/lead', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+                    } catch (err) {
+                        console.warn('API lead save fallback:', err);
+                    }
+
+                    document.getElementById('leadFeedback').classList.remove('hidden');
+                    btn.textContent = 'НАДІСЛАНО!';
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

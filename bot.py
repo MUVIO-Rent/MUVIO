@@ -1,3 +1,5 @@
+from aiohttp import web
+import re
 import asyncio
 import json
 import os
@@ -204,6 +206,20 @@ async def init_db():
                 description TEXT,
                 date_added TEXT,
                 paid_by TEXT DEFAULT 'company'
+            )
+        """)
+
+        await db.execute("""
+            CREATE TABLE IF NOT EXISTS franchise_leads (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT,
+                phone TEXT,
+                city TEXT,
+                budget TEXT,
+                scooters_count TEXT,
+                comment TEXT,
+                date_added TEXT,
+                status TEXT DEFAULT 'new'
             )
         """)
 
@@ -4392,11 +4408,205 @@ async def buyout_pay_req_handler(callback: CallbackQuery):
 
 
 # --- ЗАПУСК БОТА ---
+
+# ==================== HTTP REST API SERVER (FRANCHISE & CABINET) ====================
+CORS_HEADERS = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Requested-With"
+}
+
+async def handle_options(request):
+    return web.Response(headers=CORS_HEADERS)
+
+async def api_franchise_lead(request):
+    try:
+        data = await request.json()
+    except Exception:
+        data = {}
+
+    name = str(data.get("name", "")).strip()
+    phone = str(data.get("phone", "")).strip()
+    city = str(data.get("city", "")).strip()
+    budget = str(data.get("budget", "")).strip()
+    scooters_count = str(data.get("scooters_count", "")).strip()
+    comment = str(data.get("comment", "")).strip()
+
+    now_str = datetime.now().strftime("%d.%m.%Y %H:%M")
+
+    try:
+        async with aiosqlite.connect(DB_PATH) as db:
+            await db.execute("""
+                INSERT INTO franchise_leads (name, phone, city, budget, scooters_count, comment, date_added)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+            """, (name, phone, city, budget, scooters_count, comment, now_str))
+            await db.commit()
+    except Exception as e:
+        logger.error(f"Error saving franchise lead to DB: {e}")
+
+    # Notify admin in Telegram
+    try:
+        admin_text = (
+            "⚡️ <b>НОВА ЗАЯВКА НА ФРАНШИЗУ MUVIO!</b>\n"
+            "────────────────────\n"
+            f"👤 <b>Ім'я:</b> {name}\n"
+            f"📞 <b>Телефон:</b> <code>{phone}</code>\n"
+            f"📍 <b>Місто:</b> {city}\n"
+            f"🛵 <b>Скутери/Бюджет:</b> {scooters_count or budget}\n"
+        )
+        if comment:
+            admin_text += f"💬 <b>Коментар:</b> {comment}\n"
+        admin_text += f"⏱ <b>Час:</b> {now_str}"
+
+        clean_p = re.sub(r'[^0-9+]', '', phone)
+        kb = None
+        if clean_p:
+            kb = InlineKeyboardMarkup(inline_keyboard=[
+                [InlineKeyboardButton(text="📞 Зателефонувати", url=f"tel:{clean_p}")]
+            ])
+
+        await bot.send_message(chat_id=ADMIN_ID, text=admin_text, parse_mode="HTML", reply_markup=kb)
+    except Exception as e:
+        logger.error(f"Error sending franchise lead notification to admin: {e}")
+
+    # Google Sheets if configured
+    if sheet_requests:
+        try:
+            sheet_requests.append_row([now_str, "Франшиза", name, phone, city, scooters_count or budget, comment])
+        except Exception as e:
+            logger.warning(f"Error appending franchise lead to Google Sheets: {e}")
+
+    return web.json_response({"status": "ok", "message": "Заявку успішно прийнято"}, headers=CORS_HEADERS)
+
+
+async def api_user_profile(request):
+    telegram_id = request.query.get("telegram_id")
+    if not telegram_id:
+        return web.json_response({"error": "telegram_id is required"}, status=400, headers=CORS_HEADERS)
+
+    try:
+        tg_id_int = int(telegram_id)
+    except ValueError:
+        return web.json_response({"error": "invalid telegram_id"}, status=400, headers=CORS_HEADERS)
+
+    async with aiosqlite.connect(DB_PATH) as db:
+        db.row_factory = aiosqlite.Row
+
+        # 1. User info
+        async with db.execute("SELECT * FROM users WHERE telegram_id = ?", (tg_id_int,)) as cur:
+            u_row = await cur.fetchone()
+            user_data = dict(u_row) if u_row else {
+                "id": tg_id_int,
+                "first_name": "Клієнт",
+                "phone_number": "",
+                "bonus_balance": 0
+            }
+
+        phone = user_data.get("phone_number") or ""
+
+        # 2. Active Rental
+        rental_data = None
+        if phone:
+            async with db.execute("SELECT * FROM rentals WHERE user_phone = ? ORDER BY id DESC LIMIT 1", (phone,)) as cur:
+                r_row = await cur.fetchone()
+                if r_row:
+                    r_dict = dict(r_row)
+                    rental_data = {
+                        "vehicle_info": r_dict.get("vehicle_info") or "Електроскутер MUVIO",
+                        "plate_number": "MUVIO-" + str(r_dict.get("id", 1)).zfill(3),
+                        "contract_num": r_dict.get("contract_num") or "",
+                        "contract_date": r_dict.get("contract_date") or "",
+                        "end_date": r_dict.get("end_date") or "Активно",
+                        "rate": f"{int(r_dict.get('amount_due', 0)):,} ₴".replace(",", " ") if r_dict.get('amount_due') else "За тарифом",
+                        "equipment": "Шолом + Зарядка" if r_dict.get("has_helmet") else "Стандартна комплектація",
+                        "status": "active"
+                    }
+
+        # 3. Buyout Deal
+        buyout_data = None
+        async with db.execute("SELECT * FROM buyout_deals WHERE user_id = ? AND status = 'active' ORDER BY id DESC LIMIT 1", (tg_id_int,)) as cur:
+            b_row = await cur.fetchone()
+            if b_row:
+                b_dict = dict(b_row)
+                buyout_data = {
+                    "vehicle_info": b_dict.get("vehicle_info") or "Електроскутер",
+                    "total_price": b_dict.get("total_price") or 0,
+                    "paid_amount": b_dict.get("paid_amount") or 0,
+                    "deposit_paid": b_dict.get("deposit_paid") or 0,
+                    "term_months": b_dict.get("term_months") or 0,
+                    "contract_num": b_dict.get("contract_num") or "",
+                    "contract_date": b_dict.get("contract_date") or "",
+                    "status": b_dict.get("status") or "active"
+                }
+
+        # 4. Payments history
+        payments_data = []
+        async with db.execute("SELECT * FROM payments WHERE user_id = ? ORDER BY id DESC LIMIT 20", (tg_id_int,)) as cur:
+            p_rows = await cur.fetchall()
+            for p in p_rows:
+                p_dict = dict(p)
+                p_type_label = "Викуп" if p_dict.get("payment_type") == "buyout" else "Оренда"
+                payments_data.append({
+                    "date": p_dict.get("date_paid", ""),
+                    "purpose": f"{p_type_label} транспорту",
+                    "amount": f"{int(p_dict.get('amount', 0)):,} ₴".replace(",", " "),
+                    "bonus": f"{int(p_dict.get('bonus_used', 0)):,} ₴".replace(",", " "),
+                    "status": "Зараховано"
+                })
+
+        # 5. Expenses / Repairs history
+        repairs_data = []
+        vehicle_key = buyout_data.get("vehicle_key") if buyout_data else (rental_data.get("vehicle_info") if rental_data else None)
+        if vehicle_key:
+            async with db.execute("SELECT * FROM expenses WHERE vehicle_key LIKE ? ORDER BY id DESC LIMIT 10", (f"%{vehicle_key}%",)) as cur:
+                e_rows = await cur.fetchall()
+                for e in e_rows:
+                    e_dict = dict(e)
+                    repairs_data.append({
+                        "date": e_dict.get("date_added", ""),
+                        "title": e_dict.get("description", "Планове обслуговування"),
+                        "category": e_dict.get("category", "ТО"),
+                        "cost": "0 ₴",
+                        "status": "За рахунок MUVIO"
+                    })
+
+    response_payload = {
+        "user": {
+            "id": tg_id_int,
+            "first_name": user_data.get("full_name") or user_data.get("first_name", "Клієнт"),
+            "username": user_data.get("username", ""),
+            "phone": user_data.get("phone_number") or "",
+            "bonus_balance": user_data.get("bonus_balance", 0)
+        },
+        "rental": rental_data,
+        "buyout": buyout_data,
+        "payments": payments_data,
+        "repairs": repairs_data
+    }
+
+    return web.json_response(response_payload, headers=CORS_HEADERS)
+
+
+async def start_web_server():
+    app = web.Application()
+    app.router.add_route("OPTIONS", "/{tail:.*}", handle_options)
+    app.router.add_post("/api/franchise/lead", api_franchise_lead)
+    app.router.add_get("/api/user/profile", api_user_profile)
+
+    runner = web.AppRunner(app)
+    await runner.setup()
+    port = int(os.environ.get("PORT", 8080))
+    site = web.TCPSite(runner, "0.0.0.0", port)
+    await site.start()
+    logger.info(f"🌐 HTTP API сервер MUVIO успішно запущено на 0.0.0.0:{port}")
+
+
 async def main():
     logger.info("🚀 Инициализация БД SQLite...")
     await init_db()
     scheduler.add_job(check_expiring_rentals, 'interval', minutes=15)
     scheduler.start()
+    await start_web_server()
     logger.info("🚀 Бот MUVIO Rent запущено...")
     await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot)
