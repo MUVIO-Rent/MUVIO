@@ -711,9 +711,29 @@
             }
 
             // Посилання на бот
-            const botUrl = `https://t.me/muviobot?start=buyout_${model.key}_${months}m`;
+            updateTelegramLink();
+        }
+
+        // Генерація deep link для Telegram бота
+        function updateTelegramLink() {
+            const model = FLEET.find(m => m.key === calcState.modelKey) || FLEET[0];
+            const modelSlug = model.name
+                .replace(/№\s*\d+/g, '')
+                .trim()
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/^-+|-+$/g, '');
+            const batMatch = (calcState.batteryCode || '').match(/(\d+ah)/i);
+            const batSlug = batMatch ? batMatch[1].toLowerCase() : (calcState.batteryCode || '').toLowerCase();
+            const months = calcState.termMonths || 6;
+            const botUrl = `https://t.me/muviobot?start=buy_${modelSlug}_${batSlug}_${months}m`;
+
             const tgBtn = document.getElementById('calcTelegramBtn');
-            if (tgBtn) tgBtn.href = botUrl;
+            if (tgBtn) {
+                tgBtn.href = botUrl;
+                tgBtn.target = "_blank";
+            }
+            return botUrl;
         }
 
         // Мобільне меню
