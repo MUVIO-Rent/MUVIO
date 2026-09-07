@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сервісний хаб електротранспорту в Одесі | MUVIO — вул. Приморська, 22</title>
+    <title>MUVIO — Сервісний центр та видача | Одеса, вул. Приморська, 22</title>
     <meta name="description"
-        content="Офіційний сервісний хаб комерційного електротранспорту MUVIO в Одесі (вул. Приморська, 22). Безкоштовне планове ТО для клієнтів оренди та викупу, швидка заміна батарей за 60 сек, ремонт та мобільний виїзд.">
+        content="Сервісний центр та точка видачі MUVIO в Одесі на вул. Приморській, 22. Планове ТО за 0 ₴, шиномонтаж, гальмівні системи та підмінний транспорт.">
 
     <!-- Google Fonts: Chakra Petch & Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -71,17 +71,6 @@
             clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
         }
 
-        .tech-card {
-            border: 2px solid #1D5D3B;
-            transition: all 0.25s ease;
-        }
-
-        .tech-card:hover {
-            border-color: #24754A;
-            transform: translateY(-4px);
-            box-shadow: 0 16px 32px -8px rgba(29, 93, 59, 0.22);
-        }
-
         /* Leaflet popup styling */
         .leaflet-popup-content-wrapper {
             border-radius: 2px !important;
@@ -96,8 +85,7 @@
 </head>
 
 <body
-    class="bg-[#F9FAFB] text-[#111827] font-sans antialiased selection:bg-[#1D5D3B] selection:text-white relative min-h-screen flex flex-col justify-between">
-
+    class="bg-[#F9FAFB] text-[#111827] font-sans antialiased selection:bg-[#1D5D3B] selection:text-white relative min-h-screen">
     <!-- ==================== АРХІТЕКТУРНІ НАПРЯМНІ ТА МАРКУВАННЯ ПО БОКАХ (Polestar Aesthetic) ==================== -->
     <div class="fixed inset-y-0 left-0 right-0 pointer-events-none max-w-7xl mx-auto z-40 hidden xl:block">
         <!-- Ліва вертикальна лінія розмітки -->
@@ -106,7 +94,7 @@
                 <span class="w-1.5 h-1.5 bg-[#1D5D3B]"></span>
                 <span
                     class="text-[9px] font-brand tracking-[0.25em] text-slate-400 uppercase select-none whitespace-nowrap [writing-mode:vertical-rl] rotate-180">
-                    MUVIO SERVICE HUB // ODESA
+                    MUVIO CITY 2026 // ODESA HUB
                 </span>
                 <span class="h-10 w-[1px] bg-slate-200"></span>
             </div>
@@ -193,11 +181,11 @@
         <div id="mobileMenu" class="hidden md:hidden border-t-2 border-[#1D5D3B] bg-white px-4 py-4 space-y-2">
             <a href="catalog.html"
                 class="mobile-nav-link block font-brand font-semibold text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] py-2 pl-2">
-                КАТАЛОГ ТРАНСПОРТУ
+                КАТАЛОГ СКУТЕРІВ
             </a>
             <a href="calculator.html"
                 class="mobile-nav-link block font-brand font-semibold text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] py-2 pl-2">
-                КАЛЬКУЛЯТОР ВИКУПУ
+                КАЛЬКУЛЯТОР ВИКУПУ (RENT-TO-OWN)
             </a>
             <a href="service.html"
                 class="mobile-nav-link block font-brand font-bold text-sm uppercase tracking-wider text-[#1D5D3B] py-2 border-l-2 border-[#1D5D3B] pl-2">
@@ -221,302 +209,155 @@
         </div>
     </header>
 
-    <!-- ==================== ОСНОВНИЙ КОНТЕНТ СЕРВІСУ ==================== -->
-    <main class="flex-1">
+    <!-- ==================== 6. СЕРВІС ТА ЛОКАЦІЯ В ОДЕСІ ==================== -->
+    <section id="service" class="py-16 md:py-24 bg-white border-b-2 border-[#1D5D3B]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-x border-slate-200/60">
 
-        <!-- Верхній банер -->
-        <section class="bg-white border-b-2 border-[#1D5D3B] py-12 md:py-16">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-x border-slate-200/60">
-                <div class="max-w-3xl space-y-4">
-                    <div class="inline-flex items-center gap-2 px-3.5 py-1 bg-[#1D5D3B]/10 border border-[#1D5D3B] chamfer-badge">
-                        <span class="w-2 h-2 rounded-full bg-[#10B981]"></span>
-                        <span class="font-brand font-bold text-xs tracking-wider text-[#1D5D3B] uppercase">
-                            MUVIO SERVICE HUB // ОДЕСА, ВУЛ. ПРИМОРСЬКА, 22
-                        </span>
-                    </div>
-                    <h1 class="font-brand font-bold text-3xl sm:text-4xl md:text-5xl uppercase tracking-tight text-[#111827]">
-                        СЕРВІСНИЙ ХАБ ТА ОБСЛУГОВУВАННЯ ЕЛЕКТРОТРАНСПОРТУ
-                    </h1>
-                    <p class="text-sm sm:text-base text-[#4B5563] leading-relaxed">
-                        Повний цикл технічної підтримки комерційних скутерів та велосипедів. Безкоштовне планове ТО для всіх клієнтів оренди та викупу MUVIO, заміна розряджених акумуляторів за 60 секунд, оперативний ремонт і швидкий виїзд майстра по місту.
-                    </p>
-                </div>
-            </div>
-        </section>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 
-        <!-- 1. Регламент планового ТО -->
-        <section class="py-12 md:py-16 bg-[#F8FAFC] border-b-2 border-[#1D5D3B]">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-x border-slate-200/60">
-
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-4">
-                    <div>
-                        <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#1D5D3B]/10 border border-[#1D5D3B] chamfer-badge mb-2">
-                            <span class="font-brand font-bold text-xs tracking-wider text-[#1D5D3B] uppercase">0 ГРН ДЛЯ КЛІЄНТІВ MUVIO</span>
-                        </div>
-                        <h2 class="font-brand font-bold text-2xl sm:text-3xl uppercase text-[#111827]">
-                            РЕГЛАМЕНТ ПЛАНОВОГО ТО (КОЖНІ 1 000 КМ)
-                        </h2>
-                    </div>
-                    <a href="https://t.me/muviobot" target="_blank"
-                        class="chamfer-btn bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs uppercase tracking-wider px-5 py-3 flex items-center gap-2">
-                        <i data-lucide="calendar" class="w-4 h-4"></i>
-                        <span>ЗАПИСАТИСЯ НА ТО В TELEGRAM</span>
-                    </a>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-                    <!-- Пункт 1 -->
-                    <div class="bg-white border-2 border-slate-300 p-6 chamfer-box space-y-3">
-                        <div class="w-10 h-10 bg-[#1D5D3B]/10 border border-[#1D5D3B] flex items-center justify-center chamfer-badge text-[#1D5D3B]">
-                            <i data-lucide="disc" class="w-5 h-5"></i>
-                        </div>
-                        <h3 class="font-brand font-bold text-base uppercase text-[#111827]">Гальмівна система</h3>
-                        <p class="text-xs text-slate-600 leading-relaxed">
-                            Діагностика зносу колодок, прокачка гідравлічної рідини DOT4, регулювання натягу тросів та перевірка гальмівних дисків на биття.
-                        </p>
-                        <div class="text-[11px] font-mono text-[#1D5D3B] font-bold">Входить у підписку / викуп</div>
+                <div class="lg:col-span-6 space-y-6">
+                    <div
+                        class="inline-flex items-center gap-2 px-3 py-1 bg-[#1D5D3B]/10 border border-[#1D5D3B] chamfer-badge">
+                        <span class="font-brand font-bold text-xs tracking-wider text-[#1D5D3B] uppercase">СЕРВІСНИЙ
+                            ЦЕНТР</span>
                     </div>
 
-                    <!-- Пункт 2 -->
-                    <div class="bg-white border-2 border-slate-300 p-6 chamfer-box space-y-3">
-                        <div class="w-10 h-10 bg-[#1D5D3B]/10 border border-[#1D5D3B] flex items-center justify-center chamfer-badge text-[#1D5D3B]">
-                            <i data-lucide="cpu" class="w-5 h-5"></i>
-                        </div>
-                        <h3 class="font-brand font-bold text-base uppercase text-[#111827]">Діагностика АКБ та BMS</h3>
-                        <p class="text-xs text-slate-600 leading-relaxed">
-                            Тестування вольтажу елементів 72V/60V/48V під піковим навантаженням, перевірка балансування комірок та роз'ємів швидкого заряду.
-                        </p>
-                        <div class="text-[11px] font-mono text-[#1D5D3B] font-bold">Входить у підписку / викуп</div>
-                    </div>
-
-                    <!-- Пункт 3 -->
-                    <div class="bg-white border-2 border-slate-300 p-6 chamfer-box space-y-3">
-                        <div class="w-10 h-10 bg-[#1D5D3B]/10 border border-[#1D5D3B] flex items-center justify-center chamfer-badge text-[#1D5D3B]">
-                            <i data-lucide="circle-dot" class="w-5 h-5"></i>
-                        </div>
-                        <h3 class="font-brand font-bold text-base uppercase text-[#111827]">Шини та мотор-колесо</h3>
-                        <p class="text-xs text-slate-600 leading-relaxed">
-                            Контроль тиску в безкамерних шинах (2.5–2.8 bar), перевірка сальників підшипників, очищення контактів датчиків Холла.
-                        </p>
-                        <div class="text-[11px] font-mono text-[#1D5D3B] font-bold">Входить у підписку / викуп</div>
-                    </div>
-
-                    <!-- Пункт 4 -->
-                    <div class="bg-white border-2 border-slate-300 p-6 chamfer-box space-y-3">
-                        <div class="w-10 h-10 bg-[#1D5D3B]/10 border border-[#1D5D3B] flex items-center justify-center chamfer-badge text-[#1D5D3B]">
-                            <i data-lucide="shield-alert" class="w-5 h-5"></i>
-                        </div>
-                        <h3 class="font-brand font-bold text-base uppercase text-[#111827]">Гідроізоляція та проводка</h3>
-                        <p class="text-xs text-slate-600 leading-relaxed">
-                            Перевірка герметичності силового контролера, блоку перетворювача DC-DC та надійність сигналізації і GPS-трекера.
-                        </p>
-                        <div class="text-[11px] font-mono text-[#1D5D3B] font-bold">Входить у підписку / викуп</div>
-                    </div>
-
-                    <!-- Пункт 5 -->
-                    <div class="bg-white border-2 border-slate-300 p-6 chamfer-box space-y-3">
-                        <div class="w-10 h-10 bg-[#1D5D3B]/10 border border-[#1D5D3B] flex items-center justify-center chamfer-badge text-[#1D5D3B]">
-                            <i data-lucide="sliders" class="w-5 h-5"></i>
-                        </div>
-                        <h3 class="font-brand font-bold text-base uppercase text-[#111827]">Підвіска та кермо</h3>
-                        <p class="text-xs text-slate-600 leading-relaxed">
-                            Підтяжка рульової колонки, змащування підшипників, перевірка ходу передньої вилки та задніх гідравлічних амортизаторів.
-                        </p>
-                        <div class="text-[11px] font-mono text-[#1D5D3B] font-bold">Входить у підписку / викуп</div>
-                    </div>
-
-                    <!-- Пункт 6 -->
-                    <div class="bg-white border-2 border-[#1D5D3B] p-6 chamfer-box space-y-3 bg-emerald-50/40">
-                        <div class="w-10 h-10 bg-[#1D5D3B] flex items-center justify-center chamfer-badge text-white">
-                            <i data-lucide="refresh-cw" class="w-5 h-5"></i>
-                        </div>
-                        <h3 class="font-brand font-bold text-base uppercase text-[#1D5D3B]">Підмінний фонд техніки</h3>
-                        <p class="text-xs text-slate-700 leading-relaxed">
-                            Якщо ремонт триває більше 2 годин — безкоштовно надаємо аналогічний скутер на підміну, щоб кур'єр не втрачав заробіток.
-                        </p>
-                        <div class="text-[11px] font-mono text-[#1D5D3B] font-bold">Гарантія мобільності 24/7</div>
-                    </div>
-
-                </div>
-
-            </div>
-        </section>
-
-        <!-- 2. Battery Swap Station -->
-        <section class="py-12 md:py-16 bg-white border-b-2 border-[#1D5D3B]">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-x border-slate-200/60">
-
-                <div class="bg-gradient-to-br from-slate-900 via-[#123824] to-slate-900 text-white p-8 sm:p-12 chamfer-box border-2 border-[#1D5D3B] relative overflow-hidden">
-                    <div class="max-w-3xl space-y-6 relative z-10">
-                        <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#10B981]/20 border border-[#10B981] chamfer-badge text-xs font-brand font-bold uppercase tracking-wider text-[#10B981]">
-                            ШВИДКА ЗАМІНА БАТАРЕЙ // SWAP STATION
-                        </div>
-                        <h2 class="font-brand font-bold text-3xl sm:text-4xl uppercase tracking-tight text-white leading-tight">
-                            ЗАМІНА ЗНЯТОЇ АКБ НА ПРИМОРСЬКІЙ, 22 ЗА 60 СЕКУНД
-                        </h2>
-                        <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
-                            Більше не потрібно чекати 6 годин біля розетки під час робочого дня. Заїжджайте до нашого хабу в центрі Одеси: майстер миттєво замінить розряджену батарею 72V/60V на протестовану свіжу зі 100% зарядом.
-                        </p>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2 font-mono text-xs text-emerald-200">
-                            <div class="bg-white/10 p-3 chamfer-badge">✓ 60 секунд на заміну</div>
-                            <div class="bg-white/10 p-3 chamfer-badge">✓ Завжди готові батареї 40/60Ah</div>
-                            <div class="bg-white/10 p-3 chamfer-badge">✓ 0 грн для активних орендарів</div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- 3. Прайс на додаткові послуги та ремонт -->
-        <section class="py-12 md:py-16 bg-[#F8FAFC] border-b-2 border-[#1D5D3B]">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-x border-slate-200/60">
-
-                <div class="text-center max-w-3xl mx-auto mb-12 space-y-2">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#1D5D3B]/10 border border-[#1D5D3B] chamfer-badge">
-                        <span class="font-brand font-bold text-xs uppercase tracking-wider text-[#1D5D3B]">ПРОЗОРИЙ ПРАЙС-ЛИСТ</span>
-                    </div>
-                    <h2 class="font-brand font-bold text-2xl sm:text-3xl uppercase tracking-tight text-[#111827]">
-                        ВАРТІСТЬ РЕМОНТУ ТА ДОДАТКОВИХ ПОСЛУГ
+                    <h2 class="font-brand font-bold text-3xl sm:text-4xl uppercase tracking-tight text-[#111827]">
+                        ТЕХНІЧНЕ ОБСЛУГОВУВАННЯ ТА ВИДАЧА
                     </h2>
-                    <p class="text-xs sm:text-sm text-slate-600">
-                        Для клієнтів зі сторонньою технікою або у випадках механічних пошкоджень з вини водія:
+
+                    <p class="text-base text-[#4B5563] leading-relaxed">
+                        Повне технічне обслуговування електротранспорту за адресою: Одеса, вул. Приморська, 22.
                     </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+
+                        <div class="p-4 bg-[#F8FAFC] border-2 border-[#1D5D3B] chamfer-box">
+                            <div
+                                class="font-brand font-bold text-sm uppercase text-[#1D5D3B] flex items-center gap-2 mb-1">
+                                <i data-lucide="disc" class="w-4 h-4"></i>
+                                <span>ШИНОМОНТАЖ</span>
+                            </div>
+                            <p class="text-xs text-[#4B5563]">Заміна покришок, камер та ремонт безкамерної гуми.</p>
+                        </div>
+
+                        <div class="p-4 bg-[#F8FAFC] border-2 border-[#1D5D3B] chamfer-box">
+                            <div
+                                class="font-brand font-bold text-sm uppercase text-[#1D5D3B] flex items-center gap-2 mb-1">
+                                <i data-lucide="shield-alert" class="w-4 h-4"></i>
+                                <span>ГАЛЬМІВНІ СИСТЕМИ</span>
+                            </div>
+                            <p class="text-xs text-[#4B5563]">Регулювання та заміна колодок, прокачування гідравліки.
+                            </p>
+                        </div>
+
+                        <div class="p-4 bg-[#F8FAFC] border-2 border-[#1D5D3B] chamfer-box sm:col-span-2">
+                            <div
+                                class="font-brand font-bold text-sm uppercase text-[#1D5D3B] flex items-center gap-2 mb-1">
+                                <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+                                <span>ПІДМІННИЙ ТРАНСПОРТ</span>
+                            </div>
+                            <p class="text-xs text-[#4B5563]">Оперативна видача скутера на час планового ТО або ремонту.
+                            </p>
+                        </div>
+
+                    </div>
                 </div>
 
-                <div class="max-w-4xl mx-auto bg-white border-2 border-[#1D5D3B] chamfer-box overflow-hidden shadow-sm">
-                    <table class="w-full text-left text-xs font-mono">
-                        <thead class="bg-[#123824] text-white font-brand text-xs uppercase tracking-wider">
-                            <tr>
-                                <th class="p-4">Послуга / Вид робіт</th>
-                                <th class="p-4 text-center">Час виконання</th>
-                                <th class="p-4 text-right">Вартість</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-200">
-                            <tr class="hover:bg-slate-50">
-                                <td class="p-4 font-bold text-slate-900">Комплексна діагностика електрики та контролера</td>
-                                <td class="p-4 text-center text-slate-600">30 хв</td>
-                                <td class="p-4 text-right font-bold text-[#1D5D3B]">250 ₴</td>
-                            </tr>
-                            <tr class="hover:bg-slate-50">
-                                <td class="p-4 font-bold text-slate-900">Заміна комплекту гальмівних колодок (перед/зад)</td>
-                                <td class="p-4 text-center text-slate-600">20 хв</td>
-                                <td class="p-4 text-right font-bold text-[#1D5D3B]">200 ₴ + деталі</td>
-                            </tr>
-                            <tr class="hover:bg-slate-50">
-                                <td class="p-4 font-bold text-slate-900">Шиномонтаж безкамерної покришки скутера</td>
-                                <td class="p-4 text-center text-slate-600">30 хв</td>
-                                <td class="p-4 text-right font-bold text-[#1D5D3B]">300 ₴</td>
-                            </tr>
-                            <tr class="hover:bg-slate-50">
-                                <td class="p-4 font-bold text-slate-900">Повна гідроізоляція мотор-колеса та проводки</td>
-                                <td class="p-4 text-center text-slate-600">2 години</td>
-                                <td class="p-4 text-right font-bold text-[#1D5D3B]">800 ₴</td>
-                            </tr>
-                            <tr class="hover:bg-slate-50">
-                                <td class="p-4 font-bold text-slate-900">Встановлення прихованого GPS-трекера з блокуванням</td>
-                                <td class="p-4 text-center text-slate-600">1 година</td>
-                                <td class="p-4 text-right font-bold text-[#1D5D3B]">650 ₴</td>
-                            </tr>
-                            <tr class="hover:bg-slate-50">
-                                <td class="p-4 font-bold text-slate-900">Виїзд мобільного техніка по Одесі (екстрена допомога)</td>
-                                <td class="p-4 text-center text-slate-600">до 45 хв</td>
-                                <td class="p-4 text-right font-bold text-[#1D5D3B]">400 ₴ + ремонт</td>
-                            </tr>
-                            <tr class="hover:bg-slate-50 bg-emerald-50/30">
-                                <td class="p-4 font-bold text-[#1D5D3B]">Планове ТО для активних орендарів та викупу MUVIO</td>
-                                <td class="p-4 text-center text-slate-600">40 хв</td>
-                                <td class="p-4 text-right font-bold text-[#10B981] uppercase font-brand text-sm">БЕЗКОШТОВНО</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <!-- Локація та графік (Точні дані з запиту) -->
+                <div class="lg:col-span-6 bg-[#F8FAFC] border-2 border-[#1D5D3B] p-6 sm:p-8 chamfer-box space-y-5">
+                    <div class="border-b border-[#1D5D3B]/20 pb-4">
+                        <div class="flex items-center justify-between">
+                            <span class="font-brand font-bold text-xs uppercase tracking-widest text-[#1D5D3B]">ОФІЦІЙНА
+                                ЛОКАЦІЯ ТА ГРАФІК</span>
+                            <span class="text-[10px] font-mono text-slate-500">46.49191° N, 30.73519° E</span>
+                        </div>
+                        <h3 class="font-brand font-bold text-2xl uppercase text-[#111827] mt-1">ОДЕСА, ВУЛ. ПРИМОРСЬКА,
+                            22</h3>
+                        <p class="text-xs text-[#1D5D3B] font-medium mt-1">Перехрестя з Військовим узвозом (ліворуч при
+                            спуску до Приморської)</p>
+                    </div>
 
-            </div>
-        </section>
-
-        <!-- 4. Локація та інтерактивна карта -->
-        <section class="py-12 md:py-16 bg-white border-b-2 border-[#1D5D3B]">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-x border-slate-200/60">
-
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-
-                    <!-- Текстова інформація хабу -->
-                    <div class="lg:col-span-5 space-y-6">
-                        <div class="inline-flex items-center gap-2 px-3.5 py-1 bg-[#1D5D3B]/10 border border-[#1D5D3B] chamfer-badge">
-                            <span class="w-2 h-2 bg-[#1D5D3B]"></span>
-                            <span class="font-brand font-bold text-xs uppercase tracking-wider text-[#1D5D3B]">
-                                ГОЛОВНИЙ ХАБ В ОДЕСІ
+                    <!-- Інтерактивна карта Leaflet з точною міткою -->
+                    <div class="space-y-1.5">
+                        <div id="muvio-map"
+                            class="w-full h-60 border border-[#1D5D3B] relative z-10 bg-slate-100 shadow-sm"></div>
+                        <div class="flex items-center justify-between text-[11px] text-[#4B5563] font-mono px-0.5">
+                            <span class="flex items-center gap-1.5">
+                                <span class="w-2 h-2 rounded-full bg-[#1D5D3B]"></span>
+                                <span>Точка видачі та сервіс MUVIO</span>
                             </span>
-                        </div>
-                        <h2 class="font-brand font-bold text-3xl sm:text-4xl uppercase tracking-tight text-[#111827]">
-                            ВУЛ. ПРИМОРСЬКА, 22
-                        </h2>
-                        <p class="text-sm text-slate-600 leading-relaxed">
-                            Знаходимося безпосередньо біля перехрестя з Військовим узвозом — 2 хвилини від Морвокзалу та Потьомкінських сходів. Зручний заїзд транспортом, велика парковка та зона очікування для кур'єрів.
-                        </p>
-
-                        <div class="space-y-3 text-xs font-mono text-slate-700 bg-slate-50 p-4 border border-slate-200 chamfer-box">
-                            <div class="flex items-center gap-2">
-                                <i data-lucide="clock" class="w-4 h-4 text-[#1D5D3B]"></i>
-                                <span><strong>Графік роботи:</strong> Щодня з 11:00 до 22:00</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <i data-lucide="phone" class="w-4 h-4 text-[#1D5D3B]"></i>
-                                <span><strong>Гаряча лінія сервісу:</strong> +38(063)-831-63-61</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <i data-lucide="map-pin" class="w-4 h-4 text-[#1D5D3B]"></i>
-                                <span><strong>Орієнтир:</strong> Військовий узвіз, ліворуч при спуску</span>
-                            </div>
-                        </div>
-
-                        <div class="pt-2 flex flex-col sm:flex-row gap-3">
-                            <a href="https://t.me/Muvio_Odesa" target="_blank"
-                                class="chamfer-btn bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs uppercase py-3.5 px-6 flex items-center justify-center gap-2 border border-[#1D5D3B]">
-                                <i data-lucide="send" class="w-4 h-4"></i>
-                                <span>НАПИСАТИ МАЙСТРУ В TELEGRAM</span>
-                            </a>
-                            <a href="tel:+380638316361"
-                                class="chamfer-btn bg-slate-100 hover:bg-slate-200 text-[#111827] font-brand font-bold text-xs uppercase py-3.5 px-6 flex items-center justify-center gap-2 border border-slate-300">
-                                <i data-lucide="phone" class="w-4 h-4"></i>
-                                <span>ЗАТЕЛЕФОНУВАТИ</span>
-                            </a>
+                            <span class="text-slate-400">Військовий узвіз</span>
                         </div>
                     </div>
 
-                    <!-- Карта Leaflet -->
-                    <div class="lg:col-span-7">
-                        <div class="border-2 border-[#1D5D3B] chamfer-box overflow-hidden shadow-lg h-[400px] w-full relative">
-                            <div id="service-map" class="w-full h-full"></div>
+                    <div class="space-y-4 text-sm text-[#111827]">
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="clock" class="w-5 h-5 text-[#1D5D3B] flex-shrink-0 mt-0.5"></i>
+                            <div>
+                                <div class="font-brand font-bold uppercase">ГРАФІК РОБОТИ СЕРВІСУ ТА ВИДАЧІ:</div>
+                                <div class="text-[#4B5563] font-medium">Понеділок — Неділя: з 11:00 до 22:00 (без
+                                    вихідних)</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="message-square" class="w-5 h-5 text-[#1D5D3B] flex-shrink-0 mt-0.5"></i>
+                            <div>
+                                <div class="font-brand font-bold uppercase">ПІДТРИМКА КЛІЄНТІВ:</div>
+                                <div class="text-[#4B5563] mt-0.5">
+                                    Зв'язок з менеджером:<br>
+                                    Телеграм: <a href="https://t.me/Muvio_Odesa" target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="hover:text-[#1D5D3B] transition-colors">@Muvio_Odesa</a><br>
+                                    Телефон: <a href="tel:+380638316361"
+                                        class="hover:text-[#1D5D3B] transition-colors">+38(063)-831-63-61</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="file-check" class="w-5 h-5 text-[#1D5D3B] flex-shrink-0 mt-0.5"></i>
+                            <div>
+                                <div class="font-brand font-bold uppercase">НЕОБХІДНІ ДОКУМЕНТИ:</div>
+                                <div class="text-[#4B5563]">Паспорт або ID-картка, ІПН, вік від 18 років, смартфон з
+                                    додатком Telegram.</div>
+                            </div>
                         </div>
                     </div>
 
+                    <div class="pt-4">
+                        <a href="https://t.me/muviobot" target="_blank" rel="noopener noreferrer"
+                            class="chamfer-btn w-full bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-sm uppercase tracking-widest py-3 px-6 text-center block">
+                            НАПИСАТИ МЕНЕДЖЕРУ В TELEGRAM
+                        </a>
+                    </div>
                 </div>
 
             </div>
-        </section>
 
-    </main>
+        </div>
+    </section>
 
-    <!-- ==================== ПІДВАЛ (FOOTER) ==================== -->
-    <footer class="bg-[#123824] text-white border-t-4 border-[#1D5D3B] py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-x border-emerald-900/40">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-12 border-b border-emerald-800/40">
+    <!-- ==================== 7. ПІДВАЛ (FOOTER) ==================== -->
+    <footer id="contacts" class="bg-[#123824] text-white border-t-2 border-[#1D5D3B] pt-16 pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-x border-slate-200/60">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-12 border-b border-emerald-800/60">
 
-                <!-- Колонка 1: Про нас -->
+                <!-- Колонка 1: Бренд -->
                 <div class="space-y-4">
                     <div class="flex items-center gap-3">
                         <img src="images/logo.jpg" alt="MUVIO" class="h-10 w-auto bg-white p-1 border border-white">
                         <div class="flex flex-col">
                             <span class="font-brand font-bold text-xl tracking-wider text-white">MUVIO</span>
-                            <span class="font-brand text-[9px] tracking-widest text-emerald-300 uppercase">ТВОЄ ELECTRO CITY</span>
+                            <span class="font-brand text-[9px] tracking-widest text-emerald-300 uppercase">ТВОЄ ELECTRO
+                                CITY</span>
                         </div>
                     </div>
                     <p class="text-xs text-emerald-100 leading-relaxed">
-                        Офіційний прокат, викуп (Rent-to-Own) та сервісне обслуговування комерційного електротранспорту в Одесі. Власний хаб на вул. Приморській, 22.
+                        Офіційний прокат та викуп комерційного електротранспорту в Одесі. Власний парк перевіреної
+                        техніки
+                        в зборі з АКБ.
                     </p>
                 </div>
 
@@ -534,43 +375,46 @@
                     </ul>
                 </div>
 
-                <!-- Колонка 3: Топ моделі флоту -->
+                <!-- Колонка 3: Популярні моделі -->
                 <div>
                     <div class="font-brand font-bold text-sm uppercase tracking-wider text-emerald-200 mb-4">
-                        ТОП МОДЕЛІ ФЛОТУ
+                        ТОП МОДЕЛІ
                     </div>
                     <ul class="space-y-2 text-xs text-emerald-100 font-mono">
-                        <li>• <a href="catalog.html" class="hover:underline">Crosser CR-13 (72V 60Ah, 2000W)</a></li>
-                        <li>• <a href="catalog.html" class="hover:underline">Crosser CR-20 (72V 60Ah, 2500W)</a></li>
-                        <li>• <a href="catalog.html" class="hover:underline">Aima A700 (72V 60Ah, 1200W)</a></li>
-                        <li>• <a href="catalog.html" class="hover:underline">Aima F606 (72V 60Ah, 1200W)</a></li>
+                        <li>• Crosser CR-13 (72V 40/60Ah)</li>
+                        <li>• Crosser CR-20 (72V 40/60Ah)</li>
+                        <li>• Aima A700 (72V 40/60Ah)</li>
+                        <li>• Aima F606 (72V 40/60Ah)</li>
                     </ul>
                 </div>
 
-                <!-- Колонка 4: Локація та Контакти -->
+                <!-- Колонка 4: Точна адреса та графік -->
                 <div>
                     <div class="font-brand font-bold text-sm uppercase tracking-wider text-emerald-200 mb-4">
                         ЛОКАЦІЯ ТА ЗВ'ЯЗОК
                     </div>
                     <div class="space-y-2 text-xs text-emerald-100">
                         <p class="font-semibold text-white">м. Одеса, вул. Приморська, 22</p>
-                        <p class="text-[11px] text-emerald-200">Понеділок — Неділя: з 11:00 до 22:00</p>
+                        <p>Понеділок — Неділя: з 11:00 до 22:00</p>
                         <div class="pt-1.5 space-y-1 text-xs">
                             <p>
                                 <span class="text-emerald-300">Телефон:</span>
-                                <a href="tel:+380638316361" class="text-white hover:text-emerald-200 transition-colors ml-1 font-semibold">
+                                <a href="tel:+380638316361"
+                                    class="text-white hover:text-emerald-200 transition-colors ml-1 font-semibold">
                                     +38(063)-831-63-61
                                 </a>
                             </p>
                             <p>
-                                <span class="text-emerald-300">Telegram зв'язок:</span>
-                                <a href="https://t.me/Muvio_Odesa" target="_blank" rel="noopener noreferrer" class="text-white hover:text-emerald-200 transition-colors ml-1 font-semibold">
+                                <span class="text-emerald-300">Техпідтримка Telegram:</span>
+                                <a href="https://t.me/Muvio_Odesa" target="_blank" rel="noopener noreferrer"
+                                    class="text-white hover:text-emerald-200 transition-colors ml-1 font-semibold">
                                     @Muvio_Odesa
                                 </a>
                             </p>
                         </div>
                         <p class="pt-2">
-                            <a href="https://t.me/muviobot" target="_blank" class="chamfer-btn inline-block bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs uppercase px-4 py-2 mt-1 border border-emerald-500">
+                            <a href="https://t.me/muviobot" target="_blank"
+                                class="chamfer-btn inline-block bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs uppercase px-4 py-2 mt-1 border border-emerald-500">
                                 ВІДКРИТИ TELEGRAM BOT →
                             </a>
                         </p>
@@ -579,38 +423,42 @@
 
             </div>
 
-            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-emerald-200 gap-4 font-mono">
-                <div>© 2026 MUVIO CITY. Одеса, вул. Приморська, 22.</div>
-                <div class="text-[11px]">B2B екосистема прокату, викупу та сервісу комерційного електротранспорту</div>
+            <div
+                class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-emerald-200 gap-4 font-mono">
+                <div>© 2026 MUVIO Rent & Buyout. Одеса, вул. Приморська, 22.</div>
+                <div class="text-[11px]">Електротранспорт для кур'єрських служб та комерції</div>
             </div>
         </div>
     </footer>
 
     <!-- ==================== JAVASCRIPT ==================== -->
     <script>
-        function initServiceMap() {
-            const mapEl = document.getElementById('service-map');
+        // Ініціалізація карти Leaflet з точною точкою на Приморській, 22
+        function initMap() {
+            const mapEl = document.getElementById('muvio-map');
             if (!mapEl || typeof L === 'undefined') return;
-
             try {
+                // Координати точки строго на Приморській, 22 / перехрестя з Військовим узвозом
                 const coords = [46.49191, 30.73519];
-                const map = L.map('service-map', {
+                const map = L.map('muvio-map', {
                     center: coords,
                     zoom: 17,
                     scrollWheelZoom: false
                 });
 
+                // Публічний шар карти OpenStreetMap (без водяних знаків та API-ключа)
                 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
                     maxZoom: 19
                 }).addTo(map);
 
+                // Фірмова темно-зелена точка (#1D5D3B)
                 const pinIcon = L.divIcon({
                     className: 'custom-muvio-marker',
                     html: `
                         <div style="position: relative; display: flex; flex-direction: column; align-items: center; transform: translate(-50%, -100%);">
                             <div style="background-color: #1D5D3B; color: #ffffff; padding: 4px 8px; font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 11px; text-transform: uppercase; border: 1px solid #1D5D3B; white-space: nowrap; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
-                                MUVIO СЕРВІС — Приморська, 22
+                                MUVIO — Приморська, 22
                             </div>
                             <div style="width: 14px; height: 14px; background-color: #1D5D3B; border: 2.5px solid #ffffff; border-radius: 50%; box-shadow: 0 0 10px rgba(29,93,59,0.8); margin-top: 2px;"></div>
                             <div style="width: 2px; height: 6px; background-color: #1D5D3B;"></div>
@@ -624,34 +472,40 @@
                 marker.bindPopup(`
                     <div style="font-family: 'Inter', sans-serif; padding: 4px; font-size: 13px;">
                         <div style="font-family: 'Chakra Petch', sans-serif; font-weight: 700; color: #1D5D3B; font-size: 14px; text-transform: uppercase; margin-bottom: 4px;">
-                            MUVIO SERVICE HUB
+                            MUVIO — Приморська, 22 (біля Військового узвозу)
                         </div>
                         <div style="color: #4B5563; font-size: 12px; line-height: 1.4;">
-                            м. Одеса, вул. Приморська, 22 (перехрестя з Військовим узвозом).<br>
+                            Одеса, перехрестя з Військовим узвозом (ліворуч при спуску до моря).<br>
                             <strong>Графік:</strong> щодня 11:00 — 22:00
                         </div>
                     </div>
                 `).openPopup();
             } catch (e) {
-                console.warn('Leaflet service map error:', e);
+                console.warn('Leaflet map error:', e);
             }
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            initServiceMap();
-            if (window.lucide) window.lucide.createIcons();
+        // Мобільне меню
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            document.querySelectorAll('.mobile-nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        }
 
-            // Мобільне меню
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const mobileMenu = document.getElementById('mobileMenu');
-            if (mobileMenuBtn && mobileMenu) {
-                mobileMenuBtn.addEventListener('click', () => {
-                    mobileMenu.classList.toggle('hidden');
-                });
-                document.querySelectorAll('.mobile-nav-link').forEach(link => {
-                    link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
-                });
-            }
+        document.addEventListener('DOMContentLoaded', () => {
+            try { initMap(); } catch (e) { console.error('Map init error:', e); }
+            try {
+                if (window.lucide) {
+                    window.lucide.createIcons();
+                }
+            } catch (e) { console.error('Lucide error:', e); }
         });
     </script>
 </body>
