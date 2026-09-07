@@ -268,40 +268,30 @@
                 <div class="relative flex py-2 items-center">
                     <div class="flex-grow border-t border-slate-200"></div>
                     <span class="flex-shrink mx-4 text-xs font-brand uppercase tracking-wider text-slate-400 bg-white px-2">
-                        АБО ТЕСТОВИЙ ВХІД / DEMO
+                        АБО ВХІД ЗА TELEGRAM ID
                     </span>
                     <div class="flex-grow border-t border-slate-200"></div>
                 </div>
 
-                <!-- Альтернативний швидкий тестовий вхід (без залежності від домену в BotFather) -->
+                <!-- Вхід за числовим Telegram ID -->
                 <div class="space-y-4 bg-slate-50 p-5 border border-slate-200 chamfer-badge">
                     <div class="flex items-center gap-2">
-                        <i data-lucide="info" class="w-4 h-4 text-[#1D5D3B]"></i>
+                        <i data-lucide="shield" class="w-4 h-4 text-[#1D5D3B]"></i>
                         <span class="font-brand font-bold text-xs uppercase tracking-wider text-[#111827]">
-                            Швидкий доступ для перевірки кабінету
+                            Швидкий доступ за числовим ID
                         </span>
                     </div>
                     <p class="text-xs text-slate-500">
-                        Якщо ви тестуєте сайт локально або віджет Telegram показує помилку домену:
+                        Введіть свій унікальний числовий Telegram ID для авторизації та перевірки даних вашого профілю:
                     </p>
 
                     <div class="flex flex-col sm:flex-row gap-2">
-                        <input type="number" id="manualTelegramId" placeholder="Введіть Telegram ID (напр. 7288164492)"
+                        <input type="number" id="manualTelegramId" placeholder="Ваш Telegram ID (наприклад 7288164492)"
                             class="flex-1 bg-white border-2 border-slate-300 focus:border-[#1D5D3B] px-3 py-2 text-xs font-mono chamfer-badge outline-none">
                         <button type="button" onclick="loginWithManualId()"
-                            class="chamfer-btn bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs uppercase px-4 py-2">
-                            УВІЙТИ ЗА ID
-                        </button>
-                    </div>
-
-                    <div class="pt-2 flex flex-col sm:flex-row gap-2">
-                        <button type="button" onclick="loginAsDemoUser('buyout')"
-                            class="chamfer-btn flex-1 bg-white hover:bg-emerald-50 text-[#1D5D3B] border border-[#1D5D3B] font-brand font-bold text-xs uppercase py-2 text-center">
-                            🚀 ДЕМО: КЛІЄНТ З ВИКУПОМ
-                        </button>
-                        <button type="button" onclick="loginAsDemoUser('rent')"
-                            class="chamfer-btn flex-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 font-brand font-bold text-xs uppercase py-2 text-center">
-                            🛵 ДЕМО: ТІЛЬКИ ОРЕНДА
+                            class="chamfer-btn bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs uppercase px-5 py-2.5 flex items-center justify-center gap-1.5">
+                            <i data-lucide="log-in" class="w-4 h-4"></i>
+                            <span>УВІЙТИ</span>
                         </button>
                     </div>
                 </div>
@@ -329,8 +319,14 @@
                         </div>
                         <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-slate-500 font-mono mt-0.5">
                             <span id="userUsernameDisplay">@username</span>
-                            <span>ID: <span id="userIdDisplay" class="text-slate-700 font-bold">7288164492</span></span>
-                            <span id="userPhoneDisplay">тел. +380...</span>
+                            <span>ID: <span id="userIdDisplay" class="text-slate-700 font-bold">—</span></span>
+                            <span id="userPhoneDisplay">Телефон не вказано</span>
+                        </div>
+                        <div class="mt-2" id="userStatusBadgeWrap">
+                            <span id="userStatusBadge" class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-100 text-slate-600 font-brand font-bold text-xs uppercase tracking-wider chamfer-badge">
+                                <span class="w-2 h-2 bg-slate-400 rounded-full"></span>
+                                <span id="userStatusText">Немає активної техніки в оренді</span>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -339,7 +335,7 @@
                     <!-- Бонуси -->
                     <div class="bg-[#F8FAFC] border border-[#1D5D3B]/40 px-4 py-2 chamfer-badge text-right">
                         <div class="text-[10px] uppercase font-brand tracking-wider text-slate-500">Бонусний рахунок</div>
-                        <div id="userBonusDisplay" class="font-brand font-bold text-lg text-[#1D5D3B]">1 250 ₴</div>
+                        <div id="userBonusDisplay" class="font-brand font-bold text-lg text-[#1D5D3B]">0.00 ₴</div>
                     </div>
 
                     <!-- Кнопка виходу -->
@@ -351,11 +347,38 @@
                 </div>
             </div>
 
-            <!-- Верхній блок: 2 головні картки (Оренда + Прогрес викупу) -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- СТАН А: БЛОК БЕЗ ОРЕНДИ (ЯК У БОТІ) -->
+            <div id="noRentalState" class="bg-white border-2 border-slate-300 p-8 sm:p-12 chamfer-box text-center space-y-6 shadow-sm">
+                <div class="w-16 h-16 mx-auto bg-[#1D5D3B]/10 border border-[#1D5D3B]/30 chamfer-badge flex items-center justify-center text-[#1D5D3B]">
+                    <i data-lucide="bike" class="w-8 h-8"></i>
+                </div>
+                <div class="max-w-md mx-auto space-y-2">
+                    <h3 class="font-brand font-bold text-xl sm:text-2xl uppercase tracking-wider text-[#111827]">
+                        Немає активної техніки
+                    </h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Наразі у вас немає активного транспорту в оренді або під викуп.
+                    </p>
+                </div>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+                    <a href="index.html#catalog"
+                        class="chamfer-btn bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs sm:text-sm uppercase tracking-wider px-6 py-3 flex items-center justify-center gap-2 border border-[#1D5D3B]">
+                        <i data-lucide="layers" class="w-4 h-4"></i>
+                        <span>Обрати транспорт у каталозі</span>
+                    </a>
+                    <a href="https://t.me/muviobot" target="_blank" rel="noopener noreferrer"
+                        class="chamfer-btn bg-white hover:bg-slate-50 text-[#111827] border border-slate-300 font-brand font-bold text-xs sm:text-sm uppercase tracking-wider px-6 py-3 flex items-center justify-center gap-2">
+                        <i data-lucide="send" class="w-4 h-4 text-[#1D5D3B]"></i>
+                        <span>Зв'язатися з менеджером</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- СТАН Б: ВЕРХНІЙ БЛОК З АКТИВНИМИ КАРТКАМИ (Оренда + Прогрес викупу) -->
+            <div id="activeRentalSection" class="hidden grid grid-cols-1 lg:grid-cols-2 gap-8">
 
                 <!-- 1. ПОТОЧНИЙ СТАТУС ОРЕНДИ -->
-                <div class="bg-white border-2 border-[#1D5D3B] p-6 chamfer-box shadow-md flex flex-col justify-between">
+                <div id="activeRentalCard" class="hidden bg-white border-2 border-[#1D5D3B] p-6 chamfer-box shadow-md flex-col justify-between">
                     <div class="space-y-5">
                         <div class="flex items-center justify-between pb-3 border-b border-slate-200">
                             <div class="flex items-center gap-2">
@@ -377,13 +400,13 @@
                                 class="w-28 h-20 object-cover border border-slate-300 bg-slate-50 p-1 flex-shrink-0">
                             <div class="space-y-1">
                                 <div id="rentalVehicleTitle" class="font-brand font-bold text-lg text-[#111827]">
-                                    Crosser CR-13 №1
+                                    Електроскутер MUVIO
                                 </div>
                                 <div class="text-xs text-slate-500 font-mono">
-                                    Інв. номер: <span id="rentalPlateNumber" class="text-slate-800 font-bold">MUVIO-013</span>
+                                    Інв. номер: <span id="rentalPlateNumber" class="text-slate-800 font-bold">—</span>
                                 </div>
                                 <div class="text-xs text-slate-500">
-                                    Договір: <span id="rentalContractNumber" class="font-semibold text-slate-700">№2804-5 від 28.04.2026</span>
+                                    Договір: <span id="rentalContractNumber" class="font-semibold text-slate-700">—</span>
                                 </div>
                             </div>
                         </div>
@@ -393,18 +416,18 @@
                             <div>
                                 <span class="text-slate-500 block">Оплачено до:</span>
                                 <span id="rentalEndDate" class="font-brand font-bold text-sm text-[#111827]">
-                                    15.09.2026, 20:00
+                                    —
                                 </span>
                             </div>
                             <div>
                                 <span class="text-slate-500 block">Тариф оренди:</span>
                                 <span id="rentalRate" class="font-brand font-bold text-sm text-[#1D5D3B]">
-                                    2 500 ₴ / тиждень
+                                    —
                                 </span>
                             </div>
                             <div>
                                 <span class="text-slate-500 block">Комплектація:</span>
-                                <span id="rentalEquipment" class="text-slate-700 font-medium">Шолом + Зарядка 10Ач</span>
+                                <span id="rentalEquipment" class="text-slate-700 font-medium">Стандартна</span>
                             </div>
                             <div>
                                 <span class="text-slate-500 block">Сервісне ТО:</span>
@@ -429,7 +452,7 @@
                 </div>
 
                 <!-- 2. ПРОГРЕС ВИКУПУ (RENT-TO-OWN) -->
-                <div class="bg-white border-2 border-[#1D5D3B] p-6 chamfer-box shadow-md flex flex-col justify-between">
+                <div id="activeBuyoutCard" class="hidden bg-white border-2 border-[#1D5D3B] p-6 chamfer-box shadow-md flex-col justify-between">
                     <div class="space-y-5">
                         <div class="flex items-center justify-between pb-3 border-b border-slate-200">
                             <div class="flex items-center gap-2">
@@ -447,10 +470,10 @@
                         <!-- Модель у викупі -->
                         <div>
                             <div id="buyoutVehicleTitle" class="font-brand font-bold text-lg text-[#111827]">
-                                Crosser CR-13 №1 (72V 60Ah)
+                                —
                             </div>
                             <div class="text-xs text-slate-500 font-mono">
-                                Термін викупу: <span id="buyoutTerm">6 місяців</span> // Договір: <span id="buyoutContract">№2804-5</span>
+                                Термін викупу: <span id="buyoutTerm">—</span> // Договір: <span id="buyoutContract">—</span>
                             </div>
                         </div>
 
@@ -458,15 +481,15 @@
                         <div class="grid grid-cols-3 gap-2 text-center bg-[#F8FAFC] p-3 border border-slate-200">
                             <div>
                                 <span class="text-[10px] uppercase font-brand text-slate-500 block">Повна ціна</span>
-                                <span id="buyoutTotalPrice" class="font-brand font-bold text-base text-slate-800">80 000 ₴</span>
+                                <span id="buyoutTotalPrice" class="font-brand font-bold text-base text-slate-800">— ₴</span>
                             </div>
                             <div>
                                 <span class="text-[10px] uppercase font-brand text-[#1D5D3B] block">Виплачено</span>
-                                <span id="buyoutPaidAmount" class="font-brand font-bold text-base text-[#1D5D3B]">38 400 ₴</span>
+                                <span id="buyoutPaidAmount" class="font-brand font-bold text-base text-[#1D5D3B]">0 ₴</span>
                             </div>
                             <div>
                                 <span class="text-[10px] uppercase font-brand text-amber-600 block">Залишок</span>
-                                <span id="buyoutRemainingAmount" class="font-brand font-bold text-base text-amber-700">41 600 ₴</span>
+                                <span id="buyoutRemainingAmount" class="font-brand font-bold text-base text-amber-700">— ₴</span>
                             </div>
                         </div>
 
@@ -474,16 +497,16 @@
                         <div class="space-y-2">
                             <div class="flex justify-between items-center text-xs font-brand font-bold uppercase tracking-wider">
                                 <span class="text-slate-600">Прогрес до власності:</span>
-                                <span id="buyoutPercentDisplay" class="text-[#1D5D3B] text-sm">48%</span>
+                                <span id="buyoutPercentDisplay" class="text-[#1D5D3B] text-sm">0%</span>
                             </div>
                             <div class="w-full bg-slate-200 h-4 rounded-none overflow-hidden border border-slate-300">
                                 <div id="buyoutProgressBar"
                                     class="bg-gradient-to-r from-[#1D5D3B] to-[#10B981] h-full transition-all duration-700 relative"
-                                    style="width: 48%;">
+                                    style="width: 0%;">
                                 </div>
                             </div>
                             <div class="flex justify-between text-[10px] font-mono text-slate-400">
-                                <span>Старт (20% внесок)</span>
+                                <span>Старт</span>
                                 <span>50%</span>
                                 <span>100% ВЛАСНИК</span>
                             </div>
@@ -645,7 +668,7 @@
                     <span class="text-slate-500 block">Обов'язкове призначення платежу:</span>
                     <div class="bg-emerald-50 border border-emerald-300 p-3 chamfer-badge mt-1 space-y-2">
                         <p id="modalPaymentPurpose" class="font-mono text-[11px] text-emerald-950 leading-relaxed break-words">
-                            Платіж за викуп транспортного засобу (скутер) згідно з Договором №2804-5 від 28.04.2026 р. Без ПДВ.
+                            Платіж за оренду або викуп транспортного засобу. Без ПДВ.
                         </p>
                         <button onclick="copyToClipboard(document.getElementById('modalPaymentPurpose').innerText, this)"
                             class="chamfer-btn bg-[#1D5D3B] text-white font-brand font-bold text-[10px] uppercase px-3 py-1">
@@ -764,86 +787,8 @@
         let currentUser = null;
         let currentProfileData = null;
 
-        // ДЕМО-ДАНІ (використовуються, якщо сервер бекенду недоступний або для тесту)
-        const DEMO_PROFILES = {
-            buyout: {
-                user: {
-                    id: 7288164492,
-                    first_name: "Максим",
-                    last_name: "П.",
-                    username: "muvio_driver",
-                    phone: "+380638316361",
-                    bonus_balance: 1250
-                },
-                rental: {
-                    vehicle_info: "Crosser CR-13 №1 (2000W, 72V 60Ah)",
-                    plate_number: "MUVIO-013",
-                    contract_num: "2804-5",
-                    contract_date: "28.04.2026",
-                    end_date: "15.09.2026, 20:00",
-                    rate: "2 500 ₴ / тиждень",
-                    equipment: "Шолом + Швидка зарядка 10Ач",
-                    status: "active",
-                    image: "images/crosser.jpg"
-                },
-                buyout: {
-                    vehicle_info: "Crosser CR-13 №1",
-                    total_price: 80000,
-                    paid_amount: 38400,
-                    deposit_paid: 16000,
-                    term_months: 6,
-                    contract_num: "2804-5",
-                    contract_date: "28.04.2026",
-                    status: "active"
-                },
-                payments: [
-                    { date: "01.09.2026", purpose: "Оренда на 7 днів (до 08.09)", amount: "2 500 ₴", bonus: "0 ₴", status: "Зараховано" },
-                    { date: "25.08.2026", purpose: "Черговий платіж за викуп (серпень)", amount: "9 600 ₴", bonus: "200 ₴", status: "Зараховано" },
-                    { date: "18.08.2026", purpose: "Оренда на 7 днів (до 25.08)", amount: "2 500 ₴", bonus: "0 ₴", status: "Зараховано" },
-                    { date: "28.07.2026", purpose: "Черговий платіж за викуп (липень)", amount: "9 600 ₴", bonus: "0 ₴", status: "Зараховано" },
-                    { date: "28.06.2026", purpose: "Черговий платіж за викуп (червень)", amount: "9 600 ₴", bonus: "0 ₴", status: "Зараховано" },
-                    { date: "28.04.2026", purpose: "Перший внесок за викуп (депозит 20%)", amount: "16 000 ₴", bonus: "0 ₴", status: "Зараховано" }
-                ],
-                repairs: [
-                    { date: "02.09.2026", title: "Планове ТО: діагностика АКБ 72V, протяжка підвіски", category: "Планове ТО", cost: "0 ₴", status: "За рахунок MUVIO" },
-                    { date: "14.08.2026", title: "Заміна гальмівних колодок (перед/зад)", category: "Гальмівна система", cost: "0 ₴", status: "За рахунок MUVIO" },
-                    { date: "29.06.2026", title: "Сезонний огляд, змащення підшипників керма", category: "Профілактика", cost: "0 ₴", status: "За рахунок MUVIO" }
-                ]
-            },
-            rent: {
-                user: {
-                    id: 384910283,
-                    first_name: "Олександр",
-                    last_name: "",
-                    username: "alex_courier",
-                    phone: "+380671112233",
-                    bonus_balance: 450
-                },
-                rental: {
-                    vehicle_info: "Aima A700 (1200W, 72V 40Ah)",
-                    plate_number: "MUVIO-700",
-                    contract_num: "1205-2",
-                    contract_date: "12.05.2026",
-                    end_date: "11.09.2026, 18:00",
-                    rate: "2 200 ₴ / тиждень",
-                    equipment: "Шолом + Зарядка 10Ач",
-                    status: "active",
-                    image: "images/a700.jpg"
-                },
-                buyout: null,
-                payments: [
-                    { date: "04.09.2026", purpose: "Оренда на 7 днів (до 11.09)", amount: "2 200 ₴", bonus: "0 ₴", status: "Зараховано" },
-                    { date: "28.08.2026", purpose: "Оренда на 7 днів (до 04.09)", amount: "2 200 ₴", bonus: "50 ₴", status: "Зараховано" }
-                ],
-                repairs: [
-                    { date: "20.08.2026", title: "Планова перевірка тиску в шинах та натягу", category: "Планове ТО", cost: "0 ₴", status: "За рахунок MUVIO" }
-                ]
-            }
-        };
-
         // 1. Обробник авторизації з Telegram Widget
         window.onTelegramAuth = function (user) {
-            console.log('Telegram auth success:', user);
             currentUser = user;
             localStorage.setItem('muvio_user', JSON.stringify(user));
             loadUserProfile(user.id);
@@ -859,25 +804,16 @@
             }
             currentUser = {
                 id: idVal,
-                first_name: "Користувач",
-                username: "user_" + idVal
+                first_name: "Клієнт",
+                username: ""
             };
             localStorage.setItem('muvio_user', JSON.stringify(currentUser));
             loadUserProfile(idVal);
         }
 
-        // 3. Вхід у Демо-режимі
-        function loginAsDemoUser(demoType) {
-            const demo = DEMO_PROFILES[demoType] || DEMO_PROFILES.buyout;
-            currentUser = demo.user;
-            localStorage.setItem('muvio_user', JSON.stringify(currentUser));
-            renderProfileUI(demo);
-        }
-
-        // 4. Завантаження даних профілю через fetch до API бота
+        // 3. Завантаження даних профілю через fetch до API бота
         async function loadUserProfile(telegramId) {
             try {
-                // Запит до реального API бота
                 const response = await fetch(`/api/user/profile?telegram_id=${telegramId}`);
                 if (response.ok) {
                     const data = await response.json();
@@ -885,20 +821,27 @@
                     return;
                 }
             } catch (err) {
-                console.warn('API бекенду недоступне або офлайн. Завантаження демо-профілю:', err);
+                console.warn('API бекенду офлайн або не відповідає:', err);
             }
 
-            // Fallback: якщо API не відповідає, рендеримо надійний демонстраційний профіль
-            const fallbackProfile = DEMO_PROFILES.buyout;
-            if (currentUser) {
-                fallbackProfile.user.id = currentUser.id;
-                if (currentUser.first_name) fallbackProfile.user.first_name = currentUser.first_name;
-                if (currentUser.username) fallbackProfile.user.username = currentUser.username;
-            }
-            renderProfileUI(fallbackProfile);
+            // Чистий профіль без фіктивних даних
+            const emptyProfile = {
+                user: {
+                    id: currentUser?.id || telegramId,
+                    first_name: currentUser?.first_name || "Клієнт",
+                    username: currentUser?.username || "",
+                    phone: currentUser?.phone || "",
+                    bonus_balance: 0
+                },
+                rental: null,
+                buyout: null,
+                payments: [],
+                repairs: []
+            };
+            renderProfileUI(emptyProfile);
         }
 
-        // 5. Рендеринг профілю на сторінці
+        // 4. Рендеринг профілю на сторінці
         function renderProfileUI(data) {
             currentProfileData = data;
             document.getElementById('authSection').classList.add('hidden');
@@ -916,8 +859,8 @@
             document.getElementById('userAvatarText').textContent = (fullName[0] || 'M').toUpperCase();
             document.getElementById('userUsernameDisplay').textContent = user.username ? `@${user.username}` : '';
             document.getElementById('userIdDisplay').textContent = user.id || '—';
-            document.getElementById('userPhoneDisplay').textContent = user.phone ? `тел. ${user.phone}` : '';
-            document.getElementById('userBonusDisplay').textContent = `${(user.bonus_balance || 0).toLocaleString()} ₴`;
+            document.getElementById('userPhoneDisplay').textContent = user.phone ? `тел. ${user.phone}` : 'Телефон не вказано';
+            document.getElementById('userBonusDisplay').textContent = `${(user.bonus_balance || 0).toFixed(2)} ₴`;
 
             if (user.photo_url) {
                 const img = document.getElementById('userAvatarImg');
@@ -926,51 +869,90 @@
                 document.getElementById('userAvatarText').classList.add('hidden');
             }
 
-            // Блок оренди
-            if (rental) {
-                document.getElementById('rentalVehicleTitle').textContent = rental.vehicle_info || 'Електроскутер MUVIO';
-                document.getElementById('rentalPlateNumber').textContent = rental.plate_number || 'MUVIO-013';
-                document.getElementById('rentalContractNumber').textContent = `№${rental.contract_num || '2804-5'} від ${rental.contract_date || '28.04.2026'}`;
-                document.getElementById('rentalEndDate').textContent = rental.end_date || 'Активно';
-                document.getElementById('rentalRate').textContent = rental.rate || '2 500 ₴ / тиждень';
-                document.getElementById('rentalEquipment').textContent = rental.equipment || 'Шолом + Зарядка 10Ач';
-                if (rental.image) {
-                    document.getElementById('rentalVehicleImg').src = rental.image;
-                }
+            // Статус користувача в шапці
+            const statusBadge = document.getElementById('userStatusBadge');
+            const statusText = document.getElementById('userStatusText');
+
+            const hasRental = Boolean(rental);
+            const hasBuyout = Boolean(buyout);
+
+            if (hasRental) {
+                statusBadge.className = 'inline-flex items-center gap-1.5 px-2.5 py-1 bg-emerald-100 text-emerald-800 font-brand font-bold text-xs uppercase tracking-wider chamfer-badge';
+                statusText.innerHTML = '<span class="w-2 h-2 bg-[#10B981] rounded-full pulse-emerald inline-block mr-1"></span>АКТИВНА ОРЕНДА';
+            } else if (hasBuyout) {
+                statusBadge.className = 'inline-flex items-center gap-1.5 px-2.5 py-1 bg-emerald-100 text-emerald-800 font-brand font-bold text-xs uppercase tracking-wider chamfer-badge';
+                statusText.innerHTML = '<span class="w-2 h-2 bg-[#10B981] rounded-full pulse-emerald inline-block mr-1"></span>АКТИВНИЙ ВИКУП';
+            } else {
+                statusBadge.className = 'inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-100 text-slate-600 font-brand font-bold text-xs uppercase tracking-wider chamfer-badge';
+                statusText.textContent = 'Немає активної техніки в оренді';
             }
 
-            // Блок викупу
-            if (buyout) {
-                document.getElementById('buyoutVehicleTitle').textContent = buyout.vehicle_info || (rental ? rental.vehicle_info : 'Crosser CR-13');
-                document.getElementById('buyoutTerm').textContent = `${buyout.term_months || 6} місяців`;
-                document.getElementById('buyoutContract').textContent = `№${buyout.contract_num || '2804-5'}`;
+            // Керування станами А (без оренди) / Б (з орендою)
+            const noRentalState = document.getElementById('noRentalState');
+            const activeRentalSection = document.getElementById('activeRentalSection');
+            const rentalCard = document.getElementById('activeRentalCard');
+            const buyoutCard = document.getElementById('activeBuyoutCard');
 
-                const total = buyout.total_price || 80000;
-                const paid = buyout.paid_amount || 0;
-                const rem = Math.max(0, total - paid);
-                const percent = Math.min(100, Math.round((paid / total) * 100));
-
-                document.getElementById('buyoutTotalPrice').textContent = `${total.toLocaleString()} ₴`;
-                document.getElementById('buyoutPaidAmount').textContent = `${paid.toLocaleString()} ₴`;
-                document.getElementById('buyoutRemainingAmount').textContent = `${rem.toLocaleString()} ₴`;
-                document.getElementById('buyoutPercentDisplay').textContent = `${percent}%`;
-                document.getElementById('buyoutProgressBar').style.width = `${percent}%`;
+            if (!hasRental && !hasBuyout) {
+                noRentalState.classList.remove('hidden');
+                activeRentalSection.classList.add('hidden');
             } else {
-                // Якщо немає активного договору викупу
-                document.getElementById('buyoutVehicleTitle').textContent = 'Викуп не активовано';
-                document.getElementById('buyoutStatusBadge').textContent = 'НЕ ПІДКЛЮЧЕНО';
-                document.getElementById('buyoutStatusBadge').className = 'inline-flex items-center px-2.5 py-1 bg-slate-100 text-slate-500 font-brand font-bold text-xs uppercase tracking-wider chamfer-badge';
-                document.getElementById('buyoutPaidAmount').textContent = '0 ₴';
-                document.getElementById('buyoutRemainingAmount').textContent = '—';
-                document.getElementById('buyoutPercentDisplay').textContent = '0%';
-                document.getElementById('buyoutProgressBar').style.width = '0%';
+                noRentalState.classList.add('hidden');
+                activeRentalSection.classList.remove('hidden');
+
+                // Оренда
+                if (hasRental) {
+                    rentalCard.classList.remove('hidden');
+                    rentalCard.classList.add('flex');
+                    document.getElementById('rentalVehicleTitle').textContent = rental.vehicle_info || 'Електроскутер MUVIO';
+                    document.getElementById('rentalPlateNumber').textContent = rental.plate_number || 'MUVIO';
+                    document.getElementById('rentalContractNumber').textContent = `№${rental.contract_num || '—'} від ${rental.contract_date || '—'}`;
+                    document.getElementById('rentalEndDate').textContent = rental.end_date || 'Активно';
+                    document.getElementById('rentalRate').textContent = rental.rate || '—';
+                    document.getElementById('rentalEquipment').textContent = rental.equipment || 'Стандартна';
+                    if (rental.image) {
+                        document.getElementById('rentalVehicleImg').src = rental.image;
+                    }
+                } else {
+                    rentalCard.classList.add('hidden');
+                    rentalCard.classList.remove('flex');
+                }
+
+                // Викуп
+                if (hasBuyout) {
+                    buyoutCard.classList.remove('hidden');
+                    buyoutCard.classList.add('flex');
+                    document.getElementById('buyoutVehicleTitle').textContent = buyout.vehicle_info || (rental ? rental.vehicle_info : 'Електроскутер');
+                    document.getElementById('buyoutTerm').textContent = `${buyout.term_months || '—'} міс.`;
+                    document.getElementById('buyoutContract').textContent = `№${buyout.contract_num || '—'}`;
+
+                    const total = buyout.total_price || 0;
+                    const paid = buyout.paid_amount || 0;
+                    const rem = Math.max(0, total - paid);
+                    const percent = total > 0 ? Math.min(100, Math.round((paid / total) * 100)) : 0;
+
+                    document.getElementById('buyoutTotalPrice').textContent = `${total.toLocaleString()} ₴`;
+                    document.getElementById('buyoutPaidAmount').textContent = `${paid.toLocaleString()} ₴`;
+                    document.getElementById('buyoutRemainingAmount').textContent = `${rem.toLocaleString()} ₴`;
+                    document.getElementById('buyoutPercentDisplay').textContent = `${percent}%`;
+                    document.getElementById('buyoutProgressBar').style.width = `${percent}%`;
+                } else {
+                    buyoutCard.classList.add('hidden');
+                    buyoutCard.classList.remove('flex');
+                }
             }
 
             // Таблиця платежів
             const paymentsBody = document.getElementById('paymentsTableBody');
             paymentsBody.innerHTML = '';
             if (payments.length === 0) {
-                paymentsBody.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-slate-400">Платежів ще не зафіксовано</td></tr>';
+                paymentsBody.innerHTML = `
+                    <tr>
+                        <td colspan="5" class="p-8 text-center text-slate-400 font-sans">
+                            <i data-lucide="inbox" class="w-8 h-8 mx-auto mb-2 opacity-50"></i>
+                            Історія операцій порожня
+                        </td>
+                    </tr>`;
             } else {
                 payments.forEach(p => {
                     const tr = document.createElement('tr');
@@ -990,7 +972,13 @@
             const repairsBody = document.getElementById('repairsTableBody');
             repairsBody.innerHTML = '';
             if (repairs.length === 0) {
-                repairsBody.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-slate-400">Звернень до сервісу не зафіксовано</td></tr>';
+                repairsBody.innerHTML = `
+                    <tr>
+                        <td colspan="5" class="p-8 text-center text-slate-400 font-sans">
+                            <i data-lucide="wrench" class="w-8 h-8 mx-auto mb-2 opacity-50"></i>
+                            Записів про технічне обслуговування немає
+                        </td>
+                    </tr>`;
             } else {
                 repairs.forEach(r => {
                     const tr = document.createElement('tr');
@@ -1009,7 +997,7 @@
             if (window.lucide) window.lucide.createIcons();
         }
 
-        // 6. Вихід з кабінету
+        // 5. Вихід з кабінету
         function logoutUser() {
             localStorage.removeItem('muvio_user');
             currentUser = null;
@@ -1018,7 +1006,7 @@
             document.getElementById('authSection').classList.remove('hidden');
         }
 
-        // 7. Перемикання вкладок історії
+        // 6. Перемикання вкладок історії
         function switchCabinetTab(tabName) {
             const btnPay = document.getElementById('tabBtnPayments');
             const btnRep = document.getElementById('tabBtnRepairs');
@@ -1028,11 +1016,11 @@
             const conRep = document.getElementById('tabContentRepairs');
             const conSrv = document.getElementById('tabContentService');
 
-            // Reset buttons
+            // Скидання стилів кнопок
             [btnPay, btnRep, btnSrv].forEach(btn => {
                 btn.className = 'chamfer-badge px-4 py-2 font-brand font-bold text-xs uppercase tracking-wider bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all';
             });
-            // Hide contents
+            // Приховування вмісту
             [conPay, conRep, conSrv].forEach(con => con.classList.add('hidden'));
 
             if (tabName === 'payments') {
@@ -1047,21 +1035,22 @@
             }
         }
 
-        // 8. Модальне вікно оплати IBAN
+        // 7. Модальне вікно оплати IBAN
         function showPaymentModal(type) {
             const modal = document.getElementById('paymentModal');
             const title = document.getElementById('modalPaymentTitle');
             const purpose = document.getElementById('modalPaymentPurpose');
 
-            const cNum = currentProfileData?.rental?.contract_num || '2804-5';
-            const cDate = currentProfileData?.rental?.contract_date || '28.04.2026';
+            const cNum = currentProfileData?.rental?.contract_num || currentProfileData?.buyout?.contract_num || '';
+            const cDate = currentProfileData?.rental?.contract_date || currentProfileData?.buyout?.contract_date || '';
+            const contractPart = cNum ? `згідно з Договором №${cNum}${cDate ? ' від ' + cDate + ' р.' : ''}` : 'згідно з договором оренди';
 
             if (type === 'buyout') {
                 title.textContent = 'ОПЛАТА ЗА ВИКУП СКУТЕРА (RENT-TO-OWN)';
-                purpose.textContent = `Платіж за викуп транспортного засобу (скутер) згідно з Договором №${cNum} від ${cDate} р. Без ПДВ.`;
+                purpose.textContent = `Платіж за викуп транспортного засобу (скутер) ${contractPart}. Без ПДВ.`;
             } else {
                 title.textContent = 'ОПЛАТА ЗА ОРЕНДУ ТРАНСПОРТУ';
-                purpose.textContent = `Оплата за оренду транспортного засобу (скутер) та шолома згідно з Договором №${cNum} від ${cDate} р. Без ПДВ.`;
+                purpose.textContent = `Оплата за оренду транспортного засобу (скутер) ${contractPart}. Без ПДВ.`;
             }
 
             modal.classList.remove('hidden');
