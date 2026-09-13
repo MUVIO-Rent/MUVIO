@@ -90,12 +90,6 @@
         .pulse-emerald {
             animation: pulse-emerald 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
-
-        @media (max-width: 767px) {
-            .nav-desktop-center {
-                display: none !important;
-            }
-        }
     </style>
 </head>
 
@@ -146,26 +140,21 @@
                 </a>
 
                 <!-- Навігація по центру -->
-                <nav class="hidden md:flex nav-desktop-center"
-                    style="position: absolute; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 2rem;">
+                <nav class="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
                     <a href="catalog.html"
-                        class="text-base font-bold tracking-wider text-[#111827] hover:text-[#1D5D3B] transition-colors"
-                        style="font-size: 16px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;">
+                        class="text-base font-bold tracking-wider text-[#111827] hover:text-[#1D5D3B] transition-colors">
                         КАТАЛОГ
                     </a>
                     <a href="calculator.html"
-                        class="text-base font-bold tracking-wider text-[#111827] hover:text-[#1D5D3B] transition-colors"
-                        style="font-size: 16px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;">
+                        class="text-base font-bold tracking-wider text-[#111827] hover:text-[#1D5D3B] transition-colors">
                         КАЛЬКУЛЯТОР
                     </a>
                     <a href="service.html"
-                        class="text-base font-bold tracking-wider text-[#111827] hover:text-[#1D5D3B] transition-colors"
-                        style="font-size: 16px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;">
+                        class="text-base font-bold tracking-wider text-[#111827] hover:text-[#1D5D3B] transition-colors">
                         СЕРВІС
                     </a>
                     <a href="terms.html"
-                        class="text-base font-bold tracking-wider text-[#111827] hover:text-[#1D5D3B] transition-colors"
-                        style="font-size: 16px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;">
+                        class="text-base font-bold tracking-wider text-[#111827] hover:text-[#1D5D3B] transition-colors">
                         УМОВИ ОРЕНДИ
                     </a>
                 </nav>
@@ -173,11 +162,11 @@
                 <!-- Права частина: Профіль + Telegram Bot -->
                 <div class="flex items-center z-10">
                     <!-- Профіль користувача -->
-                    <a href="/cabinet.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin-right: 1.25rem; text-decoration: none;" title="Особистий кабінет">
-                        <svg xmlns="http://www.w3.org/2000/svg" style="width: 24px; height: 24px; color: #1D5D3B;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <a href="/cabinet.html" class="flex flex-col items-center justify-center mr-5 group hover:opacity-85 transition-opacity" title="Особистий кабінет">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-[#1D5D3B]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
-                        <span id="header-user-name" style="font-size: 11px; font-weight: 800; letter-spacing: 0.05em; color: #111827; text-transform: uppercase; margin-top: 2px; line-height: 1;">МАКСИМ</span>
+                        <span id="header-user-name" class="text-[11px] font-bold tracking-wider text-[#111827] uppercase mt-0.5 leading-tight">МАКСИМ</span>
                     </a>
 
                     <a href="https://t.me/muviobot" target="_blank" rel="noopener noreferrer"
