@@ -7,6 +7,9 @@ import logging
 import sys
 import base64
 import time
+import traceback
+import copy
+import html
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 
@@ -54,7 +57,7 @@ KYIV_TZ = ZoneInfo("Europe/Kyiv")
 def get_kyiv_now():
     return datetime.now(KYIV_TZ)
 
-BOT_TOKEN = "8704593495:AAFOeKPzOxdyomCGRd87HoWX_zSTP3EXHLs"
+BOT_TOKEN = "8680303987:AAGDjur7hTGJSNnVn2ITxPvcwCsFwot6NiM"
 ADMIN_ID = 7288164492
 DB_PATH = os.path.join(BASE_DIR, "rentals_base.db")
 WEBAPP_URL = "https://deliver-grammar-employment-three.trycloudflare.com"
@@ -444,6 +447,46 @@ async def init_db():
             )
         """)
 
+        await db.execute("""
+            CREATE TABLE IF NOT EXISTS rental_snapshots (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                vehicle_key TEXT,
+                user_id INTEGER,
+                user_phone TEXT,
+                full_name TEXT,
+                vehicle_info TEXT,
+                end_date TEXT,
+                amount_due REAL,
+                rent_paid_days INTEGER DEFAULT 7,
+                rent_period_days INTEGER DEFAULT 7,
+                custom_price_day REAL DEFAULT NULL,
+                custom_price_week REAL DEFAULT NULL,
+                custom_price_month REAL DEFAULT NULL,
+                contract_num TEXT DEFAULT '2804-5',
+                contract_date TEXT DEFAULT '28.04.2026',
+                has_helmet INTEGER DEFAULT 0,
+                buyout_deal_id INTEGER DEFAULT NULL,
+                created_at TEXT
+            )
+        """)
+
+        await db.execute("""
+            CREATE TABLE IF NOT EXISTS rental_history (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                vehicle_key TEXT,
+                vehicle_info TEXT,
+                user_id INTEGER,
+                name TEXT,
+                phone TEXT,
+                rent_start TEXT,
+                rent_end TEXT,
+                price REAL,
+                deposit REAL,
+                closed_at TEXT,
+                close_reason TEXT
+            )
+        """)
+
         # Safe schema migrations for all existing tables in rentals_base.db
         for col_def in [
             "bonus_balance REAL DEFAULT 0",
@@ -545,6 +588,8 @@ def load_fleet():
                         fleet_res[k]["status"] = v.get("status", "available")
                         fleet_res[k]["photo_id"] = v.get("photo_id", None)
                         fleet_res[k]["reserved_by"] = v.get("reserved_by", None)
+                        fleet_res[k]["last_tenant_data"] = v.get("last_tenant_data") or v.get("last_rental_snapshot", None)
+                        fleet_res[k]["last_rental_snapshot"] = fleet_res[k]["last_tenant_data"]
                         if "price_day" in v: fleet_res[k]["price_day"] = v["price_day"]
                         if "price_week" in v: fleet_res[k]["price_week"] = v["price_week"]
                         if "price_month" in v: fleet_res[k]["price_month"] = v["price_month"]
@@ -552,6 +597,7 @@ def load_fleet():
                         if "buyout_base_price" in v: fleet_res[k]["buyout_base_price"] = v["buyout_base_price"]
                         if "buyout_available" in v: fleet_res[k]["buyout_available"] = v["buyout_available"]
                         if "custom_parts_prices" in v: fleet_res[k]["custom_parts_prices"] = v["custom_parts_prices"]
+                        if "rental_history" in v: fleet_res[k]["rental_history"] = v["rental_history"]
         except Exception as e:
             logger.error(f"Ошибка загрузки fleet.json: {e}")
     return fleet_res
@@ -581,6 +627,168 @@ def save_waitlist(data):
 
 FLEET_DATABASE = load_fleet()
 WAITLIST = load_waitlist()
+
+async def create_rental_snapshot(item_id: str, reason: str = "freed") -> dict:
+    if item_id not in FLEET_DATABASE:
+        return None
+    v_data = FLEET_DATABASE[item_id]
+    user_id = v_data.get("reserved_by")
+    model_name = v_data.get("name", item_id)
+    if not user_id:
+        return v_data.get("last_rental_snapshot")
+
+    user_phone = None
+    full_name = None
+    rental_row = None
+    buyout_row = None
+
+    try:
+        async with aiosqlite.connect(DB_PATH) as db:
+            db.row_factory = aiosqlite.Row
+            async with db.execute("SELECT phone_number, full_name FROM users WHERE telegram_id = ?", (user_id,)) as cur:
+                u_row = await cur.fetchone()
+                if u_row:
+                    user_phone = u_row["phone_number"]
+                    full_name = u_row["full_name"]
+
+            # Знайти активну або останню оренду за телефоном або моделлю
+            query = "SELECT * FROM rentals WHERE (user_phone = ? OR vehicle_info = ?) ORDER BY id DESC LIMIT 1"
+            async with db.execute(query, (user_phone or "", model_name)) as cur:
+                rental_row = await cur.fetchone()
+
+            # Знайти активний викуп за транспортом або користувачем
+            async with db.execute("SELECT * FROM buyout_deals WHERE (vehicle_key = ? OR user_id = ?) AND status = 'active' ORDER BY id DESC LIMIT 1", (item_id, user_id)) as cur:
+                buyout_row = await cur.fetchone()
+
+            now_str = get_kyiv_now().strftime("%Y-%m-%d %H:%M:%S")
+            u_full_name = full_name or f"TG ID: {user_id}"
+            u_end_date = rental_row["end_date"] if rental_row else None
+            u_amt = rental_row["amount_due"] if rental_row else None
+            u_paid_d = rental_row["rent_paid_days"] if rental_row and "rent_paid_days" in rental_row.keys() and rental_row["rent_paid_days"] is not None else 7
+
+            snapshot = {
+                "vehicle_key": item_id,
+                "model_name": model_name,
+                "user_id": user_id,
+                "user_phone": user_phone,
+                "phone": user_phone,
+                "full_name": u_full_name,
+                "name": u_full_name,
+                "username_or_id": f"ID: {user_id}",
+                "rental_id": rental_row["id"] if rental_row else None,
+                "end_date": u_end_date,
+                "rent_end_date": u_end_date,
+                "amount_due": u_amt,
+                "rate": u_amt,
+                "rent_paid_days": u_paid_d,
+                "paid_days": u_paid_d,
+                "rent_period_days": rental_row["rent_period_days"] if rental_row and "rent_period_days" in rental_row.keys() and rental_row["rent_period_days"] is not None else 7,
+                "custom_price_day": rental_row["custom_price_day"] if rental_row and "custom_price_day" in rental_row.keys() else None,
+                "custom_price_week": rental_row["custom_price_week"] if rental_row and "custom_price_week" in rental_row.keys() else None,
+                "custom_price_month": rental_row["custom_price_month"] if rental_row and "custom_price_month" in rental_row.keys() else None,
+                "contract_num": rental_row["contract_num"] if rental_row and "contract_num" in rental_row.keys() else "2804-5",
+                "contract_date": rental_row["contract_date"] if rental_row and "contract_date" in rental_row.keys() else "28.04.2026",
+                "has_helmet": rental_row["has_helmet"] if rental_row and "has_helmet" in rental_row.keys() else 0,
+                "buyout_deal_id": buyout_row["id"] if buyout_row else None,
+                "created_at": now_str,
+                "reason": reason
+            }
+
+            await db.execute("""
+                INSERT INTO rental_snapshots (
+                    vehicle_key, user_id, user_phone, full_name, vehicle_info,
+                    end_date, amount_due, rent_paid_days, rent_period_days,
+                    custom_price_day, custom_price_week, custom_price_month,
+                    contract_num, contract_date, has_helmet, buyout_deal_id, created_at
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, (
+                snapshot["vehicle_key"], snapshot["user_id"], snapshot["user_phone"], snapshot["full_name"], snapshot["model_name"],
+                snapshot["end_date"], snapshot["amount_due"], snapshot["rent_paid_days"], snapshot["rent_period_days"],
+                snapshot["custom_price_day"], snapshot["custom_price_week"], snapshot["custom_price_month"],
+                snapshot["contract_num"], snapshot["contract_date"], snapshot["has_helmet"], snapshot["buyout_deal_id"], snapshot["created_at"]
+            ))
+            await db.commit()
+
+            FLEET_DATABASE[item_id]["last_tenant_data"] = snapshot
+            FLEET_DATABASE[item_id]["last_rental_snapshot"] = snapshot
+            save_fleet()
+            return snapshot
+    except Exception as e:
+        logger.error(f"Помилка створення rental_snapshot для {item_id}: {e}")
+        return None
+
+def check_scooter_status(scooter_id: str) -> bool:
+    """Returns True if scooter is occupied/rented, False if available."""
+    v = FLEET_DATABASE.get(scooter_id)
+    if not v:
+        return False
+    return v.get("status") == "rented" or v.get("reserved_by") is not None
+
+async def log_rental_history(
+    vehicle_key: str,
+    user_id: int = None,
+    name: str = None,
+    phone: str = None,
+    rent_start: str = None,
+    rent_end: str = None,
+    price: float = None,
+    deposit: float = None,
+    close_reason: str = "closed"
+):
+    """Logs rental history into rental_history table and fleet.json."""
+    now_str = get_kyiv_now().strftime("%Y-%m-%d %H:%M:%S")
+    v_data = FLEET_DATABASE.get(vehicle_key, {})
+    v_info = v_data.get("name", vehicle_key)
+
+    try:
+        async with aiosqlite.connect(DB_PATH) as db:
+            db.row_factory = aiosqlite.Row
+            if user_id and (not phone or not name):
+                async with db.execute("SELECT phone_number, full_name FROM users WHERE telegram_id = ?", (user_id,)) as cur:
+                    urow = await cur.fetchone()
+                    if urow:
+                        phone = phone or urow["phone_number"]
+                        name = name or urow["full_name"]
+
+            if not rent_end or price is None:
+                async with db.execute("SELECT * FROM rentals WHERE vehicle_info = ? ORDER BY id DESC LIMIT 1", (v_info,)) as cur:
+                    rrow = await cur.fetchone()
+                    if rrow:
+                        phone = phone or rrow["user_phone"]
+                        rent_end = rent_end or rrow["end_date"]
+                        if price is None:
+                            price = rrow["amount_due"]
+
+            deposit = deposit if deposit is not None else float(v_data.get("deposit", 4000))
+            price = price if price is not None else float(v_data.get("price_week", 2200))
+            rent_start = rent_start or "-"
+            name = name or (f"Клієнт {user_id}" if user_id else "Орендар")
+
+            await db.execute(
+                """INSERT INTO rental_history 
+                   (vehicle_key, vehicle_info, user_id, name, phone, rent_start, rent_end, price, deposit, closed_at, close_reason)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                (vehicle_key, v_info, user_id, name, phone, rent_start, rent_end, float(price), float(deposit), now_str, close_reason)
+            )
+            await db.commit()
+
+        if "rental_history" not in v_data or not isinstance(v_data["rental_history"], list):
+            v_data["rental_history"] = []
+        v_data["rental_history"].append({
+            "user_id": user_id,
+            "name": name,
+            "phone": phone,
+            "rent_start": rent_start,
+            "rent_end": rent_end,
+            "price": float(price),
+            "deposit": float(deposit),
+            "closed_at": now_str,
+            "close_reason": close_reason
+        })
+        v_data["rental_history"] = v_data["rental_history"][-10:]
+        save_fleet()
+    except Exception as e:
+        logger.error(f"Помилка в log_rental_history: {e}")
 
 def load_location_media():
     if os.path.exists(LOCATION_FILE):
@@ -767,6 +975,11 @@ class AdminUpgradeState(StatesGroup):
     waiting_for_new_item = State()
     waiting_for_days = State()
     waiting_for_amount = State()
+
+class AdminManualAssignState(StatesGroup):
+    waiting_for_user = State()
+    waiting_for_dates = State()
+    waiting_for_price = State()
 
 class AdminExpenseState(StatesGroup):
     waiting_for_type = State()
@@ -2701,18 +2914,16 @@ async def admin_approve_buyout_deal(callback: CallbackQuery):
     await callback.answer()
     parts = callback.data.split(":")
     now_str = get_kyiv_now().strftime("%Y-%m-%d")
+    deal_id = int(parts[1]) if len(parts) == 2 and parts[1].isdigit() else None
     
     async with aiosqlite.connect(DB_PATH) as db:
         db.row_factory = aiosqlite.Row
-        if len(parts) == 2:
-            deal_id = int(parts[1])
+        if deal_id:
             async with db.execute("SELECT * FROM buyout_deals WHERE id = ?", (deal_id,)) as cur:
                 deal = await cur.fetchone()
             if not deal:
                 await callback.answer("Угоду не знайдено", show_alert=True)
                 return
-            await db.execute("UPDATE buyout_deals SET status = 'active', start_date = ? WHERE id = ?", (now_str, deal_id))
-            await db.commit()
             u_id = deal['user_id']
             v_key = deal['vehicle_key']
             v_info = deal['vehicle_info']
@@ -2731,13 +2942,51 @@ async def admin_approve_buyout_deal(callback: CallbackQuery):
             v_info = v_data.get('name', 'Скутер')
             bat_spec = "-"
             ch_spec = "-"
+
+    # PART 3: ЗАХИСТ ВІД ДУРНЯ — ПЕРЕВІРКА ЗАЙНЯТОСТІ ТРАНСПОРТУ
+    if check_scooter_status(v_key) and FLEET_DATABASE.get(v_key, {}).get("reserved_by") != u_id:
+        occ_user_id = FLEET_DATABASE.get(v_key, {}).get("reserved_by")
+        occ_info = f"ID: {occ_user_id}"
+        occ_end_date = "не вказано"
+        async with aiosqlite.connect(DB_PATH) as db:
+            db.row_factory = aiosqlite.Row
+            if occ_user_id:
+                async with db.execute("SELECT full_name, phone_number FROM users WHERE telegram_id = ?", (occ_user_id,)) as cur:
+                    u_row = await cur.fetchone()
+                    if u_row:
+                        occ_name = u_row["full_name"] or f"ID {occ_user_id}"
+                        occ_phone = u_row["phone_number"] or "-"
+                        occ_info = f"{occ_name} (+{occ_phone})"
+            async with db.execute("SELECT end_date FROM rentals WHERE vehicle_info = ? ORDER BY id DESC LIMIT 1", (v_info,)) as cur:
+                r_row = await cur.fetchone()
+                if r_row and r_row["end_date"]:
+                    occ_end_date = r_row["end_date"]
+
+        warn_text = (
+            f"⚠️ <b>УВАГА! Скутер {v_info} ЗАРАЗ ЗАЙНЯТИЙ!</b>\n\n"
+            f"Поточний орендар: <b>{occ_info}</b> (до <code>{occ_end_date}</code>).\n\n"
+            "Ви не можете схвалити нову заявку без звільнення транспорту."
+        )
+        app_ref = f"buyout:{deal_id}" if deal_id else f"buyout_raw:{u_id}:{v_key}"
+        kb = InlineKeyboardMarkup(inline_keyboard=[
+            [InlineKeyboardButton(text="🔁 Замінити скутер для нової заявки", callback_data=f"reassign_app:{app_ref}")],
+            [InlineKeyboardButton(text="❌ Скасувати схвалення", callback_data=f"cancel_app:{app_ref}")]
+        ])
+        await callback.message.edit_text(warn_text, parse_mode="HTML", reply_markup=kb)
+        return
+
+    # Якщо скутер вільний або вже за цим клієнтом — продовжуємо збереження
+    async with aiosqlite.connect(DB_PATH) as db:
+        if deal_id:
+            await db.execute("UPDATE buyout_deals SET status = 'active', start_date = ? WHERE id = ?", (now_str, deal_id))
+        else:
             await db.execute(
                 """INSERT INTO buyout_deals 
                 (user_id, vehicle_key, vehicle_info, total_price, paid_amount, deposit_paid, status, start_date, battery_spec, charger_spec, term_months, buyout_term_days, total_term_days) 
                 VALUES (?, ?, ?, ?, 0, ?, 'active', ?, ?, ?, ?, ?, ?)""",
                 (u_id, v_key, v_info, tot_price, dep_price, now_str, bat_spec, ch_spec, months, months * 30, months * 30)
             )
-            await db.commit()
+        await db.commit()
 
     if v_key in FLEET_DATABASE:
         FLEET_DATABASE[v_key]["reserved_by"] = u_id
@@ -3390,6 +3639,7 @@ async def booking_confirm_callback(callback: CallbackQuery, state: FSMContext):
         "<i>Заявку та оренду автоматично зафіксовано в базі rentals_base.db.</i>"
     )
     admin_kb = InlineKeyboardMarkup(inline_keyboard=[
+        [InlineKeyboardButton(text="✅ Схвалити заявку", callback_data=f"adm_appr_rent:{rental_id}:{user_id}:{veh_id}")],
         [InlineKeyboardButton(text="👑 Відкрити карточку в адмінці", callback_data=f"admmanage:{veh_id}")],
         [InlineKeyboardButton(text="❌ Відхилити заявку", callback_data=f"adm_reject_rent:{rental_id}:{user_id}:{veh_id}")]
     ])
@@ -3397,6 +3647,165 @@ async def booking_confirm_callback(callback: CallbackQuery, state: FSMContext):
         await bot.send_message(chat_id=ADMIN_ID, text=admin_notify, parse_mode="HTML", reply_markup=admin_kb)
     except Exception as e:
         logger.error(f"Помилка сповіщення адміна: {e}")
+
+@dp.callback_query(F.data.startswith("adm_appr_rent:"), StateFilter("*"))
+async def admin_approve_rental_deal(callback: CallbackQuery):
+    if callback.from_user.id != ADMIN_ID: return
+    await callback.answer()
+    parts = callback.data.split(":")
+    rental_id = int(parts[1])
+    user_id = int(parts[2])
+    veh_id = parts[3]
+    v_data = FLEET_DATABASE.get(veh_id, {})
+    v_info = v_data.get("name", veh_id)
+
+    # PART 3: ЗАХИСТ ВІД ДУРНЯ — ПЕРЕВІРКА ЧИ СКУТЕР ЗАЙНЯТИЙ
+    if check_scooter_status(veh_id) and v_data.get("reserved_by") != user_id:
+        occ_user_id = v_data.get("reserved_by")
+        occ_info = f"ID: {occ_user_id}"
+        occ_end_date = "не вказано"
+        async with aiosqlite.connect(DB_PATH) as db:
+            db.row_factory = aiosqlite.Row
+            if occ_user_id:
+                async with db.execute("SELECT full_name, phone_number FROM users WHERE telegram_id = ?", (occ_user_id,)) as cur:
+                    u_row = await cur.fetchone()
+                    if u_row:
+                        occ_name = u_row["full_name"] or f"ID {occ_user_id}"
+                        occ_phone = u_row["phone_number"] or "-"
+                        occ_info = f"{occ_name} (+{occ_phone})"
+            async with db.execute("SELECT end_date FROM rentals WHERE vehicle_info = ? ORDER BY id DESC LIMIT 1", (v_info,)) as cur:
+                r_row = await cur.fetchone()
+                if r_row and r_row["end_date"]:
+                    occ_end_date = r_row["end_date"]
+
+        warn_text = (
+            f"⚠️ <b>УВАГА! Скутер {v_info} ЗАРАЗ ЗАЙНЯТИЙ!</b>\n\n"
+            f"Поточний орендар: <b>{occ_info}</b> (до <code>{occ_end_date}</code>).\n\n"
+            "Ви не можете схвалити нову заявку без звільнення транспорту."
+        )
+        app_ref = f"rent:{rental_id}:{user_id}"
+        kb = InlineKeyboardMarkup(inline_keyboard=[
+            [InlineKeyboardButton(text="🔁 Замінити скутер для нової заявки", callback_data=f"reassign_app:{app_ref}")],
+            [InlineKeyboardButton(text="❌ Скасувати схвалення", callback_data=f"cancel_app:{app_ref}")]
+        ])
+        await callback.message.edit_text(warn_text, parse_mode="HTML", reply_markup=kb)
+        return
+
+    # Якщо вільний — схвалюємо
+    FLEET_DATABASE[veh_id]["reserved_by"] = user_id
+    FLEET_DATABASE[veh_id]["status"] = "rented"
+    save_fleet()
+    async with aiosqlite.connect(DB_PATH) as db:
+        await db.execute("UPDATE rentals SET status = 'active' WHERE id = ?", (rental_id,))
+        await db.commit()
+
+    await callback.message.edit_text(
+        callback.message.text + f"\n\n✅ <b>СТАТУС: Заявку схвалено! Скутер {v_info} закріплено за клієнтом.</b>",
+        parse_mode="HTML"
+    )
+
+@dp.callback_query(F.data.startswith("reassign_app:"), StateFilter("*"))
+async def admin_reassign_app_vehicle(callback: CallbackQuery):
+    if callback.from_user.id != ADMIN_ID: return
+    await callback.answer()
+    payload = callback.data[len("reassign_app:"):]
+
+    avail_buttons = []
+    for k, v in FLEET_DATABASE.items():
+        if v.get("status") == "available":
+            avail_buttons.append([InlineKeyboardButton(
+                text=f"⚡ {v['name']}",
+                callback_data=f"reassign_pick:{payload}:{k}"
+            )])
+
+    if not avail_buttons:
+        await callback.message.answer("⚠️ На жаль, зараз немає інших вільних скутерів для заміни!", reply_markup=get_admin_keyboard())
+        return
+
+    avail_buttons.append([InlineKeyboardButton(text="❌ Скасувати", callback_data=f"cancel_app:{payload}")])
+    kb = InlineKeyboardMarkup(inline_keyboard=avail_buttons)
+    await callback.message.edit_text(
+        "🔁 <b>Оберіть інший ВІЛЬНИЙ скутер для цієї заявки:</b>",
+        parse_mode="HTML",
+        reply_markup=kb
+    )
+
+@dp.callback_query(F.data.startswith("reassign_pick:"), StateFilter("*"))
+async def admin_reassign_pick_vehicle(callback: CallbackQuery):
+    if callback.from_user.id != ADMIN_ID: return
+    await callback.answer()
+    parts = callback.data.split(":")
+    app_type = parts[1]
+    target_veh_id = parts[-1]
+
+    if target_veh_id not in FLEET_DATABASE or FLEET_DATABASE[target_veh_id].get("status") != "available":
+        await callback.answer("⚠️ Обраний скутер вже зайнятий!", show_alert=True)
+        return
+
+    new_name = FLEET_DATABASE[target_veh_id].get("name", target_veh_id)
+
+    if app_type == "buyout":
+        deal_id = int(parts[2])
+        async with aiosqlite.connect(DB_PATH) as db:
+            db.row_factory = aiosqlite.Row
+            async with db.execute("SELECT * FROM buyout_deals WHERE id = ?", (deal_id,)) as cur:
+                deal = await cur.fetchone()
+            if not deal:
+                await callback.answer("Угоду не знайдено!", show_alert=True)
+                return
+
+            u_id = deal["user_id"]
+            now_str = get_kyiv_now().strftime("%Y-%m-%d")
+            await db.execute(
+                "UPDATE buyout_deals SET vehicle_key = ?, vehicle_info = ?, status = 'active', start_date = ? WHERE id = ?",
+                (target_veh_id, new_name, now_str, deal_id)
+            )
+            await db.commit()
+
+        FLEET_DATABASE[target_veh_id]["status"] = "rented"
+        FLEET_DATABASE[target_veh_id]["reserved_by"] = u_id
+        save_fleet()
+
+        await callback.message.edit_text(
+            callback.message.text + f"\n\n✅ <b>Схвалено з іншим транспортом: {new_name}! Скутер закріплено за клієнтом.</b>",
+            parse_mode="HTML"
+        )
+        try:
+            await bot.send_message(chat_id=u_id, text=f"🎉 <b>Вашу заявку на викуп схвалено!</b>\n🛵 Транспорт: <b>{new_name}</b>", parse_mode="HTML")
+        except Exception:
+            pass
+
+    elif app_type == "rent":
+        rental_id = int(parts[2])
+        user_id = int(parts[3])
+        async with aiosqlite.connect(DB_PATH) as db:
+            await db.execute(
+                "UPDATE rentals SET vehicle_info = ?, status = 'active' WHERE id = ?",
+                (new_name, rental_id)
+            )
+            await db.commit()
+
+        FLEET_DATABASE[target_veh_id]["status"] = "rented"
+        FLEET_DATABASE[target_veh_id]["reserved_by"] = user_id
+        save_fleet()
+
+        await callback.message.edit_text(
+            callback.message.text + f"\n\n✅ <b>Схвалено з іншим транспортом: {new_name}! Скутер закріплено за клієнтом.</b>",
+            parse_mode="HTML"
+        )
+        try:
+            await bot.send_message(chat_id=user_id, text=f"🛵 <b>Вашу заявку на оренду схвалено!</b>\n🛵 Транспорт: <b>{new_name}</b>", parse_mode="HTML")
+        except Exception:
+            pass
+
+@dp.callback_query(F.data.startswith("cancel_app:"), StateFilter("*"))
+async def admin_cancel_app_action(callback: CallbackQuery):
+    if callback.from_user.id != ADMIN_ID: return
+    await callback.answer("Схвалення скасовано")
+    await callback.message.edit_text(
+        callback.message.text + "\n\n❌ <b>Схвалення заявки скасовано адміністратором.</b>",
+        parse_mode="HTML"
+    )
 
 @dp.callback_query(F.data.startswith("adm_reject_rent:"), StateFilter("*"))
 async def admin_reject_rental_booking(callback: CallbackQuery):
@@ -3927,28 +4336,76 @@ async def admin_item_manage(callback: types.CallbackQuery, state: FSMContext):
         async with db.execute("SELECT * FROM buyout_deals WHERE (vehicle_key = ? OR user_id = ?) AND status = 'active' ORDER BY id DESC LIMIT 1", (item_id, user_id if user_id else 0)) as cursor:
             active_buyout = await cursor.fetchone()
 
-    buttons = [
-        [InlineKeyboardButton(text="🔑 ВИДАТИ ТА АКТИВУВАТИ ОРЕНДУ", callback_data=f"issue:{item_id}")],
-        [InlineKeyboardButton(text="📅 ЗМІНИТИ ДАТУ ЗАКІНЧЕННЯ", callback_data=f"changedate:{item_id}")],
-        [InlineKeyboardButton(text="💰 ЗМІНИТИ ФІКСОВАНУ ЦІНУ ОРЕНДИ", callback_data=f"changeprice_start:{item_id}")],
-        [InlineKeyboardButton(text="⚡ Вольтаж та ціни комплектацій", callback_data=f"manage_parts_pr:{item_id}")],
-    ]
-    if active_buyout:
-        buttons.append([InlineKeyboardButton(text="🏷 ДІЮЧИЙ ВИКУП КЛІЄНТА", callback_data=f"adm_buyout_info:{item_id}")])
-        buttons.append([InlineKeyboardButton(text="💳 Внести платіж викупу", callback_data=f"adm_buyout_pay:{item_id}")])
+    buttons = []
+    status = data.get("status", "available")
+
+    if status == "rented":
+        buttons.append([InlineKeyboardButton(text="🔔 Нагадати про оплату", callback_data=f"remind_rent:{item_id}")])
+        buttons.append([InlineKeyboardButton(text="📅 ЗМІНИТИ ДАТУ ЗАКІНЧЕННЯ", callback_data=f"changedate:{item_id}")])
+        buttons.append([InlineKeyboardButton(text="🔄 Замінити транспорт / Апгрейд", callback_data=f"upgrade:{item_id}")])
+        buttons.append([InlineKeyboardButton(text="⛔ Завершити оренду достроково", callback_data=f"stoprental:{item_id}")])
+        buttons.append([InlineKeyboardButton(text="🟢 Перевести у вільні", callback_data=f"setstat:{item_id}:available")])
+        buttons.append([InlineKeyboardButton(text="🛠 Перевести в ремонт", callback_data=f"setstat:{item_id}:repair")])
+        if active_buyout:
+            buttons.append([InlineKeyboardButton(text="🏷 ДІЮЧИЙ ВИКУП КЛІЄНТА", callback_data=f"adm_buyout_info:{item_id}")])
+            buttons.append([InlineKeyboardButton(text="💳 Внести платіж викупу", callback_data=f"adm_buyout_pay:{item_id}")])
+    elif status == "available":
+        buttons.append([InlineKeyboardButton(text="🔑 ВИДАТИ ТА АКТИВУВАТИ ОРЕНДУ", callback_data=f"issue:{item_id}")])
+        buttons.append([InlineKeyboardButton(text="🔴 Перевести у зайняті (В оренді)", callback_data=f"setstat:{item_id}:rented")])
+        buttons.append([InlineKeyboardButton(text="🛠 Перевести в ремонт", callback_data=f"setstat:{item_id}:repair")])
+    else:  # repair / maintenance
+        buttons.append([InlineKeyboardButton(text="🟢 Перевести у вільні", callback_data=f"setstat:{item_id}:available")])
+        buttons.append([InlineKeyboardButton(text="🔴 Перевести у зайняті (В оренді)", callback_data=f"setstat:{item_id}:rented")])
 
     buttons.extend([
-        [InlineKeyboardButton(text="🔴 Перевести у зайняті (В оренді)", callback_data=f"setstat:{item_id}:rented")],
-        [InlineKeyboardButton(text="🟢 Перевести у вільні", callback_data=f"setstat:{item_id}:available")],
-        [InlineKeyboardButton(text="🛠 Перевести в ремонт", callback_data=f"setstat:{item_id}:repair")],
-        [InlineKeyboardButton(text="🔄 Замінити транспорт / Апгрейд", callback_data=f"upgrade:{item_id}")],
-        [InlineKeyboardButton(text="⛔ Завершити оренду достроково", callback_data=f"stoprental:{item_id}")],
+        [InlineKeyboardButton(text="💰 ЗМІНИТИ ФІКСОВАНУ ЦІНУ ОРЕНДИ", callback_data=f"changeprice_start:{item_id}")],
+        [InlineKeyboardButton(text="⚡ Вольтаж та ціни комплектацій", callback_data=f"manage_parts_pr:{item_id}")],
         [InlineKeyboardButton(text="📷 Додати / Змінити фото", callback_data=f"addphoto:{item_id}")],
+        [InlineKeyboardButton(text="📜 Історія орендарів / Відновити", callback_data=f"scooter_history:{item_id}")],
         [InlineKeyboardButton(text="⬅️ Назад до списку", callback_data="adm_back_list")]
     ])
 
     kb = InlineKeyboardMarkup(inline_keyboard=buttons)
     await safe_render_card(callback, text, kb, data.get("photo_id"))
+
+@dp.callback_query(F.data.startswith("remind_rent:") | F.data.startswith("remind_pay:"), StateFilter("*"))
+async def admin_remind_rent_callback(callback: CallbackQuery):
+    if callback.from_user.id != ADMIN_ID: return
+    item_id = callback.data.split(":")[1]
+    v_data = FLEET_DATABASE.get(item_id, {})
+    model_name = v_data.get("name", item_id)
+    user_id = v_data.get("reserved_by")
+
+    if not user_id:
+        await callback.answer("⚠️ Немає прив'язаного клієнта до цього скутера.", show_alert=True)
+        return
+
+    end_date = "найближчим часом"
+    amount = float(v_data.get("price_week", 2200))
+    async with aiosqlite.connect(DB_PATH) as db:
+        db.row_factory = aiosqlite.Row
+        async with db.execute(
+            "SELECT * FROM rentals WHERE user_phone = (SELECT phone_number FROM users WHERE telegram_id = ?) ORDER BY id DESC LIMIT 1",
+            (user_id,)
+        ) as cur:
+            r = await cur.fetchone()
+            if r:
+                end_date = r["end_date"]
+                amount = float(r["amount_due"] or amount)
+
+    text_to_user = (
+        "⏰ <b>НАГАДУВАННЯ ПРО ОПЛАТУ ОРЕНДИ</b>\n\n"
+        f"🛵 <b>Техніка:</b> {model_name}\n"
+        f"📅 <b>Термін оренди:</b> до <code>{end_date}</code>\n"
+        f"💰 <b>До сплати:</b> <b>{amount:.2f} грн</b>\n\n"
+        "Будь ласка, здійсніть оплату для продовження користування транспортом!\n"
+        "Реквізити та статус доступні у розділі <b>«👤 Особистий кабінет»</b>."
+    )
+    try:
+        await bot.send_message(chat_id=int(user_id), text=text_to_user, parse_mode="HTML")
+        await callback.answer("✅ Нагадування про оплату надіслано клієнту!", show_alert=True)
+    except Exception as e:
+        await callback.answer(f"❌ Не вдалося надіслати: {e}", show_alert=True)
 
 @dp.callback_query(F.data == "adm_back_list", StateFilter("*"))
 async def admin_back_list_callback(callback: CallbackQuery, state: FSMContext):
@@ -4523,17 +4980,14 @@ async def admin_stop_rental(callback: types.CallbackQuery):
     data = FLEET_DATABASE.get(item_id, {})
     user_id = data.get("reserved_by")
 
-    FLEET_DATABASE[item_id]["status"] = "available"
-    FLEET_DATABASE[item_id]["reserved_by"] = None
-    save_fleet()
-
     if user_id:
+        # Зберегти знімок перед зняттям для надійного 1-клік відновлення
+        await create_rental_snapshot(item_id, reason="stop_rental")
         async with aiosqlite.connect(DB_PATH) as db:
             async with db.execute("SELECT phone_number FROM users WHERE telegram_id = ?", (user_id,)) as cursor:
                 row = await cursor.fetchone()
                 if row:
                     await db.execute("UPDATE rentals SET status = 'cancelled' WHERE user_phone = ?", (row[0],))
-                    await db.execute("DELETE FROM rentals WHERE user_phone = ?", (row[0],))
             await db.execute("UPDATE buyout_deals SET status = 'cancelled' WHERE user_id = ? AND vehicle_key = ?", (user_id, item_id))
             await db.commit()
 
@@ -4545,6 +4999,10 @@ async def admin_stop_rental(callback: types.CallbackQuery):
             )
         except Exception:
             pass
+
+    FLEET_DATABASE[item_id]["status"] = "available"
+    FLEET_DATABASE[item_id]["reserved_by"] = None
+    save_fleet()
 
     if sheet_requests and user_id:
         try:
@@ -4565,18 +5023,34 @@ async def admin_upgrade_start(callback: types.CallbackQuery, state: FSMContext):
     if callback.from_user.id != ADMIN_ID: return
 
     old_item_id = callback.data.split(":")[1]
+    old_model_name = FLEET_DATABASE.get(old_item_id, {}).get("name", old_item_id)
     user_id = FLEET_DATABASE.get(old_item_id, {}).get("reserved_by")
+
+    if not user_id:
+        # Fallback: check rentals table for active tenant if reserved_by was not populated
+        async with aiosqlite.connect(DB_PATH) as db:
+            db.row_factory = aiosqlite.Row
+            async with db.execute(
+                "SELECT u.telegram_id FROM rentals r "
+                "JOIN users u ON (r.user_phone = u.phone_number OR r.user_phone = '+' || u.phone_number OR u.phone_number = '+' || r.user_phone) "
+                "WHERE r.vehicle_info = ? AND (r.status = 'active' OR r.status IS NULL) ORDER BY r.id DESC LIMIT 1",
+                (old_model_name,)
+            ) as cur:
+                r_row = await cur.fetchone()
+                if r_row and r_row["telegram_id"]:
+                    user_id = r_row["telegram_id"]
+                    FLEET_DATABASE[old_item_id]["reserved_by"] = user_id
 
     if not user_id:
         await callback.answer("⚠️ До цього скутера не прив'язаний клієнт!", show_alert=True)
         return
 
-    await state.update_data(old_item_id=old_item_id, upgrade_user_id=user_id)
+    await state.update_data(old_item_id=old_item_id, upgrade_user_id=int(user_id))
     await state.set_state(AdminUpgradeState.waiting_for_new_item)
 
     avail_buttons = []
     for k, v in FLEET_DATABASE.items():
-        if v["status"] == "available":
+        if v["status"] == "available" and k != old_item_id:
             avail_buttons.append([InlineKeyboardButton(text=f"⚡ {v['name']}", callback_data=f"selectupg:{k}")])
 
     if not avail_buttons:
@@ -4584,100 +5058,1107 @@ async def admin_upgrade_start(callback: types.CallbackQuery, state: FSMContext):
         await safe_clear_state(state)
         return
 
-    avail_buttons.append([InlineKeyboardButton(text="❌ Скасувати", callback_data="back_to_admin_panel")])
+    avail_buttons.append([InlineKeyboardButton(text="❌ Скасувати", callback_data=f"admmanage:{old_item_id}")])
     kb = InlineKeyboardMarkup(inline_keyboard=avail_buttons)
-    await callback.message.answer("Оберіть <b>новий скутер</b> для клієнта:", parse_mode="HTML", reply_markup=kb)
+    await callback.message.answer(
+        f"🛵 <b>Заміна транспорту:</b> {old_model_name}\n"
+        "Оберіть <b>новий скутер</b> для клієнта зі списку вільних:",
+        parse_mode="HTML",
+        reply_markup=kb
+    )
     await callback.answer()
 
 @dp.callback_query(F.data.startswith("selectupg:"), StateFilter("*"))
 async def admin_upgrade_select(callback: types.CallbackQuery, state: FSMContext):
+    if callback.from_user.id != ADMIN_ID: return
     new_item_id = callback.data.split(":")[1]
-    await state.update_data(new_item_id=new_item_id)
+    data = await state.get_data()
+
+    old_item_id = data.get("old_item_id")
+    user_id = data.get("upgrade_user_id") or FLEET_DATABASE.get(old_item_id, {}).get("reserved_by")
+
+    if not old_item_id or not user_id:
+        await callback.answer("⚠️ Помилка: дані заміни застаріли. Спробуйте ще раз.", show_alert=True)
+        return
+
+    if new_item_id not in FLEET_DATABASE or FLEET_DATABASE[new_item_id]["status"] != "available":
+        await callback.answer("⚠️ Обраний скутер вже зайнятий або недоступний!", show_alert=True)
+        return
+
+    new_model_name = FLEET_DATABASE.get(new_item_id, {}).get("name", new_item_id)
+    old_model_name = FLEET_DATABASE.get(old_item_id, {}).get("name", old_item_id)
+
+    await state.update_data(
+        old_item_id=old_item_id,
+        new_item_id=new_item_id,
+        upgrade_user_id=int(user_id)
+    )
     await state.set_state(AdminUpgradeState.waiting_for_days)
 
-    await callback.message.answer("Введіть <b>новий термін оренди у днях</b> (наприклад: <code>7</code>):", parse_mode="HTML", reply_markup=get_cancel_keyboard())
+    cancel_kb = InlineKeyboardMarkup(inline_keyboard=[
+        [InlineKeyboardButton(text="❌ Скасувати", callback_data=f"admmanage:{old_item_id}")]
+    ])
+    await callback.message.answer(
+        f"🛵 Обрано новий транспорт: <b>{new_model_name}</b> (заміна для <i>{old_model_name}</i>)\n\n"
+        "Введіть <b>новий термін оренди у днях</b> (наприклад: <code>7</code> або <code>30</code>):",
+        parse_mode="HTML",
+        reply_markup=cancel_kb
+    )
     await callback.answer()
 
 @dp.message(StateFilter(AdminUpgradeState.waiting_for_days), F.text)
 async def admin_upgrade_days(message: types.Message, state: FSMContext):
     if message.from_user.id != ADMIN_ID: return
-    msg_text = (message.text or "").strip()
-    if "скасувати" in msg_text.lower():
+    raw = (message.text or "").strip()
+    if "скасувати" in raw.lower():
         await safe_clear_state(state)
         await message.answer("Дію скасовано.", reply_markup=get_admin_keyboard())
         return
 
-    if not msg_text.isdigit():
-        await message.answer("Введіть кількість днів цифрами:")
+    clean_digits = raw.replace(" ", "").replace("днів", "").replace("дні", "").replace("дн", "").replace("д", "")
+    try:
+        days = int(clean_digits)
+        if days <= 0:
+            raise ValueError()
+    except (ValueError, TypeError):
+        await message.answer("⚠️ Будь ласка, введіть кількість днів цілим додатним числом (наприклад: <code>7</code> або <code>30</code>):", parse_mode="HTML")
         return
 
-    days = int(msg_text)
+    data = await state.get_data()
+    new_item_id = data.get("new_item_id")
+    v_data = FLEET_DATABASE.get(new_item_id, {})
+
+    if days >= 28:
+        default_price = float(v_data.get("price_month", 8000))
+    elif days >= 7:
+        weeks = max(1, round(days / 7))
+        default_price = float(v_data.get("price_week", 2200) * weeks)
+    else:
+        default_price = float(v_data.get("price_day", 900) * days)
+
     end_date = (get_kyiv_now() + timedelta(days=days - 1)).strftime("%Y-%m-%d 23:59")
-    await state.update_data(end_date=end_date)
+
+    await state.update_data(days=days, end_date=end_date, default_price=default_price)
     await state.set_state(AdminUpgradeState.waiting_for_amount)
 
-    await message.answer(f"📅 Нова дата закінчення: <b>{end_date}</b>\n\nВведіть <b>нову суму до сплати (з урахуванням доплати)</b>:", parse_mode="HTML", reply_markup=get_cancel_keyboard())
+    quick_kb = ReplyKeyboardMarkup(
+        keyboard=[
+            [KeyboardButton(text=f"Підтвердити {int(default_price)} грн")],
+            [KeyboardButton(text="❌ Скасувати дію")]
+        ],
+        resize_keyboard=True,
+        one_time_keyboard=True
+    )
+
+    await message.answer(
+        f"📅 Новий термін оренди: <b>{days} дн.</b> (до <code>{end_date}</code>)\n"
+        f"💰 Рекомендована вартість: <b>{int(default_price)} грн</b>\n\n"
+        "Введіть <b>нову суму до сплати</b> в грн (з урахуванням доплати чи перерахунку) або натисніть кнопку підтвердження:",
+        parse_mode="HTML",
+        reply_markup=quick_kb
+    )
 
 @dp.message(StateFilter(AdminUpgradeState.waiting_for_amount), F.text)
 async def admin_upgrade_amount(message: types.Message, state: FSMContext):
     if message.from_user.id != ADMIN_ID: return
-    msg_text = (message.text or "").strip()
-    if "скасувати" in msg_text.lower():
+    raw = (message.text or "").strip()
+    if "скасувати" in raw.lower():
         await safe_clear_state(state)
         await message.answer("Дію скасовано.", reply_markup=get_admin_keyboard())
         return
 
-    try:
-        amount = float(msg_text.replace(",", ".").replace(" ", ""))
-    except ValueError:
-        await message.answer("Введіть суму числом:")
-        return
-
     data = await state.get_data()
+    default_price = float(data.get("default_price", 2200))
+
+    if "підтвердити" in raw.lower():
+        amount = default_price
+    else:
+        clean_amt = raw.replace(",", ".").replace(" ", "").replace("грн", "")
+        try:
+            amount = float(clean_amt)
+            if amount < 0:
+                raise ValueError()
+        except (ValueError, TypeError):
+            await message.answer("⚠️ Введіть коректну суму числом (наприклад: <code>2200</code>):", parse_mode="HTML")
+            return
+
     await safe_clear_state(state)
 
-    old_item_id = data["old_item_id"]
-    new_item_id = data["new_item_id"]
-    user_id = data["upgrade_user_id"]
-    end_date = data["end_date"]
+    old_item_id = data.get("old_item_id")
+    new_item_id = data.get("new_item_id")
+    user_id = data.get("upgrade_user_id")
+    days = int(data.get("days", 7))
+    end_date = data.get("end_date") or (get_kyiv_now() + timedelta(days=days - 1)).strftime("%Y-%m-%d 23:59")
 
-    FLEET_DATABASE[old_item_id]["status"] = "available"
-    FLEET_DATABASE[old_item_id]["reserved_by"] = None
+    if not old_item_id or not new_item_id or not user_id:
+        await message.answer("⚠️ Помилка: недостатньо даних для заміни. Спробуйте ще раз.", reply_markup=get_admin_keyboard())
+        return
 
-    FLEET_DATABASE[new_item_id]["status"] = "rented"
-    FLEET_DATABASE[new_item_id]["reserved_by"] = user_id
-    save_fleet()
-
+    user_id = int(user_id)
+    old_model_name = FLEET_DATABASE.get(old_item_id, {}).get("name", old_item_id)
     new_model_name = FLEET_DATABASE.get(new_item_id, {}).get("name", new_item_id)
 
-    async with aiosqlite.connect(DB_PATH) as db:
-        async with db.execute("SELECT phone_number FROM users WHERE telegram_id = ?", (user_id,)) as cursor:
-            row = await cursor.fetchone()
+    # Збереження попереднього стану для відкату у пам'яті у разі винятку
+    prev_old_fleet = copy.deepcopy(FLEET_DATABASE.get(old_item_id, {}))
+    prev_new_fleet = copy.deepcopy(FLEET_DATABASE.get(new_item_id, {}))
 
-        if row:
-            user_phone = row[0]
-            await db.execute("DELETE FROM rentals WHERE user_phone = ?", (user_phone,))
+    try:
+        # 1. Запис поточного орендаря в історію старого скутера перед відкріпленням
+        client_label = f"ID: {user_id}"
+        user_phone = None
+        client_name = None
+        async with aiosqlite.connect(DB_PATH) as db:
+            db.row_factory = aiosqlite.Row
+            async with db.execute("SELECT phone_number, full_name, bonus_balance FROM users WHERE telegram_id = ?", (user_id,)) as cur:
+                u_row = await cur.fetchone()
+                if u_row:
+                    user_phone = u_row["phone_number"]
+                    client_name = u_row["full_name"]
+                    client_label = f"{client_name} (+{user_phone})" if client_name else f"+{user_phone}"
+
+        await log_rental_history(
+            vehicle_key=old_item_id,
+            user_id=user_id,
+            name=client_name,
+            phone=user_phone,
+            rent_end=end_date,
+            price=amount,
+            close_reason="scooter_swap"
+        )
+        await create_rental_snapshot(old_item_id, reason="scooter_swap")
+
+        # 2. Оновлення стану FLEET_DATABASE та збереження у fleet.json
+        FLEET_DATABASE[old_item_id]["status"] = "available"
+        FLEET_DATABASE[old_item_id]["reserved_by"] = None
+
+        FLEET_DATABASE[new_item_id]["status"] = "rented"
+        FLEET_DATABASE[new_item_id]["reserved_by"] = user_id
+        save_fleet()
+
+        # 3. Транзакція в SQLite (rentals_base.db)
+        async with aiosqlite.connect(DB_PATH) as db:
+            db.row_factory = aiosqlite.Row
+
+            phone_variants = []
+            if user_phone:
+                clean_p = user_phone.replace("+", "").strip()
+                phone_variants = [user_phone, clean_p, f"+{clean_p}"]
+
+            rental_row = None
+            if phone_variants:
+                placeholders = ",".join("?" for _ in phone_variants)
+                async with db.execute(
+                    f"SELECT * FROM rentals WHERE user_phone IN ({placeholders}) AND (status = 'active' OR status IS NULL) ORDER BY id DESC LIMIT 1",
+                    phone_variants
+                ) as cur:
+                    rental_row = await cur.fetchone()
+
+            if not rental_row:
+                async with db.execute(
+                    "SELECT * FROM rentals WHERE vehicle_info = ? AND (status = 'active' OR status IS NULL) ORDER BY id DESC LIMIT 1",
+                    (old_model_name,)
+                ) as cur:
+                    rental_row = await cur.fetchone()
+
+            if rental_row:
+                await db.execute(
+                    """UPDATE rentals 
+                       SET vehicle_info = ?, 
+                           end_date = ?, 
+                           amount_due = ?, 
+                           rent_paid_days = ?, 
+                           rent_period_days = ?, 
+                           reminder_sent = 0, 
+                           status = 'active'
+                       WHERE id = ?""",
+                    (new_model_name, end_date, float(amount), int(days), int(days), rental_row["id"])
+                )
+            else:
+                today_str = get_kyiv_now().strftime("%d.%m.%Y")
+                await db.execute(
+                    """INSERT INTO rentals 
+                       (user_phone, vehicle_info, end_date, amount_due, contract_num, contract_date, has_helmet, reminder_sent, status, rent_paid_days, rent_period_days)
+                       VALUES (?, ?, ?, ?, '2804-5', ?, 0, 0, 'active', ?, ?)""",
+                    (user_phone, new_model_name, end_date, float(amount), today_str, int(days), int(days))
+                )
+
             await db.execute(
-                "INSERT INTO rentals (user_phone, vehicle_info, end_date, amount_due, reminder_sent) VALUES (?, ?, ?, ?, 0)",
-                (user_phone, new_model_name, end_date, amount)
+                "UPDATE buyout_deals SET vehicle_key = ?, vehicle_info = ? WHERE user_id = ? AND status = 'active'",
+                (new_item_id, new_model_name, user_id)
             )
+
             await db.commit()
 
-    push_msg = (
-        "🔄 <b>Ваш транспорт та тариф успішно оновлено!</b>\n"
-        "────────────────────\n"
-        f"🛵 <b>Новий транспорт:</b> {new_model_name}\n"
-        f"📅 <b>Новий термін до:</b> {end_date}\n"
-        f"💰 <b>Оновлена сума до сплати:</b> {amount:.2f} грн\n"
-        "────────────────────\n"
-        "Дані оновлено у вашому <b>«👤 Особистому кабінеті»</b>."
+        await create_rental_snapshot(new_item_id, reason="scooter_replacement_target")
+
+    except Exception as e:
+        FLEET_DATABASE[old_item_id] = prev_old_fleet
+        FLEET_DATABASE[new_item_id] = prev_new_fleet
+        save_fleet()
+
+        err_tb = traceback.format_exc()
+        logger.error(f"❌ ПОМИЛКА ПРИ ЗАМІНІ СКУТЕРА:\n{err_tb}")
+        print(f"❌ ПОМИЛКА ПРИ ЗАМІНІ СКУТЕРА:\n{err_tb}")
+        await message.answer(
+            f"❌ <b>Помилка збереження заміни в базі даних!</b>\n\n"
+            f"<code>{html.escape(str(e))}</code>\n\n"
+            "Скутери повернуто до попереднього стану. Перевірте логи або консоль.",
+            parse_mode="HTML",
+            reply_markup=get_admin_keyboard()
+        )
+        return
+
+    admin_confirm_text = (
+        f"✅ Успішно! Скутер замінено на <b>{new_model_name}</b>. Дані та терміни перенесено.\n\n"
+        f"🛵 <b>Старий скутер:</b> {old_model_name} (🟢 Вільний)\n"
+        f"🛵 <b>Новий скутер:</b> {new_model_name} (🔴 В оренді)\n"
+        f"👤 <b>Клієнт:</b> {client_label}\n"
+        f"📅 <b>Термін дії до:</b> <code>{end_date}</code> ({days} дн.)\n"
+        f"💰 <b>Сума:</b> <b>{amount:.2f} грн</b>"
+    )
+    user_push_text = (
+        f"🛵 Ваш транспорт замінено на <b>{new_model_name}</b>. "
+        f"Всі сплачені дні та баланс збережено в <b>«👤 Особистий кабінет»</b>.\n\n"
+        f"📅 <b>Новий термін оренди:</b> до <code>{end_date}</code> ({days} дн.)\n"
+        f"💰 <b>Сума до сплати:</b> {amount:.2f} грн"
     )
 
     try:
-        await bot.send_message(chat_id=user_id, text=push_msg, parse_mode="HTML")
-        await message.answer("✅ <b>Транспорт успішно замінено!</b>", parse_mode="HTML", reply_markup=get_admin_keyboard())
+        await bot.send_message(chat_id=user_id, text=user_push_text, parse_mode="HTML")
     except Exception as e:
-        await message.answer(f"✅ Заміну проведено, але push не доставлено: {e}", reply_markup=get_admin_keyboard())
+        logger.warning(f"Не вдалося доставити push клієнту {user_id}: {e}")
+
+    await message.answer(admin_confirm_text, parse_mode="HTML", reply_markup=get_admin_keyboard())
+
+# --- PART 2: ІСТОРІЯ ОРЕНДАРІВ ТА ВІДНОВЛЕННЯ 1 КЛІКОМ ---
+@dp.callback_query(F.data.startswith("scooter_history:"), StateFilter("*"))
+async def admin_scooter_history(callback: CallbackQuery, state: FSMContext):
+    if callback.from_user.id != ADMIN_ID: return
+    await callback.answer()
+    await safe_clear_state(state)
+
+    item_id = callback.data.split(":")[1]
+    v_data = FLEET_DATABASE.get(item_id, {})
+    model_name = v_data.get("name", item_id)
+
+    rental_rows = []
+    async with aiosqlite.connect(DB_PATH) as db:
+        db.row_factory = aiosqlite.Row
+        # Primary query to rentals_base.db rentals table
+        async with db.execute(
+            """SELECT r.*, u.telegram_id, u.full_name 
+               FROM rentals r 
+               LEFT JOIN users u ON (r.user_phone = u.phone_number OR r.user_phone = '+' || u.phone_number OR '+' || r.user_phone = u.phone_number) 
+               WHERE r.vehicle_info = ? OR r.vehicle_info = ?
+               ORDER BY r.end_date DESC, r.id DESC LIMIT 10""",
+            (model_name, item_id)
+        ) as cur:
+            rental_rows = [dict(r) for r in await cur.fetchall()]
+
+        # Fallback to rental_history if rentals table has no entries for this scooter
+        if not rental_rows:
+            async with db.execute(
+                """SELECT rh.id, rh.phone as user_phone, rh.name as full_name, rh.user_id as telegram_id,
+                          rh.rent_start as contract_date, rh.rent_end as end_date, rh.close_reason as status, rh.price as amount_due
+                   FROM rental_history rh 
+                   WHERE rh.vehicle_key = ? OR rh.vehicle_info = ?
+                   ORDER BY rh.id DESC LIMIT 10""",
+                (item_id, model_name)
+            ) as cur:
+                rental_rows = [dict(r) for r in await cur.fetchall()]
+
+    if not rental_rows:
+        fleet_snap = v_data.get("last_tenant_data") or v_data.get("last_rental_snapshot")
+        if fleet_snap and fleet_snap.get("user_id"):
+            rental_rows.append({
+                "id": 1,
+                "user_phone": fleet_snap.get("user_phone") or fleet_snap.get("phone"),
+                "full_name": fleet_snap.get("name") or fleet_snap.get("full_name"),
+                "telegram_id": fleet_snap.get("user_id"),
+                "contract_date": "—",
+                "end_date": fleet_snap.get("rent_end_date") or fleet_snap.get("end_date") or "—",
+                "status": "completed",
+                "amount_due": fleet_snap.get("rate") or fleet_snap.get("amount_due") or 0.0
+            })
+
+    if not rental_rows:
+        text = (
+            f"📜 <b>ІСТОРІЯ ОРЕНДАРІВ: {model_name}</b>\n"
+            "────────────────────\n"
+            "<i>Записів історії оренди для цього скутера не знайдено в базі даних.</i>"
+        )
+        kb = InlineKeyboardMarkup(inline_keyboard=[
+            [InlineKeyboardButton(text="⬅️ Назад до транспорту", callback_data=f"admmanage:{item_id}")]
+        ])
+        await safe_render_card(callback, text, kb, v_data.get("photo_id"))
+        return
+
+    text_parts = [
+        f"📜 <b>ІСТОРІЯ ОРЕНДАРІВ: {model_name}</b>\n"
+        "────────────────────"
+    ]
+    buttons = []
+    for idx, r in enumerate(rental_rows, 1):
+        r_id = r["id"]
+        phone = r.get("user_phone") or "—"
+        name = r.get("full_name") or (f"+{phone}" if phone != "—" else f"ID {r.get('telegram_id') or '—'}")
+        uid = r.get("telegram_id") or "—"
+        start_d = r.get("contract_date") or "—"
+        end_d = r.get("end_date") or "—"
+        stat = r.get("status") or "active"
+
+        if stat == "active":
+            stat_label = "🟢 Активна"
+        elif stat in ("completed", "closed"):
+            stat_label = "⚪ Завершена"
+        elif stat == "expired":
+            stat_label = "🔴 Закінчилась"
+        elif stat == "cancelled":
+            stat_label = "❌ Скасована"
+        else:
+            stat_label = f"🟡 {stat}"
+
+        text_parts.append(
+            f"<b>{idx}. {name}</b> (+{phone})\n"
+            f"   🆔 User ID: <code>{uid}</code>\n"
+            f"   📅 Термін: з {start_d} до <code>{end_d}</code>\n"
+            f"   📊 Статус: <b>{stat_label}</b>"
+        )
+
+        btn_title = name if name else (f"+{phone}" if phone != "—" else f"ID {uid}")
+        buttons.append([
+            InlineKeyboardButton(
+                text=f"♻️ Відновити {btn_title[:20]}",
+                callback_data=f"scooter_restore:{item_id}:{r_id}"
+            )
+        ])
+
+    buttons.append([InlineKeyboardButton(text="⬅️ Назад до транспорту", callback_data=f"admmanage:{item_id}")])
+    text = "\n\n".join(text_parts)
+    kb = InlineKeyboardMarkup(inline_keyboard=buttons)
+    await safe_render_card(callback, text, kb, v_data.get("photo_id"))
+
+@dp.callback_query(F.data.startswith("scooter_restore:"), StateFilter("*"))
+async def admin_scooter_restore(callback: CallbackQuery, state: FSMContext):
+    if callback.from_user.id != ADMIN_ID: return
+    await callback.answer()
+    parts = callback.data.split(":")
+    item_id = parts[1]
+    rental_id = int(parts[2])
+
+    v_data = FLEET_DATABASE.get(item_id, {})
+    model_name = v_data.get("name", item_id)
+
+    target_user_id = None
+    target_name = None
+    target_phone = None
+    target_end_date = None
+
+    async with aiosqlite.connect(DB_PATH) as db:
+        db.row_factory = aiosqlite.Row
+        async with db.execute(
+            """SELECT r.*, u.telegram_id, u.full_name 
+               FROM rentals r 
+               LEFT JOIN users u ON (r.user_phone = u.phone_number OR r.user_phone = '+' || u.phone_number OR '+' || r.user_phone = u.phone_number) 
+               WHERE r.id = ?""",
+            (rental_id,)
+        ) as cur:
+            rental_row = await cur.fetchone()
+
+        if rental_row:
+            target_user_id = rental_row["telegram_id"]
+            target_phone = rental_row["user_phone"]
+            target_name = rental_row["full_name"] or (f"+{target_phone}" if target_phone else f"ID {target_user_id}")
+            target_end_date = rental_row["end_date"] or "—"
+
+            if not target_user_id and target_phone:
+                clean_phone = target_phone.replace("+", "").strip()
+                async with db.execute("SELECT telegram_id, full_name FROM users WHERE phone_number = ? OR phone_number = ?", (clean_phone, f"+{clean_phone}")) as ucur:
+                    urow = await ucur.fetchone()
+                    if urow:
+                        target_user_id = urow["telegram_id"]
+                        if not rental_row["full_name"]:
+                            target_name = urow["full_name"]
+
+            # а) В rentals_base.db вернуть/установить этой записи статус 'active'
+            await db.execute("UPDATE rentals SET status = 'active' WHERE id = ?", (rental_id,))
+            await db.commit()
+        else:
+            # Fallback if ID was from rental_history
+            async with db.execute("SELECT * FROM rental_history WHERE id = ?", (rental_id,)) as hcur:
+                h_row = await hcur.fetchone()
+                if h_row:
+                    target_user_id = h_row["user_id"]
+                    target_phone = h_row["phone"]
+                    target_name = h_row["name"] or (f"+{target_phone}" if target_phone else f"ID {target_user_id}")
+                    target_end_date = h_row["rent_end"] or (get_kyiv_now() + timedelta(days=7)).strftime("%Y-%m-%d 23:59")
+                    h_price = h_row["price"] or 2200.0
+                    today_str = get_kyiv_now().strftime("%d.%m.%Y")
+                    await db.execute(
+                        """INSERT INTO rentals (user_phone, vehicle_info, end_date, amount_due, contract_num, contract_date, status, rent_paid_days, rent_period_days)
+                           VALUES (?, ?, ?, ?, '2804-5', ?, 'active', 7, 7)""",
+                        (target_phone, model_name, target_end_date, h_price, today_str)
+                    )
+                    await db.commit()
+                else:
+                    await callback.answer("❌ Запис оренди не знайдено!", show_alert=True)
+                    return
+
+    # б) Во fleet.json для указанного item_id выставить: status = "rented", reserved_by = <user_id_арендатора>, сохранить fleet.json через save_fleet().
+    FLEET_DATABASE[item_id]["status"] = "rented"
+    if target_user_id:
+        FLEET_DATABASE[item_id]["reserved_by"] = int(target_user_id)
+    save_fleet()
+
+    # в) Обновить сообщение админа подтверждением: «✅ Оренду успішно відновлено для [Имя/Телефон] до [Дата]! Скутер повернуто в статус орендованого».
+    confirm_text = f"✅ Оренду успішно відновлено для <b>{target_name}</b> до <code>{target_end_date}</code>! Скутер повернуто в статус орендованого."
+    await callback.message.answer(confirm_text, parse_mode="HTML")
+
+    if target_user_id:
+        try:
+            await bot.send_message(
+                chat_id=int(target_user_id),
+                text=(
+                    f"🛵 <b>Вашу оренду транспорту {model_name} успішно відновлено!</b>\n"
+                    f"📅 <b>Діє до:</b> <code>{target_end_date}</code>\n\n"
+                    "Інформацію оновлено у вашому <b>«👤 Особистому кабінеті»</b>."
+                ),
+                parse_mode="HTML"
+            )
+        except Exception as e:
+            logger.warning(f"Push не доставлено клієнту {target_user_id}: {e}")
+
+    # г) Вернуть админа в обновленную карточку скутера.
+    await admin_item_manage(callback, None)
+
+@dp.callback_query(F.data.startswith("restore_history:"), StateFilter("*"))
+async def admin_restore_history_check(callback: CallbackQuery, state: FSMContext):
+    if callback.from_user.id != ADMIN_ID: return
+    await callback.answer()
+    parts = callback.data.split(":")
+    item_id = parts[1]
+    hist_id = int(parts[2])
+    src_tag = parts[3] if len(parts) > 3 else "hist"
+
+    v_data = FLEET_DATABASE.get(item_id, {})
+    model_name = v_data.get("name", item_id)
+
+    target_record = None
+    async with aiosqlite.connect(DB_PATH) as db:
+        db.row_factory = aiosqlite.Row
+        if src_tag == "snapshot":
+            async with db.execute("SELECT * FROM rental_snapshots WHERE id = ?", (hist_id,)) as cur:
+                r = await cur.fetchone()
+                if r:
+                    target_record = {
+                        "user_id": r["user_id"],
+                        "name": r["full_name"],
+                        "phone": r["user_phone"],
+                        "end_date": r["end_date"],
+                        "price": r["amount_due"],
+                        "paid_days": r["rent_paid_days"] if "rent_paid_days" in r.keys() else 7
+                    }
+        elif src_tag == "rentals":
+            async with db.execute("SELECT r.*, u.telegram_id, u.full_name FROM rentals r LEFT JOIN users u ON r.user_phone = u.phone_number WHERE r.id = ?", (hist_id,)) as cur:
+                r = await cur.fetchone()
+                if r:
+                    target_record = {
+                        "user_id": r["telegram_id"],
+                        "name": r["full_name"] or f"Клієнт {r['user_phone']}",
+                        "phone": r["user_phone"],
+                        "end_date": r["end_date"],
+                        "price": r["amount_due"],
+                        "paid_days": r["rent_paid_days"] if "rent_paid_days" in r.keys() else 7
+                    }
+        elif src_tag == "fleet":
+            fleet_snap = v_data.get("last_tenant_data") or v_data.get("last_rental_snapshot")
+            if fleet_snap:
+                target_record = {
+                    "user_id": fleet_snap.get("user_id"),
+                    "name": fleet_snap.get("name") or fleet_snap.get("full_name"),
+                    "phone": fleet_snap.get("user_phone") or fleet_snap.get("phone"),
+                    "end_date": fleet_snap.get("rent_end_date") or fleet_snap.get("end_date"),
+                    "price": fleet_snap.get("rate") or fleet_snap.get("amount_due"),
+                    "paid_days": fleet_snap.get("paid_days") or fleet_snap.get("rent_paid_days") or 7
+                }
+        elif src_tag == "fleet_hist":
+            f_list = v_data.get("rental_history") or []
+            if f_list and len(f_list) >= hist_id:
+                item = list(reversed(f_list))[hist_id - 1]
+                target_record = {
+                    "user_id": item.get("user_id"),
+                    "name": item.get("name"),
+                    "phone": item.get("phone"),
+                    "end_date": item.get("rent_end"),
+                    "price": item.get("price"),
+                    "paid_days": item.get("paid_days", 7)
+                }
+        else:
+            async with db.execute("SELECT * FROM rental_history WHERE id = ?", (hist_id,)) as cur:
+                r = await cur.fetchone()
+                if r:
+                    target_record = {
+                        "user_id": r["user_id"],
+                        "name": r["name"],
+                        "phone": r["phone"],
+                        "end_date": r["rent_end"],
+                        "price": r["price"],
+                        "paid_days": 7
+                    }
+
+        # If user_id is missing but phone exists, resolve telegram_id from users table
+        if target_record and (not target_record.get("user_id")) and target_record.get("phone"):
+            async with db.execute("SELECT telegram_id, full_name FROM users WHERE phone_number = ?", (target_record["phone"],)) as cur:
+                u = await cur.fetchone()
+                if u:
+                    target_record["user_id"] = u["telegram_id"]
+                    if not target_record.get("name"):
+                        target_record["name"] = u["full_name"]
+
+    if not target_record or not target_record.get("user_id"):
+        await callback.answer("⚠️ Не вдалося знайти запис для відновлення.", show_alert=True)
+        return
+
+    hist_name = target_record.get("name") or f"Клієнт {target_record['user_id']}"
+    hist_phone = target_record.get("phone") or "-"
+
+    # Check if scooter is currently occupied
+    is_occupied = check_scooter_status(item_id)
+    if is_occupied:
+        curr_user_id = v_data.get("reserved_by")
+        curr_label = f"ID: {curr_user_id}"
+        async with aiosqlite.connect(DB_PATH) as db:
+            db.row_factory = aiosqlite.Row
+            async with db.execute("SELECT full_name, phone_number FROM users WHERE telegram_id = ?", (curr_user_id,)) as cur:
+                cu = await cur.fetchone()
+                if cu:
+                    curr_label = f"{cu['full_name']} (+{cu['phone_number']})"
+
+        warn_text = (
+            f"⚠️ <b>УВАГА! СКУТЕР ЗАРАЗ ЗАЙНЯТИЙ!</b>\n\n"
+            f"🛵 <b>Транспорт:</b> {model_name}\n"
+            f"👤 <b>Поточний орендар:</b> <b>{curr_label}</b>\n"
+            "────────────────────\n"
+            f"Ви впевнені, що бажаєте зняти поточного клієнта та відновити попереднього орендаря <b>{hist_name}</b> (+{hist_phone})?"
+        )
+        warn_kb = InlineKeyboardMarkup(inline_keyboard=[
+            [InlineKeyboardButton(text="⚠️ Так, замінити та відновити", callback_data=f"confirm_restore_history:{item_id}:{hist_id}:{src_tag}")],
+            [InlineKeyboardButton(text="❌ Скасувати", callback_data=f"scooter_history:{item_id}")]
+        ])
+        await safe_render_card(callback, warn_text, warn_kb, v_data.get("photo_id"))
+        return
+
+    await execute_restore_tenant(callback, item_id, target_record)
+
+@dp.callback_query(F.data.startswith("confirm_restore_history:"), StateFilter("*"))
+async def admin_confirm_restore_history(callback: CallbackQuery, state: FSMContext):
+    if callback.from_user.id != ADMIN_ID: return
+    await callback.answer()
+    parts = callback.data.split(":")
+    item_id = parts[1]
+    hist_id = int(parts[2])
+    src_tag = parts[3] if len(parts) > 3 else "hist"
+
+    v_data = FLEET_DATABASE.get(item_id, {})
+    target_record = None
+    async with aiosqlite.connect(DB_PATH) as db:
+        db.row_factory = aiosqlite.Row
+        if src_tag == "snapshot":
+            async with db.execute("SELECT * FROM rental_snapshots WHERE id = ?", (hist_id,)) as cur:
+                r = await cur.fetchone()
+                if r:
+                    target_record = {
+                        "user_id": r["user_id"],
+                        "name": r["full_name"],
+                        "phone": r["user_phone"],
+                        "end_date": r["end_date"],
+                        "price": r["amount_due"],
+                        "paid_days": r["rent_paid_days"] if "rent_paid_days" in r.keys() else 7
+                    }
+        elif src_tag == "rentals":
+            async with db.execute("SELECT r.*, u.telegram_id, u.full_name FROM rentals r LEFT JOIN users u ON r.user_phone = u.phone_number WHERE r.id = ?", (hist_id,)) as cur:
+                r = await cur.fetchone()
+                if r:
+                    target_record = {
+                        "user_id": r["telegram_id"],
+                        "name": r["full_name"] or f"Клієнт {r['user_phone']}",
+                        "phone": r["user_phone"],
+                        "end_date": r["end_date"],
+                        "price": r["amount_due"],
+                        "paid_days": r["rent_paid_days"] if "rent_paid_days" in r.keys() else 7
+                    }
+        elif src_tag == "fleet":
+            fleet_snap = v_data.get("last_tenant_data") or v_data.get("last_rental_snapshot")
+            if fleet_snap:
+                target_record = {
+                    "user_id": fleet_snap.get("user_id"),
+                    "name": fleet_snap.get("name") or fleet_snap.get("full_name"),
+                    "phone": fleet_snap.get("user_phone") or fleet_snap.get("phone"),
+                    "end_date": fleet_snap.get("rent_end_date") or fleet_snap.get("end_date"),
+                    "price": fleet_snap.get("rate") or fleet_snap.get("amount_due"),
+                    "paid_days": fleet_snap.get("paid_days") or fleet_snap.get("rent_paid_days") or 7
+                }
+        elif src_tag == "fleet_hist":
+            f_list = v_data.get("rental_history") or []
+            if f_list and len(f_list) >= hist_id:
+                item = list(reversed(f_list))[hist_id - 1]
+                target_record = {
+                    "user_id": item.get("user_id"),
+                    "name": item.get("name"),
+                    "phone": item.get("phone"),
+                    "end_date": item.get("rent_end"),
+                    "price": item.get("price"),
+                    "paid_days": item.get("paid_days", 7)
+                }
+        else:
+            async with db.execute("SELECT * FROM rental_history WHERE id = ?", (hist_id,)) as cur:
+                r = await cur.fetchone()
+                if r:
+                    target_record = {
+                        "user_id": r["user_id"],
+                        "name": r["name"],
+                        "phone": r["phone"],
+                        "end_date": r["rent_end"],
+                        "price": r["price"],
+                        "paid_days": 7
+                    }
+
+        if target_record and (not target_record.get("user_id")) and target_record.get("phone"):
+            async with db.execute("SELECT telegram_id, full_name FROM users WHERE phone_number = ?", (target_record["phone"],)) as cur:
+                u = await cur.fetchone()
+                if u:
+                    target_record["user_id"] = u["telegram_id"]
+                    if not target_record.get("name"):
+                        target_record["name"] = u["full_name"]
+
+    if not target_record or not target_record.get("user_id"):
+        await callback.answer("⚠️ Дані запису не знайдено!", show_alert=True)
+        return
+
+    await execute_restore_tenant(callback, item_id, target_record)
+
+async def execute_restore_tenant(callback: CallbackQuery, item_id: str, target_record: dict):
+    v_data = FLEET_DATABASE.get(item_id, {})
+    model_name = v_data.get("name", item_id)
+    user_id = int(target_record["user_id"])
+    name = target_record.get("name") or f"Клієнт {user_id}"
+    phone = target_record.get("phone") or ""
+    end_date = target_record.get("end_date")
+    if not end_date or end_date == "-" or "не вказано" in end_date:
+        end_date = (get_kyiv_now() + timedelta(days=7)).strftime("%Y-%m-%d 23:59")
+    price = float(target_record.get("price") or v_data.get("price_week", 2200))
+    paid_days = int(target_record.get("paid_days") or 7)
+
+    # 1. Log current occupant before replacing if occupied
+    curr_uid = v_data.get("reserved_by")
+    if curr_uid and curr_uid != user_id:
+        await log_rental_history(item_id, user_id=curr_uid, close_reason="replaced_by_restore")
+        await create_rental_snapshot(item_id, reason="replaced_by_restore")
+
+    # 2. Update FLEET_DATABASE
+    FLEET_DATABASE[item_id]["status"] = "rented"
+    FLEET_DATABASE[item_id]["reserved_by"] = user_id
+    save_fleet()
+
+    # 3. Update SQLite
+    async with aiosqlite.connect(DB_PATH) as db:
+        if phone:
+            await db.execute("DELETE FROM rentals WHERE user_phone = ? OR vehicle_info = ?", (phone, model_name))
+        else:
+            await db.execute("DELETE FROM rentals WHERE vehicle_info = ?", (model_name,))
+
+        today_str = get_kyiv_now().strftime("%d.%m.%Y")
+        await db.execute(
+            """INSERT INTO rentals 
+               (user_phone, vehicle_info, end_date, amount_due, contract_num, contract_date, has_helmet, reminder_sent, status, rent_paid_days, rent_period_days)
+               VALUES (?, ?, ?, ?, '2804-5', ?, 0, 0, 'active', ?, ?)""",
+            (phone, model_name, end_date, price, today_str, paid_days, paid_days)
+        )
+        await db.commit()
+
+    # 4. Confirmation
+    admin_confirm = (
+        f"✅ Орендаря <b>{name}</b> успішно відновлено на скутер <b>{model_name}</b>!\n\n"
+        f"👤 <b>Клієнт:</b> {name} (+{phone})\n"
+        f"📅 <b>Термін дії до:</b> <code>{end_date}</code>\n"
+        f"💰 <b>Тариф:</b> {price:.2f} грн"
+    )
+    user_push = (
+        f"🛵 <b>Вашу оренду транспорту {model_name} відновлено!</b>\n\n"
+        f"📅 <b>Діє до:</b> <code>{end_date}</code>\n"
+        f"💰 <b>Сума:</b> {price:.2f} грн\n\n"
+        "Інформацію оновлено у вашому <b>«👤 Особистому кабінеті»</b>."
+    )
+    try:
+        await bot.send_message(chat_id=user_id, text=user_push, parse_mode="HTML")
+    except Exception as e:
+        logger.warning(f"Push не доставлено клієнту {user_id}: {e}")
+
+    await callback.message.answer(admin_confirm, parse_mode="HTML", reply_markup=get_admin_keyboard())
+    await admin_item_manage(callback, None)
+
+# --- ПРИЗНАЧЕННЯ ОРЕНДАРЯ ТА ВІДНОВЛЕННЯ ОРЕНДИ ДЛЯ ВІЛЬНИХ СКУТЕРІВ ---
+@dp.callback_query(F.data.startswith("admin_assign_tenant:"), StateFilter("*"))
+async def admin_assign_tenant_choice(callback: types.CallbackQuery, state: FSMContext):
+    if callback.from_user.id != ADMIN_ID: return
+    await callback.answer()
+    await safe_clear_state(state)
+
+    item_id = callback.data.split(":")[1]
+    v_data = FLEET_DATABASE.get(item_id, {})
+    v_name = v_data.get("name", item_id)
+
+    # Перевірити наявність збереженого знімка
+    snap = v_data.get("last_rental_snapshot")
+    if not snap:
+        async with aiosqlite.connect(DB_PATH) as db:
+            db.row_factory = aiosqlite.Row
+            async with db.execute("SELECT * FROM rental_snapshots WHERE vehicle_key = ? ORDER BY id DESC LIMIT 1", (item_id,)) as cur:
+                row = await cur.fetchone()
+                if row:
+                    snap = dict(row)
+
+    has_snap = bool(snap and snap.get("user_id"))
+    restore_btn_text = "🔄 Відновити останнього орендаря" if has_snap else "🔄 Відновити останнього орендаря (немає даних)"
+
+    text = (
+        f"👤 <b>ПРИЗНАЧЕННЯ АБО ВІДНОВЛЕННЯ ОРЕНДИ</b>\n"
+        f"🛵 <b>Транспорт:</b> {v_name}\n"
+        "────────────────────\n"
+        "Оберіть необхідну дію:\n\n"
+        "• <b>Відновити останнього орендаря</b> — миттєво повертає попереднього клієнта з його термінами, балансом та договором (1-клік).\n"
+        "• <b>Ввести дані вручну</b> — призначення нового або існуючого клієнта з вибором терміну та тарифу."
+    )
+    kb = InlineKeyboardMarkup(inline_keyboard=[
+        [InlineKeyboardButton(text=restore_btn_text, callback_data=f"adm_restore_prev:{item_id}")],
+        [InlineKeyboardButton(text="✍️ Ввести дані вручну", callback_data=f"adm_assign_manual:{item_id}")],
+        [InlineKeyboardButton(text="⬅️ Назад до транспорту", callback_data=f"admmanage:{item_id}")]
+    ])
+    await safe_render_card(callback, text, kb, v_data.get("photo_id"))
+
+@dp.callback_query(F.data.startswith("restore_last_tenant:") | F.data.startswith("adm_restore_prev:"), StateFilter("*"))
+async def admin_restore_last_tenant(callback: types.CallbackQuery, state: FSMContext):
+    if callback.from_user.id != ADMIN_ID: return
+    item_id = callback.data.split(":")[1]
+
+    snap = FLEET_DATABASE.get(item_id, {}).get("last_tenant_data") or FLEET_DATABASE.get(item_id, {}).get("last_rental_snapshot")
+    if not snap:
+        async with aiosqlite.connect(DB_PATH) as db:
+            db.row_factory = aiosqlite.Row
+            async with db.execute("SELECT * FROM rental_snapshots WHERE vehicle_key = ? ORDER BY id DESC LIMIT 1", (item_id,)) as cur:
+                row = await cur.fetchone()
+                if row:
+                    snap = dict(row)
+
+    if not snap or not snap.get("user_id"):
+        await callback.answer("❌ Немає збережених даних про попереднього орендаря для цього скутера.", show_alert=True)
+        return
+
+    await callback.answer()
+    name = snap.get("name") or snap.get("full_name") or f"TG ID: {snap.get('user_id')}"
+    username_or_id = snap.get("username_or_id") or (f"@{snap.get('username')}" if snap.get("username") else f"ID: {snap.get('user_id')}")
+    phone = f"+{snap.get('user_phone')}" if snap.get("user_phone") else (f"+{snap.get('phone')}" if snap.get("phone") else "не вказано")
+    end_date = snap.get("rent_end_date") or snap.get("end_date") or "не вказано"
+    rate = snap.get("rate") or snap.get("amount_due") or 0.0
+
+    text = (
+        "📋 <b>Дані останнього орендаря:</b>\n"
+        f"👤 <b>Клієнт:</b> {name} ({username_or_id})\n"
+        f"📱 <b>Тел:</b> {phone}\n"
+        f"📅 <b>Термін оренди:</b> до <code>{end_date}</code>\n"
+        f"💰 <b>Тариф:</b> <b>{rate:.2f} грн</b>\n"
+        "────────────────────\n"
+        "Відновити оренду для цього клієнта?"
+    )
+    kb = InlineKeyboardMarkup(inline_keyboard=[
+        [InlineKeyboardButton(text="✅ Підтвердити відновлення", callback_data=f"confirm_restore:{item_id}")],
+        [InlineKeyboardButton(text="❌ Скасувати", callback_data=f"admmanage:{item_id}")]
+    ])
+    await safe_render_card(callback, text, kb, FLEET_DATABASE.get(item_id, {}).get("photo_id"))
+
+@dp.callback_query(F.data.startswith("confirm_restore:") | F.data.startswith("adm_confirm_restore:"), StateFilter("*"))
+async def admin_confirm_restore(callback: types.CallbackQuery, state: FSMContext):
+    if callback.from_user.id != ADMIN_ID: return
+    item_id = callback.data.split(":")[1]
+
+    snap = FLEET_DATABASE.get(item_id, {}).get("last_tenant_data") or FLEET_DATABASE.get(item_id, {}).get("last_rental_snapshot")
+    if not snap:
+        async with aiosqlite.connect(DB_PATH) as db:
+            db.row_factory = aiosqlite.Row
+            async with db.execute("SELECT * FROM rental_snapshots WHERE vehicle_key = ? ORDER BY id DESC LIMIT 1", (item_id,)) as cur:
+                row = await cur.fetchone()
+                if row:
+                    snap = dict(row)
+
+    if not snap or not snap.get("user_id"):
+        await callback.answer("❌ Немає збережених даних про попереднього орендаря для цього скутера.", show_alert=True)
+        return
+
+    user_id = snap["user_id"]
+    user_phone = snap.get("user_phone") or snap.get("phone")
+    model_name = FLEET_DATABASE.get(item_id, {}).get("name", item_id)
+    end_date = snap.get("rent_end_date") or snap.get("end_date")
+    amount = snap.get("rate") or snap.get("amount_due") or 0.0
+    rent_paid_days = snap.get("paid_days") or snap.get("rent_paid_days") or 7
+    rent_period_days = snap.get("rent_period_days") or 7
+    contract_num = snap.get("contract_num") or "2804-5"
+    contract_date = snap.get("contract_date") or "28.04.2026"
+    has_helmet = snap.get("has_helmet") or 0
+
+    # 1. Update FLEET_DATABASE: статус «Зайнятий» и привязка user_id
+    FLEET_DATABASE[item_id]["status"] = "rented"
+    FLEET_DATABASE[item_id]["reserved_by"] = user_id
+    save_fleet()
+
+    # 2. Восстановить запись аренды в БД
+    async with aiosqlite.connect(DB_PATH) as db:
+        if user_phone:
+            await db.execute("DELETE FROM rentals WHERE user_phone = ? OR vehicle_info = ?", (user_phone, model_name))
+        else:
+            await db.execute("DELETE FROM rentals WHERE vehicle_info = ?", (model_name,))
+
+        await db.execute(
+            "INSERT INTO rentals (user_phone, vehicle_info, end_date, amount_due, contract_num, contract_date, has_helmet, reminder_sent, status, rent_paid_days, rent_period_days) "
+            "VALUES (?, ?, ?, ?, ?, ?, ?, 0, 'active', ?, ?)",
+            (user_phone, model_name, end_date, amount, contract_num, contract_date, has_helmet, rent_paid_days, rent_period_days)
+        )
+
+        if snap.get("buyout_deal_id"):
+            await db.execute("UPDATE buyout_deals SET status = 'active', is_current_vehicle = 1 WHERE id = ?", (snap["buyout_deal_id"],))
+
+        await db.commit()
+
+    name = snap.get("name") or snap.get("full_name") or f"TG ID: {user_id}"
+    await callback.answer(f"✅ Оренду для {name} успішно відновлено!", show_alert=True)
+
+    push_msg = (
+        f"🛵 <b>Вашу оренду транспорту {model_name} успішно відновлено!</b>\n"
+        "────────────────────\n"
+        f"📅 <b>Термін дії до:</b> <code>{end_date}</code>\n"
+        f"💰 <b>До сплати:</b> {amount:.2f} грн\n"
+        "────────────────────\n"
+        "Всі параметри збережено. Перевірте статус у розділі <b>«👤 Особистий кабінет»</b>."
+    )
+    try:
+        await bot.send_message(chat_id=user_id, text=push_msg, parse_mode="HTML")
+    except Exception as e:
+        logger.warning(f"Не вдалося доставити push клієнту {user_id}: {e}")
+
+    await admin_item_manage(callback, state)
+
+@dp.callback_query(F.data.startswith("adm_assign_manual:"), StateFilter("*"))
+async def admin_assign_manual_start(callback: types.CallbackQuery, state: FSMContext):
+    if callback.from_user.id != ADMIN_ID: return
+    item_id = callback.data.split(":")[1]
+    await state.update_data(manual_item_id=item_id)
+    await state.set_state(AdminManualAssignState.waiting_for_user)
+    v_name = FLEET_DATABASE.get(item_id, {}).get("name", item_id)
+    await callback.message.answer(
+        f"✍️ <b>Ручне призначення орендаря</b>\n"
+        f"🛵 <b>Транспорт:</b> {v_name}\n"
+        "────────────────────\n"
+        "Введіть <b>Telegram ID</b> (наприклад: <code>123456789</code>), <b>@username</b> або <b>номер телефону</b> клієнта (<code>380XXXXXXXXX</code>):",
+        parse_mode="HTML",
+        reply_markup=get_cancel_keyboard()
+    )
+    await callback.answer()
+
+@dp.message(StateFilter(AdminManualAssignState.waiting_for_user), F.text)
+async def admin_assign_manual_user(message: types.Message, state: FSMContext):
+    if message.from_user.id != ADMIN_ID: return
+    raw = (message.text or "").strip()
+    if "скасувати" in raw.lower():
+        await safe_clear_state(state)
+        await message.answer("Дію скасовано.", reply_markup=get_admin_keyboard())
+        return
+
+    target_uid = None
+    target_phone = None
+    target_name = None
+
+    clean_digits = raw.replace("+", "").replace(" ", "").replace("-", "")
+    async with aiosqlite.connect(DB_PATH) as db:
+        db.row_factory = aiosqlite.Row
+        if clean_digits.isdigit():
+            async with db.execute("SELECT * FROM users WHERE telegram_id = ? OR phone_number = ? LIMIT 1", (clean_digits, clean_digits)) as cur:
+                u = await cur.fetchone()
+                if u:
+                    target_uid = u["telegram_id"]
+                    target_phone = u["phone_number"]
+                    target_name = u["full_name"]
+                elif len(clean_digits) >= 10 and clean_digits.startswith("380"):
+                    target_phone = clean_digits
+                    target_uid = int(clean_digits[-9:])
+                    target_name = f"Клієнт +{clean_digits}"
+                    await db.execute("INSERT OR IGNORE INTO users (telegram_id, phone_number, full_name) VALUES (?, ?, ?)", (target_uid, target_phone, target_name))
+                    await db.commit()
+                elif len(clean_digits) <= 10:
+                    target_uid = int(clean_digits)
+                    target_phone = clean_digits
+                    target_name = f"TG ID: {clean_digits}"
+                    await db.execute("INSERT OR IGNORE INTO users (telegram_id, phone_number, full_name) VALUES (?, ?, ?)", (target_uid, target_phone, target_name))
+                    await db.commit()
+        else:
+            clean_name = raw.lstrip("@")
+            async with db.execute("SELECT * FROM users WHERE full_name LIKE ? LIMIT 1", (f"%{clean_name}%",)) as cur:
+                u = await cur.fetchone()
+                if u:
+                    target_uid = u["telegram_id"]
+                    target_phone = u["phone_number"]
+                    target_name = u["full_name"]
+
+    if not target_uid:
+        await message.answer("⚠️ Не вдалося ідентифікувати клієнта. Введіть Telegram ID цифрами або номер телефону у форматі <code>380XXXXXXXXX</code>:")
+        return
+
+    await state.update_data(target_user_id=target_uid, target_phone=target_phone, target_name=target_name)
+    await state.set_state(AdminManualAssignState.waiting_for_dates)
+
+    await message.answer(
+        f"👤 Клієнт: <b>{target_name}</b> (ID: <code>{target_uid}</code>, тел: +{target_phone})\n\n"
+        "Введіть <b>термін оренди</b>:\n"
+        "• Кількість днів цифрами (наприклад: <code>7</code> або <code>30</code>)\n"
+        "• Або точну кінцеву дату у форматі <code>ДД.ММ.РРРР</code> (наприклад: <code>25.10.2026</code>):",
+        parse_mode="HTML",
+        reply_markup=get_cancel_keyboard()
+    )
+
+@dp.message(StateFilter(AdminManualAssignState.waiting_for_dates), F.text)
+async def admin_assign_manual_dates(message: types.Message, state: FSMContext):
+    if message.from_user.id != ADMIN_ID: return
+    raw = (message.text or "").strip()
+    if "скасувати" in raw.lower():
+        await safe_clear_state(state)
+        await message.answer("Дію скасовано.", reply_markup=get_admin_keyboard())
+        return
+
+    now = get_kyiv_now()
+    paid_days = 7
+    end_date = None
+
+    if raw.isdigit():
+        days = int(raw)
+        if days < 1: days = 1
+        paid_days = days
+        end_date = (now + timedelta(days=days - 1)).strftime("%Y-%m-%d 23:59")
+    elif "." in raw:
+        try:
+            dt = datetime.strptime(raw, "%d.%m.%Y")
+            end_date = dt.strftime("%Y-%m-%d 23:59")
+            paid_days = max(1, (dt - now.replace(tzinfo=None)).days + 1)
+        except ValueError:
+            await message.answer("Введіть дату у форматі <code>ДД.ММ.РРРР</code> (наприклад: 25.10.2026) або кількість днів:")
+            return
+    else:
+        await message.answer("Введіть кількість днів цифрами (наприклад: 7) або дату <code>ДД.ММ.РРРР</code>:")
+        return
+
+    data = await state.get_data()
+    item_id = data["manual_item_id"]
+    v_data = FLEET_DATABASE.get(item_id, {})
+    if paid_days >= 28:
+        default_price = v_data.get("price_month", 8000)
+    elif paid_days >= 7:
+        weeks = max(1, round(paid_days / 7))
+        default_price = v_data.get("price_week", 2200) * weeks
+    else:
+        default_price = v_data.get("price_day", 900) * paid_days
+
+    await state.update_data(end_date=end_date, paid_days=paid_days, default_price=default_price)
+    await state.set_state(AdminManualAssignState.waiting_for_price)
+
+    confirm_kb = ReplyKeyboardMarkup(
+        keyboard=[
+            [KeyboardButton(text=f"Підтвердити {int(default_price)} грн")],
+            [KeyboardButton(text="❌ Скасувати дію")]
+        ],
+        resize_keyboard=True,
+        one_time_keyboard=True
+    )
+    await message.answer(
+        f"📅 Термін оренди: <b>{paid_days} дн.</b> (до <code>{end_date}</code>)\n"
+        f"💰 Рекомендована ціна тарифу: <b>{int(default_price)} грн</b>\n\n"
+        "Введіть <b>суму регулярного платежу</b> в грн або натисніть кнопку підтвердження:",
+        parse_mode="HTML",
+        reply_markup=confirm_kb
+    )
+
+@dp.message(StateFilter(AdminManualAssignState.waiting_for_price), F.text)
+async def admin_assign_manual_price(message: types.Message, state: FSMContext):
+    if message.from_user.id != ADMIN_ID: return
+    raw = (message.text or "").strip()
+    if "скасувати" in raw.lower():
+        await safe_clear_state(state)
+        await message.answer("Дію скасовано.", reply_markup=get_admin_keyboard())
+        return
+
+    data = await state.get_data()
+    default_price = float(data.get("default_price", 2200))
+    amount = default_price
+
+    if "підтвердити" not in raw.lower():
+        try:
+            amount = float(raw.replace(",", ".").replace(" ", "").replace("грн", ""))
+        except ValueError:
+            await message.answer("Введіть суму числом або натисніть кнопку підтвердження:")
+            return
+
+    await safe_clear_state(state)
+
+    item_id = data["manual_item_id"]
+    user_id = data["target_user_id"]
+    user_phone = data["target_phone"]
+    user_name = data["target_name"]
+    end_date = data["end_date"]
+    paid_days = data["paid_days"]
+    model_name = FLEET_DATABASE.get(item_id, {}).get("name", item_id)
+    today_str = get_kyiv_now().strftime("%d.%m.%Y")
+
+    # 1. Update FLEET_DATABASE
+    FLEET_DATABASE[item_id]["status"] = "rented"
+    FLEET_DATABASE[item_id]["reserved_by"] = user_id
+    save_fleet()
+
+    # 2. Insert active rental into DB
+    async with aiosqlite.connect(DB_PATH) as db:
+        if user_phone:
+            await db.execute("DELETE FROM rentals WHERE user_phone = ? OR vehicle_info = ?", (user_phone, model_name))
+        else:
+            await db.execute("DELETE FROM rentals WHERE vehicle_info = ?", (model_name,))
+
+        await db.execute(
+            "INSERT INTO rentals (user_phone, vehicle_info, end_date, amount_due, contract_num, contract_date, has_helmet, reminder_sent, status, rent_paid_days, rent_period_days) "
+            "VALUES (?, ?, ?, ?, '2804-5', ?, 0, 0, 'active', ?, ?)",
+            (user_phone, model_name, end_date, amount, today_str, paid_days, paid_days)
+        )
+        await db.commit()
+
+    # 3. Create snapshot of this new active rental as well
+    await create_rental_snapshot(item_id, reason="manual_assignment")
+
+    # 4. Notify admin and client
+    await message.answer(
+        f"✅ <b>Оренду успішно призначено!</b>\n"
+        f"🛵 <b>Транспорт:</b> {model_name}\n"
+        f"👤 <b>Орендар:</b> {user_name}\n"
+        f"📅 <b>Діє до:</b> <code>{end_date}</code> ({paid_days} дн.)\n"
+        f"💰 <b>Сума:</b> <b>{amount:.2f} грн</b>",
+        parse_mode="HTML",
+        reply_markup=get_admin_keyboard()
+    )
+
+    push_msg = (
+        f"🚀 <b>Вам призначено транспорт {model_name}!</b>\n"
+        "────────────────────\n"
+        f"📅 <b>Термін дії до:</b> <code>{end_date}</code>\n"
+        f"💰 <b>Сума до сплати:</b> {amount:.2f} грн\n"
+        "────────────────────\n"
+        "Вся інформація про оренду доступна у вашому <b>«👤 Особистому кабінеті»</b>."
+    )
+    try:
+        await bot.send_message(chat_id=user_id, text=push_msg, parse_mode="HTML")
+    except Exception as e:
+        logger.warning(f"Не вдалося надіслати push клієнту {user_id}: {e}")
 
 @dp.callback_query(F.data.startswith("setstat:"), StateFilter("*"))
 async def admin_set_status_callback(callback: CallbackQuery):
@@ -4688,16 +6169,17 @@ async def admin_set_status_callback(callback: CallbackQuery):
         FLEET_DATABASE[item_id]["status"] = new_stat
         if new_stat == "available":
             prev_user_id = FLEET_DATABASE[item_id].get("reserved_by")
-            FLEET_DATABASE[item_id]["reserved_by"] = None
             if prev_user_id:
+                # Зберегти знімок перед зняттям
+                await create_rental_snapshot(item_id, reason="admin_status_available")
                 async with aiosqlite.connect(DB_PATH) as db:
                     async with db.execute("SELECT phone_number FROM users WHERE telegram_id = ?", (prev_user_id,)) as cursor:
                         row = await cursor.fetchone()
                         if row:
                             await db.execute("UPDATE rentals SET status = 'cancelled' WHERE user_phone = ?", (row[0],))
-                            await db.execute("DELETE FROM rentals WHERE user_phone = ?", (row[0],))
                     await db.execute("UPDATE buyout_deals SET status = 'cancelled' WHERE user_id = ? AND vehicle_key = ?", (prev_user_id, item_id))
                     await db.commit()
+            FLEET_DATABASE[item_id]["reserved_by"] = None
         save_fleet()
         
         if new_stat == "available" and old_status != "available" and len(WAITLIST) > 0:

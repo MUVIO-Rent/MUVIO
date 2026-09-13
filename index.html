@@ -22,6 +22,7 @@
             theme: {
                 extend: {
                     colors: {
+                        primary: '#1D5D3B',
                         muvio: {
                             green: '#1D5D3B',
                             hover: '#24754A',
@@ -52,6 +53,10 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <style>
+        .text-primary {
+            color: #1D5D3B;
+        }
+
         /* MUVIO High-Tech Geometric Styles */
         .chamfer-box {
             clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
@@ -167,13 +172,10 @@
                 <div class="flex items-center gap-2 sm:gap-3 lg:gap-4">
                     <!-- Правий блок посилань -->
                     <nav class="hidden md:flex items-center space-x-1 lg:space-x-2.5">
-                        <a href="franchise.html"
-                            class="font-brand font-semibold text-xs lg:text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] px-2 py-1 transition-colors whitespace-nowrap">
-                            ФРАНШИЗА
-                        </a>
-                        <a href="cabinet.html"
-                            class="font-brand font-semibold text-xs lg:text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] px-2 py-1 transition-colors whitespace-nowrap">
-                            ОСОБИСТИЙ КАБІНЕТ
+                        <a href="/cabinet.html" class="flex items-center justify-center p-2 text-primary hover:text-emerald-500 transition-colors" title="Особистий кабінет" aria-label="Особистий кабінет">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
                         </a>
                     </nav>
 
@@ -904,7 +906,7 @@
                     <div class="font-brand font-bold text-sm uppercase tracking-wider text-emerald-200 mb-4">
                         МЕНЮ
                     </div>
-                    <ul class="space-y-2 text-xs font-brand tracking-wide">
+                    <ul class="space-y-2 text-base font-medium font-brand tracking-wide">
                         <li><a href="catalog.html?cat=scooter" class="hover:text-emerald-300 transition-colors">Каталог скутерів</a></li>
                         <li><a href="catalog.html?cat=bike" class="hover:text-emerald-300 transition-colors">Каталог електровелосипедів</a></li>
                         <li><a href="terms.html" class="hover:text-emerald-300 transition-colors">Умови оренди</a></li>
@@ -917,7 +919,7 @@
                     <div class="font-brand font-bold text-sm uppercase tracking-wider text-emerald-200 mb-4">
                         КЛАСИ СКУТЕРІВ
                     </div>
-                    <ul class="space-y-2 text-xs font-brand tracking-wide text-emerald-100">
+                    <ul class="space-y-2 text-base font-medium font-brand tracking-wide text-emerald-100">
                         <li><a href="catalog.html?brand=Aima" class="hover:text-emerald-300 transition-colors">Aima</a></li>
                         <li><a href="catalog.html?brand=Crosser" class="hover:text-emerald-300 transition-colors">Crosser</a></li>
                         <li><a href="catalog.html?brand=Like%20Bike" class="hover:text-emerald-300 transition-colors">Like Bike</a></li>
@@ -929,9 +931,10 @@
                     <div class="font-brand font-bold text-sm uppercase tracking-wider text-emerald-200 mb-4">
                         ЩЕ НАПРЯМКИ
                     </div>
-                    <ul class="space-y-2 text-xs font-brand tracking-wide">
+                    <ul class="space-y-2 text-base font-medium font-brand tracking-wide">
                         <li><a href="calculator.html" class="hover:text-emerald-300 transition-colors">Калькулятор оренди</a></li>
                         <li><a href="service.html" class="hover:text-emerald-300 transition-colors">Ремонт скутера</a></li>
+                        <li><a href="#franchise" class="hover:underline">Франшиза</a></li>
                     </ul>
                     <div class="pt-4">
                         <a href="https://t.me/muviobot" target="_blank" rel="noopener noreferrer"
