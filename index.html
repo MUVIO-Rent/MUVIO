@@ -173,7 +173,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-[#1D5D3B]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
-                        <span id="header-user-name" class="text-[11px] font-bold tracking-wider text-[#111827] uppercase leading-tight text-center">ВХІД</span>
+                        <span id="header-user-name" class="header-user-name text-[11px] font-bold tracking-wider text-[#111827] uppercase leading-tight text-center">ВХІД</span>
                     </a>
 
                     <!-- Mobile Menu Button -->
@@ -1612,31 +1612,27 @@
 
         // Оновлення імені користувача в шапці з даних сесії (muvio_active_user)
         function updateHeaderUserName() {
-            const el = document.getElementById('header-user-name');
-            if (!el) return;
+            let name = 'ВХІД';
             try {
                 const activeSaved = localStorage.getItem('muvio_active_user');
                 if (activeSaved) {
                     const active = JSON.parse(activeSaved);
                     const login = (active.login || '').trim();
-                    if (login) {
-                        el.textContent = login.toUpperCase();
-                        return;
-                    }
-                }
-                const saved = localStorage.getItem('muvio_user');
-                if (saved) {
-                    const u = JSON.parse(saved);
-                    const name = (u.login || u.name || u.first_name || u.username || '').trim();
-                    if (name) {
-                        el.textContent = name.toUpperCase();
-                        return;
+                    if (login) name = login.toUpperCase();
+                } else {
+                    const saved = localStorage.getItem('muvio_user');
+                    if (saved) {
+                        const u = JSON.parse(saved);
+                        const n = (u.login || u.name || u.first_name || u.username || '').trim();
+                        if (n) name = n.toUpperCase();
                     }
                 }
             } catch (e) {
                 console.error('Error reading active user:', e);
             }
-            el.textContent = 'ВХІД';
+            document.querySelectorAll('.header-user-name, #header-user-name').forEach(el => {
+                el.textContent = name;
+            });
         }
         const updateHeader = updateHeaderUserName;
         const initAuth = updateHeaderUserName;

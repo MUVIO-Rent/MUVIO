@@ -162,11 +162,11 @@
                 <!-- Права частина: Профіль -->
                 <div class="flex items-center z-10">
                     <!-- Профіль користувача -->
-                    <a href="/cabinet.html" class="flex flex-col items-center justify-center gap-1 group hover:opacity-85 transition-opacity" title="Особистий кабінет">
+                    <a href="cabinet.html" class="flex flex-col items-center justify-center gap-1 group hover:opacity-85 transition-opacity" title="Особистий кабінет">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-[#1D5D3B]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
-                        <span id="header-user-name" class="text-[11px] font-bold tracking-wider text-[#111827] uppercase leading-tight text-center">ВХІД</span>
+                        <span id="header-user-name" class="header-user-name text-[11px] font-bold tracking-wider text-[#111827] uppercase leading-tight text-center">ВХІД</span>
                     </a>
 
                     <!-- Mobile Menu Button -->
@@ -384,7 +384,7 @@
                         Немає активної техніки
                     </h3>
                     <p class="text-sm text-slate-600 leading-relaxed">
-                        Наразі у вас немає активного транспорту в оренді або під викуп.
+                        У вас немає активної оренди. Оберіть скутер у каталозі або зверніться до бота для оформлення.
                     </p>
                 </div>
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
@@ -411,7 +411,7 @@
                             <div class="flex items-center gap-2">
                                 <i data-lucide="gauge" class="w-5 h-5 text-[#1D5D3B]"></i>
                                 <h3 class="font-brand font-bold text-lg uppercase tracking-wider text-[#111827]">
-                                    АКТИВНА ОРЕНДА
+                                    МОЯ АКТИВНА ОРЕНДА
                                 </h3>
                             </div>
                             <span id="rentalStatusBadge"
@@ -430,7 +430,7 @@
                                     Електроскутер MUVIO
                                 </div>
                                 <div class="text-xs text-slate-500 font-mono">
-                                    Інв. номер: <span id="rentalPlateNumber" class="text-slate-800 font-bold">—</span>
+                                    Номер рами / ID: <span id="rentalPlateNumber" class="text-slate-800 font-bold">—</span>
                                 </div>
                                 <div class="text-xs text-slate-500">
                                     Договір: <span id="rentalContractNumber" class="font-semibold text-slate-700">—</span>
@@ -453,8 +453,10 @@
                                 </span>
                             </div>
                             <div>
-                                <span class="text-slate-500 block">Комплектація:</span>
-                                <span id="rentalEquipment" class="text-slate-700 font-medium">Стандартна</span>
+                                <span class="text-slate-500 block">Пробіг / Запас ходу:</span>
+                                <span id="rentalTelemetry" class="font-brand font-bold text-sm text-slate-800">
+                                    84 км / Батарея 85%
+                                </span>
                             </div>
                             <div>
                                 <span class="text-slate-500 block">Сервісне ТО:</span>
@@ -485,7 +487,7 @@
                             <div class="flex items-center gap-2">
                                 <i data-lucide="award" class="w-5 h-5 text-[#1D5D3B]"></i>
                                 <h3 class="font-brand font-bold text-lg uppercase tracking-wider text-[#111827]">
-                                    ПРОГРЕС ВИКУПУ (RENT-TO-OWN)
+                                    ПРОГРАМА ВИКУПУ (RENT-TO-OWN)
                                 </h3>
                             </div>
                             <span id="buyoutStatusBadge"
@@ -906,14 +908,22 @@
         let smsToastTimeout = null;
 
         // 1. Робота з базою користувачів у localStorage (ключ: muvio_users_db)
+        const DEFAULT_USERS_DB = [
+            { login: "maxim", phone: "+380991234567", password: "123" }
+        ];
+
         function getUsersDb() {
             try {
                 const raw = localStorage.getItem('muvio_users_db');
-                if (raw) return JSON.parse(raw);
+                if (raw) {
+                    const parsed = JSON.parse(raw);
+                    if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+                }
             } catch (e) {
                 console.error('Помилка читання muvio_users_db:', e);
             }
-            return [];
+            saveUsersDb(DEFAULT_USERS_DB);
+            return DEFAULT_USERS_DB;
         }
 
         function saveUsersDb(users) {
@@ -922,6 +932,80 @@
             } catch (e) {
                 console.error('Помилка збереження muvio_users_db:', e);
             }
+        }
+
+        // 1.1. База активних оренд (ключ: muvio_rentals_db)
+        const DEFAULT_RENTALS_DB = {
+            "+380991234567": {
+                model: "Crosser CR-13 №1",
+                vehicle_info: "Crosser CR-13 №1",
+                plate_number: "CR13-OD-042",
+                contract_num: "CR13-OD-042",
+                contract_date: "01.09.2026",
+                end_date: "21.09.2026",
+                rate: "2 200 грн / тиждень",
+                status: "Активна оренда",
+                status_text: "Оплачено до 21.09.2026",
+                mileage: "84 км",
+                battery: "85%",
+                telemetry: "84 км / Батарея 85%",
+                equipment: "Шолом, тримач для смартфона, зарядний пристрій",
+                image: "images/crosser.jpg",
+                buyout: {
+                    vehicle_info: "Crosser CR-13 №1",
+                    term_months: "12",
+                    contract_num: "CR13-OD-042-BO",
+                    contract_date: "01.09.2026",
+                    total_price: 60000,
+                    paid_amount: 12000,
+                    percent: 20
+                },
+                payments: [
+                    { date: "14.09.2026", purpose: "Щотижнева оренда (2 200 ₴)", amount: "2 200 ₴", bonus: "+50 ₴", status: "Зараховано" },
+                    { date: "07.09.2026", purpose: "Щотижнева оренда (2 200 ₴)", amount: "2 200 ₴", bonus: "+50 ₴", status: "Зараховано" },
+                    { date: "01.09.2026", purpose: "Оренда та перший внесок викупу", amount: "10 000 ₴", bonus: "+200 ₴", status: "Зараховано" }
+                ],
+                repairs: [
+                    { date: "10.09.2026", title: "Планове ТО: гальма та тиск у шинах", category: "Планове ТО", cost: "0 ₴", status: "За рахунок MUVIO" }
+                ]
+            }
+        };
+
+        function getRentalsDb() {
+            try {
+                const raw = localStorage.getItem('muvio_rentals_db');
+                if (raw) {
+                    const parsed = JSON.parse(raw);
+                    if (parsed && typeof parsed === 'object' && Object.keys(parsed).length > 0) return parsed;
+                }
+            } catch (e) {
+                console.error('Помилка читання muvio_rentals_db:', e);
+            }
+            saveRentalsDb(DEFAULT_RENTALS_DB);
+            return DEFAULT_RENTALS_DB;
+        }
+
+        function saveRentalsDb(rentals) {
+            try {
+                localStorage.setItem('muvio_rentals_db', JSON.stringify(rentals));
+            } catch (e) {
+                console.error('Помилка збереження muvio_rentals_db:', e);
+            }
+        }
+
+        // Пошук оренди в muvio_rentals_db за номером телефону з нормалізацією
+        function findRentalByPhone(phone) {
+            if (!phone) return null;
+            const norm = normalizePhone(phone);
+            if (!norm) return null;
+            const db = getRentalsDb();
+            if (db[norm]) return db[norm];
+            for (const key in db) {
+                if (normalizePhone(key) === norm) {
+                    return db[key];
+                }
+            }
+            return null;
         }
 
         // Нормалізація номера телефону (+380...)
@@ -1037,10 +1121,14 @@
             users.push(newUser);
             saveUsersDb(users);
 
-            // Збереження активної сесії muvio_active_user
+            // Пошук активної оренди за номером телефону
+            const rentalData = findRentalByPhone(phoneVal);
+
+            // Збереження активної сесії muvio_active_user ({ login, phone, rentalData })
             const activeSession = {
                 login: newUser.login,
-                phone: newUser.phone
+                phone: newUser.phone,
+                rentalData: rentalData || null
             };
             localStorage.setItem('muvio_active_user', JSON.stringify(activeSession));
 
@@ -1051,7 +1139,8 @@
                 first_name: newUser.login,
                 username: newUser.login,
                 login: newUser.login,
-                phone: newUser.phone
+                phone: newUser.phone,
+                rentalData: rentalData || null
             };
             localStorage.setItem('muvio_user', JSON.stringify(profileSession));
             currentUser = profileSession;
@@ -1062,7 +1151,7 @@
             if (passInput) passInput.value = '';
 
             updateHeaderUserName();
-            loadUserProfile(newUser.login);
+            loadUserProfile(newUser.login, rentalData);
         }
 
         // 3. Обробник форми входу (жорстка перевірка логін/телефон + пароль)
@@ -1097,10 +1186,14 @@
                 return;
             }
 
-            // Успішна авторизація
+            // Пошук активної оренди за номером телефону користувача
+            const rentalData = findRentalByPhone(foundUser.phone);
+
+            // Успішна авторизація з сесією ({ login, phone, rentalData })
             const activeSession = {
                 login: foundUser.login,
-                phone: foundUser.phone
+                phone: foundUser.phone,
+                rentalData: rentalData || null
             };
             localStorage.setItem('muvio_active_user', JSON.stringify(activeSession));
 
@@ -1110,7 +1203,8 @@
                 first_name: foundUser.login,
                 username: foundUser.login,
                 login: foundUser.login,
-                phone: foundUser.phone
+                phone: foundUser.phone,
+                rentalData: rentalData || null
             };
             localStorage.setItem('muvio_user', JSON.stringify(profileSession));
             currentUser = profileSession;
@@ -1119,7 +1213,7 @@
             if (passInput) passInput.value = '';
 
             updateHeaderUserName();
-            loadUserProfile(foundUser.login);
+            loadUserProfile(foundUser.login, rentalData);
         }
 
         // 4. Скидання паролю через SMS-код
@@ -1302,12 +1396,33 @@
             loadUserProfile(user.id);
         };
 
-        // 3. Завантаження даних профілю через fetch до API бота
-        async function loadUserProfile(telegramId) {
+        // 3. Завантаження даних профілю через fetch до API бота або локальну базу оренд
+        async function loadUserProfile(telegramId, explicitRentalData = undefined) {
+            let localRental = (explicitRentalData !== undefined) ? explicitRentalData : null;
+            if (!localRental) {
+                try {
+                    const activeSaved = localStorage.getItem('muvio_active_user');
+                    if (activeSaved) {
+                        const act = JSON.parse(activeSaved);
+                        if (act.rentalData) localRental = act.rentalData;
+                        else if (act.phone) localRental = findRentalByPhone(act.phone);
+                    }
+                } catch (e) {}
+            }
+            if (!localRental && currentUser?.phone) {
+                localRental = findRentalByPhone(currentUser.phone);
+            }
+
             try {
                 const response = await fetch(`/api/user/profile?telegram_id=${telegramId}`);
                 if (response.ok) {
                     const data = await response.json();
+                    if (!data.rental && localRental) {
+                        data.rental = localRental;
+                        if (localRental.buyout && !data.buyout) data.buyout = localRental.buyout;
+                        if (localRental.payments && (!data.payments || data.payments.length === 0)) data.payments = localRental.payments;
+                        if (localRental.repairs && (!data.repairs || data.repairs.length === 0)) data.repairs = localRental.repairs;
+                    }
                     renderProfileUI(data);
                     return;
                 }
@@ -1315,7 +1430,7 @@
                 console.warn('API бекенду офлайн або не відповідає:', err);
             }
 
-            // Чистий профіль без фіктивних даних
+            // Чистий профіль з локальними даними оренди або без неї
             const emptyProfile = {
                 user: {
                     id: currentUser?.id || telegramId,
@@ -1324,10 +1439,10 @@
                     phone: currentUser?.phone || currentUser?.contact || "",
                     bonus_balance: 0
                 },
-                rental: null,
-                buyout: null,
-                payments: [],
-                repairs: []
+                rental: localRental || null,
+                buyout: localRental?.buyout || null,
+                payments: localRental?.payments || [],
+                repairs: localRental?.repairs || []
             };
             renderProfileUI(emptyProfile);
         }
@@ -1344,7 +1459,7 @@
             const payments = data.payments || [];
             const repairs = data.repairs || [];
 
-            // Шапка
+            // Шапка профілю
             const fullName = (user.login || [user.first_name, user.last_name].filter(Boolean).join(' ') || user.name || 'Клієнт MUVIO').toUpperCase();
             document.getElementById('userNameDisplay').textContent = fullName;
             document.getElementById('userAvatarText').textContent = (fullName[0] || 'M').toUpperCase();
@@ -1362,7 +1477,7 @@
                 document.getElementById('userAvatarText').classList.add('hidden');
             }
 
-            // Статус користувача в шапці
+            // Статус користувача в бейджі
             const statusBadge = document.getElementById('userStatusBadge');
             const statusText = document.getElementById('userStatusText');
 
@@ -1371,7 +1486,8 @@
 
             if (hasRental) {
                 statusBadge.className = 'inline-flex items-center gap-1.5 px-2.5 py-1 bg-emerald-100 text-emerald-800 font-brand font-bold text-xs uppercase tracking-wider chamfer-badge';
-                statusText.innerHTML = '<span class="w-2 h-2 bg-[#10B981] rounded-full pulse-emerald inline-block mr-1"></span>АКТИВНА ОРЕНДА';
+                const sText = rental.status_text ? ` (${rental.status_text})` : '';
+                statusText.innerHTML = `<span class="w-2 h-2 bg-[#10B981] rounded-full pulse-emerald inline-block mr-1"></span>АКТИВНА ОРЕНДА${sText}`;
             } else if (hasBuyout) {
                 statusBadge.className = 'inline-flex items-center gap-1.5 px-2.5 py-1 bg-emerald-100 text-emerald-800 font-brand font-bold text-xs uppercase tracking-wider chamfer-badge';
                 statusText.innerHTML = '<span class="w-2 h-2 bg-[#10B981] rounded-full pulse-emerald inline-block mr-1"></span>АКТИВНИЙ ВИКУП';
@@ -1397,12 +1513,25 @@
                 if (hasRental) {
                     rentalCard.classList.remove('hidden');
                     rentalCard.classList.add('flex');
-                    document.getElementById('rentalVehicleTitle').textContent = rental.vehicle_info || 'Електроскутер MUVIO';
-                    document.getElementById('rentalPlateNumber').textContent = rental.plate_number || 'MUVIO';
-                    document.getElementById('rentalContractNumber').textContent = `№${rental.contract_num || '—'} від ${rental.contract_date || '—'}`;
-                    document.getElementById('rentalEndDate').textContent = rental.end_date || 'Активно';
-                    document.getElementById('rentalRate').textContent = rental.rate || '—';
-                    document.getElementById('rentalEquipment').textContent = rental.equipment || 'Стандартна';
+                    document.getElementById('rentalVehicleTitle').textContent = rental.model || rental.vehicle_info || 'Crosser CR-13 №1';
+                    document.getElementById('rentalPlateNumber').textContent = rental.plate_number || 'CR13-OD-042';
+                    document.getElementById('rentalContractNumber').textContent = `№${rental.contract_num || 'CR13-OD-042'} від ${rental.contract_date || '01.09.2026'}`;
+                    document.getElementById('rentalEndDate').textContent = rental.end_date || '21.09.2026';
+                    document.getElementById('rentalRate').textContent = rental.rate || '2 200 грн / тиждень';
+                    document.getElementById('rentalEquipment').textContent = rental.equipment || 'Шолом, тримач для смартфона, зарядний пристрій';
+                    
+                    const telemetryEl = document.getElementById('rentalTelemetry');
+                    if (telemetryEl) {
+                        const mileage = rental.mileage || '84 км';
+                        const battery = rental.battery || '85%';
+                        telemetryEl.textContent = rental.telemetry || `${mileage} / Батарея ${battery}`;
+                    }
+
+                    const rentalStatusTextEl = document.getElementById('rentalStatusText');
+                    if (rentalStatusTextEl) {
+                        rentalStatusTextEl.textContent = rental.status_text ? `АКТИВНА (${rental.status_text})` : (rental.status || 'АКТИВНА');
+                    }
+
                     if (rental.image) {
                         document.getElementById('rentalVehicleImg').src = rental.image;
                     }
@@ -1415,14 +1544,14 @@
                 if (hasBuyout) {
                     buyoutCard.classList.remove('hidden');
                     buyoutCard.classList.add('flex');
-                    document.getElementById('buyoutVehicleTitle').textContent = buyout.vehicle_info || (rental ? rental.vehicle_info : 'Електроскутер');
-                    document.getElementById('buyoutTerm').textContent = `${buyout.term_months || '—'} міс.`;
-                    document.getElementById('buyoutContract').textContent = `№${buyout.contract_num || '—'}`;
+                    document.getElementById('buyoutVehicleTitle').textContent = buyout.vehicle_info || (rental ? (rental.model || rental.vehicle_info) : 'Crosser CR-13 №1');
+                    document.getElementById('buyoutTerm').textContent = `${buyout.term_months || 12} міс.`;
+                    document.getElementById('buyoutContract').textContent = `№${buyout.contract_num || 'CR13-OD-042-BO'}`;
 
-                    const total = buyout.total_price || 0;
-                    const paid = buyout.paid_amount || 0;
+                    const total = buyout.total_price || 60000;
+                    const paid = buyout.paid_amount || 12000;
                     const rem = Math.max(0, total - paid);
-                    const percent = total > 0 ? Math.min(100, Math.round((paid / total) * 100)) : 0;
+                    const percent = buyout.percent !== undefined ? buyout.percent : (total > 0 ? Math.min(100, Math.round((paid / total) * 100)) : 20);
 
                     document.getElementById('buyoutTotalPrice').textContent = `${total.toLocaleString()} ₴`;
                     document.getElementById('buyoutPaidAmount').textContent = `${paid.toLocaleString()} ₴`;
@@ -1496,8 +1625,7 @@
             localStorage.removeItem('muvio_user');
             currentUser = null;
             currentProfileData = null;
-            const headerNameEl = document.getElementById('header-user-name');
-            if (headerNameEl) headerNameEl.textContent = 'ВХІД';
+            updateHeaderUserName();
             document.getElementById('profileSection').classList.add('hidden');
             document.getElementById('authSection').classList.remove('hidden');
             switchAuthTab('login');
@@ -1571,31 +1699,27 @@
 
         // Оновлення імені користувача в шапці з даних сесії (muvio_active_user)
         function updateHeaderUserName() {
-            const el = document.getElementById('header-user-name');
-            if (!el) return;
+            const els = document.querySelectorAll('.header-user-name, #header-user-name');
+            if (!els || els.length === 0) return;
+            let displayName = 'ВХІД';
             try {
                 const activeSaved = localStorage.getItem('muvio_active_user');
                 if (activeSaved) {
                     const active = JSON.parse(activeSaved);
                     const login = (active.login || '').trim();
-                    if (login) {
-                        el.textContent = login.toUpperCase();
-                        return;
-                    }
-                }
-                const saved = localStorage.getItem('muvio_user');
-                if (saved) {
-                    const u = JSON.parse(saved);
-                    const name = (u.login || u.name || u.first_name || u.username || '').trim();
-                    if (name) {
-                        el.textContent = name.toUpperCase();
-                        return;
+                    if (login) displayName = login.toUpperCase();
+                } else {
+                    const saved = localStorage.getItem('muvio_user');
+                    if (saved) {
+                        const u = JSON.parse(saved);
+                        const name = (u.login || u.name || u.first_name || u.username || '').trim();
+                        if (name) displayName = name.toUpperCase();
                     }
                 }
             } catch (e) {
                 console.error('Error reading active user:', e);
             }
-            el.textContent = 'ВХІД';
+            els.forEach(el => { el.textContent = displayName; });
         }
         const updateHeader = updateHeaderUserName;
         const initAuth = updateHeaderUserName;
@@ -1617,6 +1741,7 @@
                     const u = savedUser ? JSON.parse(savedUser) : null;
                     const login = active?.login || u?.login || u?.name || 'Клієнт';
                     const phone = active?.phone || u?.phone || '';
+                    const rentalData = active?.rentalData || u?.rentalData || findRentalByPhone(phone);
 
                     currentUser = {
                         id: login,
@@ -1624,9 +1749,10 @@
                         name: login,
                         first_name: login,
                         username: login,
-                        phone: phone
+                        phone: phone,
+                        rentalData: rentalData || null
                     };
-                    loadUserProfile(currentUser.id);
+                    loadUserProfile(currentUser.id, rentalData);
                 } catch (e) {
                     console.error('Saved user parse error:', e);
                     logoutUser();
