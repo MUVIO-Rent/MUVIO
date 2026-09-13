@@ -87,94 +87,127 @@
             0%, 100% { opacity: 1; transform: scale(1); }
             50% { opacity: 0.4; transform: scale(1.15); }
         }
-        /* ==================== THEME & DARK MODE ==================== */
+        /* ==================== THEME & DARK MODE (BLACKOUT PREMIER) ==================== */
         html.theme-dark {
             color-scheme: dark;
+            background-color: #0A0D0C !important;
         }
         html.theme-dark body {
-            background-color: #0F172A !important;
-            color: #E2E8F0 !important;
+            background-color: #0A0D0C !important;
+            color: #F3F4F6 !important;
         }
         html.theme-dark header,
         html.theme-dark #mobileMenu {
-            background-color: #111827 !important;
-            border-color: #1E293B !important;
+            background-color: rgba(15, 21, 18, 0.95) !important;
+            border-color: #1F2E26 !important;
         }
         html.theme-dark nav a,
         html.theme-dark .mobile-nav-link,
         html.theme-dark #header-user-name,
         html.theme-dark .settings-btn-label {
-            color: #E2E8F0 !important;
+            color: #F3F4F6 !important;
         }
         html.theme-dark nav a:hover,
         html.theme-dark .mobile-nav-link:hover {
             color: #10B981 !important;
         }
+        html.theme-dark section {
+            border-color: #1F2E26 !important;
+        }
+        html.theme-dark .border-x {
+            border-color: #1F2E26 !important;
+        }
         html.theme-dark .bg-white {
-            background-color: #1E293B !important;
+            background-color: #131A17 !important;
+            color: #F3F4F6 !important;
         }
         html.theme-dark .bg-slate-50,
+        html.theme-dark .bg-gray-50,
         html.theme-dark .bg-[#F8FAFC],
-        html.theme-dark .bg-[#F9FAFB] {
-            background-color: #0F172A !important;
+        html.theme-dark .bg-[#F9FAFB],
+        html.theme-dark .bg-slate-50\/50 {
+            background-color: #0D1210 !important;
         }
         html.theme-dark .bg-slate-100 {
-            background-color: #1E293B !important;
+            background-color: #131A17 !important;
         }
-        html.theme-dark .bg-slate-200 {
-            background-color: #334155 !important;
+        html.theme-dark .bg-slate-200,
+        html.theme-dark .bg-gray-200 {
+            background-color: #1F2E26 !important;
+        }
+        html.theme-dark .chamfer-box {
+            background-color: #131A17 !important;
+            border-color: #1F2E26 !important;
         }
         html.theme-dark .text-[#111827],
         html.theme-dark .text-slate-900,
         html.theme-dark .text-slate-800,
-        html.theme-dark .text-slate-700 {
-            color: #F1F5F9 !important;
-        }
-        html.theme-dark .text-slate-600,
-        html.theme-dark .text-slate-500 {
-            color: #94A3B8 !important;
-        }
-        html.theme-dark .bg-gray-50 {
-            background-color: #0F172A !important;
-        }
-        html.theme-dark .bg-gray-200 {
-            background-color: #334155 !important;
-        }
-        html.theme-dark .border-gray-100,
-        html.theme-dark .border-gray-200 {
-            border-color: #334155 !important;
-        }
+        html.theme-dark .text-slate-700,
         html.theme-dark .text-gray-900,
         html.theme-dark .text-gray-800,
         html.theme-dark .text-gray-700 {
-            color: #F1F5F9 !important;
+            color: #F3F4F6 !important;
         }
+        html.theme-dark .text-[#4B5563],
+        html.theme-dark .text-slate-600,
+        html.theme-dark .text-slate-500,
+        html.theme-dark .text-gray-600,
         html.theme-dark .text-gray-500,
         html.theme-dark .text-gray-400 {
-            color: #94A3B8 !important;
+            color: #9CA3AF !important;
         }
         html.theme-dark .border-slate-200,
         html.theme-dark .border-slate-200\/60,
-        html.theme-dark .border-slate-300 {
-            border-color: #334155 !important;
+        html.theme-dark .border-slate-300,
+        html.theme-dark .border-gray-100,
+        html.theme-dark .border-gray-200,
+        html.theme-dark .border-gray-300,
+        html.theme-dark .border-[#1D5D3B]\/20,
+        html.theme-dark .border-[#1D5D3B]\/30,
+        html.theme-dark .border-[#1D5D3B]\/40,
+        html.theme-dark .border-[#1D5D3B] {
+            border-color: #1F2E26 !important;
         }
         html.theme-dark input,
         html.theme-dark select,
         html.theme-dark textarea {
-            background-color: #0F172A !important;
-            color: #F1F5F9 !important;
-            border-color: #334155 !important;
+            background-color: #0D1210 !important;
+            color: #F3F4F6 !important;
+            border-color: #1F2E26 !important;
         }
         html.theme-dark footer {
-            background-color: #0B1120 !important;
+            background-color: #070908 !important;
+            border-color: #1F2E26 !important;
         }
         html.theme-dark #settingsDropdown {
-            background-color: #1E293B !important;
-            border-color: #10B981 !important;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5) !important;
+            background-color: #131A17 !important;
+            border-color: #1D5D3B !important;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.8), 0 8px 10px -6px rgba(0, 0, 0, 0.8) !important;
         }
         html.theme-dark #settingsDropdown .border-b {
-            border-color: #334155 !important;
+            border-color: #1F2E26 !important;
+        }
+
+        /* Preloader Keyframes */
+        @keyframes muvioBreathe {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 25px rgba(29, 93, 59, 0.4);
+            }
+            50% {
+                transform: scale(1.06);
+                box-shadow: 0 0 45px rgba(16, 185, 129, 0.7);
+            }
+        }
+        @keyframes muvioProgress {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        .animate-muvio-breathe {
+            animation: muvioBreathe 2s ease-in-out infinite;
+        }
+        .animate-muvio-progress {
+            animation: muvioProgress 1.4s ease-in-out infinite;
         }
     </style>
 
@@ -196,6 +229,25 @@
 
 <body
     class="bg-[#F9FAFB] text-[#111827] font-sans antialiased selection:bg-[#1D5D3B] selection:text-white relative min-h-screen">
+
+    <!-- ==================== ПРЕЛОАДЕР MUVIO ==================== -->
+    <div id="page-preloader" class="fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-[#0A0D0C]/95 backdrop-blur-md transition-opacity duration-300">
+        <div class="relative flex flex-col items-center">
+            <!-- Glowing Breathing M -->
+            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-[#1D5D3B] to-[#10B981]/80 p-0.5 shadow-[0_0_35px_rgba(29,93,59,0.6)] animate-muvio-breathe flex items-center justify-center">
+                <div class="w-full h-full bg-[#0A0D0C] rounded-2xl flex items-center justify-center">
+                    <span class="font-brand font-black text-3xl sm:text-4xl text-[#10B981] tracking-wider drop-shadow-[0_0_12px_rgba(16,185,129,0.8)]">M</span>
+                </div>
+            </div>
+            <div class="mt-4 font-brand font-bold text-xs uppercase tracking-[0.25em] text-[#9CA3AF]">
+                MUVIO
+            </div>
+            <!-- Neon emerald progress line -->
+            <div class="w-28 h-1 bg-[#1F2E26] rounded-full overflow-hidden mt-3">
+                <div class="h-full bg-gradient-to-r from-[#1D5D3B] via-[#10B981] to-[#1D5D3B] rounded-full animate-muvio-progress"></div>
+            </div>
+        </div>
+    </div>
 
     <!-- ==================== АРХІТЕКТУРНІ НАПРЯМНІ ТА МАРКУВАННЯ ПО БОКАХ (Polestar Aesthetic) ==================== -->
     <div class="fixed inset-y-0 left-0 right-0 pointer-events-none max-w-7xl mx-auto z-40 hidden xl:block">
@@ -626,39 +678,39 @@
                                 <span id="rentalStatusBadge"
                                     class="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-100 text-emerald-800 font-brand font-bold text-xs uppercase tracking-wider chamfer-badge">
                                     <span class="w-2 h-2 bg-[#10B981] rounded-full pulse-emerald"></span>
-                                    <span id="rentalStatusText">АКТИВНА ОРЕНДА</span>
+                                    <span id="rentalStatusText" data-i18n="card_active_status">АКТИВНА ОРЕНДА</span>
                                 </span>
                             </div>
 
                             <!-- Номер рами / ID та Договір -->
                             <div class="text-xs sm:text-sm text-gray-500 font-mono flex flex-wrap items-center gap-x-2">
-                                <span>Номер рами / ID: <span id="rentalPlateNumber" class="text-gray-900 font-bold">F606-OD-001</span></span>
+                                <span><span data-i18n="lbl_frame_id">Номер рами / ID:</span> <span id="rentalPlateNumber" class="text-gray-900 font-bold">F606-OD-001</span></span>
                                 <span class="text-gray-300">|</span>
-                                <span>Договір: <span id="rentalContractNumber" class="font-semibold text-gray-700">№1409 від 14.09.2026</span></span>
+                                <span><span data-i18n="lbl_contract">Договір:</span> <span id="rentalContractNumber" class="font-semibold text-gray-700">№1409 від 14.09.2026</span></span>
                             </div>
 
                             <!-- Сітка параметрів (2x2) -->
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 bg-gray-50 p-4 rounded-xl border border-gray-200 text-xs sm:text-sm">
                                 <div>
-                                    <span class="text-gray-500 block text-xs mb-0.5">Діє до:</span>
+                                    <span class="text-gray-500 block text-xs mb-0.5" data-i18n="lbl_valid_until">Діє до:</span>
                                     <span id="rentalEndDate" class="font-brand font-bold text-sm text-gray-900">
                                         2026-09-20 23:59 (До кінця оренди: 6 дн. 21 год.)
                                     </span>
                                 </div>
                                 <div>
-                                    <span class="text-gray-500 block text-xs mb-0.5">Тариф / До сплати:</span>
+                                    <span class="text-gray-500 block text-xs mb-0.5" data-i18n="lbl_rate_topay">Тариф / До сплати:</span>
                                     <span id="rentalRate" class="font-brand font-bold text-sm text-[#1D5D3B]">
                                         2 200.00 грн / тиждень
                                     </span>
                                 </div>
                                 <div>
-                                    <span class="text-gray-500 block text-xs mb-0.5">Бонусний баланс:</span>
+                                    <span class="text-gray-500 block text-xs mb-0.5" data-i18n="lbl_bonus_bal">Бонусний баланс:</span>
                                     <span id="rentalBonusBalance" class="font-brand font-bold text-sm text-emerald-700">
                                         0.00 грн
                                     </span>
                                 </div>
                                 <div>
-                                    <span class="text-gray-500 block text-xs mb-0.5">Сервісний хаб:</span>
+                                    <span class="text-gray-500 block text-xs mb-0.5" data-i18n="lbl_service_hub">Сервісний хаб:</span>
                                     <span id="rentalServiceHub" class="font-brand font-bold text-sm text-gray-800">
                                         Одеса, вул. Приморська, 22
                                     </span>
@@ -673,7 +725,7 @@
                         <div class="flex flex-wrap justify-between items-center gap-2 text-xs font-brand uppercase tracking-wider">
                             <span class="text-gray-700 font-bold flex items-center gap-1.5">
                                 <i data-lucide="clock" class="w-4 h-4 text-[#1D5D3B]"></i>
-                                <span>ШКАЛА РОЗРАХУНКОВОГО ПЕРІОДУ</span>
+                                <span data-i18n="lbl_timeline">ШКАЛА РОЗРАХУНКОВОГО ПЕРІОДУ</span>
                             </span>
                             <span id="rentalPeriodScaleText" class="text-[#1D5D3B] font-bold font-mono text-xs sm:text-sm">
                                 ОПЛАЧЕНО ДО 2026-09-20 (ЗАЛИШИЛОСЬ: 6 ДН. 21 ГОД.)
@@ -686,9 +738,9 @@
                             </div>
                         </div>
                         <div class="flex justify-between text-[11px] font-mono text-gray-400 px-0.5">
-                            <span>Початок періоду</span>
-                            <span>Екватор тижня</span>
-                            <span class="text-[#1D5D3B] font-bold">Оплачено</span>
+                            <span data-i18n="lbl_timeline_start">Початок періоду</span>
+                            <span data-i18n="lbl_timeline_mid">Екватор тижня</span>
+                            <span class="text-[#1D5D3B] font-bold" data-i18n="lbl_timeline_paid">Оплачено</span>
                         </div>
                     </div>
 
@@ -697,17 +749,17 @@
                         <button type="button" onclick="showPaymentModal('rent')"
                             class="w-full bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs sm:text-sm uppercase py-3 px-4 rounded-lg shadow-sm hover:opacity-95 flex items-center justify-center gap-2 transition-all">
                             <i data-lucide="credit-card" class="w-4 h-4 shrink-0"></i>
-                            <span>ОПЛАТА ОРЕНДИ</span>
+                            <span data-i18n="btn_pay_rent">ОПЛАТА ОРЕНДИ</span>
                         </button>
                         <button type="button" onclick="handleBuyoutRequest()"
                             class="w-full bg-white hover:bg-emerald-50 text-[#1D5D3B] border-2 border-[#1D5D3B] font-brand font-bold text-xs sm:text-sm uppercase py-3 px-4 rounded-lg shadow-sm flex items-center justify-center gap-2 transition-all">
                             <i data-lucide="award" class="w-4 h-4 shrink-0"></i>
-                            <span>ПОДАТИ ЗАЯВКУ НА ВИКУП</span>
+                            <span data-i18n="btn_buyout_req">ПОДАТИ ЗАЯВКУ НА ВИКУП</span>
                         </button>
                         <a href="https://t.me/muviobot?start=sos" target="_blank" rel="noopener noreferrer"
                             class="w-full bg-red-50 hover:bg-red-100 text-red-700 border border-red-300 font-brand font-bold text-xs sm:text-sm uppercase py-3 px-4 rounded-lg shadow-sm flex items-center justify-center gap-2 transition-all">
                             <i data-lucide="alert-triangle" class="w-4 h-4 shrink-0 text-red-600"></i>
-                            <span>ПОВІДОМИТИ ПРО ПОЛОМКУ</span>
+                            <span data-i18n="btn_report_issue">ПОВІДОМИТИ ПРО ПОЛОМКУ</span>
                         </a>
                     </div>
                 </div>
@@ -790,15 +842,15 @@
             <div class="bg-white border-2 border-[#1D5D3B] p-6 sm:p-8 chamfer-box shadow-md">
                 <!-- Заголовки вкладок -->
                 <div class="flex flex-wrap gap-2.5 border-b-2 border-slate-200 pb-4">
-                    <button type="button" id="tabBtnPayments" onclick="switchCabinetTab('payments')"
+                    <button type="button" id="tabBtnPayments" onclick="switchCabinetTab('payments')" data-i18n="tab_payments"
                         class="chamfer-badge px-5 py-2.5 font-brand font-semibold text-sm sm:text-[15px] uppercase tracking-wider bg-[#1D5D3B] text-white transition-all leading-normal">
                         💳 ІСТОРІЯ ПЛАТЕЖІВ
                     </button>
-                    <button type="button" id="tabBtnRepairs" onclick="switchCabinetTab('repairs')"
+                    <button type="button" id="tabBtnRepairs" onclick="switchCabinetTab('repairs')" data-i18n="tab_repairs"
                         class="chamfer-badge px-5 py-2.5 font-brand font-semibold text-sm sm:text-[15px] uppercase tracking-wider bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all leading-normal">
                         🛠 ІСТОРІЯ ТО ТА РЕМОНТІВ
                     </button>
-                    <button type="button" id="tabBtnService" onclick="switchCabinetTab('service')"
+                    <button type="button" id="tabBtnService" onclick="switchCabinetTab('service')" data-i18n="tab_service"
                         class="chamfer-badge px-5 py-2.5 font-brand font-semibold text-sm sm:text-[15px] uppercase tracking-wider bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all leading-normal">
                         📍 СЕРВІСНИЙ ХАБ ТА SOS
                     </button>
@@ -2188,7 +2240,24 @@
                 reg_login_label: "ЛОГІН",
                 reg_phone_label: "НОМЕР ТЕЛЕФОНУ",
                 reg_pass_label: "ПАРОЛЬ",
-                reg_btn_text: "ЗАРЕЄСТРУВАТИСЯ"
+                reg_btn_text: "ЗАРЕЄСТРУВАТИСЯ",
+                card_active_status: "АКТИВНА ОРЕНДА",
+                lbl_frame_id: "Номер рами / ID:",
+                lbl_contract: "Договір:",
+                lbl_valid_until: "Діє до:",
+                lbl_rate_topay: "Тариф / До сплати:",
+                lbl_bonus_bal: "Бонусний баланс:",
+                lbl_service_hub: "Сервісний хаб:",
+                lbl_timeline: "ШКАЛА РОЗРАХУНКОВОГО ПЕРІОДУ",
+                lbl_timeline_start: "Початок періоду",
+                lbl_timeline_mid: "Екватор тижня",
+                lbl_timeline_paid: "Оплачено",
+                btn_pay_rent: "ОПЛАТА ОРЕНДИ",
+                btn_buyout_req: "ПОДАТИ ЗАЯВКУ НА ВИКУП",
+                btn_report_issue: "ПОВІДОМИТИ ПРО ПОЛОМКУ",
+                tab_payments: "💳 ІСТОРІЯ ПЛАТЕЖІВ",
+                tab_repairs: "🛠 ІСТОРІЯ ТО ТА РЕМОНТІВ",
+                tab_service: "📍 СЕРВІСНИЙ ХАБ ТА SOS"
             },
             en: {
                 nav_catalog: "CATALOG",
@@ -2226,7 +2295,24 @@
                 reg_login_label: "LOGIN",
                 reg_phone_label: "PHONE NUMBER",
                 reg_pass_label: "PASSWORD",
-                reg_btn_text: "CREATE ACCOUNT"
+                reg_btn_text: "CREATE ACCOUNT",
+                card_active_status: "ACTIVE RENTAL",
+                lbl_frame_id: "Frame ID:",
+                lbl_contract: "Contract:",
+                lbl_valid_until: "Valid until:",
+                lbl_rate_topay: "Rate / To pay:",
+                lbl_bonus_bal: "Bonus balance:",
+                lbl_service_hub: "Service hub:",
+                lbl_timeline: "BILLING CYCLE TIMELINE",
+                lbl_timeline_start: "Cycle start",
+                lbl_timeline_mid: "Midweek",
+                lbl_timeline_paid: "Paid",
+                btn_pay_rent: "PAY RENT",
+                btn_buyout_req: "APPLY FOR BUYOUT",
+                btn_report_issue: "REPORT BREAKDOWN",
+                tab_payments: "💳 PAYMENT HISTORY",
+                tab_repairs: "🛠 MAINTENANCE & REPAIRS",
+                tab_service: "📍 SERVICE HUB & SOS"
             }
         };
 
@@ -2487,6 +2573,35 @@
             }
         };
 
+        // Прелоадер
+        function hidePreloader() {
+            const p = document.getElementById('page-preloader');
+            if (p) {
+                p.classList.add('opacity-0', 'pointer-events-none');
+                setTimeout(() => {
+                    if (p && p.parentNode) p.parentNode.removeChild(p);
+                }, 350);
+            }
+        }
+        if (document.readyState === 'complete') {
+            hidePreloader();
+        } else {
+            window.addEventListener('load', hidePreloader);
+            setTimeout(hidePreloader, 1500);
+        }
+
+        document.addEventListener('click', (e) => {
+            const link = e.target.closest('a');
+            if (!link) return;
+            const href = link.getAttribute('href');
+            if (href && !href.startsWith('#') && !href.startsWith('javascript:') && !href.startsWith('tel:') && !href.startsWith('mailto:') && !href.startsWith('http') && !link.target) {
+                const p = document.getElementById('page-preloader');
+                if (p) {
+                    p.classList.remove('opacity-0', 'pointer-events-none');
+                }
+            }
+        });
+
         // Ініціалізація сторінки
         document.addEventListener('DOMContentLoaded', () => {
             if (window.lucide) window.lucide.createIcons();
@@ -2559,6 +2674,9 @@
                     link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
                 });
             }
+
+            // Приховуємо прелоадер
+            setTimeout(hidePreloader, 200);
         });
     </script>
 </body>

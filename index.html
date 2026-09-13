@@ -98,75 +98,131 @@
             background: #ffffff !important;
         }
 
-        /* ==================== THEME & DARK MODE ==================== */
+        /* ==================== THEME & DARK MODE (BLACKOUT PREMIER) ==================== */
         html.theme-dark {
             color-scheme: dark;
+            background-color: #0A0D0C !important;
         }
         html.theme-dark body {
-            background-color: #0F172A !important;
-            color: #E2E8F0 !important;
+            background-color: #0A0D0C !important;
+            color: #F3F4F6 !important;
         }
         html.theme-dark header,
         html.theme-dark #mobileMenu {
-            background-color: #111827 !important;
-            border-color: #1E293B !important;
+            background-color: rgba(15, 21, 18, 0.95) !important;
+            border-color: #1F2E26 !important;
         }
         html.theme-dark nav a,
         html.theme-dark .mobile-nav-link,
         html.theme-dark #header-user-name,
         html.theme-dark .settings-btn-label {
-            color: #E2E8F0 !important;
+            color: #F3F4F6 !important;
         }
         html.theme-dark nav a:hover,
         html.theme-dark .mobile-nav-link:hover {
             color: #10B981 !important;
         }
+        html.theme-dark section {
+            border-color: #1F2E26 !important;
+        }
+        html.theme-dark .border-x {
+            border-color: #1F2E26 !important;
+        }
         html.theme-dark .bg-white {
-            background-color: #1E293B !important;
+            background-color: #131A17 !important;
+            color: #F3F4F6 !important;
         }
         html.theme-dark .bg-slate-50,
+        html.theme-dark .bg-gray-50,
         html.theme-dark .bg-[#F8FAFC],
-        html.theme-dark .bg-[#F9FAFB] {
-            background-color: #0F172A !important;
+        html.theme-dark .bg-[#F9FAFB],
+        html.theme-dark .bg-slate-50\/50 {
+            background-color: #0D1210 !important;
         }
         html.theme-dark .bg-slate-100 {
-            background-color: #1E293B !important;
+            background-color: #131A17 !important;
         }
-        html.theme-dark .bg-slate-200 {
-            background-color: #334155 !important;
+        html.theme-dark .bg-slate-200,
+        html.theme-dark .bg-gray-200 {
+            background-color: #1F2E26 !important;
+        }
+        html.theme-dark .chamfer-box {
+            background-color: #131A17 !important;
+            border-color: #1F2E26 !important;
+        }
+        html.theme-dark .tech-card {
+            background-color: #131A17 !important;
+            border-color: #1F2E26 !important;
         }
         html.theme-dark .text-[#111827],
         html.theme-dark .text-slate-900,
         html.theme-dark .text-slate-800,
-        html.theme-dark .text-slate-700 {
-            color: #F1F5F9 !important;
+        html.theme-dark .text-slate-700,
+        html.theme-dark .text-gray-900,
+        html.theme-dark .text-gray-800,
+        html.theme-dark .text-gray-700 {
+            color: #F3F4F6 !important;
         }
+        html.theme-dark .text-[#4B5563],
         html.theme-dark .text-slate-600,
-        html.theme-dark .text-slate-500 {
-            color: #94A3B8 !important;
+        html.theme-dark .text-slate-500,
+        html.theme-dark .text-gray-600,
+        html.theme-dark .text-gray-500,
+        html.theme-dark .text-gray-400 {
+            color: #9CA3AF !important;
         }
         html.theme-dark .border-slate-200,
         html.theme-dark .border-slate-200\/60,
-        html.theme-dark .border-slate-300 {
-            border-color: #334155 !important;
+        html.theme-dark .border-slate-300,
+        html.theme-dark .border-gray-100,
+        html.theme-dark .border-gray-200,
+        html.theme-dark .border-gray-300,
+        html.theme-dark .border-[#1D5D3B]\/20,
+        html.theme-dark .border-[#1D5D3B]\/30,
+        html.theme-dark .border-[#1D5D3B]\/40,
+        html.theme-dark .border-[#1D5D3B] {
+            border-color: #1F2E26 !important;
         }
         html.theme-dark input,
         html.theme-dark select,
         html.theme-dark textarea {
-            background-color: #0F172A !important;
-            color: #F1F5F9 !important;
-            border-color: #334155 !important;
+            background-color: #0D1210 !important;
+            color: #F3F4F6 !important;
+            border-color: #1F2E26 !important;
         }
         html.theme-dark footer {
-            background-color: #0B1120 !important;
+            background-color: #070908 !important;
+            border-color: #1F2E26 !important;
         }
         html.theme-dark #settingsDropdown {
-            background-color: #1E293B !important;
-            border-color: #10B981 !important;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5) !important;
+            background-color: #131A17 !important;
+            border-color: #1D5D3B !important;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.8), 0 8px 10px -6px rgba(0, 0, 0, 0.8) !important;
         }
         html.theme-dark #settingsDropdown .border-b {
-            border-color: #334155 !important;
+            border-color: #1F2E26 !important;
+        }
+
+        /* Preloader Keyframes */
+        @keyframes muvioBreathe {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 25px rgba(29, 93, 59, 0.4);
+            }
+            50% {
+                transform: scale(1.06);
+                box-shadow: 0 0 45px rgba(16, 185, 129, 0.7);
+            }
+        }
+        @keyframes muvioProgress {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        .animate-muvio-breathe {
+            animation: muvioBreathe 2s ease-in-out infinite;
+        }
+        .animate-muvio-progress {
+            animation: muvioProgress 1.4s ease-in-out infinite;
         }
     </style>
 
@@ -188,6 +244,26 @@
 
 <body
     class="bg-[#F9FAFB] text-[#111827] font-sans antialiased selection:bg-[#1D5D3B] selection:text-white relative min-h-screen">
+
+    <!-- ==================== ПРЕЛОАДЕР MUVIO ==================== -->
+    <div id="page-preloader" class="fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-[#0A0D0C]/95 backdrop-blur-md transition-opacity duration-300">
+        <div class="relative flex flex-col items-center">
+            <!-- Glowing Breathing M -->
+            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-[#1D5D3B] to-[#10B981]/80 p-0.5 shadow-[0_0_35px_rgba(29,93,59,0.6)] animate-muvio-breathe flex items-center justify-center">
+                <div class="w-full h-full bg-[#0A0D0C] rounded-2xl flex items-center justify-center">
+                    <span class="font-brand font-black text-3xl sm:text-4xl text-[#10B981] tracking-wider drop-shadow-[0_0_12px_rgba(16,185,129,0.8)]">M</span>
+                </div>
+            </div>
+            <div class="mt-4 font-brand font-bold text-xs uppercase tracking-[0.25em] text-[#9CA3AF]">
+                MUVIO
+            </div>
+            <!-- Neon emerald progress line -->
+            <div class="w-28 h-1 bg-[#1F2E26] rounded-full overflow-hidden mt-3">
+                <div class="h-full bg-gradient-to-r from-[#1D5D3B] via-[#10B981] to-[#1D5D3B] rounded-full animate-muvio-progress"></div>
+            </div>
+        </div>
+    </div>
+
     <!-- ==================== АРХІТЕКТУРНІ НАПРЯМНІ ТА МАРКУВАННЯ ПО БОКАХ (Polestar Aesthetic) ==================== -->
     <div class="fixed inset-y-0 left-0 right-0 pointer-events-none max-w-7xl mx-auto z-40 hidden xl:block">
         <!-- Ліва вертикальна лінія розмітки -->
@@ -418,20 +494,20 @@
                 <div
                     class="inline-flex items-center gap-2 px-4 py-1.5 bg-[#1D5D3B]/10 border border-[#1D5D3B] chamfer-badge">
                     <span class="w-2 h-2 bg-[#1D5D3B]"></span>
-                    <span class="font-brand font-bold text-xs md:text-sm tracking-widest text-[#1D5D3B] uppercase">MUVIO
+                    <span class="font-brand font-bold text-xs md:text-sm tracking-widest text-[#1D5D3B] uppercase" data-i18n="hero_tag">MUVIO
                         — ТВОЄ ELECTRO CITY</span>
                 </div>
 
                 <!-- Заголовок -->
                 <h1
-                    class="font-brand font-bold text-2xl sm:text-4xl md:text-5xl lg:text-5xl uppercase tracking-tight text-[#111827] leading-tight">
+                    class="font-brand font-bold text-2xl sm:text-4xl md:text-5xl lg:text-5xl uppercase tracking-tight text-[#111827] leading-tight" data-i18n="hero_title">
                     ОРЕНДА ТА ВИКУП<br>
                     КУР'ЄРСЬКОГО ТА ТУРИСТИЧНОГО<br>
                     ЕЛЕКТРОТРАНСПОРТУ В ОДЕСІ
                 </h1>
 
                 <!-- Підзаголовок (Сухі факти) -->
-                <p class="font-sans text-base sm:text-xl text-[#4B5563] max-w-3xl mx-auto leading-relaxed">
+                <p class="font-sans text-base sm:text-xl text-[#4B5563] max-w-3xl mx-auto leading-relaxed" data-i18n="hero_subtitle">
                     Каталог скутерів та велосипедів у зборі з АКБ. Офіційний договір, повне планове сервісне
                     обслуговування, фіксований щотижневий платіж та прозора програма викупу (Rent-to-Own).
                 </p>
@@ -440,57 +516,57 @@
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
                     <a href="#catalog"
                         class="chamfer-btn w-full sm:w-auto bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-sm md:text-base uppercase tracking-widest px-8 py-4 border border-[#1D5D3B] flex items-center justify-center gap-3">
-                        <span>ОБРАТИ СКУТЕР</span>
+                        <span data-i18n="hero_btn_choose">ОБРАТИ СКУТЕР</span>
                         <i data-lucide="arrow-down" class="w-5 h-5"></i>
                     </a>
                     <a href="#calculator"
                         class="chamfer-btn w-full sm:w-auto bg-white hover:bg-slate-50 text-[#1D5D3B] font-brand font-bold text-sm md:text-base uppercase tracking-widest px-8 py-4 border-2 border-[#1D5D3B] flex items-center justify-center gap-3">
                         <i data-lucide="calculator" class="w-5 h-5"></i>
-                        <span>КАЛЬКУЛЯТОР ОРЕНДИ</span>
+                        <span data-i18n="hero_btn_calc">КАЛЬКУЛЯТОР ОРЕНДИ</span>
                     </a>
                 </div>
 
                 <!-- Плашки характеристик -->
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-10 text-left">
                     <div class="bg-[#F8FAFC] border-2 border-[#1D5D3B] p-4 chamfer-box flex flex-col justify-between">
-                        <div class="font-brand font-bold text-2xl text-[#1D5D3B] mb-2">ОРЕНДА</div>
+                        <div class="font-brand font-bold text-2xl text-[#1D5D3B] mb-2" data-i18n="hero_badge_rent">ОРЕНДА</div>
                         <div class="space-y-1.5">
                             <div
                                 class="flex items-baseline justify-between font-brand font-bold text-sm sm:text-base text-[#1D5D3B]">
                                 <span>ВІД 800 ГРН</span>
-                                <span class="text-xs sm:text-sm font-mono text-[#4B5563] font-semibold uppercase">/
+                                <span class="text-xs sm:text-sm font-mono text-[#4B5563] font-semibold uppercase" data-i18n="hero_per_day">/
                                     ДОБА</span>
                             </div>
                             <div
                                 class="flex items-baseline justify-between font-brand font-bold text-sm sm:text-base text-[#1D5D3B] pt-1 border-t border-[#1D5D3B]/20">
                                 <span>ВІД 1 800 ГРН</span>
-                                <span class="text-xs sm:text-sm font-mono text-[#4B5563] font-semibold uppercase">/
+                                <span class="text-xs sm:text-sm font-mono text-[#4B5563] font-semibold uppercase" data-i18n="hero_per_week">/
                                     ТИЖДЕНЬ</span>
                             </div>
                             <div
                                 class="flex items-baseline justify-between font-brand font-bold text-sm sm:text-base text-[#1D5D3B] pt-1 border-t border-[#1D5D3B]/20">
                                 <span>ВІД 6 000 ГРН</span>
-                                <span class="text-xs sm:text-sm font-mono text-[#4B5563] font-semibold uppercase">/
+                                <span class="text-xs sm:text-sm font-mono text-[#4B5563] font-semibold uppercase" data-i18n="hero_per_month">/
                                     МІСЯЦЬ</span>
                             </div>
                         </div>
                     </div>
                     <div class="bg-[#F8FAFC] border-2 border-[#1D5D3B] p-4 chamfer-box">
-                        <div class="font-brand font-bold text-lg sm:text-xl lg:text-2xl text-[#1D5D3B] leading-tight">ДО
+                        <div class="font-brand font-bold text-lg sm:text-xl lg:text-2xl text-[#1D5D3B] leading-tight" data-i18n="hero_feat_range">ДО
                             160 КМ НА ОДНОМУ ЗАРЯДІ</div>
-                        <div class="text-xs sm:text-sm text-[#4B5563] mt-1.5 leading-snug">З можливістю взяти другий
+                        <div class="text-xs sm:text-sm text-[#4B5563] mt-1.5 leading-snug" data-i18n="hero_feat_range_sub">З можливістю взяти другий
                             знімний АКБ</div>
                     </div>
                     <div class="bg-[#F8FAFC] border-2 border-[#1D5D3B] p-4 chamfer-box">
-                        <div class="font-brand font-bold text-lg sm:text-xl lg:text-2xl text-[#1D5D3B] leading-tight">
+                        <div class="font-brand font-bold text-lg sm:text-xl lg:text-2xl text-[#1D5D3B] leading-tight" data-i18n="hero_feat_address">
                             ОДЕСА, ВУЛ. ПРИМОРСЬКА, 22</div>
-                        <div class="text-xs text-[#4B5563] uppercase tracking-wider font-semibold mt-1">ПН — НД: з 11:00
+                        <div class="text-xs text-[#4B5563] uppercase tracking-wider font-semibold mt-1" data-i18n="hero_feat_address_sub">ПН — НД: з 11:00
                             до 22:00</div>
                     </div>
                     <div class="bg-[#F8FAFC] border-2 border-[#1D5D3B] p-4 chamfer-box">
-                        <div class="font-brand font-bold text-lg text-[#1D5D3B] tracking-tight leading-snug">ОНЛАЙН БОТ
+                        <div class="font-brand font-bold text-lg text-[#1D5D3B] tracking-tight leading-snug" data-i18n="hero_feat_bot">ОНЛАЙН БОТ
                             У TELEGRAM 24/7</div>
-                        <div class="text-xs text-[#4B5563] mt-1.5 leading-snug">Особистий кабінет з автоматичним
+                        <div class="text-xs text-[#4B5563] mt-1.5 leading-snug" data-i18n="hero_feat_bot_sub">Особистий кабінет з автоматичним
                             розрахунком та оплатою днів оренди і викупу
                         </div>
                     </div>
@@ -509,13 +585,13 @@
                 <div>
                     <div
                         class="inline-flex items-center gap-2 px-3 py-1 bg-[#1D5D3B]/10 border border-[#1D5D3B] chamfer-badge mb-3">
-                        <span class="font-brand font-bold text-xs tracking-wider text-[#1D5D3B] uppercase">ОФІЦІЙНИЙ
+                        <span class="font-brand font-bold text-xs tracking-wider text-[#1D5D3B] uppercase" data-i18n="cat_tag">ОФІЦІЙНИЙ
                             АВТОПАРК MUVIO</span>
                     </div>
-                    <h2 class="font-brand font-bold text-2xl sm:text-4xl uppercase tracking-tight text-[#111827]">
+                    <h2 class="font-brand font-bold text-2xl sm:text-4xl uppercase tracking-tight text-[#111827]" data-i18n="cat_title">
                         КАТАЛОГ ТЕХНІКИ В НАЯВНОСТІ
                     </h2>
-                    <p class="text-sm sm:text-base text-[#4B5563] mt-1">
+                    <p class="text-sm sm:text-base text-[#4B5563] mt-1" data-i18n="cat_desc">
                         Всі моделі укомплектовані знімним АКБ та зарядним пристроєм. Реальні тарифи оренди та повної
                         вартості викупу.
                     </p>
@@ -523,15 +599,15 @@
 
                 <!-- Фільтри -->
                 <div class="flex flex-wrap gap-2.5">
-                    <button onclick="filterCatalog('all')" id="tab-all"
+                    <button onclick="filterCatalog('all')" id="tab-all" data-i18n="filter_all"
                         class="chamfer-btn px-5 py-2.5 text-sm sm:text-[15px] font-brand font-bold uppercase tracking-wider border-2 border-[#1D5D3B] bg-[#1D5D3B] text-white transition-all leading-normal">
                         ВСІ МОДЕЛІ
                     </button>
-                    <button onclick="filterCatalog('scooter')" id="tab-scooter"
+                    <button onclick="filterCatalog('scooter')" id="tab-scooter" data-i18n="filter_scooters"
                         class="chamfer-btn px-5 py-2.5 text-sm sm:text-[15px] font-brand font-bold uppercase tracking-wider border-2 border-[#1D5D3B] bg-white text-[#111827] hover:bg-[#1D5D3B]/10 transition-all leading-normal">
                         🛵 СКУТЕРИ
                     </button>
-                    <button onclick="filterCatalog('bike')" id="tab-bike"
+                    <button onclick="filterCatalog('bike')" id="tab-bike" data-i18n="filter_bikes"
                         class="chamfer-btn px-5 py-2.5 text-sm sm:text-[15px] font-brand font-bold uppercase tracking-wider border-2 border-[#1D5D3B] bg-white text-[#111827] hover:bg-[#1D5D3B]/10 transition-all leading-normal">
                         🚲 ВЕЛОСИПЕДИ
                     </button>
@@ -1274,10 +1350,17 @@
             hasFastCharger: false
         };
 
+        let currentCatalogFilter = 'all';
+
         // Рендеринг каталогу
-        function renderCatalog(filter = 'all') {
+        function renderCatalog(filter = currentCatalogFilter) {
+            currentCatalogFilter = filter;
             const grid = document.getElementById('catalogGrid');
+            if (!grid) return;
             grid.innerHTML = '';
+
+            const settings = (typeof getSiteSettings === 'function') ? getSiteSettings() : { lang: 'ua' };
+            const isEn = (settings.lang === 'en');
 
             const filtered = FLEET.filter(item => {
                 if (filter === 'all') return true;
@@ -1290,12 +1373,38 @@
 
                 const tgRentUrl = `https://t.me/muviobot?start=rent_${item.key}`;
 
+                const typeLabel = isEn ? (item.category === 'bike' ? '🚲 E-Bike' : '🛵 E-Scooter') : item.type;
+                const lblSpeed = isEn ? 'Speed:' : 'Швидкість:';
+                const lblRange = isEn ? 'Range:' : 'Запас ходу:';
+                const lblCharging = isEn ? 'Charge:' : 'Зарядка:';
+                const lblBattery = isEn ? 'Battery:' : 'Акумулятор:';
+                const lblRent = isEn ? 'Rent:' : 'Оренда:';
+                const lblPerWeek = isEn ? '/ week' : '/ тижд.';
+                const lblMonth = isEn ? 'Month:' : 'Місяць:';
+                const lblDeposit = isEn ? 'Deposit:' : 'Застава:';
+                const lblBuyout = isEn ? 'Buyout with battery:' : 'Викуп у зборі з АКБ:';
+                const btnOrder = isEn ? 'ORDER IN TELEGRAM' : 'ЗАМОВИТИ В TELEGRAM';
+                const btnCalc = isEn ? 'CALCULATE RENT →' : 'РОЗРАХУВАТИ ОРЕНДУ →';
+                const currency = isEn ? 'UAH' : 'грн';
+
+                // Format values for English if needed
+                let dispSpeed = item.speed;
+                let dispRange = item.range;
+                let dispCharging = item.charging;
+                let dispBattery = item.battery;
+                if (isEn) {
+                    dispSpeed = dispSpeed.replace('км/год', 'km/h');
+                    dispRange = dispRange.replace('до', 'up to').replace('км', 'km');
+                    dispCharging = dispCharging.replace('годин', 'hours').replace('години', 'hours');
+                    dispBattery = dispBattery.replace('(Знімна)', '(Removable)');
+                }
+
                 card.innerHTML = `
                     <div>
                         <!-- Верхня плашка -->
                         <div class="p-4 pb-0 flex items-center justify-between">
                             <span class="font-brand font-bold text-xs px-2.5 py-1 bg-[#1D5D3B] text-white chamfer-badge uppercase">
-                                ${item.type} | ${item.voltage}
+                                ${typeLabel} | ${item.voltage}
                             </span>
                             <span class="text-[10px] font-brand font-bold text-[#1D5D3B] border border-[#1D5D3B] px-2 py-0.5 chamfer-badge uppercase tracking-wider">
                                 ${item.power}
@@ -1312,29 +1421,29 @@
                             <h3 class="font-brand font-bold text-xl uppercase text-[#111827] tracking-wide">${item.name}</h3>
                             
                             <div class="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-[#1D5D3B]/20 text-xs font-mono">
-                                <div class="text-[#4B5563]">Швидкість:</div>
-                                <div class="font-bold text-right text-[#111827]">${item.speed}</div>
-                                <div class="text-[#4B5563]">Запас ходу:</div>
-                                <div class="font-bold text-right text-[#111827]">${item.range}</div>
-                                <div class="text-[#4B5563]">Зарядка:</div>
-                                <div class="font-bold text-right text-[#111827]">${item.charging}</div>
-                                <div class="text-[#4B5563]">Акумулятор:</div>
-                                <div class="font-bold text-right text-[#111827]">${item.battery}</div>
+                                <div class="text-[#4B5563]">${lblSpeed}</div>
+                                <div class="font-bold text-right text-[#111827]">${dispSpeed}</div>
+                                <div class="text-[#4B5563]">${lblRange}</div>
+                                <div class="font-bold text-right text-[#111827]">${dispRange}</div>
+                                <div class="text-[#4B5563]">${lblCharging}</div>
+                                <div class="font-bold text-right text-[#111827]">${dispCharging}</div>
+                                <div class="text-[#4B5563]">${lblBattery}</div>
+                                <div class="font-bold text-right text-[#111827]">${dispBattery}</div>
                             </div>
 
                             <!-- Тарифи та вартість викупу в зборі -->
                             <div class="mt-4 p-3.5 bg-[#F8FAFC] border border-[#1D5D3B]/30 chamfer-box">
                                 <div class="flex items-baseline justify-between">
-                                    <span class="text-xs uppercase font-brand font-bold text-[#4B5563]">Оренда:</span>
-                                    <span class="font-brand font-bold text-xl text-[#1D5D3B]">${item.price_week.toLocaleString()} грн <span class="text-xs font-normal text-[#4B5563]">/ тижд.</span></span>
+                                    <span class="text-xs uppercase font-brand font-bold text-[#4B5563]">${lblRent}</span>
+                                    <span class="font-brand font-bold text-xl text-[#1D5D3B]">${item.price_week.toLocaleString()} ${currency} <span class="text-xs font-normal text-[#4B5563]">${lblPerWeek}</span></span>
                                 </div>
                                 <div class="flex items-center justify-between text-[11px] text-[#4B5563] mt-1 font-mono">
-                                    <span>Місяць: ${item.price_month.toLocaleString()} грн</span>
-                                    <span>Застава: ${item.deposit.toLocaleString()} грн</span>
+                                    <span>${lblMonth} ${item.price_month.toLocaleString()} ${currency}</span>
+                                    <span>${lblDeposit} ${item.deposit.toLocaleString()} ${currency}</span>
                                 </div>
                                 <div class="text-[11px] text-[#111827] font-mono font-bold mt-2 pt-2 border-t border-[#1D5D3B]/20 flex justify-between">
-                                    <span>Викуп у зборі з АКБ:</span>
-                                    <span class="text-[#1D5D3B]">${item.buyout_base_price.toLocaleString()} грн</span>
+                                    <span>${lblBuyout}</span>
+                                    <span class="text-[#1D5D3B]">${item.buyout_base_price.toLocaleString()} ${currency}</span>
                                 </div>
                             </div>
                         </div>
@@ -1345,11 +1454,11 @@
                         <a href="${tgRentUrl}" target="_blank" rel="noopener noreferrer" 
                            class="chamfer-btn w-full bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs uppercase tracking-widest py-3 px-3 flex items-center justify-center gap-2 border border-[#1D5D3B]">
                             <i data-lucide="send" class="w-4 h-4"></i>
-                            <span>ЗАМОВИТИ В TELEGRAM</span>
+                            <span>${btnOrder}</span>
                         </a>
                         <button onclick="selectModelInCalc('${item.key}')" 
                                 class="chamfer-btn w-full bg-white hover:bg-slate-50 text-[#1D5D3B] font-brand font-bold text-xs uppercase tracking-widest py-2.5 px-3 border border-[#1D5D3B] flex items-center justify-center gap-1.5">
-                            <span>РОЗРАХУВАТИ ОРЕНДУ →</span>
+                            <span>${btnCalc}</span>
                         </button>
                     </div>
                 `;
@@ -1364,8 +1473,10 @@
 
         // Фільтрація каталогу
         function filterCatalog(category) {
+            currentCatalogFilter = category;
             ['all', 'scooter', 'bike'].forEach(cat => {
                 const btn = document.getElementById(`tab-${cat}`);
+                if (!btn) return;
                 if (cat === category) {
                     btn.classList.add('bg-[#1D5D3B]', 'text-white');
                     btn.classList.remove('bg-white', 'text-[#111827]');
@@ -1820,7 +1931,28 @@
                 settings_font_label: "РОЗМІР ТЕКСТУ",
                 font_small: "90%",
                 font_std: "100%",
-                font_large: "110%"
+                font_large: "110%",
+                hero_tag: "MUVIO — ТВОЄ ELECTRO CITY",
+                hero_title: "ОРЕНДА ТА ВИКУП<br>КУР'ЄРСЬКОГО ТА ТУРИСТИЧНОГО<br>ЕЛЕКТРОТРАНСПОРТУ В ОДЕСІ",
+                hero_subtitle: "Каталог скутерів та велосипедів у зборі з АКБ. Офіційний договір, повне планове сервісне обслуговування, фіксований щотижневий платіж та прозора програма викупу (Rent-to-Own).",
+                hero_btn_choose: "ОБРАТИ СКУТЕР",
+                hero_btn_calc: "КАЛЬКУЛЯТОР ОРЕНДИ",
+                hero_badge_rent: "ОРЕНДА",
+                hero_per_day: "/ ДОБА",
+                hero_per_week: "/ ТИЖДЕНЬ",
+                hero_per_month: "/ МІСЯЦЬ",
+                hero_feat_range: "ДО 160 КМ НА ОДНОМУ ЗАРЯДІ",
+                hero_feat_range_sub: "З можливістю взяти другий знімний АКБ",
+                hero_feat_address: "ОДЕСА, ВУЛ. ПРИМОРСЬКА, 22",
+                hero_feat_address_sub: "ПН — НД: з 11:00 до 22:00",
+                hero_feat_bot: "ОНЛАЙН БОТ У TELEGRAM 24/7",
+                hero_feat_bot_sub: "Особистий кабінет з автоматичним розрахунком та оплатою днів оренди і викупу",
+                cat_tag: "ОФІЦІЙНИЙ АВТОПАРК MUVIO",
+                cat_title: "КАТАЛОГ ТЕХНІКИ В НАЯВНОСТІ",
+                cat_desc: "Всі моделі укомплектовані знімним АКБ та зарядним пристроєм. Реальні тарифи оренди та повної вартості викупу.",
+                filter_all: "ВСІ МОДЕЛІ",
+                filter_scooters: "🛵 СКУТЕРИ",
+                filter_bikes: "🚲 ВЕЛОСИПЕДИ"
             },
             en: {
                 nav_catalog: "CATALOG",
@@ -1846,7 +1978,28 @@
                 settings_font_label: "TEXT SIZE",
                 font_small: "90%",
                 font_std: "100%",
-                font_large: "110%"
+                font_large: "110%",
+                hero_tag: "MUVIO — YOUR ELECTRO CITY",
+                hero_title: "RENTAL & BUYOUT OF COMMERCIAL ELECTRIC VEHICLES IN ODESA",
+                hero_subtitle: "Catalog of scooters and e-bikes with battery pack. Official contract, full scheduled maintenance, fixed weekly payment and transparent Rent-to-Own buyout program.",
+                hero_btn_choose: "CHOOSE SCOOTER",
+                hero_btn_calc: "RENTAL CALCULATOR",
+                hero_badge_rent: "RENTAL",
+                hero_per_day: "/ DAY",
+                hero_per_week: "/ WEEK",
+                hero_per_month: "/ MONTH",
+                hero_feat_range: "UP TO 160 KM PER CHARGE",
+                hero_feat_range_sub: "Option to take a second removable battery",
+                hero_feat_address: "ODESA, 22 PRYMORSKA STR.",
+                hero_feat_address_sub: "MON — SUN: 11:00 to 22:00",
+                hero_feat_bot: "ONLINE TELEGRAM BOT 24/7",
+                hero_feat_bot_sub: "Client dashboard with automated calculation and payment of rental & buyout days",
+                cat_tag: "OFFICIAL MUVIO FLEET",
+                cat_title: "IN-STOCK FLEET CATALOG",
+                cat_desc: "All models equipped with removable battery and fast charger. Live rental rates and complete buyout terms.",
+                filter_all: "ALL MODELS",
+                filter_scooters: "🛵 SCOOTERS",
+                filter_bikes: "🚲 E-BIKES"
             }
         };
 
@@ -1974,9 +2127,17 @@
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (key && dict[key]) {
-                    el.textContent = dict[key];
+                    if (dict[key].includes('<br>') || dict[key].includes('<span')) {
+                        el.innerHTML = dict[key];
+                    } else {
+                        el.textContent = dict[key];
+                    }
                 }
             });
+
+            if (typeof renderCatalog === 'function') {
+                renderCatalog(currentCatalogFilter);
+            }
 
             updateHeaderUserName();
         }
@@ -2056,6 +2217,35 @@
         const initAuth = updateHeaderUserName;
         const renderUser = updateHeaderUserName;
 
+        // Прелоадер
+        function hidePreloader() {
+            const p = document.getElementById('page-preloader');
+            if (p) {
+                p.classList.add('opacity-0', 'pointer-events-none');
+                setTimeout(() => {
+                    if (p && p.parentNode) p.parentNode.removeChild(p);
+                }, 350);
+            }
+        }
+        if (document.readyState === 'complete') {
+            hidePreloader();
+        } else {
+            window.addEventListener('load', hidePreloader);
+            setTimeout(hidePreloader, 1500);
+        }
+
+        document.addEventListener('click', (e) => {
+            const link = e.target.closest('a');
+            if (!link) return;
+            const href = link.getAttribute('href');
+            if (href && !href.startsWith('#') && !href.startsWith('javascript:') && !href.startsWith('tel:') && !href.startsWith('mailto:') && !href.startsWith('http') && !link.target) {
+                const p = document.getElementById('page-preloader');
+                if (p) {
+                    p.classList.remove('opacity-0', 'pointer-events-none');
+                }
+            }
+        });
+
         document.addEventListener('DOMContentLoaded', () => {
             initSettingsUI();
             updateHeaderUserName();
@@ -2075,6 +2265,9 @@
                     window.lucide.createIcons();
                 }
             } catch (e) { console.error('Lucide error:', e); }
+
+            // Приховуємо прелоадер після відмальовки
+            setTimeout(hidePreloader, 200);
         });
     </script>
 </body>

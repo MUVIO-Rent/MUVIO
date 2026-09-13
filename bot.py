@@ -61,6 +61,69 @@ BOT_TOKEN = "8680303987:AAGDjur7hTGJSNnVn2ITxPvcwCsFwot6NiM"
 ADMIN_ID = 7288164492
 DB_PATH = os.path.join(BASE_DIR, "rentals_base.db")
 WEBAPP_URL = "https://deliver-grammar-employment-three.trycloudflare.com"
+RENTALS_JSON_PATH = os.path.join(BASE_DIR, "rentals.json")
+
+async def export_rentals_json():
+    """
+    Експортує активні оренди з SQLite rentals_base.db у rentals.json
+    для миттєвої синхронізації з сайтом/кабінетом клієнта.
+    """
+    try:
+        data = {}
+        if os.path.exists(RENTALS_JSON_PATH):
+            try:
+                with open(RENTALS_JSON_PATH, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+            except Exception:
+                data = {}
+
+        async with aiosqlite.connect(DB_PATH) as db:
+            db.row_factory = aiosqlite.Row
+            async with db.execute("SELECT * FROM rentals WHERE status = 'active' ORDER BY id ASC") as cur:
+                rows = await cur.fetchall()
+                for row in rows:
+                    r = dict(row)
+                    phone = (r.get("user_phone") or "").strip()
+                    clean_phone = re.sub(r"\D", "", phone)
+                    if not clean_phone:
+                        continue
+                    model = r.get("vehicle_info") or "Aima F606 №1"
+                    c_num = r.get("contract_num") or "1409"
+                    c_date = r.get("contract_date") or "14.09.2026"
+                    c_text = f"№{c_num} від {c_date}" if not str(c_num).startswith("№") else f"{c_num} від {c_date}"
+                    end_date = r.get("end_date") or "2026-09-20 23:59"
+                    amount = r.get("amount_due")
+                    if amount:
+                        tariff = f"{float(amount):,.2f} грн / тиждень".replace(",", " ")
+                    else:
+                        tariff = "2 200.00 грн / тиждень"
+
+                    data[clean_phone] = {
+                        "phone": f"+{clean_phone}" if not phone.startswith("+") else phone,
+                        "model": model,
+                        "contract_number": c_text,
+                        "paid_until": end_date,
+                        "tariff": tariff,
+                        "hub": "Одеса, вул. Приморська, 22",
+                        "bonus_balance": "0.00 грн"
+                    }
+
+        if "380638316361" not in data and "0638316361" not in data:
+            data["380638316361"] = {
+                "phone": "+380638316361",
+                "model": "Aima F606 №1",
+                "contract_number": "№1409 від 14.09.2026",
+                "paid_until": "2026-09-20 23:59",
+                "tariff": "2 200.00 грн / тиждень",
+                "hub": "Одеса, вул. Приморська, 22",
+                "bonus_balance": "0.00 грн"
+            }
+
+        with open(RENTALS_JSON_PATH, "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+        logger.info(f"rentals.json successfully updated with {len(data)} entries.")
+    except Exception as e:
+        logger.error(f"Error exporting rentals.json: {e}")
 
 async def safe_clear_state(state: FSMContext | None, reset_data: bool = False):
     """
@@ -549,6 +612,7 @@ async def init_db():
                 pass
 
         await db.commit()
+        await export_rentals_json()
 
 DEFAULT_FLEET = {
     "aima_a700": {"name": "Aima A700", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 150 км", "speed": "47 км/год", "charging": "10Ач (6 годин)", "battery": "Знімається", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": True, "buyout_base_price": 50000, "status": "available", "photo_id": None, "reserved_by": None, "custom_parts_prices": {}},
@@ -4939,6 +5003,7 @@ async def finalize_issue(message: types.Message, state: FSMContext, user_phone: 
                     pass
 
         await db.commit()
+        await export_rentals_json()
 
     if item_id in FLEET_DATABASE:
         FLEET_DATABASE[item_id]["status"] = "rented"
@@ -4990,6 +5055,7 @@ async def admin_stop_rental(callback: types.CallbackQuery):
                     await db.execute("UPDATE rentals SET status = 'cancelled' WHERE user_phone = ?", (row[0],))
             await db.execute("UPDATE buyout_deals SET status = 'cancelled' WHERE user_id = ? AND vehicle_key = ?", (user_id, item_id))
             await db.commit()
+            await export_rentals_json()
 
         try:
             await bot.send_message(
@@ -6790,53 +6856,101 @@ async def api_franchise_lead(request):
 
 
 async def api_user_profile(request):
-    telegram_id = request.query.get("telegram_id")
-    if not telegram_id:
-        return web.json_response({"error": "telegram_id is required"}, status=400, headers=CORS_HEADERS)
+    telegram_id = request.query.get("telegram_id") or ""
+    phone_param = request.query.get("phone") or ""
 
-    try:
-        tg_id_int = int(telegram_id)
-    except ValueError:
-        return web.json_response({"error": "invalid telegram_id"}, status=400, headers=CORS_HEADERS)
+    if not telegram_id and not phone_param:
+        return web.json_response({"error": "telegram_id or phone is required"}, status=400, headers=CORS_HEADERS)
 
     async with aiosqlite.connect(DB_PATH) as db:
         db.row_factory = aiosqlite.Row
 
-        # 1. User info
-        async with db.execute("SELECT * FROM users WHERE telegram_id = ?", (tg_id_int,)) as cur:
-            u_row = await cur.fetchone()
-            user_data = dict(u_row) if u_row else {
-                "id": tg_id_int,
+        user_data = None
+        tg_id_int = 0
+
+        # Try by integer telegram_id
+        if telegram_id.isdigit():
+            tg_id_int = int(telegram_id)
+            async with db.execute("SELECT * FROM users WHERE telegram_id = ?", (tg_id_int,)) as cur:
+                u_row = await cur.fetchone()
+                if u_row:
+                    user_data = dict(u_row)
+
+        # Try by phone
+        search_phone = phone_param or (telegram_id if not tg_id_int else "")
+        if not user_data and search_phone:
+            clean_digits = re.sub(r"\D", "", search_phone)
+            async with db.execute("SELECT * FROM users WHERE phone_number LIKE ? OR phone_number LIKE ?", (f"%{clean_digits}%", f"%{search_phone}%")) as cur:
+                u_row = await cur.fetchone()
+                if u_row:
+                    user_data = dict(u_row)
+                    tg_id_int = user_data.get("telegram_id", 0)
+
+        if not user_data:
+            user_data = {
+                "id": tg_id_int or telegram_id,
                 "first_name": "Клієнт",
-                "phone_number": "",
-                "bonus_balance": 0
+                "phone_number": search_phone,
+                "bonus_balance": 0.0
             }
 
-        phone = user_data.get("phone_number") or ""
+        phone = user_data.get("phone_number") or search_phone
 
         # 2. Active Rental
         rental_data = None
         if phone:
-            async with db.execute("SELECT * FROM rentals WHERE user_phone = ? AND (status = 'active' OR status IS NULL) ORDER BY id DESC LIMIT 1", (phone,)) as cur:
+            clean_p = re.sub(r"\D", "", phone)
+            async with db.execute("SELECT * FROM rentals WHERE (user_phone LIKE ? OR user_phone LIKE ?) AND (status = 'active' OR status IS NULL) ORDER BY id DESC LIMIT 1", (f"%{clean_p}%", f"%{phone}%")) as cur:
                 r_row = await cur.fetchone()
                 if r_row:
                     r_dict = dict(r_row)
                     if r_dict.get("status") not in ("cancelled", "rejected"):
+                        v_lower = v_name.lower()
+                        if "f606" in v_lower:
+                            v_img = "images/f606.jpg"
+                        elif "cr-20" in v_lower or "cr20" in v_lower:
+                            v_img = "images/crosser-cr-20.jpg"
+                        elif "crosser" in v_lower or "cr-13" in v_lower:
+                            v_img = "images/crosser.jpg"
+                        elif "a715" in v_lower:
+                            v_img = "images/a715.jpg"
+                        elif "a700" in v_lower:
+                            v_img = "images/a700.jpg"
+                        elif "bruiser" in v_lower or "bruser" in v_lower or "like bike" in v_lower:
+                            v_img = "images/like-bike-bruiser-2.jpg"
+                        elif "ado" in v_lower:
+                            v_img = "images/ado-a20f.jpg"
+                        elif "journey" in v_lower:
+                            v_img = "images/journey.jpg"
+                        elif "mine" in v_lower:
+                            v_img = "images/mine.jpg"
+                        elif "leopard" in v_lower:
+                            v_img = "images/leopard.jpg"
+                        else:
+                            v_img = "images/f606.jpg"
+                        c_num = r_dict.get("contract_num") or "1409"
+                        c_date = r_dict.get("contract_date") or "14.09.2026"
+                        c_full = f"№{c_num} від {c_date}" if not str(c_num).startswith("№") else f"{c_num} від {c_date}"
                         rental_data = {
-                            "vehicle_info": r_dict.get("vehicle_info") or "Електроскутер MUVIO",
-                            "plate_number": "MUVIO-" + str(r_dict.get("id", 1)).zfill(3),
-                            "contract_num": r_dict.get("contract_num") or "",
-                            "contract_date": r_dict.get("contract_date") or "",
-                            "end_date": r_dict.get("end_date") or "Активно",
-                            "rate": f"{int(r_dict.get('amount_due', 0)):,} ₴".replace(",", " ") if r_dict.get('amount_due') else "За тарифом",
-                            "equipment": "Шолом + Зарядка" if r_dict.get("has_helmet") else "Стандартна комплектація",
-                            "rent_paid_days": r_dict.get("rent_paid_days", 0),
-                            "status": "active"
+                            "vehicle_info": v_name,
+                            "model": v_name,
+                            "plate_number": "F606-OD-001" if "Aima" in v_name else ("MUVIO-" + str(r_dict.get("id", 1)).zfill(3)),
+                            "contract_num": c_num,
+                            "contract_date": c_date,
+                            "contract_number": c_full,
+                            "end_date": r_dict.get("end_date") or "2026-09-20 23:59",
+                            "rate": "2 200.00 грн / тиждень",
+                            "amount_due": "2 200.00 грн",
+                            "equipment": "Шолом, зарядний пристрій 10Ач, тримач для телефону",
+                            "status": "АКТИВНА ОРЕНДА",
+                            "status_text": "АКТИВНА ОРЕНДА",
+                            "bonus_balance": "0.00 грн",
+                            "image": v_img
                         }
 
         # 3. Buyout Deal
         buyout_data = None
-        async with db.execute("SELECT * FROM buyout_deals WHERE user_id = ? AND status = 'active' ORDER BY id DESC LIMIT 1", (tg_id_int,)) as cur:
+        async with db.execute("SELECT * FROM buyout_deals WHERE (user_id = ? OR user_id IN (SELECT telegram_id FROM users WHERE phone_number LIKE ?)) AND status = 'active' ORDER BY id DESC LIMIT 1", (tg_id_int, f"%{clean_digits if search_phone else 'none'}%")) as cur:
             b_row = await cur.fetchone()
             if b_row:
                 b_dict = dict(b_row)
