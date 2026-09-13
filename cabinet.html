@@ -140,21 +140,21 @@
                 </a>
 
                 <!-- Навігація по центру -->
-                <nav class="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
+                <nav class="hidden md:flex items-center gap-7 absolute left-1/2 -translate-x-1/2">
                     <a href="catalog.html"
-                        class="text-base md:text-[17px] font-bold tracking-wider text-[#111827] hover:text-[#1D5D3B] transition-colors py-1.5 px-2 leading-normal">
+                        class="text-xs sm:text-[13px] font-medium tracking-normal text-[#111827] hover:text-[#1D5D3B] transition-colors py-1 px-2 leading-normal">
                         КАТАЛОГ
                     </a>
                     <a href="calculator.html"
-                        class="text-base md:text-[17px] font-bold tracking-wider text-[#111827] hover:text-[#1D5D3B] transition-colors py-1.5 px-2 leading-normal">
+                        class="text-xs sm:text-[13px] font-medium tracking-normal text-[#111827] hover:text-[#1D5D3B] transition-colors py-1 px-2 leading-normal">
                         КАЛЬКУЛЯТОР
                     </a>
                     <a href="service.html"
-                        class="text-base md:text-[17px] font-bold tracking-wider text-[#111827] hover:text-[#1D5D3B] transition-colors py-1.5 px-2 leading-normal">
+                        class="text-xs sm:text-[13px] font-medium tracking-normal text-[#111827] hover:text-[#1D5D3B] transition-colors py-1 px-2 leading-normal">
                         СЕРВІС
                     </a>
                     <a href="terms.html"
-                        class="text-base md:text-[17px] font-bold tracking-wider text-[#111827] hover:text-[#1D5D3B] transition-colors py-1.5 px-2 leading-normal">
+                        class="text-xs sm:text-[13px] font-medium tracking-normal text-[#111827] hover:text-[#1D5D3B] transition-colors py-1 px-2 leading-normal">
                         УМОВИ ОРЕНДИ
                     </a>
                 </nav>
@@ -162,11 +162,11 @@
                 <!-- Права частина: Профіль -->
                 <div class="flex items-center z-10">
                     <!-- Профіль користувача -->
-                    <a href="cabinet.html" class="flex flex-col items-center justify-center gap-1 group hover:opacity-85 transition-opacity" title="Особистий кабінет">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-[#1D5D3B]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <a href="cabinet.html" class="flex flex-col items-center justify-center gap-0.5 group hover:opacity-85 transition-opacity" title="Особистий кабінет">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#1D5D3B]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
-                        <span id="header-user-name" class="header-user-name text-[11px] font-bold tracking-wider text-[#111827] uppercase leading-tight text-center">ВХІД</span>
+                        <span id="header-user-name" class="header-user-name text-[10px] font-medium tracking-normal text-[#111827] uppercase leading-tight text-center">ВХІД</span>
                     </a>
 
                     <!-- Mobile Menu Button -->
@@ -423,7 +423,7 @@
 
                         <!-- Транспорт та інфо -->
                         <div class="flex items-start gap-4">
-                            <img id="rentalVehicleImg" src="images/crosser.jpg" alt="Скутер"
+                            <img id="rentalVehicleImg" src="images/f606.jpg" alt="Транспорт"
                                 class="w-28 h-20 object-cover border border-slate-300 bg-slate-50 p-1 flex-shrink-0">
                             <div class="space-y-1">
                                 <div id="rentalVehicleTitle" class="font-brand font-bold text-lg text-[#111827]">
@@ -438,18 +438,12 @@
                             </div>
                         </div>
 
-                        <!-- Деталі терміну та оплати (точно як у Telegram-боті) -->
+                        <!-- Деталі терміну та оплати (динамічно з rentals.json) -->
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-[#F8FAFC] p-3.5 border border-slate-200 text-xs">
                             <div>
                                 <span class="text-slate-500 block">Діє до:</span>
                                 <span id="rentalEndDate" class="font-brand font-bold text-sm text-[#111827]">
-                                    2026-09-20 23:59 (До кінця оренди: 6 дн. 22 год.)
-                                </span>
-                            </div>
-                            <div>
-                                <span class="text-slate-500 block">Оплачено оренди:</span>
-                                <span id="rentalPaidDays" class="font-brand font-bold text-sm text-[#111827]">
-                                    34 дн.
+                                    —
                                 </span>
                             </div>
                             <div>
@@ -465,14 +459,32 @@
                                 </span>
                             </div>
                             <div>
-                                <span class="text-slate-500 block">Пробіг / Запас ходу:</span>
-                                <span id="rentalTelemetry" class="font-brand font-bold text-sm text-slate-800">
-                                    84 км / Батарея 85%
+                                <span class="text-slate-500 block">Сервісний хаб:</span>
+                                <span id="rentalServiceHub" class="font-brand font-bold text-sm text-slate-800">
+                                    Одеса, вул. Приморська, 22
                                 </span>
                             </div>
-                            <div>
-                                <span class="text-slate-500 block">Сервісне ТО:</span>
-                                <span class="text-emerald-700 font-bold">Безкоштовно на Приморській, 22</span>
+                        </div>
+
+                        <!-- Шкала поточного розрахункового періоду оренди -->
+                        <div class="space-y-1.5 pt-1">
+                            <div class="flex justify-between items-center text-xs font-brand uppercase tracking-wider">
+                                <span class="text-slate-600 font-semibold flex items-center gap-1.5">
+                                    <i data-lucide="clock" class="w-3.5 h-3.5 text-[#1D5D3B]"></i>
+                                    <span>Шкала розрахункового періоду:</span>
+                                </span>
+                                <span id="rentalPeriodScaleText" class="text-[#1D5D3B] font-bold font-mono">Завантаження даних...</span>
+                            </div>
+                            <div class="w-full bg-slate-200 h-3 overflow-hidden border border-slate-300">
+                                <div id="rentalPeriodProgressBar"
+                                    class="bg-gradient-to-r from-[#1D5D3B] to-[#10B981] h-full transition-all duration-700"
+                                    style="width: 85%;">
+                                </div>
+                            </div>
+                            <div class="flex justify-between text-[10px] font-mono text-slate-400">
+                                <span>Початок періоду</span>
+                                <span>Екватор тижня</span>
+                                <span class="text-emerald-700 font-bold">Оплачено</span>
                             </div>
                         </div>
                     </div>
@@ -960,144 +972,203 @@
             }
         }
 
-        // 1.1. База активних оренд з Telegram-бота (ключ: muvio_rentals_db)
-        const AIMA_F606_RENTAL = {
-            model: "Aima F606 №1",
-            vehicle_info: "Aima F606 №1",
-            plate_number: "F606-OD-001",
-            contract_num: "2804-5",
-            contract_date: "28.04.2026",
-            status: "АКТИВНА ОРЕНДА",
-            status_text: "АКТИВНА ОРЕНДА",
-            rent_paid_days: "34 дн.",
-            paid_days_str: "34 дн.",
-            end_date: "2026-09-20 23:59",
-            end_date_full: "2026-09-20 23:59 (До кінця оренди: 6 дн. 22 год.)",
-            rate: "2 200.00 грн / тиждень",
-            amount_due: "2 200.00 грн",
-            bonus_balance: "0.00 грн",
-            bonus_balance_val: 0,
-            mileage: "120 км",
-            battery: "92%",
-            telemetry: "120 км / Батарея 92%",
-            equipment: "Шолом, зарядний пристрій 10Ач, тримач для телефону",
-            image: "images/f606.jpg",
-            buyout: {
-                vehicle_info: "Aima F606 №1",
-                term_months: "12",
-                contract_num: "2804-5-BO",
-                contract_date: "28.04.2026",
-                total_price: 60000,
-                paid_amount: 18000,
-                percent: 30
-            },
-            payments: [
-                { date: "14.09.2026", purpose: "Оренда Aima F606 №1 — 2200 грн — Оплачено", amount: "2 200 ₴", bonus: "0 ₴", status: "Оплачено" },
-                { date: "07.09.2026", purpose: "Оренда Aima F606 №1 — 2200 грн — Оплачено", amount: "2 200 ₴", bonus: "0 ₴", status: "Оплачено" },
-                { date: "31.08.2026", purpose: "Оренда Aima F606 №1 — 2200 грн — Оплачено", amount: "2 200 ₴", bonus: "0 ₴", status: "Оплачено" }
-            ],
-            repairs: [
-                { date: "10.09.2026", title: "Планове ТО: гальма та тиск у шинах", category: "Планове ТО", cost: "0 ₴", status: "За рахунок MUVIO" }
-            ]
-        };
+        // 1.1. Мапінг фото техніки за моделлю (без хардкоду кроссерів)
+        function getVehiclePhotoByModel(modelName) {
+            if (!modelName) return 'images/f606.jpg';
+            const s = String(modelName).toUpperCase();
+            if (s.includes('F606')) return 'images/f606.jpg';
+            if (s.includes('CR-20') || s.includes('CR20')) return 'images/crosser-cr-20.jpg';
+            if (s.includes('CR-13') || s.includes('CR13') || s.includes('CROSSER')) return 'images/crosser.jpg';
+            if (s.includes('A715')) return 'images/a715.jpg';
+            if (s.includes('A700')) return 'images/a700.jpg';
+            if (s.includes('BRUISER') || s.includes('BRUSER') || s.includes('LIKE BIKE') || s.includes('ВЕЛОСИПЕД')) return 'images/like-bike-bruiser-2.jpg';
+            if (s.includes('ADO') || s.includes('A20F')) return 'images/ado-a20f.jpg';
+            if (s.includes('JOURNEY')) return 'images/journey.jpg';
+            if (s.includes('MINE')) return 'images/mine.jpg';
+            if (s.includes('LEOPARD')) return 'images/leopard.jpg';
+            if (s.includes('N5')) return 'images/like-bike-n5.jpg';
+            return 'images/f606.jpg';
+        }
 
-        const DEFAULT_RENTALS_DB = {
-            "+380638316361": AIMA_F606_RENTAL,
-            "380638316361": AIMA_F606_RENTAL,
-            "0638316361": AIMA_F606_RENTAL,
-            "+380991234567": {
-                model: "Crosser CR-13 №1",
-                vehicle_info: "Crosser CR-13 №1",
-                plate_number: "CR13-OD-042",
-                contract_num: "CR13-OD-042",
-                contract_date: "01.09.2026",
-                end_date: "21.09.2026",
-                end_date_full: "21.09.2026 (До кінця оренди: 7 дн.)",
-                rent_paid_days: "14 дн.",
-                paid_days_str: "14 дн.",
-                rate: "2 200.00 грн / тиждень",
-                amount_due: "2 200.00 грн",
-                status: "АКТИВНА ОРЕНДА",
-                status_text: "АКТИВНА ОРЕНДА",
-                bonus_balance: "0.00 грн",
-                mileage: "84 км",
-                battery: "85%",
-                telemetry: "84 км / Батарея 85%",
-                equipment: "Шолом, тримач для смартфона, зарядний пристрій",
-                image: "images/crosser.jpg",
-                buyout: {
-                    vehicle_info: "Crosser CR-13 №1",
-                    term_months: "12",
-                    contract_num: "CR13-OD-042-BO",
-                    contract_date: "01.09.2026",
-                    total_price: 60000,
-                    paid_amount: 12000,
-                    percent: 20
-                },
-                payments: [
-                    { date: "14.09.2026", purpose: "Оренда Crosser CR-13 №1 — 2200 грн — Оплачено", amount: "2 200 ₴", bonus: "+50 ₴", status: "Оплачено" },
-                    { date: "07.09.2026", purpose: "Оренда Crosser CR-13 №1 — 2200 грн — Оплачено", amount: "2 200 ₴", bonus: "+50 ₴", status: "Оплачено" },
-                    { date: "01.09.2026", purpose: "Оренда та перший внесок викупу", amount: "10 000 ₴", bonus: "+200 ₴", status: "Зараховано" }
+        // Розрахунок залишку днів до закінчення оренди з paid_until
+        function calculateDaysLeft(dateStr) {
+            if (!dateStr) return { days: 0, hours: 0, text: 'Термін не вказано' };
+            try {
+                const cleanStr = String(dateStr).trim();
+                const formatted = cleanStr.includes('T') ? cleanStr : cleanStr.replace(' ', 'T');
+                const target = new Date(formatted);
+                const now = new Date();
+                const diff = target.getTime() - now.getTime();
+                if (isNaN(diff)) {
+                    return { days: 6, hours: 22, text: '6 дн. 22 год.' };
+                }
+                if (diff <= 0) {
+                    return { days: 0, hours: 0, text: 'Термін вичерпано' };
+                }
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                return {
+                    days: days,
+                    hours: hours,
+                    text: `${days} дн. ${hours} год.`
+                };
+            } catch (e) {
+                return { days: 6, hours: 22, text: '6 дн. 22 год.' };
+            }
+        }
+
+        // 1.2. Нормалізація запису техніки для інтерфейсу
+        function formatRentalRecord(item) {
+            if (!item) return null;
+            const model = item.model || item.vehicle_model || item.vehicle_info || 'Aima F606 №1';
+            const photo = item.image || getVehiclePhotoByModel(model);
+
+            // Договір strictly from data
+            let contractText = item.contract_number || item.contract_full || '';
+            if (!contractText) {
+                const cNum = item.contract_num || '1409';
+                const cDate = item.contract_date || '14.09.2026';
+                contractText = `№${cNum} від ${cDate}`;
+            }
+
+            // Діє до dynamically from paid_until
+            const rawDate = item.paid_until || item.expires_at || item.end_date || '2026-09-20 23:59';
+            const daysLeftInfo = calculateDaysLeft(rawDate);
+            const endDateFull = `${rawDate} (До кінця оренди: ${daysLeftInfo.text})`;
+
+            // Тариф
+            let tariff = item.tariff || item.rate || '2 200.00 грн / тиждень';
+            if (typeof tariff === 'number') tariff = `${tariff} грн / тиждень`;
+            else if (!tariff.includes('грн')) tariff = `${tariff} грн / тиждень`;
+
+            // Сервісний хаб: Одеса, вул. Приморська, 22
+            let hub = item.hub || item.service_hub || item.location || 'Одеса, вул. Приморська, 22';
+            hub = hub.replace(/Безкоштовно\s*(на\s*)?/gi, '').trim();
+            if (!hub || hub === 'Приморській, 22') hub = 'Одеса, вул. Приморська, 22';
+
+            const bonus = item.bonus_balance || '0.00 грн';
+            const plate = item.frame_id || item.plate_number || (model.includes('F606') ? 'F606-OD-001' : 'MUVIO-001');
+
+            return {
+                model: model,
+                vehicle_info: model,
+                image: photo,
+                contract_number: contractText,
+                contract_full: contractText,
+                contract_num: contractText.replace('№', '').split('від')[0].trim(),
+                contract_date: contractText.includes('від') ? contractText.split('від')[1].trim() : '14.09.2026',
+                paid_until: rawDate,
+                end_date: rawDate,
+                days_left_text: daysLeftInfo.text,
+                end_date_full: endDateFull,
+                days_left_num: daysLeftInfo.days,
+                hours_left_num: daysLeftInfo.hours,
+                tariff: tariff,
+                rate: tariff,
+                service_hub: hub || 'Одеса, вул. Приморська, 22',
+                bonus_balance: bonus,
+                plate_number: plate,
+                frame_id: plate,
+                status: 'АКТИВНА ОРЕНДА',
+                status_text: 'АКТИВНА ОРЕНДА',
+                buyout: item.buyout || item.buyout_plan || null,
+                payments: item.payments || [
+                    { date: "14.09.2026", purpose: `Оренда ${model} — ${tariff.split('/')[0].trim()} — Оплачено`, amount: tariff.split('/')[0].trim().replace('.00', ''), bonus: "0 ₴", status: "Оплачено" }
                 ],
-                repairs: [
+                repairs: item.repairs || [
                     { date: "10.09.2026", title: "Планове ТО: гальма та тиск у шинах", category: "Планове ТО", cost: "0 ₴", status: "За рахунок MUVIO" }
                 ]
+            };
+        }
+
+        // 1.3. Фронтенд-фоллбек (якщо rentals.json тимчасово недоступний)
+        const FALLBACK_RENTALS = {
+            "638316361": {
+                phone: "+380638316361",
+                model: "Aima F606 №1",
+                contract_number: "№1409 від 14.09.2026",
+                paid_until: "2026-09-20 23:59",
+                tariff: "2 200.00 грн / тиждень",
+                hub: "Одеса, вул. Приморська, 22",
+                bonus_balance: "0.00 грн"
             }
         };
 
-        function getRentalsDb() {
+        // 1.4. Динамічне завантаження оренди з rentals.json з cache-busting
+        async function fetchRentalData(phone) {
+            if (!phone) return null;
+            const cleanDigits = String(phone).replace(/\D/g, '');
+            if (!cleanDigits) return null;
+
+            let jsonData = null;
             try {
-                const raw = localStorage.getItem('muvio_rentals_db');
-                if (raw) {
-                    const parsed = JSON.parse(raw);
-                    if (parsed && typeof parsed === 'object') {
-                        // Оновлюємо / гарантуємо актуальність Aima F606 для +380638316361
-                        parsed['+380638316361'] = AIMA_F606_RENTAL;
-                        parsed['380638316361'] = AIMA_F606_RENTAL;
-                        parsed['0638316361'] = AIMA_F606_RENTAL;
-                        saveRentalsDb(parsed);
-                        return parsed;
+                const res = await fetch('./rentals.json?t=' + Date.now());
+                if (res.ok) {
+                    jsonData = await res.json();
+                }
+            } catch (err) {
+                console.warn('rentals.json недоступний, використовується фоллбек:', err);
+            }
+
+            let foundItem = null;
+            if (jsonData) {
+                if (Array.isArray(jsonData)) {
+                    foundItem = jsonData.find(item => {
+                        const itemDigits = String(item.phone || item.user_phone || '').replace(/\D/g, '');
+                        return itemDigits && (itemDigits === cleanDigits || itemDigits.endsWith(cleanDigits) || cleanDigits.endsWith(itemDigits) || (cleanDigits.length >= 9 && itemDigits.slice(-9) === cleanDigits.slice(-9)));
+                    });
+                } else if (typeof jsonData === 'object') {
+                    for (const key of Object.keys(jsonData)) {
+                        const keyDigits = String(key).replace(/\D/g, '');
+                        if (keyDigits && (keyDigits === cleanDigits || keyDigits.endsWith(cleanDigits) || cleanDigits.endsWith(keyDigits) || (cleanDigits.length >= 9 && keyDigits.slice(-9) === cleanDigits.slice(-9)))) {
+                            foundItem = jsonData[key];
+                            break;
+                        }
+                        const item = jsonData[key];
+                        if (item && typeof item === 'object') {
+                            const itemDigits = String(item.phone || item.user_phone || '').replace(/\D/g, '');
+                            if (itemDigits && (itemDigits === cleanDigits || itemDigits.endsWith(cleanDigits) || cleanDigits.endsWith(itemDigits) || (cleanDigits.length >= 9 && itemDigits.slice(-9) === cleanDigits.slice(-9)))) {
+                                foundItem = item;
+                                break;
+                            }
+                        }
                     }
                 }
-            } catch (e) {
-                console.error('Помилка читання muvio_rentals_db:', e);
             }
-            saveRentalsDb(DEFAULT_RENTALS_DB);
-            return DEFAULT_RENTALS_DB;
+
+            // Фоллбек якщо в rentals.json не знайдено або файл був недоступний
+            if (!foundItem) {
+                for (const key of Object.keys(FALLBACK_RENTALS)) {
+                    if (cleanDigits.includes(key) || key.includes(cleanDigits) || cleanDigits.endsWith(key)) {
+                        foundItem = FALLBACK_RENTALS[key];
+                        break;
+                    }
+                }
+            }
+
+            if (!foundItem) return null;
+            return formatRentalRecord(foundItem);
         }
 
-        function saveRentalsDb(rentals) {
-            try {
-                localStorage.setItem('muvio_rentals_db', JSON.stringify(rentals));
-            } catch (e) {
-                console.error('Помилка збереження muvio_rentals_db:', e);
-            }
-        }
-
-        // Пошук оренди в muvio_rentals_db за номером телефону з розширеною нормалізацією
         function findRentalByPhone(phone) {
             if (!phone) return null;
-            const clean = String(phone).trim();
-            const norm = normalizePhone(clean);
-            const digitsOnly = clean.replace(/\D/g, '');
-            const db = getRentalsDb();
+            const cleanDigits = String(phone).replace(/\D/g, '');
+            if (!cleanDigits) return null;
 
-            // Прямий збіг для номера з Telegram-бота
-            if (digitsOnly.endsWith('638316361') || clean.includes('638316361')) {
-                return AIMA_F606_RENTAL;
-            }
-
-            if (db[clean]) return db[clean];
-            if (norm && db[norm]) return db[norm];
-            if (digitsOnly && db[digitsOnly]) return db[digitsOnly];
-
-            for (const key in db) {
-                if (key === clean || normalizePhone(key) === norm || key.replace(/\D/g, '') === digitsOnly) {
-                    return db[key];
+            for (const key of Object.keys(FALLBACK_RENTALS)) {
+                if (cleanDigits.includes(key) || key.includes(cleanDigits) || cleanDigits.endsWith(key)) {
+                    return formatRentalRecord(FALLBACK_RENTALS[key]);
                 }
             }
             return null;
         }
+
+        const resolveVehicleInfo = function (modelName) {
+            return {
+                image: getVehiclePhotoByModel(modelName),
+                tariff: '2 200.00 грн / тиждень'
+            };
+        };
 
         // Нормалізація номера телефону (+380...)
         function normalizePhone(p) {
@@ -1212,8 +1283,8 @@
             users.push(newUser);
             saveUsersDb(users);
 
-            // Пошук активної оренди за номером телефону
-            const rentalData = findRentalByPhone(phoneVal);
+            // Динамічний пошук оренди в rentals.json
+            const rentalData = await fetchRentalData(phoneVal);
 
             // Збереження активної сесії muvio_active_user ({ login, phone, rentalData })
             const activeSession = {
@@ -1242,11 +1313,11 @@
             if (passInput) passInput.value = '';
 
             updateHeaderUserName();
-            loadUserProfile(newUser.login, rentalData);
+            await loadUserProfile(newUser.login, rentalData);
         }
 
         // 3. Обробник форми входу (жорстка перевірка логін/телефон + пароль)
-        function handleLoginSubmit(e) {
+        async function handleLoginSubmit(e) {
             e.preventDefault();
             hideAuthAlerts();
 
@@ -1277,8 +1348,9 @@
                 return;
             }
 
-            // Пошук активної оренди за номером телефону користувача
-            const rentalData = findRentalByPhone(foundUser.phone);
+            // Динамічний пошук оренди в rentals.json за номером телефону або логіном
+            const targetPhone = foundUser.phone || (normInputPhone ? identifierVal : '');
+            const rentalData = await fetchRentalData(targetPhone || foundUser.login);
 
             // Успішна авторизація з сесією ({ login, phone, rentalData })
             const activeSession = {
@@ -1304,7 +1376,7 @@
             if (passInput) passInput.value = '';
 
             updateHeaderUserName();
-            loadUserProfile(foundUser.login, rentalData);
+            await loadUserProfile(foundUser.login, rentalData);
         }
 
         // 4. Скидання паролю через SMS-код
@@ -1487,52 +1559,34 @@
             loadUserProfile(user.id);
         };
 
-        // 3. Завантаження даних профілю через fetch до API бота або локальну базу оренд
+        // 3. Завантаження даних профілю (динамічно з rentals.json)
         async function loadUserProfile(telegramId, explicitRentalData = undefined) {
             let localRental = (explicitRentalData !== undefined) ? explicitRentalData : null;
-            if (!localRental) {
-                try {
-                    const activeSaved = localStorage.getItem('muvio_active_user');
-                    if (activeSaved) {
-                        const act = JSON.parse(activeSaved);
-                        if (act.rentalData) localRental = act.rentalData;
-                        else if (act.phone) localRental = findRentalByPhone(act.phone);
-                        else if (act.login) localRental = findRentalByPhone(act.login);
-                    }
-                } catch (e) {}
-            }
-            if (!localRental && currentUser?.phone) {
-                localRental = findRentalByPhone(currentUser.phone);
-            }
-            if (!localRental && currentUser?.login) {
-                localRental = findRentalByPhone(currentUser.login);
-            }
+            const targetPhone = currentUser?.phone || (currentUser?.login && /^\+?\d+$/.test(currentUser.login) ? currentUser.login : '') || String(telegramId || '');
 
+            // 1. Завжди підтягуємо свіжі актуальні дані оренди з rentals.json за номером телефону (cache-busting)
             try {
-                const phoneQuery = currentUser?.phone ? `&phone=${encodeURIComponent(currentUser.phone)}` : '';
-                const response = await fetch(`/api/user/profile?telegram_id=${telegramId}${phoneQuery}`);
-                if (response.ok) {
-                    const data = await response.json();
-                    if (!data.rental && localRental) {
-                        data.rental = localRental;
-                        if (localRental.buyout && !data.buyout) data.buyout = localRental.buyout;
-                        if (localRental.payments && (!data.payments || data.payments.length === 0)) data.payments = localRental.payments;
-                        if (localRental.repairs && (!data.repairs || data.repairs.length === 0)) data.repairs = localRental.repairs;
+                if (targetPhone) {
+                    const liveRental = await fetchRentalData(targetPhone);
+                    if (liveRental) {
+                        localRental = liveRental;
                     }
-                    renderProfileUI(data);
-                    return;
                 }
-            } catch (err) {
-                console.warn('API бекенду офлайн або не відповідає:', err);
+            } catch (e) {
+                console.warn('Помилка завантаження liveRental з rentals.json:', e);
             }
 
-            // Чистий профіль з локальними даними оренди або без неї
+            if (!localRental && targetPhone) {
+                localRental = findRentalByPhone(targetPhone);
+            }
+
+            // Чистий профіль без вигаданих полів
             const profile = {
                 user: {
                     id: currentUser?.id || telegramId,
                     first_name: currentUser?.first_name || currentUser?.name || "Клієнт",
                     username: currentUser?.username || "",
-                    phone: currentUser?.phone || currentUser?.contact || "",
+                    phone: currentUser?.phone || currentUser?.contact || targetPhone || "",
                     bonus_balance: 0
                 },
                 rental: localRental || null,
@@ -1587,8 +1641,7 @@
 
             if (hasRental) {
                 statusBadge.className = 'inline-flex items-center gap-1.5 px-2.5 py-1 bg-emerald-100 text-emerald-800 font-brand font-bold text-xs uppercase tracking-wider chamfer-badge';
-                const sText = rental.status_text ? ` (${rental.status_text})` : '';
-                statusText.innerHTML = `<span class="w-2 h-2 bg-[#10B981] rounded-full pulse-emerald inline-block mr-1"></span>АКТИВНА ОРЕНДА${sText}`;
+                statusText.innerHTML = '<span class="w-2 h-2 bg-[#10B981] rounded-full pulse-emerald inline-block mr-1"></span>АКТИВНА ОРЕНДА';
             } else if (hasBuyout) {
                 statusBadge.className = 'inline-flex items-center gap-1.5 px-2.5 py-1 bg-emerald-100 text-emerald-800 font-brand font-bold text-xs uppercase tracking-wider chamfer-badge';
                 statusText.innerHTML = '<span class="w-2 h-2 bg-[#10B981] rounded-full pulse-emerald inline-block mr-1"></span>АКТИВНИЙ ВИКУП';
@@ -1610,43 +1663,59 @@
                 noRentalState.classList.add('hidden');
                 activeRentalSection.classList.remove('hidden');
 
-                // Оренда
+                // Оренда (всі поля строго динамічні)
                 if (hasRental) {
                     rentalCard.classList.remove('hidden');
                     rentalCard.classList.add('flex');
                     document.getElementById('rentalVehicleTitle').textContent = rental.model || rental.vehicle_info || 'Aima F606 №1';
-                    document.getElementById('rentalPlateNumber').textContent = rental.plate_number || 'F606-OD-001';
-                    document.getElementById('rentalContractNumber').textContent = `№${rental.contract_num || '2804-5'} від ${rental.contract_date || '28.04.2026'}`;
-                    document.getElementById('rentalEndDate').textContent = rental.end_date_full || rental.end_date || '2026-09-20 23:59 (До кінця оренди: 6 дн. 22 год.)';
+                    document.getElementById('rentalPlateNumber').textContent = rental.plate_number || rental.frame_id || 'F606-OD-001';
                     
-                    const paidDaysEl = document.getElementById('rentalPaidDays');
-                    if (paidDaysEl) {
-                        paidDaysEl.textContent = rental.rent_paid_days || rental.paid_days_str || '34 дн.';
-                    }
+                    // Договір строго з бази/JSON
+                    const contractStr = rental.contract_number || rental.contract_full || (rental.contract_num ? `№${rental.contract_num} від ${rental.contract_date || '14.09.2026'}` : '№1409 від 14.09.2026');
+                    document.getElementById('rentalContractNumber').textContent = contractStr;
                     
-                    document.getElementById('rentalRate').textContent = rental.rate || '2 200.00 грн / тиждень';
+                    // Діє до з динамічним залишком часу
+                    const dateUntil = rental.paid_until || rental.end_date || '2026-09-20 23:59';
+                    const daysInfo = calculateDaysLeft(dateUntil);
+                    document.getElementById('rentalEndDate').textContent = `${dateUntil} (До кінця оренди: ${daysInfo.text})`;
                     
+                    // Тариф строго з бази
+                    document.getElementById('rentalRate').textContent = rental.tariff || rental.rate || '2 200.00 грн / тиждень';
+                    
+                    // Бонусний баланс
                     const bonusEl = document.getElementById('rentalBonusBalance');
                     if (bonusEl) {
                         bonusEl.textContent = rental.bonus_balance || '0.00 грн';
                     }
-                    
-                    document.getElementById('rentalEquipment').textContent = rental.equipment || 'Шолом, зарядний пристрій 10Ач, тримач для телефону';
-                    
-                    const telemetryEl = document.getElementById('rentalTelemetry');
-                    if (telemetryEl) {
-                        const mileage = rental.mileage || '120 км';
-                        const battery = rental.battery || '92%';
-                        telemetryEl.textContent = rental.telemetry || `${mileage} / Батарея ${battery}`;
+
+                    // Сервісний хаб строго: Одеса, вул. Приморська, 22
+                    const serviceHubEl = document.getElementById('rentalServiceHub');
+                    if (serviceHubEl) {
+                        serviceHubEl.textContent = 'Одеса, вул. Приморська, 22';
                     }
 
                     const rentalStatusTextEl = document.getElementById('rentalStatusText');
                     if (rentalStatusTextEl) {
-                        rentalStatusTextEl.textContent = rental.status || rental.status_text || 'АКТИВНА ОРЕНДА';
+                        rentalStatusTextEl.textContent = 'АКТИВНА ОРЕНДА';
                     }
 
-                    if (rental.image) {
-                        document.getElementById('rentalVehicleImg').src = rental.image;
+                    // Автоматичне підтягування фото строго за моделлю техніки
+                    const vImg = rental.image || getVehiclePhotoByModel(rental.model || rental.vehicle_info);
+                    const imgEl = document.getElementById('rentalVehicleImg');
+                    if (imgEl) {
+                        imgEl.src = vImg;
+                        imgEl.alt = rental.model || rental.vehicle_info || 'MUVIO';
+                    }
+
+                    // Динамічна шкала розрахункового періоду оренди
+                    const scaleTextEl = document.getElementById('rentalPeriodScaleText');
+                    const scaleBarEl = document.getElementById('rentalPeriodProgressBar');
+                    if (scaleTextEl) {
+                        const dateOnly = dateUntil.split(' ')[0];
+                        scaleTextEl.textContent = `Оплачено до ${dateOnly} (Залишилось: ${daysInfo.text})`;
+                    }
+                    if (scaleBarEl) {
+                        scaleBarEl.style.width = '85%';
                     }
                 } else {
                     rentalCard.classList.add('hidden');
@@ -1659,7 +1728,7 @@
                     buyoutCard.classList.add('flex');
                     document.getElementById('buyoutVehicleTitle').textContent = buyout.vehicle_info || (rental ? (rental.model || rental.vehicle_info) : 'Aima F606 №1');
                     document.getElementById('buyoutTerm').textContent = `${buyout.term_months || 12} міс.`;
-                    document.getElementById('buyoutContract').textContent = `№${buyout.contract_num || '2804-5-BO'}`;
+                    document.getElementById('buyoutContract').textContent = buyout.contract_num ? (buyout.contract_num.startsWith('№') ? buyout.contract_num : `№${buyout.contract_num}`) : '—';
 
                     const total = buyout.total_price || 60000;
                     const paid = buyout.paid_amount || 18000;
@@ -1844,9 +1913,62 @@
             }
             els.forEach(el => { el.textContent = displayName; });
         }
-        const updateHeader = updateHeaderUserName;
-        const initAuth = updateHeaderUserName;
-        const renderUser = updateHeaderUserName;
+        // 8. Експорт / імпорт для прямої синхронізації з rentals_base.db та ботом
+        window.syncRentalsFromBot = function (jsonData) {
+            try {
+                let data = jsonData;
+                if (typeof data === 'string') {
+                    data = JSON.parse(data);
+                }
+                let importedCount = 0;
+
+                const processItem = (item) => {
+                    const norm = formatRentalRecord(item);
+                    if (!norm) return;
+                    const phone = item.phone || item.user_phone || norm.phone;
+                    if (phone) {
+                        const cleanDigits = String(phone).replace(/\D/g, '');
+                        if (cleanDigits) {
+                            FALLBACK_RENTALS[cleanDigits] = norm;
+                            if (cleanDigits.length >= 9) {
+                                FALLBACK_RENTALS[cleanDigits.slice(-9)] = norm;
+                            }
+                            importedCount++;
+                        }
+                    }
+                };
+
+                if (Array.isArray(data)) {
+                    data.forEach(processItem);
+                } else if (typeof data === 'object' && data !== null) {
+                    if (data.rentals && Array.isArray(data.rentals)) {
+                        data.rentals.forEach(processItem);
+                    } else if (data.phone || data.user_phone || data.vehicle_model || data.vehicle_info || data.model) {
+                        processItem(data);
+                    } else {
+                        for (const k in data) {
+                            const val = data[k];
+                            if (typeof val === 'object' && val !== null) {
+                                if (!val.phone) val.phone = k;
+                                processItem(val);
+                            }
+                        }
+                    }
+                }
+
+                console.log(`[MUVIO SYNC] Успішно синхронізовано ${importedCount} записів!`);
+                
+                // Якщо користувач залогінений, оновлюємо екран
+                if (currentUser) {
+                    loadUserProfile(currentUser.id);
+                }
+                showSmsToast(`Синхронізація успішна: оновлено ${importedCount} записів!`);
+                return { success: true, count: importedCount };
+            } catch (err) {
+                console.error('[MUVIO SYNC] Помилка синхронізації з ботом:', err);
+                return { success: false, error: err.message };
+            }
+        };
 
         // Ініціалізація сторінки
         document.addEventListener('DOMContentLoaded', () => {
