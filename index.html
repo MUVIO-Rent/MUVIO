@@ -1610,22 +1610,31 @@
             });
         }
 
-        // Оновлення імені користувача в шапці з даних сесії
+        // Оновлення імені користувача в шапці з даних сесії (muvio_active_user)
         function updateHeaderUserName() {
             const el = document.getElementById('header-user-name');
             if (!el) return;
             try {
+                const activeSaved = localStorage.getItem('muvio_active_user');
+                if (activeSaved) {
+                    const active = JSON.parse(activeSaved);
+                    const login = (active.login || '').trim();
+                    if (login) {
+                        el.textContent = login.toUpperCase();
+                        return;
+                    }
+                }
                 const saved = localStorage.getItem('muvio_user');
                 if (saved) {
                     const u = JSON.parse(saved);
-                    const name = (u.first_name || u.name || u.username || '').trim();
+                    const name = (u.login || u.name || u.first_name || u.username || '').trim();
                     if (name) {
                         el.textContent = name.toUpperCase();
                         return;
                     }
                 }
             } catch (e) {
-                console.error('Error reading muvio_user:', e);
+                console.error('Error reading active user:', e);
             }
             el.textContent = 'ВХІД';
         }
