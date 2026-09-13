@@ -142,19 +142,19 @@
                 <!-- Навігація по центру -->
                 <nav class="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
                     <a href="catalog.html"
-                        class="text-base font-bold tracking-wider text-[#111827] hover:text-[#1D5D3B] transition-colors">
+                        class="text-[15px] md:text-base font-semibold tracking-wider text-[#111827] hover:text-[#1D5D3B] transition-colors py-1 px-1.5 leading-normal">
                         КАТАЛОГ
                     </a>
                     <a href="calculator.html"
-                        class="text-base font-bold tracking-wider text-[#111827] hover:text-[#1D5D3B] transition-colors">
+                        class="text-[15px] md:text-base font-semibold tracking-wider text-[#111827] hover:text-[#1D5D3B] transition-colors py-1 px-1.5 leading-normal">
                         КАЛЬКУЛЯТОР
                     </a>
                     <a href="service.html"
-                        class="text-base font-bold tracking-wider text-[#111827] hover:text-[#1D5D3B] transition-colors">
+                        class="text-[15px] md:text-base font-semibold tracking-wider text-[#111827] hover:text-[#1D5D3B] transition-colors py-1 px-1.5 leading-normal">
                         СЕРВІС
                     </a>
                     <a href="terms.html"
-                        class="text-base font-bold tracking-wider text-[#111827] hover:text-[#1D5D3B] transition-colors">
+                        class="text-[15px] md:text-base font-semibold tracking-wider text-[#111827] hover:text-[#1D5D3B] transition-colors py-1 px-1.5 leading-normal">
                         УМОВИ ОРЕНДИ
                     </a>
                 </nav>
@@ -162,11 +162,11 @@
                 <!-- Права частина: Профіль + Telegram Bot -->
                 <div class="flex items-center z-10">
                     <!-- Профіль користувача -->
-                    <a href="/cabinet.html" class="flex flex-col items-center justify-center mr-5 group hover:opacity-85 transition-opacity" title="Особистий кабінет">
+                    <a href="/cabinet.html" class="flex flex-col items-center justify-center gap-1 mr-5 group hover:opacity-85 transition-opacity" title="Особистий кабінет">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-[#1D5D3B]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
-                        <span id="header-user-name" class="text-[11px] font-bold tracking-wider text-[#111827] uppercase mt-0.5 leading-tight">МАКСИМ</span>
+                        <span id="header-user-name" class="text-[11px] font-bold tracking-wider text-[#111827] uppercase leading-tight text-center">МАКСИМ</span>
                     </a>
 
                     <a href="https://t.me/muviobot" target="_blank" rel="noopener noreferrer"
@@ -523,17 +523,17 @@
             <!-- Нижня секція: Вкладки історії платежів, ремонтів та техпідтримки -->
             <div class="bg-white border-2 border-[#1D5D3B] p-6 sm:p-8 chamfer-box shadow-md">
                 <!-- Заголовки вкладок -->
-                <div class="flex flex-wrap gap-2 border-b-2 border-slate-200 pb-4">
+                <div class="flex flex-wrap gap-2.5 border-b-2 border-slate-200 pb-4">
                     <button type="button" id="tabBtnPayments" onclick="switchCabinetTab('payments')"
-                        class="chamfer-badge px-4 py-2 font-brand font-bold text-xs uppercase tracking-wider bg-[#1D5D3B] text-white transition-all">
+                        class="chamfer-badge px-5 py-2.5 font-brand font-semibold text-sm sm:text-[15px] uppercase tracking-wider bg-[#1D5D3B] text-white transition-all leading-normal">
                         💳 ІСТОРІЯ ПЛАТЕЖІВ
                     </button>
                     <button type="button" id="tabBtnRepairs" onclick="switchCabinetTab('repairs')"
-                        class="chamfer-badge px-4 py-2 font-brand font-bold text-xs uppercase tracking-wider bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all">
+                        class="chamfer-badge px-5 py-2.5 font-brand font-semibold text-sm sm:text-[15px] uppercase tracking-wider bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all leading-normal">
                         🛠 ІСТОРІЯ ТО ТА РЕМОНТІВ
                     </button>
                     <button type="button" id="tabBtnService" onclick="switchCabinetTab('service')"
-                        class="chamfer-badge px-4 py-2 font-brand font-bold text-xs uppercase tracking-wider bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all">
+                        class="chamfer-badge px-5 py-2.5 font-brand font-semibold text-sm sm:text-[15px] uppercase tracking-wider bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all leading-normal">
                         📍 СЕРВІСНИЙ ХАБ ТА SOS
                     </button>
                 </div>
@@ -1012,19 +1012,19 @@
 
             // Скидання стилів кнопок
             [btnPay, btnRep, btnSrv].forEach(btn => {
-                btn.className = 'chamfer-badge px-4 py-2 font-brand font-bold text-xs uppercase tracking-wider bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all';
+                btn.className = 'chamfer-badge px-5 py-2.5 font-brand font-semibold text-sm sm:text-[15px] uppercase tracking-wider bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all leading-normal';
             });
             // Приховування вмісту
             [conPay, conRep, conSrv].forEach(con => con.classList.add('hidden'));
 
             if (tabName === 'payments') {
-                btnPay.className = 'chamfer-badge px-4 py-2 font-brand font-bold text-xs uppercase tracking-wider bg-[#1D5D3B] text-white transition-all';
+                btnPay.className = 'chamfer-badge px-5 py-2.5 font-brand font-semibold text-sm sm:text-[15px] uppercase tracking-wider bg-[#1D5D3B] text-white transition-all leading-normal';
                 conPay.classList.remove('hidden');
             } else if (tabName === 'repairs') {
-                btnRep.className = 'chamfer-badge px-4 py-2 font-brand font-bold text-xs uppercase tracking-wider bg-[#1D5D3B] text-white transition-all';
+                btnRep.className = 'chamfer-badge px-5 py-2.5 font-brand font-semibold text-sm sm:text-[15px] uppercase tracking-wider bg-[#1D5D3B] text-white transition-all leading-normal';
                 conRep.classList.remove('hidden');
             } else if (tabName === 'service') {
-                btnSrv.className = 'chamfer-badge px-4 py-2 font-brand font-bold text-xs uppercase tracking-wider bg-[#1D5D3B] text-white transition-all';
+                btnSrv.className = 'chamfer-badge px-5 py-2.5 font-brand font-semibold text-sm sm:text-[15px] uppercase tracking-wider bg-[#1D5D3B] text-white transition-all leading-normal';
                 conSrv.classList.remove('hidden');
             }
         }
