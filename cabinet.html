@@ -134,6 +134,25 @@
         html.theme-dark .text-slate-500 {
             color: #94A3B8 !important;
         }
+        html.theme-dark .bg-gray-50 {
+            background-color: #0F172A !important;
+        }
+        html.theme-dark .bg-gray-200 {
+            background-color: #334155 !important;
+        }
+        html.theme-dark .border-gray-100,
+        html.theme-dark .border-gray-200 {
+            border-color: #334155 !important;
+        }
+        html.theme-dark .text-gray-900,
+        html.theme-dark .text-gray-800,
+        html.theme-dark .text-gray-700 {
+            color: #F1F5F9 !important;
+        }
+        html.theme-dark .text-gray-500,
+        html.theme-dark .text-gray-400 {
+            color: #94A3B8 !important;
+        }
         html.theme-dark .border-slate-200,
         html.theme-dark .border-slate-200\/60,
         html.theme-dark .border-slate-300 {
@@ -582,115 +601,119 @@
             </div>
 
             <!-- СТАН Б: ВЕРХНІЙ БЛОК З АКТИВНИМИ КАРТКАМИ (Оренда + Прогрес викупу) -->
-            <div id="activeRentalSection" class="hidden grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div id="activeRentalSection" class="hidden space-y-8 w-full">
 
                 <!-- 1. ПОТОЧНИЙ СТАТУС ОРЕНДИ -->
-                <div id="activeRentalCard" class="hidden bg-white border-2 border-[#1D5D3B] p-6 chamfer-box shadow-md flex-col justify-between">
-                    <div class="space-y-5">
-                        <div class="flex items-center justify-between pb-3 border-b border-slate-200">
-                            <div class="flex items-center gap-2">
-                                <i data-lucide="gauge" class="w-5 h-5 text-[#1D5D3B]"></i>
-                                <h3 class="font-brand font-bold text-lg uppercase tracking-wider text-[#111827]">
-                                    МОЯ АКТИВНА ОРЕНДА
+                <div id="activeRentalCard" class="hidden w-full bg-white border-2 border-[#1D5D3B] p-6 sm:p-8 chamfer-box shadow-md flex-col">
+                    
+                    <!-- ВЕРХНІЙ РЯД: Основна інформація -->
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                        
+                        <!-- ЗЛІВА (ок. 5 колонок): фото скутера -->
+                        <div class="md:col-span-5 rounded-xl bg-gray-50 border border-gray-200 overflow-hidden flex items-center justify-center p-3 sm:p-4 min-h-[220px] sm:min-h-[260px]">
+                            <img id="rentalVehicleImg" src="images/f606.jpg" alt="Aima F606 №1"
+                                class="w-full h-48 sm:h-56 object-contain hover:scale-105 transition-transform duration-300">
+                        </div>
+
+                        <!-- СПРАВА (ок. 7 колонок): блок з характеристиками та статусом -->
+                        <div class="md:col-span-7 flex flex-col justify-center space-y-4">
+                            
+                            <!-- Назва та статус-бейдж -->
+                            <div class="flex flex-wrap items-center justify-between gap-3 pb-2 border-b border-gray-100">
+                                <h3 id="rentalVehicleTitle" class="font-brand font-bold text-2xl text-gray-900 tracking-tight">
+                                    Aima F606 №1
                                 </h3>
+                                <span id="rentalStatusBadge"
+                                    class="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-100 text-emerald-800 font-brand font-bold text-xs uppercase tracking-wider chamfer-badge">
+                                    <span class="w-2 h-2 bg-[#10B981] rounded-full pulse-emerald"></span>
+                                    <span id="rentalStatusText">АКТИВНА ОРЕНДА</span>
+                                </span>
                             </div>
-                            <span id="rentalStatusBadge"
-                                class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-emerald-100 text-emerald-800 font-brand font-bold text-xs uppercase tracking-wider chamfer-badge">
-                                <span class="w-2 h-2 bg-[#10B981] rounded-full pulse-emerald"></span>
-                                <span id="rentalStatusText">АКТИВНА</span>
-                            </span>
-                        </div>
 
-                        <!-- Транспорт та інфо -->
-                        <div class="flex items-start gap-4">
-                            <img id="rentalVehicleImg" src="images/f606.jpg" alt="Транспорт"
-                                class="w-28 h-20 object-cover border border-slate-300 bg-slate-50 p-1 flex-shrink-0">
-                            <div class="space-y-1">
-                                <div id="rentalVehicleTitle" class="font-brand font-bold text-lg text-[#111827]">
-                                    Електроскутер MUVIO
-                                </div>
-                                <div class="text-xs text-slate-500 font-mono">
-                                    Номер рами / ID: <span id="rentalPlateNumber" class="text-slate-800 font-bold">—</span>
-                                </div>
-                                <div class="text-xs text-slate-500">
-                                    Договір: <span id="rentalContractNumber" class="font-semibold text-slate-700">—</span>
-                                </div>
+                            <!-- Номер рами / ID та Договір -->
+                            <div class="text-xs sm:text-sm text-gray-500 font-mono flex flex-wrap items-center gap-x-2">
+                                <span>Номер рами / ID: <span id="rentalPlateNumber" class="text-gray-900 font-bold">F606-OD-001</span></span>
+                                <span class="text-gray-300">|</span>
+                                <span>Договір: <span id="rentalContractNumber" class="font-semibold text-gray-700">№1409 від 14.09.2026</span></span>
                             </div>
-                        </div>
 
-                        <!-- Деталі терміну та оплати (динамічно з rentals.json) -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-[#F8FAFC] p-3.5 border border-slate-200 text-xs">
-                            <div>
-                                <span class="text-slate-500 block">Діє до:</span>
-                                <span id="rentalEndDate" class="font-brand font-bold text-sm text-[#111827]">
-                                    —
-                                </span>
-                            </div>
-                            <div>
-                                <span class="text-slate-500 block">Тариф / До сплати за оренду:</span>
-                                <span id="rentalRate" class="font-brand font-bold text-sm text-[#1D5D3B]">
-                                    2 200.00 грн / тиждень
-                                </span>
-                            </div>
-                            <div>
-                                <span class="text-slate-500 block">Бонусний баланс:</span>
-                                <span id="rentalBonusBalance" class="font-brand font-bold text-sm text-emerald-700">
-                                    0.00 грн
-                                </span>
-                            </div>
-                            <div>
-                                <span class="text-slate-500 block">Сервісний хаб:</span>
-                                <span id="rentalServiceHub" class="font-brand font-bold text-sm text-slate-800">
-                                    Одеса, вул. Приморська, 22
-                                </span>
-                            </div>
-                        </div>
-
-                        <!-- Шкала поточного розрахункового періоду оренди -->
-                        <div class="space-y-1.5 pt-1">
-                            <div class="flex justify-between items-center text-xs font-brand uppercase tracking-wider">
-                                <span class="text-slate-600 font-semibold flex items-center gap-1.5">
-                                    <i data-lucide="clock" class="w-3.5 h-3.5 text-[#1D5D3B]"></i>
-                                    <span>Шкала розрахункового періоду:</span>
-                                </span>
-                                <span id="rentalPeriodScaleText" class="text-[#1D5D3B] font-bold font-mono">Завантаження даних...</span>
-                            </div>
-                            <div class="w-full bg-slate-200 h-3 overflow-hidden border border-slate-300">
-                                <div id="rentalPeriodProgressBar"
-                                    class="bg-gradient-to-r from-[#1D5D3B] to-[#10B981] h-full transition-all duration-700"
-                                    style="width: 85%;">
+                            <!-- Сітка параметрів (2x2) -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 bg-gray-50 p-4 rounded-xl border border-gray-200 text-xs sm:text-sm">
+                                <div>
+                                    <span class="text-gray-500 block text-xs mb-0.5">Діє до:</span>
+                                    <span id="rentalEndDate" class="font-brand font-bold text-sm text-gray-900">
+                                        2026-09-20 23:59 (До кінця оренди: 6 дн. 21 год.)
+                                    </span>
+                                </div>
+                                <div>
+                                    <span class="text-gray-500 block text-xs mb-0.5">Тариф / До сплати:</span>
+                                    <span id="rentalRate" class="font-brand font-bold text-sm text-[#1D5D3B]">
+                                        2 200.00 грн / тиждень
+                                    </span>
+                                </div>
+                                <div>
+                                    <span class="text-gray-500 block text-xs mb-0.5">Бонусний баланс:</span>
+                                    <span id="rentalBonusBalance" class="font-brand font-bold text-sm text-emerald-700">
+                                        0.00 грн
+                                    </span>
+                                </div>
+                                <div>
+                                    <span class="text-gray-500 block text-xs mb-0.5">Сервісний хаб:</span>
+                                    <span id="rentalServiceHub" class="font-brand font-bold text-sm text-gray-800">
+                                        Одеса, вул. Приморська, 22
+                                    </span>
                                 </div>
                             </div>
-                            <div class="flex justify-between text-[10px] font-mono text-slate-400">
-                                <span>Початок періоду</span>
-                                <span>Екватор тижня</span>
-                                <span class="text-emerald-700 font-bold">Оплачено</span>
-                            </div>
+
                         </div>
                     </div>
 
-                    <!-- Кнопки керування (точно як у Telegram-боті) -->
-                    <div class="pt-6 border-t border-slate-200 mt-6 grid grid-cols-1 sm:grid-cols-3 gap-2">
+                    <!-- СЕРЕДНІЙ РЯД: Шкала розрахункового періоду -->
+                    <div class="w-full mt-6 pt-6 border-t border-gray-100 space-y-2.5">
+                        <div class="flex flex-wrap justify-between items-center gap-2 text-xs font-brand uppercase tracking-wider">
+                            <span class="text-gray-700 font-bold flex items-center gap-1.5">
+                                <i data-lucide="clock" class="w-4 h-4 text-[#1D5D3B]"></i>
+                                <span>ШКАЛА РОЗРАХУНКОВОГО ПЕРІОДУ</span>
+                            </span>
+                            <span id="rentalPeriodScaleText" class="text-[#1D5D3B] font-bold font-mono text-xs sm:text-sm">
+                                ОПЛАЧЕНО ДО 2026-09-20 (ЗАЛИШИЛОСЬ: 6 ДН. 21 ГОД.)
+                            </span>
+                        </div>
+                        <div class="w-full bg-gray-200 h-3 sm:h-3.5 rounded-full overflow-hidden p-0.5 border border-gray-200">
+                            <div id="rentalPeriodProgressBar"
+                                class="bg-gradient-to-r from-[#1D5D3B] to-[#10B981] h-full rounded-full transition-all duration-700"
+                                style="width: 85%;">
+                            </div>
+                        </div>
+                        <div class="flex justify-between text-[11px] font-mono text-gray-400 px-0.5">
+                            <span>Початок періоду</span>
+                            <span>Екватор тижня</span>
+                            <span class="text-[#1D5D3B] font-bold">Оплачено</span>
+                        </div>
+                    </div>
+
+                    <!-- НИЖНІЙ РЯД: Кнопки дій -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
                         <button type="button" onclick="showPaymentModal('rent')"
-                            class="chamfer-btn bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs uppercase py-2.5 px-3 flex items-center justify-center gap-1.5 transition-all text-center">
+                            class="w-full bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs sm:text-sm uppercase py-3 px-4 rounded-lg shadow-sm hover:opacity-95 flex items-center justify-center gap-2 transition-all">
                             <i data-lucide="credit-card" class="w-4 h-4 shrink-0"></i>
                             <span>ОПЛАТА ОРЕНДИ</span>
                         </button>
                         <button type="button" onclick="handleBuyoutRequest()"
-                            class="chamfer-btn bg-white hover:bg-slate-50 text-[#111827] border border-slate-300 font-brand font-bold text-xs uppercase py-2.5 px-3 flex items-center justify-center gap-1.5 transition-all text-center">
-                            <i data-lucide="award" class="w-4 h-4 text-[#1D5D3B] shrink-0"></i>
+                            class="w-full bg-white hover:bg-emerald-50 text-[#1D5D3B] border-2 border-[#1D5D3B] font-brand font-bold text-xs sm:text-sm uppercase py-3 px-4 rounded-lg shadow-sm flex items-center justify-center gap-2 transition-all">
+                            <i data-lucide="award" class="w-4 h-4 shrink-0"></i>
                             <span>ПОДАТИ ЗАЯВКУ НА ВИКУП</span>
                         </button>
                         <a href="https://t.me/muviobot?start=sos" target="_blank" rel="noopener noreferrer"
-                            class="chamfer-btn bg-white hover:bg-red-50 text-red-700 border border-red-200 font-brand font-bold text-xs uppercase py-2.5 px-3 flex items-center justify-center gap-1.5 transition-all text-center">
-                            <i data-lucide="alert-triangle" class="w-4 h-4 text-red-600 shrink-0"></i>
+                            class="w-full bg-red-50 hover:bg-red-100 text-red-700 border border-red-300 font-brand font-bold text-xs sm:text-sm uppercase py-3 px-4 rounded-lg shadow-sm flex items-center justify-center gap-2 transition-all">
+                            <i data-lucide="alert-triangle" class="w-4 h-4 shrink-0 text-red-600"></i>
                             <span>ПОВІДОМИТИ ПРО ПОЛОМКУ</span>
                         </a>
                     </div>
                 </div>
 
                 <!-- 2. ПРОГРЕС ВИКУПУ (RENT-TO-OWN) -->
-                <div id="activeBuyoutCard" class="hidden bg-white border-2 border-[#1D5D3B] p-6 chamfer-box shadow-md flex-col justify-between">
+                <div id="activeBuyoutCard" class="hidden w-full bg-white border-2 border-[#1D5D3B] p-6 sm:p-8 chamfer-box shadow-md flex-col justify-between">
                     <div class="space-y-5">
                         <div class="flex items-center justify-between pb-3 border-b border-slate-200">
                             <div class="flex items-center gap-2">
@@ -1950,7 +1973,7 @@
                     const scaleBarEl = document.getElementById('rentalPeriodProgressBar');
                     if (scaleTextEl) {
                         const dateOnly = dateUntil.split(' ')[0];
-                        scaleTextEl.textContent = `Оплачено до ${dateOnly} (Залишилось: ${daysInfo.text})`;
+                        scaleTextEl.textContent = `ОПЛАЧЕНО ДО ${dateOnly} (ЗАЛИШИЛОСЬ: ${daysInfo.text.toUpperCase()})`;
                     }
                     if (scaleBarEl) {
                         scaleBarEl.style.width = '85%';
