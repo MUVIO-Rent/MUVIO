@@ -148,9 +148,9 @@
                             class="font-brand font-semibold text-xs lg:text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] px-2 py-1 transition-colors">
                             КАТАЛОГ
                         </a>
-                        <a href="calculator.html"
+                        <a href="#calculator"
                             class="font-brand font-semibold text-xs lg:text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] px-2 py-1 transition-colors">
-                            КАЛЬКУЛЯТОР
+                            КАЛЬКУЛЯТОР ОРЕНДИ
                         </a>
                         <a href="service.html"
                             class="font-brand font-semibold text-xs lg:text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] px-2 py-1 transition-colors">
@@ -199,9 +199,9 @@
                 class="mobile-nav-link block font-brand font-semibold text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] py-2 pl-2">
                 КАТАЛОГ СКУТЕРІВ
             </a>
-            <a href="calculator.html"
+            <a href="#calculator"
                 class="mobile-nav-link block font-brand font-semibold text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] py-2 pl-2">
-                КАЛЬКУЛЯТОР ВИКУПУ (RENT-TO-OWN)
+                КАЛЬКУЛЯТОР ОРЕНДИ
             </a>
             <a href="service.html"
                 class="mobile-nav-link block font-brand font-semibold text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] py-2 pl-2">
@@ -269,7 +269,7 @@
                     <a href="#calculator"
                         class="chamfer-btn w-full sm:w-auto bg-white hover:bg-slate-50 text-[#1D5D3B] font-brand font-bold text-sm md:text-base uppercase tracking-widest px-8 py-4 border-2 border-[#1D5D3B] flex items-center justify-center gap-3">
                         <i data-lucide="calculator" class="w-5 h-5"></i>
-                        <span>КАЛЬКУЛЯТОР ВИКУПУ</span>
+                        <span>КАЛЬКУЛЯТОР ОРЕНДИ</span>
                     </a>
                 </div>
 
@@ -369,22 +369,20 @@
         </div>
     </section>
 
-    <!-- ==================== 4. КАЛЬКУЛЯТОР ВИКУПУ (RENT-TO-OWN) ==================== -->
+    <!-- ==================== 4. КАЛЬКУЛЯТОР ОРЕНДИ ==================== -->
     <section id="calculator" class="py-16 md:py-24 bg-[#123824] text-white border-b-2 border-[#1D5D3B]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-x border-slate-200/60">
 
             <div class="text-center max-w-3xl mx-auto mb-12">
                 <div
                     class="inline-flex items-center gap-2 px-3 py-1 bg-white/10 border border-white/30 chamfer-badge mb-3">
-                    <span class="font-brand font-bold text-xs tracking-wider text-white uppercase">ПРОГРАМА
-                        RENT-TO-OWN</span>
+                    <span class="font-brand font-bold text-xs tracking-wider text-white uppercase">ТАРИФИ ТА РОЗРАХУНОК</span>
                 </div>
                 <h2 class="font-brand font-bold text-3xl sm:text-4xl uppercase tracking-tight text-white">
-                    КАЛЬКУЛЯТОР ВИКУПУ СКУТЕРА
+                    КАЛЬКУЛЯТОР ОРЕНДИ
                 </h2>
                 <p class="text-sm sm:text-base text-emerald-100 mt-2">
-                    Всі скутери йдуть у зборі з базовим АКБ 40Ah (або 10Ah для велосипедів). Обирайте модель, посилений
-                    акумулятор та термін виплат.
+                    Оберіть модель транспорту, термін оренди та додаткові опції. Що довший термін оренди — то нижча вартість за добу.
                 </p>
             </div>
 
@@ -393,21 +391,34 @@
                 class="max-w-5xl mx-auto bg-white text-[#111827] border-2 border-[#1D5D3B] chamfer-box p-6 md:p-10 shadow-2xl">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
 
-                    <!-- Ліва колонка: Вибір комплектації -->
+                    <!-- Ліва колонка: Вибір комплектації та періоду -->
                     <div class="lg:col-span-7 space-y-6">
 
-                        <!-- 1. Модель -->
+                        <!-- 1. Модель транспорту -->
                         <div>
                             <label
                                 class="block font-brand font-bold text-sm uppercase tracking-wider text-[#111827] mb-2 flex items-center justify-between">
-                                <span>1. Оберіть модель транспорту:</span>
+                                <span>1. ОБЕРІТЬ МОДЕЛЬ ТРАНСПОРТУ:</span>
                                 <div class="flex items-center gap-1.5">
+                                    <span id="modelTypeBadge"
+                                        class="text-xs font-mono font-bold px-2 py-0.5 bg-emerald-50 text-[#1D5D3B] border border-[#1D5D3B]/40 chamfer-badge">🛵 Скутер</span>
                                     <span id="modelPowerBadge"
                                         class="text-xs font-mono font-bold px-2 py-0.5 bg-[#1D5D3B]/15 text-[#1D5D3B] border border-[#1D5D3B] chamfer-badge">2000W</span>
                                     <span id="modelVoltBadge"
                                         class="text-xs font-mono font-bold px-2 py-0.5 bg-[#1D5D3B] text-white chamfer-badge">72V</span>
                                 </div>
                             </label>
+
+                            <!-- DRAFT / PHOTO PREVIEW INTEGRATION -->
+                            <div class="chamfer-box bg-[#F8FAFC] border-2 border-[#1D5D3B]/25 p-3 mb-3 flex items-center justify-center overflow-hidden relative group min-h-[170px] sm:min-h-[210px]">
+                                <span id="calcVehicleBadge"
+                                    class="absolute top-2.5 left-2.5 text-[10px] font-brand font-bold uppercase tracking-wider px-2 py-0.5 bg-[#1D5D3B] text-white chamfer-badge shadow-sm">
+                                    ФЛАГМАН | 85 КМ/ГОД
+                                </span>
+                                <img id="calcVehicleImg" src="images/crosser.jpg" alt="Обраний транспорт"
+                                    class="h-36 sm:h-44 w-auto object-contain transition-all duration-300 drop-shadow-md group-hover:scale-105">
+                            </div>
+
                             <div class="relative">
                                 <select id="calcModelSelect" onchange="onModelChange()"
                                     class="w-full bg-[#F8FAFC] border-2 border-[#1D5D3B] font-brand font-bold text-[#111827] px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-[#1D5D3B] chamfer-box cursor-pointer">
@@ -415,58 +426,53 @@
                                 </select>
                             </div>
                             <div class="flex items-center justify-between text-xs text-[#4B5563] mt-1.5 px-1 font-mono">
-                                <span>Вартість у зборі (з базовим АКБ):</span>
-                                <span id="calcBasePriceTxt" class="font-bold text-[#1D5D3B]">80 000 грн</span>
+                                <span>Базовий тариф моделі:</span>
+                                <span id="calcBaseRateTxt" class="font-bold text-[#1D5D3B]">від 340 грн/доба</span>
                             </div>
                         </div>
 
-                        <!-- 2. Батарея -->
+                        <!-- 2. Термін оренди -->
                         <div>
                             <label
-                                class="block font-brand font-bold text-sm uppercase tracking-wider text-[#111827] mb-2">
-                                2. Комплектація акумулятора:
+                                class="block font-brand font-bold text-sm uppercase tracking-wider text-[#111827] mb-2 flex items-center justify-between">
+                                <span>2. ОБЕРІТЬ ТЕРМІН ОРЕНДИ:</span>
+                                <span id="durationDaysBadge"
+                                    class="text-xs font-mono font-bold text-[#1D5D3B] bg-emerald-50 px-2 py-0.5 border border-[#1D5D3B]/30 chamfer-badge">7 днів (тиждень)</span>
                             </label>
-                            <div id="batteryOptionsContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                <!-- Опції генеруються JS -->
+
+                            <!-- Кнопки швидкого вибору періоду -->
+                            <div class="grid grid-cols-2 sm:grid-cols-5 gap-2" id="durationPillsContainer">
+                                <!-- Опції генеруються JS: 1 день, 3 дні, 7 днів, 14 днів, 30 днів -->
+                            </div>
+
+                            <!-- Додатковий слайдер для точного вибору днів -->
+                            <div class="mt-3 p-3 bg-[#F8FAFC] border border-[#1D5D3B]/20 chamfer-box">
+                                <div class="flex items-center justify-between text-xs font-mono text-[#4B5563] mb-1.5">
+                                    <span>Або вкажіть точну кількість діб:</span>
+                                    <span class="font-bold text-[#1D5D3B] text-sm"><span id="sliderDaysDisplay">7</span> дн.</span>
+                                </div>
+                                <input type="range" id="calcDaysSlider" min="1" max="60" value="7" step="1"
+                                    oninput="onSliderDaysChange(this.value)"
+                                    class="w-full accent-[#1D5D3B] cursor-pointer h-2 bg-slate-200 rounded-lg">
+                                <div class="flex justify-between text-[10px] font-mono text-[#9CA3AF] mt-1">
+                                    <span>1 дн.</span>
+                                    <span>7 дн.</span>
+                                    <span>14 дн.</span>
+                                    <span>30 дн.</span>
+                                    <span>60 дн.</span>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- 3. Зарядка -->
+                        <!-- 3. Додаткові опції -->
                         <div>
                             <label
-                                class="block font-brand font-bold text-sm uppercase tracking-wider text-[#111827] mb-2">
-                                3. Зарядний пристрій:
+                                class="block font-brand font-bold text-sm uppercase tracking-wider text-[#111827] mb-2 flex items-center justify-between">
+                                <span>3. ДОДАТКОВІ ОПЦІЇ ТА ОБЛАДНАННЯ:</span>
+                                <span id="optionsCountBadge" class="text-xs font-mono font-normal text-[#4B5563]">1 опція активна</span>
                             </label>
-                            <div id="chargerOptionsContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                <!-- Опції генеруються JS -->
-                            </div>
-                        </div>
-
-                        <!-- 4. Термін -->
-                        <div>
-                            <label
-                                class="block font-brand font-bold text-sm uppercase tracking-wider text-[#111827] mb-2">
-                                4. Термін викупу (місяців):
-                            </label>
-                            <div class="grid grid-cols-3 sm:grid-cols-6 gap-2">
-                                <button type="button" onclick="setCalcTerm(3)" id="term-btn-3"
-                                    class="term-btn py-2.5 font-brand font-bold text-sm border-2 border-[#1D5D3B] bg-white text-[#111827] hover:bg-[#1D5D3B]/10 chamfer-badge transition-all">3
-                                    міс.</button>
-                                <button type="button" onclick="setCalcTerm(4)" id="term-btn-4"
-                                    class="term-btn py-2.5 font-brand font-bold text-sm border-2 border-[#1D5D3B] bg-white text-[#111827] hover:bg-[#1D5D3B]/10 chamfer-badge transition-all">4
-                                    міс.</button>
-                                <button type="button" onclick="setCalcTerm(5)" id="term-btn-5"
-                                    class="term-btn py-2.5 font-brand font-bold text-sm border-2 border-[#1D5D3B] bg-white text-[#111827] hover:bg-[#1D5D3B]/10 chamfer-badge transition-all">5
-                                    міс.</button>
-                                <button type="button" onclick="setCalcTerm(6)" id="term-btn-6"
-                                    class="term-btn py-2.5 font-brand font-bold text-sm border-2 border-[#1D5D3B] bg-[#1D5D3B] text-white chamfer-badge transition-all">6
-                                    міс.</button>
-                                <button type="button" onclick="setCalcTerm(7)" id="term-btn-7"
-                                    class="term-btn py-2.5 font-brand font-bold text-sm border-2 border-[#1D5D3B] bg-white text-[#111827] hover:bg-[#1D5D3B]/10 chamfer-badge transition-all">7
-                                    міс.</button>
-                                <button type="button" onclick="setCalcTerm(8)" id="term-btn-8"
-                                    class="term-btn py-2.5 font-brand font-bold text-sm border-2 border-[#1D5D3B] bg-white text-[#111827] hover:bg-[#1D5D3B]/10 chamfer-badge transition-all">8
-                                    міс.</button>
+                            <div id="rentalAddonsContainer" class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                                <!-- Опції генеруються JS: Шолом + тримач (+0 грн), Другий АКБ, Швидка зарядка -->
                             </div>
                         </div>
 
@@ -479,54 +485,58 @@
                         <div class="space-y-5">
                             <div class="border-b border-[#1D5D3B]/20 pb-4">
                                 <div class="font-brand font-bold text-xs uppercase tracking-widest text-[#4B5563]">
-                                    ПІДСУМОК ВИКУПУ</div>
-                                <div id="resModelTitle" class="font-brand font-bold text-xl text-[#111827] mt-1">Crosser
-                                    CR-13 №1</div>
-                                <div id="resConfigSummary" class="text-xs text-[#4B5563] mt-1 font-mono">2000W | 72V |
-                                    Базовий
-                                    АКБ 40Ah | 6 міс.</div>
+                                    ПІДСУМОК ОРЕНДИ
+                                </div>
+                                <div class="flex items-center gap-3 mt-2">
+                                    <img id="resThumbnail" src="images/crosser.jpg" alt="Прев'ю"
+                                        class="w-12 h-12 object-contain bg-white border border-[#1D5D3B]/30 p-1 chamfer-badge">
+                                    <div class="min-w-0">
+                                        <div id="resModelTitle" class="font-brand font-bold text-lg sm:text-xl text-[#111827] truncate">
+                                            Crosser CR-13 №1
+                                        </div>
+                                        <div id="resConfigSummary" class="text-xs text-[#4B5563] font-mono mt-0.5">
+                                            2000W | 72V | 7 днів (тиждень)
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="space-y-4">
 
-                                <!-- Повна вартість -->
+                                <!-- Вартість оренди -->
                                 <div class="bg-white border-2 border-[#1D5D3B]/40 p-3.5 chamfer-box">
                                     <div class="text-xs uppercase font-brand font-bold tracking-wider text-[#4B5563]">
-                                        ПОВНА ВАРТІСТЬ ВИКУПУ:</div>
+                                        РАЗОМ ДО ОПЛАТИ:
+                                    </div>
                                     <div id="resTotalPrice"
-                                        class="font-brand font-bold text-2xl sm:text-3xl text-[#111827] mt-0.5">80 000
-                                        грн</div>
-                                    <div class="text-[11px] text-[#4B5563] font-mono mt-0.5">Транспорт у зборі з АКБ та
-                                        зарядним пристроєм</div>
+                                        class="font-brand font-bold text-2xl sm:text-3xl text-[#1D5D3B] mt-0.5">
+                                        3 360 грн
+                                    </div>
+                                    <div id="resRateSubtitle" class="text-xs text-[#4B5563] font-mono mt-0.5">
+                                        Тариф: 480 грн / доба (на 7 дн.)
+                                    </div>
                                 </div>
 
-                                <!-- Завдаток 20% -->
+                                <!-- Застава / Депозит -->
                                 <div class="bg-[#1D5D3B]/10 border-2 border-[#1D5D3B] p-3.5 chamfer-box">
                                     <div
                                         class="text-xs uppercase font-brand font-bold tracking-wider text-[#1D5D3B] flex items-center justify-between">
-                                        <span>ЗАВДАТОК (ПЕРШИЙ ВНЕСОК 20%):</span>
-                                        <i data-lucide="lock" class="w-3.5 h-3.5"></i>
+                                        <span>ЗАСТАВА ЗА ТРАНСПОРТ:</span>
+                                        <i data-lucide="shield-check" class="w-4 h-4 text-[#1D5D3B]"></i>
                                     </div>
                                     <div id="resDeposit"
-                                        class="font-brand font-bold text-2xl sm:text-3xl text-[#1D5D3B] mt-0.5">16 000
-                                        грн</div>
-                                    <div class="text-[11px] text-[#4B5563] mt-0.5">Вноситься при підписанні договору
-                                        викупу</div>
+                                        class="font-brand font-bold text-2xl sm:text-3xl text-[#1D5D3B] mt-0.5">
+                                        2 000 грн
+                                    </div>
+                                    <div class="text-[11px] text-[#4B5563] mt-0.5">
+                                        Або <b>без застави</b> за умови верифікації через сервіс Дія
+                                    </div>
                                 </div>
 
-                                <!-- Регулярний платіж (ФІРМОВИЙ ЗЕЛЕНИЙ MUVIO #1D5D3B + БІЛИЙ ТЕКСТ) -->
-                                <div class="bg-[#1D5D3B] text-white p-4 chamfer-box border-2 border-[#1D5D3B]">
-                                    <div class="text-xs uppercase font-brand font-bold tracking-wider text-emerald-200">
-                                        РЕГУЛЯРНИЙ ПЛАТІЖ:</div>
-                                    <div id="resMonthly"
-                                        class="font-brand font-bold text-3xl sm:text-4xl text-white mt-1">~10 667
-                                        грн<span class="text-base text-emerald-100 font-sans font-normal"> / міс.</span>
-                                    </div>
-                                    <div id="resWeekly"
-                                        class="text-xs text-emerald-100 font-mono mt-1.5 pt-2 border-t border-emerald-600/40 flex justify-between">
-                                        <span>Орієнтовно за тиждень:</span>
-                                        <span class="font-bold text-white">~2 667 грн/тижд</span>
-                                    </div>
+                                <!-- Деталізація вартості -->
+                                <div id="resBreakdownBox"
+                                    class="bg-slate-100/80 border border-slate-200 p-3 chamfer-box text-xs font-mono space-y-1 text-[#4B5563]">
+                                    <!-- Деталі розрахунку JS -->
                                 </div>
 
                             </div>
@@ -535,9 +545,9 @@
                         <!-- Кнопка заявки в Telegram -->
                         <div class="mt-6 pt-4 border-t border-[#1D5D3B]/20">
                             <a id="calcTelegramBtn" href="#" target="_blank" rel="noopener noreferrer"
-                                class="chamfer-btn w-full bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-sm uppercase tracking-widest py-4 px-4 flex items-center justify-center gap-2 border border-[#1D5D3B] text-center">
+                                class="chamfer-btn w-full bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-sm uppercase tracking-widest py-4 px-4 flex items-center justify-center gap-2 border border-[#1D5D3B] text-center shadow-lg transition-all">
                                 <i data-lucide="send" class="w-5 h-5"></i>
-                                <span>НАДІСЛАТИ ЗАЯВКУ В TELEGRAM</span>
+                                <span>НАДІСЛАТИ ЗАЯВКУ В TELEGRAM (3 360 ГРН)</span>
                             </a>
                             <p class="text-[11px] text-center text-[#4B5563] mt-2">
                                 Сформована заявка надсилається до офіційного бота @muviobot
@@ -548,17 +558,16 @@
 
                 </div>
 
-                <!-- Правила викупу з bot.py (Сухі факти) -->
+                <!-- Правила оренди (Сухі факти) -->
                 <div class="mt-8 pt-6 border-t-2 border-[#1D5D3B]/20 grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div class="p-3.5 bg-[#F8FAFC] border border-[#1D5D3B]/30 chamfer-box">
                         <div
                             class="font-brand font-bold text-xs uppercase text-[#1D5D3B] flex items-center gap-1.5 mb-1">
-                            <i data-lucide="shield-check" class="w-4 h-4"></i>
-                            <span>1. ЗАВДАТОК 20%</span>
+                            <i data-lucide="percent" class="w-4 h-4"></i>
+                            <span>1. ДИНАМІЧНИЙ ТАРИФ</span>
                         </div>
                         <p class="text-xs text-[#4B5563] leading-relaxed">
-                            Обов'язковий перший внесок складає 20% від повної вартості обраної комплектації. У разі
-                            відмови клієнта від викупу завдаток не повертається.
+                            Що довший термін оренди — то нижча ціна за добу. При оренді від 30 днів щоденний тариф знижується до ~300 грн/доба.
                         </p>
                     </div>
 
@@ -566,23 +575,21 @@
                         <div
                             class="font-brand font-bold text-xs uppercase text-[#1D5D3B] flex items-center gap-1.5 mb-1">
                             <i data-lucide="wrench" class="w-4 h-4"></i>
-                            <span>2. БЕЗКОШТОВНІ РОБОТИ</span>
+                            <span>2. ТЕХНІЧНИЙ СЕРВІС</span>
                         </div>
                         <p class="text-xs text-[#4B5563] leading-relaxed">
-                            Робота та регламентний ремонт здійснюються майстрами сервісу MUVIO безкоштовно. Клієнт
-                            сплачує лише за необхідні запчастини.
+                            Планове ТО, регламентні роботи та заміна зношених розхідників проводяться нашими майстрами безкоштовно.
                         </p>
                     </div>
 
                     <div class="p-3.5 bg-[#F8FAFC] border border-[#1D5D3B]/30 chamfer-box">
                         <div
                             class="font-brand font-bold text-xs uppercase text-[#1D5D3B] flex items-center gap-1.5 mb-1">
-                            <i data-lucide="trending-up" class="w-4 h-4"></i>
-                            <span>3. ПОГАШЕННЯ ВИКУПУ</span>
+                            <i data-lucide="shield-check" class="w-4 h-4"></i>
+                            <span>3. ДІЯ БЕЗ ЗАСТАВИ</span>
                         </div>
                         <p class="text-xs text-[#4B5563] leading-relaxed">
-                            Клієнт сплачує щотижневий платіж, а всі кошти, внесені понад оренду, зараховуються у прогрес
-                            викупу з фіксацією суми.
+                            Пройдіть швидку верифікацію документів через Дію перед отриманням ключів та користуйтесь транспортом без внесення грошової застави.
                         </p>
                     </div>
                 </div>
@@ -722,7 +729,7 @@
                     <div class="mt-8 pt-4">
                         <a href="#calculator"
                             class="chamfer-btn w-full bg-white hover:bg-emerald-50 text-[#1D5D3B] font-brand font-bold text-sm uppercase tracking-widest py-3 px-4 border border-white text-center block">
-                            РОЗРАХУВАТИ ВИКУП ТРАНСПОРТУ
+                            РОЗРАХУВАТИ ОРЕНДУ ТРАНСПОРТУ
                         </a>
                     </div>
                 </div>
@@ -923,7 +930,7 @@
                         ЩЕ НАПРЯМКИ
                     </div>
                     <ul class="space-y-2 text-xs font-brand tracking-wide">
-                        <li><a href="calculator.html" class="hover:text-emerald-300 transition-colors">Викуп скутера</a></li>
+                        <li><a href="calculator.html" class="hover:text-emerald-300 transition-colors">Калькулятор оренди</a></li>
                         <li><a href="service.html" class="hover:text-emerald-300 transition-colors">Ремонт скутера</a></li>
                     </ul>
                     <div class="pt-4">
@@ -949,15 +956,144 @@
         // 1. АВТОПАРК З РЕАЛЬНИМИ ЦІНАМИ В ЗБОРІ
         const FLEET = [{ "key": "crosser_cr13_1", "name": "Crosser CR-13 №1", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 160 км", "speed": "85 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 1000, "price_week": 2500, "price_month": 8500, "deposit": 4500, "buyout_available": true, "buyout_base_price": 80000, "image": "images/crosser.jpg", "badge": "ФЛАГМАН | 85 КМ/ГОД", "is_top": true, "power": "2000W" }, { "key": "crosser_cr20", "name": "Crosser CR-20", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 160 км", "speed": "75 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 1000, "price_week": 2400, "price_month": 8300, "deposit": 4000, "buyout_available": true, "buyout_base_price": 77000, "image": "images/crosser-cr-20.jpg", "badge": "ТОП ПОТУЖНІСТЬ", "is_top": true, "power": "2500W" }, { "key": "aima_a700", "name": "Aima A700", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 150 км", "speed": "47 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 70000, "image": "images/a700.jpg", "badge": "ПРЕМІУМ КОМФОРТ", "is_top": true, "power": "1200W" }, { "key": "aima_f606_1", "name": "Aima F606 №1", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 100 км", "speed": "70 км/год", "charging": "10Ач (4 години)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 60000, "image": "images/f606.jpg", "badge": "ХІТ ПРОКАТУ", "is_top": true, "power": "1200W" }, { "key": "aima_a715", "name": "Aima A715", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 150 км", "speed": "65 км/год", "charging": "10Ач (4 години)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 68000, "image": "images/a715.jpg", "badge": "НАДІЙНИЙ", "is_top": false, "power": "1200W" }, { "key": "aima_journey", "name": "Aima Journey", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 160 км", "speed": "60 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2300, "price_month": 8300, "deposit": 4000, "buyout_available": true, "buyout_base_price": 68000, "image": "images/journey.jpg", "badge": "ДАЛЕКІ ДИСТАНЦІЇ", "is_top": false, "power": "1200W" }, { "key": "aima_f606_2", "name": "Aima F606 №2", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 130 км", "speed": "70 км/год", "charging": "10Ач (4 години)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 60000, "image": "images/f606-2.jpg", "badge": "ЗБІЛЬШЕНИЙ ХІД", "is_top": false, "power": "1200W" }, { "key": "crosser_cr13_2", "name": "Crosser CR-13 №2", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 160 км", "speed": "85 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 1000, "price_week": 2500, "price_month": 8500, "deposit": 4500, "buyout_available": true, "buyout_base_price": 80000, "image": "images/crosser-cr-13-2.jpg", "badge": "85 КМ/ГОД", "is_top": false, "power": "2000W" }, { "key": "aima_mine", "name": "Aima Mine", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "60V", "range": "до 130 км", "speed": "55 км/год", "charging": "7Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 60000, "image": "images/mine.jpg", "badge": "КОМПАКТНИЙ", "is_top": false, "power": "800W" }, { "key": "like_bike_n5", "name": "Like Bike N5", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "60V", "range": "до 130 км", "speed": "65 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 57000, "image": "images/like-bike-n5.jpg", "badge": "МАНЕВРЕНИЙ", "is_top": false, "power": "1000W" }, { "key": "aima_mine_plus", "name": "Aima Mine Plus", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "60V", "range": "до 130 км", "speed": "60 км/год", "charging": "7Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 55000, "image": "images/mine-plus.jpg", "badge": "PLUS СЕРІЯ", "is_top": false, "power": "800W" }, { "key": "aima_leopard", "name": "Aima Leopard", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 150 км", "speed": "48 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 50000, "image": "images/leopard.jpg", "badge": "КЛАСИКА", "is_top": false, "power": "1200W" }, { "key": "like_bike_bruser_1", "name": "Like Bike Bruiser №1", "category": "bike", "type": "🚲 Електровелосипед", "voltage": "48V", "range": "до 80 км", "speed": "45 км/год", "charging": "7Ач (4 години)", "battery": "10Ah-40Ah (Знімна)", "price_day": 800, "price_week": 1800, "price_month": 6000, "deposit": 3000, "buyout_available": true, "buyout_base_price": 28000, "image": "images/like-bike-bruiser-1.jpg", "badge": "РАМА 180 КГ", "is_top": false, "power": "500W" }, { "key": "like_bike_bruser_2", "name": "Like Bike Bruiser №2", "category": "bike", "type": "🚲 Електровелосипед", "voltage": "48V", "range": "до 80 км", "speed": "45 км/год", "charging": "7Ач (4 години)", "battery": "10Ah-40Ah (Знімна)", "price_day": 800, "price_week": 1800, "price_month": 6000, "deposit": 3000, "buyout_available": true, "buyout_base_price": 28000, "image": "images/like-bike-bruiser-2.jpg", "badge": "РАМА 180 КГ", "is_top": false, "power": "500W" }, { "key": "ado_a20f", "name": "ADO A20F", "category": "bike", "type": "🚲 Електровелосипед", "voltage": "48V", "range": "до 150 км", "speed": "40 км/год", "charging": "10Ач (4 години)", "battery": "10Ah-40Ah (Знімна)", "price_day": 800, "price_week": 1800, "price_month": 6000, "deposit": 3000, "buyout_available": true, "buyout_base_price": 28000, "image": "images/ado-a20f.jpg", "badge": "ФЕТБАЙК", "is_top": false, "power": "250W" }];
 
-        // 2. ДЕЛЬТИ АКУМУЛЯТОРІВ (+0 грн за базовий, +7 000 грн за збільшений 60Ah)
-        const BATTERY_UPGRADES = { "72V_40Ah": 0, "72V_60Ah": 7000, "60V_40Ah": 0, "60V_60Ah": 7000, "48V_10Ah": 0, "48V_20Ah": 3500, "48V_30Ah": 7000, "48V_40Ah": 10500 };
-        const CHARGER_UPGRADES = { "standard": 0, "fast": 1400 };
+        // 2. БАЗА ТАРИФІВ ОРЕНДИ ТА СПЕЦИФІКАЦІЙ
+        const RENTAL_TARIFFS = {
+            "crosser-cr-13-1": {
+                name: "Crosser CR-13 №1",
+                power: "2000W", volt: "72V", type: "🛵 Скутер",
+                image: "images/crosser.jpg",
+                badge: "ФЛАГМАН | 85 КМ/ГОД",
+                deposit: 2000,
+                rates: { 1: 1000, 3: 750, 7: 480, 14: 400, 30: 340 }
+            },
+            "crosser-cr-13-2": {
+                name: "Crosser CR-13 №2",
+                power: "2000W", volt: "72V", type: "🛵 Скутер",
+                image: "images/crosser-cr-13-2.jpg",
+                badge: "85 КМ/ГОД",
+                deposit: 2000,
+                rates: { 1: 1000, 3: 750, 7: 480, 14: 400, 30: 340 }
+            },
+            "crosser-cr-20": {
+                name: "Crosser CR-20",
+                power: "2500W", volt: "72V", type: "🛵 Скутер",
+                image: "images/crosser-cr-20.jpg",
+                badge: "ТОП ПОТУЖНІСТЬ",
+                deposit: 2000,
+                rates: { 1: 1000, 3: 750, 7: 480, 14: 400, 30: 340 }
+            },
+            "aima-leopard": {
+                name: "Aima Leopard",
+                power: "1200W", volt: "72V", type: "🛵 Скутер",
+                image: "images/leopard.jpg",
+                badge: "КЛАСИКА КОМФОРТУ",
+                deposit: 2000,
+                rates: { 1: 900, 3: 700, 7: 460, 14: 380, 30: 320 }
+            },
+            "aima-a700": {
+                name: "Aima A700",
+                power: "1200W", volt: "72V", type: "🛵 Скутер",
+                image: "images/a700.jpg",
+                badge: "ПРЕМІУМ КОМФОРТ",
+                deposit: 2000,
+                rates: { 1: 900, 3: 700, 7: 460, 14: 380, 30: 320 }
+            },
+            "aima-a715": {
+                name: "Aima A715",
+                power: "1200W", volt: "72V", type: "🛵 Скутер",
+                image: "images/a715.jpg",
+                badge: "НАДІЙНИЙ",
+                deposit: 2000,
+                rates: { 1: 900, 3: 700, 7: 460, 14: 380, 30: 320 }
+            },
+            "aima-f606-1": {
+                name: "Aima F606 №1",
+                power: "1200W", volt: "72V", type: "🛵 Скутер",
+                image: "images/f606.jpg",
+                badge: "ХІТ ПРОКАТУ",
+                deposit: 2000,
+                rates: { 1: 900, 3: 700, 7: 460, 14: 380, 30: 320 }
+            },
+            "aima-f606-2": {
+                name: "Aima F606 №2",
+                power: "1200W", volt: "72V", type: "🛵 Скутер",
+                image: "images/f606-2.jpg",
+                badge: "ЗБІЛЬШЕНИЙ ХІД",
+                deposit: 2000,
+                rates: { 1: 900, 3: 700, 7: 460, 14: 380, 30: 320 }
+            },
+            "aima-journey": {
+                name: "Aima Journey",
+                power: "1200W", volt: "72V", type: "🛵 Скутер",
+                image: "images/journey.jpg",
+                badge: "ДАЛЕКІ ДИСТАНЦІЇ",
+                deposit: 2000,
+                rates: { 1: 900, 3: 700, 7: 460, 14: 380, 30: 320 }
+            },
+            "aima-mine": {
+                name: "Aima Mine",
+                power: "800W", volt: "60V", type: "🛵 Скутер",
+                image: "images/mine.jpg",
+                badge: "КОМПАКТНИЙ",
+                deposit: 2000,
+                rates: { 1: 900, 3: 700, 7: 450, 14: 370, 30: 310 }
+            },
+            "aima-mine-plus": {
+                name: "Aima Mine Plus",
+                power: "800W", volt: "60V", type: "🛵 Скутер",
+                image: "images/mine-plus.jpg",
+                badge: "PLUS СЕРІЯ",
+                deposit: 2000,
+                rates: { 1: 900, 3: 700, 7: 450, 14: 370, 30: 310 }
+            },
+            "like-bike-n5": {
+                name: "Like Bike N5",
+                power: "1000W", volt: "60V", type: "🛵 Скутер",
+                image: "images/like-bike-n5.jpg",
+                badge: "МАНЕВРЕНИЙ",
+                deposit: 2000,
+                rates: { 1: 900, 3: 700, 7: 450, 14: 370, 30: 310 }
+            },
+            "like-bike-bruser-1": {
+                name: "Like Bike Bruiser №1",
+                power: "500W", volt: "48V", type: "🚲 Велобайк",
+                image: "images/like-bike-bruiser-1.jpg",
+                badge: "РАМА 180 КГ",
+                deposit: 1500,
+                rates: { 1: 800, 3: 600, 7: 400, 14: 320, 30: 250 }
+            },
+            "like-bike-bruser-2": {
+                name: "Like Bike Bruiser №2",
+                power: "500W", volt: "48V", type: "🚲 Велобайк",
+                image: "images/like-bike-bruiser-2.jpg",
+                badge: "РАМА 180 КГ",
+                deposit: 1500,
+                rates: { 1: 800, 3: 600, 7: 400, 14: 320, 30: 250 }
+            },
+            "ado-a20f": {
+                name: "ADO A20F",
+                power: "250W", volt: "48V", type: "🚲 Велобайк",
+                image: "images/ado-a20f.jpg",
+                badge: "ФЕТБАЙК",
+                deposit: 1500,
+                rates: { 1: 800, 3: 600, 7: 400, 14: 320, 30: 250 }
+            }
+        };
+
+        const STANDARD_PERIODS = [
+            { days: 1, label: "1 день", sub: "доба" },
+            { days: 3, label: "3 дні", sub: "вікенд" },
+            { days: 7, label: "7 днів", sub: "тиждень" },
+            { days: 14, label: "14 днів", sub: "2 тижні" },
+            { days: 30, label: "30 днів", sub: "місяць" }
+        ];
 
         let calcState = {
-            modelKey: 'crosser_cr13_1',
-            batteryCode: '72V_40Ah',
-            chargerCode: 'standard',
-            termMonths: 6
+            modelKey: 'crosser-cr-13-1',
+            days: 7,
+            hasHelmet: true,
+            hasExtraBattery: false,
+            hasFastCharger: false
         };
 
         // Рендеринг каталогу
@@ -1035,7 +1171,7 @@
                         </a>
                         <button onclick="selectModelInCalc('${item.key}')" 
                                 class="chamfer-btn w-full bg-white hover:bg-slate-50 text-[#1D5D3B] font-brand font-bold text-xs uppercase tracking-widest py-2.5 px-3 border border-[#1D5D3B] flex items-center justify-center gap-1.5">
-                            <span>РОЗРАХУВАТИ ВИКУП →</span>
+                            <span>РОЗРАХУВАТИ ОРЕНДУ →</span>
                         </button>
                     </div>
                 `;
@@ -1063,232 +1199,342 @@
             renderCatalog(category);
         }
 
+        // Нормалізація ключа моделі
+        function normalizeModelKey(rawKey) {
+            if (!rawKey) return null;
+            if (RENTAL_TARIFFS[rawKey]) return rawKey;
+            const norm = rawKey.toLowerCase().replace(/_/g, '-');
+            if (RENTAL_TARIFFS[norm]) return norm;
+            const manualMap = {
+                'crosser_cr13_1': 'crosser-cr-13-1',
+                'crosser_cr13_2': 'crosser-cr-13-2',
+                'crosser_cr20': 'crosser-cr-20',
+                'aima_a700': 'aima-a700',
+                'aima_f606_1': 'aima-f606-1',
+                'aima_a715': 'aima-a715',
+                'aima_journey': 'aima-journey',
+                'aima_f606_2': 'aima-f606-2',
+                'aima_mine': 'aima-mine',
+                'like_bike_n5': 'like-bike-n5',
+                'aima_mine_plus': 'aima-mine-plus',
+                'aima_leopard': 'aima-leopard',
+                'like_bike_bruser_1': 'like-bike-bruser-1',
+                'like_bike_bruser_2': 'like-bike-bruser-2',
+                'ado_a20f': 'ado-a20f'
+            };
+            return manualMap[rawKey] || null;
+        }
+
+        // Динамічний розрахунок добового тарифу зі зниженням при довшій оренді
+        function getDailyRate(model, days) {
+            const r = model.rates;
+            if (days <= 1) return r[1];
+            if (days <= 3) {
+                const f = (days - 1) / (3 - 1);
+                return Math.round(r[1] - f * (r[1] - r[3]));
+            }
+            if (days <= 7) {
+                const f = (days - 3) / (7 - 3);
+                return Math.round(r[3] - f * (r[3] - r[7]));
+            }
+            if (days <= 14) {
+                const f = (days - 7) / (14 - 7);
+                return Math.round(r[7] - f * (r[7] - r[14]));
+            }
+            if (days <= 30) {
+                const f = (days - 14) / (30 - 14);
+                return Math.round(r[14] - f * (r[14] - r[30]));
+            }
+            return r[30];
+        }
+
         // Ініціалізація вибору моделі в калькуляторі
         function initCalcSelect() {
             const select = document.getElementById('calcModelSelect');
+            if (!select) return;
             select.innerHTML = '';
 
-            FLEET.forEach(item => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const requestedModel = urlParams.get('model');
+            const matchedKey = normalizeModelKey(requestedModel);
+            if (matchedKey) {
+                calcState.modelKey = matchedKey;
+            }
+
+            const requestedDays = parseInt(urlParams.get('days'));
+            if (!isNaN(requestedDays) && requestedDays >= 1 && requestedDays <= 60) {
+                calcState.days = requestedDays;
+            }
+
+            Object.entries(RENTAL_TARIFFS).forEach(([key, item]) => {
                 const opt = document.createElement('option');
-                opt.value = item.key;
-                opt.textContent = `${item.name} (${item.power}, ${item.voltage}, у зборі: ${item.buyout_base_price.toLocaleString()} грн)`;
+                opt.value = key;
+                opt.textContent = `${item.name} (${item.power}, ${item.volt}) — від ${item.rates[30]} грн/доба`;
                 select.appendChild(opt);
             });
 
             select.value = calcState.modelKey;
-            updateCalcOptions();
+            renderDurationPills();
+            renderAddonOptions();
+            updateCalc();
         }
 
         function selectModelInCalc(modelKey) {
-            calcState.modelKey = modelKey;
-            document.getElementById('calcModelSelect').value = modelKey;
-            updateCalcOptions();
-            document.getElementById('calculator').scrollIntoView({ behavior: 'smooth' });
+            const matched = normalizeModelKey(modelKey);
+            if (matched) {
+                calcState.modelKey = matched;
+            } else if (RENTAL_TARIFFS[modelKey]) {
+                calcState.modelKey = modelKey;
+            }
+            const select = document.getElementById('calcModelSelect');
+            if (select) select.value = calcState.modelKey;
+            renderDurationPills();
+            renderAddonOptions();
+            updateCalc();
+            const calcEl = document.getElementById('calculator');
+            if (calcEl) calcEl.scrollIntoView({ behavior: 'smooth' });
         }
 
         function onModelChange() {
             const select = document.getElementById('calcModelSelect');
+            if (!select) return;
             calcState.modelKey = select.value;
-            updateCalcOptions();
+            renderDurationPills();
+            renderAddonOptions();
+            updateCalc();
         }
 
-        // Оновлення батарей та зарядок
-        function updateCalcOptions() {
-            const model = FLEET.find(m => m.key === calcState.modelKey) || FLEET[0];
-            const volt = model.voltage;
+        function setCalcDuration(days) {
+            calcState.days = parseInt(days);
+            const slider = document.getElementById('calcDaysSlider');
+            if (slider) slider.value = calcState.days;
+            renderDurationPills();
+            updateCalc();
+        }
 
-            if (document.getElementById('modelVoltBadge')) document.getElementById('modelVoltBadge').textContent = volt;
-            if (document.getElementById('modelPowerBadge')) document.getElementById('modelPowerBadge').textContent = model.power;
-            document.getElementById('calcBasePriceTxt').textContent = `${model.buyout_base_price.toLocaleString()} грн`;
+        function onSliderDaysChange(val) {
+            calcState.days = parseInt(val);
+            renderDurationPills();
+            updateCalc();
+        }
 
-            // Батареї
-            const batContainer = document.getElementById('batteryOptionsContainer');
-            batContainer.innerHTML = '';
+        function renderDurationPills() {
+            const container = document.getElementById('durationPillsContainer');
+            if (!container) return;
+            container.innerHTML = '';
 
-            let batteryList = [];
-            if (volt === '72V' || volt === '60V') {
-                const prefix = volt === '72V' ? '72V' : '60V';
-                batteryList = [
-                    { code: `${prefix}_40Ah`, name: `${prefix} 40Ah (Базовий)`, priceText: '+0 грн (включено у вартість)', diff: 0 },
-                    { code: `${prefix}_60Ah`, name: `${prefix} 60Ah [Посилений]`, priceText: '+7 000 грн', diff: 7000 }
-                ];
-            } else {
-                // 48V велосипеди
-                batteryList = [
-                    { code: '48V_10Ah', name: '48V 10Ah (Базовий)', priceText: '+0 грн (включено у вартість)', diff: 0 },
-                    { code: '48V_20Ah', name: '48V 20Ah (+Хід)', priceText: '+3 500 грн', diff: 3500 },
-                    { code: '48V_30Ah', name: '48V 30Ah (+Хід)', priceText: '+7 000 грн', diff: 7000 },
-                    { code: '48V_40Ah', name: '48V 40Ah (Максимальний)', priceText: '+10 500 грн', diff: 10500 }
-                ];
-            }
+            const model = RENTAL_TARIFFS[calcState.modelKey] || RENTAL_TARIFFS['crosser-cr-13-1'];
 
-            if (!batteryList.some(b => b.code === calcState.batteryCode)) {
-                calcState.batteryCode = batteryList[0].code;
-            }
-
-            batteryList.forEach(b => {
-                const isChecked = (b.code === calcState.batteryCode);
-                const btn = document.createElement('div');
-                btn.className = `p-3.5 border-2 cursor-pointer chamfer-badge transition-all flex items-center justify-between ${isChecked ? 'border-[#1D5D3B] bg-[#1D5D3B]/10 font-bold' : 'border-slate-300 bg-white hover:border-[#1D5D3B]/50'}`;
-                btn.onclick = () => {
-                    calcState.batteryCode = b.code;
-                    updateCalcOptions();
-                };
+            STANDARD_PERIODS.forEach(p => {
+                const isSelected = (calcState.days === p.days);
+                const rate = model.rates[p.days];
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.onclick = () => setCalcDuration(p.days);
+                btn.className = `p-2.5 sm:p-3 border-2 font-brand text-center chamfer-badge transition-all flex flex-col items-center justify-center cursor-pointer ${
+                    isSelected 
+                        ? 'border-[#1D5D3B] bg-[#1D5D3B] text-white shadow-md font-bold' 
+                        : 'border-slate-300 bg-white text-[#111827] hover:border-[#1D5D3B]/60 hover:bg-[#1D5D3B]/5'
+                }`;
                 btn.innerHTML = `
-                    <div>
-                        <div class="text-xs font-brand uppercase text-[#111827]">${b.name}</div>
-                        <div class="text-[11px] ${b.diff > 0 ? 'text-[#1D5D3B] font-bold' : 'text-[#4B5563]'} font-mono">${b.priceText}</div>
-                    </div>
-                    <div class="w-4 h-4 rounded-full border-2 border-[#1D5D3B] flex items-center justify-center ${isChecked ? 'bg-[#1D5D3B]' : 'bg-white'}">
-                        ${isChecked ? '<div class="w-1.5 h-1.5 bg-white rounded-full"></div>' : ''}
-                    </div>
+                    <span class="font-bold text-xs sm:text-sm uppercase tracking-wide">${p.label}</span>
+                    <span class="text-[10px] font-sans ${isSelected ? 'text-emerald-200' : 'text-[#4B5563]'}">${p.sub}</span>
+                    <span class="text-[10px] font-mono mt-1 ${isSelected ? 'text-white font-bold' : 'text-[#1D5D3B] font-bold'}">~${rate} ₴/д</span>
                 `;
-                batContainer.appendChild(btn);
+                container.appendChild(btn);
             });
 
-            // Зарядні пристрої
-            const chContainer = document.getElementById('chargerOptionsContainer');
-            chContainer.innerHTML = '';
+            const sliderDisplay = document.getElementById('sliderDaysDisplay');
+            if (sliderDisplay) sliderDisplay.textContent = calcState.days;
 
-            const chargerList = [
-                { code: 'standard', name: 'Базовий зарядний пристрій', priceText: '+0 грн (у комплекті)', diff: 0 },
-                { code: 'fast', name: 'Швидка зарядка (10A / 5A)', priceText: '+1 400 грн', diff: 1400 }
+            const daysBadge = document.getElementById('durationDaysBadge');
+            if (daysBadge) {
+                let subText = '';
+                if (calcState.days === 1) subText = ' (1 доба)';
+                else if (calcState.days === 7) subText = ' (тиждень)';
+                else if (calcState.days === 14) subText = ' (2 тижні)';
+                else if (calcState.days === 30) subText = ' (місяць)';
+                daysBadge.textContent = `${calcState.days} дн.${subText}`;
+            }
+        }
+
+        function renderAddonOptions() {
+            const container = document.getElementById('rentalAddonsContainer');
+            if (!container) return;
+            container.innerHTML = '';
+
+            const model = RENTAL_TARIFFS[calcState.modelKey] || RENTAL_TARIFFS['crosser-cr-13-1'];
+            const isBike = model.type.includes('велосипед') || model.volt === '48V';
+            const extraBatDailyRate = isBike ? 80 : 120;
+
+            const addons = [
+                {
+                    id: 'hasHelmet',
+                    title: 'Шолом + тримач',
+                    desc: '+0 грн / включено',
+                    checked: calcState.hasHelmet,
+                    priceText: 'Включено'
+                },
+                {
+                    id: 'hasExtraBattery',
+                    title: 'Другий запасний АКБ',
+                    desc: `+${extraBatDailyRate} грн/доба`,
+                    checked: calcState.hasExtraBattery,
+                    priceText: `+${extraBatDailyRate * calcState.days} грн`
+                },
+                {
+                    id: 'hasFastCharger',
+                    title: 'Швидка зарядка 10A',
+                    desc: '+150 грн (разово)',
+                    checked: calcState.hasFastCharger,
+                    priceText: '+150 грн'
+                }
             ];
 
-            if (!chargerList.some(c => c.code === calcState.chargerCode)) {
-                calcState.chargerCode = chargerList[0].code;
-            }
-
-            chargerList.forEach(c => {
-                const isChecked = (c.code === calcState.chargerCode);
-                const btn = document.createElement('div');
-                btn.className = `p-3.5 border-2 cursor-pointer chamfer-badge transition-all flex items-center justify-between ${isChecked ? 'border-[#1D5D3B] bg-[#1D5D3B]/10 font-bold' : 'border-slate-300 bg-white hover:border-[#1D5D3B]/50'}`;
-                btn.onclick = () => {
-                    calcState.chargerCode = c.code;
-                    updateCalcOptions();
+            addons.forEach(a => {
+                const card = document.createElement('div');
+                card.className = `p-3 border-2 cursor-pointer chamfer-badge transition-all flex items-center justify-between ${
+                    a.checked 
+                        ? 'border-[#1D5D3B] bg-[#1D5D3B]/10 font-bold' 
+                        : 'border-slate-300 bg-white hover:border-[#1D5D3B]/50'
+                }`;
+                card.onclick = () => {
+                    calcState[a.id] = !calcState[a.id];
+                    renderAddonOptions();
+                    updateCalc();
                 };
-                btn.innerHTML = `
-                    <div>
-                        <div class="text-xs font-brand uppercase text-[#111827]">${c.name}</div>
-                        <div class="text-[11px] ${c.diff > 0 ? 'text-[#1D5D3B] font-bold' : 'text-[#4B5563]'} font-mono">${c.priceText}</div>
+                card.innerHTML = `
+                    <div class="pr-2">
+                        <div class="text-xs font-brand uppercase text-[#111827] leading-tight">${a.title}</div>
+                        <div class="text-[11px] font-mono text-[#4B5563] mt-0.5">${a.desc}</div>
                     </div>
-                    <div class="w-4 h-4 rounded-full border-2 border-[#1D5D3B] flex items-center justify-center ${isChecked ? 'bg-[#1D5D3B]' : 'bg-white'}">
-                        ${isChecked ? '<div class="w-1.5 h-1.5 bg-white rounded-full"></div>' : ''}
+                    <div class="w-4 h-4 rounded-full border-2 border-[#1D5D3B] flex items-center justify-center shrink-0 ${a.checked ? 'bg-[#1D5D3B]' : 'bg-white'}">
+                        ${a.checked ? '<div class="w-1.5 h-1.5 bg-white rounded-full"></div>' : ''}
                     </div>
                 `;
-                chContainer.appendChild(btn);
+                container.appendChild(card);
             });
 
-            calculateBuyout();
+            let activeCount = 0;
+            if (calcState.hasHelmet) activeCount++;
+            if (calcState.hasExtraBattery) activeCount++;
+            if (calcState.hasFastCharger) activeCount++;
+            const countBadge = document.getElementById('optionsCountBadge');
+            if (countBadge) {
+                countBadge.textContent = `${activeCount} обрано`;
+            }
         }
 
-        function setCalcTerm(months) {
-            calcState.termMonths = months;
-            [3, 4, 5, 6, 7, 8].forEach(m => {
-                const btn = document.getElementById(`term-btn-${m}`);
-                if (m === months) {
-                    btn.classList.add('bg-[#1D5D3B]', 'text-white');
-                    btn.classList.remove('bg-white', 'text-[#111827]');
-                } else {
-                    btn.classList.remove('bg-[#1D5D3B]', 'text-white');
-                    btn.classList.add('bg-white', 'text-[#111827]');
+        function updateCalc() {
+            const model = RENTAL_TARIFFS[calcState.modelKey] || RENTAL_TARIFFS['crosser-cr-13-1'];
+            const days = calcState.days || 1;
+            const isBike = model.type.includes('велосипед') || model.volt === '48V';
+
+            // 1. Оновлення лівої колонки
+            const imgEl = document.getElementById('calcVehicleImg');
+            if (imgEl) {
+                imgEl.src = model.image;
+                imgEl.alt = model.name;
+            }
+            const thumbEl = document.getElementById('resThumbnail');
+            if (thumbEl) {
+                thumbEl.src = model.image;
+                thumbEl.alt = model.name;
+            }
+
+            if (document.getElementById('modelPowerBadge')) document.getElementById('modelPowerBadge').textContent = model.power;
+            if (document.getElementById('modelVoltBadge')) document.getElementById('modelVoltBadge').textContent = model.volt;
+            if (document.getElementById('modelTypeBadge')) document.getElementById('modelTypeBadge').textContent = model.type;
+            if (document.getElementById('calcVehicleBadge')) document.getElementById('calcVehicleBadge').textContent = model.badge;
+            if (document.getElementById('calcBaseRateTxt')) {
+                document.getElementById('calcBaseRateTxt').textContent = `від ${model.rates[30]} грн/доба`;
+            }
+
+            // 2. Розрахунок вартості
+            const dailyRate = getDailyRate(model, days);
+            const baseRentalCost = Math.round(dailyRate * days);
+
+            const extraBatDailyRate = isBike ? 80 : 120;
+            const batteryCost = calcState.hasExtraBattery ? (extraBatDailyRate * days) : 0;
+            const chargerCost = calcState.hasFastCharger ? 150 : 0;
+            const totalCost = baseRentalCost + batteryCost + chargerCost;
+
+            // 3. Оновлення правої колонки
+            if (document.getElementById('resModelTitle')) document.getElementById('resModelTitle').textContent = model.name;
+            if (document.getElementById('resConfigSummary')) {
+                let periodText = `${days} дн.`;
+                if (days === 1) periodText = '1 доба';
+                else if (days === 7) periodText = '7 днів (тиждень)';
+                else if (days === 14) periodText = '14 днів (2 тижні)';
+                else if (days === 30) periodText = '30 днів (місяць)';
+
+                document.getElementById('resConfigSummary').textContent = `${model.power} | ${model.volt} | ${periodText}`;
+            }
+
+            if (document.getElementById('resTotalPrice')) {
+                document.getElementById('resTotalPrice').textContent = `${totalCost.toLocaleString('uk-UA')} грн`;
+            }
+            if (document.getElementById('resRateSubtitle')) {
+                document.getElementById('resRateSubtitle').textContent = `Тариф: ${dailyRate.toLocaleString('uk-UA')} грн / доба (на ${days} дн.)`;
+            }
+
+            if (document.getElementById('resDeposit')) {
+                document.getElementById('resDeposit').textContent = `${model.deposit.toLocaleString('uk-UA')} грн`;
+            }
+
+            const breakdownBox = document.getElementById('resBreakdownBox');
+            if (breakdownBox) {
+                let html = `<div class="flex justify-between"><span>Оренда (${days} дн. × ${dailyRate} грн):</span><span class="font-bold text-[#111827]">${baseRentalCost.toLocaleString('uk-UA')} грн</span></div>`;
+                if (batteryCost > 0) {
+                    html += `<div class="flex justify-between"><span>Другий АКБ (${days} дн. × ${extraBatDailyRate} грн):</span><span class="font-bold text-[#1D5D3B]">+${batteryCost.toLocaleString('uk-UA')} грн</span></div>`;
                 }
-            });
-            calculateBuyout();
+                if (chargerCost > 0) {
+                    html += `<div class="flex justify-between"><span>Швидка зарядка 10A:</span><span class="font-bold text-[#1D5D3B]">+${chargerCost.toLocaleString('uk-UA')} грн</span></div>`;
+                }
+                if (calcState.hasHelmet) {
+                    html += `<div class="flex justify-between text-emerald-700 font-semibold"><span>Шолом + тримач для телефона:</span><span>Включено (0 грн)</span></div>`;
+                }
+                breakdownBox.innerHTML = html;
+            }
+
+            // 4. Оновлення кнопки та deep-link посилання
+            updateTelegramRentalLink(model, days, totalCost);
         }
 
-        function calculateBuyout() {
-            const model = FLEET.find(m => m.key === calcState.modelKey) || FLEET[0];
-            const basePrice = model.buyout_base_price;
-            const batDiff = BATTERY_UPGRADES[calcState.batteryCode] || 0;
-            const chDiff = CHARGER_UPGRADES[calcState.chargerCode] || 0;
-            const months = calcState.termMonths;
+        // Формування deep-link посилання на Telegram-бота: https://t.me/muviobot?start=rent_<model>_<days>d_<total>
+        function generateTelegramRentalLink(modelKey, days, total) {
+            const cleanSlug = (modelKey || 'crosser-cr-13-1').toLowerCase().replace(/_/g, '-');
+            return `https://t.me/muviobot?start=rent_${cleanSlug}_${days}d_${total}`;
+        }
 
-            // Повна вартість = базова ціна комплекту + різниця батареї + різниця зарядки
-            const totalPrice = basePrice + batDiff + chDiff;
-            const deposit = totalPrice * 0.20;
-            const monthlyPayment = (totalPrice - deposit) / months;
-            const weeklyGuide = monthlyPayment / 4;
-
-            document.getElementById('resModelTitle').textContent = model.name;
-            document.getElementById('resConfigSummary').textContent =
-                `${model.power} | ${model.voltage} | ${calcState.batteryCode.replace('_', ' ')} ${batDiff > 0 ? '(+' + batDiff + ' грн)' : '(базовий)'} | ${months} міс.`;
-
-            document.getElementById('resTotalPrice').textContent = `${Math.round(totalPrice).toLocaleString()} грн`;
-            document.getElementById('resDeposit').textContent = `${Math.round(deposit).toLocaleString()} грн`;
-            document.getElementById('resMonthly').innerHTML = `~${Math.round(monthlyPayment).toLocaleString()} грн<span class="text-base text-emerald-100 font-sans font-normal"> / міс.</span>`;
-            document.getElementById('resWeekly').innerHTML = `<span>Орієнтовно за тиждень:</span><span class="font-bold text-white">~${Math.round(weeklyGuide).toLocaleString()} грн/тижд</span>`;
-
-            // URL-safe Base64 кодування JSON
-            const botUrl = generateTelegramCalcLink();
+        function updateTelegramRentalLink(model, days, totalCost) {
             const tgBtn = document.getElementById('calcTelegramBtn');
-            if (tgBtn) {
-                tgBtn.href = botUrl;
-                const formattedPrice = Math.round(totalPrice).toLocaleString();
-                tgBtn.innerHTML = `
-                    <i data-lucide="send" class="w-5 h-5"></i>
-                    <span>НАДІСЛАТИ ЗАЯВКУ В TELEGRAM (${formattedPrice} грн)</span>
-                `;
-                if (window.lucide) {
-                    try { window.lucide.createIcons(); } catch (e) { }
-                }
+            if (!tgBtn) return;
+            const botUrl = generateTelegramRentalLink(calcState.modelKey, days, totalCost);
+            tgBtn.href = botUrl;
+            tgBtn.innerHTML = `
+                <i data-lucide="send" class="w-5 h-5"></i>
+                <span>НАДІСЛАТИ ЗАЯВКУ В TELEGRAM (${totalCost.toLocaleString('uk-UA')} ГРН)</span>
+            `;
+            if (window.lucide) {
+                try { window.lucide.createIcons(); } catch (e) { }
             }
         }
 
-        // URL-safe Base64 кодування JSON
-        function encodePayload(obj) {
-            const json = JSON.stringify(obj);
-            return btoa(unescape(encodeURIComponent(json)))
-                .replace(/\+/g, '-')
-                .replace(/\//g, '_')
-                .replace(/=+$/, '');
-        }
-
-        // Збір обраних даних калькулятора
-        function getSelectedCalcData() {
-            const model = FLEET.find(m => m.key === calcState.modelKey) || FLEET[0];
-            const basePrice = model.buyout_base_price;
-            const batDiff = BATTERY_UPGRADES[calcState.batteryCode] || 0;
-            const chDiff = CHARGER_UPGRADES[calcState.chargerCode] || 0;
-            const months = calcState.termMonths || 6;
-            const totalPrice = Math.round(basePrice + batDiff + chDiff);
-            const deposit = totalPrice * 0.20;
-            const monthlyPayment = Math.round((totalPrice - deposit) / months);
-
-            return {
-                modelKey: model.key,
-                model: model.name,
-                battery: `${calcState.batteryCode.replace(/_/g, ' ')} ${batDiff > 0 ? '(+' + batDiff.toLocaleString() + ' грн)' : '(базовий)'}`,
-                period: `${months} міс.`,
-                price: `${totalPrice.toLocaleString()} грн (~${monthlyPayment.toLocaleString()} грн/міс.)`,
-                totalPrice: totalPrice,
-                monthlyPayment: monthlyPayment
-            };
-        }
-
-        // Формування deep-link посилання на Telegram-бота: https://t.me/muviobot?start=calc_<BASE64_PAYLOAD>
-        function generateTelegramCalcLink() {
-            const data = getSelectedCalcData();
-            const payload = encodePayload({
-                model: data.model,
-                battery: data.battery,
-                period: data.period,
-                price: data.price
-            });
-            return `https://t.me/muviobot?start=calc_${payload}`;
-        }
-
-        // Обробник кліку по кнопці заявки з системним підтвердженням та редиректом у Telegram
-        function handleApplyClick(event) {
-            if (event) {
-                event.preventDefault();
-            }
-            const confirmed = window.confirm("Бажаєте перейти до Telegram-бота для оформлення заявки?");
-            if (!confirmed) {
-                return;
-            }
-            const botUrl = generateTelegramCalcLink();
-            window.location.href = botUrl;
+        // Обробник кліку по кнопці заявки
+        function handleRentalApplyClick(event) {
+            if (event) event.preventDefault();
+            const confirmed = window.confirm("Бажаєте перейти до Telegram-бота для оформлення заявки на оренду?");
+            if (!confirmed) return;
+            const model = RENTAL_TARIFFS[calcState.modelKey] || RENTAL_TARIFFS['crosser-cr-13-1'];
+            const dailyRate = getDailyRate(model, calcState.days);
+            const isBike = model.type.includes('велосипед') || model.volt === '48V';
+            const extraBatDailyRate = isBike ? 80 : 120;
+            const batteryCost = calcState.hasExtraBattery ? (extraBatDailyRate * calcState.days) : 0;
+            const chargerCost = calcState.hasFastCharger ? 150 : 0;
+            const total = Math.round(dailyRate * calcState.days) + batteryCost + chargerCost;
+            const url = generateTelegramRentalLink(calcState.modelKey, calcState.days, total);
+            window.location.href = url;
         }
 
 
@@ -1351,9 +1597,10 @@
         window.initCalcSelect = initCalcSelect;
         window.selectModelInCalc = selectModelInCalc;
         window.onModelChange = onModelChange;
-        window.updateCalcOptions = updateCalcOptions;
-        window.setCalcTerm = setCalcTerm;
-        window.calculateBuyout = calculateBuyout;
+        window.updateCalc = updateCalc;
+        window.setCalcDuration = setCalcDuration;
+        window.onSliderDaysChange = onSliderDaysChange;
+        window.handleRentalApplyClick = handleRentalApplyClick;
 
         // Мобильне меню з безпечною перевіркою
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
@@ -1375,7 +1622,7 @@
             try { initMap(); } catch (e) { console.error('Map init error:', e); }
             const tgBtn = document.getElementById('calcTelegramBtn');
             if (tgBtn) {
-                tgBtn.addEventListener('click', handleApplyClick);
+                tgBtn.addEventListener('click', handleRentalApplyClick);
             }
             try {
                 if (window.lucide) {

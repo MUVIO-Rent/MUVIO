@@ -23,3 +23,5 @@ Thumbs.db
 .venv
 env/
 venv/
+credentials.json
+analytics_sheet_backup.json

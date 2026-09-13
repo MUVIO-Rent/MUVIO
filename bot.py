@@ -10,9 +10,9 @@ import time
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 
-from aiogram import Bot, Dispatcher, types, F
+from aiogram import Bot, Dispatcher, types, F, BaseMiddleware
 from aiogram.exceptions import TelegramBadRequest
-from aiogram.filters import CommandStart, Command, StateFilter
+from aiogram.filters import CommandStart, Command, CommandObject, StateFilter
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.storage.memory import MemoryStorage
@@ -22,6 +22,7 @@ from aiogram.types import (
     InlineKeyboardMarkup,
     InlineKeyboardButton,
     CallbackQuery,
+    Message,
     InputMediaPhoto,
     InputMediaVideo,
     FSInputFile
@@ -120,6 +121,7 @@ SPREADSHEET_NAME = "MUVIO_Rent_CRM"
 
 sheet_requests = None
 sheet_incidents = None
+sheet_analytics_new = None
 
 COLOR_GREEN_CONFIRMED = {"red": 0.85, "green": 0.95, "blue": 0.85}
 
@@ -132,7 +134,7 @@ def color_row(worksheet, row_idx, color_dict):
 
 
 def init_google_sheets():
-    global sheet_requests, sheet_incidents
+    global sheet_requests, sheet_incidents, sheet_analytics_new
     if os.path.exists(CREDENTIALS_FILE):
         try:
             import gspread
@@ -143,6 +145,12 @@ def init_google_sheets():
             spreadsheet = client.open(SPREADSHEET_NAME)
             sheet_requests = spreadsheet.worksheet("Заявки")
             sheet_incidents = spreadsheet.worksheet("Поломки")
+            for s_name in ["Аналітика нових клієнтів", "Аналитика нових клієнтів"]:
+                try:
+                    sheet_analytics_new = spreadsheet.worksheet(s_name)
+                    break
+                except Exception:
+                    pass
             logger.info("✅ Подключение к Google Таблицам успешно!")
         except Exception as e:
             logger.error(f"❌ Ошибка Google Sheets: {e}")
@@ -150,6 +158,206 @@ def init_google_sheets():
         logger.warning(f"⚠️ Файл credentials.json не найден: {CREDENTIALS_FILE}")
 
 init_google_sheets()
+
+# --- GOOGLE SHEETS ANALYTICS PIPELINE ---
+CAT_ANALYTICS_MAP = {
+    "all": "Всі моделі",
+    "available": "В наявності",
+    "scooter": "Скутери",
+    "bike": "Електровелосипеди",
+}
+
+PERIOD_ANALYTICS_MAP = {
+    "1_doba": "1 доба",
+    "1_tyzhden": "1 тиждень",
+    "1_misyats": "1 місяць (28 днів)",
+    "1": "1 доба",
+    "7": "1 тиждень",
+    "28": "1 місяць",
+}
+
+def get_analytics_model_name(slug: str) -> str:
+    slug_norm = slug.lower().replace("-", "_").strip()
+    try:
+        if os.path.exists(JSON_FILE):
+            with open(JSON_FILE, "r", encoding="utf-8") as f:
+                f_data = json.load(f)
+                if slug_norm in f_data:
+                    return f_data[slug_norm].get("name", slug.replace("_", " ").title())
+                for k, v in f_data.items():
+                    if k.replace("-", "_") == slug_norm:
+                        return v.get("name", slug.replace("_", " ").title())
+    except Exception:
+        pass
+    return slug.replace("_", " ").replace("-", " ").title()
+
+def map_analytics_event(col_c: str, raw_action: str):
+    """
+    Converts raw callback strings and actions into clear Ukrainian labels before appending the row.
+    Returns (category, action_text) or None if the row should be dropped (e.g. ignore_pagination).
+    """
+    raw = str(raw_action).strip() if raw_action is not None else ""
+
+    # 1. Noise Filter (Drop useless rows)
+    if not raw or raw == "ignore_pagination":
+        return None
+
+    category = "Навігація"
+    action_text = raw
+
+    # 2. Human-Readable Action Mapping
+    if raw == "confirm_rent_booking":
+        category = "Бронювання"
+        action_text = "✅ Підтвердив бронювання оренди"
+    elif raw == "cancel_booking":
+        category = "Бронювання"
+        action_text = "❌ Скасував бронювання"
+    elif raw == "usr_rent_request":
+        category = "Бронювання"
+        action_text = "📝 Натиснув: Залишити заявку на оренду"
+    elif raw.startswith("book_") or raw == "book":
+        category = "Бронювання"
+        if raw == "book":
+            action_text = "🛵 Забронювати"
+        else:
+            model_slug = raw[5:]
+            m_name = get_analytics_model_name(model_slug)
+            action_text = f"🛵 Обрав модель: {m_name}"
+    elif raw.startswith("gallery_filter:"):
+        category = "Каталог"
+        parts = raw.split(":")
+        c_code = parts[1] if len(parts) > 1 else "all"
+        c_name = CAT_ANALYTICS_MAP.get(c_code, c_code.replace("_", " ").title())
+        action_text = f"🔍 Фільтр каталогу: {c_name}"
+    elif raw.startswith("gallery_next:"):
+        category = "Каталог"
+        parts = raw.split(":")
+        c_code = parts[1] if len(parts) > 1 else "all"
+        idx = parts[2] if len(parts) > 2 else "0"
+        c_name = CAT_ANALYTICS_MAP.get(c_code, c_code.replace("_", " ").title())
+        p_num = int(idx) + 1 if idx.isdigit() else idx
+        action_text = f"➡️ Гортає каталог ({c_name}, стор. {p_num})"
+    elif raw.startswith("gallery_prev:"):
+        category = "Каталог"
+        parts = raw.split(":")
+        c_code = parts[1] if len(parts) > 1 else "all"
+        idx = parts[2] if len(parts) > 2 else "0"
+        c_name = CAT_ANALYTICS_MAP.get(c_code, c_code.replace("_", " ").title())
+        p_num = int(idx) + 1 if idx.isdigit() else idx
+        action_text = f"⬅️ Гортає каталог ({c_name}, стор. {p_num})"
+    elif raw.startswith("rent_period:"):
+        category = "Бронювання"
+        period_key = raw.split(":", 1)[1]
+        p_text = PERIOD_ANALYTICS_MAP.get(period_key, period_key.replace("_", " "))
+        action_text = f"⏱ Період оренди: {p_text}"
+    elif raw.startswith("helmets:"):
+        category = "Бронювання"
+        h_val = raw.split(":", 1)[1]
+        if h_val == "0":
+            action_text = "🪖 Шоломи: Без шолома (маю свій)"
+        elif h_val == "1":
+            action_text = "🪖 Шоломи: 1 шолом"
+        elif h_val == "2":
+            action_text = "🪖 Шоломи: 2 шоломи"
+        else:
+            action_text = f"🪖 Шоломи: {h_val}"
+    elif raw.startswith("join_waitlist:"):
+        category = "Каталог"
+        w_item = raw.split(":", 1)[1]
+        w_name = get_analytics_model_name(w_item) if w_item != "any" else "Будь-яка модель"
+        action_text = f"⏳ Встати в лист очікування: {w_name}"
+    elif raw.startswith("c_calc:"):
+        category = "Бронювання"
+        action_text = "🤝 Заявка на викуп з сайту"
+    elif "Особистий кабінет" in raw or raw.startswith("cabinet_") or raw in ["back_to_cabinet", "client_buyout_menu"]:
+        category = "Кабінет"
+        action_text = raw if any(ord(c) > 127 for c in raw) else raw.replace("_", " ").title()
+    elif "Каталог" in raw:
+        category = "Каталог"
+        action_text = raw
+    elif "доставка" in raw or "новачок" in raw or "досвід" in raw or raw.startswith("🍕") or raw.startswith("🐣") or raw.startswith("🛵 Так"):
+        category = "Бронювання"
+        action_text = raw
+    elif raw == "/start" or raw.startswith("/start "):
+        category = "Навігація"
+        action_text = "🚀 Запуск бота (/start)"
+    elif any(ord(c) > 127 for c in raw):
+        # Preserve already valid Ukrainian labels and infer category
+        if col_c and col_c not in ["—", "start", "-", ""]:
+            category = col_c
+        else:
+            low = raw.lower()
+            if "умови" in low or "правил" in low or "меню" in low:
+                category = "Навігація"
+            elif "каталог" in low or "модел" in low or "скутер" in low:
+                category = "Каталог"
+            elif "кабінет" in low or "профіль" in low:
+                category = "Кабінет"
+            else:
+                category = "Бронювання"
+        action_text = raw
+    else:
+        # Fallback for unmapped developer strings or inputs: strip underscores and format cleanly
+        if raw.isdigit():
+            category = "Бронювання"
+            action_text = f"Введення значення: {raw}"
+        else:
+            category = "Навігація" if "menu" in raw or "back" in raw else "Бронювання"
+            action_text = raw.replace("_", " ").strip().capitalize()
+
+    return category, action_text
+
+def _log_analytics_worker(user_id: int, username: str, raw_action: str, col_c: str = "—"):
+    try:
+        mapped = map_analytics_event(col_c, raw_action)
+        if not mapped:
+            return  # Noise filter: drop useless row
+        category, action_text = mapped
+        if not sheet_analytics_new:
+            return
+        now_str = datetime.now().strftime("%d.%m.%Y %H:%M:%S")
+        user_str = f"{user_id} (@{username})" if username else str(user_id)
+        sheet_analytics_new.append_row([now_str, user_str, category, action_text])
+    except Exception as e:
+        logger.warning(f"Помилка запису в аналітику Google Sheets: {e}")
+
+def log_analytics_event_async(user_id: int, username: str, raw_action: str, col_c: str = "—"):
+    try:
+        loop = asyncio.get_running_loop()
+        loop.run_in_executor(None, _log_analytics_worker, user_id, username, raw_action, col_c)
+    except Exception:
+        pass
+
+class GoogleSheetsAnalyticsMiddleware(BaseMiddleware):
+    async def __call__(self, handler, event, data):
+        try:
+            if isinstance(event, CallbackQuery):
+                raw = event.data
+                user = event.from_user
+                if raw and user:
+                    log_analytics_event_async(user.id, user.username, raw)
+            elif isinstance(event, Message):
+                user = event.from_user
+                raw = None
+                if event.text:
+                    raw = event.text
+                elif event.contact:
+                    raw = f"Контакт: {event.contact.phone_number}"
+                elif event.photo:
+                    raw = "[Фотографія]"
+                elif event.document:
+                    raw = "[Документ]"
+                elif event.location:
+                    raw = "[Геолокація]"
+                if raw and user:
+                    log_analytics_event_async(user.id, user.username, raw)
+        except Exception as e:
+            logger.debug(f"Analytics middleware error: {e}")
+
+        return await handler(event, data)
+
+dp.message.outer_middleware(GoogleSheetsAnalyticsMiddleware())
+dp.callback_query.outer_middleware(GoogleSheetsAnalyticsMiddleware())
 
 async def init_db():
     async with aiosqlite.connect(DB_PATH) as db:
@@ -255,7 +463,10 @@ async def init_db():
             "contract_num TEXT DEFAULT '2804-5'",
             "contract_date TEXT DEFAULT '28.04.2026'",
             "has_helmet INTEGER DEFAULT 0",
-            "reminder_sent INTEGER DEFAULT 0"
+            "reminder_sent INTEGER DEFAULT 0",
+            "status TEXT DEFAULT 'active'",
+            "rent_paid_days INTEGER DEFAULT 0",
+            "rent_period_days INTEGER DEFAULT 7"
         ]:
             try:
                 await db.execute(f"ALTER TABLE rentals ADD COLUMN {col_def}")
@@ -275,6 +486,8 @@ async def init_db():
             "battery_spec TEXT",
             "charger_spec TEXT",
             "term_months INTEGER DEFAULT 6",
+            "buyout_term_days INTEGER DEFAULT 180",
+            "total_term_days INTEGER DEFAULT 180",
             "contract_num TEXT DEFAULT '2804-5'",
             "contract_date TEXT DEFAULT '28.04.2026'",
             "is_current_vehicle INTEGER DEFAULT 1"
@@ -678,14 +891,21 @@ def decode_calc_payload(payload_str: str) -> dict:
     """
     Розбір payload з калькулятора сайту.
     Основний формат: modelKey_batteryCode_chargerCode_months (наприклад: aima-a700_e_ch10_6).
-    Підтримує також зворотну сумісність з legacy URL-safe Base64 JSON.
+    Підтримує префікси calc_, buyout_, а також зворотну сумісність з legacy URL-safe Base64 JSON.
     """
     if not payload_str:
         return None
 
+    raw_str = str(payload_str).strip()
+    cleaned_str = raw_str
+    for pfx in ("calc_", "buyout_", "calc-", "buyout-"):
+        if cleaned_str.lower().startswith(pfx):
+            cleaned_str = cleaned_str[len(pfx):]
+            break
+
     # 1. Основний компактний формат без base64: modelSlug_batteryCode_chargerCode_termMonths
     try:
-        parts = str(payload_str).rsplit("_", 3)
+        parts = cleaned_str.rsplit("_", 3)
         if len(parts) == 4 and parts[3].isdigit():
             slug = parts[0].strip().lower().replace("_", "-")
             bat_code = parts[1].strip().lower()  # 'b' (базовий) або 'e' (extra)
@@ -701,7 +921,7 @@ def decode_calc_payload(payload_str: str) -> dict:
                         slug = k
                         break
             if not pricing:
-                pricing = CALC_FLEET_PRICING["crosser-cr-13-1"]
+                pricing = CALC_FLEET_PRICING.get("crosser-cr-13-1")
 
             volt = pricing.get("volt", 72)
             if bat_code == 'e':
@@ -749,31 +969,58 @@ def decode_calc_payload(payload_str: str) -> dict:
         logger.warning(f"Помилка розбору компактного payload '{payload_str}': {e}")
 
     # 2. Legacy URL-safe Base64 JSON
+    for candidate in (cleaned_str, raw_str):
+        try:
+            norm = candidate.replace("-", "+").replace("_", "/")
+            rem = len(norm) % 4
+            if rem > 0:
+                norm += "=" * (4 - rem)
+            decoded = base64.b64decode(norm).decode("utf-8")
+            data = json.loads(decoded)
+            if isinstance(data, dict):
+                model_raw = data.get("model", "")
+                v_key, v_data = find_fleet_vehicle(model_raw)
+                model_name = v_data.get("name") if v_data else (model_raw or "Електроскутер MUVIO")
+                return {
+                    "model_key": v_key or "custom",
+                    "model_slug": v_key or "custom",
+                    "model_name": model_name,
+                    "battery": data.get("battery", "Базовий"),
+                    "charger": "Калькулятор сайту",
+                    "period": data.get("period", "6 міс."),
+                    "term_months": 6,
+                    "price": data.get("price", "За розрахунком"),
+                    "total_price": 0.0,
+                    "deposit": 0.0,
+                    "monthly_payment": 0.0,
+                    "compact_payload": candidate[:40]
+                }
+        except Exception:
+            pass
+
+    # 3. Fallback: пошук моделі за згадкою в тексті payload
     try:
-        norm = payload_str.replace("-", "+").replace("_", "/")
-        rem = len(norm) % 4
-        if rem > 0:
-            norm += "=" * (4 - rem)
-        decoded = base64.b64decode(norm).decode("utf-8")
-        data = json.loads(decoded)
-        if isinstance(data, dict):
-            model_raw = data.get("model", "")
-            v_key, v_data = find_fleet_vehicle(model_raw)
-            model_name = v_data.get("name") if v_data else (model_raw or "Електроскутер MUVIO")
-            return {
-                "model_key": v_key or "custom",
-                "model_slug": v_key or "custom",
-                "model_name": model_name,
-                "battery": data.get("battery", "Базовий"),
-                "charger": "Калькулятор сайту",
-                "period": data.get("period", "6 міс."),
-                "term_months": 6,
-                "price": data.get("price", "За розрахунком"),
-                "total_price": 0.0,
-                "deposit": 0.0,
-                "monthly_payment": 0.0,
-                "compact_payload": payload_str[:40]
-            }
+        norm_text = cleaned_str.lower().replace("_", "-")
+        for k, v in CALC_FLEET_PRICING.items():
+            if k in norm_text or k.replace("-", "") in norm_text.replace("-", ""):
+                base_price = v.get("base", 50000)
+                deposit = int(round(base_price * 0.20))
+                monthly_payment = int(round((base_price - deposit) / 6))
+                v_key, v_data = find_fleet_vehicle(k)
+                return {
+                    "model_key": v_key or k,
+                    "model_slug": k,
+                    "model_name": v.get("name") or (v_data.get("name") if v_data else k),
+                    "battery": "48V 10Ah (Базовий)" if v.get("volt") == 48 else f"{v.get('volt', 72)}V 40Ah (Базовий)",
+                    "charger": "Без додаткової зарядки",
+                    "period": "6 міс.",
+                    "term_months": 6,
+                    "price": f"{base_price:,} грн (~{monthly_payment:,} грн/міс.)".replace(",", " "),
+                    "total_price": float(base_price),
+                    "deposit": float(deposit),
+                    "monthly_payment": float(monthly_payment),
+                    "compact_payload": f"{k}_b_none_6"
+                }
     except Exception:
         pass
 
@@ -833,12 +1080,19 @@ def get_local_photo_path(v_key: str) -> str:
     return mapping.get(clean)
 
 @dp.message(CommandStart(), StateFilter("*"))
-async def start_cmd_handler(message: types.Message, state: FSMContext):
+async def start_cmd_handler(message: types.Message, state: FSMContext, command: CommandObject = None):
     await safe_clear_state(state)
-    args = message.text.split()[1:]
-    if args and args[0].startswith("ref_"):
+    start_arg = ""
+    if command and command.args:
+        start_arg = command.args.strip()
+    elif message.text:
+        parts = message.text.split(maxsplit=1)
+        if len(parts) > 1:
+            start_arg = parts[1].strip()
+
+    if start_arg.startswith("ref_"):
         try:
-            ref_id = int(args[0].replace("ref_", ""))
+            ref_id = int(start_arg.replace("ref_", ""))
             if ref_id != message.from_user.id:
                 async with aiosqlite.connect(DB_PATH) as db:
                     await db.execute(
@@ -850,16 +1104,26 @@ async def start_cmd_handler(message: types.Message, state: FSMContext):
             pass
 
     # --- ОБРОБКА ДАННИХ З КАЛЬКУЛЯТОРА ВИКУПУ (RENT-TO-OWN) ---
-    if args and args[0].startswith("calc_"):
-        calc_payload = args[0][5:]
-        calc_data = decode_calc_payload(calc_payload)
+    is_calc_payload = (
+        start_arg.startswith("calc_") or 
+        start_arg.startswith("buyout_") or 
+        start_arg.startswith("calc-") or 
+        start_arg.startswith("buyout-")
+    )
+    if not is_calc_payload and start_arg and not (start_arg.startswith("ref_") or start_arg.startswith("rent_") or start_arg.startswith("admin")):
+        parts = start_arg.rsplit("_", 3)
+        if len(parts) == 4 and parts[3].isdigit():
+            is_calc_payload = True
+
+    if is_calc_payload:
+        calc_data = decode_calc_payload(start_arg)
         if calc_data:
             model_name = calc_data.get("model_name", "Електроскутер MUVIO")
             battery_val = calc_data.get("battery", "")
             period_val = calc_data.get("period", "")
             price_val = calc_data.get("price", "")
             v_key = calc_data.get("model_key", "")
-            c_payload = calc_data.get("compact_payload", calc_payload[:40])
+            c_payload = calc_data.get("compact_payload", start_arg[:40])
 
             PENDING_CALC_REQUESTS[str(message.from_user.id)] = {
                 **calc_data,
@@ -906,6 +1170,84 @@ async def start_cmd_handler(message: types.Message, state: FSMContext):
                 await message.answer(caption, parse_mode="HTML", reply_markup=kb)
 
             return
+        else:
+            await message.answer(
+                "⚠️ <b>Не вдалося розпізнати параметри розрахунку викупу.</b>\n\n"
+                "Будь ласка, перейдіть до калькулятора на сайті та сформуйте заявку повторно.",
+                parse_mode="HTML",
+                reply_markup=InlineKeyboardMarkup(inline_keyboard=[
+                    [InlineKeyboardButton(text="🧮 Відкрити калькулятор", url="https://muviorent.com/calculator.html")]
+                ])
+            )
+    # --- ОБРОБКА ДАННИХ З КАЛЬКУЛЯТОРА ОРЕНДИ (RENT CALCULATOR) ---
+    if start_arg.startswith("rent_"):
+        raw_rent = start_arg[5:].strip()
+        r_model = raw_rent
+        r_days = "7"
+        r_total = ""
+        
+        parts = raw_rent.rsplit("_", 2)
+        if len(parts) == 3 and parts[1].endswith("d") and parts[1][:-1].isdigit():
+            r_model = parts[0]
+            r_days = parts[1][:-1]
+            r_total = parts[2]
+        elif len(parts) == 2 and parts[1].endswith("d") and parts[1][:-1].isdigit():
+            r_model = parts[0]
+            r_days = parts[1][:-1]
+
+        v_key, v_data = find_fleet_vehicle(r_model)
+        model_name = v_data.get("name") if v_data else r_model.replace("-", " ").replace("_", " ").title()
+        deposit_val = v_data.get("deposit", 2000) if v_data else 2000
+        
+        caption = (
+            "🛵 <b>Заявка на оренду транспорту</b>\n\n"
+            f"• <b>Модель:</b> {model_name}\n"
+            f"• <b>Термін оренди:</b> {r_days} дн.\n"
+        )
+        if r_total:
+            try:
+                formatted_total = f"{int(r_total):,} грн".replace(",", " ")
+            except Exception:
+                formatted_total = f"{r_total} грн"
+            caption += f"• <b>Разом до оплати:</b> {formatted_total}\n"
+        caption += (
+            f"• <b>Застава:</b> {deposit_val:,} грн (або без застави через Дію)\n\n"
+            "Перевірте параметри та натисніть кнопку нижче для оформлення оренди."
+        ).replace(",", " ")
+
+        kb_buttons = []
+        if v_key and v_key in FLEET_DATABASE:
+            kb_buttons.append([InlineKeyboardButton(text="✅ Оформити оренду", callback_data=f"book_{v_key}")])
+        else:
+            kb_buttons.append([InlineKeyboardButton(text="🛵 Каталог транспорту", callback_data="book")])
+        kb_buttons.append([InlineKeyboardButton(text="❌ Змінити параметри", url="https://muviorent.com/calculator.html")])
+        kb = InlineKeyboardMarkup(inline_keyboard=kb_buttons)
+
+        photo_sent = False
+        photo_id = v_data.get("photo_id") if v_data else None
+        if photo_id:
+            try:
+                await message.answer_photo(photo=photo_id, caption=caption, parse_mode="HTML", reply_markup=kb)
+                photo_sent = True
+            except Exception as e:
+                logger.warning(f"Не вдалося надіслати photo_id {photo_id}: {e}")
+
+        if not photo_sent and v_key:
+            local_rel = get_local_photo_path(v_key)
+            if local_rel:
+                abs_p = os.path.join(CURRENT_DIR, local_rel)
+                if os.path.exists(abs_p):
+                    try:
+                        photo_file = FSInputFile(abs_p)
+                        await message.answer_photo(photo=photo_file, caption=caption, parse_mode="HTML", reply_markup=kb)
+                        photo_sent = True
+                    except Exception as e:
+                        logger.warning(f"Не вдалося надіслати локальне фото {abs_p}: {e}")
+
+        if not photo_sent:
+            await message.answer(caption, parse_mode="HTML", reply_markup=kb)
+
+        return
 
     user_name = message.from_user.first_name or "Максим"
     welcome_text = (
@@ -1018,7 +1360,8 @@ async def process_confirm_calc_buyout(callback: CallbackQuery):
         "🌐 Заявка оформлена через deep-link з сайту muviorent.com"
     )
     admin_kb = InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text="✅ Схвалити викуп та зафіксувати", callback_data=f"b_appr:{deal_id}")]
+        [InlineKeyboardButton(text="✅ Схвалити викуп та зафіксувати", callback_data=f"b_appr:{deal_id}")],
+        [InlineKeyboardButton(text="❌ Відхилити заявку", callback_data=f"b_rej:{deal_id}")]
     ]) if deal_id else None
 
     try:
@@ -1451,8 +1794,12 @@ async def process_profile(event: types.Message | types.CallbackQuery, state: FSM
                 await msg.answer(text, parse_mode="HTML", reply_markup=get_auth_keyboard())
             return
 
-        async with db.execute("SELECT * FROM rentals WHERE user_phone = ? ORDER BY id DESC LIMIT 1", (user['phone_number'],)) as cursor:
+        async with db.execute("SELECT * FROM rentals WHERE user_phone = ? AND (status = 'active' OR status IS NULL) ORDER BY id DESC LIMIT 1", (user['phone_number'],)) as cursor:
             single_r = await cursor.fetchone()
+        if single_r:
+            r_stat = single_r['status'] if 'status' in single_r.keys() else 'active'
+            if r_stat in ('cancelled', 'rejected'):
+                single_r = None
         rentals = [single_r] if single_r else []
 
         async with db.execute("SELECT * FROM buyout_deals WHERE user_id = ? AND status = 'active' ORDER BY id DESC LIMIT 1", (user_id,)) as cursor:
@@ -1483,9 +1830,19 @@ async def process_profile(event: types.Message | types.CallbackQuery, state: FSM
                 bar = "▓▓▓▓▓▓▓▓▓▓"
                 time_str = r['end_date']
 
+            # БАГ 2: Реальний строк оплаченої оренди (наприклад, 7 дн.), а не строк договору викупу
+            paid_days = 0
+            if 'rent_paid_days' in r.keys() and r['rent_paid_days'] is not None:
+                paid_days = int(r['rent_paid_days'])
+            elif 'rent_period_days' in r.keys() and r['rent_period_days'] is not None:
+                paid_days = int(r['rent_period_days'])
+            else:
+                paid_days = 7
+
             text += (
                 f"🛵 <b>Техніка:</b> {r['vehicle_info']}\n"
                 f"📅 <b>Діє до:</b> <code>{r['end_date']}</code>\n"
+                f"⏱ <b>Оплачено оренди:</b> {paid_days} дн.\n"
                 f"⏳ <b>До кінця тижня:</b> {time_str}\n"
                 f"📈 <b>Шкала оренди:</b> <code>[{bar}]</code>\n"
                 f"💰 <b>До сплати за оренду:</b> <b>{r['amount_due']:.2f} грн</b>\n"
@@ -1504,6 +1861,7 @@ async def process_profile(event: types.Message | types.CallbackQuery, state: FSM
         b_bar = "▓" * b_filled + "░" * (10 - b_filled)
         
         term_plan = buyout['term_months'] if 'term_months' in buyout.keys() and buyout['term_months'] else 6
+        buyout_term_days = buyout['buyout_term_days'] if ('buyout_term_days' in buyout.keys() and buyout['buyout_term_days']) else (term_plan * 30)
         months_passed = 1
         try:
             start_raw = buyout['start_date']
@@ -1535,7 +1893,7 @@ async def process_profile(event: types.Message | types.CallbackQuery, state: FSM
             f"💵 <b>Повна сума викупу:</b> <code>{tot:.2f} грн</code>\n"
             f"✅ <b>Вже виплачено:</b> <code>{paid:.2f} грн з {tot:.2f} грн</code>\n"
             f"⏳ <b>Залишилось виплатити:</b> <b>{rem:.2f} грн</b>\n"
-            f"📅 <b>Термін викупу:</b> {term_str}\n"
+            f"📅 <b>Термін викупу:</b> {term_str} ({buyout_term_days} дн.)\n"
             f"📈 <b>Прогрес викупу ({int(b_pct*100)}%):</b>\n"
             f"<code>[{b_bar}]</code>\n"
             "────────────────────\n"
@@ -2314,7 +2672,7 @@ async def process_send_final_buyout_app(callback: CallbackQuery):
         await db.commit()
 
     admin_msg = (
-        "🏷 <b>НОВА ЗАЯВКА НА ВИКУП СКУТЕРА!</b>\n"
+        "🤝 <b>НОВА ЗАЯВКА НА ВИКУП ВІД ДІЮЧОГО ОРЕНДАРЯ!</b>\n"
         "────────────────────\n"
         f"👤 <b>Клієнт:</b> {user_name} ({username})\n"
         f"🆔 <b>TG ID:</b> <code>{user_id}</code>\n"
@@ -2328,7 +2686,8 @@ async def process_send_final_buyout_app(callback: CallbackQuery):
     )
 
     admin_kb = InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text="✅ Схвалити викуп та зафіксувати", callback_data=f"b_appr:{deal_id}")]
+        [InlineKeyboardButton(text="✅ Схвалити умови викупу", callback_data=f"b_appr:{deal_id}")],
+        [InlineKeyboardButton(text="❌ Відхилити", callback_data=f"b_rej:{deal_id}")]
     ])
 
     try:
@@ -2336,7 +2695,7 @@ async def process_send_final_buyout_app(callback: CallbackQuery):
     except Exception as e:
         logger.error(f"[BUYOUT DEAL ADMIN ALERT ERROR] Ошибка алерта админа по сделке #{deal_id} (user_id={user_id}): {e}")
 
-@dp.callback_query(F.data.startswith("b_appr:"), StateFilter("*"))
+@dp.callback_query(F.data.startswith("b_appr:") | F.data.startswith("approve_buyout:"), StateFilter("*"))
 async def admin_approve_buyout_deal(callback: CallbackQuery):
     if callback.from_user.id != ADMIN_ID: return
     await callback.answer()
@@ -2374,9 +2733,9 @@ async def admin_approve_buyout_deal(callback: CallbackQuery):
             ch_spec = "-"
             await db.execute(
                 """INSERT INTO buyout_deals 
-                (user_id, vehicle_key, vehicle_info, total_price, paid_amount, deposit_paid, status, start_date, battery_spec, charger_spec, term_months) 
-                VALUES (?, ?, ?, ?, 0, ?, 'active', ?, ?, ?, ?)""",
-                (u_id, v_key, v_info, tot_price, dep_price, now_str, bat_spec, ch_spec, months)
+                (user_id, vehicle_key, vehicle_info, total_price, paid_amount, deposit_paid, status, start_date, battery_spec, charger_spec, term_months, buyout_term_days, total_term_days) 
+                VALUES (?, ?, ?, ?, 0, ?, 'active', ?, ?, ?, ?, ?, ?)""",
+                (u_id, v_key, v_info, tot_price, dep_price, now_str, bat_spec, ch_spec, months, months * 30, months * 30)
             )
             await db.commit()
 
@@ -2402,6 +2761,51 @@ async def admin_approve_buyout_deal(callback: CallbackQuery):
         logger.error(f"Помилка відправки сповіщення клієнту про викуп: {e}")
 
     await callback.message.edit_text(callback.message.text + "\n\n✅ <b>СТАТУС: Схвалено та зафіксовано в базі!</b>", parse_mode="HTML")
+
+@dp.callback_query(F.data.startswith("b_rej:") | F.data.startswith("reject_buyout:") | F.data.startswith("reject_buyout_existing:"), StateFilter("*"))
+async def admin_reject_buyout_deal(callback: CallbackQuery):
+    if callback.from_user.id != ADMIN_ID: return
+    await callback.answer()
+    parts = callback.data.split(":")
+    deal_id = int(parts[1]) if len(parts) > 1 and parts[1].isdigit() else None
+    
+    if not deal_id:
+        await callback.answer("Угоду не знайдено", show_alert=True)
+        return
+
+    async with aiosqlite.connect(DB_PATH) as db:
+        db.row_factory = aiosqlite.Row
+        async with db.execute("SELECT * FROM buyout_deals WHERE id = ?", (deal_id,)) as cur:
+            deal = await cur.fetchone()
+            
+        if not deal:
+            await callback.answer("Угоду не знайдено в БД", show_alert=True)
+            return
+
+        u_id = deal['user_id']
+
+        # 1. Переводимо виключно статус заявки на викуп в rejected
+        # Поточна активна оренда в таблиці rentals та закріплення техніки залишаються активними!
+        await db.execute("UPDATE buyout_deals SET status = 'rejected' WHERE id = ?", (deal_id,))
+        await db.commit()
+
+    # 2. Сповіщаємо клієнта: оренда залишається без змін
+    try:
+        reject_msg = (
+            "❌ <b>Вашу заявку на викуп було відхилено.</b>\n\n"
+            "Ваша поточна оренда залишається активною без змін. Якщо у вас виникли запитання, будь ласка, зверніться до нашого менеджера: @Muvio_Odesa"
+        )
+        await bot.send_message(chat_id=u_id, text=reject_msg, parse_mode="HTML")
+    except Exception as e:
+        logger.error(f"Помилка сповіщення клієнта про відхилення викупу #{deal_id}: {e}")
+
+    try:
+        await callback.message.edit_text(
+            callback.message.text + "\n\n❌ <b>СТАТУС: Заявку на викуп відхилено адміністратором!</b>",
+            parse_mode="HTML"
+        )
+    except Exception:
+        pass
 
 
 # ==================== БРОНИРОВАНИЕ ОРЕНДЫ ====================
@@ -2916,12 +3320,15 @@ async def booking_confirm_callback(callback: CallbackQuery, state: FSMContext):
     if period_code == "1_doba":
         end_date = (now + timedelta(days=1)).strftime("%Y-%m-%d 23:59")
         amount = veh_data.get("price_day", 900)
+        period_days = 1
     elif period_code == "1_misyats":
         end_date = (now + timedelta(days=28)).strftime("%Y-%m-%d 23:59")
         amount = veh_data.get("price_month", 8000)
+        period_days = 28
     else:
         end_date = (now + timedelta(days=7)).strftime("%Y-%m-%d 23:59")
         amount = veh_data.get("price_week", 2200)
+        period_days = 7
 
     # Save to SQLite rentals_base.db
     async with aiosqlite.connect(DB_PATH) as db:
@@ -2937,11 +3344,12 @@ async def booking_confirm_callback(callback: CallbackQuery, state: FSMContext):
         # Avoid duplicate rentals for this phone / vehicle
         await db.execute("DELETE FROM rentals WHERE user_phone = ? OR vehicle_info = ?", (phone, model_name))
         # Insert rental record
-        await db.execute(
-            """INSERT INTO rentals (user_phone, vehicle_info, end_date, amount_due, contract_num, contract_date, has_helmet, reminder_sent)
-            VALUES (?, ?, ?, ?, '2804-5', ?, ?, 0)""",
-            (phone, model_name, end_date, amount, now.strftime("%d.%m.%Y"), helmets)
+        cursor = await db.execute(
+            """INSERT INTO rentals (user_phone, vehicle_info, end_date, amount_due, contract_num, contract_date, has_helmet, reminder_sent, status, rent_paid_days, rent_period_days)
+            VALUES (?, ?, ?, ?, '2804-5', ?, ?, 0, 'active', 0, ?)""",
+            (phone, model_name, end_date, amount, now.strftime("%d.%m.%Y"), helmets, period_days)
         )
+        rental_id = cursor.lastrowid
         await db.commit()
 
     # Update fleet status
@@ -2982,12 +3390,48 @@ async def booking_confirm_callback(callback: CallbackQuery, state: FSMContext):
         "<i>Заявку та оренду автоматично зафіксовано в базі rentals_base.db.</i>"
     )
     admin_kb = InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text="👑 Відкрити карточку в адмінці", callback_data=f"admmanage:{veh_id}")]
+        [InlineKeyboardButton(text="👑 Відкрити карточку в адмінці", callback_data=f"admmanage:{veh_id}")],
+        [InlineKeyboardButton(text="❌ Відхилити заявку", callback_data=f"adm_reject_rent:{rental_id}:{user_id}:{veh_id}")]
     ])
     try:
         await bot.send_message(chat_id=ADMIN_ID, text=admin_notify, parse_mode="HTML", reply_markup=admin_kb)
     except Exception as e:
         logger.error(f"Помилка сповіщення адміна: {e}")
+
+@dp.callback_query(F.data.startswith("adm_reject_rent:"), StateFilter("*"))
+async def admin_reject_rental_booking(callback: CallbackQuery):
+    if callback.from_user.id != ADMIN_ID: return
+    await callback.answer()
+    parts = callback.data.split(":")
+    rental_id = int(parts[1])
+    target_user_id = int(parts[2])
+    veh_id = parts[3] if len(parts) > 3 else None
+
+    async with aiosqlite.connect(DB_PATH) as db:
+        await db.execute("UPDATE rentals SET status = 'rejected' WHERE id = ?", (rental_id,))
+        await db.commit()
+
+    if veh_id and veh_id in FLEET_DATABASE and FLEET_DATABASE[veh_id].get("reserved_by") == target_user_id:
+        FLEET_DATABASE[veh_id]["status"] = "available"
+        FLEET_DATABASE[veh_id]["reserved_by"] = None
+        save_fleet()
+
+    try:
+        reject_msg = (
+            "❌ <b>Вашу заявку було відхилено або скасовано адміністратором.</b>\n\n"
+            "Якщо у вас виникли запитання, будь ласка, зверніться до нашого менеджера: @Muvio_Odesa"
+        )
+        await bot.send_message(chat_id=target_user_id, text=reject_msg, parse_mode="HTML")
+    except Exception as e:
+        logger.error(f"Помилка сповіщення клієнта про відхилення оренди #{rental_id}: {e}")
+
+    try:
+        await callback.message.edit_text(
+            callback.message.text + "\n\n❌ <b>СТАТУС: Заявку на оренду відхилено адміністратором!</b>",
+            parse_mode="HTML"
+        )
+    except Exception:
+        pass
 
 # ==================== ФИНАНСОВЫЙ ДАШБОРД И НАЛОГИ ====================
 
@@ -3999,10 +4443,17 @@ async def finalize_issue(message: types.Message, state: FSMContext, user_phone: 
         # Ensure only 1 active rental for this user or vehicle
         await db.execute("DELETE FROM rentals WHERE user_phone = ? OR vehicle_info = ?", (user_phone, model_name))
 
+        # Calculate issued days
+        try:
+            end_dt = datetime.strptime(end_date[:10], "%Y-%m-%d")
+            issued_days = max(1, (end_dt - get_kyiv_now().replace(tzinfo=None)).days + 1)
+        except Exception:
+            issued_days = 7
+
         cursor = await db.execute(
-            "INSERT INTO rentals (user_phone, vehicle_info, end_date, amount_due, contract_num, contract_date, has_helmet, reminder_sent) "
-            "VALUES (?, ?, ?, ?, ?, ?, ?, 0)",
-            (user_phone, model_name, end_date, amount, contract_num, contract_date, has_helmet)
+            "INSERT INTO rentals (user_phone, vehicle_info, end_date, amount_due, contract_num, contract_date, has_helmet, reminder_sent, status, rent_paid_days, rent_period_days) "
+            "VALUES (?, ?, ?, ?, ?, ?, ?, 0, 'active', ?, ?)",
+            (user_phone, model_name, end_date, amount, contract_num, contract_date, has_helmet, issued_days, issued_days)
         )
         rental_id = cursor.lastrowid
 
@@ -4081,8 +4532,10 @@ async def admin_stop_rental(callback: types.CallbackQuery):
             async with db.execute("SELECT phone_number FROM users WHERE telegram_id = ?", (user_id,)) as cursor:
                 row = await cursor.fetchone()
                 if row:
+                    await db.execute("UPDATE rentals SET status = 'cancelled' WHERE user_phone = ?", (row[0],))
                     await db.execute("DELETE FROM rentals WHERE user_phone = ?", (row[0],))
-                    await db.commit()
+            await db.execute("UPDATE buyout_deals SET status = 'cancelled' WHERE user_id = ? AND vehicle_key = ?", (user_id, item_id))
+            await db.commit()
 
         try:
             await bot.send_message(
@@ -4234,7 +4687,17 @@ async def admin_set_status_callback(callback: CallbackQuery):
         old_status = FLEET_DATABASE[item_id]["status"]
         FLEET_DATABASE[item_id]["status"] = new_stat
         if new_stat == "available":
+            prev_user_id = FLEET_DATABASE[item_id].get("reserved_by")
             FLEET_DATABASE[item_id]["reserved_by"] = None
+            if prev_user_id:
+                async with aiosqlite.connect(DB_PATH) as db:
+                    async with db.execute("SELECT phone_number FROM users WHERE telegram_id = ?", (prev_user_id,)) as cursor:
+                        row = await cursor.fetchone()
+                        if row:
+                            await db.execute("UPDATE rentals SET status = 'cancelled' WHERE user_phone = ?", (row[0],))
+                            await db.execute("DELETE FROM rentals WHERE user_phone = ?", (row[0],))
+                    await db.execute("UPDATE buyout_deals SET status = 'cancelled' WHERE user_id = ? AND vehicle_key = ?", (prev_user_id, item_id))
+                    await db.commit()
         save_fleet()
         
         if new_stat == "available" and old_status != "available" and len(WAITLIST) > 0:
@@ -4872,20 +5335,22 @@ async def api_user_profile(request):
         # 2. Active Rental
         rental_data = None
         if phone:
-            async with db.execute("SELECT * FROM rentals WHERE user_phone = ? ORDER BY id DESC LIMIT 1", (phone,)) as cur:
+            async with db.execute("SELECT * FROM rentals WHERE user_phone = ? AND (status = 'active' OR status IS NULL) ORDER BY id DESC LIMIT 1", (phone,)) as cur:
                 r_row = await cur.fetchone()
                 if r_row:
                     r_dict = dict(r_row)
-                    rental_data = {
-                        "vehicle_info": r_dict.get("vehicle_info") or "Електроскутер MUVIO",
-                        "plate_number": "MUVIO-" + str(r_dict.get("id", 1)).zfill(3),
-                        "contract_num": r_dict.get("contract_num") or "",
-                        "contract_date": r_dict.get("contract_date") or "",
-                        "end_date": r_dict.get("end_date") or "Активно",
-                        "rate": f"{int(r_dict.get('amount_due', 0)):,} ₴".replace(",", " ") if r_dict.get('amount_due') else "За тарифом",
-                        "equipment": "Шолом + Зарядка" if r_dict.get("has_helmet") else "Стандартна комплектація",
-                        "status": "active"
-                    }
+                    if r_dict.get("status") not in ("cancelled", "rejected"):
+                        rental_data = {
+                            "vehicle_info": r_dict.get("vehicle_info") or "Електроскутер MUVIO",
+                            "plate_number": "MUVIO-" + str(r_dict.get("id", 1)).zfill(3),
+                            "contract_num": r_dict.get("contract_num") or "",
+                            "contract_date": r_dict.get("contract_date") or "",
+                            "end_date": r_dict.get("end_date") or "Активно",
+                            "rate": f"{int(r_dict.get('amount_due', 0)):,} ₴".replace(",", " ") if r_dict.get('amount_due') else "За тарифом",
+                            "equipment": "Шолом + Зарядка" if r_dict.get("has_helmet") else "Стандартна комплектація",
+                            "rent_paid_days": r_dict.get("rent_paid_days", 0),
+                            "status": "active"
+                        }
 
         # 3. Buyout Deal
         buyout_data = None
@@ -4893,12 +5358,14 @@ async def api_user_profile(request):
             b_row = await cur.fetchone()
             if b_row:
                 b_dict = dict(b_row)
+                b_term_m = b_dict.get("term_months") or 6
                 buyout_data = {
                     "vehicle_info": b_dict.get("vehicle_info") or "Електроскутер",
                     "total_price": b_dict.get("total_price") or 0,
                     "paid_amount": b_dict.get("paid_amount") or 0,
                     "deposit_paid": b_dict.get("deposit_paid") or 0,
-                    "term_months": b_dict.get("term_months") or 0,
+                    "term_months": b_term_m,
+                    "buyout_term_days": b_dict.get("buyout_term_days") or (b_term_m * 30),
                     "contract_num": b_dict.get("contract_num") or "",
                     "contract_date": b_dict.get("contract_date") or "",
                     "status": b_dict.get("status") or "active"
