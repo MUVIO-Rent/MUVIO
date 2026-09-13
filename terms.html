@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="uk" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MUVIO — Умови оренди та фінансова відповідальність | Одеса</title>
+    <meta name="description"
+        content="Офіційні правила прокату та викупу електротранспорту MUVIO в Одесі: тарифи, застави, зона експлуатації, доставка, відповідальність при поломках та ДТП.">
+
+    <!-- Google Fonts: Chakra Petch & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,400;0,500;0,600;0,700;1,700&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        muvio: {
+                            green: '#1D5D3B',
+                            hover: '#24754A',
+                            forest: '#123824',
+                            dark: '#111827',
+                            graphite: '#1F2937',
+                            slate: '#4B5563',
+                            light: '#F8FAFC',
+                            card: '#FFFFFF',
+                            border: '#1D5D3B',
+                            accent: '#10B981'
+                        }
+                    },
+                    fontFamily: {
+                        brand: ['"Chakra Petch"', 'sans-serif'],
+                        sans: ['"Inter"', 'sans-serif']
+                    }
+                }
+            }
+        };
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* MUVIO High-Tech Geometric Styles */
+        .chamfer-box {
+            clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+        }
+
+        .chamfer-btn {
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .chamfer-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px -4px rgba(29, 93, 59, 0.35);
+        }
+
+        .chamfer-badge {
+            clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-[#F9FAFB] text-[#111827] font-sans antialiased selection:bg-[#1D5D3B] selection:text-white relative min-h-screen">
+    <!-- ==================== АРХІТЕКТУРНІ НАПРЯМНІ ТА МАРКУВАННЯ ПО БОКАХ (Polestar Aesthetic) ==================== -->
+    <div class="fixed inset-y-0 left-0 right-0 pointer-events-none max-w-7xl mx-auto z-40 hidden xl:block">
+        <!-- Ліва вертикальна лінія розмітки -->
+        <div class="absolute left-0 top-0 bottom-0 w-[1px] bg-slate-200">
+            <div class="sticky top-32 flex flex-col items-center gap-4 py-4 -translate-x-full pr-3">
+                <span class="w-1.5 h-1.5 bg-[#1D5D3B]"></span>
+                <span
+                    class="text-[9px] font-brand tracking-[0.25em] text-slate-400 uppercase select-none whitespace-nowrap [writing-mode:vertical-rl] rotate-180">
+                    MUVIO CITY 2026 // ODESA HUB
+                </span>
+                <span class="h-10 w-[1px] bg-slate-200"></span>
+            </div>
+        </div>
+        <!-- Права вертикальна лінія розмітки -->
+        <div class="absolute right-0 top-0 bottom-0 w-[1px] bg-slate-200">
+            <div class="sticky top-32 flex flex-col items-center gap-4 py-4 translate-x-full pl-3">
+                <span class="w-1.5 h-1.5 bg-[#1D5D3B]"></span>
+                <span
+                    class="text-[9px] font-brand tracking-[0.25em] text-slate-400 uppercase select-none whitespace-nowrap [writing-mode:vertical-rl]">
+                    46.49191° N, 30.73519° E // PRIMORSKA 22
+                </span>
+                <span class="h-10 w-[1px] bg-slate-200"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== 1. ХЕДЕР (НАВІГАЦІЯ) ==================== -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b-2 border-[#1D5D3B] shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-x border-slate-200/60">
+            <div class="flex items-center justify-between h-20">
+
+                <!-- Ліва частина: Логотип MUVIO + Лівий блок посилань -->
+                <div class="flex items-center gap-6 lg:gap-8">
+                    <a href="index.html" class="flex items-center gap-3 group shrink-0">
+                        <img src="images/logo.jpg" alt="MUVIO"
+                            class="h-10 md:h-12 w-auto object-contain border border-[#1D5D3B]/20 p-1 bg-white">
+                        <div class="hidden sm:flex flex-col">
+                            <span
+                                class="font-brand font-bold text-lg tracking-wider text-[#1D5D3B] leading-none">MUVIO</span>
+                            <span class="font-brand text-[10px] tracking-widest text-[#4B5563] uppercase">ТВОЄ ELECTRO
+                                CITY</span>
+                        </div>
+                    </a>
+
+                    <!-- Лівий блок посилань -->
+                    <nav class="hidden md:flex items-center space-x-1 lg:space-x-3">
+                        <a href="catalog.html"
+                            class="font-brand font-semibold text-xs lg:text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] px-2 py-1 transition-colors">
+                            КАТАЛОГ
+                        </a>
+                        <a href="calculator.html"
+                            class="font-brand font-semibold text-xs lg:text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] px-2 py-1 transition-colors">
+                            КАЛЬКУЛЯТОР
+                        </a>
+                        <a href="service.html"
+                            class="font-brand font-semibold text-xs lg:text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] px-2 py-1 transition-colors">
+                            СЕРВІС
+                        </a>
+                        <a href="terms.html"
+                            class="font-brand font-bold text-xs lg:text-sm uppercase tracking-wider text-[#1D5D3B] border-b-2 border-[#1D5D3B] px-2 py-1 transition-colors">
+                            УМОВИ ОРЕНДИ
+                        </a>
+                    </nav>
+                </div>
+
+                <!-- Права частина: Правий блок посилань + Telegram Bot -->
+                <div class="flex items-center gap-2 sm:gap-3 lg:gap-4">
+                    <!-- Правий блок посилань -->
+                    <nav class="hidden md:flex items-center space-x-1 lg:space-x-3">
+                        <a href="franchise.html"
+                            class="font-brand font-semibold text-xs lg:text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] px-2 py-1 transition-colors">
+                            ФРАНШИЗА
+                        </a>
+                        <a href="cabinet.html"
+                            class="font-brand font-semibold text-xs lg:text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] px-2 py-1 transition-colors">
+                            ОСОБИСТИЙ КАБІНЕТ
+                        </a>
+                    </nav>
+
+                    <a href="https://t.me/muviobot" target="_blank" rel="noopener noreferrer"
+                        class="chamfer-btn bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs md:text-sm uppercase tracking-widest px-3 sm:px-4 md:px-5 py-2.5 flex items-center gap-2 border border-[#1D5D3B] shrink-0">
+                        <i data-lucide="send" class="w-4 h-4"></i>
+                        <span>TELEGRAM BOT</span>
+                    </a>
+
+                    <!-- Mobile Menu Button -->
+                    <button id="mobileMenuBtn" aria-label="Меню"
+                        class="md:hidden p-2 text-[#111827] hover:text-[#1D5D3B]">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobileMenu" class="hidden md:hidden border-t-2 border-[#1D5D3B] bg-white px-4 py-4 space-y-2">
+            <a href="catalog.html"
+                class="mobile-nav-link block font-brand font-semibold text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] py-2 pl-2">
+                КАТАЛОГ СКУТЕРІВ
+            </a>
+            <a href="calculator.html"
+                class="mobile-nav-link block font-brand font-semibold text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] py-2 pl-2">
+                КАЛЬКУЛЯТОР ВИКУПУ (RENT-TO-OWN)
+            </a>
+            <a href="service.html"
+                class="mobile-nav-link block font-brand font-semibold text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] py-2 pl-2">
+                СЕРВІС: ВУЛ. ПРИМОРСЬКА, 22
+            </a>
+            <a href="terms.html"
+                class="mobile-nav-link block font-brand font-bold text-sm uppercase tracking-wider text-[#1D5D3B] py-2 border-l-2 border-[#1D5D3B] pl-2">
+                УМОВИ ОРЕНДИ ТА ВІДПОВІДАЛЬНІСТЬ
+            </a>
+            <a href="franchise.html"
+                class="mobile-nav-link block font-brand font-semibold text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] py-2 pl-2">
+                ФРАНШИЗА ТА ПАРТНЕРСТВО
+            </a>
+            <a href="cabinet.html"
+                class="mobile-nav-link block font-brand font-semibold text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] py-2 pl-2">
+                ОСОБИСТИЙ КАБІНЕТ
+            </a>
+            <div class="pt-2 flex flex-col gap-2">
+                <a href="https://t.me/muviobot" target="_blank"
+                    class="chamfer-btn w-full bg-[#1D5D3B] text-white font-brand font-bold text-center py-3 flex items-center justify-center gap-2">
+                    <i data-lucide="send" class="w-4 h-4"></i>
+                    <span>ВІДКРИТИ TELEGRAM BOT</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== 2. ГОЛОВНИЙ БЛОК: ЗАГОЛОВОК СТОРІНКИ ==================== -->
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
+        
+        <!-- Заголовок сторінки -->
+        <div class="mb-10 text-center md:text-left border-b border-[#1D5D3B]/20 pb-8">
+            <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#1D5D3B]/10 text-[#1D5D3B] font-brand font-bold text-xs uppercase tracking-widest chamfer-badge mb-3">
+                <i data-lucide="shield-check" class="w-4 h-4"></i>
+                <span>ОФІЦІЙНИЙ РЕГЛАМЕНТ 2026</span>
+            </div>
+            <h1 class="font-brand font-bold text-2xl sm:text-3xl md:text-4xl uppercase tracking-tight text-[#111827] leading-tight">
+                📋 УМОВИ ОРЕНДИ ТА ФІНАНСОВА ВІДПОВІДАЛЬНІСТЬ MUVIO RENT
+            </h1>
+            <p class="mt-3 text-sm md:text-base text-[#4B5563] max-w-3xl leading-relaxed font-sans">
+                Правила користування комерційним та приватним електротранспортом, порядок взаєморозрахунків, доставки по Одесі та області, а також умови сервісного обслуговування.
+            </p>
+        </div>
+
+        <!-- ==================== СЕКЦІЇ УМОВ (6 КАРТОК) ==================== -->
+        <div class="space-y-6">
+
+            <!-- Секція 1 — 💵 Правила оплати та застави -->
+            <section class="bg-white border-2 border-[#1D5D3B] chamfer-box p-6 md:p-8 shadow-sm">
+                <div class="flex items-center gap-3 pb-4 border-b border-[#1D5D3B]/20 mb-4">
+                    <div class="w-10 h-10 bg-[#1D5D3B] text-white flex items-center justify-center chamfer-badge shrink-0">
+                        <i data-lucide="banknote" class="w-5 h-5"></i>
+                    </div>
+                    <h2 class="font-brand font-bold text-lg sm:text-xl uppercase tracking-wide text-[#111827]">
+                        💵 Правила оплати та застави
+                    </h2>
+                </div>
+                <ul class="space-y-3 text-sm md:text-base text-[#1F2937] leading-relaxed">
+                    <li class="flex items-start gap-2.5">
+                        <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
+                        <span>Мінімальний термін оренди — 1 доба.</span>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                        <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
+                        <span><b>Перерахунок не проводиться:</b> при достроковому поверненні транспорту з ініціативи орендаря оплата за сплачений період не повертається.</span>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                        <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
+                        <span><b>Повернення застави:</b> здійснюється протягом від 1 до 5 днів після здачі скутера назад.</span>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Секція 2 — 📍 Доставка та зона експлуатації -->
+            <section class="bg-white border-2 border-[#1D5D3B] chamfer-box p-6 md:p-8 shadow-sm">
+                <div class="flex items-center gap-3 pb-4 border-b border-[#1D5D3B]/20 mb-4">
+                    <div class="w-10 h-10 bg-[#1D5D3B] text-white flex items-center justify-center chamfer-badge shrink-0">
+                        <i data-lucide="map-pin" class="w-5 h-5"></i>
+                    </div>
+                    <h2 class="font-brand font-bold text-lg sm:text-xl uppercase tracking-wide text-[#111827]">
+                        📍 Доставка та зона експлуатації
+                    </h2>
+                </div>
+                <ul class="space-y-3 text-sm md:text-base text-[#1F2937] leading-relaxed">
+                    <li class="flex items-start gap-2.5">
+                        <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
+                        <span>Самовивіз з нашої локації або доставка по місту (тариф виїзду до клієнта) — <b>500–700 грн</b>.</span>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                        <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
+                        <span>Доставка за межі міста (область) — <b>700–1000 грн</b>.</span>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                        <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
+                        <span>Про необхідність доставки слід попереджати завчасно.</span>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                        <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
+                        <span><b>Основна зона:</b> м. Одеса.</span>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                        <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
+                        <span>Їзда за межі міста дозволена виключно за попередньою домовленістю з менеджером.</span>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Секція 3 — ⏰ Терміни, повернення та штрафи -->
+            <section class="bg-white border-2 border-[#1D5D3B] chamfer-box p-6 md:p-8 shadow-sm">
+                <div class="flex items-center gap-3 pb-4 border-b border-[#1D5D3B]/20 mb-4">
+                    <div class="w-10 h-10 bg-[#1D5D3B] text-white flex items-center justify-center chamfer-badge shrink-0">
+                        <i data-lucide="clock" class="w-5 h-5"></i>
+                    </div>
+                    <h2 class="font-brand font-bold text-lg sm:text-xl uppercase tracking-wide text-[#111827]">
+                        ⏰ Терміни, повернення та штрафи
+                    </h2>
+                </div>
+                <ul class="space-y-3 text-sm md:text-base text-[#1F2937] leading-relaxed">
+                    <li class="flex items-start gap-2.5">
+                        <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
+                        <span>Повернення скутера відбувається в останній день оренди у час, узгоджений з менеджером.</span>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                        <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
+                        <span>У разі не приїзду в призначену годину стягується штраф <b>100 грн</b>.</span>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                        <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
+                        <span>Затримка повернення скутера без попереднього обговорення з менеджером карається штрафом <b>10% за добу</b>.</span>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Секція 4 — 🛠 Розподіл відповідальності при поломках та ДТП -->
+            <section class="bg-white border-2 border-[#1D5D3B] chamfer-box p-6 md:p-8 shadow-sm">
+                <div class="flex items-center gap-3 pb-4 border-b border-[#1D5D3B]/20 mb-4">
+                    <div class="w-10 h-10 bg-[#1D5D3B] text-white flex items-center justify-center chamfer-badge shrink-0">
+                        <i data-lucide="wrench" class="w-5 h-5"></i>
+                    </div>
+                    <h2 class="font-brand font-bold text-lg sm:text-xl uppercase tracking-wide text-[#111827]">
+                        🛠 Розподіл відповідальності при поломках та ДТП
+                    </h2>
+                </div>
+                <ul class="space-y-3 text-sm md:text-base text-[#1F2937] leading-relaxed">
+                    <li class="flex items-start gap-2.5">
+                        <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
+                        <span><b>Технічні поломки:</b> ремонт вузлів, які вийшли з ладу через технічну несправність, здійснюється за рахунок компанії.</span>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                        <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
+                        <span><b>Проколи та знос:</b> пробиття або передчасний знос покришки — за рахунок клієнта.</span>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                        <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
+                        <span><b>Механічні пошкодження / падіння:</b> пошкодження внаслідок падіння оплачуються клієнтом.</span>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                        <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
+                        <span><b>ДТП:</b> у разі ДТП клієнт зобов'язаний терміново зв'язатись з менеджером. Простій скутера на штрафстоянці — за рахунок клієнта. Якщо клієнт вирішив питання самостійно з винуватцем і по факту не отримав оплату за збиток — виплата покладається на клієнта.</span>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Секція 5 — 🔋 Комплектація транспорту та викуп -->
+            <section class="bg-white border-2 border-[#1D5D3B] chamfer-box p-6 md:p-8 shadow-sm">
+                <div class="flex items-center gap-3 pb-4 border-b border-[#1D5D3B]/20 mb-4">
+                    <div class="w-10 h-10 bg-[#1D5D3B] text-white flex items-center justify-center chamfer-badge shrink-0">
+                        <i data-lucide="battery-charging" class="w-5 h-5"></i>
+                    </div>
+                    <h2 class="font-brand font-bold text-lg sm:text-xl uppercase tracking-wide text-[#111827]">
+                        🔋 Комплектація транспорту та викуп
+                    </h2>
+                </div>
+                <ul class="space-y-3 text-sm md:text-base text-[#1F2937] leading-relaxed">
+                    <li class="flex items-start gap-2.5">
+                        <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
+                        <span>Вся техніка передається в користування та під викуп виключно укомплектованою.</span>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                        <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
+                        <span>Мінімальна базова комплектація для скутерів включає акумулятор 40Ah, для електровелосипедів — 10Ah. Вартість викупу розраховується одразу за повний комплект (транспорт + АКБ + зарядний пристрій).</span>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Секція 6 — 📄 Оформлення -->
+            <section class="bg-white border-2 border-[#1D5D3B] chamfer-box p-6 md:p-8 shadow-sm">
+                <div class="flex items-center gap-3 pb-4 border-b border-[#1D5D3B]/20 mb-4">
+                    <div class="w-10 h-10 bg-[#1D5D3B] text-white flex items-center justify-center chamfer-badge shrink-0">
+                        <i data-lucide="file-check" class="w-5 h-5"></i>
+                    </div>
+                    <h2 class="font-brand font-bold text-lg sm:text-xl uppercase tracking-wide text-[#111827]">
+                        📄 Оформлення
+                    </h2>
+                </div>
+                <ul class="space-y-3 text-sm md:text-base text-[#1F2937] leading-relaxed">
+                    <li class="flex items-start gap-2.5">
+                        <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
+                        <span>Угода фіксується в електронному договорі перед видачею ключа.</span>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                        <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
+                        <span>Договір підписується в цифровому вигляді за допомогою КЕП (кваліфікованого електронного підпису).</span>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                        <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
+                        <span>У разі проблем із КЕП питання обговорюється з менеджером.</span>
+                    </li>
+                </ul>
+            </section>
+
+        </div>
+
+        <!-- Кнопка швидкого переходу до каталогу або бота -->
+        <div class="mt-12 flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a href="catalog.html"
+                class="chamfer-btn w-full sm:w-auto bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-sm uppercase tracking-wider py-3.5 px-8 text-center border border-[#1D5D3B]">
+                Переглянути каталог транспорту →
+            </a>
+            <a href="https://t.me/muviobot" target="_blank" rel="noopener noreferrer"
+                class="chamfer-btn w-full sm:w-auto bg-white hover:bg-slate-50 text-[#1D5D3B] font-brand font-bold text-sm uppercase tracking-wider py-3.5 px-8 text-center border-2 border-[#1D5D3B] flex items-center justify-center gap-2">
+                <i data-lucide="send" class="w-4 h-4"></i>
+                <span>Зв'язатись з менеджером у Telegram</span>
+            </a>
+        </div>
+
+    </main>
+
+    <!-- ==================== 3. ПІДВАЛ (FOOTER) ==================== -->
+    <footer id="contacts" class="bg-[#123824] text-white border-t-2 border-[#1D5D3B] pt-16 pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-x border-slate-200/60">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 pb-12 border-b border-emerald-800/60">
+
+                <!-- Колонка 1: Бренд і контакти -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <img src="images/logo.jpg" alt="MUVIO" class="h-10 w-auto bg-white p-1 border border-white">
+                        <div class="flex flex-col">
+                            <span class="font-brand font-bold text-xl tracking-wider text-white">MUVIO</span>
+                            <span class="font-brand text-[9px] tracking-widest text-emerald-300 uppercase">ТВОЄ ELECTRO CITY</span>
+                        </div>
+                    </div>
+                    <div class="space-y-2 text-xs text-emerald-100 font-sans pt-1">
+                        <p class="flex items-center gap-2">
+                            <i data-lucide="mail" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                            <a href="mailto:muviorent@gmail.com" class="hover:text-white transition-colors">muviorent@gmail.com</a>
+                        </p>
+                        <p class="flex items-center gap-2">
+                            <i data-lucide="phone" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                            <a href="tel:+380638316361" class="hover:text-white transition-colors font-semibold">+38 (063) 831-63-61</a>
+                        </p>
+                        <p class="flex items-start gap-2">
+                            <i data-lucide="map-pin" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+                            <span>м. Одеса, вул. Приморська, 22</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Колонка 2: Меню -->
+                <div>
+                    <div class="font-brand font-bold text-sm uppercase tracking-wider text-emerald-200 mb-4">
+                        МЕНЮ
+                    </div>
+                    <ul class="space-y-2 text-xs font-brand tracking-wide">
+                        <li><a href="catalog.html?cat=scooter" class="hover:text-emerald-300 transition-colors">Каталог скутерів</a></li>
+                        <li><a href="catalog.html?cat=bike" class="hover:text-emerald-300 transition-colors">Каталог електровелосипедів</a></li>
+                        <li><a href="terms.html" class="hover:text-emerald-300 transition-colors text-emerald-400 font-bold">Умови оренди</a></li>
+                        <li><a href="index.html#faq" class="hover:text-emerald-300 transition-colors">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <!-- Колонка 3: Класи скутерів -->
+                <div>
+                    <div class="font-brand font-bold text-sm uppercase tracking-wider text-emerald-200 mb-4">
+                        КЛАСИ СКУТЕРІВ
+                    </div>
+                    <ul class="space-y-2 text-xs font-brand tracking-wide text-emerald-100">
+                        <li><a href="catalog.html?brand=Aima" class="hover:text-emerald-300 transition-colors">Aima</a></li>
+                        <li><a href="catalog.html?brand=Crosser" class="hover:text-emerald-300 transition-colors">Crosser</a></li>
+                        <li><a href="catalog.html?brand=Like%20Bike" class="hover:text-emerald-300 transition-colors">Like Bike</a></li>
+                    </ul>
+                </div>
+
+                <!-- Колонка 4: Ще напрямки -->
+                <div>
+                    <div class="font-brand font-bold text-sm uppercase tracking-wider text-emerald-200 mb-4">
+                        ЩЕ НАПРЯМКИ
+                    </div>
+                    <ul class="space-y-2 text-xs font-brand tracking-wide">
+                        <li><a href="calculator.html" class="hover:text-emerald-300 transition-colors">Викуп скутера</a></li>
+                        <li><a href="service.html" class="hover:text-emerald-300 transition-colors">Ремонт скутера</a></li>
+                    </ul>
+                    <div class="pt-4">
+                        <a href="https://t.me/muviobot" target="_blank" rel="noopener noreferrer"
+                            class="chamfer-btn inline-flex items-center gap-2 bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs uppercase px-4 py-2 border border-emerald-500">
+                            <i data-lucide="send" class="w-3.5 h-3.5"></i>
+                            <span>TELEGRAM BOT →</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-emerald-200 gap-4 font-mono">
+                <div>© 2026 MUVIO Rent & Buyout. Одеса, вул. Приморська, 22.</div>
+                <div class="text-[11px]">Електротранспорт для кур'єрських служб та комерції</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            document.querySelectorAll('.mobile-nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.lucide) {
+                window.lucide.createIcons();
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -5,6 +5,8 @@ import json
 import os
 import logging
 import sys
+import base64
+import time
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 
@@ -21,7 +23,8 @@ from aiogram.types import (
     InlineKeyboardButton,
     CallbackQuery,
     InputMediaPhoto,
-    InputMediaVideo
+    InputMediaVideo,
+    FSInputFile
 )
 
 import aiosqlite
@@ -117,6 +120,16 @@ SPREADSHEET_NAME = "MUVIO_Rent_CRM"
 
 sheet_requests = None
 sheet_incidents = None
+
+COLOR_GREEN_CONFIRMED = {"red": 0.85, "green": 0.95, "blue": 0.85}
+
+def color_row(worksheet, row_idx, color_dict):
+    try:
+        if worksheet and hasattr(worksheet, "format"):
+            worksheet.format(f"A{row_idx}:M{row_idx}", {"backgroundColor": color_dict})
+    except Exception as e:
+        logger.debug(f"Помилка форматування рядка Google Sheets: {e}")
+
 
 def init_google_sheets():
     global sheet_requests, sheet_incidents
@@ -640,6 +653,185 @@ def get_admin_text_and_kb():
 
 # ==================== СТАРТ И ОСНОВНОЙ РОУТИНГ ====================
 
+# --- КЕШ ТА УТИЛІТИ ЗАЯВОК З КАЛЬКУЛЯТОРА ВИКУПУ ---
+PENDING_CALC_REQUESTS = {}
+
+# Реальний прайсинг з калькулятора сайту для синхронного розрахунку на стороні бота
+CALC_FLEET_PRICING = {
+    "aima-a700": { "name": "Aima A700", "base": 70000, "volt": 72, "extra_battery": 15000, "ch5": 1600, "ch10": 2500 },
+    "aima-a715": { "name": "Aima A715", "base": 68000, "volt": 72, "extra_battery": 17000, "ch5": 1600, "ch10": 2500 },
+    "aima-f606-1": { "name": "Aima F606 №1", "base": 60000, "volt": 72, "extra_battery": 13000, "ch5": 1600, "ch10": 2500 },
+    "aima-journey": { "name": "Aima Journey", "base": 68000, "volt": 72, "extra_battery": 12000, "ch5": 1600, "ch10": 2500 },
+    "aima-leopard": { "name": "Aima Leopard", "base": 50000, "volt": 72, "extra_battery": 15000, "ch5": 1600, "ch10": 2500 },
+    "aima-mine": { "name": "Aima Mine", "base": 60000, "volt": 60, "extra_battery": 10000, "ch5": 1600, "ch10": 2500 },
+    "aima-mine-plus": { "name": "Aima Mine Plus", "base": 55000, "volt": 60, "extra_battery": 12000, "ch5": 1600, "ch10": 2500 },
+    "like-bike-n5": { "name": "Like Bike N5", "base": 57000, "volt": 60, "extra_battery": 12000, "ch5": 1600, "ch10": 2500 },
+    "crosser-cr-13-1": { "name": "Crosser CR-13 №1", "base": 80000, "volt": 72, "extra_battery": 12000, "ch5": 2000, "ch10": 3000 },
+    "crosser-cr-13-2": { "name": "Crosser CR-13 №2", "base": 80000, "volt": 72, "extra_battery": 12000, "ch5": 2000, "ch10": 3000 },
+    "crosser-cr-20": { "name": "Crosser CR-20", "base": 77000, "volt": 72, "extra_battery": 12000, "ch5": 1600, "ch10": 2500 },
+    "like-bike-bruser-1": { "name": "Like Bike Bruser №1", "base": 28000, "volt": 48, "extra_battery": 14000, "ch5": 1500, "ch10": 2000 },
+    "like-bike-bruser-2": { "name": "Like Bike Bruser №2", "base": 28000, "volt": 48, "extra_battery": 14000, "ch5": 1500, "ch10": 2000 },
+    "ado-a20f": { "name": "ADO A20F", "base": 28000, "volt": 48, "extra_battery": 14000, "ch5": 1500, "ch10": 2000 }
+}
+
+def decode_calc_payload(payload_str: str) -> dict:
+    """
+    Розбір payload з калькулятора сайту.
+    Основний формат: modelKey_batteryCode_chargerCode_months (наприклад: aima-a700_e_ch10_6).
+    Підтримує також зворотну сумісність з legacy URL-safe Base64 JSON.
+    """
+    if not payload_str:
+        return None
+
+    # 1. Основний компактний формат без base64: modelSlug_batteryCode_chargerCode_termMonths
+    try:
+        parts = str(payload_str).rsplit("_", 3)
+        if len(parts) == 4 and parts[3].isdigit():
+            slug = parts[0].strip().lower().replace("_", "-")
+            bat_code = parts[1].strip().lower()  # 'b' (базовий) або 'e' (extra)
+            ch_code = parts[2].strip().lower()   # 'none', 'ch5', 'ch10'
+            months = int(parts[3])
+
+            pricing = CALC_FLEET_PRICING.get(slug)
+            if not pricing:
+                norm_slug = slug.replace("cr-13", "cr13").replace("cr-20", "cr20")
+                for k, v in CALC_FLEET_PRICING.items():
+                    if k.replace("-", "") == slug.replace("-", "") or k.replace("-", "") == norm_slug.replace("-", ""):
+                        pricing = v
+                        slug = k
+                        break
+            if not pricing:
+                pricing = CALC_FLEET_PRICING["crosser-cr-13-1"]
+
+            volt = pricing.get("volt", 72)
+            if bat_code == 'e':
+                battery_val = "48V 40Ah [Посилений]" if volt == 48 else f"{volt}V 60Ah [Посилений]"
+                bat_diff = pricing.get("extra_battery", 0)
+            else:
+                battery_val = "48V 10Ah (Базовий)" if volt == 48 else f"{volt}V 40Ah (Базовий)"
+                bat_diff = 0
+
+            if ch_code == 'ch5':
+                charger_val = "Зарядний пристрій 5A"
+                ch_diff = pricing.get("ch5", 1600)
+            elif ch_code == 'ch10':
+                charger_val = "Швидка зарядка 10A"
+                ch_diff = pricing.get("ch10", 2500)
+            else:
+                charger_val = "Без додаткової зарядки"
+                ch_diff = 0
+
+            base_price = pricing.get("base", 50000)
+            total_price = int(base_price + bat_diff + ch_diff)
+            deposit = int(round(total_price * 0.20))
+            monthly_payment = int(round((total_price - deposit) / max(1, months)))
+
+            v_key, v_data = find_fleet_vehicle(slug)
+            model_name = pricing.get("name") or (v_data.get("name") if v_data else slug)
+
+            price_fmt = f"{total_price:,} грн (~{monthly_payment:,} грн/міс.)".replace(",", " ")
+
+            return {
+                "model_key": v_key or slug,
+                "model_slug": slug,
+                "model_name": model_name,
+                "battery": battery_val,
+                "charger": charger_val,
+                "period": f"{months} міс.",
+                "term_months": months,
+                "price": price_fmt,
+                "total_price": float(total_price),
+                "deposit": float(deposit),
+                "monthly_payment": float(monthly_payment),
+                "compact_payload": f"{slug}_{bat_code}_{ch_code}_{months}"
+            }
+    except Exception as e:
+        logger.warning(f"Помилка розбору компактного payload '{payload_str}': {e}")
+
+    # 2. Legacy URL-safe Base64 JSON
+    try:
+        norm = payload_str.replace("-", "+").replace("_", "/")
+        rem = len(norm) % 4
+        if rem > 0:
+            norm += "=" * (4 - rem)
+        decoded = base64.b64decode(norm).decode("utf-8")
+        data = json.loads(decoded)
+        if isinstance(data, dict):
+            model_raw = data.get("model", "")
+            v_key, v_data = find_fleet_vehicle(model_raw)
+            model_name = v_data.get("name") if v_data else (model_raw or "Електроскутер MUVIO")
+            return {
+                "model_key": v_key or "custom",
+                "model_slug": v_key or "custom",
+                "model_name": model_name,
+                "battery": data.get("battery", "Базовий"),
+                "charger": "Калькулятор сайту",
+                "period": data.get("period", "6 міс."),
+                "term_months": 6,
+                "price": data.get("price", "За розрахунком"),
+                "total_price": 0.0,
+                "deposit": 0.0,
+                "monthly_payment": 0.0,
+                "compact_payload": payload_str[:40]
+            }
+    except Exception:
+        pass
+
+    return None
+
+def find_fleet_vehicle(key_or_name: str):
+    if not key_or_name:
+        first_k = next(iter(FLEET_DATABASE.keys()))
+        return first_k, FLEET_DATABASE.get(first_k, {})
+
+    if key_or_name in FLEET_DATABASE:
+        return key_or_name, FLEET_DATABASE[key_or_name]
+
+    clean_k = str(key_or_name).lower().replace("-", "_")
+    clean_k_no_num_dash = clean_k.replace("cr_13", "cr13").replace("cr_20", "cr20")
+    for k, v in FLEET_DATABASE.items():
+        if k == clean_k or k == clean_k_no_num_dash:
+            return k, v
+        if k.replace("_", "") == clean_k.replace("_", ""):
+            return k, v
+
+    target_name = str(key_or_name).strip().lower()
+    for k, v in FLEET_DATABASE.items():
+        v_name = v.get("name", "").strip().lower()
+        if v_name == target_name:
+            return k, v
+        if target_name in v_name or v_name in target_name:
+            return k, v
+
+    first_k = next(iter(FLEET_DATABASE.keys()))
+    return first_k, FLEET_DATABASE.get(first_k, {})
+
+def get_local_photo_path(v_key: str) -> str:
+    clean = str(v_key).lower().replace("_", "-")
+    mapping = {
+        "aima-a700": "images/a700.jpg",
+        "aima-a715": "images/a715.jpg",
+        "aima-f606-1": "images/f606.jpg",
+        "aima-f606-2": "images/f606-2.jpg",
+        "aima-journey": "images/journey.jpg",
+        "aima-leopard": "images/leopard.jpg",
+        "aima-mine": "images/mine.jpg",
+        "aima-mine-plus": "images/mine-plus.jpg",
+        "like-bike-n5": "images/like-bike-n5.jpg",
+        "crosser-cr-13-1": "images/crosser.jpg",
+        "crosser-cr13-1": "images/crosser.jpg",
+        "crosser-cr-13-2": "images/crosser-cr-13-2.jpg",
+        "crosser-cr13-2": "images/crosser-cr-13-2.jpg",
+        "crosser-cr-20": "images/crosser-cr-20.jpg",
+        "crosser-cr20": "images/crosser-cr-20.jpg",
+        "like-bike-bruser-1": "images/like-bike-bruiser-1.jpg",
+        "like-bike-bruiser-1": "images/like-bike-bruiser-1.jpg",
+        "like-bike-bruser-2": "images/like-bike-bruiser-2.jpg",
+        "like-bike-bruiser-2": "images/like-bike-bruiser-2.jpg",
+        "ado-a20f": "images/ado-a20f.jpg",
+    }
+    return mapping.get(clean)
+
 @dp.message(CommandStart(), StateFilter("*"))
 async def start_cmd_handler(message: types.Message, state: FSMContext):
     await safe_clear_state(state)
@@ -657,6 +849,64 @@ async def start_cmd_handler(message: types.Message, state: FSMContext):
         except Exception:
             pass
 
+    # --- ОБРОБКА ДАННИХ З КАЛЬКУЛЯТОРА ВИКУПУ (RENT-TO-OWN) ---
+    if args and args[0].startswith("calc_"):
+        calc_payload = args[0][5:]
+        calc_data = decode_calc_payload(calc_payload)
+        if calc_data:
+            model_name = calc_data.get("model_name", "Електроскутер MUVIO")
+            battery_val = calc_data.get("battery", "")
+            period_val = calc_data.get("period", "")
+            price_val = calc_data.get("price", "")
+            v_key = calc_data.get("model_key", "")
+            c_payload = calc_data.get("compact_payload", calc_payload[:40])
+
+            PENDING_CALC_REQUESTS[str(message.from_user.id)] = {
+                **calc_data,
+                "timestamp": time.time()
+            }
+
+            caption = (
+                "🛵 <b>Заявка на викуп техніки (Rent-to-Own)</b>\n\n"
+                f"• <b>Модель:</b> {model_name}\n"
+                f"• <b>Комплектація:</b> {battery_val}\n"
+                f"• <b>Термін викупу:</b> {period_val}\n"
+                f"• <b>Платіж:</b> {price_val}\n\n"
+                "Перевірте правильність параметрів перед відправкою заявки менеджеру."
+            )
+
+            kb = InlineKeyboardMarkup(inline_keyboard=[
+                [InlineKeyboardButton(text="✅ Підтвердити та відправити заявку", callback_data=f"c_calc:{c_payload}")],
+                [InlineKeyboardButton(text="❌ Змінити параметри", url="https://muviorent.com/calculator.html")]
+            ])
+
+            photo_sent = False
+            _, v_data = find_fleet_vehicle(v_key)
+            photo_id = v_data.get("photo_id") if v_data else None
+            if photo_id:
+                try:
+                    await message.answer_photo(photo=photo_id, caption=caption, parse_mode="HTML", reply_markup=kb)
+                    photo_sent = True
+                except Exception as e:
+                    logger.warning(f"Не вдалося надіслати photo_id {photo_id}: {e}")
+
+            if not photo_sent and v_key:
+                local_rel = get_local_photo_path(v_key)
+                if local_rel:
+                    abs_p = os.path.join(CURRENT_DIR, local_rel)
+                    if os.path.exists(abs_p):
+                        try:
+                            photo_file = FSInputFile(abs_p)
+                            await message.answer_photo(photo=photo_file, caption=caption, parse_mode="HTML", reply_markup=kb)
+                            photo_sent = True
+                        except Exception as e:
+                            logger.warning(f"Не вдалося надіслати локальне фото {abs_p}: {e}")
+
+            if not photo_sent:
+                await message.answer(caption, parse_mode="HTML", reply_markup=kb)
+
+            return
+
     user_name = message.from_user.first_name or "Максим"
     welcome_text = (
         f"Привіт, {user_name}! 👋\n\n"
@@ -671,6 +921,121 @@ async def start_cmd_handler(message: types.Message, state: FSMContext):
         "Оберіть потрібний розділ у меню нижче 👇"
     )
     await message.answer(welcome_text, parse_mode="HTML", reply_markup=get_main_keyboard())
+
+@dp.callback_query(F.data.startswith("c_calc:") | (F.data == "confirm_calc_buyout"), StateFilter("*"))
+async def process_confirm_calc_buyout(callback: CallbackQuery):
+    await callback.answer()
+    user_id = callback.from_user.id
+    user_name = callback.from_user.full_name
+    username = f"@{callback.from_user.username}" if callback.from_user.username else "немає"
+
+    order_data = PENDING_CALC_REQUESTS.get(str(user_id), {})
+
+    # Якщо пам'ять процесу очистилась (рестарт бота) — відновлюємо дані з callback_data
+    if not order_data and callback.data.startswith("c_calc:"):
+        c_payload = callback.data.split(":", 1)[1]
+        recovered = decode_calc_payload(c_payload)
+        if recovered:
+            order_data = recovered
+            PENDING_CALC_REQUESTS[str(user_id)] = recovered
+
+    # Якщо даних немає і відновити не вдалося — повідомляємо клієнта про застарілу заявку замість створення дефолтів
+    if not order_data:
+        expired_kb = InlineKeyboardMarkup(inline_keyboard=[
+            [InlineKeyboardButton(text="🔄 Сформувати розрахунок заново", url="https://muviorent.com/calculator.html")]
+        ])
+        await callback.message.answer(
+            "⚠️ <b>Час очікування заявки минув або сервіс було оновлено.</b>\n\n"
+            "Будь ласка, перейдіть до калькулятора на сайті та надішліть заявку повторно.",
+            parse_mode="HTML",
+            reply_markup=expired_kb
+        )
+        return
+
+    model_name = order_data.get("model_name", "Скутер MUVIO")
+    v_key = order_data.get("model_key", "custom")
+    battery_val = order_data.get("battery", "Базовий")
+    period_val = order_data.get("period", "6 міс.")
+    price_val = order_data.get("price", "За розрахунком")
+    charger_val = order_data.get("charger", "Калькулятор сайту")
+
+    term_months = order_data.get("term_months", 6)
+    if not term_months:
+        try:
+            m_match = re.search(r'\d+', str(period_val))
+            if m_match:
+                term_months = int(m_match.group(0))
+        except Exception:
+            term_months = 6
+
+    total_pr = order_data.get("total_price", 0.0)
+    if not total_pr:
+        try:
+            p_clean = re.sub(r'[^\d.]', '', str(price_val).split('(')[0].replace(' ', ''))
+            if p_clean:
+                total_pr = float(p_clean)
+        except Exception:
+            total_pr = 0.0
+
+    dep_pr = order_data.get("deposit", total_pr * 0.20)
+
+    phone = "Не вказано (новий користувач)"
+    async with aiosqlite.connect(DB_PATH) as db:
+        async with db.execute("SELECT phone_number FROM users WHERE telegram_id = ?", (user_id,)) as cur:
+            u_row = await cur.fetchone()
+            if u_row and u_row[0]:
+                phone = f"+{u_row[0]}"
+
+    deal_id = None
+    now_str = get_kyiv_now().strftime("%Y-%m-%d")
+    try:
+        async with aiosqlite.connect(DB_PATH) as db:
+            cursor = await db.execute(
+                """INSERT INTO buyout_deals 
+                (user_id, vehicle_key, vehicle_info, total_price, paid_amount, deposit_paid, status, start_date, battery_spec, charger_spec, term_months)
+                VALUES (?, ?, ?, ?, 0, ?, 'pending', ?, ?, ?, ?)""",
+                (user_id, v_key, model_name, total_pr, dep_pr, now_str, battery_val, charger_val, term_months)
+            )
+            deal_id = cursor.lastrowid
+            await db.commit()
+    except Exception as e:
+        logger.error(f"[DB ERROR] Помилка збереження buyout_deal з калькулятора: {e}")
+
+    admin_msg = (
+        "🛵 <b>НОВА ЗАЯВКА НА ВИКУП З САЙТУ (КАЛЬКУЛЯТОР)!</b>\n"
+        "────────────────────\n"
+        f"📋 <b>Номер угоди:</b> <code>#{deal_id}</code>\n"
+        f"👤 <b>Клієнт:</b> {user_name} ({username})\n"
+        f"🆔 <b>TG ID:</b> <code>{user_id}</code>\n"
+        f"📱 <b>Телефон:</b> {phone}\n"
+        f"🛵 <b>Модель:</b> <b>{model_name}</b>\n"
+        f"🔋 <b>Комплектація:</b> <b>{battery_val}</b>\n"
+        f"🔌 <b>Зарядка:</b> <b>{charger_val}</b>\n"
+        f"📅 <b>Термін викупу:</b> <b>{period_val}</b>\n"
+        f"💵 <b>Платіж / Ціна:</b> <b>{price_val}</b>\n"
+        f"🔒 <b>Завдаток (20%):</b> <b>{dep_pr:.2f} грн</b>\n"
+        "────────────────────\n"
+        "🌐 Заявка оформлена через deep-link з сайту muviorent.com"
+    )
+    admin_kb = InlineKeyboardMarkup(inline_keyboard=[
+        [InlineKeyboardButton(text="✅ Схвалити викуп та зафіксувати", callback_data=f"b_appr:{deal_id}")]
+    ]) if deal_id else None
+
+    try:
+        await bot.send_message(chat_id=ADMIN_ID, text=admin_msg, parse_mode="HTML", reply_markup=admin_kb)
+    except Exception as e:
+        logger.error(f"[CALC BUYOUT ADMIN ALERT ERROR] Не вдалося сповістити адміна про заявку #{deal_id} (user_id={user_id}, model={model_name}): {e}")
+
+    try:
+        await callback.message.edit_reply_markup(reply_markup=None)
+    except Exception:
+        pass
+
+    await callback.message.answer(
+        "Дякуємо! Заявку прийнято. Наш менеджер зв'яжеться з вами найближчим часом для підписання договору та узгодження видачі скутера.",
+        parse_mode="HTML",
+        reply_markup=get_main_keyboard()
+    )
 
 @dp.message(lambda msg: msg.text and any(w in msg.text.lower() for w in ["вільні", "каталог", "скутери"]), StateFilter("*"))
 async def client_gallery_trigger(message: types.Message, state: FSMContext):
@@ -1969,7 +2334,7 @@ async def process_send_final_buyout_app(callback: CallbackQuery):
     try:
         await bot.send_message(chat_id=ADMIN_ID, text=admin_msg, parse_mode="HTML", reply_markup=admin_kb)
     except Exception as e:
-        logger.error(f"Ошибка алерта админа: {e}")
+        logger.error(f"[BUYOUT DEAL ADMIN ALERT ERROR] Ошибка алерта админа по сделке #{deal_id} (user_id={user_id}): {e}")
 
 @dp.callback_query(F.data.startswith("b_appr:"), StateFilter("*"))
 async def admin_approve_buyout_deal(callback: CallbackQuery):
@@ -4467,7 +4832,7 @@ async def api_franchise_lead(request):
 
         await bot.send_message(chat_id=ADMIN_ID, text=admin_text, parse_mode="HTML", reply_markup=kb)
     except Exception as e:
-        logger.error(f"Error sending franchise lead notification to admin: {e}")
+        logger.error(f"[FRANCHISE LEAD ADMIN ALERT ERROR] Error sending franchise lead notification to admin (name={name}, phone={phone}): {e}")
 
     # Google Sheets if configured
     if sheet_requests:
