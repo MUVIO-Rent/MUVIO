@@ -154,31 +154,6 @@
         </div>
     </div>
 
-    <!-- ==================== АРХІТЕКТУРНІ НАПРЯМНІ ТА МАРКУВАННЯ ПО БОКАХ (Polestar Aesthetic) ==================== -->
-    <div class="fixed inset-y-0 left-0 right-0 pointer-events-none max-w-7xl mx-auto z-40 hidden xl:block">
-        <!-- Ліва вертикальна лінія розмітки -->
-        <div class="absolute left-0 top-0 bottom-0 w-[1px] bg-slate-200">
-            <div class="sticky top-32 flex flex-col items-center gap-4 py-4 -translate-x-full pr-3">
-                <span class="w-1.5 h-1.5 bg-[#1D5D3B]"></span>
-                <span
-                    class="text-[9px] font-brand tracking-[0.25em] text-slate-400 uppercase select-none whitespace-nowrap [writing-mode:vertical-rl] rotate-180">
-                    MUVIO CITY 2026 // ODESA HUB
-                </span>
-                <span class="h-10 w-[1px] bg-slate-200"></span>
-            </div>
-        </div>
-        <!-- Права вертикальна лінія розмітки -->
-        <div class="absolute right-0 top-0 bottom-0 w-[1px] bg-slate-200">
-            <div class="sticky top-32 flex flex-col items-center gap-4 py-4 translate-x-full pl-3">
-                <span class="w-1.5 h-1.5 bg-[#1D5D3B]"></span>
-                <span
-                    class="text-[9px] font-brand tracking-[0.25em] text-slate-400 uppercase select-none whitespace-nowrap [writing-mode:vertical-rl]">
-                    46.49191° N, 30.73519° E // PRIMORSKA 22
-                </span>
-                <span class="h-10 w-[1px] bg-slate-200"></span>
-            </div>
-        </div>
-    </div>
 
 
     <!-- ==================== 1. ХЕДЕР (НАВІГАЦІЯ) ==================== -->
@@ -418,129 +393,143 @@
         </div>
     </header>
 
-    <!-- ==================== 2. HERO СЕКЦИЯ ==================== -->
-    <section class="relative overflow-hidden bg-white border-b-2 border-[#1D5D3B] py-16 md:py-24">
-        <!-- Тонка технологічна сітка бренду -->
-        <!-- Clean background without grid pattern -->
+    <!-- ==================== 2. HERO СЕКЦІЯ (ПРЕМІАЛЬНИЙ АВТОМОБІЛЬНИЙ ФОРМАТ) ==================== -->
+    <section class="relative overflow-hidden bg-[#090D0B] border-b-2 border-[#1D5D3B] pt-8 pb-12 sm:pb-16 text-white">
+        <!-- М'яке фонове світіння у стилі флагманського автошоуруму -->
+        <div class="absolute -top-24 left-1/4 w-96 h-96 bg-[#1D5D3B]/20 rounded-full blur-3xl pointer-events-none -z-0"></div>
+        <div class="absolute top-1/3 right-0 w-[500px] h-[500px] bg-[#1D5D3B]/15 rounded-full blur-[100px] pointer-events-none -z-0"></div>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-x border-slate-200/60 relative z-10">
-            <div class="text-center max-w-6xl mx-auto space-y-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <!-- 2-колонкова автомобільна компоновка -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center pt-4 sm:pt-8 pb-8">
+                <!-- СЛІВА (lg:col-span-7): Заголовок, переваги та CTA -->
+                <div class="lg:col-span-7 space-y-6 text-left">
+                    <!-- Головний заголовок H1 в нормальному регістрі (Sentence case) -->
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.1] normal-case" style="text-transform: none !important;">
+                        <span class="lang-ua">Оренда електротранспорту в Одесі</span>
+                        <span class="lang-en">Electric vehicle rental in Odesa</span>
+                    </h1>
 
-                <!-- Плашка стилю логотипу -->
-                <div
-                    class="inline-flex items-center gap-2 px-4 py-1.5 bg-[#1D5D3B]/10 border border-[#1D5D3B] chamfer-badge">
-                    <span class="w-2 h-2 bg-[#1D5D3B]"></span>
-                    <span class="font-brand font-bold text-xs md:text-sm tracking-widest text-[#1D5D3B] uppercase">
-                        <span class="lang-ua">MUVIO — ТВОЄ ELECTRO CITY</span>
-                        <span class="lang-en">MUVIO — YOUR ELECTRO CITY</span>
-                    </span>
+                    <!-- Підзаголовок (текст під H1) -->
+                    <p class="text-base sm:text-lg text-zinc-400 max-w-xl leading-relaxed font-normal">
+                        <span class="lang-ua">Для кур'єрів та туризму • Всі моделі з АКБ та зарядкою • Безкоштовне сервісне обслуговування</span>
+                        <span class="lang-en">For couriers and tourism • All models with battery & charger • Free maintenance</span>
+                    </p>
+
+                    <!-- Блок кнопок дії (CTA) -->
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
+                        <a href="#catalog"
+                            class="inline-flex items-center justify-center gap-3 bg-[#1D5D3B] hover:bg-[#237248] text-white px-8 py-4 rounded-xl font-bold text-base shadow-lg shadow-[#1D5D3B]/20 transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]">
+                            <span class="lang-ua">Обрати транспорт</span>
+                            <span class="lang-en">Choose Vehicle</span>
+                            <i data-lucide="arrow-down" class="w-5 h-5"></i>
+                        </a>
+                        <a href="calculator.html"
+                            class="inline-flex items-center justify-center gap-3 border border-zinc-700 hover:border-zinc-500 text-zinc-200 hover:text-white px-8 py-4 rounded-xl font-semibold text-base backdrop-blur-sm bg-zinc-900/40 hover:bg-zinc-800/60 transition-all duration-200">
+                            <i data-lucide="calculator" class="w-5 h-5 text-zinc-400"></i>
+                            <span class="lang-ua">Калькулятор оренди</span>
+                            <span class="lang-en">Rental Calculator</span>
+                        </a>
+                    </div>
                 </div>
 
-                <!-- Заголовок -->
-                <h1
-                    class="font-brand font-bold text-2xl sm:text-4xl md:text-5xl lg:text-5xl uppercase tracking-tight text-[#111827] leading-tight">
-                    <span class="lang-ua">ОРЕНДА КУР'ЄРСЬКОГО ТА ТУРИСТИЧНОГО<br>ЕЛЕКТРОТРАНСПОРТУ В ОДЕСІ</span>
-                    <span class="lang-en">RENTAL OF COURIER & TOURIST<br>ELECTRIC VEHICLES IN ODESA</span>
-                </h1>
-
-                <!-- Підзаголовок (Сухі факти) -->
-                <p class="font-sans text-base sm:text-xl text-[#4B5563] max-w-3xl mx-auto leading-relaxed">
-                    <span class="lang-ua">Каталог скутерів та велосипедів у зборі з АКБ. Офіційний договір, повне планове сервісне обслуговування та фіксований щотижневий платіж.</span>
-                    <span class="lang-en">Catalog of scooters and e-bikes complete with battery. Official agreement, full scheduled maintenance and fixed weekly payment.</span>
-                </p>
-
-                <!-- Геометричні кнопки дій -->
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-                    <a href="#catalog"
-                        class="chamfer-btn w-full sm:w-auto bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-sm md:text-base uppercase tracking-widest px-8 py-4 border border-[#1D5D3B] flex items-center justify-center gap-3">
-                        <span class="lang-ua">ОБРАТИ СКУТЕР</span>
-                        <span class="lang-en">SELECT SCOOTER</span>
-                        <i data-lucide="arrow-down" class="w-5 h-5 shrink-0"></i>
-                    </a>
-                    <a href="#calculator"
-                        class="chamfer-btn w-full sm:w-auto bg-white hover:bg-slate-50 text-[#1D5D3B] font-brand font-bold text-sm md:text-base uppercase tracking-widest px-8 py-4 border-2 border-[#1D5D3B] flex items-center justify-center gap-3">
-                        <i data-lucide="calculator" class="w-5 h-5 shrink-0"></i>
-                        <span class="lang-ua">КАЛЬКУЛЯТОР ОРЕНДИ</span>
-                        <span class="lang-en">RENTAL CALCULATOR</span>
-                    </a>
-                </div>
-
-                <!-- Плашки характеристик -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-10 text-left">
-                    <div class="bg-[#F8FAFC] border-2 border-[#1D5D3B] p-4 chamfer-box flex flex-col justify-between">
-                        <div class="font-brand font-bold text-2xl text-[#1D5D3B] mb-2">
-                            <span class="lang-ua">ОРЕНДА</span>
-                            <span class="lang-en">RENTAL</span>
-                        </div>
-                        <div class="space-y-1.5">
-                            <div
-                                class="flex items-baseline justify-between font-brand font-bold text-sm sm:text-base text-[#1D5D3B]">
-                                <span>
-                                    <span class="lang-ua">ВІД 800 ГРН</span>
-                                    <span class="lang-en">FROM 800 UAH</span>
-                                </span>
-                                <span class="text-xs sm:text-sm font-mono text-[#4B5563] font-semibold uppercase">
-                                    <span class="lang-ua">/ ДОБА</span>
-                                    <span class="lang-en">/ DAY</span>
-                                </span>
-                            </div>
-                            <div
-                                class="flex items-baseline justify-between font-brand font-bold text-sm sm:text-base text-[#1D5D3B] pt-1 border-t border-[#1D5D3B]/20">
-                                <span>
-                                    <span class="lang-ua">ВІД 1 800 ГРН</span>
-                                    <span class="lang-en">FROM 1 800 UAH</span>
-                                </span>
-                                <span class="text-xs sm:text-sm font-mono text-[#4B5563] font-semibold uppercase">
-                                    <span class="lang-ua">/ ТИЖДЕНЬ</span>
-                                    <span class="lang-en">/ WEEK</span>
-                                </span>
-                            </div>
-                            <div
-                                class="flex items-baseline justify-between font-brand font-bold text-sm sm:text-base text-[#1D5D3B] pt-1 border-t border-[#1D5D3B]/20">
-                                <span>
-                                    <span class="lang-ua">ВІД 6 000 ГРН</span>
-                                    <span class="lang-en">FROM 6 000 UAH</span>
-                                </span>
-                                <span class="text-xs sm:text-sm font-mono text-[#4B5563] font-semibold uppercase">
-                                    <span class="lang-ua">/ МІСЯЦЬ</span>
-                                    <span class="lang-en">/ MONTH</span>
+                <!-- СПРАВА (lg:col-span-5): Реальне фото флагманського скутера Crosser CR-13 з затемненим фоном -->
+                <div class="lg:col-span-5 relative flex items-center justify-center">
+                    <!-- М'яка темна радіальна підложка/градієнт сзаду -->
+                    <div class="absolute inset-0 bg-radial from-[#1D5D3B]/30 via-zinc-900/60 to-transparent rounded-full blur-2xl -z-10 scale-105 pointer-events-none"></div>
+                    <div class="relative w-full max-w-lg lg:max-w-none group">
+                        <div class="relative rounded-2xl overflow-hidden p-4 sm:p-6 bg-gradient-to-b from-zinc-800/40 via-zinc-900/30 to-black/70 border border-zinc-700/50 shadow-2xl backdrop-blur-md">
+                            <img src="images/crosser.jpg" alt="Crosser CR-13" class="w-full h-auto max-h-[320px] sm:max-h-[380px] object-contain mx-auto drop-shadow-[0_20px_35px_rgba(0,0,0,0.8)] transition-transform duration-500 group-hover:scale-[1.03]">
+                            
+                            <!-- Нижня інформаційна плашка картки -->
+                            <div class="mt-4 pt-3 border-t border-zinc-700/50 flex items-center justify-between text-xs sm:text-sm">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-2 h-2 rounded-full bg-[#1D5D3B] animate-pulse"></span>
+                                    <span class="font-bold text-white tracking-wide">Crosser CR-13 • 72V</span>
+                                </div>
+                                <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-[#1D5D3B]/30 text-emerald-400 border border-[#1D5D3B]/60">
+                                    <span class="lang-ua">До 160 км</span>
+                                    <span class="lang-en">Up to 160 km</span>
                                 </span>
                             </div>
                         </div>
                     </div>
-                    <div class="bg-[#F8FAFC] border-2 border-[#1D5D3B] p-4 chamfer-box">
-                        <div class="font-brand font-bold text-lg sm:text-xl lg:text-2xl text-[#1D5D3B] leading-tight">
-                            <span class="lang-ua">ДО 160 КМ НА ОДНОМУ ЗАРЯДІ</span>
-                            <span class="lang-en">UP TO 160 KM PER CHARGE</span>
-                        </div>
-                        <div class="text-xs sm:text-sm text-[#4B5563] mt-1.5 leading-snug">
-                            <span class="lang-ua">З можливістю взяти другий знімний АКБ</span>
-                            <span class="lang-en">With option to take a 2nd removable battery</span>
-                        </div>
-                    </div>
-                    <div class="bg-[#F8FAFC] border-2 border-[#1D5D3B] p-4 chamfer-box">
-                        <div class="font-brand font-bold text-lg sm:text-xl lg:text-2xl text-[#1D5D3B] leading-tight">
-                            <span class="lang-ua">ОДЕСА, ВУЛ. ПРИМОРСЬКА, 22</span>
-                            <span class="lang-en">ODESA, 22 PRIMORSKA STR.</span>
-                        </div>
-                        <div class="text-xs text-[#4B5563] uppercase tracking-wider font-semibold mt-1">
-                            <span class="lang-ua">ПН — НД: з 11:00 до 22:00</span>
-                            <span class="lang-en">MON — SUN: 11:00 to 22:00</span>
-                        </div>
-                    </div>
-                    <div class="bg-[#F8FAFC] border-2 border-[#1D5D3B] p-4 chamfer-box">
-                        <div class="font-brand font-bold text-lg text-[#1D5D3B] tracking-tight leading-snug">
-                            <span class="lang-ua">ОНЛАЙН БОТ У TELEGRAM 24/7</span>
-                            <span class="lang-en">ONLINE BOT IN TELEGRAM 24/7</span>
-                        </div>
-                        <div class="text-xs text-[#4B5563] mt-1.5 leading-snug">
-                            <span class="lang-ua">Особистий кабінет з автоматичним розрахунком та оплатою днів оренди</span>
-                            <span class="lang-en">Personal account with automatic calculation & payment of rental days</span>
-                        </div>
-                    </div>
                 </div>
-
             </div>
+
+            <!-- 3. Компактна строга статусна смуга (4 лаконічних тезиси) -->
+            <div class="mt-4 pt-8 border-t border-zinc-800/80">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-0 divide-y md:divide-y-0 md:divide-x divide-zinc-800/80 text-left">
+                    <!-- Тезис 1: Тариф -->
+                    <div class="pt-3 md:pt-0 md:px-5 first:pl-0 flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-lg bg-[#1D5D3B]/20 border border-[#1D5D3B]/40 flex items-center justify-center shrink-0 text-[#2E8B57]">
+                            <i data-lucide="tag" class="w-4 h-4"></i>
+                        </div>
+                        <div>
+                            <div class="text-[11px] uppercase tracking-wider text-zinc-400 font-semibold">
+                                <span class="lang-ua">Тарифи</span>
+                                <span class="lang-en">Rates</span>
+                            </div>
+                            <div class="text-xs sm:text-sm font-bold text-white whitespace-nowrap">
+                                <span class="lang-ua">Від 800 ₴/доба • 1 800 ₴/тижд.</span>
+                                <span class="lang-en">From 800 ₴/day • 1,800 ₴/week</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Тезис 2: Запас ходу -->
+                    <div class="pt-3 md:pt-0 md:px-5 flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-lg bg-[#1D5D3B]/20 border border-[#1D5D3B]/40 flex items-center justify-center shrink-0 text-[#2E8B57]">
+                            <i data-lucide="zap" class="w-4 h-4"></i>
+                        </div>
+                        <div>
+                            <div class="text-[11px] uppercase tracking-wider text-zinc-400 font-semibold">
+                                <span class="lang-ua">Запас ходу</span>
+                                <span class="lang-en">Range</span>
+                            </div>
+                            <div class="text-xs sm:text-sm font-bold text-white whitespace-nowrap">
+                                <span class="lang-ua">До 160 км на одному заряді</span>
+                                <span class="lang-en">Up to 160 km per charge</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Тезис 3: Хаб -->
+                    <div class="pt-3 md:pt-0 md:px-5 flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-lg bg-[#1D5D3B]/20 border border-[#1D5D3B]/40 flex items-center justify-center shrink-0 text-[#2E8B57]">
+                            <i data-lucide="map-pin" class="w-4 h-4"></i>
+                        </div>
+                        <div>
+                            <div class="text-[11px] uppercase tracking-wider text-zinc-400 font-semibold">
+                                <span class="lang-ua">Локація</span>
+                                <span class="lang-en">Location</span>
+                            </div>
+                            <div class="text-xs sm:text-sm font-bold text-white whitespace-nowrap">
+                                <span class="lang-ua">Хаб: Одеса, вул. Приморська, 22</span>
+                                <span class="lang-en">Hub: Odesa, 22 Primorska Str.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Тезис 4: Бот підтримки -->
+                    <div class="pt-3 md:pt-0 md:px-5 last:pr-0 flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-lg bg-[#1D5D3B]/20 border border-[#1D5D3B]/40 flex items-center justify-center shrink-0 text-[#2E8B57]">
+                            <i data-lucide="bot" class="w-4 h-4"></i>
+                        </div>
+                        <div>
+                            <div class="text-[11px] uppercase tracking-wider text-zinc-400 font-semibold">
+                                <span class="lang-ua">Підтримка</span>
+                                <span class="lang-en">Support</span>
+                            </div>
+                            <div class="text-xs sm:text-sm font-bold text-white whitespace-nowrap">
+                                <span class="lang-ua">Онлайн-бот підтримки 24/7</span>
+                                <span class="lang-en">Online Support Bot 24/7</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
