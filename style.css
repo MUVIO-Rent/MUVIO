@@ -1,0 +1,41 @@
+/* ==========================================================================
+   MUVIO — GLOBAL BASE STYLES & TYPOGRAPHY (MANROPE)
+   ========================================================================== */
+
+/* 1. Base Typography: html, body, and base elements */
+html,
+body,
+* {
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+}
+
+/* 2. Headings: h1, h2, h3, .hero-title */
+h1,
+h2,
+h3,
+.hero-title {
+    font-family: 'Manrope', sans-serif !important;
+    letter-spacing: -0.02em !important;
+}
+
+/* 3. Hero Main Title (H1 / .hero-title) */
+h1,
+.hero-title {
+    font-weight: 800 !important;
+    letter-spacing: -0.025em !important;
+}
+
+/* 4. Buttons, badges, prices and navigation elements */
+button,
+.chamfer-btn,
+.chamfer-badge,
+[class*="chamfer"],
+nav a,
+.mobile-nav-link,
+.font-brand,
+.font-sans,
+[class*="price"],
+.tariff-price,
+.badge {
+    font-family: 'Manrope', sans-serif !important;
+}
