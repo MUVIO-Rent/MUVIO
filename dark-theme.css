@@ -466,7 +466,13 @@ html.theme-dark #mobileMenu {
 
 html.theme-dark #mobile-menu a,
 html.theme-dark #mobileMenu a {
-    color: #E5E7EB !important;
+    color: #FFFFFF !important;
+    border-bottom: 1px solid #1F2E26 !important;
+}
+
+html.theme-dark #mobile-menu a:last-child,
+html.theme-dark #mobileMenu a:last-child {
+    border-bottom: none !important;
 }
 
 html.theme-dark #mobile-menu a:hover,
