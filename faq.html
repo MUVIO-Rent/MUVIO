@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MUVIO — Сервісний центр та видача | Одеса, вул. Приморська, 22</title>
+    <title>MUVIO — Часті запитання (FAQ) та сервісна політика | Одеса</title>
     <meta name="description"
-        content="Сервісний центр та точка видачі MUVIO в Одесі на вул. Приморській, 22. Планове ТО за 0 ₴, шиномонтаж, гальмівні системи та підмінний транспорт.">
+        content="Відповіді на часті запитання щодо прокату електроскутерів та електровелосипедів MUVIO в Одесі: документи, ТО, застава, ремонт та підмінний фонд.">
 
     <!-- Google Fonts: Chakra Petch & Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -74,7 +74,6 @@
         .chamfer-badge {
             clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
         }
-
     </style>
 </head>
 
@@ -84,7 +83,6 @@
     <!-- ==================== ПРЕЛОАДЕР MUVIO ==================== -->
     <div id="page-preloader" class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#0A0D0C] transition-opacity duration-300">
         <div class="preloader-logo-wrap animate-pulse mb-3">
-            <!-- Точный родной SVG-логотип MUVIO изумрудного цвета #00E676 -->
             <svg class="w-16 h-16 text-[#00E676] glow-breathe" viewBox="0 0 100 100" fill="currentColor">
                 <path d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z"/>
             </svg>
@@ -101,7 +99,7 @@
         </div>
     </div>
 
-    <!-- ==================== АРХІТЕКТУРНІ НАПРЯМНІ ТА МАРКУВАННЯ ПО БОКАХ (Polestar Aesthetic) ==================== -->
+    <!-- ==================== АРХІТЕКТУРНІ НАПРЯМНІ ТА МАРКУВАННЯ ПО БОКАХ ==================== -->
     <div class="fixed inset-y-0 left-0 right-0 pointer-events-none max-w-7xl mx-auto z-40 hidden xl:block">
         <!-- Ліва вертикальна лінія розмітки -->
         <div class="absolute left-0 top-0 bottom-0 w-[1px] bg-slate-200">
@@ -129,31 +127,28 @@
 
     <!-- ==================== 1. ХЕДЕР (НАВІГАЦІЯ) ==================== -->
     <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b-2 border-[#1D5D3B] shadow-sm relative w-full">
-        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 border-x border-slate-200/60">
-            <div class="relative w-full flex items-center justify-between h-16 sm:h-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-x border-slate-200/60">
+            <div class="relative w-full flex items-center justify-between h-20">
 
-                <!-- ЛІВА ЧАСТИНА: Бургер + Логотип MUVIO -->
-                <div class="flex items-center gap-2.5 sm:gap-3 shrink-0 z-10">
-                    <!-- 1-й елемент: кнопка-бургер (3 лінії, #burger-btn) -->
-                    <button id="burger-btn" data-burger="true" type="button" aria-label="Меню"
-                        class="header-action-btn md:hidden flex items-center justify-center w-9 h-9 p-1.5 text-[#1D5D3B] hover:text-[#16472d] transition-colors focus:outline-none"
-                        style="background: transparent !important; border: none !important;">
-                        <svg class="w-6 h-6 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <!-- Ліва частина: Бургер + Логотип MUVIO -->
+                <div class="flex items-center gap-3 z-10">
+                    <button id="burger-btn" data-burger="true" aria-label="Відкрити меню"
+                        class="header-action-btn md:hidden p-1.5 text-[#1D5D3B] hover:text-[#16472d] transition-colors focus:outline-none flex items-center justify-center">
+                        <svg class="w-6 h-6 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <line x1="3" y1="6" x2="21" y2="6"></line>
                             <line x1="3" y1="12" x2="21" y2="12"></line>
                             <line x1="3" y1="18" x2="21" y2="18"></line>
                         </svg>
                     </button>
 
-                    <!-- 2-й елемент: фірмова векторна літера/значок MUVIO ("M") -->
-                    <a href="index.html" class="flex items-center gap-2.5 group shrink-0" style="background: transparent !important; border: none !important;" aria-label="MUVIO Головна">
+                    <a href="index.html" class="flex items-center gap-2.5 group shrink-0" style="background: transparent !important; border: none !important;">
                         <div class="header-logo-wrap flex items-center justify-center shrink-0" style="background: transparent !important; border: none !important;">
-                            <svg class="w-8 h-8 sm:w-10 sm:h-10 text-[#1D5D3B] transition-colors" viewBox="0 0 100 100" fill="currentColor">
+                            <svg class="w-9 h-9 md:w-10 md:h-10 text-[#1D5D3B] transition-colors" viewBox="0 0 100 100" fill="currentColor">
                                 <path d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z"/>
                             </svg>
                         </div>
                         <div class="hidden sm:flex flex-col">
-                            <span class="font-brand font-bold text-lg sm:text-xl tracking-wider text-[#1D5D3B] leading-none">MUVIO</span>
+                            <span class="font-brand font-bold text-lg md:text-xl tracking-wider text-[#1D5D3B] leading-none">MUVIO</span>
                             <div class="text-[10px] tracking-[0.2em] uppercase font-semibold text-gray-400">
                                 <span class="lang-ua">ТВОЄ ELECTRO CITY</span>
                                 <span class="lang-en">YOUR ELECTRO CITY</span>
@@ -163,7 +158,7 @@
                 </div>
 
                 <!-- Навігація по центру -->
-                <nav class="hidden md:flex items-center gap-6 absolute left-1/2 -translate-x-1/2">
+                <nav class="hidden md:flex items-center gap-7 absolute left-1/2 -translate-x-1/2">
                     <a href="catalog.html"
                         class="text-xs sm:text-[13px] font-medium tracking-normal text-[#111827] hover:text-[#1D5D3B] transition-colors py-1 px-2 leading-normal">
                         <span class="lang-ua">КАТАЛОГ</span>
@@ -175,7 +170,7 @@
                         <span class="lang-en">CALCULATOR</span>
                     </a>
                     <a href="service.html"
-                        class="nav-link-active text-xs sm:text-[13px] font-medium tracking-normal text-[#1D5D3B] border-b-2 border-[#1D5D3B] transition-colors py-1 px-2 leading-normal">
+                        class="text-xs sm:text-[13px] font-medium tracking-normal text-[#111827] hover:text-[#1D5D3B] transition-colors py-1 px-2 leading-normal">
                         <span class="lang-ua">СЕРВІС</span>
                         <span class="lang-en">SERVICE</span>
                     </a>
@@ -185,16 +180,14 @@
                         <span class="lang-en">TERMS</span>
                     </a>
                     <a href="faq.html"
-                        class="text-xs sm:text-[13px] font-medium tracking-normal text-[#111827] hover:text-[#1D5D3B] transition-colors py-1 px-2 leading-normal font-bold">
+                        class="text-xs sm:text-[13px] font-medium tracking-normal nav-link-active transition-colors py-1 px-2 leading-normal font-bold">
                         <span>FAQ</span>
                     </a>
                 </nav>
 
-                <!-- ПРАВА ЧАСТИНА: Профіль та Налаштування -->
-                <div class="flex items-center gap-2.5 sm:gap-3 ml-auto z-10 relative">
-                    <!-- 1-й елемент: Профіль користувача -->
-                    <a href="cabinet.html" class="header-action-btn flex flex-col items-center justify-center gap-0.5 group text-[#1D5D3B] hover:text-[#16472d] transition-colors p-1"
-                        style="background: transparent !important; border: none !important;" title="Особистий кабінет" aria-label="Особистий кабінет">
+                <!-- Права частина: Профіль та Налаштування -->
+                <div class="flex items-center gap-3 ml-auto z-10 relative">
+                    <a href="cabinet.html" class="header-action-btn flex flex-col items-center justify-center gap-0.5 group text-[#1D5D3B] hover:text-[#16472d] transition-colors" title="Особистий кабінет">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#1D5D3B]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
@@ -204,10 +197,8 @@
                         </span>
                     </a>
 
-                    <!-- 2-й елемент: Кнопка налаштувань інтерфейсу -->
                     <button type="button" id="options-btn" onclick="toggleSettingsModal(event)"
                         class="header-action-btn flex flex-col items-center justify-center gap-0.5 p-1 text-[#1D5D3B] hover:text-[#16472d] transition-colors"
-                        style="background: transparent !important; border: none !important;"
                         title="Налаштування" aria-label="Налаштування">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#1D5D3B]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
@@ -240,7 +231,7 @@
                         </div>
 
                         <div class="space-y-4 pt-3 text-left">
-                            <!-- А) ТЕМА САЙТУ -->
+                            <!-- ТЕМА САЙТУ -->
                             <div>
                                 <div class="flex items-center justify-between mb-2">
                                     <span class="font-brand font-bold text-xs uppercase tracking-wider text-slate-600">
@@ -270,7 +261,7 @@
                                 </div>
                             </div>
 
-                            <!-- Б) МОВА / LANGUAGE -->
+                            <!-- МОВА / LANGUAGE -->
                             <div>
                                 <div class="flex items-center justify-between mb-2">
                                     <span class="font-brand font-bold text-xs uppercase tracking-wider text-slate-600">
@@ -294,28 +285,6 @@
                                     </button>
                                 </div>
                             </div>
-
-                            <!-- В) МАСШТАБ (Range Slider 80% - 120%) -->
-                            <div>
-                                <div class="flex items-center justify-between mb-2">
-                                    <span class="font-brand font-bold text-xs uppercase tracking-wider text-slate-600">
-                                        <span class="lang-ua">МАСШТАБ (ZOOM)</span>
-                                        <span class="lang-en">ZOOM SCALE</span>
-                                    </span>
-                                    <span id="font-scale-value" class="text-xs font-mono font-bold text-[#1D5D3B]">100%</span>
-                                </div>
-                                <div class="space-y-1.5">
-                                    <input type="range" id="font-scale-slider" min="80" max="120" value="100" step="5"
-                                        oninput="applySiteFontScale(this.value)"
-                                        onchange="saveSiteZoom(this.value)"
-                                        class="w-full cursor-pointer">
-                                    <div class="flex justify-between text-[10px] font-mono text-slate-400 select-none">
-                                        <span>80%</span>
-                                        <span>100%</span>
-                                        <span>120%</span>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -324,235 +293,190 @@
         </div>
 
         <!-- Mobile Drawer -->
-        <div id="mobile-menu" data-mobile-menu="true" class="hidden md:hidden border-t-2 border-[#1D5D3B] bg-white px-4 py-3 space-y-1 shadow-xl transition-all duration-200">
-            <div class="flex items-center justify-between pb-2 mb-1 border-b border-slate-100 dark:border-[#1F2E26]">
-                <span class="font-brand font-bold text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">
-                    <span class="lang-ua">МЕНЮ НАВІГАЦІЇ</span>
-                    <span class="lang-en">NAVIGATION MENU</span>
+        <div id="mobile-menu" data-mobile-menu="true" class="hidden md:hidden border-t-2 border-[#1D5D3B] bg-white px-4 py-3 space-y-1">
+            <div class="flex items-center justify-between pb-2 mb-2 border-b border-gray-100 dark:border-gray-800">
+                <span class="text-xs font-bold uppercase tracking-wider text-gray-500">
+                    <span class="lang-ua">НАВІГАЦІЯ</span>
+                    <span class="lang-en">NAVIGATION</span>
                 </span>
-                <button type="button" id="mobile-menu-close" class="p-1 text-slate-400 hover:text-[#1D5D3B] dark:hover:text-[#00E676] transition-colors" aria-label="Закрити меню">
-                    <svg class="w-5 h-5 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                <button type="button" id="mobile-menu-close" class="p-1.5 text-gray-500 hover:text-[#1D5D3B] dark:hover:text-[#00E676] transition-colors" aria-label="Закрити меню">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
                 </button>
             </div>
             <a href="catalog.html"
-                class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-[#111827] hover:text-[#1D5D3B] py-2 px-2 transition-colors rounded">
+                class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-[#111827] hover:text-[#1D5D3B] py-2.5 px-2 transition-colors">
                 <span class="lang-ua">КАТАЛОГ</span>
                 <span class="lang-en">CATALOG</span>
             </a>
             <a href="calculator.html"
-                class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-[#111827] hover:text-[#1D5D3B] py-2 px-2 transition-colors rounded">
+                class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-[#111827] hover:text-[#1D5D3B] py-2.5 px-2 transition-colors">
                 <span class="lang-ua">КАЛЬКУЛЯТОР</span>
                 <span class="lang-en">CALCULATOR</span>
             </a>
             <a href="service.html"
-                class="mobile-nav-link nav-link-active block font-brand font-semibold text-base tracking-wide text-[#111827] hover:text-[#1D5D3B] py-2 px-2 transition-colors rounded">
+                class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-[#111827] hover:text-[#1D5D3B] py-2.5 px-2 transition-colors">
                 <span class="lang-ua">СЕРВІС</span>
                 <span class="lang-en">SERVICE</span>
             </a>
             <a href="terms.html"
-                class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-[#111827] hover:text-[#1D5D3B] py-2 px-2 transition-colors rounded">
+                class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-[#111827] hover:text-[#1D5D3B] py-2.5 px-2 transition-colors">
                 <span class="lang-ua">УМОВИ ОРЕНДИ</span>
                 <span class="lang-en">TERMS</span>
             </a>
             <a href="faq.html"
-                class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-[#111827] hover:text-[#1D5D3B] py-2 px-2 transition-colors rounded font-bold">
+                class="mobile-nav-link block font-brand font-semibold text-base tracking-wide nav-link-active py-2.5 px-2 transition-colors font-bold">
                 <span>FAQ</span>
             </a>
         </div>
     </header>
 
-    <!-- ==================== 6. СЕРВІС ТА ЛОКАЦІЯ В ОДЕСІ ==================== -->
-    <section id="service" class="py-16 md:py-24 bg-white border-b-2 border-[#1D5D3B]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-x border-slate-200/60">
+    <!-- ==================== ГОЛОВНИЙ БЛОК: FAQ ==================== -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+        <div class="text-center space-y-4 mb-12">
+            <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#1D5D3B]/10 border border-[#1D5D3B] chamfer-badge">
+                <span class="w-2 h-2 bg-[#1D5D3B]"></span>
+                <span class="font-brand font-bold text-xs tracking-widest text-[#1D5D3B] uppercase">
+                    <span class="lang-ua">ВІДПОВІДІ НА ПОПУЛЯРНІ ПИТАННЯ</span>
+                    <span class="lang-en">FREQUENTLY ASKED QUESTIONS</span>
+                </span>
+            </div>
+            <h1 class="font-brand font-bold text-3xl sm:text-4xl md:text-5xl uppercase tracking-tight text-[#111827]">
+                <span class="lang-ua">ЧАСТІ ЗАПИТАННЯ ТА СЕРВІС</span>
+                <span class="lang-en">FAQ & SERVICE POLICY</span>
+            </h1>
+            <p class="text-base sm:text-lg text-[#4B5563] max-w-2xl mx-auto leading-relaxed">
+                <span class="lang-ua">Все, що потрібно знати про умови прокату, безкоштовне технічне обслуговування та підмінний фонд MUVIO в Одесі.</span>
+                <span class="lang-en">Everything you need to know about rental terms, free scheduled maintenance, and MUVIO's replacement fleet in Odesa.</span>
+            </p>
+        </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-
-                <div class="lg:col-span-6 space-y-6">
-                    <div
-                        class="inline-flex items-center gap-2 px-3 py-1 bg-[#1D5D3B]/10 border border-[#1D5D3B] chamfer-badge">
-                        <span class="font-brand font-bold text-xs tracking-wider text-[#1D5D3B] uppercase">
-                            <span class="lang-ua">СЕРВІСНИЙ ЦЕНТР</span>
-                            <span class="lang-en">SERVICE CENTER</span>
-                        </span>
+        <div class="space-y-4 mb-14" id="faqAccordion">
+            <!-- 1. Документи для оренди -->
+            <div class="faq-item bg-[#F8FAFC] border-2 border-[#1D5D3B]/30 hover:border-[#1D5D3B] rounded-xl overflow-hidden transition-all duration-300 shadow-sm">
+                <button type="button" class="faq-trigger w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4 font-brand font-bold text-base sm:text-lg text-[#111827] cursor-pointer" onclick="toggleFaq(0)" aria-expanded="false">
+                    <span class="flex items-center gap-3">
+                        <span class="w-7 h-7 rounded-lg bg-[#1D5D3B]/10 text-[#1D5D3B] flex items-center justify-center shrink-0 text-xs font-mono font-bold">01</span>
+                        <span class="lang-ua">Які документи потрібні для оренди?</span>
+                        <span class="lang-en">What documents are required for rental?</span>
+                    </span>
+                    <div class="w-7 h-7 rounded-full bg-[#1D5D3B]/10 flex items-center justify-center shrink-0 text-[#1D5D3B] transition-transform duration-300 faq-icon">
+                        <i data-lucide="chevron-down" class="w-4 h-4 shrink-0"></i>
                     </div>
-
-                    <h2 class="font-brand font-bold text-3xl sm:text-4xl uppercase tracking-tight text-[#111827]">
-                        <span class="lang-ua">ТЕХНІЧНЕ ОБСЛУГОВУВАННЯ ТА ВИДАЧА</span>
-                        <span class="lang-en">MAINTENANCE & PICKUP</span>
-                    </h2>
-
-                    <p class="text-base text-[#4B5563] leading-relaxed">
-                        <span class="lang-ua">Повне технічне обслуговування електротранспорту за адресою: Одеса, вул. Приморська, 22.</span>
-                        <span class="lang-en">Full maintenance of light electric vehicles at: Odesa, 22 Primorska Str.</span>
+                </button>
+                <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out px-4 sm:px-5 pb-0 text-sm sm:text-base text-[#4B5563] leading-relaxed border-t border-transparent">
+                    <p class="py-3">
+                        <span class="lang-ua">Паспорт (або ID-картка), ІПН, вік від 18 років та встановлений додаток Telegram для підписання договору й керування орендою.</span>
+                        <span class="lang-en">Passport (or ID card), Tax ID (ITN), age 18+, and the Telegram app installed for signing the agreement and managing your rental.</span>
                     </p>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-
-                        <div class="p-4 bg-[#F8FAFC] border-2 border-[#1D5D3B] chamfer-box">
-                            <div
-                                class="font-brand font-bold text-sm uppercase text-[#1D5D3B] flex items-center gap-2 mb-1">
-                                <i data-lucide="disc" class="w-4 h-4"></i>
-                                <span>
-                                    <span class="lang-ua">ШИНОМОНТАЖ</span>
-                                    <span class="lang-en">TIRE SERVICE</span>
-                                </span>
-                            </div>
-                            <p class="text-xs text-[#4B5563]">
-                                <span class="lang-ua">Заміна покришок, камер та ремонт безкамерної гуми.</span>
-                                <span class="lang-en">Tire & tube replacement, tubeless tire repair.</span>
-                            </p>
-                        </div>
-
-                        <div class="p-4 bg-[#F8FAFC] border-2 border-[#1D5D3B] chamfer-box">
-                            <div
-                                class="font-brand font-bold text-sm uppercase text-[#1D5D3B] flex items-center gap-2 mb-1">
-                                <i data-lucide="shield-alert" class="w-4 h-4"></i>
-                                <span>
-                                    <span class="lang-ua">ГАЛЬМІВНІ СИСТЕМИ</span>
-                                    <span class="lang-en">BRAKE SYSTEMS</span>
-                                </span>
-                            </div>
-                            <p class="text-xs text-[#4B5563]">
-                                <span class="lang-ua">Регулювання та заміна колодок, прокачування гідравліки.</span>
-                                <span class="lang-en">Brake pad adjustment & replacement, hydraulic bleeding.</span>
-                            </p>
-                        </div>
-
-                        <div class="p-4 bg-[#F8FAFC] border-2 border-[#1D5D3B] chamfer-box sm:col-span-2">
-                            <div
-                                class="font-brand font-bold text-sm uppercase text-[#1D5D3B] flex items-center gap-2 mb-1">
-                                <i data-lucide="refresh-cw" class="w-4 h-4"></i>
-                                <span>
-                                    <span class="lang-ua">ПІДМІННИЙ ТРАНСПОРТ</span>
-                                    <span class="lang-en">REPLACEMENT VEHICLE</span>
-                                </span>
-                            </div>
-                            <p class="text-xs text-[#4B5563]">
-                                <span class="lang-ua">Оперативна видача скутера на час планового ТО або ремонту.</span>
-                                <span class="lang-en">Immediate scooter replacement during maintenance or repairs.</span>
-                            </p>
-                        </div>
-
-                    </div>
                 </div>
-
-                <!-- Локація та графік (Точні дані з запиту) -->
-                <div class="lg:col-span-6 bg-[#F8FAFC] border-2 border-[#1D5D3B] p-6 sm:p-8 chamfer-box space-y-5">
-                    <div class="border-b border-[#1D5D3B]/20 pb-4">
-                        <div class="flex items-center justify-between">
-                            <span class="font-brand font-bold text-xs uppercase tracking-widest text-[#1D5D3B]">
-                                <span class="lang-ua">ОФІЦІЙНА ЛОКАЦІЯ ТА ГРАФІК</span>
-                                <span class="lang-en">OFFICIAL LOCATION & SCHEDULE</span>
-                            </span>
-                            <span class="text-[10px] font-mono text-slate-500">46.49191° N, 30.73519° E</span>
-                        </div>
-                        <h3 class="font-brand font-bold text-2xl uppercase text-[#111827] mt-1">
-                            <span class="lang-ua">ОДЕСА, ВУЛ. ПРИМОРСЬКА, 22</span>
-                            <span class="lang-en">ODESA, 22 PRIMORSKA STR.</span>
-                        </h3>
-                        <p class="text-xs text-[#1D5D3B] font-medium mt-1">
-                            <span class="lang-ua">Перехрестя з Військовим узвозом (ліворуч при спуску до Приморської)</span>
-                            <span class="lang-en">Intersection with Viyskovyi Descent (on the left going down to Primorska)</span>
-                        </p>
-                    </div>
-
-                    <!-- Інтерактивна карта з точною міткою Приморська, 22 -->
-                    <div class="space-y-1.5">
-                        <div class="w-full rounded-xl overflow-hidden border border-[#1F2E26] shadow-sm relative" style="height: 380px;">
-                            <iframe 
-                                id="serviceHubMapFrame"
-                                class="service-hub-map w-full h-full"
-                                width="100%" 
-                                height="100%" 
-                                frameborder="0" 
-                                scrolling="no" 
-                                marginheight="0" 
-                                marginwidth="0" 
-                                src="https://www.openstreetmap.org/export/embed.html?bbox=30.72519%2C46.48591%2C30.74519%2C46.49791&amp;layer=mapnik&amp;marker=46.49191%2C30.73519"
-                                style="filter: invert(90%) hue-rotate(180deg) brightness(95%) contrast(90%);">
-                            </iframe>
-                        </div>
-                        <div class="flex items-center justify-between text-[11px] text-[#4B5563] font-mono px-0.5">
-                            <span class="flex items-center gap-1.5">
-                                <span class="w-2 h-2 rounded-full bg-[#1D5D3B]"></span>
-                                <span>
-                                    <span class="lang-ua">Точка видачі та сервіс MUVIO</span>
-                                    <span class="lang-en">MUVIO pickup point & service</span>
-                                </span>
-                            </span>
-                            <span class="text-slate-400">
-                                <span class="lang-ua">Військовий узвіз</span>
-                                <span class="lang-en">Viyskovyi Descent</span>
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="space-y-4 text-sm text-[#111827]">
-                        <div class="flex items-start gap-3">
-                            <i data-lucide="clock" class="w-5 h-5 text-[#1D5D3B] flex-shrink-0 mt-0.5"></i>
-                            <div>
-                                <div class="font-brand font-bold uppercase">
-                                    <span class="lang-ua">ГРАФІК РОБОТИ СЕРВІСУ ТА ВИДАЧІ:</span>
-                                    <span class="lang-en">SERVICE & PICKUP HOURS:</span>
-                                </div>
-                                <div class="text-[#4B5563] font-medium">
-                                    <span class="lang-ua">Понеділок — Неділя: з 11:00 до 22:00 (без вихідних)</span>
-                                    <span class="lang-en">Monday — Sunday: 11:00 to 22:00 (seven days a week)</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start gap-3">
-                            <i data-lucide="message-square" class="w-5 h-5 text-[#1D5D3B] flex-shrink-0 mt-0.5"></i>
-                            <div>
-                                <div class="font-brand font-bold uppercase">
-                                    <span class="lang-ua">ПІДТРИМКА КЛІЄНТІВ:</span>
-                                    <span class="lang-en">CUSTOMER SUPPORT:</span>
-                                </div>
-                                <div class="text-[#4B5563] mt-0.5">
-                                    <span class="lang-ua">Зв'язок з менеджером:<br></span>
-                                    <span class="lang-en">Contact manager:<br></span>
-                                    <span>Telegram: </span><a href="https://t.me/Muvio_Odesa" target="_blank"
-                                        rel="noopener noreferrer"
-                                        class="hover:text-[#1D5D3B] transition-colors">@Muvio_Odesa</a><br>
-                                    <span class="lang-ua">Телефон: </span>
-                                    <span class="lang-en">Phone: </span><a href="tel:+380638316361"
-                                        class="hover:text-[#1D5D3B] transition-colors">+38(063)-831-63-61</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start gap-3">
-                            <i data-lucide="file-check" class="w-5 h-5 text-[#1D5D3B] flex-shrink-0 mt-0.5"></i>
-                            <div>
-                                <div class="font-brand font-bold uppercase">
-                                    <span class="lang-ua">НЕОБХІДНІ ДОКУМЕНТИ:</span>
-                                    <span class="lang-en">REQUIRED DOCUMENTS:</span>
-                                </div>
-                                <div class="text-[#4B5563]">
-                                    <span class="lang-ua">Паспорт або ID-картка, ІПН, вік від 18 років, смартфон з додатком Telegram.</span>
-                                    <span class="lang-en">Passport or ID card, Tax ID, age 18+, smartphone with Telegram app.</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="pt-4">
-                        <a href="https://t.me/muviobot" target="_blank" rel="noopener noreferrer"
-                            class="chamfer-btn w-full bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-sm uppercase tracking-widest py-3 px-6 text-center block">
-                            <span class="lang-ua">НАПИСАТИ МЕНЕДЖЕРУ В TELEGRAM</span>
-                            <span class="lang-en">MESSAGE MANAGER IN TELEGRAM</span>
-                        </a>
-                    </div>
-                </div>
-
             </div>
 
+            <!-- 2. ТО у вартості -->
+            <div class="faq-item bg-[#F8FAFC] border-2 border-[#1D5D3B]/30 hover:border-[#1D5D3B] rounded-xl overflow-hidden transition-all duration-300 shadow-sm">
+                <button type="button" class="faq-trigger w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4 font-brand font-bold text-base sm:text-lg text-[#111827] cursor-pointer" onclick="toggleFaq(1)" aria-expanded="false">
+                    <span class="flex items-center gap-3">
+                        <span class="w-7 h-7 rounded-lg bg-[#1D5D3B]/10 text-[#1D5D3B] flex items-center justify-center shrink-0 text-xs font-mono font-bold">02</span>
+                        <span class="lang-ua">Чи входить технічне обслуговування у вартість?</span>
+                        <span class="lang-en">Is maintenance included in the price?</span>
+                    </span>
+                    <div class="w-7 h-7 rounded-full bg-[#1D5D3B]/10 flex items-center justify-center shrink-0 text-[#1D5D3B] transition-transform duration-300 faq-icon">
+                        <i data-lucide="chevron-down" class="w-4 h-4 shrink-0"></i>
+                    </div>
+                </button>
+                <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out px-4 sm:px-5 pb-0 text-sm sm:text-base text-[#4B5563] leading-relaxed border-t border-transparent">
+                    <p class="py-3">
+                        <span class="lang-ua">Так, 100% планового ТО, регламентні роботи та заміна зношених розхідників проводяться нашими майстрами в хабі безкоштовно.</span>
+                        <span class="lang-en">Yes, 100% of scheduled maintenance, routine inspections, and replacement of worn parts are performed by our technicians at the hub free of charge.</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- 3. Прокол колеса / поломка -->
+            <div class="faq-item bg-[#F8FAFC] border-2 border-[#1D5D3B]/30 hover:border-[#1D5D3B] rounded-xl overflow-hidden transition-all duration-300 shadow-sm">
+                <button type="button" class="faq-trigger w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4 font-brand font-bold text-base sm:text-lg text-[#111827] cursor-pointer" onclick="toggleFaq(2)" aria-expanded="false">
+                    <span class="flex items-center gap-3">
+                        <span class="w-7 h-7 rounded-lg bg-[#1D5D3B]/10 text-[#1D5D3B] flex items-center justify-center shrink-0 text-xs font-mono font-bold">03</span>
+                        <span class="lang-ua">Що робити у разі проколу колеса чи поломки (шиномонтаж)?</span>
+                        <span class="lang-en">What to do in case of a flat tire or breakdown (tire repair)?</span>
+                    </span>
+                    <div class="w-7 h-7 rounded-full bg-[#1D5D3B]/10 flex items-center justify-center shrink-0 text-[#1D5D3B] transition-transform duration-300 faq-icon">
+                        <i data-lucide="chevron-down" class="w-4 h-4 shrink-0"></i>
+                    </div>
+                </button>
+                <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out px-4 sm:px-5 pb-0 text-sm sm:text-base text-[#4B5563] leading-relaxed border-t border-transparent">
+                    <p class="py-3">
+                        <span class="lang-ua">Зверніться до нашого сервісного центру (вул. Приморська, 22) або напишіть у бот. Заміна покришок, камер та ремонт безкамерної гуми виконуються на місці майстрами сервісу.</span>
+                        <span class="lang-en">Contact our service center (22 Prymorska St) or message our Telegram bot. Tire replacements, inner tube fixes, and tubeless tire repairs are carried out on-site by our service technicians.</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- 4. Підмінний транспорт -->
+            <div class="faq-item bg-[#F8FAFC] border-2 border-[#1D5D3B]/30 hover:border-[#1D5D3B] rounded-xl overflow-hidden transition-all duration-300 shadow-sm">
+                <button type="button" class="faq-trigger w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4 font-brand font-bold text-base sm:text-lg text-[#111827] cursor-pointer" onclick="toggleFaq(3)" aria-expanded="false">
+                    <span class="flex items-center gap-3">
+                        <span class="w-7 h-7 rounded-lg bg-[#1D5D3B]/10 text-[#1D5D3B] flex items-center justify-center shrink-0 text-xs font-mono font-bold">04</span>
+                        <span class="lang-ua">Чи надається підмінний транспорт на час ремонту?</span>
+                        <span class="lang-en">Is a replacement vehicle provided during repairs?</span>
+                    </span>
+                    <div class="w-7 h-7 rounded-full bg-[#1D5D3B]/10 flex items-center justify-center shrink-0 text-[#1D5D3B] transition-transform duration-300 faq-icon">
+                        <i data-lucide="chevron-down" class="w-4 h-4 shrink-0"></i>
+                    </div>
+                </button>
+                <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out px-4 sm:px-5 pb-0 text-sm sm:text-base text-[#4B5563] leading-relaxed border-t border-transparent">
+                    <p class="py-3">
+                        <span class="lang-ua">Так, у разі тривалого планового ТО або складного ремонту ми оперативно видаємо підмінний скутер із парку, щоб ви не втрачали робочий час.</span>
+                        <span class="lang-en">Yes, in case of prolonged scheduled maintenance or complex repairs, we promptly issue a replacement scooter from our fleet so you don't lose working time.</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- 5. Застава -->
+            <div class="faq-item bg-[#F8FAFC] border-2 border-[#1D5D3B]/30 hover:border-[#1D5D3B] rounded-xl overflow-hidden transition-all duration-300 shadow-sm">
+                <button type="button" class="faq-trigger w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4 font-brand font-bold text-base sm:text-lg text-[#111827] cursor-pointer" onclick="toggleFaq(4)" aria-expanded="false">
+                    <span class="flex items-center gap-3">
+                        <span class="w-7 h-7 rounded-lg bg-[#1D5D3B]/10 text-[#1D5D3B] flex items-center justify-center shrink-0 text-xs font-mono font-bold">05</span>
+                        <span class="lang-ua">Як нараховується та повертається застава?</span>
+                        <span class="lang-en">How is the deposit charged and refunded?</span>
+                    </span>
+                    <div class="w-7 h-7 rounded-full bg-[#1D5D3B]/10 flex items-center justify-center shrink-0 text-[#1D5D3B] transition-transform duration-300 faq-icon">
+                        <i data-lucide="chevron-down" class="w-4 h-4 shrink-0"></i>
+                    </div>
+                </button>
+                <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out px-4 sm:px-5 pb-0 text-sm sm:text-base text-[#4B5563] leading-relaxed border-t border-transparent">
+                    <p class="py-3">
+                        <span class="lang-ua">Застава вноситься при підписанні договору (4 500 грн для Crosser CR-13, 4 000 грн для інших скутерів, 3 000 грн для електровелосипедів) і повертається в повному обсязі після завершення оренди та перевірки техніки.</span>
+                        <span class="lang-en">The deposit is paid upon signing the agreement (4,500 UAH for Crosser CR-13, 4,000 UAH for other scooters, 3,000 UAH for e-bikes) and is fully refunded upon completion of the rental and vehicle inspection.</span>
+                    </p>
+                </div>
+            </div>
         </div>
-    </section>
+
+        <!-- Додаткова консультація з менеджером -->
+        <div class="bg-white border-2 border-[#1D5D3B] p-6 sm:p-8 chamfer-box text-center space-y-4 shadow-sm">
+            <div class="w-12 h-12 rounded-full bg-[#1D5D3B]/10 text-[#1D5D3B] flex items-center justify-center mx-auto">
+                <i data-lucide="message-circle-question" class="w-6 h-6"></i>
+            </div>
+            <h2 class="font-brand font-bold text-xl sm:text-2xl uppercase text-[#111827]">
+                <span class="lang-ua">НЕ ЗНАЙШЛИ ВІДПОВІДІ НА СВОЄ ПИТАННЯ?</span>
+                <span class="lang-en">DIDN'T FIND YOUR QUESTION?</span>
+            </h2>
+            <p class="text-sm sm:text-base text-[#4B5563] max-w-xl mx-auto">
+                <span class="lang-ua">Наші менеджери готові відповісти на будь-які деталі щодо оренди, технічних характеристик чи бронювання 7 днів на тиждень.</span>
+                <span class="lang-en">Our managers are ready to assist with any rental details, tech specs, or reservations 7 days a week.</span>
+            </p>
+            <div class="pt-2">
+                <a href="https://t.me/Muvio_Odesa" target="_blank" rel="noopener noreferrer"
+                    class="chamfer-btn inline-flex items-center justify-center gap-2.5 bg-[#229ED9] hover:bg-[#1e8bc0] text-white font-brand font-bold text-sm uppercase tracking-widest py-3.5 px-8 shadow-md active:scale-[0.98]">
+                    <i data-lucide="send" class="w-4 h-4 shrink-0"></i>
+                    <span class="lang-ua">НАПИСАТИ МЕНЕДЖЕРУ В TELEGRAM</span>
+                    <span class="lang-en">MESSAGE MANAGER IN TELEGRAM</span>
+                </a>
+            </div>
+        </div>
+    </main>
 
     <!-- ==================== 7. ПІДВАЛ (FOOTER) ==================== -->
     <footer id="contacts" class="bg-[#123824] text-white border-t-2 border-[#1D5D3B] pt-16 pb-12">
@@ -576,19 +500,25 @@
                         </div>
                     </div>
                     <div class="space-y-2 text-xs text-emerald-100 font-sans pt-1">
-                        <p class="flex items-center gap-2">
-                            <i data-lucide="mail" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                        <p class="flex items-center gap-2.5">
+                            <span class="w-6 h-6 rounded-md bg-emerald-800/60 flex items-center justify-center shrink-0 text-emerald-300">
+                                <i data-lucide="mail" class="w-3.5 h-3.5 shrink-0"></i>
+                            </span>
                             <a href="mailto:muviorent@gmail.com" class="hover:text-white transition-colors">muviorent@gmail.com</a>
                         </p>
-                        <p class="flex items-center gap-2">
-                            <i data-lucide="phone" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                        <p class="flex items-center gap-2.5">
+                            <span class="w-6 h-6 rounded-md bg-emerald-800/60 flex items-center justify-center shrink-0 text-emerald-300">
+                                <i data-lucide="phone" class="w-3.5 h-3.5 shrink-0"></i>
+                            </span>
                             <a href="tel:+380638316361" class="hover:text-white transition-colors font-semibold">+38 (063) 831-63-61</a>
                         </p>
-                        <p class="flex items-start gap-2">
-                            <i data-lucide="map-pin" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+                        <p class="flex items-start gap-2.5">
+                            <span class="w-6 h-6 rounded-md bg-emerald-800/60 flex items-center justify-center shrink-0 text-emerald-300 mt-0.5">
+                                <i data-lucide="map-pin" class="w-3.5 h-3.5 shrink-0"></i>
+                            </span>
                             <span>
                                 <span class="lang-ua">м. Одеса, вул. Приморська, 22</span>
-                                <span class="lang-en">Odesa, 22 Primorska Str.</span>
+                                <span class="lang-en">Odesa, Prymorska St, 22</span>
                             </span>
                         </p>
                     </div>
@@ -601,22 +531,10 @@
                         <span class="lang-en">MENU</span>
                     </div>
                     <ul class="space-y-2 text-base font-medium font-brand tracking-wide">
-                        <li><a href="catalog.html?cat=scooter" class="hover:text-emerald-300 transition-colors">
-                            <span class="lang-ua">Каталог скутерів</span>
-                            <span class="lang-en">Scooter Catalog</span>
-                        </a></li>
-                        <li><a href="catalog.html?cat=bike" class="hover:text-emerald-300 transition-colors">
-                            <span class="lang-ua">Каталог електровелосипедів</span>
-                            <span class="lang-en">E-Bike Catalog</span>
-                        </a></li>
-                        <li><a href="terms.html" class="hover:text-emerald-300 transition-colors">
-                            <span class="lang-ua">Умови оренди</span>
-                            <span class="lang-en">Rental Terms</span>
-                        </a></li>
-                        <li><a href="index.html#faq" class="hover:text-emerald-300 transition-colors">
-                            <span class="lang-ua">FAQ</span>
-                            <span class="lang-en">FAQ</span>
-                        </a></li>
+                        <li><a href="catalog.html?cat=scooter" class="hover:text-emerald-300 transition-colors"><span class="lang-ua">Каталог скутерів</span><span class="lang-en">Scooter Catalog</span></a></li>
+                        <li><a href="catalog.html?cat=bike" class="hover:text-emerald-300 transition-colors"><span class="lang-ua">Каталог електровелосипедів</span><span class="lang-en">E-Bike Catalog</span></a></li>
+                        <li><a href="terms.html" class="hover:text-emerald-300 transition-colors"><span class="lang-ua">Умови оренди</span><span class="lang-en">Rental Terms</span></a></li>
+                        <li><a href="faq.html" class="hover:text-emerald-300 transition-colors text-emerald-400 font-bold">FAQ</a></li>
                     </ul>
                 </div>
 
@@ -640,25 +558,15 @@
                         <span class="lang-en">EXPLORE</span>
                     </div>
                     <ul class="space-y-2 text-base font-medium font-brand tracking-wide">
-                        <li><a href="calculator.html" class="hover:text-emerald-300 transition-colors">
-                            <span class="lang-ua">Калькулятор оренди</span>
-                            <span class="lang-en">Rental Calculator</span>
-                        </a></li>
-                        <li><a href="service.html" class="hover:text-emerald-300 transition-colors text-emerald-400 font-bold">
-                            <span class="lang-ua">Ремонт скутера</span>
-                            <span class="lang-en">Scooter Repair</span>
-                        </a></li>
-                        <li><a href="#franchise" class="hover:underline">
-                            <span class="lang-ua">Франшиза</span>
-                            <span class="lang-en">Franchise</span>
-                        </a></li>
+                        <li><a href="calculator.html" class="hover:text-emerald-300 transition-colors"><span class="lang-ua">Калькулятор оренди</span><span class="lang-en">Rental Calculator</span></a></li>
+                        <li><a href="service.html" class="hover:text-emerald-300 transition-colors"><span class="lang-ua">Ремонт скутера</span><span class="lang-en">Scooter Repair</span></a></li>
+                        <li><a href="franchise.html" class="hover:underline"><span class="lang-ua">Франшиза</span><span class="lang-en">Franchise</span></a></li>
                     </ul>
                     <div class="pt-4">
                         <a href="https://t.me/muviobot" target="_blank" rel="noopener noreferrer"
                             class="chamfer-btn inline-flex items-center gap-2 bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs uppercase px-4 py-2 border border-emerald-500">
                             <i data-lucide="send" class="w-3.5 h-3.5"></i>
-                            <span class="lang-ua">TELEGRAM BOT →</span>
-                            <span class="lang-en">TELEGRAM BOT →</span>
+                            <span>TELEGRAM BOT →</span>
                         </a>
                     </div>
                 </div>
@@ -680,15 +588,38 @@
 
     <!-- ==================== JAVASCRIPT ==================== -->
     <script>
+        // Прелоадер
+        function hidePreloader() {
+            const p = document.getElementById('page-preloader');
+            if (p) {
+                p.classList.add('opacity-0', 'pointer-events-none');
+                setTimeout(() => {
+                    if (p && p.parentNode) p.parentNode.removeChild(p);
+                }, 350);
+            }
+        }
+        if (document.readyState === 'complete') {
+            hidePreloader();
+        } else {
+            window.addEventListener('load', hidePreloader);
+            setTimeout(hidePreloader, 1500);
+        }
 
         // Мобільне меню
-        const burgerBtn = document.getElementById('burger-btn') || document.querySelector('[data-burger]') || document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobile-menu') || document.getElementById('mobileMenu');
+        const burgerBtn = document.getElementById('burger-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+
         if (burgerBtn && mobileMenu) {
-            burgerBtn.onclick = (e) => {
+            burgerBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 mobileMenu.classList.toggle('hidden');
-            };
+            });
+            if (mobileMenuClose) {
+                mobileMenuClose.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            }
             mobileMenu.querySelectorAll('.mobile-nav-link, a, button').forEach(link => {
                 link.addEventListener('click', () => {
                     mobileMenu.classList.add('hidden');
@@ -696,7 +627,48 @@
             });
         }
 
-        // Єдина синхронізація імені користувача в шапці (muvio_active_user)
+        // FAQ Accordion Logic
+        function toggleFaq(index) {
+            const accordion = document.getElementById('faqAccordion');
+            if (!accordion) return;
+            const items = accordion.querySelectorAll('.faq-item');
+            if (!items[index]) return;
+
+            const targetItem = items[index];
+            const trigger = targetItem.querySelector('.faq-trigger');
+            const content = targetItem.querySelector('.faq-content');
+            const icon = targetItem.querySelector('.faq-icon');
+            const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+
+            items.forEach((item, i) => {
+                if (i !== index) {
+                    const tr = item.querySelector('.faq-trigger');
+                    const co = item.querySelector('.faq-content');
+                    const ic = item.querySelector('.faq-icon');
+                    if (tr) tr.setAttribute('aria-expanded', 'false');
+                    if (co) {
+                        co.style.maxHeight = '0px';
+                        co.classList.remove('pb-4');
+                    }
+                    if (ic) ic.style.transform = 'rotate(0deg)';
+                }
+            });
+
+            if (isExpanded) {
+                trigger.setAttribute('aria-expanded', 'false');
+                content.style.maxHeight = '0px';
+                content.classList.remove('pb-4');
+                if (icon) icon.style.transform = 'rotate(0deg)';
+            } else {
+                trigger.setAttribute('aria-expanded', 'true');
+                content.classList.add('pb-4');
+                content.style.maxHeight = (content.scrollHeight + 32) + 'px';
+                if (icon) icon.style.transform = 'rotate(180deg)';
+            }
+        }
+        window.toggleFaq = toggleFaq;
+
+        // Синхронізація імені користувача
         function updateHeaderUserName() {
             let name = '';
             try {
@@ -728,11 +700,9 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             updateHeaderUserName();
-            try {
-                if (window.lucide) {
-                    window.lucide.createIcons();
-                }
-            } catch (e) { console.error('Lucide error:', e); }
+            if (window.lucide) {
+                window.lucide.createIcons();
+            }
         });
     </script>
     <!-- MUVIO Theme & Settings Module -->

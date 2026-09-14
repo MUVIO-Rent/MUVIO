@@ -48,9 +48,7 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- Leaflet Map CSS & JS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
 
     <!-- MUVIO Dark Theme -->
     <link rel="stylesheet" href="./dark-theme.css">
@@ -90,16 +88,7 @@
             box-shadow: 0 16px 32px -8px rgba(29, 93, 59, 0.22);
         }
 
-        /* Leaflet popup styling */
-        .leaflet-popup-content-wrapper {
-            border-radius: 2px !important;
-            border: 1px solid #1D5D3B !important;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12) !important;
-        }
 
-        .leaflet-popup-tip {
-            background: #ffffff !important;
-        }
 
 
 
@@ -234,7 +223,7 @@
                         <span class="lang-ua">КАТАЛОГ</span>
                         <span class="lang-en">CATALOG</span>
                     </a>
-                    <a href="#calculator"
+                    <a href="calculator.html"
                         class="text-xs sm:text-[13px] font-medium tracking-normal text-[#111827] hover:text-[#1D5D3B] transition-colors py-1 px-2 leading-normal">
                         <span class="lang-ua">КАЛЬКУЛЯТОР</span>
                         <span class="lang-en">CALCULATOR</span>
@@ -249,8 +238,8 @@
                         <span class="lang-ua">УМОВИ ОРЕНДИ</span>
                         <span class="lang-en">TERMS</span>
                     </a>
-                    <a href="#faq"
-                        class="text-xs sm:text-[13px] font-medium tracking-normal text-[#111827] hover:text-[#1D5D3B] transition-colors py-1 px-2 leading-normal font-bold">
+                    <a href="faq.html"
+                        class="text-xs sm:text-[13px] font-medium tracking-normal text-[#111827] hover:text-[#1D5D3B] transition-colors py-1 px-2 leading-normal">
                         <span>FAQ</span>
                     </a>
                 </nav>
@@ -422,7 +411,7 @@
                 <span class="lang-ua">УМОВИ ОРЕНДИ</span>
                 <span class="lang-en">TERMS</span>
             </a>
-            <a href="#faq"
+            <a href="faq.html"
                 class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-[#111827] hover:text-[#1D5D3B] py-2 px-2 transition-colors rounded font-bold">
                 <span>FAQ</span>
             </a>
@@ -2330,10 +2319,21 @@
                         </p>
                     </div>
 
-                    <!-- Інтерактивна карта Leaflet з точною міткою -->
+                    <!-- Гарантовано працююча інтерактивна карта OpenStreetMap з точною міткою -->
                     <div class="space-y-1.5">
-                        <div id="muvio-map"
-                            class="w-full h-60 border border-[#1D5D3B] relative z-10 bg-slate-100 shadow-sm"></div>
+                        <div style="width: 100%; height: 380px; min-height: 380px; border-radius: 12px; overflow: hidden; border: 1px solid #1F2E26; position: relative;">
+                            <iframe 
+                                title="MUVIO Hub Location"
+                                width="100%" 
+                                height="380" 
+                                frameborder="0" 
+                                scrolling="no" 
+                                marginheight="0" 
+                                marginwidth="0" 
+                                src="https://www.openstreetmap.org/export/embed.html?bbox=30.72800%2C46.48800%2C30.74200%2C46.49500&amp;layer=mapnik&amp;marker=46.49191%2C30.73519"
+                                style="width: 100%; height: 380px; border: 0; filter: invert(92%) hue-rotate(180deg) contrast(110%) brightness(85%);">
+                            </iframe>
+                        </div>
                         <div class="flex items-center justify-between text-[11px] text-[#4B5563] font-mono px-0.5">
                             <span class="flex items-center gap-1.5">
                                 <span class="w-2 h-2 rounded-full bg-[#1D5D3B]"></span>
@@ -3483,58 +3483,7 @@
         }
 
 
-        // Ініціалізація карти Leaflet з точною точкою на Приморській, 22
-        function initMap() {
-            const mapEl = document.getElementById('muvio-map');
-            if (!mapEl || typeof L === 'undefined') return;
-            try {
-                // Координати точки строго на Приморській, 22 / перехрестя з Військовим узвозом
-                const coords = [46.49191, 30.73519];
-                const map = L.map('muvio-map', {
-                    center: coords,
-                    zoom: 17,
-                    scrollWheelZoom: false
-                });
 
-                // Публічний шар карти OpenStreetMap (без водяних знаків та API-ключа)
-                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-                    maxZoom: 19
-                }).addTo(map);
-
-                // Фірмова темно-зелена точка (#1D5D3B)
-                const pinIcon = L.divIcon({
-                    className: 'custom-muvio-marker',
-                    html: `
-                        <div style="position: relative; display: flex; flex-direction: column; align-items: center; transform: translate(-50%, -100%);">
-                            <div style="background-color: #1D5D3B; color: #ffffff; padding: 4px 8px; font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 11px; text-transform: uppercase; border: 1px solid #1D5D3B; white-space: nowrap; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
-                                MUVIO — Приморська, 22
-                            </div>
-                            <div style="width: 14px; height: 14px; background-color: #1D5D3B; border: 2.5px solid #ffffff; border-radius: 50%; box-shadow: 0 0 10px rgba(29,93,59,0.8); margin-top: 2px;"></div>
-                            <div style="width: 2px; height: 6px; background-color: #1D5D3B;"></div>
-                        </div>
-                    `,
-                    iconSize: [0, 0],
-                    iconAnchor: [0, 0]
-                });
-
-                const marker = L.marker(coords, { icon: pinIcon }).addTo(map);
-                marker.bindPopup(`
-                    <div style="font-family: 'Inter', sans-serif; padding: 4px; font-size: 13px;">
-                        <div style="font-family: 'Chakra Petch', sans-serif; font-weight: 700; color: #1D5D3B; font-size: 14px; text-transform: uppercase; margin-bottom: 4px;">
-                            MUVIO — Приморська, 22 (біля Військового узвозу)
-                        </div>
-                        <div style="color: #4B5563; font-size: 12px; line-height: 1.4;">
-                            Одеса, перехрестя з Військовим узвозом (ліворуч при спуску до моря).<br>
-                            <strong>Графік:</strong> щодня 11:00 — 22:00
-                        </div>
-                    </div>
-                `).openPopup();
-            } catch (e) {
-                console.warn('Leaflet map error:', e);
-            }
-        }
-        window.initMap = initMap;
 
         // Explicit window export for zero-scope issues
         window.renderCatalog = renderCatalog;
@@ -3741,9 +3690,8 @@
                 if (typeof initSettingsUI === 'function') initSettingsUI();
             });
 
-            // 3. Калькулятор та мапа
+            // 3. Калькулятор
             try { initCalcSelect(); } catch (e) { console.error('Calc init error:', e); }
-            try { initMap(); } catch (e) { console.error('Map init error:', e); }
             const tgBtn = document.getElementById('calcTelegramBtn');
             if (tgBtn) {
                 tgBtn.addEventListener('click', handleRentalApplyClick);

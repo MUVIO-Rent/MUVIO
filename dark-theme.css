@@ -730,3 +730,18 @@ html.theme-dark .faq-content {
     color: #9CA3AF !important;
     border-color: #1F2E26 !important;
 }
+
+/* 21. Active Navigation Link Indicator (Emerald in Light, Neon #00E676 in Dark) */
+nav a.nav-link-active,
+.mobile-nav-link.nav-link-active {
+    color: #1D5D3B !important;
+    border-bottom: 2px solid #1D5D3B !important;
+    font-weight: 700 !important;
+}
+
+html.theme-dark nav a.nav-link-active,
+html.theme-dark .mobile-nav-link.nav-link-active {
+    color: #00E676 !important;
+    border-bottom: 2px solid #00E676 !important;
+    font-weight: 700 !important;
+}
