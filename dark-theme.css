@@ -526,6 +526,7 @@ header,
 /* 14. Header Action Buttons (Profile, Settings, Burger) - Strictly In-Place Behavior (No lateral shifts) */
 .header-action-btn,
 #settingsBtn,
+#options-btn,
 #burger-btn,
 #mobileMenuBtn,
 a[title="Особистий кабінет"] {
@@ -537,6 +538,7 @@ a[title="Особистий кабінет"] {
 
 .header-action-btn:hover,
 #settingsBtn:hover,
+#options-btn:hover,
 #burger-btn:hover,
 #mobileMenuBtn:hover,
 a[title="Особистий кабінет"]:hover {
@@ -545,6 +547,7 @@ a[title="Особистий кабінет"]:hover {
 
 .header-action-btn:active,
 #settingsBtn:active,
+#options-btn:active,
 #burger-btn:active,
 #mobileMenuBtn:active,
 a[title="Особистий кабінет"]:active {
@@ -605,13 +608,18 @@ html.theme-dark #mobileMenu a:hover {
     will-change: transform;
 }
 
-/* 16. Header Action Icons (Profile & Gear) in Dark Theme */
+/* 16. Header Action Icons (Profile & Gear & Burger) in Dark Theme */
 html.theme-dark a[title="Особистий кабінет"],
 html.theme-dark a[title="Особистий кабінет"] svg,
 html.theme-dark a[title="Особистий кабінет"] span,
 html.theme-dark #settingsBtn,
 html.theme-dark #settingsBtn svg,
-html.theme-dark #settingsBtn span {
+html.theme-dark #settingsBtn span,
+html.theme-dark #options-btn,
+html.theme-dark #options-btn svg,
+html.theme-dark #options-btn span,
+html.theme-dark #burger-btn,
+html.theme-dark #burger-btn svg {
     color: #E5E7EB !important;
 }
 
@@ -620,7 +628,12 @@ html.theme-dark a[title="Особистий кабінет"]:hover svg,
 html.theme-dark a[title="Особистий кабінет"]:hover span,
 html.theme-dark #settingsBtn:hover,
 html.theme-dark #settingsBtn:hover svg,
-html.theme-dark #settingsBtn:hover span {
+html.theme-dark #settingsBtn:hover span,
+html.theme-dark #options-btn:hover,
+html.theme-dark #options-btn:hover svg,
+html.theme-dark #options-btn:hover span,
+html.theme-dark #burger-btn:hover,
+html.theme-dark #burger-btn:hover svg {
     color: #00E676 !important;
 }
 

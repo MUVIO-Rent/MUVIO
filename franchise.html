@@ -142,21 +142,34 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-x border-slate-200/60">
             <div class="relative w-full flex items-center justify-between h-20">
 
-                <!-- Ліва частина: Логотип MUVIO -->
-                <a href="index.html" class="flex items-center gap-2.5 group shrink-0 z-10" style="background: transparent !important; border: none !important;">
-                    <div class="header-logo-wrap flex items-center justify-center shrink-0" style="background: transparent !important; border: none !important;">
-                        <svg class="w-9 h-9 md:w-10 md:h-10 text-[#1D5D3B] transition-colors" viewBox="0 0 100 100" fill="currentColor">
-                            <path d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z"/>
+                <!-- Ліва частина: Бургер + Логотип MUVIO -->
+                <div class="flex items-center gap-3 z-10">
+                    <!-- 1-й елемент: кнопка-бургер (3 лінії, #burger-btn) для відкриття мобільного меню -->
+                    <button id="burger-btn" data-burger="true" aria-label="Відкрити меню"
+                        class="header-action-btn md:hidden p-1.5 text-[#1D5D3B] hover:text-[#16472d] transition-colors focus:outline-none flex items-center justify-center">
+                        <svg class="w-6 h-6 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
                         </svg>
-                    </div>
-                    <div class="hidden sm:flex flex-col">
-                        <span class="font-brand font-bold text-lg md:text-xl tracking-wider text-[#1D5D3B] leading-none">MUVIO</span>
-                        <div class="text-[10px] tracking-[0.2em] uppercase font-semibold text-gray-400">
-                            <span class="lang-ua">ТВОЄ ELECTRO CITY</span>
-                            <span class="lang-en">YOUR ELECTRO CITY</span>
+                    </button>
+
+                    <!-- 2-й елемент: фірмова векторна буква/значок MUVIO ("M") смарагдового кольору без білих рамок -->
+                    <a href="index.html" class="flex items-center gap-2.5 group shrink-0" style="background: transparent !important; border: none !important;">
+                        <div class="header-logo-wrap flex items-center justify-center shrink-0" style="background: transparent !important; border: none !important;">
+                            <svg class="w-9 h-9 md:w-10 md:h-10 text-[#1D5D3B] transition-colors" viewBox="0 0 100 100" fill="currentColor">
+                                <path d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z"/>
+                            </svg>
                         </div>
-                    </div>
-                </a>
+                        <div class="hidden sm:flex flex-col">
+                            <span class="font-brand font-bold text-lg md:text-xl tracking-wider text-[#1D5D3B] leading-none">MUVIO</span>
+                            <div class="text-[10px] tracking-[0.2em] uppercase font-semibold text-gray-400">
+                                <span class="lang-ua">ТВОЄ ELECTRO CITY</span>
+                                <span class="lang-en">YOUR ELECTRO CITY</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
 
                 <!-- Навігація по центру -->
                 <nav class="hidden md:flex items-center gap-6 absolute left-1/2 -translate-x-1/2">
@@ -182,9 +195,9 @@
                     </a>
                 </nav>
 
-                <!-- Права частина: Профіль та Налаштування -->
-                <div class="flex items-center z-10 relative">
-                    <!-- Профіль користувача -->
+                <!-- Права частина мобільної/десктопної шапки: Профіль та Налаштування -->
+                <div class="flex items-center gap-3 ml-auto z-10 relative">
+                    <!-- 1-й елемент: кнопка профілю/входу -->
                     <a href="cabinet.html" class="header-action-btn flex flex-col items-center justify-center gap-0.5 group text-[#1D5D3B] hover:text-[#16472d] transition-colors" title="Особистий кабінет">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#1D5D3B]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -195,9 +208,9 @@
                         </span>
                     </a>
 
-                    <!-- Кнопка налаштувань інтерфейсу -->
-                    <button type="button" id="settingsBtn" onclick="toggleSettingsModal(event)"
-                        class="header-action-btn ml-3 sm:ml-4 flex flex-col items-center justify-center gap-0.5 p-1 text-[#1D5D3B] hover:text-[#16472d] transition-colors"
+                    <!-- 2-й елемент: кнопка налаштувань (#options-btn) -->
+                    <button type="button" id="options-btn" onclick="toggleSettingsModal(event)"
+                        class="header-action-btn flex flex-col items-center justify-center gap-0.5 p-1 text-[#1D5D3B] hover:text-[#16472d] transition-colors"
                         title="Налаштування" aria-label="Налаштування">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#1D5D3B]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
@@ -207,12 +220,6 @@
                             <span class="lang-ua">ОПЦІЇ</span>
                             <span class="lang-en">OPTIONS</span>
                         </span>
-                    </button>
-
-                    <!-- Mobile Menu Button -->
-                    <button id="burger-btn" data-burger="true" aria-label="Меню"
-                        class="header-action-btn md:hidden p-2 text-[#111827] hover:text-[#1D5D3B] ml-2">
-                        <i data-lucide="menu" class="w-6 h-6"></i>
                     </button>
 
                     <!-- Меню налаштувань інтерфейсу -->
@@ -323,6 +330,17 @@
 
         <!-- Mobile Drawer -->
         <div id="mobile-menu" data-mobile-menu="true" class="hidden md:hidden border-t-2 border-[#1D5D3B] bg-white px-4 py-3 space-y-1">
+            <div class="flex items-center justify-between pb-2 mb-2 border-b border-gray-100 dark:border-gray-800">
+                <span class="text-xs font-bold uppercase tracking-wider text-gray-500">
+                    <span class="lang-ua">НАВІГАЦІЯ</span>
+                    <span class="lang-en">NAVIGATION</span>
+                </span>
+                <button type="button" id="mobile-menu-close" class="p-1.5 text-gray-500 hover:text-[#1D5D3B] dark:hover:text-[#00E676] transition-colors" aria-label="Закрити меню">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
             <a href="catalog.html"
                 class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-[#111827] hover:text-[#1D5D3B] py-2.5 px-2 transition-colors">
                 <span class="lang-ua">КАТАЛОГ</span>

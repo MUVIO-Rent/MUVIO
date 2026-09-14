@@ -640,23 +640,30 @@
         const btnEn = document.getElementById('langBtnEn');
         if (btnEn) btnEn.onclick = () => setSiteLanguage('en');
 
-        // Bind settings toggle button
-        const gearBtn = document.getElementById('settingsBtn');
+        // Bind settings toggle button (#options-btn or #settingsBtn)
+        const gearBtn = document.getElementById('options-btn') || document.getElementById('settingsBtn');
         if (gearBtn) gearBtn.onclick = toggleSettingsModal;
 
         // Mobile drawer toggle if exists
         const burgerBtn = document.getElementById('burger-btn') || document.querySelector('[data-burger]') || document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobile-menu') || document.getElementById('mobileMenu');
+        const mobileMenu = document.getElementById('mobile-menu') || document.querySelector('[data-mobile-menu]') || document.getElementById('mobileMenu');
         if (burgerBtn && mobileMenu) {
             burgerBtn.onclick = (e) => {
                 e.stopPropagation();
                 mobileMenu.classList.toggle('hidden');
             };
-            mobileMenu.querySelectorAll('a, button').forEach(link => {
+            mobileMenu.querySelectorAll('a, button, .mobile-nav-link').forEach(link => {
                 link.addEventListener('click', () => {
                     mobileMenu.classList.add('hidden');
                 });
             });
+            const closeBtn = document.getElementById('mobile-menu-close');
+            if (closeBtn) {
+                closeBtn.onclick = (e) => {
+                    e.stopPropagation();
+                    mobileMenu.classList.add('hidden');
+                };
+            }
             document.addEventListener('click', (e) => {
                 if (!mobileMenu.classList.contains('hidden')) {
                     if (!mobileMenu.contains(e.target) && !burgerBtn.contains(e.target)) {
@@ -675,7 +682,7 @@
     // Click outside closes modal
     document.addEventListener('click', (e) => {
         const drop = document.getElementById('settingsDropdown');
-        const btn = document.getElementById('settingsBtn');
+        const btn = document.getElementById('options-btn') || document.getElementById('settingsBtn');
         if (drop && !drop.classList.contains('hidden')) {
             if (!drop.contains(e.target) && (!btn || !btn.contains(e.target))) {
                 closeSettingsModal();
@@ -687,6 +694,90 @@
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeSettingsModal();
     });
+
+    // --------------------------------------------------------------------------
+    // PULL-TO-REFRESH (SWIPE DOWN WITH INDICATOR FOR MOBILE)
+    // --------------------------------------------------------------------------
+    function initPullToRefresh() {
+        if (typeof window === 'undefined') return;
+        // Check touch device
+        const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+        if (!isTouch) return;
+
+        let indicator = document.getElementById('muvio-ptr-indicator');
+        if (!indicator) {
+            indicator = document.createElement('div');
+            indicator.id = 'muvio-ptr-indicator';
+            indicator.className = 'fixed left-1/2 -translate-x-1/2 z-[9998] pointer-events-none transition-transform duration-150 flex items-center justify-center';
+            indicator.style.top = '-50px';
+            indicator.innerHTML = `
+                <div class="w-10 h-10 rounded-full bg-white dark:bg-[#0A0D0C] border-2 border-[#1D5D3B] shadow-lg flex items-center justify-center text-[#1D5D3B] dark:text-[#00E676]">
+                    <svg id="muvio-ptr-spinner" class="w-5 h-5 transition-transform duration-75" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="23 4 23 10 17 10"></polyline>
+                        <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                    </svg>
+                </div>
+            `;
+            document.body.appendChild(indicator);
+        }
+
+        let startY = 0;
+        let startX = 0;
+        let isPulling = false;
+        let pullDist = 0;
+        const THRESHOLD = 65;
+
+        window.addEventListener('touchstart', (e) => {
+            if (e.touches.length !== 1) return;
+            if (window.scrollY <= 1) {
+                startY = e.touches[0].clientY;
+                startX = e.touches[0].clientX;
+                isPulling = true;
+                pullDist = 0;
+            } else {
+                isPulling = false;
+            }
+        }, { passive: true });
+
+        window.addEventListener('touchmove', (e) => {
+            if (!isPulling || e.touches.length !== 1) return;
+            const curY = e.touches[0].clientY;
+            const curX = e.touches[0].clientX;
+            const dy = curY - startY;
+            const dx = curX - startX;
+
+            if (dy > 0 && Math.abs(dy) > Math.abs(dx) && window.scrollY <= 1) {
+                pullDist = Math.min(dy * 0.42, 90);
+                indicator.style.transform = `translate(-50%, ${pullDist}px)`;
+                const spinner = document.getElementById('muvio-ptr-spinner');
+                if (spinner) {
+                    spinner.style.transform = `rotate(${pullDist * 4.5}deg)`;
+                }
+            } else {
+                pullDist = 0;
+                indicator.style.transform = 'translate(-50%, 0px)';
+            }
+        }, { passive: true });
+
+        const finishPull = () => {
+            if (!isPulling) return;
+            isPulling = false;
+            if (pullDist >= THRESHOLD) {
+                const spinner = document.getElementById('muvio-ptr-spinner');
+                if (spinner) spinner.classList.add('animate-spin');
+                indicator.style.transform = 'translate(-50%, 65px)';
+                setTimeout(() => {
+                    window.location.reload();
+                }, 220);
+            } else {
+                indicator.style.transform = 'translate(-50%, 0px)';
+            }
+            pullDist = 0;
+        };
+
+        window.addEventListener('touchend', finishPull, { passive: true });
+        window.addEventListener('touchcancel', finishPull, { passive: true });
+    }
 
     // --------------------------------------------------------------------------
     // 10. HIGH-PERFORMANCE 120Hz PROMOTION SCROLL ENGINE (Repaint/Reflow Suppressor)
@@ -721,10 +812,12 @@
         document.addEventListener('DOMContentLoaded', () => {
             initSettingsUI();
             updateHeaderUserName();
+            initPullToRefresh();
         });
     } else {
         initSettingsUI();
         updateHeaderUserName();
+        initPullToRefresh();
     }
 
     // --------------------------------------------------------------------------
