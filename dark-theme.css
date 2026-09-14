@@ -106,10 +106,15 @@ html.theme-dark [class*="bg-white/80"] {
     border-color: rgba(31, 46, 38, 0.7) !important;
 }
 
-/* Header Seamless Vector Logo (Transparent, No White Square) */
-.header-logo-wrap {
+/* Header Seamless Vector Logo (Strictly Transparent, No Square Background) */
+.header-logo-wrap,
+html.theme-dark .header-logo-wrap,
+a .header-logo-wrap,
+html.theme-dark a .header-logo-wrap {
     background: transparent !important;
+    background-color: transparent !important;
     border: none !important;
+    outline: none !important;
     box-shadow: none !important;
     padding: 0 !important;
 }
@@ -117,21 +122,16 @@ html.theme-dark [class*="bg-white/80"] {
 .header-logo-wrap svg {
     color: #1D5D3B !important;
     fill: #1D5D3B !important;
-    stroke: none !important;
+    stroke: #1D5D3B !important;
     transition: color 0.25s ease, filter 0.25s ease;
 }
 
-html.theme-dark .header-logo-wrap {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-}
-
-html.theme-dark .header-logo-wrap svg {
+html.theme-dark .header-logo-wrap svg,
+html.theme-dark .header-logo-wrap svg path {
     color: #1D5D3B !important;
     fill: #1D5D3B !important;
-    stroke: none !important;
-    filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.45)) drop-shadow(0 0 4px rgba(255, 255, 255, 0.18)) !important;
+    stroke: #1D5D3B !important;
+    filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.6)) drop-shadow(0 0 3px rgba(255, 255, 255, 0.25)) !important;
 }
 
 html.theme-dark a .header-logo-wrap + div > span:first-child {
@@ -448,11 +448,12 @@ html.theme-dark #page-preloader {
     background-color: #0B0E0C !important;
 }
 
-html.theme-dark #page-preloader .preloader-logo-wrap svg {
+html.theme-dark #page-preloader .preloader-logo-wrap svg,
+html.theme-dark #page-preloader .preloader-logo-wrap svg path {
     color: #1D5D3B !important;
     fill: #1D5D3B !important;
-    stroke: none !important;
-    filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.45)) drop-shadow(0 0 4px rgba(255, 255, 255, 0.18)) !important;
+    stroke: #1D5D3B !important;
+    filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.6)) drop-shadow(0 0 3px rgba(255, 255, 255, 0.25)) !important;
 }
 
 html.theme-dark #page-preloader .preloader-brand-title {
