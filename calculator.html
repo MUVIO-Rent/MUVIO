@@ -243,20 +243,21 @@
                                 </div>
                             </div>
 
-                            <!-- В) РОЗМІР ТЕКСТУ (Range Slider 50% - 150%) -->
+                            <!-- В) МАСШТАБ (Range Slider 80% - 120%) -->
                             <div>
                                 <div class="flex items-center justify-between mb-2">
-                                    <span class="font-brand font-bold text-xs uppercase tracking-wider text-slate-600" data-i18n="settings_font_label">РОЗМІР ТЕКСТУ</span>
+                                    <span class="font-brand font-bold text-xs uppercase tracking-wider text-slate-600" data-i18n="settings_font_label">МАСШТАБ (ZOOM)</span>
                                     <span id="font-scale-value" class="text-xs font-mono font-bold text-[#1D5D3B]">100%</span>
                                 </div>
                                 <div class="space-y-1.5">
-                                    <input type="range" id="font-scale-slider" min="50" max="150" value="100" step="5"
-                                        oninput="setSiteFontScale(this.value)"
+                                    <input type="range" id="font-scale-slider" min="80" max="120" value="100" step="5"
+                                        oninput="applySiteFontScale(this.value)"
+                                        onchange="saveSiteZoom(this.value)"
                                         class="w-full cursor-pointer">
                                     <div class="flex justify-between text-[10px] font-mono text-slate-400 select-none">
-                                        <span>50%</span>
+                                        <span>80%</span>
                                         <span>100%</span>
-                                        <span>150%</span>
+                                        <span>120%</span>
                                     </div>
                                 </div>
                             </div>
@@ -310,12 +311,12 @@
             <div class="text-center max-w-3xl mx-auto mb-12">
                 <div
                     class="inline-flex items-center gap-2 px-3 py-1 bg-white/10 border border-white/30 chamfer-badge mb-3">
-                    <span class="font-brand font-bold text-xs tracking-wider text-white uppercase">ТАРИФИ ТА РОЗРАХУНОК</span>
+                    <span class="font-brand font-bold text-xs tracking-wider text-white uppercase" data-i18n="calc_section_tag">ТАРИФИ ТА РОЗРАХУНОК</span>
                 </div>
-                <h2 class="font-brand font-bold text-3xl sm:text-4xl uppercase tracking-tight text-white">
+                <h2 class="font-brand font-bold text-3xl sm:text-4xl uppercase tracking-tight text-white" data-i18n="calc_section_title">
                     КАЛЬКУЛЯТОР ОРЕНДИ
                 </h2>
-                <p class="text-sm sm:text-base text-emerald-100 mt-2">
+                <p class="text-sm sm:text-base text-emerald-100 mt-2" data-i18n="calc_section_desc">
                     Оберіть модель транспорту, термін оренди та додаткові опції. Що довший термін оренди — то нижча вартість за добу.
                 </p>
             </div>
@@ -332,7 +333,7 @@
                         <div>
                             <label
                                 class="block font-brand font-bold text-sm uppercase tracking-wider text-[#111827] mb-2 flex items-center justify-between">
-                                <span>1. ОБЕРІТЬ МОДЕЛЬ ТРАНСПОРТУ:</span>
+                                <span data-i18n="calc_step1_label">1. ОБЕРІТЬ МОДЕЛЬ ТРАНСПОРТУ:</span>
                                 <div class="flex items-center gap-1.5">
                                     <span id="modelTypeBadge"
                                         class="text-xs font-mono font-bold px-2 py-0.5 bg-emerald-50 text-[#1D5D3B] border border-[#1D5D3B]/40 chamfer-badge">🛵 Скутер</span>
@@ -360,7 +361,7 @@
                                 </select>
                             </div>
                             <div class="flex items-center justify-between text-xs text-[#4B5563] mt-1.5 px-1 font-mono">
-                                <span>Базовий тариф моделі:</span>
+                                <span data-i18n="calc_base_rate_prefix">Базовий тариф моделі:</span>
                                 <span id="calcBaseRateTxt" class="font-bold text-[#1D5D3B]">від 340 грн/доба</span>
                             </div>
                         </div>
@@ -369,7 +370,7 @@
                         <div>
                             <label
                                 class="block font-brand font-bold text-sm uppercase tracking-wider text-[#111827] mb-2 flex items-center justify-between">
-                                <span>2. ОБЕРІТЬ ТЕРМІН ОРЕНДИ:</span>
+                                <span data-i18n="calc_step2_label">2. ОБЕРІТЬ ТЕРМІН ОРЕНДИ:</span>
                                 <span id="durationDaysBadge"
                                     class="text-xs font-mono font-bold text-[#1D5D3B] bg-emerald-50 px-2 py-0.5 border border-[#1D5D3B]/30 chamfer-badge">7 днів (тиждень)</span>
                             </label>
@@ -382,7 +383,7 @@
                             <!-- Додатковий слайдер для точного вибору днів -->
                             <div class="mt-3 p-3 bg-[#F8FAFC] border border-[#1D5D3B]/20 chamfer-box">
                                 <div class="flex items-center justify-between text-xs font-mono text-[#4B5563] mb-1.5">
-                                    <span>Або вкажіть точну кількість діб:</span>
+                                    <span data-i18n="calc_slider_exact_label">Або вкажіть точну кількість діб:</span>
                                     <span class="font-bold text-[#1D5D3B] text-sm"><span id="sliderDaysDisplay">7</span> дн.</span>
                                 </div>
                                 <input type="range" id="calcDaysSlider" min="1" max="60" value="7" step="1"
@@ -402,7 +403,7 @@
                         <div>
                             <label
                                 class="block font-brand font-bold text-sm uppercase tracking-wider text-[#111827] mb-2 flex items-center justify-between">
-                                <span>3. ДОДАТКОВІ ОПЦІЇ ТА ОБЛАДНАННЯ:</span>
+                                <span data-i18n="calc_step3_label">3. ДОДАТКОВІ ОПЦІЇ ТА ОБЛАДНАННЯ:</span>
                                 <span id="optionsCountBadge" class="text-xs font-mono font-normal text-[#4B5563]">1 опція активна</span>
                             </label>
                             <div id="rentalAddonsContainer" class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
@@ -418,7 +419,7 @@
 
                         <div class="space-y-5">
                             <div class="border-b border-[#1D5D3B]/20 pb-4">
-                                <div class="font-brand font-bold text-xs uppercase tracking-widest text-[#4B5563]">
+                                <div class="font-brand font-bold text-xs uppercase tracking-widest text-[#4B5563]" data-i18n="calc_summary_heading">
                                     ПІДСУМОК ОРЕНДИ
                                 </div>
                                 <div class="flex items-center gap-3 mt-2">
@@ -439,7 +440,7 @@
 
                                 <!-- Вартість оренди -->
                                 <div class="bg-white border-2 border-[#1D5D3B]/40 p-3.5 chamfer-box">
-                                    <div class="text-xs uppercase font-brand font-bold tracking-wider text-[#4B5563]">
+                                    <div class="text-xs uppercase font-brand font-bold tracking-wider text-[#4B5563]" data-i18n="calc_total_label">
                                         РАЗОМ ДО ОПЛАТИ:
                                     </div>
                                     <div id="resTotalPrice"
@@ -455,14 +456,14 @@
                                 <div class="bg-[#1D5D3B]/10 border-2 border-[#1D5D3B] p-3.5 chamfer-box">
                                     <div
                                         class="text-xs uppercase font-brand font-bold tracking-wider text-[#1D5D3B] flex items-center justify-between">
-                                        <span>ЗАСТАВА ЗА ТРАНСПОРТ:</span>
+                                        <span data-i18n="calc_deposit_label">ЗАСТАВА ЗА ТРАНСПОРТ:</span>
                                         <i data-lucide="shield-check" class="w-4 h-4 text-[#1D5D3B]"></i>
                                     </div>
                                     <div id="resDeposit"
                                         class="font-brand font-bold text-2xl sm:text-3xl text-[#1D5D3B] mt-0.5">
                                         2 000 грн
                                     </div>
-                                    <div class="text-[11px] text-[#4B5563] mt-0.5">
+                                    <div class="text-[11px] text-[#4B5563] mt-0.5" data-i18n="calc_deposit_note">
                                         Або <b>без застави</b> за умови верифікації через сервіс Дія
                                     </div>
                                 </div>
@@ -483,7 +484,7 @@
                                 <i data-lucide="send" class="w-5 h-5"></i>
                                 <span>НАДІСЛАТИ ЗАЯВКУ В TELEGRAM (3 360 ГРН)</span>
                             </a>
-                            <p class="text-[11px] text-center text-[#4B5563] mt-2">
+                            <p class="text-[11px] text-center text-[#4B5563] mt-2" data-i18n="calc_bot_note">
                                 Сформована заявка надсилається до офіційного бота @muviobot
                             </p>
                         </div>
@@ -864,11 +865,29 @@
             if (!container) return;
             container.innerHTML = '';
 
+            const isEn = (window.getSiteSettings ? window.getSiteSettings().lang : 'ua') === 'en';
+            const dict = (window.MUVIO_CALC_I18N && window.MUVIO_CALC_I18N[isEn ? 'en' : 'ua']) || {
+                pills: {
+                    1: { label: "1 ДЕНЬ", sub: "доба" },
+                    3: { label: "3 ДНІ", sub: "вікенд" },
+                    7: { label: "7 ДНІВ", sub: "тиждень" },
+                    14: { label: "14 ДНІВ", sub: "2 тижні" },
+                    30: { label: "30 ДНІВ", sub: "місяць" }
+                },
+                rate_day_pill: "грн/д",
+                days_badge_1: "1 доба",
+                days_badge_7: "тиждень",
+                days_badge_14: "2 тижні",
+                days_badge_30: "місяць",
+                days_unit: "дн."
+            };
+
             const model = RENTAL_TARIFFS[calcState.modelKey] || RENTAL_TARIFFS['crosser-cr-13-1'];
 
             STANDARD_PERIODS.forEach(p => {
                 const isSelected = (calcState.days === p.days);
                 const rate = model.rates[p.days];
+                const pillInfo = (dict.pills && dict.pills[p.days]) || { label: p.label, sub: p.sub };
                 const btn = document.createElement('button');
                 btn.type = 'button';
                 btn.onclick = () => setCalcDuration(p.days);
@@ -878,9 +897,9 @@
                         : 'border-slate-300 bg-white text-[#111827] hover:border-[#1D5D3B]/60 hover:bg-[#1D5D3B]/5'
                 }`;
                 btn.innerHTML = `
-                    <span class="font-bold text-xs sm:text-sm uppercase tracking-wide">${p.label}</span>
-                    <span class="text-[10px] font-sans ${isSelected ? 'text-emerald-200' : 'text-[#4B5563]'}">${p.sub}</span>
-                    <span class="text-[10px] font-mono mt-1 ${isSelected ? 'text-white font-bold' : 'text-[#1D5D3B] font-bold'}">~${rate} ₴/д</span>
+                    <span class="font-bold text-xs sm:text-sm uppercase tracking-wide">${pillInfo.label}</span>
+                    <span class="text-[10px] font-sans ${isSelected ? 'text-emerald-200' : 'text-[#4B5563]'}">${pillInfo.sub}</span>
+                    <span class="text-[10px] font-mono mt-1 ${isSelected ? 'text-white font-bold' : 'text-[#1D5D3B] font-bold'}">~${rate} ${dict.rate_day_pill}</span>
                 `;
                 container.appendChild(btn);
             });
@@ -891,11 +910,11 @@
             const daysBadge = document.getElementById('durationDaysBadge');
             if (daysBadge) {
                 let subText = '';
-                if (calcState.days === 1) subText = ' (1 доба)';
-                else if (calcState.days === 7) subText = ' (тиждень)';
-                else if (calcState.days === 14) subText = ' (2 тижні)';
-                else if (calcState.days === 30) subText = ' (місяць)';
-                daysBadge.textContent = `${calcState.days} дн.${subText}`;
+                if (calcState.days === 1) subText = ` (${dict.days_badge_1})`;
+                else if (calcState.days === 7) subText = ` (${dict.days_badge_7})`;
+                else if (calcState.days === 14) subText = ` (${dict.days_badge_14})`;
+                else if (calcState.days === 30) subText = ` (${dict.days_badge_30})`;
+                daysBadge.textContent = `${calcState.days} ${dict.days_unit}${subText}`;
             }
         }
 
@@ -904,31 +923,42 @@
             if (!container) return;
             container.innerHTML = '';
 
+            const isEn = (window.getSiteSettings ? window.getSiteSettings().lang : 'ua') === 'en';
+            const dict = (window.MUVIO_CALC_I18N && window.MUVIO_CALC_I18N[isEn ? 'en' : 'ua']) || {
+                addons: {
+                    helmet: { title: "ШОЛОМ + ТРИМАЧ", desc: "+0 грн / включено", badge: "Включено" },
+                    battery: { title: "ДРУГИЙ ЗАПАСНИЙ АКБ", desc: "+{rate} грн/доба" },
+                    charger: { title: "ШВИДКА ЗАРЯДКА 10А", desc: "+150 грн (разово)", badge: "+150 грн" }
+                },
+                options_count: "обрано"
+            };
+
             const model = RENTAL_TARIFFS[calcState.modelKey] || RENTAL_TARIFFS['crosser-cr-13-1'];
             const isBike = model.type.includes('велосипед') || model.volt === '48V';
             const extraBatDailyRate = isBike ? 80 : 120;
+            const currUnit = isEn ? 'UAH' : 'грн';
 
             const addons = [
                 {
                     id: 'hasHelmet',
-                    title: 'Шолом + тримач',
-                    desc: '+0 грн / включено',
+                    title: dict.addons.helmet.title,
+                    desc: dict.addons.helmet.desc,
                     checked: calcState.hasHelmet,
-                    priceText: 'Включено'
+                    priceText: dict.addons.helmet.badge
                 },
                 {
                     id: 'hasExtraBattery',
-                    title: 'Другий запасний АКБ',
-                    desc: `+${extraBatDailyRate} грн/доба`,
+                    title: dict.addons.battery.title,
+                    desc: dict.addons.battery.desc.replace('{rate}', extraBatDailyRate),
                     checked: calcState.hasExtraBattery,
-                    priceText: `+${extraBatDailyRate * calcState.days} грн`
+                    priceText: `+${extraBatDailyRate * calcState.days} ${currUnit}`
                 },
                 {
                     id: 'hasFastCharger',
-                    title: 'Швидка зарядка 10A',
-                    desc: '+150 грн (разово)',
+                    title: dict.addons.charger.title,
+                    desc: dict.addons.charger.desc,
                     checked: calcState.hasFastCharger,
-                    priceText: '+150 грн'
+                    priceText: dict.addons.charger.badge
                 }
             ];
 
@@ -962,7 +992,7 @@
             if (calcState.hasFastCharger) activeCount++;
             const countBadge = document.getElementById('optionsCountBadge');
             if (countBadge) {
-                countBadge.textContent = `${activeCount} обрано`;
+                countBadge.textContent = `${activeCount} ${dict.options_count}`;
             }
         }
 
@@ -970,6 +1000,8 @@
             const model = RENTAL_TARIFFS[calcState.modelKey] || RENTAL_TARIFFS['crosser-cr-13-1'];
             const days = calcState.days || 1;
             const isBike = model.type.includes('велосипед') || model.volt === '48V';
+            const isEn = (window.getSiteSettings ? window.getSiteSettings().lang : 'ua') === 'en';
+            const currUnit = isEn ? 'UAH' : 'грн';
 
             // 1. Оновлення лівої колонки
             const imgEl = document.getElementById('calcVehicleImg');
@@ -985,10 +1017,18 @@
 
             if (document.getElementById('modelPowerBadge')) document.getElementById('modelPowerBadge').textContent = model.power;
             if (document.getElementById('modelVoltBadge')) document.getElementById('modelVoltBadge').textContent = model.volt;
-            if (document.getElementById('modelTypeBadge')) document.getElementById('modelTypeBadge').textContent = model.type;
-            if (document.getElementById('calcVehicleBadge')) document.getElementById('calcVehicleBadge').textContent = model.badge;
+            if (document.getElementById('modelTypeBadge')) {
+                document.getElementById('modelTypeBadge').textContent = isEn 
+                    ? (isBike ? '🚲 E-Bike' : '🛵 Scooter') 
+                    : model.type;
+            }
+            if (document.getElementById('calcVehicleBadge')) {
+                document.getElementById('calcVehicleBadge').textContent = isEn ? 'FLAGSHIP | 85 KM/H' : model.badge;
+            }
             if (document.getElementById('calcBaseRateTxt')) {
-                document.getElementById('calcBaseRateTxt').textContent = `від ${model.rates[30]} грн/доба`;
+                document.getElementById('calcBaseRateTxt').textContent = isEn 
+                    ? `from ${model.rates[30]} UAH/day` 
+                    : `від ${model.rates[30]} грн/доба`;
             }
 
             // 2. Розрахунок вартості
@@ -1003,37 +1043,52 @@
             // 3. Оновлення правої колонки
             if (document.getElementById('resModelTitle')) document.getElementById('resModelTitle').textContent = model.name;
             if (document.getElementById('resConfigSummary')) {
-                let periodText = `${days} дн.`;
-                if (days === 1) periodText = '1 доба';
-                else if (days === 7) periodText = '7 днів (тиждень)';
-                else if (days === 14) periodText = '14 днів (2 тижні)';
-                else if (days === 30) periodText = '30 днів (місяць)';
+                let periodText = `${days} ${isEn ? 'days' : 'дн.'}`;
+                if (days === 1) periodText = isEn ? '1 day' : '1 доба';
+                else if (days === 7) periodText = isEn ? '7 days (week)' : '7 днів (тиждень)';
+                else if (days === 14) periodText = isEn ? '14 days (2 weeks)' : '14 днів (2 тижні)';
+                else if (days === 30) periodText = isEn ? '30 days (month)' : '30 днів (місяць)';
 
                 document.getElementById('resConfigSummary').textContent = `${model.power} | ${model.volt} | ${periodText}`;
             }
 
             if (document.getElementById('resTotalPrice')) {
-                document.getElementById('resTotalPrice').textContent = `${totalCost.toLocaleString('uk-UA')} грн`;
+                document.getElementById('resTotalPrice').textContent = isEn
+                    ? `${totalCost.toLocaleString('en-US')} UAH`
+                    : `${totalCost.toLocaleString('uk-UA')} грн`;
             }
             if (document.getElementById('resRateSubtitle')) {
-                document.getElementById('resRateSubtitle').textContent = `Тариф: ${dailyRate.toLocaleString('uk-UA')} грн / доба (на ${days} дн.)`;
+                document.getElementById('resRateSubtitle').textContent = isEn
+                    ? `Rate: ${dailyRate.toLocaleString('en-US')} UAH / day (${days} d.)`
+                    : `Тариф: ${dailyRate.toLocaleString('uk-UA')} грн / доба (на ${days} дн.)`;
             }
 
             if (document.getElementById('resDeposit')) {
-                document.getElementById('resDeposit').textContent = `${model.deposit.toLocaleString('uk-UA')} грн`;
+                document.getElementById('resDeposit').textContent = isEn
+                    ? `${model.deposit.toLocaleString('en-US')} UAH`
+                    : `${model.deposit.toLocaleString('uk-UA')} грн`;
             }
 
             const breakdownBox = document.getElementById('resBreakdownBox');
             if (breakdownBox) {
-                let html = `<div class="flex justify-between"><span>Оренда (${days} дн. × ${dailyRate} грн):</span><span class="font-bold text-[#111827]">${baseRentalCost.toLocaleString('uk-UA')} грн</span></div>`;
+                let html = isEn
+                    ? `<div class="flex justify-between"><span>Rental (${days} d. × ${dailyRate} UAH):</span><span class="font-bold text-[#111827]">${baseRentalCost.toLocaleString('en-US')} UAH</span></div>`
+                    : `<div class="flex justify-between"><span>Оренда (${days} дн. × ${dailyRate} грн):</span><span class="font-bold text-[#111827]">${baseRentalCost.toLocaleString('uk-UA')} грн</span></div>`;
+                
                 if (batteryCost > 0) {
-                    html += `<div class="flex justify-between"><span>Другий АКБ (${days} дн. × ${extraBatDailyRate} грн):</span><span class="font-bold text-[#1D5D3B]">+${batteryCost.toLocaleString('uk-UA')} грн</span></div>`;
+                    html += isEn
+                        ? `<div class="flex justify-between"><span>Second Battery (${days} d. × ${extraBatDailyRate} UAH):</span><span class="font-bold text-[#1D5D3B]">+${batteryCost.toLocaleString('en-US')} UAH</span></div>`
+                        : `<div class="flex justify-between"><span>Другий АКБ (${days} дн. × ${extraBatDailyRate} грн):</span><span class="font-bold text-[#1D5D3B]">+${batteryCost.toLocaleString('uk-UA')} грн</span></div>`;
                 }
                 if (chargerCost > 0) {
-                    html += `<div class="flex justify-between"><span>Швидка зарядка 10A:</span><span class="font-bold text-[#1D5D3B]">+${chargerCost.toLocaleString('uk-UA')} грн</span></div>`;
+                    html += isEn
+                        ? `<div class="flex justify-between"><span>Fast Charger 10A:</span><span class="font-bold text-[#1D5D3B]">+${chargerCost.toLocaleString('en-US')} UAH</span></div>`
+                        : `<div class="flex justify-between"><span>Швидка зарядка 10A:</span><span class="font-bold text-[#1D5D3B]">+${chargerCost.toLocaleString('uk-UA')} грн</span></div>`;
                 }
                 if (calcState.hasHelmet) {
-                    html += `<div class="flex justify-between text-emerald-700 font-semibold"><span>Шолом + тримач для телефона:</span><span>Включено (0 грн)</span></div>`;
+                    html += isEn
+                        ? `<div class="flex justify-between text-emerald-700 font-semibold"><span>Helmet + phone mount:</span><span>Included (0 UAH)</span></div>`
+                        : `<div class="flex justify-between text-emerald-700 font-semibold"><span>Шолом + тримач для телефона:</span><span>Включено (0 грн)</span></div>`;
                 }
                 breakdownBox.innerHTML = html;
             }
@@ -1052,14 +1107,25 @@
             if (!tgBtn) return;
             const botUrl = generateTelegramRentalLink(calcState.modelKey, days, totalCost);
             tgBtn.href = botUrl;
+            const isEn = (window.getSiteSettings ? window.getSiteSettings().lang : 'ua') === 'en';
+            const btnText = isEn 
+                ? `SEND APPLICATION TO TELEGRAM (${totalCost.toLocaleString('en-US')} UAH)`
+                : `НАДІСЛАТИ ЗАЯВКУ В TELEGRAM (${totalCost.toLocaleString('uk-UA')} ГРН)`;
             tgBtn.innerHTML = `
                 <i data-lucide="send" class="w-5 h-5"></i>
-                <span>НАДІСЛАТИ ЗАЯВКУ В TELEGRAM (${totalCost.toLocaleString('uk-UA')} ГРН)</span>
+                <span>${btnText}</span>
             `;
             if (window.lucide) {
                 try { window.lucide.createIcons(); } catch (e) { }
             }
         }
+
+        function renderCalculatorI18n() {
+            renderDurationPills();
+            renderAddonOptions();
+            updateCalc();
+        }
+        window.renderCalculatorI18n = renderCalculatorI18n;
 
         function handleRentalApplyClick(event) {
             if (event) event.preventDefault();

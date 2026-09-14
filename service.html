@@ -247,20 +247,21 @@
                                 </div>
                             </div>
 
-                            <!-- В) РОЗМІР ТЕКСТУ (Range Slider 50% - 150%) -->
+                            <!-- В) МАСШТАБ (Range Slider 80% - 120%) -->
                             <div>
                                 <div class="flex items-center justify-between mb-2">
-                                    <span class="font-brand font-bold text-xs uppercase tracking-wider text-slate-600" data-i18n="settings_font_label">РОЗМІР ТЕКСТУ</span>
+                                    <span class="font-brand font-bold text-xs uppercase tracking-wider text-slate-600" data-i18n="settings_font_label">МАСШТАБ (ZOOM)</span>
                                     <span id="font-scale-value" class="text-xs font-mono font-bold text-[#1D5D3B]">100%</span>
                                 </div>
                                 <div class="space-y-1.5">
-                                    <input type="range" id="font-scale-slider" min="50" max="150" value="100" step="5"
-                                        oninput="setSiteFontScale(this.value)"
+                                    <input type="range" id="font-scale-slider" min="80" max="120" value="100" step="5"
+                                        oninput="applySiteFontScale(this.value)"
+                                        onchange="saveSiteZoom(this.value)"
                                         class="w-full cursor-pointer">
                                     <div class="flex justify-between text-[10px] font-mono text-slate-400 select-none">
-                                        <span>50%</span>
+                                        <span>80%</span>
                                         <span>100%</span>
-                                        <span>150%</span>
+                                        <span>120%</span>
                                     </div>
                                 </div>
                             </div>
@@ -320,7 +321,7 @@
                             ЦЕНТР</span>
                     </div>
 
-                    <h2 class="font-brand font-bold text-3xl sm:text-4xl uppercase tracking-tight text-[#111827]">
+                    <h2 data-i18n="section_maintenance_title" class="font-brand font-bold text-3xl sm:text-4xl uppercase tracking-tight text-[#111827]">
                         ТЕХНІЧНЕ ОБСЛУГОВУВАННЯ ТА ВИДАЧА
                     </h2>
 
@@ -334,7 +335,7 @@
                             <div
                                 class="font-brand font-bold text-sm uppercase text-[#1D5D3B] flex items-center gap-2 mb-1">
                                 <i data-lucide="disc" class="w-4 h-4"></i>
-                                <span>ШИНОМОНТАЖ</span>
+                                <span data-i18n="feature_tires_title">ШИНОМОНТАЖ</span>
                             </div>
                             <p class="text-xs text-[#4B5563]">Заміна покришок, камер та ремонт безкамерної гуми.</p>
                         </div>
@@ -343,7 +344,7 @@
                             <div
                                 class="font-brand font-bold text-sm uppercase text-[#1D5D3B] flex items-center gap-2 mb-1">
                                 <i data-lucide="shield-alert" class="w-4 h-4"></i>
-                                <span>ГАЛЬМІВНІ СИСТЕМИ</span>
+                                <span data-i18n="feature_brakes_title">ГАЛЬМІВНІ СИСТЕМИ</span>
                             </div>
                             <p class="text-xs text-[#4B5563]">Регулювання та заміна колодок, прокачування гідравліки.
                             </p>
@@ -353,7 +354,7 @@
                             <div
                                 class="font-brand font-bold text-sm uppercase text-[#1D5D3B] flex items-center gap-2 mb-1">
                                 <i data-lucide="refresh-cw" class="w-4 h-4"></i>
-                                <span>ПІДМІННИЙ ТРАНСПОРТ</span>
+                                <span data-i18n="feature_replacement_title">ПІДМІННИЙ ТРАНСПОРТ</span>
                             </div>
                             <p class="text-xs text-[#4B5563]">Оперативна видача скутера на час планового ТО або ремонту.
                             </p>
@@ -366,7 +367,7 @@
                 <div class="lg:col-span-6 bg-[#F8FAFC] border-2 border-[#1D5D3B] p-6 sm:p-8 chamfer-box space-y-5">
                     <div class="border-b border-[#1D5D3B]/20 pb-4">
                         <div class="flex items-center justify-between">
-                            <span class="font-brand font-bold text-xs uppercase tracking-widest text-[#1D5D3B]">ОФІЦІЙНА
+                            <span data-i18n="section_location_title" class="font-brand font-bold text-xs uppercase tracking-widest text-[#1D5D3B]">ОФІЦІЙНА
                                 ЛОКАЦІЯ ТА ГРАФІК</span>
                             <span class="text-[10px] font-mono text-slate-500">46.49191° N, 30.73519° E</span>
                         </div>

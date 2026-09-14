@@ -1,8 +1,8 @@
 /**
  * ==========================================================================
- * MUVIO — GLOBAL THEME, LANGUAGE & FONT-SCALE SYNCHRONIZATION MODULE
+ * MUVIO — GLOBAL THEME, LANGUAGE & ZOOM SYNCHRONIZATION MODULE
  * (theme-settings.js)
- * Architecture: Single Source of Truth for Dark Theme, I18N, Range Slider & Cross-Tab Sync
+ * Architecture: Single Source of Truth for Strict Blackout, I18N, CSS Zoom & Cross-Tab Sync
  * ==========================================================================
  */
 
@@ -34,7 +34,7 @@
             settings_lang_label: "МОВА / LANGUAGE",
             lang_ua: "УКР",
             lang_en: "ENG",
-            settings_font_label: "РОЗМІР ТЕКСТУ",
+            settings_font_label: "МАСШТАБ (ZOOM)",
 
             // Index landing elements
             hero_tag: "MUVIO — ТВОЄ ELECTRO CITY",
@@ -43,6 +43,9 @@
             hero_btn_choose: "ОБРАТИ СКУТЕР",
             hero_btn_calc: "КАЛЬКУЛЯТОР ОРЕНДИ",
             hero_badge_rent: "ОРЕНДА",
+            hero_from_800: "ВІД 800 ГРН",
+            hero_from_1800: "ВІД 1 800 ГРН",
+            hero_from_6000: "ВІД 6 000 ГРН",
             hero_per_day: "/ ДОБА",
             hero_per_week: "/ ТИЖДЕНЬ",
             hero_per_month: "/ МІСЯЦЬ",
@@ -58,6 +61,36 @@
             filter_all: "ВСІ МОДЕЛІ",
             filter_scooters: "🛵 СКУТЕРИ",
             filter_bikes: "🚲 ВЕЛОСИПЕДИ",
+
+            // Calculator
+            calc_section_tag: "ТАРИФИ ТА РОЗРАХУНОК",
+            calc_section_title: "КАЛЬКУЛЯТОР ОРЕНДИ",
+            calc_section_desc: "Оберіть модель транспорту, термін оренди та додаткові опції. Що довший термін оренди — то нижча вартість за добу.",
+            calc_step1_label: "1. ОБЕРІТЬ МОДЕЛЬ ТРАНСПОРТУ:",
+            calc_step2_label: "2. ОБЕРІТЬ ТЕРМІН ОРЕНДИ:",
+            calc_step3_label: "3. ДОДАТКОВІ ОПЦІЇ ТА ОБЛАДНАННЯ:",
+            calc_summary_heading: "ПІДСУМОК ОРЕНДИ",
+            calc_total_label: "РАЗОМ ДО ОПЛАТИ:",
+            calc_deposit_label: "ЗАСТАВА ЗА ТРАНСПОРТ:",
+            calc_deposit_note: "Або <b>без застави</b> за умови верифікації через сервіс Дія",
+            calc_send_telegram: "НАДІСЛАТИ ЗАЯВКУ В TELEGRAM",
+            calc_base_rate_prefix: "Базовий тариф моделі:",
+            calc_slider_exact_label: "Або вкажіть точну кількість діб:",
+            calc_bot_note: "Сформована заявка надсилається до офіційного бота @muviobot",
+
+            // Rental Formats
+            section_formats_tag: "УМОВИ СПІВПРАЦІ",
+            section_formats_title: "ФОРМАТИ ОРЕНДИ ТА ВИКУПУ",
+            section_formats_desc: "Офіційне оформлення, прозорі договірні зобов'язання та чіткі умови без зайвих нарахувань.",
+            card_classic_rent_title: "КЛАСИЧНА ОРЕНДА",
+            card_buyout_title: "ПРОГРАМА ВИКУПУ",
+
+            // Service & Hub
+            section_maintenance_title: "ТЕХНІЧНЕ ОБСЛУГОВУВАННЯ ТА ВИДАЧА",
+            feature_tires_title: "ШИНОМОНТАЖ",
+            feature_brakes_title: "ГАЛЬМІВНІ СИСТЕМИ",
+            feature_replacement_title: "ПІДМІННИЙ ТРАНСПОРТ",
+            section_location_title: "ОФІЦІЙНА ЛОКАЦІЯ ТА ГРАФІК",
 
             // Cabinet elements
             cabinet_title: "ОСОБИСТИЙ КАБІНЕТ",
@@ -111,7 +144,7 @@
             settings_lang_label: "LANGUAGE",
             lang_ua: "UKR",
             lang_en: "ENG",
-            settings_font_label: "TEXT SIZE",
+            settings_font_label: "ZOOM SCALE",
 
             // Index landing elements
             hero_tag: "MUVIO — YOUR ELECTRO CITY",
@@ -120,6 +153,9 @@
             hero_btn_choose: "CHOOSE SCOOTER",
             hero_btn_calc: "RENTAL CALCULATOR",
             hero_badge_rent: "RENTAL",
+            hero_from_800: "FROM 800 UAH",
+            hero_from_1800: "FROM 1 800 UAH",
+            hero_from_6000: "FROM 6 000 UAH",
             hero_per_day: "/ DAY",
             hero_per_week: "/ WEEK",
             hero_per_month: "/ MONTH",
@@ -135,6 +171,36 @@
             filter_all: "ALL MODELS",
             filter_scooters: "🛵 SCOOTERS",
             filter_bikes: "🚲 E-BIKES",
+
+            // Calculator
+            calc_section_tag: "RATES & CALCULATION",
+            calc_section_title: "RENTAL CALCULATOR",
+            calc_section_desc: "Select a vehicle model, rental duration and additional options. Longer rental periods mean lower daily rates.",
+            calc_step1_label: "1. SELECT VEHICLE MODEL:",
+            calc_step2_label: "2. SELECT RENTAL PERIOD:",
+            calc_step3_label: "3. ADDITIONAL OPTIONS & GEAR:",
+            calc_summary_heading: "RENTAL SUMMARY",
+            calc_total_label: "TOTAL TO PAY:",
+            calc_deposit_label: "SECURITY DEPOSIT:",
+            calc_deposit_note: "Or <b>without deposit</b> subject to Diia verification",
+            calc_send_telegram: "SEND APPLICATION TO TELEGRAM",
+            calc_base_rate_prefix: "Base model rate:",
+            calc_slider_exact_label: "Or specify exact number of days:",
+            calc_bot_note: "Application will be sent directly to @muviobot",
+
+            // Rental Formats
+            section_formats_tag: "TERMS OF SERVICE",
+            section_formats_title: "RENTAL & BUYOUT OPTIONS",
+            section_formats_desc: "Official contract, transparent commitments and clear terms without hidden fees.",
+            card_classic_rent_title: "CLASSIC RENTAL",
+            card_buyout_title: "BUYOUT PROGRAM",
+
+            // Service & Hub
+            section_maintenance_title: "MAINTENANCE & PICKUP HUB",
+            feature_tires_title: "TIRE SERVICE",
+            feature_brakes_title: "BRAKE SYSTEMS",
+            feature_replacement_title: "REPLACEMENT VEHICLE",
+            section_location_title: "OFFICIAL LOCATION & HOURS",
 
             // Cabinet elements
             cabinet_title: "CLIENT DASHBOARD",
@@ -171,10 +237,63 @@
 
     window.MUVIO_I18N = MUVIO_I18N;
 
+    // Calculator i18n pills & addons dictionary
+    window.MUVIO_CALC_I18N = {
+        ua: {
+            pills: {
+                1: { label: "1 ДЕНЬ", sub: "доба" },
+                3: { label: "3 ДНІ", sub: "вікенд" },
+                7: { label: "7 ДНІВ", sub: "тиждень" },
+                14: { label: "14 ДНІВ", sub: "2 тижні" },
+                30: { label: "30 ДНІВ", sub: "місяць" }
+            },
+            addons: {
+                helmet: { title: "ШОЛОМ + ТРИМАЧ", desc: "+0 грн / включено", badge: "Включено" },
+                battery: { title: "ДРУГИЙ ЗАПАСНИЙ АКБ", desc: "+{rate} грн/доба", prefix: "+" },
+                charger: { title: "ШВИДКА ЗАРЯДКА 10А", desc: "+150 грн (разово)", badge: "+150 грн" }
+            },
+            tg_btn: "НАДІСЛАТИ ЗАЯВКУ В TELEGRAM ({price} ГРН)",
+            tg_btn_base: "НАДІСЛАТИ ЗАЯВКУ В TELEGRAM",
+            rate_unit: "грн/доба",
+            rate_day_pill: "грн/д",
+            days_badge_1: "1 доба",
+            days_badge_7: "тиждень",
+            days_badge_14: "2 тижні",
+            days_badge_30: "місяць",
+            days_unit: "дн.",
+            options_count: "обрано"
+        },
+        en: {
+            pills: {
+                1: { label: "1 DAY", sub: "day" },
+                3: { label: "3 DAYS", sub: "weekend" },
+                7: { label: "7 DAYS", sub: "week" },
+                14: { label: "14 DAYS", sub: "2 weeks" },
+                30: { label: "30 DAYS", sub: "month" }
+            },
+            addons: {
+                helmet: { title: "HELMET + PHONE MOUNT", desc: "+0 UAH / included", badge: "Included" },
+                battery: { title: "SECOND SPARE BATTERY", desc: "+{rate} UAH/day", prefix: "+" },
+                charger: { title: "FAST CHARGER 10A", desc: "+150 UAH (one-time)", badge: "+150 UAH" }
+            },
+            tg_btn: "SEND APPLICATION TO TELEGRAM ({price} UAH)",
+            tg_btn_base: "SEND APPLICATION TO TELEGRAM",
+            rate_unit: "UAH/day",
+            rate_day_pill: "UAH/d",
+            days_badge_1: "1 day",
+            days_badge_7: "week",
+            days_badge_14: "2 weeks",
+            days_badge_30: "month",
+            days_unit: "days",
+            options_count: "selected"
+        }
+    };
+
     const DEFAULT_SETTINGS = {
         theme: 'light',
         lang: 'ua',
-        fontScale: 100
+        fontScale: 100,
+        zoom: 100
     };
 
     // --------------------------------------------------------------------------
@@ -185,11 +304,11 @@
             const raw = localStorage.getItem('muvio_site_settings');
             if (raw) {
                 const parsed = JSON.parse(raw);
-                if (parsed.fontScale === undefined) {
-                    if (parsed.fontSize === 'small') parsed.fontScale = 90;
-                    else if (parsed.fontSize === 'large') parsed.fontScale = 110;
-                    else parsed.fontScale = 100;
-                }
+                let z = parsed.zoom !== undefined ? parsed.zoom : parsed.fontScale;
+                z = parseInt(z, 10);
+                if (isNaN(z) || z < 80 || z > 120) z = 100;
+                parsed.zoom = z;
+                parsed.fontScale = z;
                 return Object.assign({}, DEFAULT_SETTINGS, parsed);
             }
         } catch (e) {
@@ -207,7 +326,7 @@
     }
 
     // --------------------------------------------------------------------------
-    // 3. SYNCHRONOUS ANTI-FLICKER EXECUTION
+    // 3. SYNCHRONOUS ANTI-FLICKER & ZOOM INITIALIZATION
     // --------------------------------------------------------------------------
     try {
         const initS = getSiteSettings();
@@ -216,8 +335,15 @@
         } else {
             document.documentElement.classList.remove('theme-dark');
         }
-        const scaleVal = Math.max(50, Math.min(150, parseInt(initS.fontScale, 10) || 100));
-        document.documentElement.style.fontSize = (scaleVal / 100 * 16) + 'px';
+        const initialZoom = Math.max(80, Math.min(120, parseInt(initS.zoom || initS.fontScale, 10) || 100));
+        if (document.body) {
+            document.body.style.zoom = (initialZoom / 100);
+        } else {
+            document.addEventListener('DOMContentLoaded', () => {
+                if (document.body) document.body.style.zoom = (initialZoom / 100);
+            });
+        }
+        document.documentElement.style.fontSize = '';
     } catch (e) {}
 
     // --------------------------------------------------------------------------
@@ -225,6 +351,7 @@
     // --------------------------------------------------------------------------
     function setSiteTheme(theme) {
         const settings = getSiteSettings();
+        if (settings.theme === theme) return;
         settings.theme = theme;
         saveSiteSettings(settings);
         applySiteTheme(theme);
@@ -261,6 +388,7 @@
     // --------------------------------------------------------------------------
     function setSiteLanguage(lang) {
         const settings = getSiteSettings();
+        if (settings.lang === lang) return;
         settings.lang = lang;
         saveSiteSettings(settings);
         applySiteLanguage(lang);
@@ -293,7 +421,7 @@
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
             if (key && dict[key]) {
-                if (dict[key].includes('<br>') || dict[key].includes('<span')) {
+                if (dict[key].includes('<br>') || dict[key].includes('<span') || dict[key].includes('<b>')) {
                     el.innerHTML = dict[key];
                 } else {
                     el.textContent = dict[key];
@@ -301,34 +429,30 @@
             }
         });
 
+        // Trigger dynamic page re-renders
         if (typeof window.renderCatalog === 'function' && typeof window.currentCatalogFilter !== 'undefined') {
             try { window.renderCatalog(window.currentCatalogFilter); } catch (err) {}
+        }
+        if (typeof window.renderCalculatorI18n === 'function') {
+            try { window.renderCalculatorI18n(); } catch (err) {}
         }
 
         updateHeaderUserName();
     }
 
     // --------------------------------------------------------------------------
-    // 6. FONT SCALE RANGE SLIDER CONTROLLER
+    // 6. ZOOM / SCALE CONTROLLER (CSS Zoom 80% - 120%, Safe & Stable)
     // --------------------------------------------------------------------------
-    function setSiteFontScale(val) {
+    function applySiteZoom(val) {
         val = parseInt(val, 10);
         if (isNaN(val)) val = 100;
-        val = Math.max(50, Math.min(150, val));
+        val = Math.max(80, Math.min(120, val));
 
-        const settings = getSiteSettings();
-        settings.fontScale = val;
-        saveSiteSettings(settings);
-        applySiteFontScale(val);
-    }
-
-    function applySiteFontScale(val) {
-        val = parseInt(val, 10);
-        if (isNaN(val)) val = 100;
-        val = Math.max(50, Math.min(150, val));
-
-        // Dynamic base font size
-        document.documentElement.style.fontSize = (val / 100 * 16) + 'px';
+        // Smooth CSS zoom on body without reflowing font-size
+        if (document.body) {
+            document.body.style.zoom = (val / 100);
+        }
+        document.documentElement.style.fontSize = '';
 
         const slider = document.getElementById('font-scale-slider');
         if (slider && parseInt(slider.value, 10) !== val) {
@@ -344,6 +468,24 @@
         if (badge) {
             badge.textContent = val + '%';
         }
+    }
+
+    function saveSiteZoom(val) {
+        val = parseInt(val, 10);
+        if (isNaN(val)) val = 100;
+        val = Math.max(80, Math.min(120, val));
+
+        const settings = getSiteSettings();
+        if (settings.zoom !== val) {
+            settings.zoom = val;
+            settings.fontScale = val;
+            saveSiteSettings(settings);
+        }
+    }
+
+    function setSiteFontScale(val) {
+        applySiteZoom(val);
+        saveSiteZoom(val);
     }
 
     // --------------------------------------------------------------------------
@@ -407,14 +549,22 @@
         const settings = getSiteSettings();
         applySiteTheme(settings.theme);
         applySiteLanguage(settings.lang);
-        applySiteFontScale(settings.fontScale);
+        applySiteZoom(settings.zoom || settings.fontScale || 100);
 
-        // Bind slider input event
+        // Bind slider with safe min=80, max=120, step=5
         const slider = document.getElementById('font-scale-slider');
         if (slider) {
-            slider.value = settings.fontScale;
+            slider.min = "80";
+            slider.max = "120";
+            slider.step = "5";
+            slider.value = settings.zoom || settings.fontScale || 100;
+            // On dragging (input): live zoom only, zero storage writes
             slider.oninput = function () {
-                setSiteFontScale(this.value);
+                applySiteZoom(this.value);
+            };
+            // On release (change): persist to storage
+            slider.onchange = function () {
+                saveSiteZoom(this.value);
             };
         }
 
@@ -470,7 +620,7 @@
             const settings = getSiteSettings();
             applySiteTheme(settings.theme);
             applySiteLanguage(settings.lang);
-            applySiteFontScale(settings.fontScale);
+            applySiteZoom(settings.zoom || settings.fontScale || 100);
         } else if (e.key === 'muvio_active_user' || e.key === 'muvio_user') {
             updateHeaderUserName();
         }
@@ -495,7 +645,9 @@
     window.setSiteLanguage = setSiteLanguage;
     window.applySiteLanguage = applySiteLanguage;
     window.setSiteFontScale = setSiteFontScale;
-    window.applySiteFontScale = applySiteFontScale;
+    window.applySiteFontScale = applySiteZoom;
+    window.applySiteZoom = applySiteZoom;
+    window.saveSiteZoom = saveSiteZoom;
     window.toggleSettingsModal = toggleSettingsModal;
     window.closeSettingsModal = closeSettingsModal;
     window.getSiteSettings = getSiteSettings;

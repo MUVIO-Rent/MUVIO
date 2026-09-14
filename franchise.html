@@ -244,20 +244,21 @@
                                 </div>
                             </div>
 
-                            <!-- В) РОЗМІР ТЕКСТУ (Range Slider 50% - 150%) -->
+                            <!-- В) МАСШТАБ (Range Slider 80% - 120%) -->
                             <div>
                                 <div class="flex items-center justify-between mb-2">
-                                    <span class="font-brand font-bold text-xs uppercase tracking-wider text-slate-600" data-i18n="settings_font_label">РОЗМІР ТЕКСТУ</span>
+                                    <span class="font-brand font-bold text-xs uppercase tracking-wider text-slate-600" data-i18n="settings_font_label">МАСШТАБ (ZOOM)</span>
                                     <span id="font-scale-value" class="text-xs font-mono font-bold text-[#1D5D3B]">100%</span>
                                 </div>
                                 <div class="space-y-1.5">
-                                    <input type="range" id="font-scale-slider" min="50" max="150" value="100" step="5"
-                                        oninput="setSiteFontScale(this.value)"
+                                    <input type="range" id="font-scale-slider" min="80" max="120" value="100" step="5"
+                                        oninput="applySiteFontScale(this.value)"
+                                        onchange="saveSiteZoom(this.value)"
                                         class="w-full cursor-pointer">
                                     <div class="flex justify-between text-[10px] font-mono text-slate-400 select-none">
-                                        <span>50%</span>
+                                        <span>80%</span>
                                         <span>100%</span>
-                                        <span>150%</span>
+                                        <span>120%</span>
                                     </div>
                                 </div>
                             </div>
