@@ -334,8 +334,8 @@ html.theme-dark #page-preloader {
 }
 
 /* 11. Leaflet Map In Dark Mode */
-html.theme-dark .leaflet-tile {
-    filter: brightness(0.85) invert(0.9) hue-rotate(190deg) contrast(1.1);
+html.theme-dark .leaflet-tile-pane {
+    filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7);
 }
 
 html.theme-dark .leaflet-container {
@@ -347,6 +347,14 @@ html.theme-dark .leaflet-popup-content-wrapper {
     color: #FFFFFF !important;
     border: 1px solid #242826 !important;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.85) !important;
+}
+
+html.theme-dark .leaflet-popup-content div {
+    color: #FFFFFF !important;
+}
+
+html.theme-dark .leaflet-popup-content span {
+    color: #9CA3AF !important;
 }
 
 html.theme-dark .leaflet-popup-tip {
