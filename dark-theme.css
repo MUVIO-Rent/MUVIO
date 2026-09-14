@@ -134,8 +134,12 @@ html.theme-dark .header-logo-wrap svg,
 html.theme-dark .header-logo-wrap svg path {
     color: #1D5D3B !important;
     fill: #1D5D3B !important;
-    stroke: #1D5D3B !important;
-    filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.6)) drop-shadow(0 0 3px rgba(255, 255, 255, 0.25)) !important;
+    stroke: #2E8B57 !important;
+    stroke-width: 1.2px !important;
+    stroke-linejoin: round !important;
+    paint-order: stroke fill !important;
+    filter: drop-shadow(0 0 2px rgba(46, 139, 87, 0.6)) !important;
+    opacity: 1 !important;
 }
 
 html.theme-dark a .header-logo-wrap + div > span:first-child {
@@ -465,8 +469,12 @@ html.theme-dark #page-preloader .preloader-logo-wrap svg,
 html.theme-dark #page-preloader .preloader-logo-wrap svg path {
     color: #1D5D3B !important;
     fill: #1D5D3B !important;
-    stroke: #1D5D3B !important;
-    filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.6)) drop-shadow(0 0 3px rgba(255, 255, 255, 0.25)) !important;
+    stroke: #2E8B57 !important;
+    stroke-width: 1.2px !important;
+    stroke-linejoin: round !important;
+    paint-order: stroke fill !important;
+    filter: drop-shadow(0 0 2px rgba(46, 139, 87, 0.6)) !important;
+    opacity: 1 !important;
 }
 
 html.theme-dark #page-preloader .preloader-brand-title {
@@ -717,12 +725,12 @@ html.theme-dark #mobileMenu a:hover {
 @keyframes glowBreatheDark {
     0%, 100% {
         transform: scale(1);
-        filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.45)) drop-shadow(0 0 4px rgba(255, 255, 255, 0.18));
-        opacity: 0.95;
+        filter: drop-shadow(0 0 2px rgba(46, 139, 87, 0.6));
+        opacity: 1;
     }
     50% {
         transform: scale(1.05);
-        filter: drop-shadow(0 0 1.5px rgba(255, 255, 255, 0.65)) drop-shadow(0 0 6px rgba(255, 255, 255, 0.28));
+        filter: drop-shadow(0 0 3px rgba(46, 139, 87, 0.85));
         opacity: 1;
     }
 }
