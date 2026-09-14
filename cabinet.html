@@ -63,7 +63,7 @@
 
         .chamfer-btn {
             clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
         }
 
         .chamfer-btn:hover {
@@ -77,7 +77,7 @@
 
         .tech-card {
             border: 2px solid #1D5D3B;
-            transition: all 0.25s ease;
+            transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
         }
 
         .tech-card:hover {
@@ -88,43 +88,28 @@
         /* Pulsing indicator */
         @keyframes pulse-emerald {
             0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(1.15); }
+            50% { opacity: 0.5; transform: scale(0.95); }
         }
-
-
-        /* Preloader Keyframes */
-        @keyframes muvioBreathe {
-            0%, 100% {
-                transform: scale(1);
-                box-shadow: 0 0 25px rgba(29, 93, 59, 0.4);
-            }
-            50% {
-                transform: scale(1.06);
-                box-shadow: 0 0 45px rgba(16, 185, 129, 0.7);
-            }
-        }
-        @keyframes muvioProgress {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-        .animate-muvio-breathe {
-            animation: muvioBreathe 2s ease-in-out infinite;
-        }
-        .animate-muvio-progress {
-            animation: muvioProgress 1.4s ease-in-out infinite;
+        .animate-pulse-emerald {
+            animation: pulse-emerald 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
     </style>
 
-    <!-- Anti-flicker Settings Loader -->
+    <!-- Custom Theme & Settings Engine -->
+    <script src="theme-settings.js"></script>
+
     <script>
         (function () {
             try {
-                const raw = localStorage.getItem('muvio_site_settings');
-                if (raw) {
-                    const s = JSON.parse(raw);
-                    if (s.theme === 'dark') document.documentElement.classList.add('theme-dark');
-                    if (s.fontSize === 'small') document.documentElement.style.fontSize = '90%';
-                    else if (s.fontSize === 'large') document.documentElement.style.fontSize = '110%';
+                const s = localStorage.getItem('muvio_site_settings');
+                if (s) {
+                    const parsed = JSON.parse(s);
+                    if (parsed.theme === 'dark') document.documentElement.classList.add('theme-dark');
+                    let z = parsed.zoom !== undefined ? parsed.zoom : parsed.fontScale;
+                    if (!isNaN(z) && z >= 80 && z <= 120) {
+                        document.documentElement.style.zoom = (z / 100);
+                        document.documentElement.style.setProperty('--muvio-font-scale', (z / 100).toString());
+                    }
                 }
             } catch (e) { }
         })();
@@ -135,20 +120,18 @@
     class="bg-[#F9FAFB] text-[#111827] font-sans antialiased selection:bg-[#1D5D3B] selection:text-white relative min-h-screen">
 
     <!-- ==================== ПРЕЛОАДЕР MUVIO ==================== -->
-    <div id="page-preloader" class="fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-[#0A0D0C]/95 backdrop-blur-md transition-opacity duration-300">
+    <div id="page-preloader" class="fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-[#000000] transition-opacity duration-300">
         <div class="relative flex flex-col items-center">
-            <!-- Glowing Breathing M -->
-            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-[#1D5D3B] to-[#10B981]/80 p-0.5 shadow-[0_0_35px_rgba(29,93,59,0.6)] animate-muvio-breathe flex items-center justify-center">
-                <div class="w-full h-full bg-[#0A0D0C] rounded-2xl flex items-center justify-center">
-                    <span class="font-brand font-black text-3xl sm:text-4xl text-[#10B981] tracking-wider drop-shadow-[0_0_12px_rgba(16,185,129,0.8)]">M</span>
-                </div>
-            </div>
+            <!-- Exact Branded Vector SVG Logo of MUVIO (64x64px, Neon #00E676, Glow-Breathe) -->
+            <svg class="w-16 h-16 text-[#00E676] glow-breathe" viewBox="0 0 100 100" fill="currentColor">
+                <path d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z"/>
+            </svg>
             <div class="mt-4 font-brand font-bold text-xs uppercase tracking-[0.25em] text-[#9CA3AF]">
                 MUVIO
             </div>
             <!-- Neon emerald progress line -->
             <div class="w-28 h-1 bg-[#1F2E26] rounded-full overflow-hidden mt-3">
-                <div class="h-full bg-gradient-to-r from-[#1D5D3B] via-[#10B981] to-[#1D5D3B] rounded-full animate-muvio-progress"></div>
+                <div class="h-full bg-gradient-to-r from-[#1D5D3B] via-[#00E676] to-[#1D5D3B] rounded-full animate-muvio-progress"></div>
             </div>
         </div>
     </div>
@@ -1158,12 +1141,13 @@
                 <!-- Колонка 2: Меню -->
                 <div>
                     <div class="font-brand font-bold text-sm uppercase tracking-wider text-emerald-200 mb-4">
-                        МЕНЮ
+                        <span class="lang-ua">МЕНЮ</span>
+                        <span class="lang-en">MENU</span>
                     </div>
                     <ul class="space-y-2 text-base font-medium font-brand tracking-wide">
-                        <li><a href="catalog.html?cat=scooter" class="hover:text-emerald-300 transition-colors">Каталог скутерів</a></li>
-                        <li><a href="catalog.html?cat=bike" class="hover:text-emerald-300 transition-colors">Каталог електровелосипедів</a></li>
-                        <li><a href="terms.html" class="hover:text-emerald-300 transition-colors">Умови оренди</a></li>
+                        <li><a href="catalog.html?cat=scooter" class="hover:text-emerald-300 transition-colors"><span class="lang-ua">Каталог скутерів</span><span class="lang-en">Scooter Catalog</span></a></li>
+                        <li><a href="catalog.html?cat=bike" class="hover:text-emerald-300 transition-colors"><span class="lang-ua">Каталог електровелосипедів</span><span class="lang-en">E-Bike Catalog</span></a></li>
+                        <li><a href="terms.html" class="hover:text-emerald-300 transition-colors"><span class="lang-ua">Умови оренди</span><span class="lang-en">Rental Terms</span></a></li>
                         <li><a href="index.html#faq" class="hover:text-emerald-300 transition-colors">FAQ</a></li>
                     </ul>
                 </div>
@@ -1171,7 +1155,8 @@
                 <!-- Колонка 3: Класи скутерів -->
                 <div>
                     <div class="font-brand font-bold text-sm uppercase tracking-wider text-emerald-200 mb-4">
-                        КЛАСИ СКУТЕРІВ
+                        <span class="lang-ua">КЛАСИ СКУТЕРІВ</span>
+                        <span class="lang-en">SCOOTER CLASSES</span>
                     </div>
                     <ul class="space-y-2 text-base font-medium font-brand tracking-wide text-emerald-100">
                         <li><a href="catalog.html?brand=Aima" class="hover:text-emerald-300 transition-colors">Aima</a></li>
@@ -1183,12 +1168,13 @@
                 <!-- Колонка 4: Ще напрямки -->
                 <div>
                     <div class="font-brand font-bold text-sm uppercase tracking-wider text-emerald-200 mb-4">
-                        ЩЕ НАПРЯМКИ
+                        <span class="lang-ua">ЩЕ НАПРЯМКИ</span>
+                        <span class="lang-en">EXPLORE</span>
                     </div>
                     <ul class="space-y-2 text-base font-medium font-brand tracking-wide">
-                        <li><a href="calculator.html" class="hover:text-emerald-300 transition-colors">Калькулятор оренди</a></li>
-                        <li><a href="service.html" class="hover:text-emerald-300 transition-colors">Ремонт скутера</a></li>
-                        <li><a href="#franchise" class="hover:underline">Франшиза</a></li>
+                        <li><a href="calculator.html" class="hover:text-emerald-300 transition-colors"><span class="lang-ua">Калькулятор оренди</span><span class="lang-en">Rental Calculator</span></a></li>
+                        <li><a href="service.html" class="hover:text-emerald-300 transition-colors"><span class="lang-ua">Ремонт скутера</span><span class="lang-en">Scooter Repair</span></a></li>
+                        <li><a href="franchise.html" class="hover:underline"><span class="lang-ua">Франшиза</span><span class="lang-en">Franchise</span></a></li>
                     </ul>
                     <div class="pt-4">
                         <a href="https://t.me/muviobot" target="_blank" rel="noopener noreferrer"
@@ -1202,8 +1188,14 @@
             </div>
 
             <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-emerald-200 gap-4 font-mono">
-                <div>© 2026 MUVIO Rent & Buyout. Одеса, вул. Приморська, 22.</div>
-                <div class="text-[11px]">Електротранспорт для кур'єрських служб та комерції</div>
+                <div>
+                    <span class="lang-ua">© 2026 MUVIO Rent & Buyout. Одеса, вул. Приморська, 22.</span>
+                    <span class="lang-en">© 2026 MUVIO Rent & Buyout. Odesa, Prymorska St, 22.</span>
+                </div>
+                <div class="text-[11px]">
+                    <span class="lang-ua">Комерційний та кур’єрський легкий електротранспорт</span>
+                    <span class="lang-en">Commercial and courier light electric transport</span>
+                </div>
             </div>
         </div>
     </footer>

@@ -63,7 +63,7 @@
 
         .chamfer-btn {
             clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
         }
 
         .chamfer-btn:hover {
@@ -77,7 +77,7 @@
 
         .tech-card {
             border: 2px solid #1D5D3B;
-            transition: all 0.25s ease;
+            transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
         }
 
         .tech-card:hover {
@@ -640,12 +640,13 @@
                 <!-- Колонка 2: Меню -->
                 <div>
                     <div class="font-brand font-bold text-sm uppercase tracking-wider text-emerald-200 mb-4">
-                        МЕНЮ
+                        <span class="lang-ua">МЕНЮ</span>
+                        <span class="lang-en">MENU</span>
                     </div>
                     <ul class="space-y-2 text-base font-medium font-brand tracking-wide">
-                        <li><a href="catalog.html?cat=scooter" class="hover:text-emerald-300 transition-colors">Каталог скутерів</a></li>
-                        <li><a href="catalog.html?cat=bike" class="hover:text-emerald-300 transition-colors">Каталог електровелосипедів</a></li>
-                        <li><a href="terms.html" class="hover:text-emerald-300 transition-colors">Умови оренди</a></li>
+                        <li><a href="catalog.html?cat=scooter" class="hover:text-emerald-300 transition-colors"><span class="lang-ua">Каталог скутерів</span><span class="lang-en">Scooter Catalog</span></a></li>
+                        <li><a href="catalog.html?cat=bike" class="hover:text-emerald-300 transition-colors"><span class="lang-ua">Каталог електровелосипедів</span><span class="lang-en">E-Bike Catalog</span></a></li>
+                        <li><a href="terms.html" class="hover:text-emerald-300 transition-colors"><span class="lang-ua">Умови оренди</span><span class="lang-en">Rental Terms</span></a></li>
                         <li><a href="index.html#faq" class="hover:text-emerald-300 transition-colors">FAQ</a></li>
                     </ul>
                 </div>
@@ -653,7 +654,8 @@
                 <!-- Колонка 3: Класи скутерів -->
                 <div>
                     <div class="font-brand font-bold text-sm uppercase tracking-wider text-emerald-200 mb-4">
-                        КЛАСИ СКУТЕРІВ
+                        <span class="lang-ua">КЛАСИ СКУТЕРІВ</span>
+                        <span class="lang-en">SCOOTER CLASSES</span>
                     </div>
                     <ul class="space-y-2 text-base font-medium font-brand tracking-wide text-emerald-100">
                         <li><a href="catalog.html?brand=Aima" class="hover:text-emerald-300 transition-colors">Aima</a></li>
@@ -665,12 +667,13 @@
                 <!-- Колонка 4: Ще напрямки -->
                 <div>
                     <div class="font-brand font-bold text-sm uppercase tracking-wider text-emerald-200 mb-4">
-                        ЩЕ НАПРЯМКИ
+                        <span class="lang-ua">ЩЕ НАПРЯМКИ</span>
+                        <span class="lang-en">EXPLORE</span>
                     </div>
                     <ul class="space-y-2 text-base font-medium font-brand tracking-wide">
-                        <li><a href="calculator.html" class="hover:text-emerald-300 transition-colors text-emerald-400 font-bold">Калькулятор оренди</a></li>
-                        <li><a href="service.html" class="hover:text-emerald-300 transition-colors">Ремонт скутера</a></li>
-                        <li><a href="#franchise" class="hover:underline">Франшиза</a></li>
+                        <li><a href="calculator.html" class="hover:text-emerald-300 transition-colors text-emerald-400 font-bold"><span class="lang-ua">Калькулятор оренди</span><span class="lang-en">Rental Calculator</span></a></li>
+                        <li><a href="service.html" class="hover:text-emerald-300 transition-colors"><span class="lang-ua">Ремонт скутера</span><span class="lang-en">Scooter Repair</span></a></li>
+                        <li><a href="franchise.html" class="hover:underline"><span class="lang-ua">Франшиза</span><span class="lang-en">Franchise</span></a></li>
                     </ul>
                     <div class="pt-4">
                         <a href="https://t.me/muviobot" target="_blank" rel="noopener noreferrer"
@@ -684,8 +687,14 @@
             </div>
 
             <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-emerald-200 gap-4 font-mono">
-                <div>© 2026 MUVIO Rent & Buyout. Одеса, вул. Приморська, 22.</div>
-                <div class="text-[11px]">Електротранспорт для кур'єрських служб та комерції</div>
+                <div>
+                    <span class="lang-ua">© 2026 MUVIO Rent & Buyout. Одеса, вул. Приморська, 22.</span>
+                    <span class="lang-en">© 2026 MUVIO Rent & Buyout. Odesa, Prymorska St, 22.</span>
+                </div>
+                <div class="text-[11px]">
+                    <span class="lang-ua">Комерційний та кур’єрський легкий електротранспорт</span>
+                    <span class="lang-en">Commercial and courier light electric transport</span>
+                </div>
             </div>
         </div>
     </footer>
@@ -880,11 +889,27 @@
             return r[30];
         }
 
-        function initCalcSelect() {
+        // Оновлення опцій моделі в залежності від обраної мови
+        function updateCalcModelOptions() {
             const select = document.getElementById('calcModelSelect');
             if (!select) return;
+            const currentVal = select.value || calcState.modelKey;
             select.innerHTML = '';
+            const isEn = (document.documentElement.getAttribute('lang') === 'en');
+            Object.entries(RENTAL_TARIFFS).forEach(([key, item]) => {
+                const opt = document.createElement('option');
+                opt.value = key;
+                const postfix = isEn ? `— from ${item.rates[30]} UAH/day` : `— від ${item.rates[30]} грн/доба`;
+                opt.textContent = `${item.name} (${item.power}, ${item.volt}) ${postfix}`;
+                select.appendChild(opt);
+            });
+            if (currentVal && RENTAL_TARIFFS[currentVal]) {
+                select.value = currentVal;
+            }
+        }
+        window.updateCalcModelOptions = updateCalcModelOptions;
 
+        function initCalcSelect() {
             const urlParams = new URLSearchParams(window.location.search);
             const requestedModel = urlParams.get('model');
             const matchedKey = normalizeModelKey(requestedModel);
@@ -897,14 +922,10 @@
                 calcState.days = requestedDays;
             }
 
-            Object.entries(RENTAL_TARIFFS).forEach(([key, item]) => {
-                const opt = document.createElement('option');
-                opt.value = key;
-                opt.textContent = `${item.name} (${item.power}, ${item.volt}) — від ${item.rates[30]} грн/доба`;
-                select.appendChild(opt);
-            });
+            updateCalcModelOptions();
 
-            select.value = calcState.modelKey;
+            const select = document.getElementById('calcModelSelect');
+            if (select) select.value = calcState.modelKey;
             renderDurationPills();
             renderAddonOptions();
             updateCalc();

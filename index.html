@@ -67,7 +67,7 @@
 
         .chamfer-btn {
             clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
         }
 
         .chamfer-btn:hover {
@@ -81,7 +81,7 @@
 
         .tech-card {
             border: 2px solid #1D5D3B;
-            transition: all 0.25s ease;
+            transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
         }
 
         .tech-card:hover {
@@ -146,20 +146,18 @@
     class="bg-[#F9FAFB] text-[#111827] font-sans antialiased selection:bg-[#1D5D3B] selection:text-white relative min-h-screen">
 
     <!-- ==================== ПРЕЛОАДЕР MUVIO ==================== -->
-    <div id="page-preloader" class="fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-[#0A0D0C]/95 backdrop-blur-md transition-opacity duration-300">
+    <div id="page-preloader" class="fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-[#000000] transition-opacity duration-300">
         <div class="relative flex flex-col items-center">
-            <!-- Glowing Breathing M -->
-            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-[#1D5D3B] to-[#10B981]/80 p-0.5 shadow-[0_0_35px_rgba(29,93,59,0.6)] animate-muvio-breathe flex items-center justify-center">
-                <div class="w-full h-full bg-[#0A0D0C] rounded-2xl flex items-center justify-center">
-                    <span class="font-brand font-black text-3xl sm:text-4xl text-[#10B981] tracking-wider drop-shadow-[0_0_12px_rgba(16,185,129,0.8)]">M</span>
-                </div>
-            </div>
+            <!-- Exact Branded Vector SVG Logo of MUVIO (64x64px, Neon #00E676, Glow-Breathe) -->
+            <svg class="w-16 h-16 text-[#00E676] glow-breathe" viewBox="0 0 100 100" fill="currentColor">
+                <path d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z"/>
+            </svg>
             <div class="mt-4 font-brand font-bold text-xs uppercase tracking-[0.25em] text-[#9CA3AF]">
                 MUVIO
             </div>
             <!-- Neon emerald progress line -->
             <div class="w-28 h-1 bg-[#1F2E26] rounded-full overflow-hidden mt-3">
-                <div class="h-full bg-gradient-to-r from-[#1D5D3B] via-[#10B981] to-[#1D5D3B] rounded-full animate-muvio-progress"></div>
+                <div class="h-full bg-gradient-to-r from-[#1D5D3B] via-[#00E676] to-[#1D5D3B] rounded-full animate-muvio-progress"></div>
             </div>
         </div>
     </div>
@@ -1278,9 +1276,9 @@
                         <span class="lang-en">MENU</span>
                     </div>
                     <ul class="space-y-2 text-base font-medium font-brand tracking-wide">
-                        <li><a href="catalog.html?cat=scooter" class="hover:text-emerald-300 transition-colors"><span class="lang-ua">Каталог скутерів</span><span class="lang-en">Scooter catalog</span></a></li>
-                        <li><a href="catalog.html?cat=bike" class="hover:text-emerald-300 transition-colors"><span class="lang-ua">Каталог електровелосипедів</span><span class="lang-en">E-bike catalog</span></a></li>
-                        <li><a href="terms.html" class="hover:text-emerald-300 transition-colors"><span class="lang-ua">Умови оренди</span><span class="lang-en">Rental terms</span></a></li>
+                        <li><a href="catalog.html?cat=scooter" class="hover:text-emerald-300 transition-colors"><span class="lang-ua">Каталог скутерів</span><span class="lang-en">Scooter Catalog</span></a></li>
+                        <li><a href="catalog.html?cat=bike" class="hover:text-emerald-300 transition-colors"><span class="lang-ua">Каталог електровелосипедів</span><span class="lang-en">E-Bike Catalog</span></a></li>
+                        <li><a href="terms.html" class="hover:text-emerald-300 transition-colors"><span class="lang-ua">Умови оренди</span><span class="lang-en">Rental Terms</span></a></li>
                         <li><a href="index.html#faq" class="hover:text-emerald-300 transition-colors">FAQ</a></li>
                     </ul>
                 </div>
@@ -1302,11 +1300,11 @@
                 <div>
                     <div class="font-brand font-bold text-sm uppercase tracking-wider text-emerald-200 mb-4">
                         <span class="lang-ua">ЩЕ НАПРЯМКИ</span>
-                        <span class="lang-en">MORE SERVICES</span>
+                        <span class="lang-en">EXPLORE</span>
                     </div>
                     <ul class="space-y-2 text-base font-medium font-brand tracking-wide">
-                        <li><a href="calculator.html" class="hover:text-emerald-300 transition-colors"><span class="lang-ua">Калькулятор оренди</span><span class="lang-en">Rental calculator</span></a></li>
-                        <li><a href="service.html" class="hover:text-emerald-300 transition-colors"><span class="lang-ua">Ремонт скутера</span><span class="lang-en">Scooter repair</span></a></li>
+                        <li><a href="calculator.html" class="hover:text-emerald-300 transition-colors"><span class="lang-ua">Калькулятор оренди</span><span class="lang-en">Rental Calculator</span></a></li>
+                        <li><a href="service.html" class="hover:text-emerald-300 transition-colors"><span class="lang-ua">Ремонт скутера</span><span class="lang-en">Scooter Repair</span></a></li>
                         <li><a href="franchise.html" class="hover:underline"><span class="lang-ua">Франшиза</span><span class="lang-en">Franchise</span></a></li>
                     </ul>
                     <div class="pt-4">
@@ -1326,8 +1324,8 @@
                     <span class="lang-en">© 2026 MUVIO Rent & Buyout. Odesa, Prymorska St, 22.</span>
                 </div>
                 <div class="text-[11px]">
-                    <span class="lang-ua">Електротранспорт для кур'єрських служб та комерції</span>
-                    <span class="lang-en">Light electric vehicles for delivery fleets & urban commerce</span>
+                    <span class="lang-ua">Комерційний та кур’єрський легкий електротранспорт</span>
+                    <span class="lang-en">Commercial and courier light electric transport</span>
                 </div>
             </div>
         </div>
@@ -1676,11 +1674,28 @@
         }
 
         // Ініціалізація вибору моделі в калькуляторі
-        function initCalcSelect() {
+        // Оновлення опцій моделі в залежності від обраної мови
+        function updateCalcModelOptions() {
             const select = document.getElementById('calcModelSelect');
             if (!select) return;
+            const currentVal = select.value || calcState.modelKey;
             select.innerHTML = '';
+            const isEn = (document.documentElement.getAttribute('lang') === 'en');
+            Object.entries(RENTAL_TARIFFS).forEach(([key, item]) => {
+                const opt = document.createElement('option');
+                opt.value = key;
+                const postfix = isEn ? `— from ${item.rates[30]} UAH/day` : `— від ${item.rates[30]} грн/доба`;
+                opt.textContent = `${item.name} (${item.power}, ${item.volt}) ${postfix}`;
+                select.appendChild(opt);
+            });
+            if (currentVal && RENTAL_TARIFFS[currentVal]) {
+                select.value = currentVal;
+            }
+        }
+        window.updateCalcModelOptions = updateCalcModelOptions;
 
+        // Ініціалізація вибору моделі в калькуляторі
+        function initCalcSelect() {
             const urlParams = new URLSearchParams(window.location.search);
             const requestedModel = urlParams.get('model');
             const matchedKey = normalizeModelKey(requestedModel);
@@ -1693,14 +1708,10 @@
                 calcState.days = requestedDays;
             }
 
-            Object.entries(RENTAL_TARIFFS).forEach(([key, item]) => {
-                const opt = document.createElement('option');
-                opt.value = key;
-                opt.textContent = `${item.name} (${item.power}, ${item.volt}) — від ${item.rates[30]} грн/доба`;
-                select.appendChild(opt);
-            });
+            updateCalcModelOptions();
 
-            select.value = calcState.modelKey;
+            const select = document.getElementById('calcModelSelect');
+            if (select) select.value = calcState.modelKey;
             renderDurationPills();
             renderAddonOptions();
             updateCalc();

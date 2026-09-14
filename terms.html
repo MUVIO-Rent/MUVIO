@@ -63,7 +63,7 @@
 
         .chamfer-btn {
             clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
         }
 
         .chamfer-btn:hover {
@@ -359,7 +359,7 @@
                     </div>
                     <h2 class="font-brand font-bold text-lg sm:text-xl uppercase tracking-wide text-[#111827]">
                         <span class="lang-ua">💵 Правила оплати та застави</span>
-                        <span class="lang-en">💵 Payment & Deposit Terms</span>
+                        <span class="lang-en">💵 PAYMENT & DEPOSIT TERMS</span>
                     </h2>
                 </div>
                 <ul class="space-y-3 text-sm md:text-base text-[#1F2937] leading-relaxed">
@@ -367,21 +367,21 @@
                         <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
                         <span>
                             <span class="lang-ua">Мінімальний термін оренди — 1 доба.</span>
-                            <span class="lang-en">Minimum rental period is 1 day.</span>
+                            <span class="lang-en">Minimum rental period — 1 day</span>
                         </span>
                     </li>
                     <li class="flex items-start gap-2.5">
                         <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
                         <span>
                             <span class="lang-ua"><b>Перерахунок не проводиться:</b> при достроковому поверненні транспорту з ініціативи орендаря оплата за сплачений період не повертається.</span>
-                            <span class="lang-en"><b>No recalculation:</b> upon early vehicle return on renter's initiative, payments for the active rental period are non-refundable.</span>
+                            <span class="lang-en"><b>No recalculation:</b> early return does not refund paid period</span>
                         </span>
                     </li>
                     <li class="flex items-start gap-2.5">
                         <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
                         <span>
                             <span class="lang-ua"><b>Повернення застави:</b> здійснюється протягом від 1 до 5 днів після здачі скутера назад.</span>
-                            <span class="lang-en"><b>Deposit return:</b> processed within 1 to 5 days following vehicle inspection and check-in.</span>
+                            <span class="lang-en"><b>Deposit refund:</b> processed within 1 to 5 business days after return</span>
                         </span>
                     </li>
                 </ul>
@@ -395,7 +395,7 @@
                     </div>
                     <h2 class="font-brand font-bold text-lg sm:text-xl uppercase tracking-wide text-[#111827]">
                         <span class="lang-ua">📍 Доставка та зона експлуатації</span>
-                        <span class="lang-en">📍 Delivery & Operating Zone</span>
+                        <span class="lang-en">📍 DELIVERY & OPERATING AREA</span>
                     </h2>
                 </div>
                 <ul class="space-y-3 text-sm md:text-base text-[#1F2937] leading-relaxed">
@@ -403,7 +403,7 @@
                         <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
                         <span>
                             <span class="lang-ua">Самовивіз з нашої локації або доставка по місту (тариф виїзду до клієнта) — <b>500–700 грн</b>.</span>
-                            <span class="lang-en">Self-pickup from our hub or city courier delivery — <b>500–700 UAH</b>.</span>
+                            <span class="lang-en">Self-pickup from hub or delivery within city — <b>500-700 UAH</b></span>
                         </span>
                     </li>
                     <li class="flex items-start gap-2.5">
@@ -445,7 +445,7 @@
                     </div>
                     <h2 class="font-brand font-bold text-lg sm:text-xl uppercase tracking-wide text-[#111827]">
                         <span class="lang-ua">⏰ Терміни, повернення та штрафи</span>
-                        <span class="lang-en">⏰ Deadlines, Return & Penalties</span>
+                        <span class="lang-en">⏰ TERMS, RETURNS & PENALTIES</span>
                     </h2>
                 </div>
                 <ul class="space-y-3 text-sm md:text-base text-[#1F2937] leading-relaxed">
@@ -645,15 +645,15 @@
                     <ul class="space-y-2 text-base font-medium font-brand tracking-wide">
                         <li><a href="catalog.html?cat=scooter" class="hover:text-emerald-300 transition-colors">
                             <span class="lang-ua">Каталог скутерів</span>
-                            <span class="lang-en">Scooter catalog</span>
+                            <span class="lang-en">Scooter Catalog</span>
                         </a></li>
                         <li><a href="catalog.html?cat=bike" class="hover:text-emerald-300 transition-colors">
                             <span class="lang-ua">Каталог електровелосипедів</span>
-                            <span class="lang-en">E-bike catalog</span>
+                            <span class="lang-en">E-Bike Catalog</span>
                         </a></li>
                         <li><a href="terms.html" class="hover:text-emerald-300 transition-colors text-emerald-400 font-bold">
                             <span class="lang-ua">Умови оренди</span>
-                            <span class="lang-en">Rental terms</span>
+                            <span class="lang-en">Rental Terms</span>
                         </a></li>
                         <li><a href="index.html#faq" class="hover:text-emerald-300 transition-colors">
                             <span class="lang-ua">FAQ</span>
@@ -679,16 +679,16 @@
                 <div>
                     <div class="font-brand font-bold text-sm uppercase tracking-wider text-emerald-200 mb-4">
                         <span class="lang-ua">ЩЕ НАПРЯМКИ</span>
-                        <span class="lang-en">MORE DESTINATIONS</span>
+                        <span class="lang-en">EXPLORE</span>
                     </div>
                     <ul class="space-y-2 text-base font-medium font-brand tracking-wide">
                         <li><a href="calculator.html" class="hover:text-emerald-300 transition-colors">
                             <span class="lang-ua">Калькулятор оренди</span>
-                            <span class="lang-en">Rental calculator</span>
+                            <span class="lang-en">Rental Calculator</span>
                         </a></li>
                         <li><a href="service.html" class="hover:text-emerald-300 transition-colors">
                             <span class="lang-ua">Ремонт скутера</span>
-                            <span class="lang-en">Scooter repair</span>
+                            <span class="lang-en">Scooter Repair</span>
                         </a></li>
                         <li><a href="#franchise" class="hover:underline">
                             <span class="lang-ua">Франшиза</span>
@@ -710,11 +710,11 @@
             <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-emerald-200 gap-4 font-mono">
                 <div>
                     <span class="lang-ua">© 2026 MUVIO Rent & Buyout. Одеса, вул. Приморська, 22.</span>
-                    <span class="lang-en">© 2026 MUVIO Rent & Buyout. Odesa, 22 Primorska Str.</span>
+                    <span class="lang-en">© 2026 MUVIO Rent & Buyout. Odesa, Prymorska St, 22.</span>
                 </div>
                 <div class="text-[11px]">
-                    <span class="lang-ua">Електротранспорт для кур'єрських служб та комерції</span>
-                    <span class="lang-en">Light electric vehicles for couriers and commerce</span>
+                    <span class="lang-ua">Комерційний та кур’єрський легкий електротранспорт</span>
+                    <span class="lang-en">Commercial and courier light electric transport</span>
                 </div>
             </div>
         </div>

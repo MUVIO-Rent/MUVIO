@@ -478,8 +478,15 @@
         if (typeof window.renderCalculatorI18n === 'function') {
             try { window.renderCalculatorI18n(); } catch (err) {}
         }
+        if (typeof window.updateCalcModelOptions === 'function') {
+            try { window.updateCalcModelOptions(); } catch (err) {}
+        }
+        if (typeof window.updateCalc === 'function') {
+            try { window.updateCalc(); } catch (err) {}
+        }
 
         updateHeaderUserName();
+        window.dispatchEvent(new CustomEvent('muvio:langchange', { detail: { lang: normalized } }));
     }
 
     // --------------------------------------------------------------------------

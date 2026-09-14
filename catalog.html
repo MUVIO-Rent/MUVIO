@@ -63,7 +63,7 @@
 
         .chamfer-btn {
             clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
         }
 
         .chamfer-btn:hover {
@@ -77,7 +77,7 @@
 
         .tech-card {
             border: 2px solid #1D5D3B;
-            transition: all 0.25s ease;
+            transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
         }
 
         .tech-card:hover {
@@ -438,9 +438,9 @@
                         <span class="lang-en">MENU</span>
                     </div>
                     <ul class="space-y-2 text-base font-medium font-brand tracking-wide">
-                        <li><a href="catalog.html?cat=scooter" class="hover:text-emerald-300 transition-colors"><span class="lang-ua">Каталог скутерів</span><span class="lang-en">Scooter catalog</span></a></li>
-                        <li><a href="catalog.html?cat=bike" class="hover:text-emerald-300 transition-colors"><span class="lang-ua">Каталог електровелосипедів</span><span class="lang-en">E-bike catalog</span></a></li>
-                        <li><a href="terms.html" class="hover:text-emerald-300 transition-colors"><span class="lang-ua">Умови оренди</span><span class="lang-en">Rental terms</span></a></li>
+                        <li><a href="catalog.html?cat=scooter" class="hover:text-emerald-300 transition-colors"><span class="lang-ua">Каталог скутерів</span><span class="lang-en">Scooter Catalog</span></a></li>
+                        <li><a href="catalog.html?cat=bike" class="hover:text-emerald-300 transition-colors"><span class="lang-ua">Каталог електровелосипедів</span><span class="lang-en">E-Bike Catalog</span></a></li>
+                        <li><a href="terms.html" class="hover:text-emerald-300 transition-colors"><span class="lang-ua">Умови оренди</span><span class="lang-en">Rental Terms</span></a></li>
                         <li><a href="index.html#faq" class="hover:text-emerald-300 transition-colors">FAQ</a></li>
                     </ul>
                 </div>
@@ -462,11 +462,11 @@
                 <div>
                     <div class="font-brand font-bold text-sm uppercase tracking-wider text-emerald-200 mb-4">
                         <span class="lang-ua">ЩЕ НАПРЯМКИ</span>
-                        <span class="lang-en">MORE SERVICES</span>
+                        <span class="lang-en">EXPLORE</span>
                     </div>
                     <ul class="space-y-2 text-base font-medium font-brand tracking-wide">
-                        <li><a href="calculator.html" class="hover:text-emerald-300 transition-colors"><span class="lang-ua">Калькулятор оренди</span><span class="lang-en">Rental calculator</span></a></li>
-                        <li><a href="service.html" class="hover:text-emerald-300 transition-colors"><span class="lang-ua">Ремонт скутера</span><span class="lang-en">Scooter repair</span></a></li>
+                        <li><a href="calculator.html" class="hover:text-emerald-300 transition-colors"><span class="lang-ua">Калькулятор оренди</span><span class="lang-en">Rental Calculator</span></a></li>
+                        <li><a href="service.html" class="hover:text-emerald-300 transition-colors"><span class="lang-ua">Ремонт скутера</span><span class="lang-en">Scooter Repair</span></a></li>
                         <li><a href="franchise.html" class="hover:underline"><span class="lang-ua">Франшиза</span><span class="lang-en">Franchise</span></a></li>
                     </ul>
                     <div class="pt-4">
@@ -486,8 +486,8 @@
                     <span class="lang-en">© 2026 MUVIO Rent & Buyout. Odesa, Prymorska St, 22.</span>
                 </div>
                 <div class="text-[11px]">
-                    <span class="lang-ua">Електротранспорт для кур'єрських служб та комерції</span>
-                    <span class="lang-en">Light electric vehicles for delivery fleets & urban commerce</span>
+                    <span class="lang-ua">Комерційний та кур’єрський легкий електротранспорт</span>
+                    <span class="lang-en">Commercial and courier light electric transport</span>
                 </div>
             </div>
         </div>

@@ -227,6 +227,7 @@ html.theme-dark #settingsDropdown .border-t {
 }
 
 /* 8. Range Slider (Scale / Zoom) */
+/* 8. Range Slider (Scale / Zoom) */
 #font-scale-slider {
     -webkit-appearance: none;
     appearance: none;
@@ -285,9 +286,11 @@ html.theme-dark footer.bg-\[\#123824\] {
     border-color: #222222 !important;
 }
 
-/* 10. Preloader */
+/* 10. Preloader (Pure Black, Zero Blur for Performance) */
 html.theme-dark #page-preloader {
-    background-color: rgba(0, 0, 0, 0.98) !important;
+    background-color: #000000 !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
 }
 
 /* 11. Leaflet Map In Dark Mode */
@@ -310,15 +313,98 @@ html.theme-dark .leaflet-popup-tip {
     background: #111413 !important;
 }
 
-/* 12. Preloader Keyframes */
-@keyframes muvioBreathe {
+/* 12. Terms & Conditions High-Contrast Readability */
+html.theme-dark .chamfer-box h2,
+html.theme-dark section h2,
+html.theme-dark .terms-header {
+    color: #FFFFFF !important;
+}
+
+html.theme-dark .chamfer-box p,
+html.theme-dark .chamfer-box ul,
+html.theme-dark .chamfer-box li,
+html.theme-dark .chamfer-box li span,
+html.theme-dark .text-\[\#1F2937\],
+html.theme-dark .text-\[\#111827\],
+html.theme-dark .text-\[\#4B5563\] {
+    color: #E5E7EB !important;
+}
+
+html.theme-dark .chamfer-box b,
+html.theme-dark .chamfer-box strong,
+html.theme-dark .chamfer-box span.font-bold {
+    color: #FFFFFF !important;
+}
+
+/* Emerald Accents: Bright Vivid Emerald (#10B981 / #34D399) instead of muddy dark */
+html.theme-dark .text-emerald-400,
+html.theme-dark .text-emerald-300,
+html.theme-dark .chamfer-box .text-\[\#1D5D3B\],
+html.theme-dark .chamfer-box .text-\[\#24754A\] {
+    color: #10B981 !important;
+}
+
+html.theme-dark span.w-2.h-2.bg-\[\#1D5D3B\],
+html.theme-dark .bg-\[\#1D5D3B\].rounded-full {
+    background-color: #10B981 !important;
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.7) !important;
+}
+
+/* 13. Safari / macOS Scroll Smoothness & Hardware Acceleration */
+/* Strictly no universal transitions that cause reflow/jank on scroll */
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Disable backdrop-filter on long scroll sections to eliminate scroll lag */
+html.theme-dark section,
+html.theme-dark main,
+html.theme-dark .tech-card,
+html.theme-dark .chamfer-box,
+section,
+main {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+}
+
+/* Re-enable light blur strictly for top header */
+header,
+header.sticky {
+    -webkit-backdrop-filter: blur(12px) !important;
+    backdrop-filter: blur(12px) !important;
+}
+
+/* Hardware acceleration on main layout containers and scroll sections */
+main,
+section,
+.scroll-section,
+.tech-card,
+.chamfer-box {
+    will-change: transform;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* Transitions strictly on interactive elements on hover */
+button,
+a,
+.chamfer-btn {
+    transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease !important;
+}
+
+/* 14. MUVIO Native Logo Preloader Animations */
+@keyframes glowBreathe {
     0%, 100% {
         transform: scale(1);
-        box-shadow: 0 0 25px rgba(29, 93, 59, 0.4);
+        filter: drop-shadow(0 0 10px rgba(0, 230, 118, 0.55));
+        opacity: 0.94;
     }
     50% {
-        transform: scale(1.06);
-        box-shadow: 0 0 45px rgba(16, 185, 129, 0.7);
+        transform: scale(1.08);
+        filter: drop-shadow(0 0 24px rgba(0, 230, 118, 0.95)) drop-shadow(0 0 42px rgba(0, 230, 118, 0.55));
+        opacity: 1;
     }
 }
 
@@ -327,10 +413,12 @@ html.theme-dark .leaflet-popup-tip {
     100% { transform: translateX(100%); }
 }
 
+.glow-breathe,
 .animate-muvio-breathe {
-    animation: muvioBreathe 2s ease-in-out infinite;
+    animation: glowBreathe 2s ease-in-out infinite;
 }
 
 .animate-muvio-progress {
     animation: muvioProgress 1.4s ease-in-out infinite;
 }
+
