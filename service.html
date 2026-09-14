@@ -652,10 +652,26 @@
                     return;
                 }
                 const map = L.map('map').setView([46.49191, 30.73519], 16);
-                L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-                    attribution: '© OpenStreetMap'
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19,
+                    attribution: '&copy; OpenStreetMap'
                 }).addTo(map);
-                L.marker([46.49191, 30.73519]).addTo(map).bindPopup('<b>MUVIO HUB</b><br>вул. Приморська, 22').openPopup();
+
+                function getPopupContent() {
+                    const isEn = (document.documentElement.getAttribute('lang') === 'en') || (localStorage.getItem('muvio_lang') === 'en');
+                    const street = isEn ? '22 Prymorska Str.' : 'вул. Приморська, 22';
+                    return `<div style="text-align:center; font-family:sans-serif; color:#111;"><b>MUVIO</b><br><span style="font-size:12px; color:#666;">${street}</span></div>`;
+                }
+
+                const marker = L.marker([46.49191, 30.73519]).addTo(map);
+                marker.bindPopup(getPopupContent()).openPopup();
+
+                window.addEventListener('muvio:langchange', () => {
+                    if (marker) {
+                        marker.setPopupContent(getPopupContent());
+                    }
+                });
+
                 setTimeout(() => { map.invalidateSize(); }, 300);
             } catch (e) {
                 console.warn('Leaflet map error:', e);
