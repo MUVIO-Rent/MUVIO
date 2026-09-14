@@ -1,6 +1,6 @@
 /* ==========================================================================
    MUVIO — GLOBAL BASE STYLES & TYPOGRAPHY
-   Futuristic Square Techno Font for Headlines, Clean Grotesque for Body
+   Chakra Petch for Headlines, Clean Grotesque for Body
    ========================================================================== */
 
 /* 1. Base readable grotesque for small text
@@ -20,10 +20,10 @@ td,
 th,
 .font-sans,
 [class*="font-sans"] {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
 }
 
-/* 2. Technological square font for headings (h1, h2, h3, .hero-title,
+/* 2. Chakra Petch for headings (h1, h2, h3, .hero-title,
       catalog model names, logo in text, badges) */
 h1,
 h2,
@@ -38,33 +38,33 @@ h3,
 .preloader-brand-title,
 [id*="catalog"] h3,
 .catalog-card-title {
-    font-family: 'Orbitron', 'Tektur', sans-serif !important;
+    font-family: 'Chakra Petch', sans-serif !important;
     text-transform: uppercase !important;
-    letter-spacing: 0.03em !important;
+    letter-spacing: 0.04em !important;
 }
 
 /* Specific styling for H1 / Hero */
 h1,
 .hero-title {
-    font-family: 'Orbitron', 'Tektur', sans-serif !important;
+    font-family: 'Chakra Petch', sans-serif !important;
     text-transform: uppercase !important;
-    letter-spacing: 0.03em !important;
-    font-weight: 800 !important;
+    letter-spacing: 0.04em !important;
+    font-weight: 700 !important;
 }
 
 /* Specific styling for H2 */
 h2 {
-    font-family: 'Orbitron', 'Tektur', sans-serif !important;
+    font-family: 'Chakra Petch', sans-serif !important;
     text-transform: uppercase !important;
-    letter-spacing: 0.03em !important;
+    letter-spacing: 0.04em !important;
     font-weight: 700 !important;
 }
 
 /* Specific styling for H3 / Catalog model names */
 h3 {
-    font-family: 'Orbitron', 'Tektur', sans-serif !important;
+    font-family: 'Chakra Petch', sans-serif !important;
     text-transform: uppercase !important;
-    letter-spacing: 0.03em !important;
+    letter-spacing: 0.04em !important;
     font-weight: 700 !important;
 }
 
@@ -72,7 +72,7 @@ h3 {
 a[aria-label*="MUVIO"] span.font-brand,
 .preloader-brand-title,
 .header-logo-text {
-    font-family: 'Orbitron', 'Tektur', sans-serif !important;
+    font-family: 'Chakra Petch', sans-serif !important;
     text-transform: uppercase !important;
-    letter-spacing: 0.03em !important;
+    letter-spacing: 0.04em !important;
 }
