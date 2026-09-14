@@ -491,7 +491,7 @@ html.theme-dark #mobileMenu a:hover {
 
 @keyframes muvioProgress {
     0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
+    100% { transform: translateX(200%); }
 }
 
 .glow-breathe,
@@ -499,8 +499,10 @@ html.theme-dark #mobileMenu a:hover {
     animation: glowBreathe 2s ease-in-out infinite;
 }
 
-.animate-muvio-progress {
+.animate-muvio-progress,
+.preloader-bar-line {
     animation: muvioProgress 1.4s ease-in-out infinite;
+    will-change: transform;
 }
 
 

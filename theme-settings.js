@@ -719,7 +719,31 @@
     }
 
     // --------------------------------------------------------------------------
-    // 11. GLOBAL API EXPORTS
+    // 12. GLOBAL PRELOADER CONTROLLER (Fade out opacity-0 -> hidden after 200-300ms)
+    // --------------------------------------------------------------------------
+    function hidePagePreloader() {
+        const preloader = document.getElementById('page-preloader');
+        if (!preloader || preloader.dataset.hidden === 'true') return;
+        preloader.dataset.hidden = 'true';
+        preloader.style.transition = 'opacity 0.25s ease';
+        preloader.style.opacity = '0';
+        setTimeout(() => {
+            preloader.classList.add('hidden');
+            preloader.style.display = 'none';
+        }, 250);
+    }
+
+    if (document.readyState === 'complete') {
+        setTimeout(hidePagePreloader, 150);
+    } else {
+        window.addEventListener('load', () => setTimeout(hidePagePreloader, 150));
+        document.addEventListener('DOMContentLoaded', () => setTimeout(hidePagePreloader, 350));
+    }
+    // Fallback timer ensures preloader never hangs
+    setTimeout(hidePagePreloader, 2000);
+
+    // --------------------------------------------------------------------------
+    // 13. GLOBAL API EXPORTS
     // --------------------------------------------------------------------------
     window.setSiteTheme = setSiteTheme;
     window.applySiteTheme = applySiteTheme;
@@ -735,5 +759,7 @@
     window.saveSiteSettings = saveSiteSettings;
     window.updateHeaderUserName = updateHeaderUserName;
     window.initSettingsUI = initSettingsUI;
+    window.hidePagePreloader = hidePagePreloader;
+    window.hidePreloader = hidePagePreloader;
 
 })();
