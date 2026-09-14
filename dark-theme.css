@@ -24,6 +24,10 @@ html.theme-dark {
     --accent-hover: #237248;
     --accent-border: #287A4E;
     --accent-glow: rgba(29, 93, 59, 0.45);
+    --text-accent: #2E8B57;
+    --accent-light: #287A4E;
+    --badge-bg: rgba(29, 93, 59, 0.3);
+    --badge-border: #1D5D3B;
 }
 
 html.theme-dark body {
@@ -256,11 +260,19 @@ html.theme-dark [data-status="paid"],
 html.theme-dark .badge-green,
 html.theme-dark #modelTypeBadge,
 html.theme-dark #calcVehicleBadge {
-    background-color: #131A16 !important;
-    color: #2ECC71 !important;
-    border: 1px solid #287A4E !important;
-    box-shadow: 0 0 8px rgba(29, 93, 59, 0.35) !important;
-    text-shadow: 0 0 5px rgba(29, 93, 59, 0.4) !important;
+    background-color: rgba(29, 93, 59, 0.25) !important;
+    color: #34A869 !important;
+    border: 1px solid #1D5D3B !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+}
+
+/* Vehicle catalog card badge on photo in dark theme */
+html.theme-dark .vehicle-card .chamfer-badge.bg-\[\#1D5D3B\],
+html.theme-dark #catalogGrid .chamfer-badge.bg-\[\#1D5D3B\] {
+    background-color: rgba(29, 93, 59, 0.25) !important;
+    border: 1px solid #1D5D3B !important;
+    color: #34A869 !important;
 }
 
 html.theme-dark #rentalContractNumber {
@@ -270,13 +282,14 @@ html.theme-dark #rentalPlateNumber {
     color: #FFFFFF !important;
 }
 
-/* Price Highlights */
+/* Price Highlights (Comfortable eye-friendly emerald #2E8B57 / #287A4E) */
 html.theme-dark #resTotalPrice,
 html.theme-dark #resDeposit,
 html.theme-dark #rentalRate,
-html.theme-dark .text-\[\#1D5D3B\] {
-    color: #2ECC71 !important;
-    filter: drop-shadow(0 0 5px rgba(29, 93, 59, 0.4)) !important;
+html.theme-dark .text-\[\#1D5D3B\],
+html.theme-dark span.text-\[\#1D5D3B\] {
+    color: #2E8B57 !important;
+    filter: none !important;
 }
 
 /* Duration Pills & Addon Cards in Calculator */
@@ -475,10 +488,10 @@ html.theme-dark #page-preloader .preloader-bar-line {
 
 /* 10.1 Calculator Duration Badge In Dark Mode */
 html.theme-dark #durationDaysBadge {
-    background-color: #131A16 !important;
-    color: #2ECC71 !important;
-    border: 1px solid #287A4E !important;
-    box-shadow: 0 0 8px rgba(29, 93, 59, 0.35) !important;
+    background-color: rgba(29, 93, 59, 0.25) !important;
+    color: #34A869 !important;
+    border: 1px solid #1D5D3B !important;
+    box-shadow: none !important;
 }
 
 /* 11. Service Hub Map (OpenStreetMap Embed Iframe) */
@@ -761,7 +774,7 @@ html.theme-dark #options-btn:hover svg,
 html.theme-dark #options-btn:hover span,
 html.theme-dark #burger-btn:hover,
 html.theme-dark #burger-btn:hover svg {
-    color: #2ECC71 !important;
+    color: #2E8B57 !important;
 }
 
 /* 17. Cabinet Rental Control Buttons */
@@ -777,19 +790,18 @@ html.theme-dark #cabinet-btn-pay:hover {
 }
 
 html.theme-dark #cabinet-btn-buyout {
-    background-color: #121815 !important;
-    color: #2ECC71 !important;
-    border: 1px solid #287A4E !important;
-    box-shadow: 0 0 8px rgba(29, 93, 59, 0.35) !important;
+    background-color: rgba(29, 93, 59, 0.25) !important;
+    color: #34A869 !important;
+    border: 1px solid #1D5D3B !important;
+    box-shadow: none !important;
 }
 html.theme-dark #cabinet-btn-buyout:hover {
-    background-color: #18221d !important;
-    border-color: #2D8A58 !important;
-    box-shadow: 0 0 12px rgba(29, 93, 59, 0.5) !important;
+    background-color: rgba(29, 93, 59, 0.4) !important;
+    border-color: #287A4E !important;
 }
 html.theme-dark #cabinet-btn-buyout i,
 html.theme-dark #cabinet-btn-buyout svg {
-    color: #2ECC71 !important;
+    color: #34A869 !important;
 }
 
 html.theme-dark #cabinet-btn-breakdown {
@@ -809,10 +821,10 @@ html.theme-dark #cabinet-btn-breakdown svg {
 html.theme-dark .badge-status-active,
 html.theme-dark [data-status="active"],
 html.theme-dark [data-status="paid"] {
-    background-color: #131A16 !important;
-    color: #2ECC71 !important;
-    border: 1px solid #287A4E !important;
-    box-shadow: 0 0 8px rgba(29, 93, 59, 0.35) !important;
+    background-color: rgba(29, 93, 59, 0.25) !important;
+    color: #34A869 !important;
+    border: 1px solid #1D5D3B !important;
+    box-shadow: none !important;
 }
 
 /* 19. Apple-like Smooth UX, Micro-Animations & Tactile Feedback */
@@ -852,12 +864,21 @@ html.theme-dark .faq-trigger {
 }
 
 html.theme-dark .faq-trigger.is-open {
-    color: #2ECC71 !important;
+    color: #2E8B57 !important;
 }
 
+html.theme-dark .faq-trigger.is-open span:first-child > span:first-child,
+html.theme-dark .faq-trigger span:first-child > span:first-child.bg-\[\#1D5D3B\]\/10,
 html.theme-dark .faq-icon-wrap {
-    background-color: #16221B !important;
-    color: #2ECC71 !important;
+    background-color: rgba(29, 93, 59, 0.2) !important;
+    color: #2E8B57 !important;
+}
+
+html.theme-dark .faq-trigger .faq-icon,
+html.theme-dark .faq-trigger .faq-icon svg,
+html.theme-dark .faq-trigger .faq-icon i {
+    color: #2E8B57 !important;
+    stroke: #2E8B57 !important;
 }
 
 html.theme-dark .faq-content {
@@ -865,7 +886,7 @@ html.theme-dark .faq-content {
     border-color: #1F2E26 !important;
 }
 
-/* 21. Active Navigation Link Indicator (Emerald in Light, Ambient Emerald in Dark) */
+/* 21. Active Navigation Link Indicator (Emerald in Light, Deep Emerald in Dark) */
 nav a.nav-link-active,
 .mobile-nav-link.nav-link-active {
     color: #1D5D3B !important;
@@ -875,8 +896,8 @@ nav a.nav-link-active,
 
 html.theme-dark nav a.nav-link-active,
 html.theme-dark .mobile-nav-link.nav-link-active {
-    color: #2ECC71 !important;
+    color: #2E8B57 !important;
     border-bottom: 2px solid #1D5D3B !important;
     font-weight: 700 !important;
-    text-shadow: 0 0 6px rgba(29, 93, 59, 0.5) !important;
+    text-shadow: none !important;
 }
