@@ -486,6 +486,9 @@
         if (typeof window.updateCalc === 'function') {
             try { window.updateCalc(); } catch (err) {}
         }
+        if (typeof window.renderCabinetI18n === 'function') {
+            try { window.renderCabinetI18n(); } catch (err) {}
+        }
 
         updateHeaderUserName();
         window.dispatchEvent(new CustomEvent('muvio:langchange', { detail: { lang: normalized } }));

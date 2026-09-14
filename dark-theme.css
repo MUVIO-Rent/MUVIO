@@ -91,6 +91,37 @@ html.theme-dark [class*="bg-white/80"] {
     border-color: #222222 !important;
 }
 
+/* Header Seamless Vector Logo (Transparent, No White Square) */
+.header-logo-wrap {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+}
+
+.header-logo-wrap svg {
+    color: #1D5D3B;
+}
+
+html.theme-dark .header-logo-wrap {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+html.theme-dark .header-logo-wrap svg {
+    color: #00E676 !important;
+    filter: drop-shadow(0 0 8px rgba(0, 230, 118, 0.45));
+}
+
+html.theme-dark a .header-logo-wrap + div > span:first-child {
+    color: #FFFFFF !important;
+}
+
+html.theme-dark a .header-logo-wrap + div > div {
+    color: #9CA3AF !important;
+}
+
 /* Section dividers & borders */
 html.theme-dark .border-x,
 html.theme-dark .border-y,
