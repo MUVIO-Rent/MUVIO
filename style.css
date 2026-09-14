@@ -3,8 +3,8 @@
    Futuristic Square Techno Font for Headlines, Clean Grotesque for Body
    ========================================================================== */
 
-/* 1. Base Document & Clean Grotesque for readable small text
-      (descriptions, specs, rental terms, FAQ, forms) */
+/* 1. Base readable grotesque for small text
+      (paragraphs, spec descriptions, FAQ, rental terms, forms) */
 html,
 body,
 p,
@@ -20,10 +20,11 @@ td,
 th,
 .font-sans,
 [class*="font-sans"] {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
 }
 
-/* 2. Technological square font for headings (h1, h2, h3), MUVIO brand logo, badges */
+/* 2. Technological square font for headings (h1, h2, h3, .hero-title,
+      catalog model names, logo in text, badges) */
 h1,
 h2,
 h3,
@@ -34,10 +35,12 @@ h3,
 [class*="chamfer-badge"],
 .badge,
 .header-logo-text,
-.preloader-brand-title {
+.preloader-brand-title,
+[id*="catalog"] h3,
+.catalog-card-title {
     font-family: 'Orbitron', 'Tektur', sans-serif !important;
     text-transform: uppercase !important;
-    letter-spacing: 0.04em !important;
+    letter-spacing: 0.03em !important;
 }
 
 /* Specific styling for H1 / Hero */
@@ -45,7 +48,7 @@ h1,
 .hero-title {
     font-family: 'Orbitron', 'Tektur', sans-serif !important;
     text-transform: uppercase !important;
-    letter-spacing: 0.04em !important;
+    letter-spacing: 0.03em !important;
     font-weight: 800 !important;
 }
 
@@ -53,15 +56,23 @@ h1,
 h2 {
     font-family: 'Orbitron', 'Tektur', sans-serif !important;
     text-transform: uppercase !important;
-    letter-spacing: 0.04em !important;
+    letter-spacing: 0.03em !important;
     font-weight: 700 !important;
 }
 
-/* Header MUVIO Brand Logo Text */
+/* Specific styling for H3 / Catalog model names */
+h3 {
+    font-family: 'Orbitron', 'Tektur', sans-serif !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.03em !important;
+    font-weight: 700 !important;
+}
+
+/* Logo in text & Preloader */
 a[aria-label*="MUVIO"] span.font-brand,
 .preloader-brand-title,
 .header-logo-text {
     font-family: 'Orbitron', 'Tektur', sans-serif !important;
     text-transform: uppercase !important;
-    letter-spacing: 0.06em !important;
+    letter-spacing: 0.03em !important;
 }
