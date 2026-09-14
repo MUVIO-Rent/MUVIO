@@ -120,14 +120,14 @@ html.theme-dark [class*="bg-white/80"] {
 html.theme-dark .header-logo-wrap {
     background: transparent !important;
     border: none !important;
-    box-shadow: none !important;
+    box-shadow: 0 0 12px rgba(29, 93, 59, 0.5) !important;
 }
 
 html.theme-dark .header-logo-wrap svg {
-    color: #00E676 !important;
-    fill: #00E676 !important;
-    stroke: none !important;
-    filter: drop-shadow(0 0 8px rgba(0, 230, 118, 0.45)) !important;
+    color: #1D5D3B !important;
+    fill: #1D5D3B !important;
+    stroke: #1D5D3B !important;
+    filter: drop-shadow(0 0 6px rgba(29, 93, 59, 0.75)) drop-shadow(0 0 14px rgba(29, 93, 59, 0.45)) !important;
 }
 
 html.theme-dark a .header-logo-wrap + div > span:first-child {
@@ -408,9 +408,10 @@ html.theme-dark #page-preloader {
 }
 
 html.theme-dark #page-preloader .preloader-logo-wrap svg {
-    color: #00E676 !important;
-    fill: #00E676 !important;
-    filter: drop-shadow(0 0 16px rgba(0, 230, 118, 0.75)) !important;
+    color: #1D5D3B !important;
+    fill: #1D5D3B !important;
+    stroke: #1D5D3B !important;
+    filter: drop-shadow(0 0 8px rgba(29, 93, 59, 0.65)) drop-shadow(0 0 16px rgba(29, 93, 59, 0.45)) !important;
 }
 
 html.theme-dark #page-preloader .preloader-brand-title {
@@ -418,7 +419,7 @@ html.theme-dark #page-preloader .preloader-brand-title {
 }
 
 html.theme-dark #page-preloader .preloader-brand-sub {
-    color: #00E676 !important;
+    color: #1D5D3B !important;
 }
 
 html.theme-dark #page-preloader .preloader-bar-track {
@@ -426,8 +427,8 @@ html.theme-dark #page-preloader .preloader-bar-track {
 }
 
 html.theme-dark #page-preloader .preloader-bar-line {
-    background-color: #00E676 !important;
-    box-shadow: 0 0 10px rgba(0, 230, 118, 0.6) !important;
+    background-color: #1D5D3B !important;
+    box-shadow: 0 0 10px rgba(29, 93, 59, 0.7) !important;
 }
 
 /* 10.1 Calculator Duration Badge In Dark Mode */
@@ -660,12 +661,12 @@ html.theme-dark #mobileMenu a:hover {
 @keyframes glowBreatheDark {
     0%, 100% {
         transform: scale(1);
-        filter: drop-shadow(0 0 10px rgba(0, 230, 118, 0.55));
-        opacity: 0.94;
+        filter: drop-shadow(0 0 8px rgba(29, 93, 59, 0.65)) drop-shadow(0 0 16px rgba(29, 93, 59, 0.45));
+        opacity: 0.95;
     }
     50% {
         transform: scale(1.08);
-        filter: drop-shadow(0 0 24px rgba(0, 230, 118, 0.95)) drop-shadow(0 0 42px rgba(0, 230, 118, 0.55));
+        filter: drop-shadow(0 0 14px rgba(29, 93, 59, 0.85)) drop-shadow(0 0 28px rgba(29, 93, 59, 0.55));
         opacity: 1;
     }
 }
