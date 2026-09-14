@@ -38,7 +38,7 @@
 
             // Index landing elements
             hero_tag: "MUVIO — ТВОЄ ELECTRO CITY",
-            hero_title: "ОРЕНДА КУР'ЄРСЬКОГО ТА МІСЬКОГО<br>ЕЛЕКТРОТРАНСПОРТУ В ОДЕСІ",
+            hero_title: "ОРЕНДА КУР'ЄРСЬКОГО ТА ТУРИСТИЧНОГО<br>ЕЛЕКТРОТРАНСПОРТУ В ОДЕСІ",
             hero_subtitle: "Каталог скутерів та велосипедів у зборі з АКБ. Офіційний договір, повне планове сервісне обслуговування та фіксований щотижневий платіж.",
             hero_btn_choose: "ОБРАТИ СКУТЕР",
             hero_btn_calc: "КАЛЬКУЛЯТОР ОРЕНДИ",
@@ -148,7 +148,7 @@
 
             // Index landing elements
             hero_tag: "MUVIO — YOUR ELECTRO CITY",
-            hero_title: "COMMERCIAL & URBAN<br>ELECTRIC VEHICLE RENTAL IN ODESA",
+            hero_title: "RENTAL OF COURIER & TOURIST<br>ELECTRIC VEHICLES IN ODESA",
             hero_subtitle: "Catalog of scooters and e-bikes complete with battery. Official agreement, full scheduled maintenance and fixed weekly payment.",
             hero_btn_choose: "CHOOSE SCOOTER",
             hero_btn_calc: "RENTAL CALCULATOR",
