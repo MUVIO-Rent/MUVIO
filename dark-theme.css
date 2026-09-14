@@ -371,7 +371,15 @@ html.theme-dark #durationDaysBadge {
     border: 1px solid rgba(29, 93, 59, 0.7) !important;
 }
 
-/* 11. Leaflet Map In Dark Mode */
+/* 11. Service Hub Map (OpenStreetMap Embed Iframe) */
+html:not(.theme-dark) .service-hub-map {
+    filter: none !important;
+}
+
+html.theme-dark .service-hub-map {
+    filter: invert(90%) hue-rotate(180deg) brightness(95%) contrast(90%) !important;
+}
+
 html.theme-dark .leaflet-tile-pane {
     filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7);
 }

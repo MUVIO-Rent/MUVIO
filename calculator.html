@@ -425,10 +425,10 @@
 
                             <!-- Кнопки швидкого вибору періоду: рівно 5 фіксованих кнопок -->
                             <div class="grid grid-cols-2 sm:grid-cols-5 gap-2" id="durationPillsContainer">
-                                <!-- Опції генеруються JS: [1 ДЕНЬ] [2 ДНІ] [3 ДНІ] [7 ДНІВ (ТИЖДЕНЬ)] [30 ДНІВ (МІСЯЦЬ)] -->
+                                <!-- Опції генеруються JS: [1 ДЕНЬ] [2 ДНІ] [3 ДНІ] [7 ДНІВ (ТИЖДЕНЬ)] [28 ДНІВ (МІСЯЦЬ)] -->
                             </div>
 
-                            <!-- Додатковий слайдер для дискретного вибору [1, 2, 3, 7, 30] з блокуванням 4-6 днів -->
+                            <!-- Додатковий слайдер для дискретного вибору [1, 2, 3, 7, 28] з блокуванням 4-6 днів -->
                             <div class="mt-3 p-3 bg-[#F8FAFC] border border-[#1D5D3B]/20 chamfer-box">
                                 <div class="flex items-center justify-between text-xs font-mono text-[#4B5563] mb-1.5">
                                     <span>
@@ -439,7 +439,7 @@
                                         <span class="font-bold text-[#1D5D3B] text-sm">
                                             <span id="sliderDaysDisplay">7</span> <span class="lang-ua">дн.</span><span class="lang-en">d.</span>
                                         </span>
-                                        <input type="number" id="manualDaysInput" min="1" max="30" value="7"
+                                        <input type="number" id="manualDaysInput" min="1" max="28" value="7"
                                             onchange="onManualDaysChange(this.value)"
                                             onkeyup="if(event.key==='Enter')onManualDaysChange(this.value)"
                                             class="w-14 px-1.5 py-0.5 text-xs font-bold text-center border border-[#1D5D3B]/40 rounded bg-white text-[#111827] focus:outline-none focus:border-[#1D5D3B]"
@@ -454,7 +454,7 @@
                                     <span class="cursor-pointer font-semibold hover:text-[#1D5D3B]" onclick="setCalcDuration(2)">2 <span class="lang-ua">дні</span><span class="lang-en">days</span></span>
                                     <span class="cursor-pointer font-semibold hover:text-[#1D5D3B]" onclick="setCalcDuration(3)">3 <span class="lang-ua">дні</span><span class="lang-en">days</span></span>
                                     <span class="cursor-pointer font-semibold hover:text-[#1D5D3B]" onclick="setCalcDuration(7)">7 <span class="lang-ua">днів</span><span class="lang-en">days</span></span>
-                                    <span class="cursor-pointer font-semibold hover:text-[#1D5D3B]" onclick="setCalcDuration(30)">30 <span class="lang-ua">днів</span><span class="lang-en">days</span></span>
+                                    <span class="cursor-pointer font-semibold hover:text-[#1D5D3B]" onclick="setCalcDuration(28)">28 <span class="lang-ua">днів</span><span class="lang-en">days</span></span>
                                 </div>
 
                                 <!-- Повідомлення про блокування 4-6 днів -->
@@ -577,8 +577,8 @@
                             </span>
                         </div>
                         <p class="text-xs text-[#4B5563] leading-relaxed">
-                            <span class="lang-ua">Що довший термін оренди — то нижча ціна за добу. При оренді від 30 днів щоденний тариф знижується до ~300 грн/доба.</span>
-                            <span class="lang-en">Longer rental periods mean lower daily rates. For 30+ day rentals, daily rates decrease to ~300 UAH/day.</span>
+                            <span class="lang-ua">Що довший термін оренди — то нижча ціна за добу. При оренді від 28 днів щоденний тариф знижується до ~300 грн/доба.</span>
+                            <span class="lang-en">Longer rental periods mean lower daily rates. For 28+ day rentals, daily rates decrease to ~300 UAH/day.</span>
                         </p>
                     </div>
 
@@ -725,22 +725,22 @@
             groupA: { // Crosser (CR-13 №1, CR-13 №2, CR-20)
                 nameUa: "Crosser",
                 nameEn: "Crosser",
-                total: { 1: 1000, 2: 1800, 3: 2400, 7: 2500, 30: 8500 },
-                daily: { 1: 1000, 2: 900, 3: 800, 7: Math.round(2500 / 7), 30: Math.round(8500 / 30) },
+                total: { 1: 1000, 2: 1800, 3: 2400, 7: 2500, 28: 8500, 30: 8500 },
+                daily: { 1: 1000, 2: 900, 3: 800, 7: Math.round(2500 / 7), 28: Math.round(8500 / 28), 30: Math.round(8500 / 30) },
                 deposit: 4500
             },
             groupB: { // Стандартні скутери (Aima F606 №1/№2, A700, Leopard, A715, Mine та ін.)
                 nameUa: "Стандартні скутери",
                 nameEn: "Standard Scooters",
-                total: { 1: 900, 2: 1600, 3: 2100, 7: 2200, 30: 8000 },
-                daily: { 1: 900, 2: 800, 3: 700, 7: Math.round(2200 / 7), 30: Math.round(8000 / 30) },
+                total: { 1: 900, 2: 1600, 3: 2100, 7: 2200, 28: 8000, 30: 8000 },
+                daily: { 1: 900, 2: 800, 3: 700, 7: Math.round(2200 / 7), 28: Math.round(8000 / 28), 30: Math.round(8000 / 30) },
                 deposit: 4000
             },
             groupC: { // Електровелосипеди (Like Bike Bruiser, Like Bike N5, ADO A20F+)
                 nameUa: "Електровелосипеди",
                 nameEn: "E-Bikes",
-                total: { 1: 800, 2: 1500, 3: 1800, 7: 1800, 30: 6000 },
-                daily: { 1: 800, 2: 750, 3: 600, 7: Math.round(1800 / 7), 30: 200 },
+                total: { 1: 800, 2: 1500, 3: 1800, 7: 1800, 28: 6000, 30: 6000 },
+                daily: { 1: 800, 2: 750, 3: 600, 7: Math.round(1800 / 7), 28: Math.round(6000 / 28), 30: 200 },
                 deposit: 3000
             }
         };
@@ -864,14 +864,14 @@
             }
         };
 
-        const DISCRETE_DAYS = [1, 2, 3, 7, 30];
+        const DISCRETE_DAYS = [1, 2, 3, 7, 28];
 
         const STANDARD_PERIODS = [
             { days: 1, labelUa: "1 ДЕНЬ", labelEn: "1 DAY" },
             { days: 2, labelUa: "2 ДНІ", labelEn: "2 DAYS" },
             { days: 3, labelUa: "3 ДНІ", labelEn: "3 DAYS" },
             { days: 7, labelUa: "7 ДНІВ (ТИЖДЕНЬ)", labelEn: "7 DAYS (WEEK)" },
-            { days: 30, labelUa: "30 ДНІВ (МІСЯЦЬ)", labelEn: "30 DAYS (MONTH)" }
+            { days: 28, labelUa: "28 ДНІВ (МІСЯЦЬ)", labelEn: "28 DAYS (MONTH)" }
         ];
 
         let calcState = {
@@ -925,11 +925,11 @@
             } else if (days < 7) {
                 baseCost = tier.total[7];
                 dailyRate = tier.daily[7];
-            } else if (days < 30) {
+            } else if (days < 28) {
                 dailyRate = Math.round(tier.total[7] / 7);
                 baseCost = dailyRate * days;
             } else {
-                dailyRate = Math.round(tier.total[30] / 30);
+                dailyRate = Math.round(tier.total[28] / 28);
                 baseCost = dailyRate * days;
             }
 
@@ -960,8 +960,8 @@
                 const groupKey = getVehicleGroup(key);
                 const tier = TARIFF_TIERS[groupKey];
                 const postfix = isEn 
-                    ? `— from ~${tier.daily[30]} UAH/day (${tier.total[30]} UAH/mo)` 
-                    : `— від ~${tier.daily[30]} грн/доба (${tier.total[30]} грн/міс)`;
+                    ? `— from ~${tier.daily[28]} UAH/day (${tier.total[28]} UAH/mo)` 
+                    : `— від ~${tier.daily[28]} грн/доба (${tier.total[28]} грн/міс)`;
                 opt.textContent = `${item.name} (${item.power}, ${item.volt}) ${postfix}`;
                 select.appendChild(opt);
             });
@@ -1085,7 +1085,7 @@
                 else if (calcState.days === 2) badgeText = isEn ? '2 days' : '2 дні';
                 else if (calcState.days === 3) badgeText = isEn ? '3 days' : '3 дні';
                 else if (calcState.days === 7) badgeText = isEn ? '7 days (week)' : '7 днів (тиждень)';
-                else if (calcState.days === 30) badgeText = isEn ? '30 days (month)' : '30 днів (місяць)';
+                else if (calcState.days === 28 || calcState.days === 30) badgeText = isEn ? '28 days (month)' : '28 днів (місяць)';
                 daysBadge.textContent = badgeText;
             }
         }
@@ -1230,7 +1230,7 @@
                 else if (days === 2) periodText = isEn ? '2 days' : '2 дні';
                 else if (days === 3) periodText = isEn ? '3 days' : '3 дні';
                 else if (days === 7) periodText = isEn ? '7 days (week)' : '7 днів (тиждень)';
-                else if (days === 30) periodText = isEn ? '30 days (month)' : '30 днів (місяць)';
+                else if (days === 28 || days === 30) periodText = isEn ? '28 days (month)' : '28 днів (місяць)';
 
                 document.getElementById('resConfigSummary').textContent = `${model.power} | ${model.volt} | ${periodText}`;
             }
@@ -1257,7 +1257,7 @@
                 else if (days === 2) periodName = isEn ? '2 days' : '2 дні';
                 else if (days === 3) periodName = isEn ? '3 days' : '3 дні';
                 else if (days === 7) periodName = isEn ? '7 days (week)' : '7 днів (тиждень)';
-                else if (days === 30) periodName = isEn ? '30 days (month)' : '30 днів (місяць)';
+                else if (days === 28 || days === 30) periodName = isEn ? '28 days (month)' : '28 днів (місяць)';
 
                 let html = isEn
                     ? `<div class="flex justify-between items-center py-0.5"><span>Rental (${periodName}):</span><span class="font-bold text-[#111827] dark:text-white">${baseRentalCost.toLocaleString('en-US')} UAH</span></div>`

@@ -245,7 +245,8 @@
                 2: { label: "2 ДНІ" },
                 3: { label: "3 ДНІ" },
                 7: { label: "7 ДНІВ (ТИЖДЕНЬ)" },
-                30: { label: "30 ДНІВ (МІСЯЦЬ)" }
+                28: { label: "28 ДНІВ (МІСЯЦЬ)" },
+                30: { label: "28 ДНІВ (МІСЯЦЬ)" }
             },
             addons: {
                 helmet: { title: "ШОЛОМ + ТРИМАЧ ДЛЯ ТЕЛЕФОНУ", desc: "+200 грн", badge: "+200 грн", price: 200 },
@@ -260,7 +261,8 @@
             days_badge_2: "2 дні",
             days_badge_3: "3 дні",
             days_badge_7: "7 днів (тиждень)",
-            days_badge_30: "30 днів (місяць)",
+            days_badge_28: "28 днів (місяць)",
+            days_badge_30: "28 днів (місяць)",
             days_unit: "дн.",
             options_count: "обрано"
         },
@@ -270,7 +272,8 @@
                 2: { label: "2 DAYS" },
                 3: { label: "3 DAYS" },
                 7: { label: "7 DAYS (WEEK)" },
-                30: { label: "30 DAYS (MONTH)" }
+                28: { label: "28 DAYS (MONTH)" },
+                30: { label: "28 DAYS (MONTH)" }
             },
             addons: {
                 helmet: { title: "HELMET + PHONE MOUNT", desc: "+200 UAH", badge: "+200 UAH", price: 200 },
@@ -285,7 +288,8 @@
             days_badge_2: "2 days",
             days_badge_3: "3 days",
             days_badge_7: "7 days (week)",
-            days_badge_30: "30 days (month)",
+            days_badge_28: "28 days (month)",
+            days_badge_30: "28 days (month)",
             days_unit: "days",
             options_count: "selected"
         }

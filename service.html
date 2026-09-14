@@ -48,10 +48,6 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- Leaflet Map CSS & JS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
     <!-- MUVIO Dark Theme -->
     <link rel="stylesheet" href="./dark-theme.css">
 
@@ -443,9 +439,22 @@
                         </p>
                     </div>
 
-                    <!-- Інтерактивна карта Leaflet з точною міткою -->
+                    <!-- Інтерактивна карта з точною міткою Приморська, 22 -->
                     <div class="space-y-1.5">
-                        <div id="map" class="w-full rounded-xl overflow-hidden border border-[#1D5D3B] relative shadow-sm" style="height: 380px; min-height: 380px; z-index: 1;"></div>
+                        <div class="w-full rounded-xl overflow-hidden border border-[#1F2E26] shadow-sm relative" style="height: 380px;">
+                            <iframe 
+                                id="serviceHubMapFrame"
+                                class="service-hub-map w-full h-full"
+                                width="100%" 
+                                height="100%" 
+                                frameborder="0" 
+                                scrolling="no" 
+                                marginheight="0" 
+                                marginwidth="0" 
+                                src="https://www.openstreetmap.org/export/embed.html?bbox=30.72519%2C46.48591%2C30.74519%2C46.49791&amp;layer=mapnik&amp;marker=46.49191%2C30.73519"
+                                style="filter: invert(90%) hue-rotate(180deg) brightness(95%) contrast(90%);">
+                            </iframe>
+                        </div>
                         <div class="flex items-center justify-between text-[11px] text-[#4B5563] font-mono px-0.5">
                             <span class="flex items-center gap-1.5">
                                 <span class="w-2 h-2 rounded-full bg-[#1D5D3B]"></span>
@@ -651,39 +660,6 @@
 
     <!-- ==================== JAVASCRIPT ==================== -->
     <script>
-        // Ініціалізація карти Leaflet з точною точкою на Приморській, 22
-        function initMap() {
-            const mapContainer = document.getElementById('map');
-            if (!mapContainer || mapContainer._leaflet_id || typeof L === 'undefined') return;
-            try {
-                const map = L.map('map', { scrollWheelZoom: false }).setView([46.49191, 30.73519], 16);
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    maxZoom: 19,
-                    attribution: '&copy; OpenStreetMap'
-                }).addTo(map);
-
-                function getPopupContent() {
-                    const isEn = (document.documentElement.getAttribute('lang') === 'en') || (localStorage.getItem('muvio_lang') === 'en');
-                    const street = isEn ? '22 Prymorska Str.' : 'вул. Приморська, 22';
-                    return `<div style="text-align:center;font-family:sans-serif;color:#111;"><b>MUVIO</b><br><span style="font-size:12px;color:#555;">${street}</span></div>`;
-                }
-
-                const marker = L.marker([46.49191, 30.73519]).addTo(map)
-                    .bindPopup(getPopupContent())
-                    .openPopup();
-
-                window.addEventListener('muvio:langchange', () => {
-                    if (marker) {
-                        marker.setPopupContent(getPopupContent());
-                    }
-                });
-
-                setTimeout(() => { map.invalidateSize(); }, 250);
-                window.addEventListener('resize', () => map.invalidateSize());
-            } catch (e) {
-                console.warn('Leaflet map error:', e);
-            }
-        }
 
         // Мобільне меню
         const burgerBtn = document.getElementById('burger-btn') || document.querySelector('[data-burger]') || document.getElementById('mobileMenuBtn');
@@ -732,7 +708,6 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             updateHeaderUserName();
-            try { initMap(); } catch (e) { console.error('Map init error:', e); }
             try {
                 if (window.lucide) {
                     window.lucide.createIcons();

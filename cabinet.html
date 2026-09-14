@@ -1311,10 +1311,15 @@
             const lower = str.toLowerCase();
             let unitUa = 'тиждень';
             let unitEn = 'week';
-            if (lower.includes('місяць') || lower.includes('міс') || lower.includes('month')) {
+
+            // Check week / тиждень first to avoid matching "день" inside "тиждень"!
+            if (lower.includes('тиждень') || lower.includes('тиж') || lower.includes('week') || numVal === 2200) {
+                unitUa = 'тиждень';
+                unitEn = 'week';
+            } else if (lower.includes('місяць') || lower.includes('міс') || lower.includes('month') || numVal >= 6000) {
                 unitUa = 'місяць';
                 unitEn = 'month';
-            } else if (lower.includes('доба') || lower.includes('день') || lower.includes('day')) {
+            } else if (lower.includes('доба') || lower.includes('доб') || /\bдень\b/.test(lower) || /\bdays?\b/.test(lower)) {
                 unitUa = 'доба';
                 unitEn = 'day';
             }
