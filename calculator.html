@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0F1411">
     <title>Калькулятор оренди скутера та електробайка | MUVIO RENT</title>
     <meta name="description"
         content="Розрахуйте вартість оренди електроскутера або електровелосипеда в Одесі. Гнучкі тарифи від 1 до 30+ днів, опції та моментальне бронювання. MUVIO Rent.">
@@ -94,20 +95,20 @@
     <!-- ==================== ПРЕЛОАДЕР MUVIO ==================== -->
     <div id="page-preloader" class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#0A0D0C] transition-opacity duration-300">
         <div class="preloader-logo-wrap animate-pulse mb-3">
-            <!-- Точный родной SVG-логотип MUVIO изумрудного цвета #00E676 -->
-            <svg class="w-16 h-16 text-[#00E676] glow-breathe" viewBox="0 0 100 100" fill="currentColor">
+            <!-- Точный родной SVG-логотип MUVIO изумрудного цвета #00C853 -->
+            <svg class="w-16 h-16 text-[#00C853] glow-breathe" viewBox="0 0 100 100" fill="currentColor">
                 <path d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z"/>
             </svg>
         </div>
         <div class="text-center">
             <div class="text-white font-bold tracking-widest text-lg">MUVIO</div>
-            <div class="text-[#00E676] text-[10px] tracking-[0.25em] uppercase font-semibold">
+            <div class="text-[#00C853] text-[10px] tracking-[0.25em] uppercase font-semibold">
                 <span class="lang-ua">ТВОЄ ELECTRO CITY</span>
                 <span class="lang-en">YOUR ELECTRO CITY</span>
             </div>
         </div>
         <div class="w-28 h-0.5 bg-[#1F2E26] rounded-full mt-4 overflow-hidden relative">
-            <div class="preloader-bar-line absolute left-0 top-0 h-full w-1/2 bg-[#00E676]"></div>
+            <div class="preloader-bar-line absolute left-0 top-0 h-full w-1/2 bg-[#00C853]"></div>
         </div>
     </div>
 
@@ -657,7 +658,7 @@
                 <div class="space-y-4">
                     <div class="flex items-center gap-3">
                         <div class="header-logo-wrap flex items-center justify-center shrink-0">
-                            <svg class="w-10 h-10 text-[#00E676]" viewBox="0 0 100 100" fill="currentColor">
+                            <svg class="w-10 h-10 text-[#00C853]" viewBox="0 0 100 100" fill="currentColor">
                                 <path d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z"/>
                             </svg>
                         </div>
@@ -767,14 +768,14 @@
                 daily: { 1: 1000, 2: 900, 3: 800, 7: Math.round(2500 / 7), 28: Math.round(8500 / 28), 30: Math.round(8500 / 30) },
                 deposit: 4500
             },
-            groupB: { // Стандартні скутери (Aima F606 №1/№2, A700, Leopard, A715, Mine та ін.)
+            groupB: { // Стандартні скутери (Aima F606 №1/№2, A700, Leopard, A715, Mine, Like Bike N5 та ін.)
                 nameUa: "Стандартні скутери",
                 nameEn: "Standard Scooters",
                 total: { 1: 900, 2: 1600, 3: 2100, 7: 2200, 28: 8000, 30: 8000 },
                 daily: { 1: 900, 2: 800, 3: 700, 7: Math.round(2200 / 7), 28: Math.round(8000 / 28), 30: Math.round(8000 / 30) },
                 deposit: 4000
             },
-            groupC: { // Електровелосипеди (Like Bike Bruiser, Like Bike N5, ADO A20F+)
+            groupC: { // Електровелосипеди (Like Bike Bruiser, ADO A20F+)
                 nameUa: "Електровелосипеди",
                 nameEn: "E-Bikes",
                 total: { 1: 800, 2: 1500, 3: 1800, 7: 1800, 28: 6000, 30: 6000 },
@@ -787,7 +788,7 @@
             if (!modelKey) return 'groupA';
             const k = modelKey.toLowerCase();
             if (k.startsWith('crosser')) return 'groupA';
-            if (k.includes('bruiser') || k.includes('bruser') || k.includes('ado') || k.includes('like-bike-n5') || k.includes('like_bike_n5')) {
+            if (k.includes('bruiser') || k.includes('bruser') || k.includes('ado')) {
                 return 'groupC';
             }
             return 'groupB';
@@ -877,7 +878,7 @@
                 power: "1000W", volt: "60V", type: "🛵 Скутер",
                 image: "images/like-bike-n5.jpg",
                 badge: "МАНЕВРЕНИЙ",
-                group: "groupC"
+                group: "groupB"
             },
             "like-bike-bruser-1": {
                 name: "Like Bike Bruiser №1",

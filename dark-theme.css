@@ -83,12 +83,23 @@ html.theme-dark .border-gray-200 {
 
 /* 3. Header, Mobile Menu & Sticky Drawers */
 html.theme-dark header,
+html.theme-dark header.sticky {
+    background: rgba(15, 20, 17, 0.88) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    border-bottom: 1px solid rgba(31, 46, 38, 0.7) !important;
+}
+
 html.theme-dark #mobileMenu,
+html.theme-dark #mobile-menu,
+html.theme-dark [data-mobile-menu="true"],
 html.theme-dark [class*="bg-white/95"],
 html.theme-dark [class*="bg-white/90"],
 html.theme-dark [class*="bg-white/80"] {
-    background-color: rgba(0, 0, 0, 0.98) !important;
-    border-color: #222222 !important;
+    background-color: rgba(15, 20, 17, 0.94) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    border-color: rgba(31, 46, 38, 0.7) !important;
 }
 
 /* Header Seamless Vector Logo (Transparent, No White Square) */
@@ -100,7 +111,9 @@ html.theme-dark [class*="bg-white/80"] {
 }
 
 .header-logo-wrap svg {
-    color: #1D5D3B;
+    color: #1D5D3B !important;
+    fill: currentColor !important;
+    transition: color 0.25s ease, filter 0.25s ease;
 }
 
 html.theme-dark .header-logo-wrap {
@@ -110,8 +123,9 @@ html.theme-dark .header-logo-wrap {
 }
 
 html.theme-dark .header-logo-wrap svg {
-    color: #00E676 !important;
-    filter: drop-shadow(0 0 8px rgba(0, 230, 118, 0.45));
+    color: #00C853 !important;
+    fill: #00C853 !important;
+    filter: drop-shadow(0 0 6px rgba(0, 200, 83, 0.25)) !important;
 }
 
 html.theme-dark a .header-logo-wrap + div > span:first-child {

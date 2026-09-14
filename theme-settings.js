@@ -388,9 +388,11 @@
         const btnLight = document.getElementById('themeBtnLight');
         const btnDark = document.getElementById('themeBtnDark');
         const badge = document.getElementById('currentThemeBadge');
+        const metaThemeColor = document.querySelector('meta[name="theme-color"]');
 
         if (theme === 'dark') {
             document.documentElement.classList.add('theme-dark');
+            if (metaThemeColor) metaThemeColor.setAttribute('content', '#0F1411');
             if (badge) badge.textContent = 'DARK';
             if (btnDark) {
                 btnDark.className = 'py-2 px-3 text-xs font-brand font-bold uppercase tracking-wider chamfer-badge flex items-center justify-center gap-1.5 transition-all bg-[#1D5D3B] text-white';
@@ -400,6 +402,7 @@
             }
         } else {
             document.documentElement.classList.remove('theme-dark');
+            if (metaThemeColor) metaThemeColor.setAttribute('content', '#FFFFFF');
             if (badge) badge.textContent = 'LIGHT';
             if (btnLight) {
                 btnLight.className = 'py-2 px-3 text-xs font-brand font-bold uppercase tracking-wider chamfer-badge flex items-center justify-center gap-1.5 transition-all bg-[#1D5D3B] text-white';
