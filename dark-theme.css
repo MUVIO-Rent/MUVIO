@@ -177,12 +177,17 @@ html.theme-dark #calcTelegramBtn:hover {
     box-shadow: 0 6px 20px rgba(36, 117, 74, 0.6) !important;
 }
 
-/* Active Status Badges */
+/* Active Status Badges & Payment Status Badges */
 html.theme-dark #rentalStatusBadge,
+html.theme-dark #userStatusBadge[data-status="active"],
+html.theme-dark .badge-status-active,
+html.theme-dark .badge-status-paid,
+html.theme-dark [data-status="active"],
+html.theme-dark [data-status="paid"],
 html.theme-dark .badge-green {
-    background-color: rgba(16, 185, 129, 0.2) !important;
-    color: #10B981 !important;
-    border-color: rgba(16, 185, 129, 0.4) !important;
+    background-color: #131A16 !important;
+    color: #00E676 !important;
+    border: 1px solid rgba(29, 93, 59, 0.6) !important;
 }
 
 /* Price Highlights */
@@ -565,5 +570,15 @@ html.theme-dark #cabinet-btn-breakdown i,
 html.theme-dark #cabinet-btn-breakdown svg {
     color: #F87171 !important;
 }
+
+/* 18. Fix Status Badges in Cabinet (Blackout active & paid badges) */
+html.theme-dark .badge-status-active,
+html.theme-dark [data-status="active"],
+html.theme-dark [data-status="paid"] {
+    background-color: #131A16 !important;
+    color: #00E676 !important;
+    border: 1px solid rgba(29, 93, 59, 0.6) !important;
+}
+
 
 

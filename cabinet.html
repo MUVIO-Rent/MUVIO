@@ -531,7 +531,7 @@
                         </div>
                         <div class="mt-2" id="userStatusBadgeWrap">
                             <span id="userStatusBadge" class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-100 text-slate-600 font-brand font-bold text-xs uppercase tracking-wider chamfer-badge">
-                                <span class="w-2 h-2 bg-slate-400 rounded-full"></span>
+                                <span id="userStatusDot" class="w-2 h-2 bg-slate-400 rounded-full"></span>
                                 <span id="userStatusText">Немає активної техніки в оренді</span>
                             </span>
                         </div>
@@ -610,7 +610,7 @@
                                     Aima F606 №1
                                 </h3>
                                 <span id="rentalStatusBadge"
-                                    class="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-100 text-emerald-800 font-brand font-bold text-xs uppercase tracking-wider chamfer-badge">
+                                    class="badge-status-active inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-[#1D5D3B] border border-emerald-200 font-brand font-bold text-xs uppercase tracking-wider chamfer-badge" data-status="active">
                                     <span class="w-2 h-2 bg-[#10B981] rounded-full pulse-emerald"></span>
                                     <span id="rentalStatusText">
                                         <span class="lang-ua">АКТИВНА ОРЕНДА</span>
@@ -1950,18 +1950,31 @@
             // Статус користувача в бейджі
             const statusBadge = document.getElementById('userStatusBadge');
             const statusText = document.getElementById('userStatusText');
+            const dotEl = document.getElementById('userStatusDot');
 
             const hasRental = Boolean(rental);
             const hasBuyout = Boolean(buyout);
 
             if (hasRental) {
-                statusBadge.className = 'inline-flex items-center gap-1.5 px-2.5 py-1 bg-emerald-100 text-emerald-800 font-brand font-bold text-xs uppercase tracking-wider chamfer-badge';
-                statusText.innerHTML = '<span class="w-2 h-2 bg-[#10B981] rounded-full pulse-emerald inline-block mr-1"></span>АКТИВНА ОРЕНДА';
+                statusBadge.className = 'badge-status-active inline-flex items-center gap-1.5 px-2.5 py-1 bg-emerald-50 text-[#1D5D3B] border border-emerald-200 font-brand font-bold text-xs uppercase tracking-wider chamfer-badge';
+                statusBadge.setAttribute('data-status', 'active');
+                if (dotEl) {
+                    dotEl.className = 'w-2 h-2 bg-[#10B981] rounded-full pulse-emerald';
+                }
+                statusText.textContent = 'АКТИВНА ОРЕНДА';
             } else if (hasBuyout) {
-                statusBadge.className = 'inline-flex items-center gap-1.5 px-2.5 py-1 bg-emerald-100 text-emerald-800 font-brand font-bold text-xs uppercase tracking-wider chamfer-badge';
-                statusText.innerHTML = '<span class="w-2 h-2 bg-[#10B981] rounded-full pulse-emerald inline-block mr-1"></span>АКТИВНИЙ ВИКУП';
+                statusBadge.className = 'badge-status-active inline-flex items-center gap-1.5 px-2.5 py-1 bg-emerald-50 text-[#1D5D3B] border border-emerald-200 font-brand font-bold text-xs uppercase tracking-wider chamfer-badge';
+                statusBadge.setAttribute('data-status', 'active');
+                if (dotEl) {
+                    dotEl.className = 'w-2 h-2 bg-[#10B981] rounded-full pulse-emerald';
+                }
+                statusText.textContent = 'АКТИВНИЙ ВИКУП';
             } else {
-                statusBadge.className = 'inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-100 text-slate-600 font-brand font-bold text-xs uppercase tracking-wider chamfer-badge';
+                statusBadge.className = 'inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-100 text-slate-600 border border-slate-200 font-brand font-bold text-xs uppercase tracking-wider chamfer-badge';
+                statusBadge.removeAttribute('data-status');
+                if (dotEl) {
+                    dotEl.className = 'w-2 h-2 bg-slate-400 rounded-full';
+                }
                 statusText.textContent = 'Немає активної техніки в оренді';
             }
 
@@ -2081,7 +2094,7 @@
                         <td class="p-3 font-medium text-slate-800">${p.purpose}</td>
                         <td class="p-3 font-bold text-[#1D5D3B]">${p.amount}</td>
                         <td class="p-3 text-slate-500">${p.bonus || '0 ₴'}</td>
-                        <td class="p-3"><span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 text-[10px] font-brand font-bold uppercase chamfer-badge">${p.status || 'Зараховано'}</span></td>
+                        <td class="p-3"><span class="badge-status-paid inline-flex items-center px-2.5 py-1 bg-emerald-50 text-[#1D5D3B] border border-emerald-200 rounded text-xs font-semibold font-brand uppercase tracking-wider" data-status="paid">${p.status || 'Оплачено'}</span></td>
                     `;
                     paymentsBody.appendChild(tr);
                 });
@@ -2107,7 +2120,7 @@
                         <td class="p-3 font-medium text-slate-800">${r.title || r.description}</td>
                         <td class="p-3 text-slate-600">${r.category || 'ТО'}</td>
                         <td class="p-3 font-bold text-emerald-700">${r.cost || '0 ₴'}</td>
-                        <td class="p-3"><span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 text-[10px] font-brand font-bold uppercase chamfer-badge">${r.status || 'За рахунок MUVIO'}</span></td>
+                        <td class="p-3"><span class="badge-status-paid inline-flex items-center px-2.5 py-1 bg-emerald-50 text-[#1D5D3B] border border-emerald-200 rounded text-xs font-semibold font-brand uppercase tracking-wider" data-status="paid">${r.status || 'За рахунок MUVIO'}</span></td>
                     `;
                     repairsBody.appendChild(tr);
                 });
