@@ -511,4 +511,59 @@ html.theme-dark #mobileMenu a:hover {
     will-change: transform;
 }
 
+/* 16. Header Action Icons (Profile & Gear) in Dark Theme */
+html.theme-dark a[title="Особистий кабінет"],
+html.theme-dark a[title="Особистий кабінет"] svg,
+html.theme-dark a[title="Особистий кабінет"] span,
+html.theme-dark #settingsBtn,
+html.theme-dark #settingsBtn svg,
+html.theme-dark #settingsBtn span {
+    color: #E5E7EB !important;
+}
+
+html.theme-dark a[title="Особистий кабінет"]:hover,
+html.theme-dark a[title="Особистий кабінет"]:hover svg,
+html.theme-dark a[title="Особистий кабінет"]:hover span,
+html.theme-dark #settingsBtn:hover,
+html.theme-dark #settingsBtn:hover svg,
+html.theme-dark #settingsBtn:hover span {
+    color: #00E676 !important;
+}
+
+/* 17. Cabinet Rental Control Buttons */
+html.theme-dark #cabinet-btn-pay {
+    background-color: #1D5D3B !important;
+    color: #FFFFFF !important;
+    border: 1px solid #2e8556 !important;
+}
+html.theme-dark #cabinet-btn-pay:hover {
+    background-color: #236e46 !important;
+}
+
+html.theme-dark #cabinet-btn-buyout {
+    background-color: #121815 !important;
+    color: #00E676 !important;
+    border-color: rgba(29, 93, 59, 0.7) !important;
+}
+html.theme-dark #cabinet-btn-buyout:hover {
+    background-color: #18221d !important;
+}
+html.theme-dark #cabinet-btn-buyout i,
+html.theme-dark #cabinet-btn-buyout svg {
+    color: #00E676 !important;
+}
+
+html.theme-dark #cabinet-btn-breakdown {
+    background-color: #161111 !important;
+    color: #F87171 !important;
+    border-color: rgba(239, 68, 68, 0.4) !important;
+}
+html.theme-dark #cabinet-btn-breakdown:hover {
+    background-color: rgba(69, 10, 10, 0.4) !important;
+}
+html.theme-dark #cabinet-btn-breakdown i,
+html.theme-dark #cabinet-btn-breakdown svg {
+    color: #F87171 !important;
+}
+
 
