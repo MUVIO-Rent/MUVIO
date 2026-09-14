@@ -1,12 +1,12 @@
 /* ==========================================================================
    MUVIO — GLOBAL BASE STYLES & TYPOGRAPHY
-   Chakra Petch for Headlines, Clean Grotesque for Body
+   Original Native System Typography (-apple-system, BlinkMacSystemFont, "SF Pro Display", etc.)
    ========================================================================== */
 
-/* 1. Base readable grotesque for small text
-      (paragraphs, spec descriptions, FAQ, rental terms, forms) */
+/* 1. Base Document Canvas & All Text */
 html,
 body,
+*,
 p,
 ul,
 ol,
@@ -19,57 +19,51 @@ table,
 td,
 th,
 .font-sans,
-[class*="font-sans"] {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
-}
-
-/* 2. Headings (h2, h3, catalog model names, logo in text, badges) */
-h2,
-h3,
+[class*="font-sans"],
 .font-brand,
 [class*="font-brand"],
+button,
+.chamfer-btn,
 .chamfer-badge,
 [class*="chamfer-badge"],
 .badge,
-.header-logo-text,
-.preloader-brand-title,
+nav a,
+.mobile-nav-link {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", sans-serif !important;
+}
+
+/* 2. Headings (h1, h2, h3, .hero-title, catalog model names) */
+h1,
+h2,
+h3,
+.hero-title,
 [id*="catalog"] h3,
 .catalog-card-title {
-    font-family: 'Chakra Petch', sans-serif !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.04em !important;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", sans-serif !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.02em !important;
 }
 
-/* Specific styling for H1 / Hero (Sentence case, bold, premium) */
+/* Specific styling for H1 / Hero */
 h1,
 .hero-title {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
-    text-transform: none !important;
-    letter-spacing: -0.025em !important;
     font-weight: 800 !important;
+    letter-spacing: -0.02em !important;
+    text-transform: none !important;
 }
 
-/* Specific styling for H2 */
-h2 {
-    font-family: 'Chakra Petch', sans-serif !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.04em !important;
-    font-weight: 700 !important;
-}
-
-/* Specific styling for H3 / Catalog model names */
+/* Specific styling for H2, H3 */
+h2,
 h3 {
-    font-family: 'Chakra Petch', sans-serif !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.04em !important;
-    font-weight: 700 !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.02em !important;
 }
 
-/* Logo in text & Preloader */
-a[aria-label*="MUVIO"] span.font-brand,
+/* Brand Name in header/preloader */
+.header-logo-text,
 .preloader-brand-title,
-.header-logo-text {
-    font-family: 'Chakra Petch', sans-serif !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.04em !important;
+a[aria-label*="MUVIO"] span.font-brand {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", sans-serif !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.05em !important;
 }
