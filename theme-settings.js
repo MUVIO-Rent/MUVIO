@@ -242,10 +242,10 @@
         ua: {
             pills: {
                 1: { label: "1 ДЕНЬ", sub: "доба" },
-                3: { label: "3 ДНІ", sub: "вікенд" },
-                7: { label: "7 ДНІВ", sub: "тиждень" },
-                14: { label: "14 ДНІВ", sub: "2 тижні" },
-                30: { label: "30 ДНІВ", sub: "місяць" }
+                2: { label: "2 ДНІ", sub: "2 доби" },
+                3: { label: "3 ДНІ (ВІКЕНД)", sub: "вікенд" },
+                7: { label: "7 ДНІВ (ТИЖДЕНЬ)", sub: "тиждень" },
+                30: { label: "30 ДНІВ (МІСЯЦЬ)", sub: "місяць" }
             },
             addons: {
                 helmet: { title: "ШОЛОМ + ТРИМАЧ", desc: "+0 грн / включено", badge: "Включено" },
@@ -255,21 +255,22 @@
             tg_btn: "НАДІСЛАТИ ЗАЯВКУ В TELEGRAM ({price} ГРН)",
             tg_btn_base: "НАДІСЛАТИ ЗАЯВКУ В TELEGRAM",
             rate_unit: "грн/доба",
-            rate_day_pill: "грн/д",
-            days_badge_1: "1 доба",
-            days_badge_7: "тиждень",
-            days_badge_14: "2 тижні",
-            days_badge_30: "місяць",
+            rate_day_pill: "грн/доба",
+            days_badge_1: "1 день (доба)",
+            days_badge_2: "2 дні",
+            days_badge_3: "3 дні (вікенд)",
+            days_badge_7: "7 днів (тиждень)",
+            days_badge_30: "30 днів (місяць)",
             days_unit: "дн.",
             options_count: "обрано"
         },
         en: {
             pills: {
                 1: { label: "1 DAY", sub: "day" },
-                3: { label: "3 DAYS", sub: "weekend" },
-                7: { label: "7 DAYS", sub: "week" },
-                14: { label: "14 DAYS", sub: "2 weeks" },
-                30: { label: "30 DAYS", sub: "month" }
+                2: { label: "2 DAYS", sub: "2 days" },
+                3: { label: "3 DAYS (WEEKEND)", sub: "weekend" },
+                7: { label: "7 DAYS (WEEK)", sub: "week" },
+                30: { label: "30 DAYS (MONTH)", sub: "month" }
             },
             addons: {
                 helmet: { title: "HELMET + PHONE MOUNT", desc: "+0 UAH / included", badge: "Included" },
@@ -279,11 +280,12 @@
             tg_btn: "SEND APPLICATION TO TELEGRAM ({price} UAH)",
             tg_btn_base: "SEND APPLICATION TO TELEGRAM",
             rate_unit: "UAH/day",
-            rate_day_pill: "UAH/d",
-            days_badge_1: "1 day",
-            days_badge_7: "week",
-            days_badge_14: "2 weeks",
-            days_badge_30: "month",
+            rate_day_pill: "UAH/day",
+            days_badge_1: "1 day (day)",
+            days_badge_2: "2 days",
+            days_badge_3: "3 days (weekend)",
+            days_badge_7: "7 days (week)",
+            days_badge_30: "30 days (month)",
             days_unit: "days",
             options_count: "selected"
         }
