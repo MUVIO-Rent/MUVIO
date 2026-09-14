@@ -613,7 +613,7 @@
                                 </span>
                                 <div class="flex items-center gap-1.5">
                                     <span id="modelTypeBadge"
-                                        class="text-xs font-mono font-bold px-2 py-0.5 bg-emerald-50 text-[#1D5D3B] border border-[#1D5D3B]/40 chamfer-badge">
+                                        class="text-xs font-mono font-bold px-2 py-0.5 bg-[#131A16] text-[#00E676] border border-[#1D5D3B]/60 chamfer-badge">
                                         <span class="lang-ua">🛵 Скутер</span>
                                         <span class="lang-en">🛵 Scooter</span>
                                     </span>
@@ -660,7 +660,7 @@
 
                             <!-- Кнопки швидкого вибору періоду: рівно 5 фіксованих кнопок -->
                             <div class="grid grid-cols-2 sm:grid-cols-5 gap-2" id="durationPillsContainer">
-                                <!-- Опції генеруються JS: [1 ДЕНЬ] [2 ДНІ] [3 ДНІ (ВІКЕНД)] [7 ДНІВ (ТИЖДЕНЬ)] [30 ДНІВ (МІСЯЦЬ)] -->
+                                <!-- Опції генеруються JS: [1 ДЕНЬ] [2 ДНІ] [3 ДНІ] [7 ДНІВ (ТИЖДЕНЬ)] [30 ДНІВ (МІСЯЦЬ)] -->
                             </div>
 
                             <!-- Додатковий слайдер для дискретного вибору [1, 2, 3, 7, 30] з блокуванням 4-6 днів -->
@@ -772,10 +772,6 @@
                                         class="font-brand font-bold text-2xl sm:text-3xl text-[#1D5D3B] mt-0.5">
                                         2 000 грн
                                     </div>
-                                    <div class="text-[11px] text-[#4B5563] mt-0.5">
-                                        <span class="lang-ua">Або <b>без застави</b> за умови верифікації через сервіс Дія</span>
-                                        <span class="lang-en">Or <b>no deposit</b> with Diia service identity verification</span>
-                                    </div>
                                 </div>
 
                                 <!-- Деталізація вартості -->
@@ -842,15 +838,15 @@
                     <div class="p-3.5 bg-[#F8FAFC] border border-[#1D5D3B]/30 chamfer-box">
                         <div
                             class="font-brand font-bold text-xs uppercase text-[#1D5D3B] flex items-center gap-1.5 mb-1">
-                            <i data-lucide="shield-check" class="w-4 h-4"></i>
+                            <i data-lucide="file-text" class="w-4 h-4"></i>
                             <span>
-                                <span class="lang-ua">3. ДІЯ БЕЗ ЗАСТАВИ</span>
-                                <span class="lang-en">3. DIIA NO DEPOSIT</span>
+                                <span class="lang-ua">3. ОФІЦІЙНИЙ ДОГОВІР</span>
+                                <span class="lang-en">3. OFFICIAL CONTRACT</span>
                             </span>
                         </div>
                         <p class="text-xs text-[#4B5563] leading-relaxed">
-                            <span class="lang-ua">Пройдіть швидку верифікацію документів через Дію перед отриманням ключів та користуйтесь транспортом без внесення грошової застави.</span>
-                            <span class="lang-en">Complete quick ID verification via Diia before receiving keys to ride without paying a cash security deposit.</span>
+                            <span class="lang-ua">Прозорий договір оренди та акт прийому-передачі техніки.</span>
+                            <span class="lang-en">Transparent lease agreement and vehicle transfer acceptance act.</span>
                         </p>
                     </div>
                 </div>
@@ -1478,7 +1474,7 @@
         const STANDARD_PERIODS = [
             { days: 1, labelUa: "1 ДЕНЬ", labelEn: "1 DAY" },
             { days: 2, labelUa: "2 ДНІ", labelEn: "2 DAYS" },
-            { days: 3, labelUa: "3 ДНІ (ВІКЕНД)", labelEn: "3 DAYS (WEEKEND)" },
+            { days: 3, labelUa: "3 ДНІ", labelEn: "3 DAYS" },
             { days: 7, labelUa: "7 ДНІВ (ТИЖДЕНЬ)", labelEn: "7 DAYS (WEEK)" },
             { days: 30, labelUa: "30 ДНІВ (МІСЯЦЬ)", labelEn: "30 DAYS (MONTH)" }
         ];
@@ -1860,7 +1856,7 @@
                 let badgeText = `${calcState.days} ${isEn ? 'days' : 'дн.'}`;
                 if (calcState.days === 1) badgeText = isEn ? '1 day (day)' : '1 день (доба)';
                 else if (calcState.days === 2) badgeText = isEn ? '2 days' : '2 дні';
-                else if (calcState.days === 3) badgeText = isEn ? '3 days (weekend)' : '3 дні (вікенд)';
+                else if (calcState.days === 3) badgeText = isEn ? '3 days' : '3 дні';
                 else if (calcState.days === 7) badgeText = isEn ? '7 days (week)' : '7 днів (тиждень)';
                 else if (calcState.days === 30) badgeText = isEn ? '30 days (month)' : '30 днів (місяць)';
                 daysBadge.textContent = badgeText;
@@ -2005,7 +2001,7 @@
                 let periodText = `${days} ${isEn ? 'days' : 'дн.'}`;
                 if (days === 1) periodText = isEn ? '1 day (day)' : '1 день (доба)';
                 else if (days === 2) periodText = isEn ? '2 days' : '2 дні';
-                else if (days === 3) periodText = isEn ? '3 days (weekend)' : '3 дні (вікенд)';
+                else if (days === 3) periodText = isEn ? '3 days' : '3 дні';
                 else if (days === 7) periodText = isEn ? '7 days (week)' : '7 днів (тиждень)';
                 else if (days === 30) periodText = isEn ? '30 days (month)' : '30 днів (місяць)';
 
@@ -2032,7 +2028,7 @@
                 let periodName = `${days} ${isEn ? 'days' : 'дн.'}`;
                 if (days === 1) periodName = isEn ? '1 day' : '1 доба';
                 else if (days === 2) periodName = isEn ? '2 days' : '2 дні';
-                else if (days === 3) periodName = isEn ? '3 days (weekend)' : '3 дні (вікенд)';
+                else if (days === 3) periodName = isEn ? '3 days' : '3 дні';
                 else if (days === 7) periodName = isEn ? '7 days (week)' : '7 днів (тиждень)';
                 else if (days === 30) periodName = isEn ? '30 days (month)' : '30 днів (місяць)';
 

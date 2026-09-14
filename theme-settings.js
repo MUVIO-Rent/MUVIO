@@ -243,7 +243,7 @@
             pills: {
                 1: { label: "1 ДЕНЬ" },
                 2: { label: "2 ДНІ" },
-                3: { label: "3 ДНІ (ВІКЕНД)" },
+                3: { label: "3 ДНІ" },
                 7: { label: "7 ДНІВ (ТИЖДЕНЬ)" },
                 30: { label: "30 ДНІВ (МІСЯЦЬ)" }
             },
@@ -258,7 +258,7 @@
             rate_day_pill: "грн/доба",
             days_badge_1: "1 день (доба)",
             days_badge_2: "2 дні",
-            days_badge_3: "3 дні (вікенд)",
+            days_badge_3: "3 дні",
             days_badge_7: "7 днів (тиждень)",
             days_badge_30: "30 днів (місяць)",
             days_unit: "дн.",
@@ -268,7 +268,7 @@
             pills: {
                 1: { label: "1 DAY" },
                 2: { label: "2 DAYS" },
-                3: { label: "3 DAYS (WEEKEND)" },
+                3: { label: "3 DAYS" },
                 7: { label: "7 DAYS (WEEK)" },
                 30: { label: "30 DAYS (MONTH)" }
             },
@@ -283,7 +283,7 @@
             rate_day_pill: "UAH/day",
             days_badge_1: "1 day (day)",
             days_badge_2: "2 days",
-            days_badge_3: "3 days (weekend)",
+            days_badge_3: "3 days",
             days_badge_7: "7 days (week)",
             days_badge_30: "30 days (month)",
             days_unit: "days",
