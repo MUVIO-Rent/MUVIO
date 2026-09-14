@@ -350,11 +350,11 @@ html.theme-dark .bg-\[\#1D5D3B\].rounded-full {
     box-shadow: 0 0 10px rgba(16, 185, 129, 0.7) !important;
 }
 
-/* 13. Safari / macOS Scroll Smoothness & Hardware Acceleration */
-/* Smooth mobile & Safari scrolling */
+/* 13. Safari / iOS / macOS 120Hz ProMotion Native Scroll Engine & GPU Acceleration */
 html, body {
-    scroll-behavior: smooth !important;
     -webkit-overflow-scrolling: touch !important;
+    scroll-behavior: auto !important;
+    overscroll-behavior-y: none;
 }
 
 /* Strictly no universal transitions that cause reflow/jank on scroll */
@@ -363,10 +363,17 @@ html, body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* Remove all heavy card box-shadows that cause scroll lag, use crisp border #1F2E26 */
+/* Completely disable hover effects & repaint/reflow triggers while finger/pointer scrolls */
+body.is-scrolling,
+body.is-scrolling * {
+    pointer-events: none !important;
+}
+
+/* Clean static borders without blur, heavy shadows or outlines */
 html.theme-dark .tech-card,
 html.theme-dark .chamfer-box,
 html.theme-dark .card,
+html.theme-dark .product-card,
 html.theme-dark section .shadow-sm,
 html.theme-dark section .shadow-md,
 html.theme-dark section .shadow-lg,
@@ -374,12 +381,15 @@ html.theme-dark section .shadow-xl,
 html.theme-dark section .shadow-2xl,
 html.theme-dark section [class*="shadow-"] {
     box-shadow: none !important;
+    outline: none !important;
     border: 1px solid #1F2E26 !important;
 }
 
 html.theme-dark .tech-card:hover,
-html.theme-dark .chamfer-box:hover {
+html.theme-dark .chamfer-box:hover,
+html.theme-dark .product-card:hover {
     box-shadow: none !important;
+    outline: none !important;
     border-color: #2D4A3A !important;
 }
 
@@ -399,16 +409,24 @@ header.sticky {
     backdrop-filter: blur(12px) !important;
 }
 
-/* Hardware acceleration on main layout containers and scroll sections */
+/* GPU Hardware Composite Acceleration (120 FPS Video Layer) */
+.product-card,
+.catalog-grid,
+#catalogGrid,
 main,
 section,
+header,
 .scroll-section,
 .tech-card,
-.chamfer-box {
-    will-change: transform;
-    -webkit-transform: translateZ(0);
+.chamfer-box,
+#calculator {
     transform: translateZ(0);
+    -webkit-transform: translateZ(0);
     backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    perspective: 1000;
+    -webkit-perspective: 1000;
+    will-change: transform;
 }
 
 /* 14. Header Action Buttons (Profile, Settings, Burger) - Strictly In-Place Behavior (No lateral shifts) */

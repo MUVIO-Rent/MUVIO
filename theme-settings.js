@@ -680,7 +680,21 @@
     });
 
     // --------------------------------------------------------------------------
-    // 10. CROSS-TAB SYNCHRONIZATION
+    // 10. HIGH-PERFORMANCE 120Hz PROMOTION SCROLL ENGINE (Repaint/Reflow Suppressor)
+    // --------------------------------------------------------------------------
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+        if (!document.body.classList.contains('is-scrolling')) {
+            document.body.classList.add('is-scrolling');
+        }
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            document.body.classList.remove('is-scrolling');
+        }, 120);
+    }, { passive: true });
+
+    // --------------------------------------------------------------------------
+    // 11. CROSS-TAB SYNCHRONIZATION
     // --------------------------------------------------------------------------
     window.addEventListener('storage', (e) => {
         if (e.key === 'muvio_site_settings' || e.key === 'muvio_lang') {
