@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MUVIO — Каталог техніки в наявності | Оренда та викуп електротранспорту в Одесі</title>
+    <title>MUVIO — Каталог техніки в наявності | Оренда електротранспорту в Одесі</title>
     <meta name="description"
-        content="Офіційний автопарк MUVIO: електроскутери та велосипеди у зборі з АКБ та зарядним пристроєм. Реальні тарифи оренди та повної вартості викупу.">
+        content="Офіційний автопарк MUVIO: електроскутери та велосипеди у зборі з АКБ та зарядним пристроєм. Реальні тарифи оренди.">
 
     <!-- Google Fonts: Chakra Petch & Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -383,8 +383,8 @@
                         <span class="lang-en">AVAILABLE FLEET CATALOG</span>
                     </h2>
                     <p class="text-sm sm:text-base text-[#4B5563] mt-1">
-                        <span class="lang-ua">Всі моделі укомплектовані знімним АКБ та зарядним пристроєм. Реальні тарифи оренди та повної вартості викупу.</span>
-                        <span class="lang-en">All models equipped with removable battery & charger. Verified rental rates and full buyout cost.</span>
+                        <span class="lang-ua">Всі моделі укомплектовані знімним АКБ та зарядним пристроєм. Реальні тарифи оренди.</span>
+                        <span class="lang-en">All models equipped with removable battery & charger. Verified rental rates.</span>
                     </p>
                 </div>
 
@@ -507,8 +507,8 @@
 
             <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-emerald-200 gap-4 font-mono">
                 <div>
-                    <span class="lang-ua">© 2026 MUVIO Rent & Buyout. Одеса, вул. Приморська, 22.</span>
-                    <span class="lang-en">© 2026 MUVIO Rent & Buyout. Odesa, Prymorska St, 22.</span>
+                    <span class="lang-ua">© 2026 MUVIO Rent. Одеса, вул. Приморська, 22.</span>
+                    <span class="lang-en">© 2026 MUVIO Rent. Odesa, 22 Prymorska Str.</span>
                 </div>
                 <div class="text-[11px]">
                     <span class="lang-ua">Комерційний та кур’єрський легкий електротранспорт</span>
@@ -627,7 +627,8 @@
                                         <span class="lang-en">Deposit: ${item.deposit.toLocaleString('en-US')} UAH</span>
                                     </span>
                                 </div>
-                                <div class="text-[11px] text-[#111827] font-mono font-bold mt-2 pt-2 border-t border-[#1D5D3B]/20 flex justify-between">
+                                <!-- HIDDEN BUYOUT ROW. TO RESTORE REMOVE 'hidden' -->
+                                <div class="hidden text-[11px] text-[#111827] font-mono font-bold mt-2 pt-2 border-t border-[#1D5D3B]/20 justify-between">
                                     <span>
                                         <span class="lang-ua">Викуп у зборі з АКБ:</span>
                                         <span class="lang-en">Buyout with battery:</span>

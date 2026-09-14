@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MUVIO — ТВОЄ ELECTRO CITY | Оренда та викуп комерційного електротранспорту в Одесі</title>
+    <title>MUVIO — ТВОЄ ELECTRO CITY | Оренда комерційного електротранспорту в Одесі</title>
     <meta name="description"
-        content="Офіційний прокат та викуп (Rent-to-Own) електроскутерів та велосипедів в Одесі. вул. Приморська, 22. Планове ТО за наш рахунок, фіксовані тарифи.">
+        content="Офіційний прокат електроскутерів та велосипедів в Одесі. вул. Приморська, 22. Планове ТО за наш рахунок, фіксовані тарифи.">
 
     <!-- Google Fonts: Chakra Petch & Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -442,14 +442,14 @@
                 <!-- Заголовок -->
                 <h1
                     class="font-brand font-bold text-2xl sm:text-4xl md:text-5xl lg:text-5xl uppercase tracking-tight text-[#111827] leading-tight">
-                    <span class="lang-ua">ОРЕНДА ТА ВИКУП<br>КУР'ЄРСЬКОГО ТА ТУРИСТИЧНОГО<br>ЕЛЕКТРОТРАНСПОРТУ В ОДЕСІ</span>
-                    <span class="lang-en">RENTAL & BUYOUT<br>OF COURIER & URBAN<br>ELECTRIC VEHICLES IN ODESA</span>
+                    <span class="lang-ua">ОРЕНДА КУР'ЄРСЬКОГО ТА МІСЬКОГО<br>ЕЛЕКТРОТРАНСПОРТУ В ОДЕСІ</span>
+                    <span class="lang-en">COMMERCIAL & URBAN<br>ELECTRIC VEHICLE RENTAL IN ODESA</span>
                 </h1>
 
                 <!-- Підзаголовок (Сухі факти) -->
                 <p class="font-sans text-base sm:text-xl text-[#4B5563] max-w-3xl mx-auto leading-relaxed">
-                    <span class="lang-ua">Каталог скутерів та велосипедів у зборі з АКБ. Офіційний договір, повне планове сервісне обслуговування, фіксований щотижневий платіж та прозора програма викупу (Rent-to-Own).</span>
-                    <span class="lang-en">Catalog of scooters and e-bikes complete with battery. Official agreement, full scheduled maintenance, fixed weekly payment and transparent Rent-to-Own buyout program.</span>
+                    <span class="lang-ua">Каталог скутерів та велосипедів у зборі з АКБ. Офіційний договір, повне планове сервісне обслуговування та фіксований щотижневий платіж.</span>
+                    <span class="lang-en">Catalog of scooters and e-bikes complete with battery. Official agreement, full scheduled maintenance and fixed weekly payment.</span>
                 </p>
 
                 <!-- Геометричні кнопки дій -->
@@ -537,8 +537,8 @@
                             <span class="lang-en">ONLINE BOT IN TELEGRAM 24/7</span>
                         </div>
                         <div class="text-xs text-[#4B5563] mt-1.5 leading-snug">
-                            <span class="lang-ua">Особистий кабінет з автоматичним розрахунком та оплатою днів оренди і викупу</span>
-                            <span class="lang-en">Personal account with automatic calculation & payment for rental days and buyout</span>
+                            <span class="lang-ua">Особистий кабінет з автоматичним розрахунком та оплатою днів оренди</span>
+                            <span class="lang-en">Personal account with automatic calculation & payment of rental days</span>
                         </div>
                     </div>
                 </div>
@@ -566,8 +566,8 @@
                         <span class="lang-en">AVAILABLE FLEET CATALOG</span>
                     </h2>
                     <p class="text-sm sm:text-base text-[#4B5563] mt-1">
-                        <span class="lang-ua">Всі моделі укомплектовані знімним АКБ та зарядним пристроєм. Реальні тарифи оренди та повної вартості викупу.</span>
-                        <span class="lang-en">All models equipped with removable battery & charger. Verified rental rates and full buyout cost.</span>
+                        <span class="lang-ua">Всі моделі укомплектовані знімним АКБ та зарядним пристроєм. Реальні тарифи оренди.</span>
+                        <span class="lang-en">All models equipped with removable battery & charger. Verified rental rates.</span>
                     </p>
                 </div>
 
@@ -883,7 +883,8 @@
     </section>
 
     <!-- ==================== 5. ТАРИФИ ТА ПОРІВНЯННЯ УМОВ ==================== -->
-    <section id="tariffs" class="py-16 md:py-24 bg-[#F8FAFC] border-b-2 border-[#1D5D3B]">
+    <!-- HIDDEN BUYOUT SECTION. TO RESTORE REMOVE 'hidden' -->
+    <section id="rental-formats" data-section="tariffs" class="hidden py-16 md:py-24 bg-[#F8FAFC] border-b-2 border-[#1D5D3B]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-x border-slate-200/60">
 
             <div class="text-center max-w-3xl mx-auto mb-12">
@@ -1339,8 +1340,8 @@
 
             <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-emerald-200 gap-4 font-mono">
                 <div>
-                    <span class="lang-ua">© 2026 MUVIO Rent & Buyout. Одеса, вул. Приморська, 22.</span>
-                    <span class="lang-en">© 2026 MUVIO Rent & Buyout. Odesa, Prymorska St, 22.</span>
+                    <span class="lang-ua">© 2026 MUVIO Rent. Одеса, вул. Приморська, 22.</span>
+                    <span class="lang-en">© 2026 MUVIO Rent. Odesa, 22 Prymorska Str.</span>
                 </div>
                 <div class="text-[11px]">
                     <span class="lang-ua">Комерційний та кур’єрський легкий електротранспорт</span>
@@ -1605,7 +1606,8 @@
                                         <span class="lang-en">Deposit: ${item.deposit.toLocaleString('en-US')} UAH</span>
                                     </span>
                                 </div>
-                                <div class="text-[11px] text-[#111827] font-mono font-bold mt-2 pt-2 border-t border-[#1D5D3B]/20 flex justify-between">
+                                <!-- HIDDEN BUYOUT ROW. TO RESTORE REMOVE 'hidden' -->
+                                <div class="hidden text-[11px] text-[#111827] font-mono font-bold mt-2 pt-2 border-t border-[#1D5D3B]/20 justify-between">
                                     <span>
                                         <span class="lang-ua">Викуп у зборі з АКБ:</span>
                                         <span class="lang-en">Buyout with battery:</span>
