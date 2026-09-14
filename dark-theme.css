@@ -333,6 +333,13 @@ html.theme-dark #page-preloader {
     backdrop-filter: none !important;
 }
 
+/* 10.1 Calculator Duration Badge In Dark Mode */
+html.theme-dark #durationDaysBadge {
+    background-color: #131A16 !important;
+    color: #00E676 !important;
+    border: 1px solid rgba(29, 93, 59, 0.7) !important;
+}
+
 /* 11. Leaflet Map In Dark Mode */
 html.theme-dark .leaflet-tile-pane {
     filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7);

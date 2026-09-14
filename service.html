@@ -441,7 +441,7 @@
 
                     <!-- Інтерактивна карта Leaflet з точною міткою -->
                     <div class="space-y-1.5">
-                        <div id="map" style="height: 380px; width: 100%; border-radius: 12px; z-index: 1;" class="border border-[#1D5D3B] relative shadow-sm"></div>
+                        <div id="map" class="w-full rounded-xl overflow-hidden border border-[#1D5D3B] relative shadow-sm" style="height: 380px; min-height: 380px; z-index: 1;"></div>
                         <div class="flex items-center justify-between text-[11px] text-[#4B5563] font-mono px-0.5">
                             <span class="flex items-center gap-1.5">
                                 <span class="w-2 h-2 rounded-full bg-[#1D5D3B]"></span>
@@ -645,13 +645,10 @@
     <script>
         // Ініціалізація карти Leaflet з точною точкою на Приморській, 22
         function initMap() {
-            const mapEl = document.getElementById('map');
-            if (!mapEl || typeof L === 'undefined') return;
+            const mapContainer = document.getElementById('map');
+            if (!mapContainer || mapContainer._leaflet_id || typeof L === 'undefined') return;
             try {
-                if (mapEl._leaflet_id) {
-                    return;
-                }
-                const map = L.map('map').setView([46.49191, 30.73519], 16);
+                const map = L.map('map', { scrollWheelZoom: false }).setView([46.49191, 30.73519], 16);
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     maxZoom: 19,
                     attribution: '&copy; OpenStreetMap'
@@ -660,11 +657,12 @@
                 function getPopupContent() {
                     const isEn = (document.documentElement.getAttribute('lang') === 'en') || (localStorage.getItem('muvio_lang') === 'en');
                     const street = isEn ? '22 Prymorska Str.' : 'вул. Приморська, 22';
-                    return `<div style="text-align:center; font-family:sans-serif; color:#111;"><b>MUVIO</b><br><span style="font-size:12px; color:#666;">${street}</span></div>`;
+                    return `<div style="text-align:center;font-family:sans-serif;color:#111;"><b>MUVIO</b><br><span style="font-size:12px;color:#555;">${street}</span></div>`;
                 }
 
-                const marker = L.marker([46.49191, 30.73519]).addTo(map);
-                marker.bindPopup(getPopupContent()).openPopup();
+                const marker = L.marker([46.49191, 30.73519]).addTo(map)
+                    .bindPopup(getPopupContent())
+                    .openPopup();
 
                 window.addEventListener('muvio:langchange', () => {
                     if (marker) {
@@ -672,7 +670,8 @@
                     }
                 });
 
-                setTimeout(() => { map.invalidateSize(); }, 300);
+                setTimeout(() => { map.invalidateSize(); }, 250);
+                window.addEventListener('resize', () => map.invalidateSize());
             } catch (e) {
                 console.warn('Leaflet map error:', e);
             }
