@@ -1,0 +1,268 @@
+/* ==========================================================================
+   MUVIO — MONOLITHIC BLACKOUT DARK THEME (dark-theme.css)
+   Cross-page dark mode styling, contour borders & contrast typography
+   ========================================================================== */
+
+/* 1. Base Document Canvas */
+html.theme-dark {
+    color-scheme: dark;
+    background-color: #0A0D0C !important;
+}
+
+html.theme-dark body {
+    background-color: #0A0D0C !important;
+    color: #FFFFFF !important;
+}
+
+/* 2. Containers, Cards & Section Backgrounds */
+html.theme-dark .bg-white,
+html.theme-dark [class*="bg-gray-50"],
+html.theme-dark [class*="bg-gray-100"],
+html.theme-dark [class*="bg-slate-50"],
+html.theme-dark [class*="bg-slate-100"],
+html.theme-dark [class*="bg-zinc-50"],
+html.theme-dark [class*="bg-neutral-50"],
+html.theme-dark .bg-\[\#F8FAFC\],
+html.theme-dark .bg-\[\#F9FAFB\],
+html.theme-dark .chamfer-box,
+html.theme-dark .tech-card,
+html.theme-dark .card {
+    background-color: #121815 !important;
+    color: #FFFFFF !important;
+}
+
+html.theme-dark [class*="bg-slate-200"],
+html.theme-dark [class*="bg-gray-200"] {
+    background-color: #1A231E !important;
+}
+
+/* Header & Drawers */
+html.theme-dark header,
+html.theme-dark #mobileMenu,
+html.theme-dark [class*="bg-white\/95"],
+html.theme-dark [class*="bg-white\/90"],
+html.theme-dark [class*="bg-white\/80"] {
+    background-color: rgba(18, 24, 21, 0.96) !important;
+    border-color: #1F2E26 !important;
+}
+
+/* Section dividers & borders */
+html.theme-dark section,
+html.theme-dark .border-x,
+html.theme-dark .border-y,
+html.theme-dark .border-t,
+html.theme-dark .border-b,
+html.theme-dark .border-l,
+html.theme-dark .border-r,
+html.theme-dark .border-slate-200,
+html.theme-dark .border-slate-300,
+html.theme-dark .border-gray-100,
+html.theme-dark .border-gray-200,
+html.theme-dark .border-gray-300,
+html.theme-dark .divide-slate-200 > :not([hidden]) ~ :not([hidden]),
+html.theme-dark .divide-gray-200 > :not([hidden]) ~ :not([hidden]),
+html.theme-dark .divide-slate-100 > :not([hidden]) ~ :not([hidden]) {
+    border-color: #1F2E26 !important;
+}
+
+/* 3. Pure White Contrast Text */
+html.theme-dark .text-gray-900,
+html.theme-dark .text-gray-800,
+html.theme-dark .text-black,
+html.theme-dark .text-\[\#111827\],
+html.theme-dark .text-slate-900,
+html.theme-dark .text-slate-800,
+html.theme-dark .text-slate-700,
+html.theme-dark nav a,
+html.theme-dark .mobile-nav-link,
+html.theme-dark #header-user-name,
+html.theme-dark .header-user-name,
+html.theme-dark .settings-btn-label,
+html.theme-dark h1,
+html.theme-dark h2,
+html.theme-dark h3,
+html.theme-dark h4,
+html.theme-dark h5,
+html.theme-dark h6,
+html.theme-dark .font-brand.font-bold,
+html.theme-dark .font-brand.font-black,
+html.theme-dark .vehicle-title,
+html.theme-dark .model-title {
+    color: #FFFFFF !important;
+}
+
+/* Secondary & Dimmed Text */
+html.theme-dark .text-\[\#4B5563\],
+html.theme-dark .text-slate-600,
+html.theme-dark .text-slate-500,
+html.theme-dark .text-gray-600,
+html.theme-dark .text-gray-500,
+html.theme-dark .text-gray-400 {
+    color: #9CA3AF !important;
+}
+
+/* Navigation Links Hover */
+html.theme-dark nav a:hover,
+html.theme-dark .mobile-nav-link:hover {
+    color: #00E676 !important;
+}
+
+/* 4. Green Elements & Accents with soft contour glow */
+html.theme-dark .bg-\[\#1D5D3B\],
+html.theme-dark .border-\[\#1D5D3B\],
+html.theme-dark [class*="border-\[\#1D5D3B\]"],
+html.theme-dark .chamfer-btn,
+html.theme-dark .chamfer-badge,
+html.theme-dark .badge-green,
+html.theme-dark button.bg-\[\#1D5D3B\],
+html.theme-dark a.bg-\[\#1D5D3B\],
+html.theme-dark .bg-\[\#00E676\],
+html.theme-dark .border-\[\#00E676\] {
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.18), inset 0 0 0 1px rgba(255, 255, 255, 0.1) !important;
+    border-color: rgba(255, 255, 255, 0.25) !important;
+}
+
+html.theme-dark .text-\[\#1D5D3B\] {
+    color: #10B981 !important;
+}
+
+html.theme-dark .text-\[\#00E676\] {
+    color: #00E676 !important;
+    text-shadow: 0 0 10px rgba(0, 230, 118, 0.35);
+}
+
+/* 5. Inputs, selects & textareas */
+html.theme-dark input:not([type="range"]),
+html.theme-dark select,
+html.theme-dark textarea {
+    background-color: #0D1210 !important;
+    color: #FFFFFF !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+html.theme-dark input:focus,
+html.theme-dark select:focus,
+html.theme-dark textarea:focus {
+    border-color: #10B981 !important;
+    outline: none !important;
+    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25) !important;
+}
+
+/* 6. Settings Modal / Dropdown */
+#settingsDropdown {
+    transform-origin: top right;
+}
+
+html.theme-dark #settingsDropdown {
+    background-color: #121815 !important;
+    border-color: rgba(255, 255, 255, 0.25) !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.15) !important;
+}
+
+html.theme-dark #settingsDropdown .border-b,
+html.theme-dark #settingsDropdown .border-t {
+    border-color: #1F2E26 !important;
+}
+
+/* Range Slider Styling */
+#font-scale-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    border-radius: 9999px;
+    outline: none;
+    background: #CBD5E1;
+    transition: background 0.2s ease;
+}
+
+html.theme-dark #font-scale-slider {
+    background: #1F2E26 !important;
+}
+
+#font-scale-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #1D5D3B;
+    cursor: pointer;
+    border: 2px solid #FFFFFF;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    transition: transform 0.15s ease, background 0.15s ease;
+}
+
+html.theme-dark #font-scale-slider::-webkit-slider-thumb {
+    background: #10B981;
+    border-color: #0A0D0C;
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.8);
+}
+
+#font-scale-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+}
+
+#font-scale-slider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #1D5D3B;
+    cursor: pointer;
+    border: 2px solid #FFFFFF;
+}
+
+html.theme-dark #font-scale-slider::-moz-range-thumb {
+    background: #10B981;
+    border-color: #0A0D0C;
+}
+
+/* 7. Footer */
+html.theme-dark footer {
+    background-color: #070908 !important;
+    border-color: #1F2E26 !important;
+}
+
+/* 8. Leaflet Map In Dark Mode */
+html.theme-dark .leaflet-tile {
+    filter: brightness(0.68) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.75);
+}
+
+html.theme-dark .leaflet-container {
+    background: #0A0D0C !important;
+}
+
+html.theme-dark .leaflet-popup-content-wrapper {
+    background-color: #121815 !important;
+    color: #FFFFFF !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7) !important;
+}
+
+html.theme-dark .leaflet-popup-tip {
+    background: #121815 !important;
+}
+
+/* 9. Preloader Keyframes */
+@keyframes muvioBreathe {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 25px rgba(29, 93, 59, 0.4);
+    }
+    50% {
+        transform: scale(1.06);
+        box-shadow: 0 0 45px rgba(16, 185, 129, 0.7);
+    }
+}
+
+@keyframes muvioProgress {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.animate-muvio-breathe {
+    animation: muvioBreathe 2s ease-in-out infinite;
+}
+
+.animate-muvio-progress {
+    animation: muvioProgress 1.4s ease-in-out infinite;
+}
