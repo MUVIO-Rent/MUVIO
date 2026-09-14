@@ -67,3 +67,44 @@ a[aria-label*="MUVIO"] span.font-brand {
     font-weight: 800 !important;
     letter-spacing: 0.05em !important;
 }
+
+/* ==========================================================================
+   HERO SECTION — LIGHT THEME BASELINE
+   ========================================================================== */
+#hero-section {
+    background-color: #F8FAFC !important;
+    color: #0F172A !important;
+}
+
+#hero-section h1 {
+    color: #0F172A !important;
+}
+
+#hero-section p {
+    color: #475569 !important;
+}
+
+#hero-section .hero-calc-btn {
+    border-color: #CBD5E1 !important;
+    color: #0F172A !important;
+    background-color: #FFFFFF !important;
+}
+
+#hero-section .hero-calc-btn:hover {
+    background-color: #F1F5F9 !important;
+    border-color: #94A3B8 !important;
+    color: #0F172A !important;
+}
+
+#hero-section .hero-statusbar {
+    border-color: #E2E8F0 !important;
+}
+
+#hero-section .hero-statusbar > div > div {
+    border-color: #E2E8F0 !important;
+}
+
+#hero-section .hero-logo-glow div {
+    background: radial-gradient(circle, rgba(29, 93, 59, 0.12) 0%, rgba(248, 250, 252, 0) 70%) !important;
+}
+

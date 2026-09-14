@@ -979,3 +979,52 @@ html.theme-dark .mobile-nav-link.nav-link-active {
     font-weight: 700 !important;
     text-shadow: none !important;
 }
+
+/* ==========================================================================
+   22. HERO SECTION — DARK THEME OVERRIDES
+   ========================================================================== */
+html.theme-dark #hero-section {
+    background-color: #0B0E0C !important;
+    color: #FFFFFF !important;
+}
+
+html.theme-dark #hero-section h1 {
+    color: #FFFFFF !important;
+}
+
+html.theme-dark #hero-section p {
+    color: #94A3B8 !important;
+}
+
+html.theme-dark #hero-section .hero-calc-btn {
+    border-color: #3F3F46 !important;
+    color: #E4E4E7 !important;
+    background-color: rgba(24, 24, 27, 0.5) !important;
+}
+
+html.theme-dark #hero-section .hero-calc-btn:hover {
+    background-color: rgba(39, 39, 42, 0.7) !important;
+    border-color: #71717A !important;
+    color: #FFFFFF !important;
+}
+
+html.theme-dark #hero-section .hero-statusbar {
+    border-color: #27272A !important;
+}
+
+html.theme-dark #hero-section .hero-statusbar > div > div {
+    border-color: #27272A !important;
+}
+
+html.theme-dark #hero-section .hero-statusbar .text-\[\#0F172A\] {
+    color: #FFFFFF !important;
+}
+
+html.theme-dark #hero-section .hero-statusbar .text-\[\#64748B\] {
+    color: #A1A1AA !important;
+}
+
+html.theme-dark #hero-section .hero-logo-glow div {
+    background: radial-gradient(circle, rgba(29, 93, 59, 0.28) 0%, rgba(11, 14, 12, 0) 70%) !important;
+}
+
