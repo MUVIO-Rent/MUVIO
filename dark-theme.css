@@ -446,9 +446,9 @@ html.theme-dark .bg-\[\#1D5D3B\].rounded-full {
 
 /* 13. Safari / iOS / macOS 120Hz ProMotion Native Scroll Engine & GPU Acceleration */
 html, body {
+    overscroll-behavior-y: auto !important;
     -webkit-overflow-scrolling: touch !important;
     scroll-behavior: auto !important;
-    overscroll-behavior-y: none;
 }
 
 /* Strictly no universal transitions that cause reflow/jank on scroll */
