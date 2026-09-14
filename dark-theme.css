@@ -1,8 +1,20 @@
 /* ==========================================================================
-   MUVIO — STRICT MONOCHROME BLACKOUT DARK THEME (dark-theme.css)
+   MUVIO — STRICT MONOCHROME BLACKOUT DARK THEME & BILINGUAL ENGINE
    Pure Deep Black #000000, Deep Graphite #111413 & Pure White Contrast
    Green preserved ONLY for MUVIO logo, main action buttons & active badges
    ========================================================================== */
+
+/* Bilingual System: Strict CSS Hide/Show by html lang attribute */
+html[lang="uk"] .lang-en,
+html[lang="ua"] .lang-en,
+html:not([lang="en"]) .lang-en {
+    display: none !important;
+}
+
+html[lang="en"] .lang-ua,
+html[lang="en"] .lang-uk {
+    display: none !important;
+}
 
 /* 1. Base Document Canvas & Page Backgrounds */
 html.theme-dark {

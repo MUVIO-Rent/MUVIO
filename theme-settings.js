@@ -302,6 +302,7 @@
     function getSiteSettings() {
         try {
             const raw = localStorage.getItem('muvio_site_settings');
+            let lang = localStorage.getItem('muvio_lang');
             if (raw) {
                 const parsed = JSON.parse(raw);
                 let z = parsed.zoom !== undefined ? parsed.zoom : parsed.fontScale;
@@ -309,7 +310,11 @@
                 if (isNaN(z) || z < 80 || z > 120) z = 100;
                 parsed.zoom = z;
                 parsed.fontScale = z;
+                if (lang) parsed.lang = (lang === 'en') ? 'en' : 'ua';
                 return Object.assign({}, DEFAULT_SETTINGS, parsed);
+            }
+            if (lang) {
+                return Object.assign({}, DEFAULT_SETTINGS, { lang: lang === 'en' ? 'en' : 'ua' });
             }
         } catch (e) {
             console.warn('Failed to parse muvio_site_settings:', e);
@@ -326,9 +331,25 @@
     }
 
     // --------------------------------------------------------------------------
-    // 3. SYNCHRONOUS ANTI-FLICKER & ZOOM INITIALIZATION
+    // 3. SYNCHRONOUS ANTI-FLICKER & ZOOM & LANG INITIALIZATION
     // --------------------------------------------------------------------------
     try {
+        // Instant synchronous lang setup on documentElement
+        let initialLang = 'uk';
+        try {
+            const rawLang = localStorage.getItem('muvio_lang');
+            if (rawLang === 'en') {
+                initialLang = 'en';
+            } else if (!rawLang) {
+                const rawSettings = localStorage.getItem('muvio_site_settings');
+                if (rawSettings) {
+                    const parsed = JSON.parse(rawSettings);
+                    if (parsed && (parsed.lang === 'en' || parsed.lang === 'eng')) initialLang = 'en';
+                }
+            }
+        } catch (err) {}
+        document.documentElement.setAttribute('lang', initialLang);
+
         const initS = getSiteSettings();
         if (initS.theme === 'dark') {
             document.documentElement.classList.add('theme-dark');
@@ -384,22 +405,39 @@
     }
 
     // --------------------------------------------------------------------------
-    // 5. LANGUAGE CONTROLLER
+    // 5. LANGUAGE CONTROLLER (CSS-Based Dual .lang-ua / .lang-en & Placeholders)
     // --------------------------------------------------------------------------
+    function updateFormPlaceholders(lang) {
+        const isEn = (lang === 'en');
+        document.querySelectorAll('[data-placeholder-ua], [data-placeholder-en]').forEach(el => {
+            const ph = isEn ? el.getAttribute('data-placeholder-en') : el.getAttribute('data-placeholder-ua');
+            if (ph !== null) {
+                el.setAttribute('placeholder', ph);
+            }
+        });
+    }
+
     function setSiteLanguage(lang) {
-        const settings = getSiteSettings();
-        if (settings.lang === lang) return;
-        settings.lang = lang;
-        saveSiteSettings(settings);
-        applySiteLanguage(lang);
+        const normalized = (lang === 'en') ? 'en' : 'uk';
+        document.documentElement.setAttribute('lang', normalized);
+        try {
+            localStorage.setItem('muvio_lang', normalized);
+            const settings = getSiteSettings();
+            settings.lang = normalized === 'en' ? 'en' : 'ua';
+            saveSiteSettings(settings);
+        } catch (e) {}
+        applySiteLanguage(normalized);
     }
 
     function applySiteLanguage(lang) {
+        const normalized = (lang === 'en') ? 'en' : 'uk';
+        document.documentElement.setAttribute('lang', normalized);
+
         const btnUa = document.getElementById('langBtnUa');
         const btnEn = document.getElementById('langBtnEn');
         const badge = document.getElementById('currentLangBadge');
 
-        if (lang === 'en') {
+        if (normalized === 'en') {
             if (badge) badge.textContent = 'EN';
             if (btnEn) {
                 btnEn.className = 'py-2 px-3 text-xs font-brand font-bold uppercase tracking-wider chamfer-badge flex items-center justify-center gap-1.5 transition-all bg-[#1D5D3B] text-white';
@@ -417,7 +455,11 @@
             }
         }
 
-        const dict = MUVIO_I18N[lang] || MUVIO_I18N.ua;
+        // Update form inputs with data-placeholder-ua and data-placeholder-en
+        updateFormPlaceholders(normalized);
+
+        // Fallback for any elements still using data-i18n
+        const dict = MUVIO_I18N[normalized === 'en' ? 'en' : 'ua'] || MUVIO_I18N.ua;
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
             if (key && dict[key]) {
@@ -616,7 +658,7 @@
     // 10. CROSS-TAB SYNCHRONIZATION
     // --------------------------------------------------------------------------
     window.addEventListener('storage', (e) => {
-        if (e.key === 'muvio_site_settings') {
+        if (e.key === 'muvio_site_settings' || e.key === 'muvio_lang') {
             const settings = getSiteSettings();
             applySiteTheme(settings.theme);
             applySiteLanguage(settings.lang);
