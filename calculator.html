@@ -87,28 +87,42 @@
             box-shadow: 0 16px 32px -8px rgba(29, 93, 59, 0.22);
         }
     </style>
+    <!-- Anti-flicker Settings Loader -->
+    <script>
+        (function () {
+            try {
+                var s = localStorage.getItem('muvio_site_settings');
+                var t = s ? JSON.parse(s).theme : (localStorage.getItem('muvio_theme') || 'light');
+                if (t === 'dark') {
+                    document.documentElement.classList.add('theme-dark');
+                } else {
+                    document.documentElement.classList.remove('theme-dark');
+                }
+            } catch (e) { }
+        })();
+    </script>
 </head>
 
 <body
     class="bg-[#F9FAFB] text-[#111827] font-sans antialiased selection:bg-[#1D5D3B] selection:text-white relative min-h-screen">
 
     <!-- ==================== ПРЕЛОАДЕР MUVIO ==================== -->
-    <div id="page-preloader" class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#0A0D0C] transition-opacity duration-300">
+    <div id="page-preloader" class="fixed inset-0 z-[9999] flex flex-col items-center justify-center transition-opacity duration-300">
         <div class="preloader-logo-wrap animate-pulse mb-3">
-            <!-- Точный родной SVG-логотип MUVIO изумрудного цвета #00C853 -->
-            <svg class="w-16 h-16 text-[#00C853] glow-breathe" viewBox="0 0 100 100" fill="currentColor">
+            <!-- Точный родной SVG-логотип MUVIO -->
+            <svg class="w-16 h-16 glow-breathe" viewBox="0 0 100 100" fill="currentColor">
                 <path d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z"/>
             </svg>
         </div>
         <div class="text-center">
-            <div class="text-white font-bold tracking-widest text-lg">MUVIO</div>
-            <div class="text-[#00C853] text-[10px] tracking-[0.25em] uppercase font-semibold">
+            <div class="preloader-brand-title font-bold tracking-widest text-lg">MUVIO</div>
+            <div class="preloader-brand-sub text-[10px] tracking-[0.25em] uppercase font-semibold">
                 <span class="lang-ua">ТВОЄ ELECTRO CITY</span>
                 <span class="lang-en">YOUR ELECTRO CITY</span>
             </div>
         </div>
-        <div class="w-28 h-0.5 bg-[#1F2E26] rounded-full mt-4 overflow-hidden relative">
-            <div class="preloader-bar-line absolute left-0 top-0 h-full w-1/2 bg-[#00C853]"></div>
+        <div class="preloader-bar-track w-28 h-0.5 rounded-full mt-4 overflow-hidden relative">
+            <div class="preloader-bar-line absolute left-0 top-0 h-full w-1/2"></div>
         </div>
     </div>
 

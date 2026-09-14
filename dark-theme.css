@@ -112,7 +112,8 @@ html.theme-dark [class*="bg-white/80"] {
 
 .header-logo-wrap svg {
     color: #1D5D3B !important;
-    fill: currentColor !important;
+    fill: #1D5D3B !important;
+    stroke: none !important;
     transition: color 0.25s ease, filter 0.25s ease;
 }
 
@@ -123,9 +124,10 @@ html.theme-dark .header-logo-wrap {
 }
 
 html.theme-dark .header-logo-wrap svg {
-    color: #00C853 !important;
-    fill: #00C853 !important;
-    filter: drop-shadow(0 0 6px rgba(0, 200, 83, 0.25)) !important;
+    color: #00E676 !important;
+    fill: #00E676 !important;
+    stroke: none !important;
+    filter: drop-shadow(0 0 8px rgba(0, 230, 118, 0.45)) !important;
 }
 
 html.theme-dark a .header-logo-wrap + div > span:first-child {
@@ -371,11 +373,61 @@ html.theme-dark footer.bg-\[\#123824\] {
     border-color: #222222 !important;
 }
 
-/* 10. Preloader (Pure Black, Zero Blur for Performance) */
-html.theme-dark #page-preloader {
-    background-color: #000000 !important;
+/* 10. Preloader (Pure White in Light, Deep Black #0B0E0C in Dark) */
+#page-preloader {
+    background-color: #FFFFFF !important;
     -webkit-backdrop-filter: none !important;
     backdrop-filter: none !important;
+    opacity: 1;
+}
+
+#page-preloader .preloader-logo-wrap svg {
+    color: #1D5D3B !important;
+    fill: #1D5D3B !important;
+}
+
+#page-preloader .preloader-brand-title {
+    color: #111827 !important;
+}
+
+#page-preloader .preloader-brand-sub {
+    color: #1D5D3B !important;
+}
+
+#page-preloader .preloader-bar-track {
+    background-color: #E5E7EB !important;
+}
+
+#page-preloader .preloader-bar-line {
+    background-color: #1D5D3B !important;
+}
+
+/* Preloader Dark Mode Override */
+html.theme-dark #page-preloader {
+    background-color: #0B0E0C !important;
+}
+
+html.theme-dark #page-preloader .preloader-logo-wrap svg {
+    color: #00E676 !important;
+    fill: #00E676 !important;
+    filter: drop-shadow(0 0 16px rgba(0, 230, 118, 0.75)) !important;
+}
+
+html.theme-dark #page-preloader .preloader-brand-title {
+    color: #FFFFFF !important;
+}
+
+html.theme-dark #page-preloader .preloader-brand-sub {
+    color: #00E676 !important;
+}
+
+html.theme-dark #page-preloader .preloader-bar-track {
+    background-color: #1F2E26 !important;
+}
+
+html.theme-dark #page-preloader .preloader-bar-line {
+    background-color: #00E676 !important;
+    box-shadow: 0 0 10px rgba(0, 230, 118, 0.6) !important;
 }
 
 /* 10.1 Calculator Duration Badge In Dark Mode */
@@ -592,7 +644,20 @@ html.theme-dark #mobileMenu a:hover {
 }
 
 /* 15. MUVIO Native Logo Preloader Animations */
-@keyframes glowBreathe {
+@keyframes glowBreatheLight {
+    0%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 6px rgba(29, 93, 59, 0.3));
+        opacity: 0.95;
+    }
+    50% {
+        transform: scale(1.06);
+        filter: drop-shadow(0 0 16px rgba(29, 93, 59, 0.55));
+        opacity: 1;
+    }
+}
+
+@keyframes glowBreatheDark {
     0%, 100% {
         transform: scale(1);
         filter: drop-shadow(0 0 10px rgba(0, 230, 118, 0.55));
@@ -612,7 +677,12 @@ html.theme-dark #mobileMenu a:hover {
 
 .glow-breathe,
 .animate-muvio-breathe {
-    animation: glowBreathe 2s ease-in-out infinite;
+    animation: glowBreatheLight 2s ease-in-out infinite;
+}
+
+html.theme-dark .glow-breathe,
+html.theme-dark .animate-muvio-breathe {
+    animation: glowBreatheDark 2s ease-in-out infinite;
 }
 
 .animate-muvio-progress,
