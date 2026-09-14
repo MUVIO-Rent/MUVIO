@@ -351,19 +351,43 @@ html.theme-dark .bg-\[\#1D5D3B\].rounded-full {
 }
 
 /* 13. Safari / macOS Scroll Smoothness & Hardware Acceleration */
+/* Smooth mobile & Safari scrolling */
+html, body {
+    scroll-behavior: smooth !important;
+    -webkit-overflow-scrolling: touch !important;
+}
+
 /* Strictly no universal transitions that cause reflow/jank on scroll */
 * {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* Disable backdrop-filter on long scroll sections to eliminate scroll lag */
-html.theme-dark section,
-html.theme-dark main,
+/* Remove all heavy card box-shadows that cause scroll lag, use crisp border #1F2E26 */
 html.theme-dark .tech-card,
 html.theme-dark .chamfer-box,
-section,
-main {
+html.theme-dark .card,
+html.theme-dark section .shadow-sm,
+html.theme-dark section .shadow-md,
+html.theme-dark section .shadow-lg,
+html.theme-dark section .shadow-xl,
+html.theme-dark section .shadow-2xl,
+html.theme-dark section [class*="shadow-"] {
+    box-shadow: none !important;
+    border: 1px solid #1F2E26 !important;
+}
+
+html.theme-dark .tech-card:hover,
+html.theme-dark .chamfer-box:hover {
+    box-shadow: none !important;
+    border-color: #2D4A3A !important;
+}
+
+/* Disable backdrop-filter and heavy filters on long scroll sections to eliminate scroll lag */
+html.theme-dark section,
+html.theme-dark section *,
+html.theme-dark main,
+html.theme-dark main * {
     -webkit-backdrop-filter: none !important;
     backdrop-filter: none !important;
 }
@@ -387,14 +411,53 @@ section,
     backface-visibility: hidden;
 }
 
-/* Transitions strictly on interactive elements on hover */
-button,
-a,
-.chamfer-btn {
-    transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease !important;
+/* 14. Header Action Buttons (Profile, Settings, Burger) - Strictly In-Place Behavior (No lateral shifts) */
+.header-action-btn,
+#settingsBtn,
+#burger-btn,
+#mobileMenuBtn,
+a[title="Особистий кабінет"] {
+    transform: scale(1) !important;
+    transform-origin: center center !important;
+    transition: transform 0.15s ease, opacity 0.15s ease, color 0.15s ease !important;
+    will-change: transform;
 }
 
-/* 14. MUVIO Native Logo Preloader Animations */
+.header-action-btn:hover,
+#settingsBtn:hover,
+#burger-btn:hover,
+#mobileMenuBtn:hover,
+a[title="Особистий кабінет"]:hover {
+    transform: scale(1.06) !important;
+}
+
+.header-action-btn:active,
+#settingsBtn:active,
+#burger-btn:active,
+#mobileMenuBtn:active,
+a[title="Особистий кабінет"]:active {
+    transform: scale(0.95) !important;
+}
+
+/* Mobile Menu Dark Mode Styling */
+html.theme-dark #mobile-menu,
+html.theme-dark #mobileMenu {
+    background-color: #0A0D0C !important;
+    border-color: #1F2E26 !important;
+}
+
+html.theme-dark #mobile-menu a,
+html.theme-dark #mobileMenu a {
+    color: #E5E7EB !important;
+}
+
+html.theme-dark #mobile-menu a:hover,
+html.theme-dark #mobileMenu a:hover {
+    color: #10B981 !important;
+    background-color: rgba(29, 93, 59, 0.2) !important;
+}
+
+/* 15. MUVIO Native Logo Preloader Animations */
 @keyframes glowBreathe {
     0%, 100% {
         transform: scale(1);
@@ -421,4 +484,5 @@ a,
 .animate-muvio-progress {
     animation: muvioProgress 1.4s ease-in-out infinite;
 }
+
 

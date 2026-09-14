@@ -636,12 +636,30 @@
         if (gearBtn) gearBtn.onclick = toggleSettingsModal;
 
         // Mobile drawer toggle if exists
-        const mobileBtn = document.getElementById('mobileMenuBtn');
-        const mobileDrawer = document.getElementById('mobileMenu');
-        if (mobileBtn && mobileDrawer) {
-            mobileBtn.onclick = () => {
-                mobileDrawer.classList.toggle('hidden');
+        const burgerBtn = document.getElementById('burger-btn') || document.querySelector('[data-burger]') || document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobile-menu') || document.getElementById('mobileMenu');
+        if (burgerBtn && mobileMenu) {
+            burgerBtn.onclick = (e) => {
+                e.stopPropagation();
+                mobileMenu.classList.toggle('hidden');
             };
+            mobileMenu.querySelectorAll('a, button').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+            document.addEventListener('click', (e) => {
+                if (!mobileMenu.classList.contains('hidden')) {
+                    if (!mobileMenu.contains(e.target) && !burgerBtn.contains(e.target)) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
         }
     }
 

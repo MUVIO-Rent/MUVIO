@@ -152,8 +152,12 @@
             <svg class="w-16 h-16 text-[#00E676] glow-breathe" viewBox="0 0 100 100" fill="currentColor">
                 <path d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z"/>
             </svg>
-            <div class="mt-4 font-brand font-bold text-xs uppercase tracking-[0.25em] text-[#9CA3AF]">
-                MUVIO
+            <div class="mt-4 flex flex-col items-center text-center">
+                <span class="font-brand font-bold text-lg tracking-wider text-white leading-none">MUVIO</span>
+                <span class="font-brand text-[10px] tracking-widest text-emerald-400 uppercase mt-1">
+                    <span class="lang-ua">ТВОЄ ELECTRO CITY</span>
+                    <span class="lang-en">YOUR ELECTRO CITY</span>
+                </span>
             </div>
             <!-- Neon emerald progress line -->
             <div class="w-28 h-1 bg-[#1F2E26] rounded-full overflow-hidden mt-3">
@@ -233,7 +237,7 @@
                 <!-- Права частина: Профіль та Налаштування -->
                 <div class="flex items-center z-10 relative">
                     <!-- Профіль користувача -->
-                    <a href="cabinet.html" class="flex flex-col items-center justify-center gap-0.5 group hover:opacity-85 transition-opacity" title="Особистий кабінет">
+                    <a href="cabinet.html" class="header-action-btn flex flex-col items-center justify-center gap-0.5 group" title="Особистий кабінет">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#1D5D3B]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
@@ -245,7 +249,7 @@
 
                     <!-- Кнопка налаштувань інтерфейсу -->
                     <button type="button" id="settingsBtn" onclick="toggleSettingsModal(event)"
-                        class="ml-3 sm:ml-4 flex flex-col items-center justify-center gap-0.5 p-1 text-[#1D5D3B] hover:text-[#24754A] hover:rotate-45 transition-all duration-300"
+                        class="header-action-btn ml-3 sm:ml-4 flex flex-col items-center justify-center gap-0.5 p-1 text-[#1D5D3B]"
                         title="Налаштування" aria-label="Налаштування">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
@@ -258,8 +262,8 @@
                     </button>
 
                     <!-- Mobile Menu Button -->
-                    <button id="mobileMenuBtn" aria-label="Меню"
-                        class="md:hidden p-2 text-[#111827] hover:text-[#1D5D3B] ml-2">
+                    <button id="burger-btn" data-burger="true" aria-label="Меню"
+                        class="header-action-btn md:hidden p-2 text-[#111827] hover:text-[#1D5D3B] ml-2">
                         <i data-lucide="menu" class="w-6 h-6"></i>
                     </button>
 
@@ -368,7 +372,7 @@
         </div>
 
         <!-- Mobile Drawer -->
-        <div id="mobileMenu" class="hidden md:hidden border-t-2 border-[#1D5D3B] bg-white px-4 py-4 space-y-2">
+        <div id="mobile-menu" data-mobile-menu="true" class="hidden md:hidden border-t-2 border-[#1D5D3B] bg-white px-4 py-4 space-y-2">
             <a href="catalog.html"
                 class="mobile-nav-link block font-brand font-semibold text-sm uppercase tracking-wider text-[#111827] hover:text-[#1D5D3B] py-2 pl-2">
                 <span class="lang-ua">КАТАЛОГ СКУТЕРІВ</span>
@@ -2105,14 +2109,15 @@
         window.onSliderDaysChange = onSliderDaysChange;
         window.handleRentalApplyClick = handleRentalApplyClick;
 
-        // Мобильне меню з безпечною перевіркою
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        if (mobileMenuBtn && mobileMenu) {
-            mobileMenuBtn.addEventListener('click', () => {
+        // Мобільне меню
+        const burgerBtn = document.getElementById('burger-btn') || document.querySelector('[data-burger]') || document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobile-menu') || document.getElementById('mobileMenu');
+        if (burgerBtn && mobileMenu) {
+            burgerBtn.onclick = (e) => {
+                e.stopPropagation();
                 mobileMenu.classList.toggle('hidden');
-            });
-            document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            };
+            mobileMenu.querySelectorAll('.mobile-nav-link, a, button').forEach(link => {
                 link.addEventListener('click', () => {
                     mobileMenu.classList.add('hidden');
                 });
