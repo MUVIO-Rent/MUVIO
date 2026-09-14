@@ -241,16 +241,16 @@
     window.MUVIO_CALC_I18N = {
         ua: {
             pills: {
-                1: { label: "1 ДЕНЬ", sub: "доба" },
-                2: { label: "2 ДНІ", sub: "2 доби" },
-                3: { label: "3 ДНІ (ВІКЕНД)", sub: "вікенд" },
-                7: { label: "7 ДНІВ (ТИЖДЕНЬ)", sub: "тиждень" },
-                30: { label: "30 ДНІВ (МІСЯЦЬ)", sub: "місяць" }
+                1: { label: "1 ДЕНЬ" },
+                2: { label: "2 ДНІ" },
+                3: { label: "3 ДНІ (ВІКЕНД)" },
+                7: { label: "7 ДНІВ (ТИЖДЕНЬ)" },
+                30: { label: "30 ДНІВ (МІСЯЦЬ)" }
             },
             addons: {
-                helmet: { title: "ШОЛОМ + ТРИМАЧ", desc: "+0 грн / включено", badge: "Включено" },
-                battery: { title: "ДРУГИЙ ЗАПАСНИЙ АКБ", desc: "+{rate} грн/доба", prefix: "+" },
-                charger: { title: "ШВИДКА ЗАРЯДКА 10А", desc: "+150 грн (разово)", badge: "+150 грн" }
+                helmet: { title: "ШОЛОМ + ТРИМАЧ ДЛЯ ТЕЛЕФОНУ", desc: "+200 грн", badge: "+200 грн", price: 200 },
+                battery40: { title: "ДРУГИЙ АКБ 40Ah (ЗНІМНИЙ)", desc: "+800 грн", badge: "+800 грн", price: 800 },
+                battery60: { title: "ДРУГИЙ АКБ 60Ah (ЗНІМНИЙ)", desc: "+1 000 грн", badge: "+1 000 грн", price: 1000 }
             },
             tg_btn: "НАДІСЛАТИ ЗАЯВКУ В TELEGRAM ({price} ГРН)",
             tg_btn_base: "НАДІСЛАТИ ЗАЯВКУ В TELEGRAM",
@@ -266,16 +266,16 @@
         },
         en: {
             pills: {
-                1: { label: "1 DAY", sub: "day" },
-                2: { label: "2 DAYS", sub: "2 days" },
-                3: { label: "3 DAYS (WEEKEND)", sub: "weekend" },
-                7: { label: "7 DAYS (WEEK)", sub: "week" },
-                30: { label: "30 DAYS (MONTH)", sub: "month" }
+                1: { label: "1 DAY" },
+                2: { label: "2 DAYS" },
+                3: { label: "3 DAYS (WEEKEND)" },
+                7: { label: "7 DAYS (WEEK)" },
+                30: { label: "30 DAYS (MONTH)" }
             },
             addons: {
-                helmet: { title: "HELMET + PHONE MOUNT", desc: "+0 UAH / included", badge: "Included" },
-                battery: { title: "SECOND SPARE BATTERY", desc: "+{rate} UAH/day", prefix: "+" },
-                charger: { title: "FAST CHARGER 10A", desc: "+150 UAH (one-time)", badge: "+150 UAH" }
+                helmet: { title: "HELMET + PHONE MOUNT", desc: "+200 UAH", badge: "+200 UAH", price: 200 },
+                battery40: { title: "SECOND BATTERY 40Ah (REMOVABLE)", desc: "+800 UAH", badge: "+800 UAH", price: 800 },
+                battery60: { title: "SECOND BATTERY 60Ah (REMOVABLE)", desc: "+1,000 UAH", badge: "+1,000 UAH", price: 1000 }
             },
             tg_btn: "SEND APPLICATION TO TELEGRAM ({price} UAH)",
             tg_btn_base: "SEND APPLICATION TO TELEGRAM",

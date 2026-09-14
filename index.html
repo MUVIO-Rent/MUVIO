@@ -641,13 +641,6 @@
                                     <!-- Опції генеруються JS -->
                                 </select>
                             </div>
-                            <div class="flex items-center justify-between text-xs text-[#4B5563] mt-1.5 px-1 font-mono">
-                                <span>
-                                    <span class="lang-ua">Базовий тариф моделі:</span>
-                                    <span class="lang-en">Base model rate:</span>
-                                </span>
-                                <span id="calcBaseRateTxt" class="font-bold text-[#1D5D3B]">від 340 грн/доба</span>
-                            </div>
                         </div>
 
                         <!-- 2. Термін оренди -->
@@ -762,9 +755,6 @@
                                     <div id="resTotalPrice"
                                         class="font-brand font-bold text-2xl sm:text-3xl text-[#1D5D3B] mt-0.5">
                                         3 360 грн
-                                    </div>
-                                    <div id="resRateSubtitle" class="text-xs text-[#4B5563] font-mono mt-0.5">
-                                        Тариф: 480 грн / доба (на 7 дн.)
                                     </div>
                                 </div>
 
@@ -1486,19 +1476,18 @@
         const DISCRETE_DAYS = [1, 2, 3, 7, 30];
 
         const STANDARD_PERIODS = [
-            { days: 1, labelUa: "1 ДЕНЬ", labelEn: "1 DAY", subUa: "доба", subEn: "day" },
-            { days: 2, labelUa: "2 ДНІ", labelEn: "2 DAYS", subUa: "2 доби", subEn: "2 days" },
-            { days: 3, labelUa: "3 ДНІ (ВІКЕНД)", labelEn: "3 DAYS (WEEKEND)", subUa: "вікенд", subEn: "weekend" },
-            { days: 7, labelUa: "7 ДНІВ (ТИЖДЕНЬ)", labelEn: "7 DAYS (WEEK)", subUa: "тиждень", subEn: "week" },
-            { days: 30, labelUa: "30 ДНІВ (МІСЯЦЬ)", labelEn: "30 DAYS (MONTH)", subUa: "місяць", subEn: "month" }
+            { days: 1, labelUa: "1 ДЕНЬ", labelEn: "1 DAY" },
+            { days: 2, labelUa: "2 ДНІ", labelEn: "2 DAYS" },
+            { days: 3, labelUa: "3 ДНІ (ВІКЕНД)", labelEn: "3 DAYS (WEEKEND)" },
+            { days: 7, labelUa: "7 ДНІВ (ТИЖДЕНЬ)", labelEn: "7 DAYS (WEEK)" },
+            { days: 30, labelUa: "30 ДНІВ (МІСЯЦЬ)", labelEn: "30 DAYS (MONTH)" }
         ];
 
         let calcState = {
             modelKey: 'crosser-cr-13-1',
             days: 7,
-            hasHelmet: true,
-            hasExtraBattery: false,
-            hasFastCharger: false
+            hasHelmet: false,
+            batteryOption: 'none' // 'none' | '40ah' | '60ah'
         };
 
         let currentCatalogFilter = 'all';
@@ -1832,6 +1821,7 @@
         }
         window.onManualDaysChange = onManualDaysChange;
 
+        // Чисті кнопки строків оренди у 2 рядки без сміття
         function renderDurationPills() {
             const container = document.getElementById('durationPillsContainer');
             if (!container) return;
@@ -1840,34 +1830,24 @@
             const isEn = (window.getSiteSettings ? window.getSiteSettings().lang : 'ua') === 'en';
             const groupKey = getVehicleGroup(calcState.modelKey);
             const tier = TARIFF_TIERS[groupKey];
-            const currUnit = isEn ? 'UAH' : 'грн';
-            const rateUnit = isEn ? 'UAH/day' : 'грн/доба';
-            const totalPrefix = isEn ? 'Total:' : 'Разом:';
+            const currSign = isEn ? 'UAH' : '₴';
 
             STANDARD_PERIODS.forEach(p => {
                 const isSelected = (calcState.days === p.days);
                 const totalCost = tier.total[p.days];
-                const dailyCost = tier.daily[p.days];
                 const label = isEn ? p.labelEn : p.labelUa;
-                const sub = isEn ? p.subEn : p.subUa;
 
                 const btn = document.createElement('button');
                 btn.type = 'button';
                 btn.onclick = () => setCalcDuration(p.days);
-                btn.className = `p-2 sm:p-2.5 border-2 font-brand text-center chamfer-badge transition-all flex flex-col items-center justify-between cursor-pointer min-h-[92px] ${
+                btn.className = `calc-pill-btn p-2 sm:p-2.5 border-2 font-brand text-center chamfer-badge transition-all flex flex-col items-center justify-center cursor-pointer min-h-[66px] sm:min-h-[72px] ${
                     isSelected 
-                        ? 'border-[#1D5D3B] bg-[#1D5D3B] text-white shadow-md font-bold' 
+                        ? 'is-active border-[#1D5D3B] bg-[#1D5D3B] text-white shadow-md font-bold' 
                         : 'border-slate-300 bg-white text-[#111827] hover:border-[#1D5D3B]/60 hover:bg-[#1D5D3B]/5'
                 }`;
                 btn.innerHTML = `
-                    <div class="w-full">
-                        <span class="font-bold text-xs uppercase tracking-tight block text-center leading-tight">${label}</span>
-                        <span class="text-[10px] font-sans block text-center mt-0.5 ${isSelected ? 'text-emerald-200' : 'text-[#4B5563]'}">${sub}</span>
-                    </div>
-                    <div class="w-full pt-1 border-t ${isSelected ? 'border-emerald-600/60' : 'border-slate-200'} mt-1">
-                        <span class="text-[11px] font-mono block text-center ${isSelected ? 'text-white font-bold' : 'text-[#1D5D3B] font-bold'}">${dailyCost.toLocaleString(isEn ? 'en-US' : 'uk-UA')} ${rateUnit}</span>
-                        <span class="text-[10px] font-bold block text-center mt-0.5 ${isSelected ? 'text-emerald-300' : 'text-slate-700'}">${totalPrefix} ${totalCost.toLocaleString(isEn ? 'en-US' : 'uk-UA')} ${currUnit}</span>
-                    </div>
+                    <span class="font-bold text-xs uppercase tracking-tight block text-center leading-tight ${isSelected ? 'text-white' : 'text-[#111827]'}">${label}</span>
+                    <span class="font-extrabold text-sm sm:text-base block text-center mt-1.5 ${isSelected ? 'text-emerald-300' : 'text-[#1D5D3B]'}">${totalCost.toLocaleString(isEn ? 'en-US' : 'uk-UA')} ${currSign}</span>
                 `;
                 container.appendChild(btn);
             });
@@ -1887,84 +1867,97 @@
             }
         }
 
+        // Блок 3: Додаткові опції (Шолом +200 грн чекбокс, АКБ 40Ah +800 / 60Ah +1000 радіо)
         function renderAddonOptions() {
             const container = document.getElementById('rentalAddonsContainer');
             if (!container) return;
             container.innerHTML = '';
 
             const isEn = (window.getSiteSettings ? window.getSiteSettings().lang : 'ua') === 'en';
-            const dict = (window.MUVIO_CALC_I18N && window.MUVIO_CALC_I18N[isEn ? 'en' : 'ua']) || {
-                addons: {
-                    helmet: { title: "ШОЛОМ + ТРИМАЧ", desc: "+0 грн / включено", badge: "Включено" },
-                    battery: { title: "ДРУГИЙ ЗАПАСНИЙ АКБ", desc: "+{rate} грн/доба" },
-                    charger: { title: "ШВИДКА ЗАРЯДКА 10А", desc: "+150 грн (разово)", badge: "+150 грн" }
-                },
-                options_count: "обрано"
-            };
 
-            const model = RENTAL_TARIFFS[calcState.modelKey] || RENTAL_TARIFFS['crosser-cr-13-1'];
-            const isBike = model.type.includes('велосипед') || model.volt === '48V';
-            const extraBatDailyRate = isBike ? 80 : 120;
-            const currUnit = isEn ? 'UAH' : 'грн';
-
-            const addons = [
+            const options = [
                 {
-                    id: 'hasHelmet',
-                    title: dict.addons.helmet.title,
-                    desc: dict.addons.helmet.desc,
-                    checked: calcState.hasHelmet,
-                    priceText: dict.addons.helmet.badge
+                    id: 'helmet',
+                    type: 'checkbox',
+                    title: isEn ? "HELMET + PHONE MOUNT" : "ШОЛОМ + ТРИМАЧ ДЛЯ ТЕЛЕФОНУ",
+                    priceLabel: isEn ? "+200 UAH" : "+200 грн",
+                    isActive: calcState.hasHelmet,
+                    onToggle: () => {
+                        calcState.hasHelmet = !calcState.hasHelmet;
+                    }
                 },
                 {
-                    id: 'hasExtraBattery',
-                    title: dict.addons.battery.title,
-                    desc: dict.addons.battery.desc.replace('{rate}', extraBatDailyRate),
-                    checked: calcState.hasExtraBattery,
-                    priceText: `+${extraBatDailyRate * calcState.days} ${currUnit}`
+                    id: 'battery40',
+                    type: 'radio',
+                    title: isEn ? "SECOND BATTERY 40Ah (REMOVABLE)" : "ДРУГИЙ АКБ 40Ah (ЗНІМНИЙ)",
+                    priceLabel: isEn ? "+800 UAH" : "+800 грн",
+                    isActive: (calcState.batteryOption === '40ah'),
+                    onToggle: () => {
+                        calcState.batteryOption = (calcState.batteryOption === '40ah') ? 'none' : '40ah';
+                    }
                 },
                 {
-                    id: 'hasFastCharger',
-                    title: dict.addons.charger.title,
-                    desc: dict.addons.charger.desc,
-                    checked: calcState.hasFastCharger,
-                    priceText: dict.addons.charger.badge
+                    id: 'battery60',
+                    type: 'radio',
+                    title: isEn ? "SECOND BATTERY 60Ah (REMOVABLE)" : "ДРУГИЙ АКБ 60Ah (ЗНІМНИЙ)",
+                    priceLabel: isEn ? "+1,000 UAH" : "+1 000 грн",
+                    isActive: (calcState.batteryOption === '60ah'),
+                    onToggle: () => {
+                        calcState.batteryOption = (calcState.batteryOption === '60ah') ? 'none' : '60ah';
+                    }
                 }
             ];
 
-            addons.forEach(a => {
+            options.forEach(opt => {
                 const card = document.createElement('div');
-                card.className = `p-3 border-2 cursor-pointer chamfer-badge transition-all flex items-center justify-between ${
-                    a.checked 
-                        ? 'border-[#1D5D3B] bg-[#1D5D3B]/10 font-bold' 
+                card.className = `calc-addon-card p-3 border-2 cursor-pointer chamfer-badge transition-all flex items-center justify-between min-h-[64px] ${
+                    opt.isActive 
+                        ? 'is-active border-[#1D5D3B] bg-[#1D5D3B]/10 font-bold ring-1 ring-[#1D5D3B]' 
                         : 'border-slate-300 bg-white hover:border-[#1D5D3B]/50'
                 }`;
                 card.onclick = () => {
-                    calcState[a.id] = !calcState[a.id];
+                    opt.onToggle();
                     renderAddonOptions();
                     updateCalc();
                 };
+
+                let indicatorHtml = '';
+                if (opt.type === 'checkbox') {
+                    indicatorHtml = `
+                        <div class="w-5 h-5 rounded border-2 border-[#1D5D3B] flex items-center justify-center shrink-0 transition-colors ${opt.isActive ? 'bg-[#1D5D3B] text-white' : 'bg-white'}">
+                            ${opt.isActive ? '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>' : ''}
+                        </div>
+                    `;
+                } else {
+                    indicatorHtml = `
+                        <div class="w-5 h-5 rounded-full border-2 border-[#1D5D3B] flex items-center justify-center shrink-0 transition-colors bg-white">
+                            ${opt.isActive ? '<div class="w-2.5 h-2.5 bg-[#1D5D3B] rounded-full"></div>' : ''}
+                        </div>
+                    `;
+                }
+
                 card.innerHTML = `
-                    <div class="pr-2">
-                        <div class="text-xs font-brand uppercase text-[#111827] leading-tight">${a.title}</div>
-                        <div class="text-[11px] font-mono text-[#4B5563] mt-0.5">${a.desc}</div>
+                    <div class="pr-2 min-w-0">
+                        <div class="text-xs font-brand uppercase text-[#111827] leading-tight font-bold">${opt.title}</div>
+                        <div class="text-xs font-mono font-bold text-[#1D5D3B] mt-1">${opt.priceLabel}</div>
                     </div>
-                    <div class="w-4 h-4 rounded-full border-2 border-[#1D5D3B] flex items-center justify-center shrink-0 ${a.checked ? 'bg-[#1D5D3B]' : 'bg-white'}">
-                        ${a.checked ? '<div class="w-1.5 h-1.5 bg-white rounded-full"></div>' : ''}
-                    </div>
+                    ${indicatorHtml}
                 `;
                 container.appendChild(card);
             });
 
             let activeCount = 0;
             if (calcState.hasHelmet) activeCount++;
-            if (calcState.hasExtraBattery) activeCount++;
-            if (calcState.hasFastCharger) activeCount++;
+            if (calcState.batteryOption !== 'none') activeCount++;
             const countBadge = document.getElementById('optionsCountBadge');
             if (countBadge) {
-                countBadge.textContent = `${activeCount} ${dict.options_count}`;
+                countBadge.textContent = isEn
+                    ? `${activeCount} ${activeCount === 1 ? 'option active' : 'options active'}`
+                    : `${activeCount} ${activeCount === 1 ? 'опція активна' : (activeCount === 0 ? 'опцій обрано' : 'опції активні')}`;
             }
         }
 
+        // Перерахунок суми «РАЗОМ ДО ОПЛАТИ» та оновлення чека
         function updateCalc() {
             const model = RENTAL_TARIFFS[calcState.modelKey] || RENTAL_TARIFFS['crosser-cr-13-1'];
             const days = calcState.days || 1;
@@ -1996,22 +1989,15 @@
 
             const pricing = getRentalPricing(calcState.modelKey, days);
             const baseRentalCost = pricing.baseCost;
-            const dailyRate = pricing.dailyRate;
             const deposit = pricing.deposit;
 
-            if (document.getElementById('calcBaseRateTxt')) {
-                const groupKey = getVehicleGroup(calcState.modelKey);
-                const tier = TARIFF_TIERS[groupKey];
-                document.getElementById('calcBaseRateTxt').textContent = isEn 
-                    ? `from ~${tier.daily[30]} UAH/day (${tier.total[30]} UAH/mo)` 
-                    : `від ~${tier.daily[30]} грн/доба (${tier.total[30]} грн/міс)`;
-            }
+            // 2. Додаткові опції: Шлем (+200 грн), АКБ 40Ah (+800 грн) або 60Ah (+1 000 грн)
+            const helmetCost = calcState.hasHelmet ? 200 : 0;
+            let batteryCost = 0;
+            if (calcState.batteryOption === '40ah') batteryCost = 800;
+            else if (calcState.batteryOption === '60ah') batteryCost = 1000;
 
-            // 2. Додаткові опції
-            const extraBatDailyRate = isBike ? 80 : 120;
-            const batteryCost = calcState.hasExtraBattery ? (extraBatDailyRate * days) : 0;
-            const chargerCost = calcState.hasFastCharger ? 150 : 0;
-            const totalCost = baseRentalCost + batteryCost + chargerCost;
+            const totalCost = baseRentalCost + helmetCost + batteryCost;
 
             // 3. Оновлення правої колонки
             if (document.getElementById('resModelTitle')) document.getElementById('resModelTitle').textContent = model.name;
@@ -2026,23 +2012,21 @@
                 document.getElementById('resConfigSummary').textContent = `${model.power} | ${model.volt} | ${periodText}`;
             }
 
+            // Крупна сума зеленим акцентом
             if (document.getElementById('resTotalPrice')) {
                 document.getElementById('resTotalPrice').textContent = isEn
                     ? `${totalCost.toLocaleString('en-US')} UAH`
                     : `${totalCost.toLocaleString('uk-UA')} грн`;
             }
-            if (document.getElementById('resRateSubtitle')) {
-                document.getElementById('resRateSubtitle').textContent = isEn
-                    ? `Rate: ~${dailyRate.toLocaleString('en-US')} UAH / day (${days} d. total: ${baseRentalCost.toLocaleString('en-US')} UAH)`
-                    : `Тариф: ~${dailyRate.toLocaleString('uk-UA')} грн / доба (за ${days} дн.: ${baseRentalCost.toLocaleString('uk-UA')} грн)`;
-            }
 
+            // Застава окремим блоком
             if (document.getElementById('resDeposit')) {
                 document.getElementById('resDeposit').textContent = isEn
                     ? `${deposit.toLocaleString('en-US')} UAH`
                     : `${deposit.toLocaleString('uk-UA')} грн`;
             }
 
+            // Блок чека (тільки обрані позиції)
             const breakdownBox = document.getElementById('resBreakdownBox');
             if (breakdownBox) {
                 let periodName = `${days} ${isEn ? 'days' : 'дн.'}`;
@@ -2053,24 +2037,25 @@
                 else if (days === 30) periodName = isEn ? '30 days (month)' : '30 днів (місяць)';
 
                 let html = isEn
-                    ? `<div class="flex justify-between"><span>Base Rental (${periodName}):</span><span class="font-bold text-[#111827]">${baseRentalCost.toLocaleString('en-US')} UAH</span></div>`
-                    : `<div class="flex justify-between"><span>Оренда (${periodName}):</span><span class="font-bold text-[#111827]">${baseRentalCost.toLocaleString('uk-UA')} грн</span></div>`;
+                    ? `<div class="flex justify-between items-center py-0.5"><span>Rental (${periodName}):</span><span class="font-bold text-[#111827] dark:text-white">${baseRentalCost.toLocaleString('en-US')} UAH</span></div>`
+                    : `<div class="flex justify-between items-center py-0.5"><span>Оренда (${periodName}):</span><span class="font-bold text-[#111827] dark:text-white">${baseRentalCost.toLocaleString('uk-UA')} грн</span></div>`;
                 
-                if (batteryCost > 0) {
-                    html += isEn
-                        ? `<div class="flex justify-between"><span>Second Battery (${days} d. × ${extraBatDailyRate} UAH):</span><span class="font-bold text-[#1D5D3B]">+${batteryCost.toLocaleString('en-US')} UAH</span></div>`
-                        : `<div class="flex justify-between"><span>Другий АКБ (${days} дн. × ${extraBatDailyRate} грн):</span><span class="font-bold text-[#1D5D3B]">+${batteryCost.toLocaleString('uk-UA')} грн</span></div>`;
-                }
-                if (chargerCost > 0) {
-                    html += isEn
-                        ? `<div class="flex justify-between"><span>Fast Charger 10A:</span><span class="font-bold text-[#1D5D3B]">+${chargerCost.toLocaleString('en-US')} UAH</span></div>`
-                        : `<div class="flex justify-between"><span>Швидка зарядка 10A:</span><span class="font-bold text-[#1D5D3B]">+${chargerCost.toLocaleString('uk-UA')} грн</span></div>`;
-                }
                 if (calcState.hasHelmet) {
                     html += isEn
-                        ? `<div class="flex justify-between text-emerald-700 font-semibold"><span>Helmet + phone mount:</span><span>Included (0 UAH)</span></div>`
-                        : `<div class="flex justify-between text-emerald-700 font-semibold"><span>Шолом + тримач для телефона:</span><span>Включено (0 грн)</span></div>`;
+                        ? `<div class="flex justify-between items-center py-0.5 text-[#1D5D3B]"><span>Helmet + phone mount:</span><span class="font-bold">+200 UAH</span></div>`
+                        : `<div class="flex justify-between items-center py-0.5 text-[#1D5D3B]"><span>Шолом + тримач:</span><span class="font-bold">+200 грн</span></div>`;
                 }
+
+                if (calcState.batteryOption === '40ah') {
+                    html += isEn
+                        ? `<div class="flex justify-between items-center py-0.5 text-[#1D5D3B]"><span>Second Battery 40Ah:</span><span class="font-bold">+800 UAH</span></div>`
+                        : `<div class="flex justify-between items-center py-0.5 text-[#1D5D3B]"><span>Другий АКБ 40Ah:</span><span class="font-bold">+800 грн</span></div>`;
+                } else if (calcState.batteryOption === '60ah') {
+                    html += isEn
+                        ? `<div class="flex justify-between items-center py-0.5 text-[#1D5D3B]"><span>Second Battery 60Ah:</span><span class="font-bold">+1,000 UAH</span></div>`
+                        : `<div class="flex justify-between items-center py-0.5 text-[#1D5D3B]"><span>Другий АКБ 60Ah:</span><span class="font-bold">+1 000 грн</span></div>`;
+                }
+
                 breakdownBox.innerHTML = html;
             }
 
@@ -2115,12 +2100,11 @@
             const confirmed = window.confirm("Бажаєте перейти до Telegram-бота для оформлення заявки на оренду?");
             if (!confirmed) return;
             const pricing = getRentalPricing(calcState.modelKey, calcState.days);
-            const model = RENTAL_TARIFFS[calcState.modelKey] || RENTAL_TARIFFS['crosser-cr-13-1'];
-            const isBike = model.type.includes('велосипед') || model.volt === '48V';
-            const extraBatDailyRate = isBike ? 80 : 120;
-            const batteryCost = calcState.hasExtraBattery ? (extraBatDailyRate * calcState.days) : 0;
-            const chargerCost = calcState.hasFastCharger ? 150 : 0;
-            const total = pricing.baseCost + batteryCost + chargerCost;
+            const helmetCost = calcState.hasHelmet ? 200 : 0;
+            let batteryCost = 0;
+            if (calcState.batteryOption === '40ah') batteryCost = 800;
+            else if (calcState.batteryOption === '60ah') batteryCost = 1000;
+            const total = pricing.baseCost + helmetCost + batteryCost;
             const url = generateTelegramRentalLink(calcState.modelKey, calcState.days, total);
             window.location.href = url;
         }

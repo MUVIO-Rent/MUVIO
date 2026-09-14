@@ -198,6 +198,34 @@ html.theme-dark .text-\[\#1D5D3B\] {
     color: #10B981 !important;
 }
 
+/* Duration Pills & Addon Cards in Calculator */
+html.theme-dark .calc-pill-btn.is-active {
+    background-color: #1D5D3B !important;
+    border-color: #00E676 !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 4px 14px rgba(0, 230, 118, 0.25) !important;
+}
+html.theme-dark .calc-pill-btn:not(.is-active) {
+    background-color: #111413 !important;
+    border-color: #242826 !important;
+    color: #9CA3AF !important;
+}
+html.theme-dark .calc-pill-btn:not(.is-active):hover {
+    border-color: #1D5D3B !important;
+    color: #FFFFFF !important;
+}
+html.theme-dark .calc-addon-card.is-active {
+    background-color: #131A16 !important;
+    border-color: #00E676 !important;
+}
+html.theme-dark .calc-addon-card:not(.is-active) {
+    background-color: #111413 !important;
+    border-color: #242826 !important;
+}
+html.theme-dark .calc-addon-card:not(.is-active):hover {
+    border-color: rgba(0, 230, 118, 0.4) !important;
+}
+
 /* 6. Form Inputs, Selects & Textareas */
 html.theme-dark input:not([type="range"]),
 html.theme-dark select,
