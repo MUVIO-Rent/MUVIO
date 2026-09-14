@@ -448,7 +448,6 @@ html.theme-dark .bg-\[\#1D5D3B\].rounded-full {
 html, body {
     overscroll-behavior-y: auto !important;
     -webkit-overflow-scrolling: touch !important;
-    scroll-behavior: auto !important;
 }
 
 /* Strictly no universal transitions that cause reflow/jank on scroll */
@@ -682,5 +681,52 @@ html.theme-dark [data-status="paid"] {
     border: 1px solid rgba(29, 93, 59, 0.6) !important;
 }
 
+/* 19. Apple-like Smooth UX, Micro-Animations & Tactile Feedback */
+html {
+    scroll-behavior: smooth !important;
+}
 
+[id] {
+    scroll-margin-top: 5.5rem;
+}
 
+button, .chamfer-btn, .mobile-nav-link, a.btn, a.chamfer-btn, .calc-pill-btn, .calc-addon-card, .faq-trigger {
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+button:active, .chamfer-btn:active, a.chamfer-btn:active, .calc-pill-btn:active, .calc-addon-card:active, .faq-trigger:active, .mobile-nav-link:active {
+    transform: scale(0.98) !important;
+}
+
+/* 20. FAQ Section in Dark Theme */
+html.theme-dark #faq {
+    background-color: #000000 !important;
+    border-color: #1F2E26 !important;
+}
+
+html.theme-dark .faq-item {
+    background-color: #111413 !important;
+    border-color: #1F2E26 !important;
+}
+
+html.theme-dark .faq-item:hover {
+    border-color: rgba(0, 230, 118, 0.4) !important;
+}
+
+html.theme-dark .faq-trigger {
+    color: #FFFFFF !important;
+}
+
+html.theme-dark .faq-trigger.is-open {
+    color: #00E676 !important;
+}
+
+html.theme-dark .faq-icon-wrap {
+    background-color: #16221B !important;
+    color: #00E676 !important;
+}
+
+html.theme-dark .faq-content {
+    color: #9CA3AF !important;
+    border-color: #1F2E26 !important;
+}

@@ -249,6 +249,10 @@
                         <span class="lang-ua">УМОВИ ОРЕНДИ</span>
                         <span class="lang-en">TERMS</span>
                     </a>
+                    <a href="#faq"
+                        class="text-xs sm:text-[13px] font-medium tracking-normal text-[#111827] hover:text-[#1D5D3B] transition-colors py-1 px-2 leading-normal font-bold">
+                        <span>FAQ</span>
+                    </a>
                 </nav>
 
                 <!-- ПРАВА ЧАСТИНА: Профіль та Налаштування -->
@@ -418,6 +422,10 @@
                 <span class="lang-ua">УМОВИ ОРЕНДИ</span>
                 <span class="lang-en">TERMS</span>
             </a>
+            <a href="#faq"
+                class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-[#111827] hover:text-[#1D5D3B] py-2 px-2 transition-colors rounded font-bold">
+                <span>FAQ</span>
+            </a>
         </div>
     </header>
 
@@ -458,11 +466,11 @@
                         class="chamfer-btn w-full sm:w-auto bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-sm md:text-base uppercase tracking-widest px-8 py-4 border border-[#1D5D3B] flex items-center justify-center gap-3">
                         <span class="lang-ua">ОБРАТИ СКУТЕР</span>
                         <span class="lang-en">SELECT SCOOTER</span>
-                        <i data-lucide="arrow-down" class="w-5 h-5"></i>
+                        <i data-lucide="arrow-down" class="w-5 h-5 shrink-0"></i>
                     </a>
                     <a href="#calculator"
                         class="chamfer-btn w-full sm:w-auto bg-white hover:bg-slate-50 text-[#1D5D3B] font-brand font-bold text-sm md:text-base uppercase tracking-widest px-8 py-4 border-2 border-[#1D5D3B] flex items-center justify-center gap-3">
-                        <i data-lucide="calculator" class="w-5 h-5"></i>
+                        <i data-lucide="calculator" class="w-5 h-5 shrink-0"></i>
                         <span class="lang-ua">КАЛЬКУЛЯТОР ОРЕНДИ</span>
                         <span class="lang-en">RENTAL CALCULATOR</span>
                     </a>
@@ -1804,15 +1812,15 @@
                                 </div>
                             </label>
 
-                            <!-- DRAFT / PHOTO PREVIEW INTEGRATION -->
-                            <div class="chamfer-box bg-[#F8FAFC] border-2 border-[#1D5D3B]/25 p-3 mb-3 flex items-center justify-center overflow-hidden relative group min-h-[170px] sm:min-h-[210px]">
+                            <!-- PHOTO PREVIEW INTEGRATION -->
+                            <div class="relative rounded-xl overflow-hidden bg-[#F8FAFC] border-2 border-[#1D5D3B]/25 p-3 mb-3 flex items-center justify-center min-h-[170px] sm:min-h-[210px] group">
                                 <span id="calcVehicleBadge"
-                                    class="absolute top-2.5 left-2.5 text-[10px] font-brand font-bold uppercase tracking-wider px-2 py-0.5 bg-[#1D5D3B] text-white chamfer-badge shadow-sm">
-                                    <span class="lang-ua">ФЛАГМАН | 85 КМ/ГОД</span>
-                                    <span class="lang-en">FLAGSHIP | 85 KM/H</span>
+                                    class="absolute top-3 left-3 z-20 bg-[#131A16]/90 backdrop-blur-md text-[#00E676] border border-[#1D5D3B]/70 px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider shadow-sm">
+                                    <span class="lang-ua">85 КМ/ГОД</span>
+                                    <span class="lang-en">85 KM/H</span>
                                 </span>
                                 <img id="calcVehicleImg" src="images/crosser.jpg" alt="Обраний транспорт"
-                                    class="h-36 sm:h-44 w-auto object-contain transition-all duration-300 drop-shadow-md group-hover:scale-105">
+                                    class="relative z-0 h-36 sm:h-44 w-auto object-contain transition-all duration-300 drop-shadow-md group-hover:scale-105 pointer-events-none">
                             </div>
 
                             <div class="relative">
@@ -1839,8 +1847,8 @@
                             </label>
 
                             <!-- Кнопки швидкого вибору періоду: рівно 5 фіксованих кнопок -->
-                            <div class="grid grid-cols-2 sm:grid-cols-5 gap-2" id="durationPillsContainer">
-                                <!-- Опції генеруються JS: [1 ДЕНЬ] [2 ДНІ] [3 ДНІ] [7 ДНІВ (ТИЖДЕНЬ)] [28 ДНІВ (МІСЯЦЬ)] -->
+                            <div class="grid grid-cols-5 gap-1 sm:gap-2" id="durationPillsContainer">
+                                <!-- Опції генеруються JS: [1 ДЕНЬ] [2 ДНІ] [3 ДНІ] [7 ДНІВ] [28 ДНІВ] -->
                             </div>
 
                             <!-- Додатковий слайдер для дискретного вибору [1, 2, 3, 7, 28] з блокуванням 4-6 днів -->
@@ -2343,7 +2351,9 @@
 
                     <div class="space-y-4 text-sm text-[#111827]">
                         <div class="flex items-start gap-3">
-                            <i data-lucide="clock" class="w-5 h-5 text-[#1D5D3B] flex-shrink-0 mt-0.5"></i>
+                            <div class="w-8 h-8 rounded-lg bg-[#1D5D3B]/10 text-[#1D5D3B] flex items-center justify-center shrink-0 mt-0.5">
+                                <i data-lucide="clock" class="w-4 h-4 shrink-0"></i>
+                            </div>
                             <div>
                                 <div class="font-brand font-bold uppercase">
                                     <span class="lang-ua">ГРАФІК РОБОТИ СЕРВІСУ ТА ВИДАЧІ:</span>
@@ -2357,7 +2367,9 @@
                         </div>
 
                         <div class="flex items-start gap-3">
-                            <i data-lucide="message-square" class="w-5 h-5 text-[#1D5D3B] flex-shrink-0 mt-0.5"></i>
+                            <div class="w-8 h-8 rounded-lg bg-[#1D5D3B]/10 text-[#1D5D3B] flex items-center justify-center shrink-0 mt-0.5">
+                                <i data-lucide="message-square" class="w-4 h-4 shrink-0"></i>
+                            </div>
                             <div>
                                 <div class="font-brand font-bold uppercase">
                                     <span class="lang-ua">ПІДТРИМКА КЛІЄНТІВ:</span>
@@ -2367,15 +2379,17 @@
                                     <span class="lang-ua">Зв'язок з менеджером:</span><span class="lang-en">Contact manager:</span><br>
                                     <span class="lang-ua">Телеграм:</span><span class="lang-en">Telegram:</span> <a href="https://t.me/Muvio_Odesa" target="_blank"
                                         rel="noopener noreferrer"
-                                        class="hover:text-[#1D5D3B] transition-colors">@Muvio_Odesa</a><br>
+                                        class="hover:text-[#1D5D3B] transition-colors font-semibold">@Muvio_Odesa</a><br>
                                     <span class="lang-ua">Телефон:</span><span class="lang-en">Phone:</span> <a href="tel:+380638316361"
-                                        class="hover:text-[#1D5D3B] transition-colors">+38(063)-831-63-61</a>
+                                        class="hover:text-[#1D5D3B] transition-colors font-semibold">+38 (063) 831-63-61</a>
                                 </div>
                             </div>
                         </div>
 
                         <div class="flex items-start gap-3">
-                            <i data-lucide="file-check" class="w-5 h-5 text-[#1D5D3B] flex-shrink-0 mt-0.5"></i>
+                            <div class="w-8 h-8 rounded-lg bg-[#1D5D3B]/10 text-[#1D5D3B] flex items-center justify-center shrink-0 mt-0.5">
+                                <i data-lucide="file-check" class="w-4 h-4 shrink-0"></i>
+                            </div>
                             <div>
                                 <div class="font-brand font-bold uppercase">
                                     <span class="lang-ua">НЕОБХІДНІ ДОКУМЕНТИ:</span>
@@ -2390,8 +2404,9 @@
                     </div>
 
                     <div class="pt-4">
-                        <a href="https://t.me/muviobot" target="_blank" rel="noopener noreferrer"
-                            class="chamfer-btn w-full bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-sm uppercase tracking-widest py-3 px-6 text-center block">
+                        <a href="https://t.me/Muvio_Odesa" target="_blank" rel="noopener noreferrer"
+                            class="chamfer-btn w-full bg-[#229ED9] hover:bg-[#1e8bc0] text-white font-brand font-bold text-sm uppercase tracking-widest py-3.5 px-6 text-center flex items-center justify-center gap-2.5 shadow-md active:scale-[0.98]">
+                            <i data-lucide="send" class="w-4 h-4 shrink-0"></i>
                             <span class="lang-ua">НАПИСАТИ МЕНЕДЖЕРУ В TELEGRAM</span>
                             <span class="lang-en">MESSAGE MANAGER IN TELEGRAM</span>
                         </a>
@@ -2400,6 +2415,131 @@
 
             </div>
 
+        </div>
+    </section>
+
+    <!-- ==================== 6. ЧАСТІ ЗАПИТАННЯ (FAQ) ==================== -->
+    <section id="faq" class="py-16 md:py-24 bg-white border-b-2 border-[#1D5D3B] scroll-mt-20">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 border-x border-slate-200/60">
+            <div class="text-center space-y-3 mb-12">
+                <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#1D5D3B]/10 border border-[#1D5D3B] chamfer-badge">
+                    <span class="w-2 h-2 bg-[#1D5D3B]"></span>
+                    <span class="font-brand font-bold text-xs tracking-widest text-[#1D5D3B] uppercase">
+                        <span class="lang-ua">ВІДПОВІДІ НА ПОПУЛЯРНІ ПИТАННЯ</span>
+                        <span class="lang-en">FREQUENTLY ASKED QUESTIONS</span>
+                    </span>
+                </div>
+                <h2 class="font-brand font-bold text-2xl sm:text-3xl md:text-4xl uppercase tracking-tight text-[#111827]">
+                    <span class="lang-ua">ЧАСТІ ЗАПИТАННЯ ТА СЕРВІС</span>
+                    <span class="lang-en">FAQ & SERVICE POLICY</span>
+                </h2>
+                <p class="text-sm sm:text-base text-[#4B5563] max-w-2xl mx-auto">
+                    <span class="lang-ua">Все, що потрібно знати про умови прокату, безкоштовне технічне обслуговування та підмінний фонд MUVIO.</span>
+                    <span class="lang-en">Everything you need to know about rental terms, free maintenance, and MUVIO's replacement fleet.</span>
+                </p>
+            </div>
+
+            <div class="space-y-4" id="faqAccordion">
+                <!-- 1. Документи для оренди -->
+                <div class="faq-item bg-[#F8FAFC] border-2 border-[#1D5D3B]/30 hover:border-[#1D5D3B] rounded-xl overflow-hidden transition-all duration-300 shadow-sm">
+                    <button type="button" class="faq-trigger w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4 font-brand font-bold text-base sm:text-lg text-[#111827] cursor-pointer" onclick="toggleFaq(0)" aria-expanded="false">
+                        <span class="flex items-center gap-3">
+                            <span class="w-7 h-7 rounded-lg bg-[#1D5D3B]/10 text-[#1D5D3B] flex items-center justify-center shrink-0 text-xs font-mono font-bold">01</span>
+                            <span class="lang-ua">Які документи потрібні для оренди?</span>
+                            <span class="lang-en">What documents are required for rental?</span>
+                        </span>
+                        <div class="w-7 h-7 rounded-full bg-[#1D5D3B]/10 flex items-center justify-center shrink-0 text-[#1D5D3B] transition-transform duration-300 faq-icon">
+                            <i data-lucide="chevron-down" class="w-4 h-4 shrink-0"></i>
+                        </div>
+                    </button>
+                    <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out px-4 sm:px-5 pb-0 text-sm sm:text-base text-[#4B5563] leading-relaxed border-t border-transparent">
+                        <p class="py-3">
+                            <span class="lang-ua">Паспорт (або ID-картка), ІПН, вік від 18 років та встановлений додаток Telegram для підписання договору й керування орендою.</span>
+                            <span class="lang-en">Passport (or ID card), Tax ID (ITN), age 18+, and the Telegram app installed for signing the agreement and managing your rental.</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 2. ТО у вартості -->
+                <div class="faq-item bg-[#F8FAFC] border-2 border-[#1D5D3B]/30 hover:border-[#1D5D3B] rounded-xl overflow-hidden transition-all duration-300 shadow-sm">
+                    <button type="button" class="faq-trigger w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4 font-brand font-bold text-base sm:text-lg text-[#111827] cursor-pointer" onclick="toggleFaq(1)" aria-expanded="false">
+                        <span class="flex items-center gap-3">
+                            <span class="w-7 h-7 rounded-lg bg-[#1D5D3B]/10 text-[#1D5D3B] flex items-center justify-center shrink-0 text-xs font-mono font-bold">02</span>
+                            <span class="lang-ua">Чи входить технічне обслуговування у вартість?</span>
+                            <span class="lang-en">Is maintenance included in the price?</span>
+                        </span>
+                        <div class="w-7 h-7 rounded-full bg-[#1D5D3B]/10 flex items-center justify-center shrink-0 text-[#1D5D3B] transition-transform duration-300 faq-icon">
+                            <i data-lucide="chevron-down" class="w-4 h-4 shrink-0"></i>
+                        </div>
+                    </button>
+                    <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out px-4 sm:px-5 pb-0 text-sm sm:text-base text-[#4B5563] leading-relaxed border-t border-transparent">
+                        <p class="py-3">
+                            <span class="lang-ua">Так, 100% планового ТО, регламентні роботи та заміна зношених розхідників проводяться нашими майстрами в хабі безкоштовно.</span>
+                            <span class="lang-en">Yes, 100% of scheduled maintenance, routine inspections, and replacement of worn parts are performed by our technicians at the hub free of charge.</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 3. Прокол колеса / поломка -->
+                <div class="faq-item bg-[#F8FAFC] border-2 border-[#1D5D3B]/30 hover:border-[#1D5D3B] rounded-xl overflow-hidden transition-all duration-300 shadow-sm">
+                    <button type="button" class="faq-trigger w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4 font-brand font-bold text-base sm:text-lg text-[#111827] cursor-pointer" onclick="toggleFaq(2)" aria-expanded="false">
+                        <span class="flex items-center gap-3">
+                            <span class="w-7 h-7 rounded-lg bg-[#1D5D3B]/10 text-[#1D5D3B] flex items-center justify-center shrink-0 text-xs font-mono font-bold">03</span>
+                            <span class="lang-ua">Що робити у разі проколу колеса чи поломки (шиномонтаж)?</span>
+                            <span class="lang-en">What to do in case of a flat tire or breakdown (tire repair)?</span>
+                        </span>
+                        <div class="w-7 h-7 rounded-full bg-[#1D5D3B]/10 flex items-center justify-center shrink-0 text-[#1D5D3B] transition-transform duration-300 faq-icon">
+                            <i data-lucide="chevron-down" class="w-4 h-4 shrink-0"></i>
+                        </div>
+                    </button>
+                    <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out px-4 sm:px-5 pb-0 text-sm sm:text-base text-[#4B5563] leading-relaxed border-t border-transparent">
+                        <p class="py-3">
+                            <span class="lang-ua">Зверніться до нашого сервісного центру (вул. Приморська, 22) або напишіть у бот. Заміна покришок, камер та ремонт безкамерної гуми виконуються на місці майстрами сервісу.</span>
+                            <span class="lang-en">Contact our service center (22 Prymorska St) or message our Telegram bot. Tire replacements, inner tube fixes, and tubeless tire repairs are carried out on-site by our service technicians.</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 4. Підмінний транспорт -->
+                <div class="faq-item bg-[#F8FAFC] border-2 border-[#1D5D3B]/30 hover:border-[#1D5D3B] rounded-xl overflow-hidden transition-all duration-300 shadow-sm">
+                    <button type="button" class="faq-trigger w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4 font-brand font-bold text-base sm:text-lg text-[#111827] cursor-pointer" onclick="toggleFaq(3)" aria-expanded="false">
+                        <span class="flex items-center gap-3">
+                            <span class="w-7 h-7 rounded-lg bg-[#1D5D3B]/10 text-[#1D5D3B] flex items-center justify-center shrink-0 text-xs font-mono font-bold">04</span>
+                            <span class="lang-ua">Чи надається підмінний транспорт на час ремонту?</span>
+                            <span class="lang-en">Is a replacement vehicle provided during repairs?</span>
+                        </span>
+                        <div class="w-7 h-7 rounded-full bg-[#1D5D3B]/10 flex items-center justify-center shrink-0 text-[#1D5D3B] transition-transform duration-300 faq-icon">
+                            <i data-lucide="chevron-down" class="w-4 h-4 shrink-0"></i>
+                        </div>
+                    </button>
+                    <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out px-4 sm:px-5 pb-0 text-sm sm:text-base text-[#4B5563] leading-relaxed border-t border-transparent">
+                        <p class="py-3">
+                            <span class="lang-ua">Так, у разі тривалого планового ТО або складного ремонту ми оперативно видаємо підмінний скутер із парку, щоб ви не втрачали робочий час.</span>
+                            <span class="lang-en">Yes, in case of prolonged scheduled maintenance or complex repairs, we promptly issue a replacement scooter from our fleet so you don't lose working time.</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 5. Застава -->
+                <div class="faq-item bg-[#F8FAFC] border-2 border-[#1D5D3B]/30 hover:border-[#1D5D3B] rounded-xl overflow-hidden transition-all duration-300 shadow-sm">
+                    <button type="button" class="faq-trigger w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4 font-brand font-bold text-base sm:text-lg text-[#111827] cursor-pointer" onclick="toggleFaq(4)" aria-expanded="false">
+                        <span class="flex items-center gap-3">
+                            <span class="w-7 h-7 rounded-lg bg-[#1D5D3B]/10 text-[#1D5D3B] flex items-center justify-center shrink-0 text-xs font-mono font-bold">05</span>
+                            <span class="lang-ua">Як нараховується та повертається застава?</span>
+                            <span class="lang-en">How is the deposit charged and refunded?</span>
+                        </span>
+                        <div class="w-7 h-7 rounded-full bg-[#1D5D3B]/10 flex items-center justify-center shrink-0 text-[#1D5D3B] transition-transform duration-300 faq-icon">
+                            <i data-lucide="chevron-down" class="w-4 h-4 shrink-0"></i>
+                        </div>
+                    </button>
+                    <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out px-4 sm:px-5 pb-0 text-sm sm:text-base text-[#4B5563] leading-relaxed border-t border-transparent">
+                        <p class="py-3">
+                            <span class="lang-ua">Застава вноситься при підписанні договору (4 500 грн для Crosser CR-13, 4 000 грн для інших скутерів, 3 000 грн для електровелосипедів) і повертається в повному обсязі після завершення оренди та перевірки техніки.</span>
+                            <span class="lang-en">The deposit is paid upon signing the agreement (4,500 UAH for Crosser CR-13, 4,000 UAH for other scooters, 3,000 UAH for e-bikes) and is fully refunded upon completion of the rental and vehicle inspection.</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -2425,16 +2565,22 @@
                         </div>
                     </div>
                     <div class="space-y-2 text-xs text-emerald-100 font-sans pt-1">
-                        <p class="flex items-center gap-2">
-                            <i data-lucide="mail" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                        <p class="flex items-center gap-2.5">
+                            <span class="w-6 h-6 rounded-md bg-emerald-800/60 flex items-center justify-center shrink-0 text-emerald-300">
+                                <i data-lucide="mail" class="w-3.5 h-3.5 shrink-0"></i>
+                            </span>
                             <a href="mailto:muviorent@gmail.com" class="hover:text-white transition-colors">muviorent@gmail.com</a>
                         </p>
-                        <p class="flex items-center gap-2">
-                            <i data-lucide="phone" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                        <p class="flex items-center gap-2.5">
+                            <span class="w-6 h-6 rounded-md bg-emerald-800/60 flex items-center justify-center shrink-0 text-emerald-300">
+                                <i data-lucide="phone" class="w-3.5 h-3.5 shrink-0"></i>
+                            </span>
                             <a href="tel:+380638316361" class="hover:text-white transition-colors font-semibold">+38 (063) 831-63-61</a>
                         </p>
-                        <p class="flex items-start gap-2">
-                            <i data-lucide="map-pin" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+                        <p class="flex items-start gap-2.5">
+                            <span class="w-6 h-6 rounded-md bg-emerald-800/60 flex items-center justify-center shrink-0 text-emerald-300 mt-0.5">
+                                <i data-lucide="map-pin" class="w-3.5 h-3.5 shrink-0"></i>
+                            </span>
                             <span>
                                 <span class="lang-ua">м. Одеса, вул. Приморська, 22</span>
                                 <span class="lang-en">Odesa, Prymorska St, 22</span>
@@ -2507,16 +2653,21 @@
 
     <!-- ==================== JAVASCRIPT ==================== -->
     <script>
-        // Скидання автоскролу: сторінка відкривається строго зверху на Hero
+        // Скидання автоскролу: сторінка відкривається зверху на Hero, або плавно до хешу
         if (history.scrollRestoration) {
             history.scrollRestoration = 'manual';
         }
         if (!window.location.hash || window.location.hash === '#') {
             window.scrollTo(0, 0);
+        } else {
+            setTimeout(() => {
+                const target = document.querySelector(window.location.hash);
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 250);
         }
 
         // 1. АВТОПАРК З РЕАЛЬНИМИ ЦІНАМИ В ЗБОРІ
-        const FLEET = [{ "key": "crosser_cr13_1", "name": "Crosser CR-13 №1", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 160 км", "speed": "85 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 1000, "price_week": 2500, "price_month": 8500, "deposit": 4500, "buyout_available": true, "buyout_base_price": 80000, "image": "images/crosser.jpg", "badge": "ФЛАГМАН | 85 КМ/ГОД", "is_top": true, "power": "2000W" }, { "key": "crosser_cr20", "name": "Crosser CR-20", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 160 км", "speed": "75 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 1000, "price_week": 2500, "price_month": 8500, "deposit": 4500, "buyout_available": true, "buyout_base_price": 77000, "image": "images/crosser-cr-20.jpg", "badge": "ТОП ПОТУЖНІСТЬ", "is_top": true, "power": "2500W" }, { "key": "aima_a700", "name": "Aima A700", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 150 км", "speed": "47 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 70000, "image": "images/a700.jpg", "badge": "ПРЕМІУМ КОМФОРТ", "is_top": true, "power": "1200W" }, { "key": "aima_f606_1", "name": "Aima F606 №1", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 100 км", "speed": "70 км/год", "charging": "10Ач (4 години)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 60000, "image": "images/f606.jpg", "badge": "ХІТ ПРОКАТУ", "is_top": true, "power": "1200W" }, { "key": "aima_a715", "name": "Aima A715", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 150 км", "speed": "65 км/год", "charging": "10Ач (4 години)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 68000, "image": "images/a715.jpg", "badge": "НАДІЙНИЙ", "is_top": false, "power": "1200W" }, { "key": "aima_journey", "name": "Aima Journey", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 160 км", "speed": "60 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 68000, "image": "images/journey.jpg", "badge": "ДАЛЕКІ ДИСТАНЦІЇ", "is_top": false, "power": "1200W" }, { "key": "aima_f606_2", "name": "Aima F606 №2", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 130 км", "speed": "70 км/год", "charging": "10Ач (4 години)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 60000, "image": "images/f606-2.jpg", "badge": "ЗБІЛЬШЕНИЙ ХІД", "is_top": false, "power": "1200W" }, { "key": "crosser_cr13_2", "name": "Crosser CR-13 №2", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 160 км", "speed": "85 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 1000, "price_week": 2500, "price_month": 8500, "deposit": 4500, "buyout_available": true, "buyout_base_price": 80000, "image": "images/crosser-cr-13-2.jpg", "badge": "85 КМ/ГОД", "is_top": false, "power": "2000W" }, { "key": "aima_mine", "name": "Aima Mine", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "60V", "range": "до 130 км", "speed": "55 км/год", "charging": "7Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 60000, "image": "images/mine.jpg", "badge": "КОМПАКТНИЙ", "is_top": false, "power": "800W" }, { "key": "like_bike_n5", "name": "Like Bike N5", "category": "bike", "type": "🚲 Електровелосипед", "voltage": "60V", "range": "до 130 км", "speed": "65 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 800, "price_week": 1800, "price_month": 6000, "deposit": 3000, "buyout_available": true, "buyout_base_price": 57000, "image": "images/like-bike-n5.jpg", "badge": "МАНЕВРЕНИЙ", "is_top": false, "power": "1000W" }, { "key": "aima_mine_plus", "name": "Aima Mine Plus", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "60V", "range": "до 130 км", "speed": "60 км/год", "charging": "7Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 55000, "image": "images/mine-plus.jpg", "badge": "PLUS СЕРІЯ", "is_top": false, "power": "800W" }, { "key": "aima_leopard", "name": "Aima Leopard", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 150 км", "speed": "48 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 50000, "image": "images/leopard.jpg", "badge": "КЛАСИКА", "is_top": false, "power": "1200W" }, { "key": "like_bike_bruser_1", "name": "Like Bike Bruiser №1", "category": "bike", "type": "🚲 Електровелосипед", "voltage": "48V", "range": "до 80 км", "speed": "45 км/год", "charging": "7Ач (4 години)", "battery": "10Ah-40Ah (Знімна)", "price_day": 800, "price_week": 1800, "price_month": 6000, "deposit": 3000, "buyout_available": true, "buyout_base_price": 28000, "image": "images/like-bike-bruiser-1.jpg", "badge": "РАМА 180 КГ", "is_top": false, "power": "500W" }, { "key": "like_bike_bruser_2", "name": "Like Bike Bruiser №2", "category": "bike", "type": "🚲 Електровелосипед", "voltage": "48V", "range": "до 80 км", "speed": "45 км/год", "charging": "7Ач (4 години)", "battery": "10Ah-40Ah (Знімна)", "price_day": 800, "price_week": 1800, "price_month": 6000, "deposit": 3000, "buyout_available": true, "buyout_base_price": 28000, "image": "images/like-bike-bruiser-2.jpg", "badge": "РАМА 180 КГ", "is_top": false, "power": "500W" }, { "key": "ado_a20f", "name": "ADO A20F", "category": "bike", "type": "🚲 Електровелосипед", "voltage": "48V", "range": "до 150 км", "speed": "40 км/год", "charging": "10Ач (4 години)", "battery": "10Ah-40Ah (Знімна)", "price_day": 800, "price_week": 1800, "price_month": 6000, "deposit": 3000, "buyout_available": true, "buyout_base_price": 28000, "image": "images/ado-a20f.jpg", "badge": "ФЕТБАЙК", "is_top": false, "power": "250W" }];
+        const FLEET = [{ "key": "crosser_cr13_1", "name": "Crosser CR-13 №1", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 160 км", "speed": "85 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 1000, "price_week": 2500, "price_month": 8500, "deposit": 4500, "buyout_available": true, "buyout_base_price": 80000, "image": "images/crosser.jpg", "badge": "85 КМ/ГОД", "is_top": true, "power": "2000W" }, { "key": "crosser_cr20", "name": "Crosser CR-20", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 160 км", "speed": "75 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 1000, "price_week": 2500, "price_month": 8500, "deposit": 4500, "buyout_available": true, "buyout_base_price": 77000, "image": "images/crosser-cr-20.jpg", "badge": "ТОП ПОТУЖНІСТЬ", "is_top": true, "power": "2500W" }, { "key": "aima_a700", "name": "Aima A700", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 150 км", "speed": "47 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 70000, "image": "images/a700.jpg", "badge": "ПРЕМІУМ КОМФОРТ", "is_top": true, "power": "1200W" }, { "key": "aima_f606_1", "name": "Aima F606 №1", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 100 км", "speed": "70 км/год", "charging": "10Ач (4 години)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 60000, "image": "images/f606.jpg", "badge": "ХІТ ПРОКАТУ", "is_top": true, "power": "1200W" }, { "key": "aima_a715", "name": "Aima A715", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 150 км", "speed": "65 км/год", "charging": "10Ач (4 години)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 68000, "image": "images/a715.jpg", "badge": "НАДІЙНИЙ", "is_top": false, "power": "1200W" }, { "key": "aima_journey", "name": "Aima Journey", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 160 км", "speed": "60 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 68000, "image": "images/journey.jpg", "badge": "ДАЛЕКІ ДИСТАНЦІЇ", "is_top": false, "power": "1200W" }, { "key": "aima_f606_2", "name": "Aima F606 №2", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 130 км", "speed": "70 км/год", "charging": "10Ач (4 години)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 60000, "image": "images/f606-2.jpg", "badge": "ЗБІЛЬШЕНИЙ ХІД", "is_top": false, "power": "1200W" }, { "key": "crosser_cr13_2", "name": "Crosser CR-13 №2", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 160 км", "speed": "85 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 1000, "price_week": 2500, "price_month": 8500, "deposit": 4500, "buyout_available": true, "buyout_base_price": 80000, "image": "images/crosser-cr-13-2.jpg", "badge": "85 КМ/ГОД", "is_top": false, "power": "2000W" }, { "key": "aima_mine", "name": "Aima Mine", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "60V", "range": "до 130 км", "speed": "55 км/год", "charging": "7Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 60000, "image": "images/mine.jpg", "badge": "КОМПАКТНИЙ", "is_top": false, "power": "800W" }, { "key": "like_bike_n5", "name": "Like Bike N5", "category": "bike", "type": "🚲 Електровелосипед", "voltage": "60V", "range": "до 130 км", "speed": "65 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 800, "price_week": 1800, "price_month": 6000, "deposit": 3000, "buyout_available": true, "buyout_base_price": 57000, "image": "images/like-bike-n5.jpg", "badge": "МАНЕВРЕНИЙ", "is_top": false, "power": "1000W" }, { "key": "aima_mine_plus", "name": "Aima Mine Plus", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "60V", "range": "до 130 км", "speed": "60 км/год", "charging": "7Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 55000, "image": "images/mine-plus.jpg", "badge": "PLUS СЕРІЯ", "is_top": false, "power": "800W" }, { "key": "aima_leopard", "name": "Aima Leopard", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 150 км", "speed": "48 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 50000, "image": "images/leopard.jpg", "badge": "КЛАСИКА", "is_top": false, "power": "1200W" }, { "key": "like_bike_bruser_1", "name": "Like Bike Bruiser №1", "category": "bike", "type": "🚲 Електровелосипед", "voltage": "48V", "range": "до 80 км", "speed": "45 км/год", "charging": "7Ач (4 години)", "battery": "10Ah-40Ah (Знімна)", "price_day": 800, "price_week": 1800, "price_month": 6000, "deposit": 3000, "buyout_available": true, "buyout_base_price": 28000, "image": "images/like-bike-bruiser-1.jpg", "badge": "РАМА 180 КГ", "is_top": false, "power": "500W" }, { "key": "like_bike_bruser_2", "name": "Like Bike Bruiser №2", "category": "bike", "type": "🚲 Електровелосипед", "voltage": "48V", "range": "до 80 км", "speed": "45 км/год", "charging": "7Ач (4 години)", "battery": "10Ah-40Ah (Знімна)", "price_day": 800, "price_week": 1800, "price_month": 6000, "deposit": 3000, "buyout_available": true, "buyout_base_price": 28000, "image": "images/like-bike-bruiser-2.jpg", "badge": "РАМА 180 КГ", "is_top": false, "power": "500W" }, { "key": "ado_a20f", "name": "ADO A20F", "category": "bike", "type": "🚲 Електровелосипед", "voltage": "48V", "range": "до 150 км", "speed": "40 км/год", "charging": "10Ач (4 години)", "battery": "10Ah-40Ah (Знімна)", "price_day": 800, "price_week": 1800, "price_month": 6000, "deposit": 3000, "buyout_available": true, "buyout_base_price": 28000, "image": "images/ado-a20f.jpg", "badge": "ФЕТБАЙК", "is_top": false, "power": "250W" }];
 
         // 2. СТУПЕНЧАТА ТАРИФНА СІТКА ПО КАТЕГОРИЯХ (ГРУПИ А, Б, В)
         const TARIFF_TIERS = {
@@ -2559,7 +2710,7 @@
                 name: "Crosser CR-13 №1",
                 power: "2000W", volt: "72V", type: "🛵 Скутер",
                 image: "images/crosser.jpg",
-                badge: "ФЛАГМАН | 85 КМ/ГОД",
+                badge: "85 КМ/ГОД",
                 group: "groupA"
             },
             "crosser-cr-13-2": {
@@ -2668,8 +2819,8 @@
             { days: 1, labelUa: "1 ДЕНЬ", labelEn: "1 DAY" },
             { days: 2, labelUa: "2 ДНІ", labelEn: "2 DAYS" },
             { days: 3, labelUa: "3 ДНІ", labelEn: "3 DAYS" },
-            { days: 7, labelUa: "7 ДНІВ (ТИЖДЕНЬ)", labelEn: "7 DAYS (WEEK)" },
-            { days: 28, labelUa: "28 ДНІВ (МІСЯЦЬ)", labelEn: "28 DAYS (MONTH)" }
+            { days: 7, labelUa: "7 ДНІВ", labelEn: "7 DAYS" },
+            { days: 28, labelUa: "28 ДНІВ", labelEn: "28 DAYS" }
         ];
 
         let calcState = {
@@ -3059,14 +3210,14 @@
                 const btn = document.createElement('button');
                 btn.type = 'button';
                 btn.onclick = () => setCalcDuration(p.days);
-                btn.className = `calc-pill-btn p-2 sm:p-2.5 border-2 font-brand text-center chamfer-badge transition-all flex flex-col items-center justify-center cursor-pointer min-h-[66px] sm:min-h-[72px] ${
+                btn.className = `calc-pill-btn px-1 py-2 sm:px-2.5 sm:py-2.5 border-2 font-brand text-center chamfer-badge transition-all flex flex-col items-center justify-center cursor-pointer min-h-[66px] sm:min-h-[72px] ${
                     isSelected 
                         ? 'is-active border-[#1D5D3B] bg-[#1D5D3B] text-white shadow-md font-bold' 
                         : 'border-slate-300 bg-white text-[#111827] hover:border-[#1D5D3B]/60 hover:bg-[#1D5D3B]/5'
                 }`;
                 btn.innerHTML = `
-                    <span class="font-bold text-xs uppercase tracking-tight block text-center leading-tight ${isSelected ? 'text-white' : 'text-[#111827]'}">${label}</span>
-                    <span class="font-extrabold text-sm sm:text-base block text-center mt-1.5 ${isSelected ? 'text-emerald-300' : 'text-[#1D5D3B]'}">${totalCost.toLocaleString(isEn ? 'en-US' : 'uk-UA')} ${currSign}</span>
+                    <span class="font-bold text-[10px] sm:text-xs uppercase tracking-tight block text-center leading-tight ${isSelected ? 'text-white' : 'text-[#111827]'}">${label}</span>
+                    <span class="font-extrabold text-xs sm:text-sm md:text-base block text-center mt-1 sm:mt-1.5 whitespace-nowrap ${isSelected ? 'text-emerald-300' : 'text-[#1D5D3B]'}">${totalCost.toLocaleString(isEn ? 'en-US' : 'uk-UA')} ${currSign}</span>
                 `;
                 container.appendChild(btn);
             });
@@ -3203,7 +3354,10 @@
                     : model.type;
             }
             if (document.getElementById('calcVehicleBadge')) {
-                document.getElementById('calcVehicleBadge').textContent = isEn ? 'FLAGSHIP | 85 KM/H' : model.badge;
+                const bText = model.badge || (isBike ? 'ЕЛЕКТРОВЕЛОСИПЕД' : 'ЕЛЕКТРОСКУТЕР');
+                document.getElementById('calcVehicleBadge').textContent = isEn 
+                    ? (bText === '85 КМ/ГОД' ? '85 KM/H' : (isBike ? 'E-BIKE' : 'E-SCOOTER')) 
+                    : bText;
             }
 
             const pricing = getRentalPricing(calcState.modelKey, days);
@@ -3408,6 +3562,68 @@
             });
         }
 
+        // ==================== FAQ ACCORDION LOGIC ====================
+        function toggleFaq(index) {
+            const accordion = document.getElementById('faqAccordion');
+            if (!accordion) return;
+            const items = accordion.querySelectorAll('.faq-item');
+            if (!items[index]) return;
+
+            const targetItem = items[index];
+            const trigger = targetItem.querySelector('.faq-trigger');
+            const content = targetItem.querySelector('.faq-content');
+            const icon = targetItem.querySelector('.faq-icon');
+            const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+
+            // Закрити всі інші вкладки для чистого UX
+            items.forEach((item, i) => {
+                if (i !== index) {
+                    const tr = item.querySelector('.faq-trigger');
+                    const co = item.querySelector('.faq-content');
+                    const ic = item.querySelector('.faq-icon');
+                    if (tr) tr.setAttribute('aria-expanded', 'false');
+                    if (co) {
+                        co.style.maxHeight = '0px';
+                        co.classList.remove('pb-4');
+                    }
+                    if (ic) ic.style.transform = 'rotate(0deg)';
+                }
+            });
+
+            if (isExpanded) {
+                trigger.setAttribute('aria-expanded', 'false');
+                content.style.maxHeight = '0px';
+                content.classList.remove('pb-4');
+                if (icon) icon.style.transform = 'rotate(0deg)';
+            } else {
+                trigger.setAttribute('aria-expanded', 'true');
+                content.classList.add('pb-4');
+                content.style.maxHeight = (content.scrollHeight + 32) + 'px';
+                if (icon) icon.style.transform = 'rotate(180deg)';
+            }
+        }
+        window.toggleFaq = toggleFaq;
+
+        // Кінематографічно плавний Apple-перехід до якорів
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (!href || href === '#' || href.length <= 1) return;
+                const target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    const mMenu = document.getElementById('mobile-menu') || document.getElementById('mobileMenu');
+                    if (mMenu && !mMenu.classList.contains('hidden')) {
+                        mMenu.classList.add('hidden');
+                    }
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    if (history.pushState) {
+                        history.pushState(null, null, href);
+                    }
+                }
+            });
+        });
+
 
 
         // Оновлення імені користувача в шапці з даних сесії (muvio_active_user)
@@ -3559,6 +3775,11 @@
             hidePreloader();
             if (!window.location.hash || window.location.hash === '#') {
                 window.scrollTo(0, 0);
+            } else {
+                setTimeout(() => {
+                    const target = document.querySelector(window.location.hash);
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 200);
             }
         });
     </script>

@@ -6905,6 +6905,7 @@ async def api_user_profile(request):
                 if r_row:
                     r_dict = dict(r_row)
                     if r_dict.get("status") not in ("cancelled", "rejected"):
+                        v_name = r_dict.get("vehicle_info") or "Aima F606"
                         v_lower = v_name.lower()
                         if "f606" in v_lower:
                             v_img = "images/f606.jpg"

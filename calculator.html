@@ -194,6 +194,10 @@
                         <span class="lang-ua">УМОВИ ОРЕНДИ</span>
                         <span class="lang-en">TERMS</span>
                     </a>
+                    <a href="index.html#faq"
+                        class="text-xs sm:text-[13px] font-medium tracking-normal text-[#111827] hover:text-[#1D5D3B] transition-colors py-1 px-2 leading-normal font-bold">
+                        <span>FAQ</span>
+                    </a>
                 </nav>
 
                 <!-- ПРАВА ЧАСТИНА: Профіль та Налаштування -->
@@ -362,6 +366,10 @@
                 <span class="lang-ua">УМОВИ ОРЕНДИ</span>
                 <span class="lang-en">TERMS</span>
             </a>
+            <a href="index.html#faq"
+                class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-[#111827] hover:text-[#1D5D3B] py-2.5 px-2 transition-colors font-bold">
+                <span>FAQ</span>
+            </a>
         </div>
     </header>
 
@@ -413,15 +421,15 @@
                                 </div>
                             </label>
 
-                            <!-- DRAFT / PHOTO PREVIEW INTEGRATION -->
-                            <div class="chamfer-box bg-[#F8FAFC] border-2 border-[#1D5D3B]/25 p-3 mb-3 flex items-center justify-center overflow-hidden relative group min-h-[170px] sm:min-h-[210px]">
+                            <!-- PHOTO PREVIEW INTEGRATION -->
+                            <div class="relative rounded-xl overflow-hidden bg-[#F8FAFC] border-2 border-[#1D5D3B]/25 p-3 mb-3 flex items-center justify-center min-h-[170px] sm:min-h-[210px] group">
                                 <span id="calcVehicleBadge"
-                                    class="absolute top-2.5 left-2.5 text-[10px] font-brand font-bold uppercase tracking-wider px-2 py-0.5 bg-[#1D5D3B] text-white chamfer-badge shadow-sm">
-                                    <span class="lang-ua">ФЛАГМАН | 85 КМ/ГОД</span>
-                                    <span class="lang-en">FLAGSHIP | 85 KM/H</span>
+                                    class="absolute top-3 left-3 z-20 bg-[#131A16]/90 backdrop-blur-md text-[#00E676] border border-[#1D5D3B]/70 px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider shadow-sm">
+                                    <span class="lang-ua">85 КМ/ГОД</span>
+                                    <span class="lang-en">85 KM/H</span>
                                 </span>
                                 <img id="calcVehicleImg" src="images/crosser.jpg" alt="Обраний транспорт"
-                                    class="h-36 sm:h-44 w-auto object-contain transition-all duration-300 drop-shadow-md group-hover:scale-105">
+                                    class="relative z-0 h-36 sm:h-44 w-auto object-contain transition-all duration-300 drop-shadow-md group-hover:scale-105 pointer-events-none">
                             </div>
 
                             <div class="relative">
@@ -662,17 +670,26 @@
                         </div>
                     </div>
                     <div class="space-y-2 text-xs text-emerald-100 font-sans pt-1">
-                        <p class="flex items-center gap-2">
-                            <i data-lucide="mail" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                        <p class="flex items-center gap-2.5">
+                            <span class="w-6 h-6 rounded-md bg-emerald-800/60 flex items-center justify-center shrink-0 text-emerald-300">
+                                <i data-lucide="mail" class="w-3.5 h-3.5 shrink-0"></i>
+                            </span>
                             <a href="mailto:muviorent@gmail.com" class="hover:text-white transition-colors">muviorent@gmail.com</a>
                         </p>
-                        <p class="flex items-center gap-2">
-                            <i data-lucide="phone" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                        <p class="flex items-center gap-2.5">
+                            <span class="w-6 h-6 rounded-md bg-emerald-800/60 flex items-center justify-center shrink-0 text-emerald-300">
+                                <i data-lucide="phone" class="w-3.5 h-3.5 shrink-0"></i>
+                            </span>
                             <a href="tel:+380638316361" class="hover:text-white transition-colors font-semibold">+38 (063) 831-63-61</a>
                         </p>
-                        <p class="flex items-start gap-2">
-                            <i data-lucide="map-pin" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
-                            <span>м. Одеса, вул. Приморська, 22</span>
+                        <p class="flex items-start gap-2.5">
+                            <span class="w-6 h-6 rounded-md bg-emerald-800/60 flex items-center justify-center shrink-0 text-emerald-300 mt-0.5">
+                                <i data-lucide="map-pin" class="w-3.5 h-3.5 shrink-0"></i>
+                            </span>
+                            <span>
+                                <span class="lang-ua">м. Одеса, вул. Приморська, 22</span>
+                                <span class="lang-en">Odesa, Prymorska St, 22</span>
+                            </span>
                         </p>
                     </div>
                 </div>
@@ -782,7 +799,7 @@
                 name: "Crosser CR-13 №1",
                 power: "2000W", volt: "72V", type: "🛵 Скутер",
                 image: "images/crosser.jpg",
-                badge: "ФЛАГМАН | 85 КМ/ГОД",
+                badge: "85 КМ/ГОД",
                 group: "groupA"
             },
             "crosser-cr-13-2": {
@@ -891,8 +908,8 @@
             { days: 1, labelUa: "1 ДЕНЬ", labelEn: "1 DAY" },
             { days: 2, labelUa: "2 ДНІ", labelEn: "2 DAYS" },
             { days: 3, labelUa: "3 ДНІ", labelEn: "3 DAYS" },
-            { days: 7, labelUa: "7 ДНІВ (ТИЖДЕНЬ)", labelEn: "7 DAYS (WEEK)" },
-            { days: 28, labelUa: "28 ДНІВ (МІСЯЦЬ)", labelEn: "28 DAYS (MONTH)" }
+            { days: 7, labelUa: "7 ДНІВ", labelEn: "7 DAYS" },
+            { days: 28, labelUa: "28 ДНІВ", labelEn: "28 DAYS" }
         ];
 
         let calcState = {
@@ -1084,14 +1101,14 @@
                 const btn = document.createElement('button');
                 btn.type = 'button';
                 btn.onclick = () => setCalcDuration(p.days);
-                btn.className = `calc-pill-btn p-2 sm:p-2.5 border-2 font-brand text-center chamfer-badge transition-all flex flex-col items-center justify-center cursor-pointer min-h-[66px] sm:min-h-[72px] ${
+                btn.className = `calc-pill-btn px-1 py-2 sm:px-2.5 sm:py-2.5 border-2 font-brand text-center chamfer-badge transition-all flex flex-col items-center justify-center cursor-pointer min-h-[66px] sm:min-h-[72px] ${
                     isSelected 
                         ? 'is-active border-[#1D5D3B] bg-[#1D5D3B] text-white shadow-md font-bold' 
                         : 'border-slate-300 bg-white text-[#111827] hover:border-[#1D5D3B]/60 hover:bg-[#1D5D3B]/5'
                 }`;
                 btn.innerHTML = `
-                    <span class="font-bold text-xs uppercase tracking-tight block text-center leading-tight ${isSelected ? 'text-white' : 'text-[#111827]'}">${label}</span>
-                    <span class="font-extrabold text-sm sm:text-base block text-center mt-1.5 ${isSelected ? 'text-emerald-300' : 'text-[#1D5D3B]'}">${totalCost.toLocaleString(isEn ? 'en-US' : 'uk-UA')} ${currSign}</span>
+                    <span class="font-bold text-[10px] sm:text-xs uppercase tracking-tight block text-center leading-tight ${isSelected ? 'text-white' : 'text-[#111827]'}">${label}</span>
+                    <span class="font-extrabold text-xs sm:text-sm md:text-base block text-center mt-1 sm:mt-1.5 whitespace-nowrap ${isSelected ? 'text-emerald-300' : 'text-[#1D5D3B]'}">${totalCost.toLocaleString(isEn ? 'en-US' : 'uk-UA')} ${currSign}</span>
                 `;
                 container.appendChild(btn);
             });
@@ -1228,7 +1245,10 @@
                     : model.type;
             }
             if (document.getElementById('calcVehicleBadge')) {
-                document.getElementById('calcVehicleBadge').textContent = isEn ? 'FLAGSHIP | 85 KM/H' : model.badge;
+                const bText = model.badge || (isBike ? 'ЕЛЕКТРОВЕЛОСИПЕД' : 'ЕЛЕКТРОСКУТЕР');
+                document.getElementById('calcVehicleBadge').textContent = isEn 
+                    ? (bText === '85 КМ/ГОД' ? '85 KM/H' : (isBike ? 'E-BIKE' : 'E-SCOOTER')) 
+                    : bText;
             }
 
             const pricing = getRentalPricing(calcState.modelKey, days);
