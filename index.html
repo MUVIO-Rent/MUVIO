@@ -391,24 +391,20 @@
     </header>
 
     <!-- ==================== 2. HERO СЕКЦІЯ (АВТОМОБІЛЬНИЙ ПРЕМІУМ-ФОРМАТ) ==================== -->
-    <section id="hero-section" class="relative overflow-hidden bg-[#F8FAFC] dark:bg-[#0B0E0C] border-b-2 border-[#1D5D3B] pt-8 pb-12 sm:pb-16 text-[#0F172A] dark:text-white transition-colors duration-300">
-        <!-- М'яке фонове світіння -->
-        <div class="absolute -top-24 left-1/4 w-96 h-96 bg-[#1D5D3B]/10 dark:bg-[#1D5D3B]/20 rounded-full blur-3xl pointer-events-none -z-0"></div>
-        <div class="absolute top-1/3 right-0 w-[500px] h-[500px] bg-[#1D5D3B]/10 dark:bg-[#1D5D3B]/15 rounded-full blur-[100px] pointer-events-none -z-0"></div>
-
+    <section id="hero-section" class="relative overflow-hidden bg-[#0B0E0C] pt-8 pb-12 sm:pb-16 text-white transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <!-- 2-колонкова автомобільна компоновка -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center pt-4 sm:pt-8 pb-8">
                 <!-- СЛІВА (lg:col-span-7): Заголовок, переваги та CTA -->
                 <div class="lg:col-span-7 space-y-6 text-left">
                     <!-- Головний заголовок H1 в нормальному регістрі (Sentence case) -->
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#0F172A] dark:text-white leading-[1.1] normal-case" style="text-transform: none !important;">
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.1] normal-case" style="text-transform: none !important;">
                         <span class="lang-ua">Оренда електротранспорту в Одесі</span>
                         <span class="lang-en">Electric vehicle rental in Odesa</span>
                     </h1>
 
                     <!-- Підзаголовок (текст під H1) -->
-                    <p class="text-base sm:text-lg text-[#475569] dark:text-zinc-400 max-w-xl leading-relaxed font-normal">
+                    <p class="text-base sm:text-lg text-zinc-400 max-w-xl leading-relaxed font-normal">
                         <span class="lang-ua">Для кур'єрів та туризму • Всі моделі з АКБ та зарядкою • Безкоштовне сервісне обслуговування</span>
                         <span class="lang-en">For couriers and tourism • All models with battery & charger • Free maintenance</span>
                     </p>
@@ -422,8 +418,8 @@
                             <i data-lucide="arrow-down" class="w-5 h-5"></i>
                         </a>
                         <a href="calculator.html"
-                            class="hero-calc-btn inline-flex items-center justify-center gap-3 border border-slate-300 dark:border-zinc-700 hover:border-slate-400 dark:hover:border-zinc-500 text-[#0F172A] dark:text-zinc-200 hover:text-[#0F172A] dark:hover:text-white px-8 py-4 rounded-xl font-semibold text-base backdrop-blur-sm bg-white/80 dark:bg-zinc-900/40 hover:bg-slate-100 dark:hover:bg-zinc-800/60 transition-all duration-200">
-                            <i data-lucide="calculator" class="w-5 h-5 text-slate-500 dark:text-zinc-400"></i>
+                            class="hero-calc-btn inline-flex items-center justify-center gap-3 border border-zinc-700 hover:border-zinc-500 text-zinc-200 hover:text-white px-8 py-4 rounded-xl font-semibold text-base backdrop-blur-sm bg-zinc-900/40 hover:bg-zinc-800/60 transition-all duration-200">
+                            <i data-lucide="calculator" class="w-5 h-5 text-zinc-400"></i>
                             <span class="lang-ua">Калькулятор оренди</span>
                             <span class="lang-en">Rental Calculator</span>
                         </a>
@@ -432,12 +428,6 @@
 
                 <!-- СПРАВА (lg:col-span-5): Чиста геометрична емблема MUVIO без тексту (мінімалізм) -->
                 <div class="lg:col-span-5 relative flex flex-col items-center justify-center py-6 sm:py-10">
-                    <!-- М'яке глибоке радіальне світіння позаду знака -->
-                    <div class="hero-logo-glow absolute inset-0 flex items-center justify-center pointer-events-none -z-0">
-                        <div class="w-72 h-72 sm:w-88 sm:h-88 md:w-96 md:h-96 rounded-full"
-                            style="background: radial-gradient(circle, rgba(29, 93, 59, 0.14) 0%, rgba(248, 250, 252, 0) 70%); filter: blur(20px);"></div>
-                    </div>
-
                     <!-- Чистий знак без текстових дублювань -->
                     <div class="relative z-10 flex flex-col items-center justify-center group">
                         <svg class="hero-logo-svg w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 transition-all duration-700 ease-out group-hover:scale-105"
@@ -445,25 +435,25 @@
                             <path d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z"
                                 fill="#1D5D3B"
                                 stroke="#2E8B57"
-                                stroke-width="1.5"
+                                stroke-width="1.5px"
                                 stroke-linejoin="round"
                                 paint-order="stroke fill"
-                                style="filter: drop-shadow(0 0 12px rgba(46, 139, 87, 0.35));" />
+                                style="fill: #1D5D3B !important; stroke: #2E8B57 !important; stroke-width: 1.5px !important; filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.4)) drop-shadow(0 0 6px rgba(46, 139, 87, 0.35)) !important;" />
                         </svg>
                     </div>
                 </div>
             </div>
 
             <!-- 3. Строгий горизонтальний статус-бар із тонкими роздільниками (без коробок) -->
-            <div class="hero-statusbar mt-4 pt-6 border-t border-slate-200 dark:border-zinc-800">
-                <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-0 divide-y lg:divide-y-0 lg:divide-x divide-slate-200 dark:divide-zinc-800 text-left">
+            <div class="hero-statusbar mt-4 pt-6 border-t border-zinc-800">
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-0 divide-y lg:divide-y-0 lg:divide-x divide-zinc-800 text-left">
                     <!-- 1. Тарифи -->
                     <div class="pt-4 lg:pt-0 lg:px-6 first:pl-0">
-                        <div class="text-xs uppercase tracking-wider text-[#64748B] dark:text-zinc-400 font-semibold mb-1">
+                        <div class="text-xs uppercase tracking-wider text-zinc-400 font-semibold mb-1">
                             <span class="lang-ua">Тарифи</span>
                             <span class="lang-en">Rates</span>
                         </div>
-                        <div class="text-sm sm:text-base font-bold text-[#0F172A] dark:text-white whitespace-nowrap">
+                        <div class="text-sm sm:text-base font-bold text-white whitespace-nowrap">
                             <span class="lang-ua">від 800 ₴/доба • 1 800 ₴/тижд</span>
                             <span class="lang-en">from 800 ₴/day • 1,800 ₴/week</span>
                         </div>
@@ -471,11 +461,11 @@
 
                     <!-- 2. Запас ходу -->
                     <div class="pt-4 lg:pt-0 lg:px-6">
-                        <div class="text-xs uppercase tracking-wider text-[#64748B] dark:text-zinc-400 font-semibold mb-1">
+                        <div class="text-xs uppercase tracking-wider text-zinc-400 font-semibold mb-1">
                             <span class="lang-ua">Запас ходу</span>
                             <span class="lang-en">Range</span>
                         </div>
-                        <div class="text-sm sm:text-base font-bold text-[#0F172A] dark:text-white whitespace-nowrap">
+                        <div class="text-sm sm:text-base font-bold text-white whitespace-nowrap">
                             <span class="lang-ua">до 160 км на одному заряді</span>
                             <span class="lang-en">up to 160 km per charge</span>
                         </div>
@@ -483,11 +473,11 @@
 
                     <!-- 3. Хаб -->
                     <div class="pt-4 lg:pt-0 lg:px-6">
-                        <div class="text-xs uppercase tracking-wider text-[#64748B] dark:text-zinc-400 font-semibold mb-1">
+                        <div class="text-xs uppercase tracking-wider text-zinc-400 font-semibold mb-1">
                             <span class="lang-ua">Хаб</span>
                             <span class="lang-en">Hub</span>
                         </div>
-                        <div class="text-sm sm:text-base font-bold text-[#0F172A] dark:text-white whitespace-nowrap">
+                        <div class="text-sm sm:text-base font-bold text-white whitespace-nowrap">
                             <span class="lang-ua">Одеса, вул. Приморська, 22</span>
                             <span class="lang-en">Odesa, 22 Primorska Str.</span>
                         </div>
@@ -495,11 +485,11 @@
 
                     <!-- 4. Підтримка -->
                     <div class="pt-4 lg:pt-0 lg:px-6 last:pr-0">
-                        <div class="text-xs uppercase tracking-wider text-[#64748B] dark:text-zinc-400 font-semibold mb-1">
+                        <div class="text-xs uppercase tracking-wider text-zinc-400 font-semibold mb-1">
                             <span class="lang-ua">Підтримка</span>
                             <span class="lang-en">Support</span>
                         </div>
-                        <div class="text-sm sm:text-base font-bold text-[#0F172A] dark:text-white whitespace-nowrap">
+                        <div class="text-sm sm:text-base font-bold text-white whitespace-nowrap">
                             <span class="lang-ua">Онлайн-бот 24/7</span>
                             <span class="lang-en">Online Bot 24/7</span>
                         </div>
@@ -511,7 +501,7 @@
     </section>
 
     <!-- ==================== 3. КАТАЛОГ СКУТЕРІВ (ТОП МОДЕЛІ СПЕРШУ) ==================== -->
-    <section id="catalog" class="py-16 md:py-24 bg-[#F8FAFC] border-b-2 border-[#1D5D3B]">
+    <section id="catalog" class="py-16 md:py-24 bg-[#0B0E0C] border-b-2 border-[#1D5D3B]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-x border-slate-200/60">
 
             <!-- Заголовок секції -->

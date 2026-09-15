@@ -69,42 +69,66 @@ a[aria-label*="MUVIO"] span.font-brand {
 }
 
 /* ==========================================================================
-   HERO SECTION — LIGHT THEME BASELINE
+   HERO SECTION — SEAMLESS MONOLITHIC #0B0E0C BACKGROUND
    ========================================================================== */
-#hero-section {
-    background-color: #F8FAFC !important;
-    color: #0F172A !important;
+#hero-section,
+.hero-section,
+#hero {
+    background-color: #0B0E0C !important;
+    background-image: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+}
+
+#hero-section::before,
+#hero-section::after,
+.hero-section::before,
+.hero-section::after,
+#hero::before,
+#hero::after {
+    display: none !important;
+    content: none !important;
+    background: none !important;
 }
 
 #hero-section h1 {
-    color: #0F172A !important;
+    color: #FFFFFF !important;
 }
 
 #hero-section p {
-    color: #475569 !important;
+    color: #94A3B8 !important;
 }
 
 #hero-section .hero-calc-btn {
-    border-color: #CBD5E1 !important;
-    color: #0F172A !important;
-    background-color: #FFFFFF !important;
+    border-color: #3F3F46 !important;
+    color: #E4E4E7 !important;
+    background-color: rgba(24, 24, 27, 0.5) !important;
 }
 
 #hero-section .hero-calc-btn:hover {
-    background-color: #F1F5F9 !important;
-    border-color: #94A3B8 !important;
-    color: #0F172A !important;
+    background-color: rgba(39, 39, 42, 0.7) !important;
+    border-color: #71717A !important;
+    color: #FFFFFF !important;
 }
 
 #hero-section .hero-statusbar {
-    border-color: #E2E8F0 !important;
+    border-color: #27272A !important;
 }
 
 #hero-section .hero-statusbar > div > div {
-    border-color: #E2E8F0 !important;
+    border-color: #27272A !important;
 }
 
-#hero-section .hero-logo-glow div {
-    background: radial-gradient(circle, rgba(29, 93, 59, 0.12) 0%, rgba(248, 250, 252, 0) 70%) !important;
+.hero-logo-glow,
+#hero-section .hero-logo-glow {
+    display: none !important;
 }
+
+.hero-logo-svg path {
+    fill: #1D5D3B !important;
+    stroke: #2E8B57 !important;
+    stroke-width: 1.5px !important;
+    filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.4)) drop-shadow(0 0 6px rgba(46, 139, 87, 0.35)) !important;
+}
+
 

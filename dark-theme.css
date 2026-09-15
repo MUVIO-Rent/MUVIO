@@ -981,10 +981,34 @@ html.theme-dark .mobile-nav-link.nav-link-active {
 }
 
 /* ==========================================================================
-   22. HERO SECTION — DARK THEME OVERRIDES
+   22. HERO SECTION & CATALOG — SEAMLESS MONOLITHIC #0B0E0C THEME
    ========================================================================== */
-html.theme-dark #hero-section {
+#hero-section,
+.hero-section,
+#hero,
+html.theme-dark #hero-section,
+html.theme-dark .hero-section,
+html.theme-dark #hero,
+html.theme-dark #catalog {
     background-color: #0B0E0C !important;
+    background-image: none !important;
+    border-bottom: none !important;
+}
+
+#hero-section::before,
+#hero-section::after,
+.hero-section::before,
+.hero-section::after,
+#hero::before,
+#hero::after,
+html.theme-dark #hero-section::before,
+html.theme-dark #hero-section::after {
+    display: none !important;
+    content: none !important;
+    background: none !important;
+}
+
+html.theme-dark #hero-section {
     color: #FFFFFF !important;
 }
 
@@ -1024,7 +1048,17 @@ html.theme-dark #hero-section .hero-statusbar .text-\[\#64748B\] {
     color: #A1A1AA !important;
 }
 
-html.theme-dark #hero-section .hero-logo-glow div {
-    background: radial-gradient(circle, rgba(29, 93, 59, 0.28) 0%, rgba(11, 14, 12, 0) 70%) !important;
+.hero-logo-glow,
+html.theme-dark #hero-section .hero-logo-glow {
+    display: none !important;
 }
+
+.hero-logo-svg path,
+html.theme-dark .hero-logo-svg path {
+    fill: #1D5D3B !important;
+    stroke: #2E8B57 !important;
+    stroke-width: 1.5px !important;
+    filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.4)) drop-shadow(0 0 6px rgba(46, 139, 87, 0.35)) !important;
+}
+
 
