@@ -1072,4 +1072,22 @@ body.dark #hero-section .hero-statusbar .text-\[\#64748B\] {
     color: var(--text-muted) !important;
 }
 
+/* MUVIO Vector Logo Dark Mode: Emerald Mark, Crisp White Letters */
+html.theme-dark .muvio-logo-mark,
+body.theme-dark .muvio-logo-mark,
+body.dark .muvio-logo-mark,
+.theme-dark .muvio-logo-mark,
+[data-theme="dark"] .muvio-logo-mark {
+    fill: #2E8B57 !important;
+}
+
+html.theme-dark .muvio-logo-letters,
+body.theme-dark .muvio-logo-letters,
+body.dark .muvio-logo-letters,
+.theme-dark .muvio-logo-letters,
+[data-theme="dark"] .muvio-logo-letters {
+    fill: #FFFFFF !important;
+}
+
+
 

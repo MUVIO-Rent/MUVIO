@@ -91,10 +91,6 @@
         }
     </style>
 
-    <!-- Google Fonts: Chakra Petch for MUVIO Techno Wordmark -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&display=swap" rel="stylesheet">
 
     <!-- Custom Theme & Settings Engine -->
     <script src="theme-settings.js"></script>
@@ -104,16 +100,14 @@
 
     <!-- 1. ХЕДЕР (ЛОГОТИП + МОВА + ТЕМА) -->
     <header class="w-full max-w-7xl mx-auto pt-5 pb-8 px-6 sm:px-10 flex items-center justify-between">
-        <!-- Слева вверху: логотип MUVIO (аккуратный SVG знак + надпись UVIO, цвет #1D5D3B) -->
-        <a href="index.html" class="inline-flex items-center gap-1.5 tracking-tight group select-none" aria-label="MUVIO">
-            <!-- Векторный знак «M» (на ~40-50% выше букв UVIO) -->
-            <svg class="h-[34px] w-auto sm:h-[38px] shrink-0 text-[#1D5D3B]" viewBox="0 0 60 100" fill="#1D5D3B" style="fill: #1D5D3B !important;">
-                <path transform="translate(-20, 0)" d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z" fill="#1D5D3B"/>
+        <!-- Слева вверху: єдиний векторний логотип MUVIO -->
+        <a href="index.html" class="inline-flex items-center select-none group focus:outline-none" aria-label="MUVIO">
+            <svg class="h-7 sm:h-8 w-auto transition-opacity group-hover:opacity-90 shrink-0" viewBox="0 0 216 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Фірмовий знак MUVIO (блискавка M) -->
+                <path class="muvio-logo-mark" d="M 28.67,51.38 L 3.54,2.0 L 11.1,36.58 L 0.0,36.66 L 26.14,92.0 L 18.82,52.75 L 28.67,56.37 L 38.52,52.75 L 31.2,92.0 L 57.34,36.66 L 46.24,36.58 L 53.8,2.0 Z" fill="#1D5D3B"/>
+                <!-- Букви UVIO з фірмовими техно-кутами 45° -->
+                <path class="muvio-logo-letters" fill-rule="evenodd" clip-rule="evenodd" d="M 63.11,50.29 L 63.11,85.41 L 67.5,89.8 L 98.23,89.8 L 102.62,85.41 L 102.62,54.68 L 93.29,54.68 L 93.29,80.48 L 90.0,83.77 L 75.73,83.77 L 72.44,80.48 L 72.44,54.68 Z M 106.46,54.68 L 128.96,89.8 L 134.45,89.8 L 156.95,54.68 L 147.07,54.68 L 131.71,78.83 L 116.34,54.68 Z M 161.34,54.68 L 170.12,54.68 L 170.12,89.26 L 161.34,93.65 Z M 179.45,54.68 L 210.73,54.68 L 215.12,59.07 L 215.12,85.41 L 210.73,89.8 L 179.45,89.8 L 175.06,85.41 L 175.06,59.07 Z M 187.68,63.46 L 202.5,63.46 L 205.79,66.76 L 205.79,77.73 L 202.5,81.02 L 187.68,81.02 L 184.39,77.73 L 184.39,66.76 Z" fill="#1D5D3B"/>
             </svg>
-            <!-- Буквы UVIO геометричным техно-шрифтом Chakra Petch единого цвета #1D5D3B -->
-            <span class="brand-logo-text text-[21px] sm:text-[24px] uppercase leading-none" style="font-family: 'Chakra Petch', sans-serif !important; font-weight: 700 !important; letter-spacing: 0.08em !important; color: #1D5D3B !important;">
-                UVIO
-            </span>
         </a>
 
         <!-- Справа вверху: переключатель языка (UA / EN) + смена темы -->
