@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0F1411">
+    <title>Вхід — MUVIO | Особистий кабінет</title>
+    <meta name="description" content="Авторизація клієнта сервісу оренди електротранспорту MUVIO.">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: ['class', '.theme-dark'],
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1D5D3B',
+                        muvio: {
+                            green: '#1D5D3B',
+                            hover: '#24754A',
+                            forest: '#123824',
+                            dark: '#111827'
+                        }
+                    },
+                    fontFamily: {
+                        brand: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'sans-serif'],
+                        sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'sans-serif']
+                    }
+                }
+            }
+        };
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Global Styles & Dark Theme -->
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./dark-theme.css">
+
+    <style>
+        body {
+            background-color: #FFFFFF;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+        html.theme-dark body {
+            background-color: #0B0E0C !important;
+            color: #FFFFFF !important;
+        }
+        .auth-input-tesla {
+            background-color: #f4f4f5 !important;
+            border: 1px solid #e4e4e7 !important;
+            border-radius: 6px !important;
+            padding: 10px 14px !important;
+            font-size: 14px !important;
+            color: #18181b !important;
+            transition: all 0.15s ease-in-out !important;
+        }
+        .auth-input-tesla:focus {
+            outline: none !important;
+            border-color: #1D5D3B !important;
+            box-shadow: 0 0 0 1px #1D5D3B !important;
+            background-color: #ffffff !important;
+        }
+        html.theme-dark .auth-input-tesla {
+            background-color: rgba(24, 24, 27, 0.6) !important;
+            border: 1px solid #27272a !important;
+            color: #ffffff !important;
+        }
+        html.theme-dark .auth-input-tesla:focus {
+            border-color: #1D5D3B !important;
+            box-shadow: 0 0 0 1px #1D5D3B !important;
+            background-color: rgba(24, 24, 27, 0.9) !important;
+        }
+        html.theme-dark .auth-divider-text {
+            background-color: #0B0E0C !important;
+        }
+        html.theme-dark .auth-btn-secondary {
+            background-color: #27272a !important;
+            color: #f4f4f5 !important;
+        }
+        html.theme-dark .auth-btn-secondary:hover {
+            background-color: #3f3f46 !important;
+        }
+        html.theme-dark #resetPasswordModal > div {
+            background-color: #0B0E0C !important;
+            border-color: #27272a !important;
+            color: #ffffff !important;
+        }
+    </style>
+
+    <!-- Custom Theme & Settings Engine -->
+    <script src="theme-settings.js"></script>
+</head>
+
+<body class="min-h-screen flex flex-col justify-between text-zinc-900 dark:text-white antialiased selection:bg-[#1D5D3B] selection:text-white">
+
+    <!-- 1. ХЕДЕР (ЛОГОТИП + МОВА + ТЕМА) -->
+    <header class="w-full max-w-7xl mx-auto px-4 sm:px-8 py-5 flex items-center justify-between">
+        <!-- Слева вверху: логотип MUVIO (аккуратный SVG знак + надпись MUVIO, цвет #1D5D3B) -->
+        <a href="index.html" class="inline-flex items-center gap-2.5 transition-opacity hover:opacity-90 group" aria-label="MUVIO Головна">
+            <div class="flex items-center justify-center shrink-0">
+                <svg class="w-7 h-7 sm:w-8 sm:h-8 text-[#1D5D3B]" viewBox="0 0 100 100" fill="currentColor">
+                    <path d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z"/>
+                </svg>
+            </div>
+            <span class="font-bold text-xl sm:text-2xl tracking-wider text-[#1D5D3B]">MUVIO</span>
+        </a>
+
+        <!-- Справа вверху: переключатель языка (UA / EN) + смена темы -->
+        <div class="flex items-center gap-3">
+            <div class="inline-flex items-center text-xs font-semibold tracking-wider text-zinc-500 dark:text-zinc-400">
+                <button type="button" id="authLangUa" onclick="setSiteLanguage('ua')"
+                    class="px-2 py-1 transition-colors hover:text-[#1D5D3B] dark:hover:text-white">
+                    UA
+                </button>
+                <span class="text-zinc-300 dark:text-zinc-700">|</span>
+                <button type="button" id="authLangEn" onclick="setSiteLanguage('en')"
+                    class="px-2 py-1 transition-colors hover:text-[#1D5D3B] dark:hover:text-white">
+                    EN
+                </button>
+            </div>
+
+            <!-- Переключатель темы (светлая / темная) -->
+            <button type="button" onclick="toggleAuthTheme()"
+                class="p-2 text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                title="Перемкнути тему" aria-label="Перемкнути тему">
+                <svg id="themeIconSun" class="w-4 h-4 hidden dark:block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                </svg>
+                <svg id="themeIconMoon" class="w-4 h-4 block dark:hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- 2. ЦЕНТРАЛЬНИЙ КОНТЕЙНЕР ФОРМИ (max-w-[380px] w-full mx-auto px-4 py-8 sm:py-12 my-auto) -->
+    <main class="max-w-[380px] w-full mx-auto px-4 py-8 sm:py-12 my-auto">
+        <!-- Повідомлення про помилку -->
+        <div id="authErrorMsg" class="hidden p-3 mb-6 bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/60 text-rose-700 dark:text-rose-300 text-xs rounded-md flex items-center gap-2">
+            <i data-lucide="alert-circle" class="w-4 h-4 shrink-0"></i>
+            <span id="authErrorText"></span>
+        </div>
+
+        <!-- Повідомлення про успіх -->
+        <div id="authSuccessMsg" class="hidden p-3 mb-6 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-900/60 text-emerald-800 dark:text-emerald-300 text-xs rounded-md flex items-center gap-2">
+            <i data-lucide="check-circle-2" class="w-4 h-4 shrink-0"></i>
+            <span id="authSuccessText"></span>
+        </div>
+
+        <!-- ВХІД / SIGN IN -->
+        <div id="authLoginView">
+            <h1 class="font-bold text-3xl sm:text-[32px] text-zinc-900 dark:text-white tracking-tight mb-8 text-left">
+                <span class="lang-ua">Вхід</span>
+                <span class="lang-en">Sign In</span>
+            </h1>
+
+            <form id="loginForm" onsubmit="event.preventDefault(); handleLoginSubmit(event);" class="space-y-4">
+                <div>
+                    <label for="loginIdentifier" class="text-xs font-semibold text-zinc-600 dark:text-zinc-400 mb-1.5 block text-left">
+                        <span class="lang-ua">Логін або номер телефону</span>
+                        <span class="lang-en">Username or Phone</span>
+                    </label>
+                    <input type="text" id="loginIdentifier" required
+                        data-placeholder-ua="Введіть логін або номер телефону"
+                        data-placeholder-en="Enter username or phone number"
+                        placeholder="Введіть логін або номер телефону"
+                        class="auth-input-tesla w-full bg-zinc-100 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 rounded-md px-3.5 py-2.5 text-sm text-zinc-900 dark:text-white focus:outline-none focus:border-[#1D5D3B] focus:ring-1 focus:ring-[#1D5D3B] transition-all">
+                </div>
+
+                <div>
+                    <label for="loginPassword" class="text-xs font-semibold text-zinc-600 dark:text-zinc-400 mb-1.5 block text-left">
+                        <span class="lang-ua">Пароль</span>
+                        <span class="lang-en">Password</span>
+                    </label>
+                    <input type="password" id="loginPassword" required
+                        data-placeholder-ua="••••••••"
+                        data-placeholder-en="••••••••"
+                        placeholder="••••••••"
+                        class="auth-input-tesla w-full bg-zinc-100 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 rounded-md px-3.5 py-2.5 text-sm text-zinc-900 dark:text-white focus:outline-none focus:border-[#1D5D3B] focus:ring-1 focus:ring-[#1D5D3B] transition-all">
+                </div>
+
+                <button type="submit"
+                    class="bg-[#1D5D3B] hover:bg-[#237248] text-white font-medium text-sm py-2.5 w-full rounded-md shadow-sm transition-all text-center mt-2">
+                    <span class="lang-ua">Увійти</span>
+                    <span class="lang-en">Sign In</span>
+                </button>
+
+                <div class="text-center py-3">
+                    <button type="button" onclick="openResetPasswordModal()"
+                        class="text-xs text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200 underline transition-colors">
+                        <span class="lang-ua">Забули пароль?</span>
+                        <span class="lang-en">Forgot password?</span>
+                    </button>
+                </div>
+
+                <div class="relative my-6 text-center">
+                    <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-zinc-200 dark:border-zinc-800"></div></div>
+                    <span class="relative bg-white dark:bg-[#0B0E0C] px-3 text-xs text-zinc-400 font-medium auth-divider-text">
+                        <span class="lang-ua">Або</span>
+                        <span class="lang-en">Or</span>
+                    </span>
+                </div>
+
+                <button type="button" onclick="switchAuthTab('register')"
+                    class="auth-btn-secondary bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100 font-medium text-sm py-2.5 w-full rounded-md transition-all text-center">
+                    <span class="lang-ua">Створити акаунт</span>
+                    <span class="lang-en">Create Account</span>
+                </button>
+            </form>
+        </div>
+
+        <!-- РЕЄСТРАЦІЯ / REGISTER -->
+        <div id="authRegisterView" class="hidden">
+            <h1 class="font-bold text-3xl sm:text-[32px] text-zinc-900 dark:text-white tracking-tight mb-8 text-left">
+                <span class="lang-ua">Створити акаунт</span>
+                <span class="lang-en">Create Account</span>
+            </h1>
+
+            <form id="registerForm" onsubmit="event.preventDefault(); handleRegisterSubmit(event);" class="space-y-4">
+                <div>
+                    <label for="regLogin" class="text-xs font-semibold text-zinc-600 dark:text-zinc-400 mb-1.5 block text-left">
+                        <span class="lang-ua">Логін</span>
+                        <span class="lang-en">Username</span>
+                    </label>
+                    <input type="text" id="regLogin" required
+                        data-placeholder-ua="Введіть ваш логін"
+                        data-placeholder-en="Enter username"
+                        placeholder="Введіть ваш логін"
+                        class="auth-input-tesla w-full bg-zinc-100 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 rounded-md px-3.5 py-2.5 text-sm text-zinc-900 dark:text-white focus:outline-none focus:border-[#1D5D3B] focus:ring-1 focus:ring-[#1D5D3B] transition-all">
+                </div>
+
+                <div>
+                    <label for="regPhone" class="text-xs font-semibold text-zinc-600 dark:text-zinc-400 mb-1.5 block text-left">
+                        <span class="lang-ua">Номер телефону</span>
+                        <span class="lang-en">Phone Number</span>
+                    </label>
+                    <input type="tel" id="regPhone" required
+                        data-placeholder-ua="+380 (XX) XXX-XX-XX"
+                        data-placeholder-en="+380 (XX) XXX-XX-XX"
+                        placeholder="+380 (XX) XXX-XX-XX"
+                        class="auth-input-tesla w-full bg-zinc-100 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 rounded-md px-3.5 py-2.5 text-sm text-zinc-900 dark:text-white focus:outline-none focus:border-[#1D5D3B] focus:ring-1 focus:ring-[#1D5D3B] transition-all">
+                </div>
+
+                <div>
+                    <label for="regPassword" class="text-xs font-semibold text-zinc-600 dark:text-zinc-400 mb-1.5 block text-left">
+                        <span class="lang-ua">Пароль</span>
+                        <span class="lang-en">Password</span>
+                    </label>
+                    <input type="password" id="regPassword" required minlength="3"
+                        data-placeholder-ua="Введіть пароль"
+                        data-placeholder-en="Enter password"
+                        placeholder="Введіть пароль"
+                        class="auth-input-tesla w-full bg-zinc-100 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 rounded-md px-3.5 py-2.5 text-sm text-zinc-900 dark:text-white focus:outline-none focus:border-[#1D5D3B] focus:ring-1 focus:ring-[#1D5D3B] transition-all">
+                </div>
+
+                <button type="submit"
+                    class="bg-[#1D5D3B] hover:bg-[#237248] text-white font-medium text-sm py-2.5 w-full rounded-md shadow-sm transition-all text-center mt-2">
+                    <span class="lang-ua">Зареєструватися</span>
+                    <span class="lang-en">Create Account</span>
+                </button>
+
+                <div class="relative my-6 text-center">
+                    <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-zinc-200 dark:border-zinc-800"></div></div>
+                    <span class="relative bg-white dark:bg-[#0B0E0C] px-3 text-xs text-zinc-400 font-medium auth-divider-text">
+                        <span class="lang-ua">Або</span>
+                        <span class="lang-en">Or</span>
+                    </span>
+                </div>
+
+                <button type="button" onclick="switchAuthTab('login')"
+                    class="auth-btn-secondary bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100 font-medium text-sm py-2.5 w-full rounded-md transition-all text-center">
+                    <span class="lang-ua">Увійти в наявний акаунт</span>
+                    <span class="lang-en">Sign In with existing account</span>
+                </button>
+            </form>
+        </div>
+
+        <!-- Сумісність для селекторів -->
+        <button id="authTabLogin" type="button" class="hidden"></button>
+        <button id="authTabRegister" type="button" class="hidden"></button>
+    </main>
+
+    <!-- 3. ПОДВАЛ (FOOTER) -->
+    <footer class="py-6 px-4">
+        <div class="max-w-md mx-auto text-xs text-zinc-400 dark:text-zinc-500 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-center">
+            <span>MUVIO © 2026</span>
+            <span class="text-zinc-300 dark:text-zinc-700">•</span>
+            <a href="terms.html" class="hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors">
+                <span class="lang-ua">Умови та конфіденційність</span>
+                <span class="lang-en">Privacy & Terms</span>
+            </a>
+            <span class="text-zinc-300 dark:text-zinc-700">•</span>
+            <a href="https://t.me/muviobot" target="_blank" rel="noopener noreferrer" class="hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors">
+                <span class="lang-ua">Підтримка</span>
+                <span class="lang-en">Support</span>
+            </a>
+        </div>
+    </footer>
+
+    <!-- ==================== МОДАЛЬНЕ ВІКНО: ВІДНОВЛЕННЯ ПАРОЛЮ (SMS) ==================== -->
+    <div id="resetPasswordModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+        <div class="bg-white dark:bg-[#0B0E0C] border border-zinc-200 dark:border-zinc-800 rounded-lg p-6 sm:p-8 shadow-2xl max-w-[400px] w-full space-y-5 relative">
+            <button type="button" onclick="closeResetPasswordModal()" class="absolute top-5 right-5 text-zinc-400 hover:text-zinc-800 dark:hover:text-white transition-colors p-1" aria-label="Закрити">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <div>
+                <h3 class="font-bold text-2xl text-zinc-900 dark:text-white tracking-tight">
+                    <span class="lang-ua">Відновлення паролю</span>
+                    <span class="lang-en">Reset Password</span>
+                </h3>
+                <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
+                    <span class="lang-ua">Безпека та доступ до акаунту</span>
+                    <span class="lang-en">Account security & access</span>
+                </p>
+            </div>
+
+            <!-- Помилка модального вікна -->
+            <div id="resetModalError" class="hidden p-3 bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/60 text-rose-700 dark:text-rose-300 text-xs rounded-md flex items-center gap-2">
+                <i data-lucide="alert-circle" class="w-4 h-4 shrink-0"></i>
+                <span id="resetModalErrorText"></span>
+            </div>
+
+            <!-- Крок 1: Введення номера телефону -->
+            <form id="resetStep1Form" onsubmit="handleSendResetCode(event)" class="space-y-4">
+                <p class="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                    <span class="lang-ua">Введіть номер телефону, вказаний при реєстрації. Ми надішлемо вам 4-значний SMS-код для підтвердження.</span>
+                    <span class="lang-en">Enter the phone number used during registration. We will send you a 4-digit SMS code to verify.</span>
+                </p>
+                <div>
+                    <label class="text-xs font-semibold text-zinc-600 dark:text-zinc-400 mb-1.5 block text-left">
+                        <span class="lang-ua">Номер телефону</span>
+                        <span class="lang-en">Phone Number</span>
+                    </label>
+                    <input type="tel" id="resetPhone" required placeholder="+380 (XX) XXX-XX-XX"
+                        class="auth-input-tesla w-full bg-zinc-100 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 rounded-md px-3.5 py-2.5 text-sm text-zinc-900 dark:text-white focus:outline-none focus:border-[#1D5D3B] focus:ring-1 focus:ring-[#1D5D3B] transition-all">
+                </div>
+                <button type="submit"
+                    class="bg-[#1D5D3B] hover:bg-[#237248] text-white font-medium text-sm py-2.5 w-full rounded-md shadow-sm transition-all text-center mt-2 flex items-center justify-center gap-2">
+                    <i data-lucide="send" class="w-4 h-4"></i>
+                    <span class="lang-ua">Отримати SMS-код</span>
+                    <span class="lang-en">Get SMS Code</span>
+                </button>
+            </form>
+
+            <!-- Крок 2: Введення коду та нового пароля -->
+            <form id="resetStep2Form" onsubmit="handleConfirmResetPassword(event)" class="hidden space-y-4">
+                <div class="bg-zinc-100 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 p-3 rounded-md text-xs text-zinc-700 dark:text-zinc-300">
+                    <span class="lang-ua">Код надіслано на номер:</span>
+                    <span class="lang-en">Code sent to:</span>
+                    <span id="resetTargetPhoneDisplay" class="font-bold text-[#1D5D3B] ml-1"></span>
+                </div>
+
+                <div>
+                    <label class="text-xs font-semibold text-zinc-600 dark:text-zinc-400 mb-1.5 block text-left">
+                        <span class="lang-ua">4-значний SMS-код</span>
+                        <span class="lang-en">4-digit SMS Code</span>
+                    </label>
+                    <input type="text" id="resetSmsCode" required maxlength="4" placeholder="••••"
+                        class="auth-input-tesla w-full bg-zinc-100 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 rounded-md px-3.5 py-2.5 text-center text-lg font-mono font-bold tracking-widest text-zinc-900 dark:text-white focus:outline-none focus:border-[#1D5D3B] focus:ring-1 focus:ring-[#1D5D3B] transition-all">
+                </div>
+
+                <div>
+                    <label class="text-xs font-semibold text-zinc-600 dark:text-zinc-400 mb-1.5 block text-left">
+                        <span class="lang-ua">Новий пароль</span>
+                        <span class="lang-en">New Password</span>
+                    </label>
+                    <input type="password" id="resetNewPassword" required minlength="3" placeholder="Введіть новий пароль"
+                        class="auth-input-tesla w-full bg-zinc-100 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 rounded-md px-3.5 py-2.5 text-sm text-zinc-900 dark:text-white focus:outline-none focus:border-[#1D5D3B] focus:ring-1 focus:ring-[#1D5D3B] transition-all">
+                </div>
+
+                <button type="submit"
+                    class="bg-[#1D5D3B] hover:bg-[#237248] text-white font-medium text-sm py-2.5 w-full rounded-md shadow-sm transition-all text-center mt-2 flex items-center justify-center gap-2">
+                    <i data-lucide="check" class="w-4 h-4"></i>
+                    <span class="lang-ua">Підтвердити та змінити пароль</span>
+                    <span class="lang-en">Confirm & Change Password</span>
+                </button>
+
+                <div class="flex items-center justify-between pt-1 text-xs">
+                    <button type="button" onclick="goToResetStep1()" class="text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200 underline font-medium">
+                        <span class="lang-ua">← Змінити номер</span>
+                        <span class="lang-en">← Change phone</span>
+                    </button>
+                    <button type="button" onclick="resendResetCode()" class="text-[#1D5D3B] hover:underline font-semibold text-xs">
+                        <span class="lang-ua">Надіслати код повторно</span>
+                        <span class="lang-en">Resend code</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Вспливаюче Toast-повідомлення (SMS) -->
+    <div id="smsToast" class="fixed top-6 left-1/2 -translate-x-1/2 z-50 hidden transition-all duration-300 max-w-md w-[92%] sm:w-auto">
+        <div class="bg-zinc-900 text-white border border-zinc-700/80 p-4 rounded-lg shadow-2xl flex items-start gap-3">
+            <div class="text-[#1D5D3B] mt-0.5 shrink-0">
+                <i data-lucide="message-square" class="w-5 h-5"></i>
+            </div>
+            <div class="flex-1 pr-2">
+                <p class="font-semibold text-xs uppercase tracking-wider text-zinc-300">SMS СЕРВІС</p>
+                <p id="smsToastText" class="text-sm font-sans mt-0.5 text-zinc-100 leading-snug"></p>
+            </div>
+            <button type="button" onclick="hideSmsToast()" class="text-zinc-400 hover:text-white p-1 shrink-0">
+                <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- ==================== JAVASCRIPT ==================== -->
+    <script>
+        const DEFAULT_USERS_DB = [
+            { login: "MUVIO", phone: "0638316361", password: "123" }
+        ];
+
+        function getUsersDb() {
+            try {
+                const raw = localStorage.getItem('muvio_users_db');
+                if (raw) {
+                    const parsed = JSON.parse(raw);
+                    if (Array.isArray(parsed) && parsed.length > 0) {
+                        const hasMuvio = parsed.some(u => 
+                            (u.login && u.login.toUpperCase() === 'MUVIO') ||
+                            (u.phone && String(u.phone).replace(/\D/g, '').endsWith('638316361'))
+                        );
+                        if (!hasMuvio) {
+                            parsed.unshift({ login: "MUVIO", phone: "0638316361", password: "123" });
+                            saveUsersDb(parsed);
+                        }
+                        return parsed;
+                    }
+                }
+            } catch (e) {
+                console.error('Помилка читання muvio_users_db:', e);
+            }
+            saveUsersDb(DEFAULT_USERS_DB);
+            return DEFAULT_USERS_DB;
+        }
+
+        function saveUsersDb(users) {
+            try {
+                localStorage.setItem('muvio_users_db', JSON.stringify(users));
+            } catch (e) {
+                console.error('Помилка запису muvio_users_db:', e);
+            }
+        }
+
+        function showAuthError(msg) {
+            const errBox = document.getElementById('authErrorMsg');
+            const errText = document.getElementById('authErrorText');
+            const succBox = document.getElementById('authSuccessMsg');
+            if (succBox) succBox.classList.add('hidden');
+            if (errBox && errText) {
+                errText.textContent = msg;
+                errBox.classList.remove('hidden');
+            }
+            if (window.lucide) window.lucide.createIcons();
+        }
+
+        function showAuthSuccess(msg) {
+            const succBox = document.getElementById('authSuccessMsg');
+            const succText = document.getElementById('authSuccessText');
+            const errBox = document.getElementById('authErrorMsg');
+            if (errBox) errBox.classList.add('hidden');
+            if (succBox && succText) {
+                succText.textContent = msg;
+                succBox.classList.remove('hidden');
+            }
+            if (window.lucide) window.lucide.createIcons();
+        }
+
+        function hideAuthAlerts() {
+            const errBox = document.getElementById('authErrorMsg');
+            const succBox = document.getElementById('authSuccessMsg');
+            if (errBox) errBox.classList.add('hidden');
+            if (succBox) succBox.classList.add('hidden');
+        }
+
+        function switchAuthTab(tab) {
+            hideAuthAlerts();
+            const loginView = document.getElementById('authLoginView');
+            const regView = document.getElementById('authRegisterView');
+            const formLogin = document.getElementById('loginForm');
+            const formReg = document.getElementById('registerForm');
+
+            if (tab === 'login') {
+                if (loginView) loginView.classList.remove('hidden');
+                if (regView) regView.classList.add('hidden');
+                if (formLogin) formLogin.classList.remove('hidden');
+                if (formReg) formReg.classList.add('hidden');
+            } else {
+                if (loginView) loginView.classList.add('hidden');
+                if (regView) regView.classList.remove('hidden');
+                if (formReg) formReg.classList.remove('hidden');
+                if (formLogin) formLogin.classList.add('hidden');
+            }
+            if (window.lucide) window.lucide.createIcons();
+        }
+
+        function updateAuthLangUI(lang) {
+            const currentLang = lang || (document.documentElement.getAttribute('lang') === 'en' ? 'en' : 'ua');
+            const btnUa = document.getElementById('authLangUa');
+            const btnEn = document.getElementById('authLangEn');
+            if (btnUa && btnEn) {
+                if (currentLang === 'en') {
+                    btnEn.className = 'px-2 py-1 font-bold text-zinc-900 dark:text-white transition-colors';
+                    btnUa.className = 'px-2 py-1 font-medium text-zinc-400 hover:text-[#1D5D3B] dark:hover:text-white transition-colors';
+                } else {
+                    btnUa.className = 'px-2 py-1 font-bold text-zinc-900 dark:text-white transition-colors';
+                    btnEn.className = 'px-2 py-1 font-medium text-zinc-400 hover:text-[#1D5D3B] dark:hover:text-white transition-colors';
+                }
+            }
+        }
+        window.addEventListener('muvio:langchange', (e) => {
+            updateAuthLangUI(e.detail ? e.detail.lang : null);
+        });
+
+        function toggleAuthTheme() {
+            const isDark = document.documentElement.classList.contains('theme-dark');
+            const nextTheme = isDark ? 'light' : 'dark';
+            if (typeof window.setSiteTheme === 'function') {
+                window.setSiteTheme(nextTheme);
+            } else {
+                if (nextTheme === 'dark') {
+                    document.documentElement.classList.add('theme-dark');
+                } else {
+                    document.documentElement.classList.remove('theme-dark');
+                }
+            }
+        }
+
+        async function handleLoginSubmit(e) {
+            if (e && e.preventDefault) e.preventDefault();
+            hideAuthAlerts();
+
+            const identifierInput = document.getElementById('loginIdentifier');
+            const passInput = document.getElementById('loginPassword');
+
+            const identifierVal = identifierInput ? identifierInput.value.trim() : '';
+            const passVal = passInput ? passInput.value.trim() : '';
+
+            if (!identifierVal || !passVal) {
+                showAuthError("Будь ласка, заповніть усі поля.");
+                return;
+            }
+
+            const users = getUsersDb();
+            const cleanInputDigits = identifierVal.replace(/\D/g, '');
+            const isDefaultLogin = identifierVal.toUpperCase() === 'MUVIO';
+            const isDefaultPhone = cleanInputDigits.length >= 9 && (cleanInputDigits.endsWith('638316361') || cleanInputDigits === '0638316361');
+
+            let foundUser = null;
+
+            if ((isDefaultLogin || isDefaultPhone) && passVal === '123') {
+                foundUser = users.find(u => (u.login && u.login.toUpperCase() === 'MUVIO') || (u.phone && String(u.phone).replace(/\D/g, '').endsWith('638316361')));
+                if (!foundUser) {
+                    foundUser = { login: "MUVIO", phone: "0638316361", password: "123" };
+                    users.unshift(foundUser);
+                    saveUsersDb(users);
+                }
+            } else {
+                foundUser = users.find(u => {
+                    const matchLogin = u.login && u.login.trim().toLowerCase() === identifierVal.toLowerCase();
+                    let matchPhone = false;
+                    if (cleanInputDigits.length >= 9) {
+                        const uDigits = String(u.phone || '').replace(/\D/g, '');
+                        if (uDigits) {
+                            matchPhone = (uDigits === cleanInputDigits) ||
+                                         (uDigits.length >= 9 && uDigits.slice(-9) === cleanInputDigits.slice(-9)) ||
+                                         uDigits.endsWith(cleanInputDigits) ||
+                                         cleanInputDigits.endsWith(uDigits);
+                        }
+                    }
+                    return matchLogin || matchPhone;
+                });
+            }
+
+            if (!foundUser || String(foundUser.password).trim() !== passVal) {
+                showAuthError("Невірний пароль або логін");
+                return;
+            }
+
+            const activeSession = { login: foundUser.login, phone: foundUser.phone || '' };
+            localStorage.setItem('muvio_active_user', JSON.stringify(activeSession));
+
+            const profileSession = {
+                id: foundUser.login,
+                name: foundUser.login,
+                first_name: foundUser.login,
+                username: foundUser.login,
+                login: foundUser.login,
+                phone: foundUser.phone
+            };
+            localStorage.setItem('muvio_user', JSON.stringify(profileSession));
+
+            // Перенаправляємо в особистий кабінет
+            window.location.href = 'cabinet.html';
+        }
+
+        async function handleRegisterSubmit(e) {
+            if (e && e.preventDefault) e.preventDefault();
+            hideAuthAlerts();
+
+            const loginInput = document.getElementById('regLogin');
+            const phoneInput = document.getElementById('regPhone');
+            const passInput = document.getElementById('regPassword');
+
+            const loginVal = loginInput ? loginInput.value.trim() : '';
+            const phoneVal = phoneInput ? phoneInput.value.trim() : '';
+            const passVal = passInput ? passInput.value.trim() : '';
+
+            if (!loginVal || !phoneVal || !passVal) {
+                showAuthError("Будь ласка, заповніть усі обов'язкові поля.");
+                return;
+            }
+
+            if (passVal.length < 3) {
+                showAuthError("Пароль повинен містити щонайменше 3 символи.");
+                return;
+            }
+
+            const users = getUsersDb();
+            const cleanPhone = phoneVal.replace(/\D/g, '');
+
+            const loginExists = users.some(u => u.login && u.login.trim().toLowerCase() === loginVal.toLowerCase());
+            if (loginExists) {
+                showAuthError(`Логін "${loginVal}" вже зайнятий. Будь ласка, оберіть інший логін.`);
+                return;
+            }
+
+            if (cleanPhone.length >= 9) {
+                const phoneExists = users.some(u => {
+                    const existingPhoneDigits = String(u.phone || '').replace(/\D/g, '');
+                    return existingPhoneDigits && (existingPhoneDigits === cleanPhone || (existingPhoneDigits.length >= 9 && existingPhoneDigits.slice(-9) === cleanPhone.slice(-9)));
+                });
+                if (phoneExists) {
+                    showAuthError(`Номер телефону "${phoneVal}" вже зареєстрований.`);
+                    return;
+                }
+            }
+
+            const newUser = { login: loginVal, phone: phoneVal, password: passVal };
+            users.push(newUser);
+            saveUsersDb(users);
+
+            const activeSession = { login: newUser.login, phone: newUser.phone };
+            localStorage.setItem('muvio_active_user', JSON.stringify(activeSession));
+
+            const profileSession = {
+                id: newUser.login,
+                name: newUser.login,
+                first_name: newUser.login,
+                username: newUser.login,
+                login: newUser.login,
+                phone: newUser.phone
+            };
+            localStorage.setItem('muvio_user', JSON.stringify(profileSession));
+
+            // Перенаправляємо в особистий кабінет
+            window.location.href = 'cabinet.html';
+        }
+
+        // Відновлення пароля
+        let resetSession = null;
+        let smsToastTimeout = null;
+
+        function showSmsToast(msg) {
+            const toast = document.getElementById('smsToast');
+            const text = document.getElementById('smsToastText');
+            if (toast && text) {
+                text.textContent = msg;
+                toast.classList.remove('hidden');
+                if (window.lucide) window.lucide.createIcons();
+                if (smsToastTimeout) clearTimeout(smsToastTimeout);
+                smsToastTimeout = setTimeout(() => {
+                    hideSmsToast();
+                }, 14000);
+            }
+        }
+
+        function hideSmsToast() {
+            const toast = document.getElementById('smsToast');
+            if (toast) toast.classList.add('hidden');
+            if (smsToastTimeout) clearTimeout(smsToastTimeout);
+        }
+
+        function openResetPasswordModal() {
+            const modal = document.getElementById('resetPasswordModal');
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                goToResetStep1();
+                if (window.lucide) window.lucide.createIcons();
+            }
+        }
+
+        function closeResetPasswordModal() {
+            const modal = document.getElementById('resetPasswordModal');
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                resetSession = null;
+                const errBox = document.getElementById('resetModalError');
+                if (errBox) errBox.classList.add('hidden');
+            }
+        }
+
+        function showResetError(msg) {
+            const errBox = document.getElementById('resetModalError');
+            const errText = document.getElementById('resetModalErrorText');
+            if (errBox && errText) {
+                errText.textContent = msg;
+                errBox.classList.remove('hidden');
+            }
+        }
+
+        function hideResetError() {
+            const errBox = document.getElementById('resetModalError');
+            if (errBox) errBox.classList.add('hidden');
+        }
+
+        function goToResetStep1() {
+            hideResetError();
+            const step1 = document.getElementById('resetStep1Form');
+            const step2 = document.getElementById('resetStep2Form');
+            if (step1) step1.classList.remove('hidden');
+            if (step2) step2.classList.add('hidden');
+            const phoneInput = document.getElementById('resetPhone');
+            if (phoneInput && !phoneInput.value) {
+                const idInput = document.getElementById('loginIdentifier');
+                if (idInput && idInput.value && /\d/.test(idInput.value)) {
+                    phoneInput.value = idInput.value;
+                }
+            }
+        }
+
+        function handleSendResetCode(e) {
+            if (e && e.preventDefault) e.preventDefault();
+            hideResetError();
+
+            const phoneInput = document.getElementById('resetPhone');
+            const rawPhone = phoneInput ? phoneInput.value.trim() : '';
+            const cleanDigits = rawPhone.replace(/\D/g, '');
+
+            if (!rawPhone || cleanDigits.length < 9) {
+                showResetError("Введіть коректний номер телефону (щонайменше 9 цифр).");
+                return;
+            }
+
+            const users = getUsersDb();
+            const user = users.find(u => {
+                const uDigits = String(u.phone || '').replace(/\D/g, '');
+                return uDigits && (uDigits === cleanDigits || uDigits.endsWith(cleanDigits) || cleanDigits.endsWith(uDigits) || (cleanDigits.length >= 9 && uDigits.slice(-9) === cleanDigits.slice(-9)));
+            });
+
+            if (!user && !(cleanDigits.endsWith('638316361') || cleanDigits === '0638316361')) {
+                showResetError(`Користувача з номером "${rawPhone}" не знайдено в системі.`);
+                return;
+            }
+
+            const generatedCode = String(Math.floor(1000 + Math.random() * 9000));
+            resetSession = {
+                phone: rawPhone,
+                cleanDigits: cleanDigits,
+                code: generatedCode,
+                timestamp: Date.now()
+            };
+
+            const step1 = document.getElementById('resetStep1Form');
+            const step2 = document.getElementById('resetStep2Form');
+            const disp = document.getElementById('resetTargetPhoneDisplay');
+            if (disp) disp.textContent = rawPhone;
+            if (step1) step1.classList.add('hidden');
+            if (step2) step2.classList.remove('hidden');
+
+            const smsInput = document.getElementById('resetSmsCode');
+            if (smsInput) {
+                smsInput.value = '';
+                setTimeout(() => smsInput.focus(), 150);
+            }
+
+            showSmsToast(`MUVIO: Ваш код підтвердження відновлення паролю: ${generatedCode}. Нікому не передавайте цей код.`);
+        }
+
+        function resendResetCode() {
+            if (!resetSession || !resetSession.phone) {
+                goToResetStep1();
+                return;
+            }
+            const generatedCode = String(Math.floor(1000 + Math.random() * 9000));
+            resetSession.code = generatedCode;
+            resetSession.timestamp = Date.now();
+            hideResetError();
+            showSmsToast(`MUVIO: Новий код підтвердження: ${generatedCode}. Нікому не передавайте його.`);
+        }
+
+        function handleConfirmResetPassword(e) {
+            if (e && e.preventDefault) e.preventDefault();
+            hideResetError();
+
+            if (!resetSession) {
+                showResetError("Сесія відновлення завершилась. Будь ласка, введіть номер телефону знову.");
+                goToResetStep1();
+                return;
+            }
+
+            const codeInput = document.getElementById('resetSmsCode');
+            const passInput = document.getElementById('resetNewPassword');
+
+            const enteredCode = codeInput ? codeInput.value.trim() : '';
+            const newPassword = passInput ? passInput.value.trim() : '';
+
+            if (!enteredCode || enteredCode !== resetSession.code) {
+                showResetError("Невірний SMS-код. Перевірте код або надішліть новий.");
+                return;
+            }
+
+            if (!newPassword || newPassword.length < 3) {
+                showResetError("Новий пароль повинен містити щонайменше 3 символи.");
+                return;
+            }
+
+            const users = getUsersDb();
+            let targetUser = users.find(u => {
+                const uDigits = String(u.phone || '').replace(/\D/g, '');
+                return uDigits && (uDigits === resetSession.cleanDigits || uDigits.endsWith(resetSession.cleanDigits) || resetSession.cleanDigits.endsWith(uDigits) || (resetSession.cleanDigits.length >= 9 && uDigits.slice(-9) === resetSession.cleanDigits.slice(-9)));
+            });
+
+            if (!targetUser) {
+                targetUser = {
+                    login: "MUVIO",
+                    phone: resetSession.phone,
+                    password: newPassword
+                };
+                users.unshift(targetUser);
+            } else {
+                targetUser.password = newPassword;
+            }
+
+            saveUsersDb(users);
+            closeResetPasswordModal();
+            switchAuthTab('login');
+
+            const idInput = document.getElementById('loginIdentifier');
+            if (idInput) idInput.value = targetUser.login || resetSession.phone;
+            showAuthSuccess("Пароль успішно змінено! Тепер ви можете увійти з новим паролем.");
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.lucide) window.lucide.createIcons();
+
+            // Перевіряємо чи користувач вже залогінений
+            const activeSaved = localStorage.getItem('muvio_active_user');
+            const savedUser = localStorage.getItem('muvio_user');
+            if (activeSaved || savedUser) {
+                window.location.href = 'cabinet.html';
+                return;
+            }
+
+            getUsersDb();
+            switchAuthTab('login');
+            updateAuthLangUI();
+        });
+    </script>
+</body>
+
+</html>
