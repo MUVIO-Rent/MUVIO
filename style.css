@@ -3,7 +3,18 @@
    Original Native System Typography (-apple-system, BlinkMacSystemFont, "SF Pro Display", etc.)
    ========================================================================== */
 
-/* MUVIO Unified Vector Logo */
+@import url('https://fonts.googleapis.com/css2?family=Tektur:wght@700;900&family=Chakra+Petch:wght@700;900&display=swap');
+
+/* MUVIO Brand Typography & Wordmark */
+.brand-logo-text {
+    font-family: 'Tektur', 'Chakra Petch', sans-serif !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.02em !important;
+    -webkit-text-stroke: 0.5px currentColor;
+    color: #1D5D3B !important;
+    transition: color 0.2s ease;
+}
+
 .muvio-logo-mark {
     fill: #1D5D3B !important;
     transition: fill 0.2s ease;
@@ -15,6 +26,14 @@
 }
 
 /* Dark Theme: Vibrant Emerald Mark, Pure White Letters */
+html.theme-dark .brand-logo-text,
+.theme-dark .brand-logo-text,
+body.theme-dark .brand-logo-text,
+body.dark .brand-logo-text,
+[data-theme="dark"] .brand-logo-text {
+    color: #FFFFFF !important;
+}
+
 html.theme-dark .muvio-logo-mark,
 .theme-dark .muvio-logo-mark,
 body.theme-dark .muvio-logo-mark,
