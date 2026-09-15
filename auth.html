@@ -95,18 +95,20 @@
     <script src="theme-settings.js"></script>
 </head>
 
-<body class="min-h-screen flex flex-col justify-between text-zinc-900 dark:text-white antialiased selection:bg-[#1D5D3B] selection:text-white">
+<body class="min-h-screen flex flex-col text-zinc-900 dark:text-white antialiased selection:bg-[#1D5D3B] selection:text-white">
 
     <!-- 1. ХЕДЕР (ЛОГОТИП + МОВА + ТЕМА) -->
-    <header class="w-full max-w-7xl mx-auto px-4 sm:px-8 py-5 flex items-center justify-between">
-        <!-- Слева вверху: логотип MUVIO (аккуратный SVG знак + надпись MUVIO, цвет #1D5D3B) -->
-        <a href="index.html" class="inline-flex items-center gap-2.5 transition-opacity hover:opacity-90 group" aria-label="MUVIO Головна">
-            <div class="flex items-center justify-center shrink-0">
-                <svg class="w-7 h-7 sm:w-8 sm:h-8 text-[#1D5D3B]" viewBox="0 0 100 100" fill="currentColor">
-                    <path d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z"/>
-                </svg>
-            </div>
-            <span class="font-bold text-xl sm:text-2xl tracking-wider text-[#1D5D3B]">MUVIO</span>
+    <header class="w-full max-w-7xl mx-auto pt-5 pb-8 px-6 sm:px-10 flex items-center justify-between">
+        <!-- Слева вверху: логотип MUVIO (аккуратный SVG знак + надпись UVIO, цвет #1D5D3B) -->
+        <a href="index.html" class="inline-flex items-center gap-[1px] tracking-tight group select-none" aria-label="MUVIO">
+            <!-- Векторный знак вместо первой буквы 'M' -->
+            <svg class="h-6 w-auto sm:h-7" viewBox="0 0 60 100" fill="#1D5D3B">
+                <path transform="translate(-20, 0)" d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z" fill="#1D5D3B"/>
+            </svg>
+            <!-- Остальная часть слова без буквы M -->
+            <span class="font-extrabold text-xl sm:text-2xl tracking-wider text-zinc-900 dark:text-white uppercase leading-none">
+                UVIO
+            </span>
         </a>
 
         <!-- Справа вверху: переключатель языка (UA / EN) + смена темы -->
@@ -138,8 +140,8 @@
         </div>
     </header>
 
-    <!-- 2. ЦЕНТРАЛЬНИЙ КОНТЕЙНЕР ФОРМИ (max-w-[380px] w-full mx-auto px-4 py-8 sm:py-12 my-auto) -->
-    <main class="max-w-[380px] w-full mx-auto px-4 py-8 sm:py-12 my-auto">
+    <!-- 2. ЦЕНТРАЛЬНИЙ КОНТЕЙНЕР ФОРМИ (mx-auto w-full max-w-[360px] px-4 pt-6 sm:pt-10 pb-16) -->
+    <main class="mx-auto w-full max-w-[360px] px-4 pt-6 sm:pt-10 pb-16">
         <!-- Повідомлення про помилку -->
         <div id="authErrorMsg" class="hidden p-3 mb-6 bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/60 text-rose-700 dark:text-rose-300 text-xs rounded-md flex items-center gap-2">
             <i data-lucide="alert-circle" class="w-4 h-4 shrink-0"></i>
@@ -154,7 +156,7 @@
 
         <!-- ВХІД / SIGN IN -->
         <div id="authLoginView">
-            <h1 class="font-bold text-3xl sm:text-[32px] text-zinc-900 dark:text-white tracking-tight mb-8 text-left">
+            <h1 class="text-[32px] leading-[1.2] font-semibold text-zinc-900 dark:text-white tracking-tight mb-6 text-left">
                 <span class="lang-ua">Вхід</span>
                 <span class="lang-en">Sign In</span>
             </h1>
@@ -216,7 +218,7 @@
 
         <!-- РЕЄСТРАЦІЯ / REGISTER -->
         <div id="authRegisterView" class="hidden">
-            <h1 class="font-bold text-3xl sm:text-[32px] text-zinc-900 dark:text-white tracking-tight mb-8 text-left">
+            <h1 class="text-[32px] leading-[1.2] font-semibold text-zinc-900 dark:text-white tracking-tight mb-6 text-left">
                 <span class="lang-ua">Створити акаунт</span>
                 <span class="lang-en">Create Account</span>
             </h1>
@@ -286,7 +288,7 @@
     </main>
 
     <!-- 3. ПОДВАЛ (FOOTER) -->
-    <footer class="py-6 px-4">
+    <footer class="mt-auto py-8 px-4">
         <div class="max-w-md mx-auto text-xs text-zinc-400 dark:text-zinc-500 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-center">
             <span>MUVIO © 2026</span>
             <span class="text-zinc-300 dark:text-zinc-700">•</span>

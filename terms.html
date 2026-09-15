@@ -128,20 +128,16 @@
                         </svg>
                     </button>
 
-                    <!-- 2-й елемент: фірмова векторна буква/значок MUVIO ("M") смарагдового кольору без білих рамок -->
-                    <a href="index.html" class="flex items-center gap-2.5 group shrink-0" style="background: transparent !important; border: none !important;">
-                        <div class="header-logo-wrap flex items-center justify-center shrink-0" style="background: transparent !important; border: none !important; box-shadow: none !important;">
-                            <svg class="w-7 h-7 sm:w-8 sm:h-8 text-[#1D5D3B] transition-colors" viewBox="0 0 100 100" fill="none" style="fill: #1D5D3B !important; stroke: none !important;">
-                                <path d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z" fill="#1D5D3B" stroke="none" style="fill: #1D5D3B !important; stroke: none !important; filter: none !important;"/>
-                            </svg>
-                        </div>
-                        <div class="hidden sm:flex flex-col">
-                            <span class="font-brand font-bold text-lg md:text-xl tracking-wider text-[#1D5D3B] leading-none">MUVIO</span>
-                            <div class="text-[10px] tracking-[0.2em] uppercase font-semibold text-gray-400">
-                                <span class="lang-ua">ТВОЄ ELECTRO CITY</span>
-                                <span class="lang-en">YOUR ELECTRO CITY</span>
-                            </div>
-                        </div>
+                    <!-- 2-й елемент: фірмова векторна буква/значок MUVIO ("M") + UVIO -->
+                    <a href="index.html" class="inline-flex items-center gap-[1px] tracking-tight group select-none" aria-label="MUVIO">
+                        <!-- Векторный знак вместо первой буквы 'M' -->
+                        <svg class="h-6 w-auto sm:h-7" viewBox="0 0 60 100" fill="#1D5D3B">
+                            <path transform="translate(-20, 0)" d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z" fill="#1D5D3B"/>
+                        </svg>
+                        <!-- Остальная часть слова без буквы M -->
+                        <span class="font-extrabold text-xl sm:text-2xl tracking-wider text-zinc-900 dark:text-white uppercase leading-none">
+                            UVIO
+                        </span>
                     </a>
                 </div>
 
