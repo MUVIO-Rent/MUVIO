@@ -106,44 +106,31 @@
 <body class="min-h-screen flex flex-col text-zinc-900 dark:text-white antialiased selection:bg-[#1D5D3B] selection:text-white">
 
     <!-- 1. ХЕДЕР (ЛОГОТИП + МОВА + ТЕМА) -->
-    <header style="display: flex !important; align-items: center !important; justify-content: space-between !important; padding: 28px 48px !important; width: 100% !important; box-sizing: border-box !important;">
-        <!-- Слева вверху: фірмовий логотип MUVIO (єдиний монолітний вектор) -->
-        <a href="index.html" style="height: 32px !important; width: auto !important; display: flex !important; align-items: center !important; text-decoration: none !important;" class="group select-none focus:outline-none" aria-label="MUVIO">
-            <svg style="height: 32px !important; width: auto !important; display: block !important;" class="shrink-0 transition-opacity group-hover:opacity-90" viewBox="0 0 208 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <!-- Знак M -->
-                <path class="muvio-logo-mark" d="M 28.67,51.38 L 3.54,2.0 L 11.1,36.58 L 0.0,36.66 L 26.14,92.0 L 18.82,52.75 L 28.67,56.37 L 38.52,52.75 L 31.2,92.0 L 57.34,36.66 L 46.24,36.58 L 53.8,2.0 Z" fill="#1D5D3B"/>
-                <!-- Масивні плотні букви U, V, I, O (векторні техно-криві Black 900) -->
-                <path class="muvio-logo-letters" fill-rule="evenodd" clip-rule="evenodd" d="M 49.0,54.0 L 43.0,60.0 L 43.0,86.5 L 48.5,92.0 L 79.5,92.0 L 85.0,86.5 L 85.0,54.0 L 74.0,54.0 L 74.0,81.0 L 71.0,84.0 L 57.0,84.0 L 54.0,81.0 L 54.0,54.0 Z M 89.0,54.0 L 109.5,92.0 L 120.5,92.0 L 141.0,54.0 L 130.0,54.0 L 115.0,81.5 L 100.0,54.0 Z M 145.0,54.0 L 155.5,54.0 L 155.5,84.0 L 145.0,94.5 Z M 165.5,54.0 L 197.5,54.0 L 203.0,59.5 L 203.0,86.5 L 197.5,92.0 L 165.5,92.0 L 160.0,86.5 L 160.0,59.5 Z M 171.0,62.0 L 192.0,62.0 L 195.0,65.0 L 195.0,81.0 L 192.0,84.0 L 171.0,84.0 L 168.0,81.0 L 168.0,65.0 Z" fill="#1D5D3B"/>
-            </svg>
-        </a>
+    <header style="display: flex !important; justify-content: space-between !important; align-items: center !important; padding: 24px 36px 0 36px !important; width: 100% !important; box-sizing: border-box !important; position: relative !important;">
+      <!-- ЛОГОТИП СЛЕВА: ТОЧНОЕ ПОЗИЦИОНИРОВАНИЕ И ЗАЗОР -->
+      <a href="index.html" style="display: inline-flex !important; align-items: center !important; gap: 6px !important; text-decoration: none !important; user-select: none !important;" aria-label="MUVIO">
+        <!-- Векторная буква M: высота ровно 24px -->
+        <svg style="height: 24px !important; width: auto !important; fill: #1D5D3B !important; flex-shrink: 0 !important; display: block !important;" viewBox="0 0 58 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path class="muvio-logo-mark" d="M 28.67,51.38 L 3.54,2.0 L 11.1,36.58 L 0.0,36.66 L 26.14,92.0 L 18.82,52.75 L 28.67,56.37 L 38.52,52.75 L 31.2,92.0 L 57.34,36.66 L 46.24,36.58 L 53.8,2.0 Z" fill="#1D5D3B"/>
+        </svg>
+        <!-- Буквы UVIO: строго с зазором 6px, НЕ НАПОЛЗАТЬ на M! -->
+        <span class="brand-logo-text" style="font-family: 'Tektur', 'Chakra Petch', sans-serif !important; font-size: 18px !important; font-weight: 900 !important; letter-spacing: 0.12em !important; color: #1D5D3B !important; line-height: 1 !important; display: inline-block !important;">
+          UVIO
+        </span>
+      </a>
 
-        <!-- Справа вверху: переключатель языка (UA / EN) + смена темы -->
-        <div style="display: flex !important; align-items: center !important; gap: 16px !important;">
-            <div class="inline-flex items-center text-xs font-semibold tracking-wider text-zinc-500 dark:text-zinc-400">
-                <button type="button" id="authLangUa" onclick="setSiteLanguage('ua')"
-                    class="px-2 py-1 transition-colors hover:text-[#1D5D3B] dark:hover:text-white">
-                    UA
-                </button>
-                <span class="text-zinc-300 dark:text-zinc-700">|</span>
-                <button type="button" id="authLangEn" onclick="setSiteLanguage('en')"
-                    class="px-2 py-1 transition-colors hover:text-[#1D5D3B] dark:hover:text-white">
-                    EN
-                </button>
-            </div>
-
-            <!-- Переключатель темы (светлая / темная) -->
-            <button type="button" onclick="toggleAuthTheme()"
-                class="p-2 text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800"
-                title="Перемкнути тему" aria-label="Перемкнути тему">
-                <svg id="themeIconSun" class="w-4 h-4 hidden dark:block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="5"></circle>
-                    <path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
-                </svg>
-                <svg id="themeIconMoon" class="w-4 h-4 block dark:hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                </svg>
-            </button>
-        </div>
+      <!-- ПРАВЫЙ БЛОК (ЯЗЫК И ТЕМА): ВЫРОВНЕН ПО ЦЕНТРУ С ЛОГОТИПОМ -->
+      <div style="display: flex !important; align-items: center !important; gap: 16px !important; font-size: 12px !important; font-weight: 600 !important;">
+        <span style="color: #71717a !important; cursor: pointer !important; display: inline-flex !important; align-items: center !important; gap: 4px !important;">
+          <button type="button" id="authLangUa" onclick="setSiteLanguage('ua')" style="background: none !important; border: none !important; padding: 0 !important; font: inherit !important; color: inherit !important; cursor: pointer !important;">UA</button>
+          <span style="color: #d4d4d8 !important;">|</span>
+          <button type="button" id="authLangEn" onclick="setSiteLanguage('en')" style="background: none !important; border: none !important; padding: 0 !important; font: inherit !important; color: inherit !important; cursor: pointer !important;">EN</button>
+        </span>
+        <button id="theme-toggle" type="button" onclick="toggleAuthTheme()" style="background: none !important; border: none !important; cursor: pointer !important; padding: 0 !important; color: #71717a !important; display: flex !important; align-items: center !important;" aria-label="Toggle theme">
+          <!-- Иконка луны/солнца -->
+          <svg style="width: 16px !important; height: 16px !important;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+        </button>
+      </div>
     </header>
 
     <!-- 2. ЦЕНТРАЛЬНИЙ КОНТЕЙНЕР ФОРМИ (mx-auto w-full max-w-[360px] px-4 pt-6 sm:pt-10 pb-16) -->

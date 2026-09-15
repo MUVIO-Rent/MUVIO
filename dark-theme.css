@@ -1087,8 +1087,15 @@ body.theme-dark .muvio-logo-letters,
 html.dark .muvio-logo-letters,
 body.dark .muvio-logo-letters,
 .theme-dark .muvio-logo-letters,
-[data-theme="dark"] .muvio-logo-letters {
+[data-theme="dark"] .muvio-logo-letters,
+html.theme-dark .brand-logo-text,
+body.theme-dark .brand-logo-text,
+html.dark .brand-logo-text,
+body.dark .brand-logo-text,
+.theme-dark .brand-logo-text,
+[data-theme="dark"] .brand-logo-text {
     fill: #FFFFFF !important;
+    color: #FFFFFF !important;
 }
 
 
