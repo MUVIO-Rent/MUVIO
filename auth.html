@@ -107,16 +107,14 @@
 
     <!-- 1. ХЕДЕР (ЛОГОТИП + МОВА + ТЕМА) -->
     <header style="display: flex !important; justify-content: space-between !important; align-items: center !important; padding: 24px 40px !important; width: 100% !important; box-sizing: border-box !important; position: relative !important;">
-      <!-- ЛОГОТИП СЛЕВА: ТОЧНОЕ ПОЗИЦИОНИРОВАНИЕ И ЗАЗОР -->
-      <a href="/" style="display: inline-flex !important; align-items: center !important; gap: 8px !important; text-decoration: none !important;" aria-label="MUVIO">
-        <!-- Знак M: высота ровно 28px -->
-        <svg style="height: 28px !important; width: auto !important; fill: #1D5D3B !important; flex-shrink: 0 !important;" viewBox="0 0 58 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- ЛОГОТИП: ЄДИНИЙ МОНОЛІТНИЙ SVG MUVIO -->
+      <a href="index.html" style="display: inline-flex !important; align-items: center !important; text-decoration: none !important;" aria-label="MUVIO">
+        <svg style="height: 28px !important; width: auto !important; display: block !important;" viewBox="0 0 208 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Знак M -->
           <path class="muvio-logo-mark" d="M 28.67,51.38 L 3.54,2.0 L 11.1,36.58 L 0.0,36.66 L 26.14,92.0 L 18.82,52.75 L 28.67,56.37 L 38.52,52.75 L 31.2,92.0 L 57.34,36.66 L 46.24,36.58 L 53.8,2.0 Z" fill="#1D5D3B"/>
+          <!-- Букви U, V, I, O — векторні техно-контури -->
+          <path class="muvio-logo-letters" fill-rule="evenodd" clip-rule="evenodd" d="M 49.0,54.0 L 43.0,60.0 L 43.0,86.5 L 48.5,92.0 L 79.5,92.0 L 85.0,86.5 L 85.0,54.0 L 74.0,54.0 L 74.0,81.0 L 71.0,84.0 L 57.0,84.0 L 54.0,81.0 L 54.0,54.0 Z M 89.0,54.0 L 109.5,92.0 L 120.5,92.0 L 141.0,54.0 L 130.0,54.0 L 115.0,81.5 L 100.0,54.0 Z M 145.0,54.0 L 155.5,54.0 L 155.5,84.0 L 145.0,94.5 Z M 165.5,54.0 L 197.5,54.0 L 203.0,59.5 L 203.0,86.5 L 197.5,92.0 L 165.5,92.0 L 160.0,86.5 L 160.0,59.5 Z M 171.0,62.0 L 192.0,62.0 L 195.0,65.0 L 195.0,81.0 L 192.0,84.0 L 171.0,84.0 L 168.0,81.0 L 168.0,65.0 Z" fill="#1D5D3B"/>
         </svg>
-        <!-- UVIO: делаем буквы широкими и тяжелыми через transform и font-stretch -->
-        <span class="brand-logo-text" style="font-family: 'Tektur', sans-serif !important; font-size: 22px !important; font-weight: 900 !important; color: #1D5D3B !important; line-height: 1 !important; letter-spacing: 0.08em !important; transform: scaleX(1.18); transform-origin: left center; display: inline-block !important;">
-          UVIO
-        </span>
       </a>
 
       <!-- ПРАВЫЙ БЛОК (ЯЗЫК И ТЕМА): ВЫРОВНЕН ПО ЦЕНТРУ С ЛОГОТИПОМ -->
