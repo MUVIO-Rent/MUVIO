@@ -139,29 +139,21 @@ body.dark {
 }
 
 .hero-logo-glow,
-#hero-section .hero-logo-glow {
+.hero-softbox-glow,
+#hero-section .hero-logo-glow,
+#hero-section .hero-softbox-glow {
     display: none !important;
 }
 
-/* Monolithic emerald body: strictly no stroke, no filter, pure #1D5D3B */
+/* Monolithic emerald body: strictly no stroke, no filter, no shadow, pure #1D5D3B */
+.hero-logo-svg,
 .hero-logo-svg path,
 .hero-logo-path {
     fill: #1D5D3B !important;
     stroke: none !important;
     filter: none !important;
-}
-
-.hero-softbox-glow {
-    position: absolute;
-    inset: 0;
-    margin: auto;
-    width: 280px;
-    height: 280px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.04) 45%, rgba(11, 14, 12, 0) 70%);
-    pointer-events: none;
-    z-index: 0;
-    filter: blur(20px);
+    box-shadow: none !important;
+    drop-shadow: none !important;
 }
 
 /* ==========================================================================

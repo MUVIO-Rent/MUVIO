@@ -1077,24 +1077,27 @@ body.dark #hero-section .hero-statusbar .text-\[\#64748B\] {
 }
 
 html.theme-dark .hero-logo-glow,
+html.theme-dark .hero-softbox-glow,
 html.theme-dark #hero-section .hero-logo-glow,
+html.theme-dark #hero-section .hero-softbox-glow,
 body.dark .hero-logo-glow,
-body.dark #hero-section .hero-logo-glow {
+body.dark .hero-softbox-glow,
+body.dark #hero-section .hero-logo-glow,
+body.dark #hero-section .hero-softbox-glow {
     display: none !important;
 }
 
+html.theme-dark .hero-logo-svg,
 html.theme-dark .hero-logo-svg path,
 html.theme-dark .hero-logo-path,
+body.dark .hero-logo-svg,
 body.dark .hero-logo-svg path,
 body.dark .hero-logo-path {
     fill: #1D5D3B !important;
     stroke: none !important;
     filter: none !important;
-}
-
-html.theme-dark .hero-softbox-glow,
-body.dark .hero-softbox-glow {
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.04) 45%, rgba(11, 14, 12, 0) 70%) !important;
+    box-shadow: none !important;
+    drop-shadow: none !important;
 }
 
 
