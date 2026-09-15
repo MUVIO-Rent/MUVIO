@@ -1100,4 +1100,11 @@ body.dark .hero-logo-path {
     drop-shadow: none !important;
 }
 
+html.theme-dark .hero-logo-svg,
+body.dark .hero-logo-svg {
+    opacity: 0.18 !important;
+    pointer-events: none !important;
+    user-select: none !important;
+}
+
 

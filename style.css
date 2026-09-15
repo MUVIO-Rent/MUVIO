@@ -145,7 +145,7 @@ body.dark {
     display: none !important;
 }
 
-/* Monolithic emerald body: strictly no stroke, no filter, no shadow, pure #1D5D3B */
+/* Hero Architectural Watermark Emblem: Monolithic emerald body with opacity */
 .hero-logo-svg,
 .hero-logo-svg path,
 .hero-logo-path {
@@ -154,6 +154,17 @@ body.dark {
     filter: none !important;
     box-shadow: none !important;
     drop-shadow: none !important;
+}
+
+.hero-logo-svg {
+    opacity: 0.12 !important;
+    pointer-events: none !important;
+    user-select: none !important;
+}
+
+.hero-watermark-wrap {
+    pointer-events: none !important;
+    user-select: none !important;
 }
 
 /* ==========================================================================
