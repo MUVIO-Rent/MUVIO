@@ -141,5 +141,11 @@ body.dark {
     color: var(--text-main) !important;
 }
 
-
-
+/* Header Logo: Solid Monolithic #1D5D3B geometry */
+.header-logo-wrap svg,
+.header-logo-wrap svg path {
+    color: #1D5D3B !important;
+    fill: #1D5D3B !important;
+    stroke: none !important;
+    filter: none !important;
+}

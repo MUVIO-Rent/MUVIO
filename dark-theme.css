@@ -221,11 +221,8 @@ html.theme-dark .header-logo-wrap svg,
 html.theme-dark .header-logo-wrap svg path {
     color: #1D5D3B !important;
     fill: #1D5D3B !important;
-    stroke: #2E8B57 !important;
-    stroke-width: 1.2px !important;
-    stroke-linejoin: round !important;
-    paint-order: stroke fill !important;
-    filter: drop-shadow(0 0 2px rgba(46, 139, 87, 0.6)) !important;
+    stroke: none !important;
+    filter: none !important;
     opacity: 1 !important;
 }
 
