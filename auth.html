@@ -94,6 +94,11 @@
 
 
 
+    <!-- Google Fonts: Tektur & Chakra Petch for MUVIO Techno Wordmark (ExtraBold / Black 900) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tektur:wght@700;900&family=Chakra+Petch:wght@700;900&display=swap" rel="stylesheet">
+
     <!-- Custom Theme & Settings Engine -->
     <script src="theme-settings.js"></script>
 </head>
@@ -101,10 +106,10 @@
 <body class="min-h-screen flex flex-col text-zinc-900 dark:text-white antialiased selection:bg-[#1D5D3B] selection:text-white">
 
     <!-- 1. ХЕДЕР (ЛОГОТИП + МОВА + ТЕМА) -->
-    <header class="w-full max-w-7xl mx-auto pt-5 pb-8 px-6 sm:px-10 flex items-center justify-between">
+    <header style="display: flex !important; align-items: center !important; justify-content: space-between !important; padding: 28px 48px !important; width: 100% !important; box-sizing: border-box !important;">
         <!-- Слева вверху: фірмовий логотип MUVIO (єдиний монолітний вектор) -->
-        <a href="index.html" class="inline-flex items-center select-none group focus:outline-none" aria-label="MUVIO">
-            <svg class="h-8 w-auto transition-opacity group-hover:opacity-90 shrink-0" viewBox="0 0 208 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <a href="index.html" style="height: 32px !important; width: auto !important; display: flex !important; align-items: center !important; text-decoration: none !important;" class="group select-none focus:outline-none" aria-label="MUVIO">
+            <svg style="height: 32px !important; width: auto !important; display: block !important;" class="shrink-0 transition-opacity group-hover:opacity-90" viewBox="0 0 208 96" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <!-- Знак M -->
                 <path class="muvio-logo-mark" d="M 28.67,51.38 L 3.54,2.0 L 11.1,36.58 L 0.0,36.66 L 26.14,92.0 L 18.82,52.75 L 28.67,56.37 L 38.52,52.75 L 31.2,92.0 L 57.34,36.66 L 46.24,36.58 L 53.8,2.0 Z" fill="#1D5D3B"/>
                 <!-- Масивні плотні букви U, V, I, O (векторні техно-криві Black 900) -->
@@ -113,7 +118,7 @@
         </a>
 
         <!-- Справа вверху: переключатель языка (UA / EN) + смена темы -->
-        <div class="flex items-center gap-3">
+        <div style="display: flex !important; align-items: center !important; gap: 16px !important;">
             <div class="inline-flex items-center text-xs font-semibold tracking-wider text-zinc-500 dark:text-zinc-400">
                 <button type="button" id="authLangUa" onclick="setSiteLanguage('ua')"
                     class="px-2 py-1 transition-colors hover:text-[#1D5D3B] dark:hover:text-white">
