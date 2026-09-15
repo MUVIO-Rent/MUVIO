@@ -146,6 +146,9 @@ body.dark {
 }
 
 /* Hero Architectural Watermark Emblem: Monolithic emerald body with opacity */
+#hero svg.hero-emblem-svg,
+#hero-section svg.hero-emblem-svg,
+.hero-emblem-svg,
 .hero-logo-svg,
 .hero-logo-svg path,
 .hero-logo-path {
@@ -156,10 +159,20 @@ body.dark {
     drop-shadow: none !important;
 }
 
+#hero svg.hero-emblem-svg,
+#hero-section svg.hero-emblem-svg,
+.hero-emblem-svg,
 .hero-logo-svg {
-    opacity: 0.12 !important;
+    opacity: 0.18 !important;
     pointer-events: none !important;
     user-select: none !important;
+}
+
+html.theme-light #hero svg.hero-emblem-svg,
+html.theme-light #hero-section svg.hero-emblem-svg,
+html.theme-light .hero-emblem-svg,
+html.theme-light .hero-logo-svg {
+    opacity: 0.10 !important;
 }
 
 .hero-watermark-wrap {

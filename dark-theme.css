@@ -1087,9 +1087,11 @@ body.dark #hero-section .hero-softbox-glow {
     display: none !important;
 }
 
+html.theme-dark .hero-emblem-svg,
 html.theme-dark .hero-logo-svg,
 html.theme-dark .hero-logo-svg path,
 html.theme-dark .hero-logo-path,
+body.dark .hero-emblem-svg,
 body.dark .hero-logo-svg,
 body.dark .hero-logo-svg path,
 body.dark .hero-logo-path {
@@ -1100,11 +1102,24 @@ body.dark .hero-logo-path {
     drop-shadow: none !important;
 }
 
+html.theme-dark #hero svg.hero-emblem-svg,
+html.theme-dark #hero-section svg.hero-emblem-svg,
+html.theme-dark .hero-emblem-svg,
 html.theme-dark .hero-logo-svg,
+body.dark #hero svg.hero-emblem-svg,
+body.dark #hero-section svg.hero-emblem-svg,
+body.dark .hero-emblem-svg,
 body.dark .hero-logo-svg {
     opacity: 0.18 !important;
     pointer-events: none !important;
     user-select: none !important;
+}
+
+html.theme-light #hero svg.hero-emblem-svg,
+html.theme-light #hero-section svg.hero-emblem-svg,
+html.theme-light .hero-emblem-svg,
+html.theme-light .hero-logo-svg {
+    opacity: 0.10 !important;
 }
 
 
