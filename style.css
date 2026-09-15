@@ -125,44 +125,8 @@ body.dark {
 }
 
 #hero-section .hero-calc-btn:hover {
-    background-color: rgba(241, 245, 249, 0.8) !important;
-    border-color: #94A3B8 !important;
-    color: #0F172A !important;
-}
-
-#hero-section .hero-statusbar {
-    border-color: var(--border-subtle) !important;
-}
-
-#hero-section .hero-statusbar > div > div {
-    border-color: var(--border-subtle) !important;
-}
-
-.hero-logo-glow,
-.hero-softbox-glow,
-#hero-section .hero-logo-glow,
-#hero-section .hero-softbox-glow {
-    display: none !important;
-}
-
-/* Hero Large Emblem: Pure 100% Opaque Solid #1D5D3B */
-#hero svg.hero-emblem-svg,
-#hero-section svg.hero-emblem-svg,
-.hero-emblem-svg,
-.hero-logo-svg,
-.hero-logo-svg path,
-.hero-logo-path {
-    fill: #1D5D3B !important;
-    opacity: 1 !important;
-    stroke: none !important;
-    filter: none !important;
-    box-shadow: none !important;
-    drop-shadow: none !important;
-}
-
-.hero-watermark-wrap {
-    pointer-events: none !important;
-    user-select: none !important;
+    border-color: #1D5D3B !important;
+    color: #1D5D3B !important;
 }
 
 /* ==========================================================================

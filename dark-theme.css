@@ -1051,8 +1051,7 @@ body.dark #hero-section .hero-calc-btn {
 
 html.theme-dark #hero-section .hero-calc-btn:hover,
 body.dark #hero-section .hero-calc-btn:hover {
-    background-color: rgba(39, 39, 42, 0.7) !important;
-    border-color: #71717A !important;
+    border-color: #2E8B57 !important;
     color: #FFFFFF !important;
 }
 
@@ -1074,37 +1073,6 @@ body.dark #hero-section .hero-statusbar .text-\[\#0F172A\] {
 html.theme-dark #hero-section .hero-statusbar .text-\[\#64748B\],
 body.dark #hero-section .hero-statusbar .text-\[\#64748B\] {
     color: var(--text-muted) !important;
-}
-
-html.theme-dark .hero-logo-glow,
-html.theme-dark .hero-softbox-glow,
-html.theme-dark #hero-section .hero-logo-glow,
-html.theme-dark #hero-section .hero-softbox-glow,
-body.dark .hero-logo-glow,
-body.dark .hero-softbox-glow,
-body.dark #hero-section .hero-logo-glow,
-body.dark #hero-section .hero-softbox-glow {
-    display: none !important;
-}
-
-html.theme-dark #hero svg.hero-emblem-svg,
-html.theme-dark #hero-section svg.hero-emblem-svg,
-html.theme-dark .hero-emblem-svg,
-html.theme-dark .hero-logo-svg,
-html.theme-dark .hero-logo-svg path,
-html.theme-dark .hero-logo-path,
-body.dark #hero svg.hero-emblem-svg,
-body.dark #hero-section svg.hero-emblem-svg,
-body.dark .hero-emblem-svg,
-body.dark .hero-logo-svg,
-body.dark .hero-logo-svg path,
-body.dark .hero-logo-path {
-    fill: #1D5D3B !important;
-    opacity: 1 !important;
-    stroke: none !important;
-    filter: none !important;
-    box-shadow: none !important;
-    drop-shadow: none !important;
 }
 
 

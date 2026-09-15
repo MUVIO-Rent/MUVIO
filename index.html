@@ -390,54 +390,43 @@
         </div>
     </header>
 
-    <!-- ==================== 2. HERO СЕКЦІЯ (АВТОМОБІЛЬНИЙ ПРЕМІУМ-ФОРМАТ) ==================== -->
-    <section id="hero-section" class="relative overflow-hidden pt-8 pb-12 sm:pb-16 transition-colors duration-300" style="background-color: var(--bg-main) !important; color: var(--text-main) !important;">
+    <!-- ==================== 2. HERO СЕКЦІЯ (ПРЕМІАЛЬНА ЦЕНТРОВАНА КОМПОНОВКА) ==================== -->
+    <section id="hero-section" class="relative overflow-hidden transition-colors duration-300" style="background-color: var(--bg-main) !important; color: var(--text-main) !important;">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <!-- 2-колонкова автомобільна компоновка -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center pt-4 sm:pt-8 pb-8">
-                <!-- СЛІВА (lg:col-span-7): Заголовок, переваги та CTA -->
-                <div class="lg:col-span-7 space-y-6 text-left">
-                    <!-- Головний заголовок H1 в нормальному регістрі (Sentence case) -->
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] normal-case" style="text-transform: none !important; color: var(--text-main) !important;">
-                        <span class="lang-ua">Оренда електротранспорту в Одесі</span>
-                        <span class="lang-en">Electric vehicle rental in Odesa</span>
-                    </h1>
-
-                    <!-- Підзаголовок (текст під H1) -->
-                    <p class="text-base sm:text-lg max-w-xl leading-relaxed font-normal" style="color: var(--text-muted) !important;">
-                        <span class="lang-ua">Для кур'єрів та туризму • Всі моделі з АКБ та зарядкою • Безкоштовне сервісне обслуговування</span>
-                        <span class="lang-en">For couriers and tourism • All models with battery & charger • Free maintenance</span>
-                    </p>
-
-                    <!-- Блок кнопок дії (CTA) -->
-                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
-                        <a href="#catalog"
-                            class="inline-flex items-center justify-center gap-3 bg-[#1D5D3B] hover:bg-[#237248] text-white px-8 py-4 rounded-xl font-bold text-base shadow-lg shadow-[#1D5D3B]/20 transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]">
-                            <span class="lang-ua">Обрати транспорт</span>
-                            <span class="lang-en">Choose Vehicle</span>
-                            <i data-lucide="arrow-down" class="w-5 h-5"></i>
-                        </a>
-                        <a href="calculator.html"
-                            class="hero-calc-btn inline-flex items-center justify-center gap-3 border px-8 py-4 rounded-xl font-semibold text-base backdrop-blur-sm transition-all duration-200">
-                            <i data-lucide="calculator" class="w-5 h-5"></i>
-                            <span class="lang-ua">Калькулятор оренди</span>
-                            <span class="lang-en">Rental Calculator</span>
-                        </a>
-                    </div>
+            <!-- Центральний Hero блок -->
+            <div class="max-w-4xl mx-auto text-center pt-10 pb-12 px-4">
+                <!-- НАДЗАГОЛОВОК (акуратний технічний бейдж) -->
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#1D5D3B]/40 bg-[#1D5D3B]/10 text-xs font-semibold text-[#1D5D3B] dark:text-[#2E8B57] mb-6">
+                    <span class="w-2 h-2 rounded-full bg-[#1D5D3B] dark:bg-[#2E8B57] animate-pulse"></span>
+                    <span class="lang-ua tracking-wide">КОМЕРЦІЙНИЙ ТА МІСЬКИЙ ЕЛЕКТРОТРАНСПОРТ</span>
+                    <span class="lang-en tracking-wide">COMMERCIAL & URBAN ELECTRIC VEHICLES</span>
                 </div>
 
-                <!-- СПРАВА (lg:col-span-5): Велика фонова архітектурна емблема MUVIO (водяний знак) -->
-                <div class="lg:col-span-5 relative flex items-center justify-center lg:justify-end py-4 sm:py-6 pointer-events-none select-none overflow-visible">
-                    <div class="hero-watermark-wrap relative flex items-center justify-center lg:justify-end w-full lg:translate-x-6 pointer-events-none select-none">
-                        <svg class="hero-logo-svg hero-emblem-svg w-[280px] h-[310px] sm:w-[340px] sm:h-[380px] lg:w-[380px] lg:h-[420px] pointer-events-none select-none transition-all duration-300"
-                            viewBox="0 0 100 100" fill="none"
-                            style="opacity: 1 !important; fill: #1D5D3B !important;">
-                            <path class="hero-logo-path" d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z"
-                                fill="#1D5D3B"
-                                stroke="none"
-                                style="opacity: 1 !important; fill: #1D5D3B !important; stroke: none !important; filter: none !important;" />
-                        </svg>
-                    </div>
+                <!-- ГЛАВНЫЙ ЗАГОЛОВОК H1 -->
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1] text-zinc-900 dark:text-white mb-6" style="color: var(--text-main) !important;">
+                    <span class="lang-ua">Оренда електротранспорту <br><span class="text-[#1D5D3B] dark:text-[#2E8B57]">в Одесі</span></span>
+                    <span class="lang-en">Electric vehicle rental <br><span class="text-[#1D5D3B] dark:text-[#2E8B57]">in Odesa</span></span>
+                </h1>
+
+                <!-- ПОДЗАГОЛОВОК -->
+                <p class="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed mb-8 max-w-2xl mx-auto" style="color: var(--text-muted) !important;">
+                    <span class="lang-ua">Електричні скутери та велосипеди для кур'єрів і міста. Повне сервісне обслуговування, змінні АКБ до 160 км та офіційний договір.</span>
+                    <span class="lang-en">Electric scooters and bikes for couriers and city. Full maintenance, swappable batteries up to 160 km & official agreement.</span>
+                </p>
+
+                <!-- БЛОК КНОПОК ДЕЙСТВИЯ -->
+                <div class="flex justify-center items-center gap-4 flex-wrap">
+                    <a href="#catalog"
+                        class="inline-flex items-center justify-center gap-2.5 bg-[#1D5D3B] hover:bg-[#237248] text-white px-7 py-3.5 rounded-xl font-bold text-base shadow-lg shadow-[#1D5D3B]/20 transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]">
+                        <span class="lang-ua">Обрати транспорт ↓</span>
+                        <span class="lang-en">Choose Vehicle ↓</span>
+                    </a>
+                    <a href="#calculator"
+                        class="hero-calc-btn inline-flex items-center justify-center gap-2.5 border border-zinc-300 dark:border-zinc-800 hover:border-[#1D5D3B] text-zinc-900 dark:text-zinc-200 px-7 py-3.5 rounded-xl font-semibold text-base transition-all duration-200">
+                        <i data-lucide="calculator" class="w-4 h-4"></i>
+                        <span class="lang-ua">Калькулятор оренди</span>
+                        <span class="lang-en">Rental Calculator</span>
+                    </a>
                 </div>
             </div>
 
