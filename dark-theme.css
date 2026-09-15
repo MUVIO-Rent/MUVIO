@@ -87,6 +87,23 @@ a[aria-label*="MUVIO"] span.font-brand {
 }
 
 /* 1. Base Document Canvas & Page Backgrounds */
+:root {
+    --bg-main: #FFFFFF;
+    --bg-secondary: #F8FAFC;
+    --text-main: #0F172A;
+    --text-muted: #475569;
+    --border-subtle: #E2E8F0;
+}
+
+html.theme-dark,
+body.dark {
+    --bg-main: #0B0E0C;
+    --bg-secondary: #111613;
+    --text-main: #FFFFFF;
+    --text-muted: #94A3B8;
+    --border-subtle: #1D2620;
+}
+
 html.theme-dark {
     color-scheme: dark;
     background-color: #000000 !important;
@@ -981,80 +998,95 @@ html.theme-dark .mobile-nav-link.nav-link-active {
 }
 
 /* ==========================================================================
-   22. HERO SECTION & CATALOG — SEAMLESS MONOLITHIC #0B0E0C THEME
+   22. HERO SECTION & CATALOG — THEME-SYNCHRONIZED DARK THEME OVERRIDES
    ========================================================================== */
-#hero-section,
-.hero-section,
-#hero,
 html.theme-dark #hero-section,
 html.theme-dark .hero-section,
 html.theme-dark #hero,
-html.theme-dark #catalog {
-    background-color: #0B0E0C !important;
+body.dark #hero-section,
+body.dark .hero-section,
+body.dark #hero {
+    background-color: var(--bg-main) !important;
     background-image: none !important;
     border-bottom: none !important;
+    color: var(--text-main) !important;
 }
 
-#hero-section::before,
-#hero-section::after,
-.hero-section::before,
-.hero-section::after,
-#hero::before,
-#hero::after,
+html.theme-dark #catalog,
+body.dark #catalog {
+    background-color: var(--bg-secondary) !important;
+    background-image: none !important;
+}
+
+html.theme-dark #catalog h2,
+body.dark #catalog h2 {
+    color: var(--text-main) !important;
+}
+
 html.theme-dark #hero-section::before,
-html.theme-dark #hero-section::after {
+html.theme-dark #hero-section::after,
+body.dark #hero-section::before,
+body.dark #hero-section::after {
     display: none !important;
     content: none !important;
     background: none !important;
 }
 
-html.theme-dark #hero-section {
-    color: #FFFFFF !important;
+html.theme-dark #hero-section h1,
+body.dark #hero-section h1 {
+    color: var(--text-main) !important;
 }
 
-html.theme-dark #hero-section h1 {
-    color: #FFFFFF !important;
+html.theme-dark #hero-section p,
+body.dark #hero-section p {
+    color: var(--text-muted) !important;
 }
 
-html.theme-dark #hero-section p {
-    color: #94A3B8 !important;
-}
-
-html.theme-dark #hero-section .hero-calc-btn {
+html.theme-dark #hero-section .hero-calc-btn,
+body.dark #hero-section .hero-calc-btn {
     border-color: #3F3F46 !important;
     color: #E4E4E7 !important;
     background-color: rgba(24, 24, 27, 0.5) !important;
 }
 
-html.theme-dark #hero-section .hero-calc-btn:hover {
+html.theme-dark #hero-section .hero-calc-btn:hover,
+body.dark #hero-section .hero-calc-btn:hover {
     background-color: rgba(39, 39, 42, 0.7) !important;
     border-color: #71717A !important;
     color: #FFFFFF !important;
 }
 
-html.theme-dark #hero-section .hero-statusbar {
-    border-color: #27272A !important;
+html.theme-dark #hero-section .hero-statusbar,
+body.dark #hero-section .hero-statusbar {
+    border-color: var(--border-subtle) !important;
 }
 
-html.theme-dark #hero-section .hero-statusbar > div > div {
-    border-color: #27272A !important;
+html.theme-dark #hero-section .hero-statusbar > div > div,
+body.dark #hero-section .hero-statusbar > div > div {
+    border-color: var(--border-subtle) !important;
 }
 
-html.theme-dark #hero-section .hero-statusbar .text-\[\#0F172A\] {
-    color: #FFFFFF !important;
+html.theme-dark #hero-section .hero-statusbar .text-\[\#0F172A\],
+body.dark #hero-section .hero-statusbar .text-\[\#0F172A\] {
+    color: var(--text-main) !important;
 }
 
-html.theme-dark #hero-section .hero-statusbar .text-\[\#64748B\] {
-    color: #A1A1AA !important;
+html.theme-dark #hero-section .hero-statusbar .text-\[\#64748B\],
+body.dark #hero-section .hero-statusbar .text-\[\#64748B\] {
+    color: var(--text-muted) !important;
 }
 
-.hero-logo-glow,
-html.theme-dark #hero-section .hero-logo-glow {
+html.theme-dark .hero-logo-glow,
+html.theme-dark #hero-section .hero-logo-glow,
+body.dark .hero-logo-glow,
+body.dark #hero-section .hero-logo-glow {
     display: none !important;
 }
 
-.hero-logo-svg path,
-html.theme-dark .hero-logo-svg path {
+html.theme-dark .hero-logo-svg path,
+html.theme-dark .hero-logo-path,
+body.dark .hero-logo-svg path,
+body.dark .hero-logo-path {
     fill: #1D5D3B !important;
     stroke: #2E8B57 !important;
     stroke-width: 1.5px !important;

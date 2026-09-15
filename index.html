@@ -391,20 +391,20 @@
     </header>
 
     <!-- ==================== 2. HERO СЕКЦІЯ (АВТОМОБІЛЬНИЙ ПРЕМІУМ-ФОРМАТ) ==================== -->
-    <section id="hero-section" class="relative overflow-hidden bg-[#0B0E0C] pt-8 pb-12 sm:pb-16 text-white transition-colors duration-300">
+    <section id="hero-section" class="relative overflow-hidden pt-8 pb-12 sm:pb-16 transition-colors duration-300" style="background-color: var(--bg-main) !important; color: var(--text-main) !important;">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <!-- 2-колонкова автомобільна компоновка -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center pt-4 sm:pt-8 pb-8">
                 <!-- СЛІВА (lg:col-span-7): Заголовок, переваги та CTA -->
                 <div class="lg:col-span-7 space-y-6 text-left">
                     <!-- Головний заголовок H1 в нормальному регістрі (Sentence case) -->
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.1] normal-case" style="text-transform: none !important;">
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] normal-case" style="text-transform: none !important; color: var(--text-main) !important;">
                         <span class="lang-ua">Оренда електротранспорту в Одесі</span>
                         <span class="lang-en">Electric vehicle rental in Odesa</span>
                     </h1>
 
                     <!-- Підзаголовок (текст під H1) -->
-                    <p class="text-base sm:text-lg text-zinc-400 max-w-xl leading-relaxed font-normal">
+                    <p class="text-base sm:text-lg max-w-xl leading-relaxed font-normal" style="color: var(--text-muted) !important;">
                         <span class="lang-ua">Для кур'єрів та туризму • Всі моделі з АКБ та зарядкою • Безкоштовне сервісне обслуговування</span>
                         <span class="lang-en">For couriers and tourism • All models with battery & charger • Free maintenance</span>
                     </p>
@@ -418,8 +418,8 @@
                             <i data-lucide="arrow-down" class="w-5 h-5"></i>
                         </a>
                         <a href="calculator.html"
-                            class="hero-calc-btn inline-flex items-center justify-center gap-3 border border-zinc-700 hover:border-zinc-500 text-zinc-200 hover:text-white px-8 py-4 rounded-xl font-semibold text-base backdrop-blur-sm bg-zinc-900/40 hover:bg-zinc-800/60 transition-all duration-200">
-                            <i data-lucide="calculator" class="w-5 h-5 text-zinc-400"></i>
+                            class="hero-calc-btn inline-flex items-center justify-center gap-3 border px-8 py-4 rounded-xl font-semibold text-base backdrop-blur-sm transition-all duration-200">
+                            <i data-lucide="calculator" class="w-5 h-5"></i>
                             <span class="lang-ua">Калькулятор оренди</span>
                             <span class="lang-en">Rental Calculator</span>
                         </a>
@@ -432,69 +432,68 @@
                     <div class="relative z-10 flex flex-col items-center justify-center group">
                         <svg class="hero-logo-svg w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 transition-all duration-700 ease-out group-hover:scale-105"
                             viewBox="0 0 100 100" fill="none">
-                            <path d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z"
+                            <path class="hero-logo-path" d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z"
                                 fill="#1D5D3B"
-                                stroke="#2E8B57"
+                                stroke="#1D5D3B"
                                 stroke-width="1.5px"
                                 stroke-linejoin="round"
-                                paint-order="stroke fill"
-                                style="fill: #1D5D3B !important; stroke: #2E8B57 !important; stroke-width: 1.5px !important; filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.4)) drop-shadow(0 0 6px rgba(46, 139, 87, 0.35)) !important;" />
+                                paint-order="stroke fill" />
                         </svg>
                     </div>
                 </div>
             </div>
 
             <!-- 3. Строгий горизонтальний статус-бар із тонкими роздільниками (без коробок) -->
-            <div class="hero-statusbar mt-4 pt-6 border-t border-zinc-800">
-                <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-0 divide-y lg:divide-y-0 lg:divide-x divide-zinc-800 text-left">
+            <div class="hero-statusbar mt-4 pt-6 border-t" style="border-color: var(--border-subtle) !important;">
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-0 divide-y lg:divide-y-0 lg:divide-x text-left" style="border-color: var(--border-subtle) !important;">
                     <!-- 1. Тарифи -->
-                    <div class="pt-4 lg:pt-0 lg:px-6 first:pl-0">
-                        <div class="text-xs uppercase tracking-wider text-zinc-400 font-semibold mb-1">
+                    <div class="pt-4 lg:pt-0 lg:px-6 first:pl-0" style="border-color: var(--border-subtle) !important;">
+                        <div class="text-xs uppercase tracking-wider font-semibold mb-1" style="color: var(--text-muted) !important;">
                             <span class="lang-ua">Тарифи</span>
                             <span class="lang-en">Rates</span>
                         </div>
-                        <div class="text-sm sm:text-base font-bold text-white whitespace-nowrap">
+                        <div class="text-sm sm:text-base font-bold whitespace-nowrap" style="color: var(--text-main) !important;">
                             <span class="lang-ua">від 800 ₴/доба • 1 800 ₴/тижд</span>
                             <span class="lang-en">from 800 ₴/day • 1,800 ₴/week</span>
                         </div>
                     </div>
 
                     <!-- 2. Запас ходу -->
-                    <div class="pt-4 lg:pt-0 lg:px-6">
-                        <div class="text-xs uppercase tracking-wider text-zinc-400 font-semibold mb-1">
+                    <div class="pt-4 lg:pt-0 lg:px-6" style="border-color: var(--border-subtle) !important;">
+                        <div class="text-xs uppercase tracking-wider font-semibold mb-1" style="color: var(--text-muted) !important;">
                             <span class="lang-ua">Запас ходу</span>
                             <span class="lang-en">Range</span>
                         </div>
-                        <div class="text-sm sm:text-base font-bold text-white whitespace-nowrap">
+                        <div class="text-sm sm:text-base font-bold whitespace-nowrap" style="color: var(--text-main) !important;">
                             <span class="lang-ua">до 160 км на одному заряді</span>
                             <span class="lang-en">up to 160 km per charge</span>
                         </div>
                     </div>
 
                     <!-- 3. Сервіс -->
-                    <div class="pt-4 lg:pt-0 lg:px-6">
-                        <div class="text-xs uppercase tracking-wider text-zinc-400 font-semibold mb-1">
+                    <div class="pt-4 lg:pt-0 lg:px-6" style="border-color: var(--border-subtle) !important;">
+                        <div class="text-xs uppercase tracking-wider font-semibold mb-1" style="color: var(--text-muted) !important;">
                             <span class="lang-ua">Сервіс</span>
                             <span class="lang-en">Service</span>
                         </div>
-                        <div class="text-sm sm:text-base font-bold text-white whitespace-nowrap">
+                        <div class="text-sm sm:text-base font-bold whitespace-nowrap" style="color: var(--text-main) !important;">
                             <span class="lang-ua">Одеса, вул. Приморська, 22</span>
                             <span class="lang-en">Odesa, 22 Primorska Str.</span>
                         </div>
                     </div>
 
                     <!-- 4. Підтримка -->
-                    <div class="pt-4 lg:pt-0 lg:px-6 last:pr-0">
-                        <div class="text-xs uppercase tracking-wider text-zinc-400 font-semibold mb-1">
+                    <div class="pt-4 lg:pt-0 lg:px-6 last:pr-0" style="border-color: var(--border-subtle) !important;">
+                        <div class="text-xs uppercase tracking-wider font-semibold mb-1" style="color: var(--text-muted) !important;">
                             <span class="lang-ua">Підтримка</span>
                             <span class="lang-en">Support</span>
                         </div>
-                        <div class="text-sm sm:text-base font-bold text-white">
+                        <div class="text-sm sm:text-base font-bold">
                             <a href="https://t.me/muviobot" target="_blank" rel="noopener noreferrer"
-                                class="inline-flex items-center gap-1 text-white hover:text-[#2E8B57] transition-colors group">
+                                class="inline-flex items-center gap-1 transition-colors group" style="color: var(--text-main) !important;">
                                 <span class="lang-ua">Онлайн-бот у Telegram 24/7</span>
                                 <span class="lang-en">Online Bot in Telegram 24/7</span>
-                                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-400 group-hover:text-[#2E8B57] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 shrink-0"></i>
+                                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 group-hover:text-[#1D5D3B] transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 shrink-0"></i>
                             </a>
                         </div>
                     </div>
@@ -505,8 +504,8 @@
     </section>
 
     <!-- ==================== 3. КАТАЛОГ СКУТЕРІВ (ТОП МОДЕЛІ СПЕРШУ) ==================== -->
-    <section id="catalog" class="py-16 md:py-24 bg-[#0B0E0C] border-b-2 border-[#1D5D3B]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-x border-slate-200/60">
+    <section id="catalog" class="py-16 md:py-24 border-b-2 border-[#1D5D3B]" style="background-color: var(--bg-secondary) !important;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-x" style="border-color: var(--border-subtle) !important;">
 
             <!-- Заголовок секції -->
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
@@ -518,11 +517,11 @@
                             <span class="lang-en">OFFICIAL MUVIO FLEET</span>
                         </span>
                     </div>
-                    <h2 class="font-brand font-bold text-2xl sm:text-4xl uppercase tracking-tight text-[#111827]">
+                    <h2 class="font-brand font-bold text-2xl sm:text-4xl uppercase tracking-tight" style="color: var(--text-main) !important;">
                         <span class="lang-ua">КАТАЛОГ ТЕХНІКИ В НАЯВНОСТІ</span>
                         <span class="lang-en">AVAILABLE FLEET CATALOG</span>
                     </h2>
-                    <p class="text-sm sm:text-base text-[#4B5563] mt-1">
+                    <p class="text-sm sm:text-base mt-1" style="color: var(--text-muted) !important;">
                         <span class="lang-ua">Всі моделі укомплектовані знімним АКБ та зарядним пристроєм. Реальні тарифи оренди.</span>
                         <span class="lang-en">All models equipped with removable battery & charger. Verified rental rates.</span>
                     </p>

@@ -68,16 +68,34 @@ a[aria-label*="MUVIO"] span.font-brand {
     letter-spacing: 0.05em !important;
 }
 
+:root {
+    --bg-main: #FFFFFF;
+    --bg-secondary: #F8FAFC;
+    --text-main: #0F172A;
+    --text-muted: #475569;
+    --border-subtle: #E2E8F0;
+}
+
+html.theme-dark,
+body.dark {
+    --bg-main: #0B0E0C;
+    --bg-secondary: #111613;
+    --text-main: #FFFFFF;
+    --text-muted: #94A3B8;
+    --border-subtle: #1D2620;
+}
+
 /* ==========================================================================
-   HERO SECTION — SEAMLESS MONOLITHIC #0B0E0C BACKGROUND
+   HERO SECTION — THEME-SYNCHRONIZED (LIGHT THEME BASELINE)
    ========================================================================== */
 #hero-section,
 .hero-section,
 #hero {
-    background-color: #0B0E0C !important;
+    background-color: var(--bg-main) !important;
     background-image: none !important;
     border-bottom: none !important;
     box-shadow: none !important;
+    color: var(--text-main) !important;
 }
 
 #hero-section::before,
@@ -92,31 +110,32 @@ a[aria-label*="MUVIO"] span.font-brand {
 }
 
 #hero-section h1 {
-    color: #FFFFFF !important;
+    color: var(--text-main) !important;
 }
 
 #hero-section p {
-    color: #94A3B8 !important;
+    color: var(--text-muted) !important;
 }
 
+/* Light theme: transparent background, slate-300 border, dark-slate text */
 #hero-section .hero-calc-btn {
-    border-color: #3F3F46 !important;
-    color: #E4E4E7 !important;
-    background-color: rgba(24, 24, 27, 0.5) !important;
+    border-color: #CBD5E1 !important;
+    color: #0F172A !important;
+    background-color: transparent !important;
 }
 
 #hero-section .hero-calc-btn:hover {
-    background-color: rgba(39, 39, 42, 0.7) !important;
-    border-color: #71717A !important;
-    color: #FFFFFF !important;
+    background-color: rgba(241, 245, 249, 0.8) !important;
+    border-color: #94A3B8 !important;
+    color: #0F172A !important;
 }
 
 #hero-section .hero-statusbar {
-    border-color: #27272A !important;
+    border-color: var(--border-subtle) !important;
 }
 
 #hero-section .hero-statusbar > div > div {
-    border-color: #27272A !important;
+    border-color: var(--border-subtle) !important;
 }
 
 .hero-logo-glow,
@@ -124,11 +143,26 @@ a[aria-label*="MUVIO"] span.font-brand {
     display: none !important;
 }
 
-.hero-logo-svg path {
+/* Light theme: clean flat emerald logo, no dark drop-shadow */
+.hero-logo-svg path,
+.hero-logo-path {
     fill: #1D5D3B !important;
-    stroke: #2E8B57 !important;
+    stroke: #1D5D3B !important;
     stroke-width: 1.5px !important;
-    filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.4)) drop-shadow(0 0 6px rgba(46, 139, 87, 0.35)) !important;
+    filter: none !important;
 }
+
+/* ==========================================================================
+   CATALOG SECTION — THEME-SYNCHRONIZED
+   ========================================================================== */
+#catalog {
+    background-color: var(--bg-secondary) !important;
+    background-image: none !important;
+}
+
+#catalog h2 {
+    color: var(--text-main) !important;
+}
+
 
 
