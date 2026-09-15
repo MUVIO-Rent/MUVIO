@@ -1088,9 +1088,9 @@ html.theme-dark .hero-logo-path,
 body.dark .hero-logo-svg path,
 body.dark .hero-logo-path {
     fill: #1D5D3B !important;
-    stroke: #2E8B57 !important;
+    stroke: url(#emblem-rim) !important;
     stroke-width: 1.5px !important;
-    filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.4)) drop-shadow(0 0 6px rgba(46, 139, 87, 0.35)) !important;
+    filter: drop-shadow(0 -2px 1px rgba(255, 255, 255, 0.55)) drop-shadow(0 -5px 6px rgba(255, 255, 255, 0.15)) !important;
 }
 
 

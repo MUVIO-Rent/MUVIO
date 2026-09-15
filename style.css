@@ -143,11 +143,11 @@ body.dark {
     display: none !important;
 }
 
-/* Light theme: clean flat emerald logo, no dark drop-shadow */
+/* Monolithic emerald body with subtle directional rim */
 .hero-logo-svg path,
 .hero-logo-path {
     fill: #1D5D3B !important;
-    stroke: #1D5D3B !important;
+    stroke: url(#emblem-rim) !important;
     stroke-width: 1.5px !important;
     filter: none !important;
 }
