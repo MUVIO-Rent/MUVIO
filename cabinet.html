@@ -434,15 +434,15 @@
     <!-- ==================== СТАН А: ЕКРАН АВТОРИЗАЦІЇ (TESLA AUTH) ==================== -->
     <div id="authSection" class="min-h-screen flex flex-col bg-white dark:bg-[#0B0E0C] text-zinc-900 dark:text-white transition-colors duration-200">
         <!-- 1. Хедер Tesla Auth -->
-        <header style="display: flex !important; justify-content: space-between !important; align-items: center !important; padding: 24px 36px 0 36px !important; width: 100% !important; box-sizing: border-box !important; position: relative !important;">
+        <header style="display: flex !important; justify-content: space-between !important; align-items: center !important; padding: 24px 40px !important; width: 100% !important; box-sizing: border-box !important; position: relative !important;">
           <!-- ЛОГОТИП СЛЕВА: ТОЧНОЕ ПОЗИЦИОНИРОВАНИЕ И ЗАЗОР -->
-          <a href="/" style="display: inline-flex !important; align-items: center !important; gap: 4px !important; text-decoration: none !important; user-select: none !important;" aria-label="MUVIO">
-            <!-- Знак M -->
-            <svg style="height: 24px !important; width: auto !important; fill: #1D5D3B !important; flex-shrink: 0 !important; display: block !important;" viewBox="0 0 58 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <a href="/" style="display: inline-flex !important; align-items: center !important; gap: 8px !important; text-decoration: none !important;" aria-label="MUVIO">
+            <!-- Знак M: высота ровно 28px -->
+            <svg style="height: 28px !important; width: auto !important; fill: #1D5D3B !important; flex-shrink: 0 !important;" viewBox="0 0 58 96" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path class="muvio-logo-mark" d="M 28.67,51.38 L 3.54,2.0 L 11.1,36.58 L 0.0,36.66 L 26.14,92.0 L 18.82,52.75 L 28.67,56.37 L 38.52,52.75 L 31.2,92.0 L 57.34,36.66 L 46.24,36.58 L 53.8,2.0 Z" fill="#1D5D3B"/>
             </svg>
-            <!-- Надпись UVIO: фирменный Tektur максимальной жирности 900 -->
-            <span class="brand-logo-text" style="font-family: 'Tektur', sans-serif !important; font-size: 20px !important; font-weight: 900 !important; letter-spacing: 0.04em !important; color: #1D5D3B !important; line-height: 1 !important;">
+            <!-- UVIO: делаем буквы широкими и тяжелыми через transform и font-stretch -->
+            <span class="brand-logo-text" style="font-family: 'Tektur', sans-serif !important; font-size: 22px !important; font-weight: 900 !important; color: #1D5D3B !important; line-height: 1 !important; letter-spacing: 0.08em !important; transform: scaleX(1.18); transform-origin: left center; display: inline-block !important;">
               UVIO
             </span>
           </a>
