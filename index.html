@@ -382,7 +382,7 @@
         #hero {
             position: relative !important;
             overflow: hidden !important;
-            height: calc(100vh - 60px) !important;
+            height: calc(100vh - 46px) !important;
             min-height: 560px !important;
             margin-bottom: 0 !important;
             padding-bottom: 0 !important;
@@ -392,6 +392,7 @@
             background-color: #000000 !important;
             display: flex !important;
             align-items: center !important;
+            opacity: 1 !important;
         }
 
         /* Hero Dual-Layer Crossfade (hero_day.jpg & hero_night.jpg) */
@@ -407,7 +408,7 @@
             height: 100% !important;
             background-size: cover !important;
             background-repeat: no-repeat !important;
-            background-position: 85% center !important;
+            background-position: 100% center !important;
             transition: opacity 0.6s ease-in-out !important;
             pointer-events: none !important;
         }
@@ -489,10 +490,10 @@
         }
 
         #hero-section .hero-text-content {
-            max-width: 560px !important;
+            max-width: 480px !important;
         }
 
-        /* ==================== 1. ФИКСАЦИЯ ШАПКИ ПРИ СКРОЛЛЕ (STICKY HEADER) ==================== */
+        /* ==================== 1. УЛЬТРАТОНКАЯ ШАПКА В СТИЛЕ TESLA ==================== */
         header,
         .site-header-synced {
             position: sticky !important;
@@ -500,6 +501,12 @@
             left: 0 !important;
             width: 100% !important;
             z-index: 100 !important;
+            min-height: 46px !important;
+            height: 46px !important;
+            padding: 0 36px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
             background: rgba(255, 255, 255, 0.92) !important;
             background-color: rgba(255, 255, 255, 0.92) !important;
             backdrop-filter: blur(12px) !important;
@@ -508,13 +515,18 @@
             box-sizing: border-box !important;
         }
 
-        /* ==================== 2. ЧИТАЕМОСТЬ ТЕКСТА И ИКОНОК В СВЕТЛОЙ ТЕМЕ ==================== */
+        .header-logo-img,
+        .muvio-logo-svg {
+            height: 24px !important;
+            width: auto !important;
+            display: block !important;
+        }
+
+        /* Tesla style typography for header menu & right buttons */
         header nav a,
         header .header-nav-link,
         header a,
         header button,
-        header #theme-toggle,
-        header #burger-btn,
         header .header-user-name,
         header #authLangUa,
         header #authLangEn,
@@ -522,12 +534,14 @@
         .site-header-synced .header-nav-link,
         .site-header-synced a,
         .site-header-synced button,
-        .site-header-synced #theme-toggle,
-        .site-header-synced #burger-btn,
         .site-header-synced .header-user-name,
         .site-header-synced #authLangUa,
         .site-header-synced #authLangEn {
-            color: #18181b !important;
+            font-size: 12px !important;
+            font-weight: 500 !important;
+            letter-spacing: 0.08em !important;
+            text-transform: uppercase !important;
+            color: #171717 !important;
             opacity: 1 !important;
         }
 
@@ -541,8 +555,8 @@
         .site-header-synced button svg,
         .site-header-synced #theme-toggle svg,
         .site-header-synced #burger-btn svg {
-            color: #18181b !important;
-            stroke: #18181b !important;
+            color: #171717 !important;
+            stroke: #171717 !important;
             opacity: 1 !important;
         }
 
@@ -575,8 +589,6 @@
         html.dark header .header-nav-link,
         html.dark header a,
         html.dark header button,
-        html.dark header #theme-toggle,
-        html.dark header #burger-btn,
         html.dark header .header-user-name,
         html.dark header #authLangUa,
         html.dark header #authLangEn,
@@ -584,8 +596,6 @@
         html.dark .site-header-synced .header-nav-link,
         html.dark .site-header-synced a,
         html.dark .site-header-synced button,
-        html.dark .site-header-synced #theme-toggle,
-        html.dark .site-header-synced #burger-btn,
         html.dark .site-header-synced .header-user-name,
         html.dark .site-header-synced #authLangUa,
         html.dark .site-header-synced #authLangEn,
@@ -593,7 +603,6 @@
         html.theme-dark header .header-nav-link,
         html.theme-dark header a,
         html.theme-dark header button,
-        html.theme-dark header #theme-toggle,
         html.theme-dark header .header-user-name,
         html.theme-dark header #authLangUa,
         html.theme-dark header #authLangEn,
@@ -601,7 +610,6 @@
         html.theme-dark .site-header-synced .header-nav-link,
         html.theme-dark .site-header-synced a,
         html.theme-dark .site-header-synced button,
-        html.theme-dark .site-header-synced #theme-toggle,
         html.theme-dark .site-header-synced .header-user-name,
         html.theme-dark .site-header-synced #authLangUa,
         html.theme-dark .site-header-synced #authLangEn,
@@ -613,7 +621,30 @@
         [data-theme="dark"] header button,
         [data-theme="dark"] .site-header-synced a,
         [data-theme="dark"] .site-header-synced button {
-            color: #f4f4f5 !important;
+            font-size: 12px !important;
+            font-weight: 500 !important;
+            letter-spacing: 0.08em !important;
+            text-transform: uppercase !important;
+            color: #F4F4F5 !important;
+            opacity: 1 !important;
+        }
+
+        html.dark header nav a svg,
+        html.dark header a svg,
+        html.dark header button svg,
+        html.dark header #burger-btn svg,
+        html.dark .site-header-synced nav a svg,
+        html.dark .site-header-synced a svg,
+        html.dark .site-header-synced button svg,
+        html.dark .site-header-synced #burger-btn svg,
+        html.theme-dark header nav a svg,
+        html.theme-dark header a svg,
+        html.theme-dark header button svg,
+        html.theme-dark .site-header-synced nav a svg,
+        html.theme-dark .site-header-synced a svg,
+        html.theme-dark .site-header-synced button svg {
+            color: #F4F4F5 !important;
+            stroke: #F4F4F5 !important;
             opacity: 1 !important;
         }
 
@@ -849,15 +880,15 @@
 
     <!-- ==================== 1. ХЕДЕР (НАВІГАЦІЯ) ==================== -->
     <header class="site-header-synced w-full"
-        style="width: 100% !important; position: sticky !important; top: 0 !important; left: 0 !important; z-index: 100 !important; display: flex !important; justify-content: space-between !important; align-items: center !important; padding: 10px 48px !important; box-sizing: border-box !important;">
+        style="width: 100% !important; position: sticky !important; top: 0 !important; left: 0 !important; z-index: 100 !important; min-height: 46px !important; height: 46px !important; padding: 0 36px !important; display: flex !important; align-items: center !important; justify-content: space-between !important; box-sizing: border-box !important;">
 
         <!-- ЛІВА ЧАСТИНА: Бургер (для мобільних) + Чистий прозорий SVG-логотип MUVIO -->
         <div class="flex items-center gap-3 shrink-0 z-10">
             <!-- Кнопка-бургер (#burger-btn) для мобільних екранів -->
             <button id="burger-btn" data-burger="true" type="button" aria-label="Меню"
-                class="header-action-btn md:hidden flex items-center justify-center w-9 h-9 p-1.5 text-[#1D5D3B] hover:text-[#16472d] dark:text-[#2E8B57] dark:hover:text-emerald-400 transition-colors focus:outline-none"
+                class="header-action-btn md:hidden flex items-center justify-center w-8 h-8 p-1 text-[#1D5D3B] hover:text-[#16472d] dark:text-[#2E8B57] dark:hover:text-emerald-400 transition-colors focus:outline-none"
                 style="background: transparent !important; border: none !important;">
-                <svg class="w-6 h-6 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg class="w-5 h-5 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="3" y1="6" x2="21" y2="6"></line>
                     <line x1="3" y1="12" x2="21" y2="12"></line>
                     <line x1="3" y1="18" x2="21" y2="18"></line>
@@ -866,29 +897,29 @@
 
             <!-- Логотип MUVIO (растровый PNG, крайнее левое положение) -->
             <a href="index.html" style="display: inline-flex !important; align-items: center !important; text-decoration: none !important; background: transparent !important;" class="group focus:outline-none" aria-label="MUVIO">
-                <img src="images/logo-header-trans.png" alt="MUVIO" style="height: 44px !important; width: auto !important; display: block !important; transition: opacity 0.2s; background: transparent !important;" class="header-logo-img group-hover:opacity-90" />
+                <img src="images/logo-header-trans.png" alt="MUVIO" style="height: 24px !important; width: auto !important; display: block !important; transition: opacity 0.2s; background: transparent !important;" class="header-logo-img group-hover:opacity-90" />
             </a>
         </div>
 
         <!-- ЦЕНТРАЛЬНЕ МЕНЮ: Строго по центру шапки -->
         <nav class="hidden md:flex items-center gap-7 lg:gap-8 absolute left-1/2 -translate-x-1/2">
-            <a href="catalog.html" style="font-size: 13px !important; font-weight: 600 !important; letter-spacing: 0.06em !important; text-transform: uppercase !important; text-decoration: none !important;" class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2">
+            <a href="catalog.html" style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important;" class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2">
                 <span class="lang-ua">КАТАЛОГ</span>
                 <span class="lang-en">CATALOG</span>
             </a>
-            <a href="calculator.html" style="font-size: 13px !important; font-weight: 600 !important; letter-spacing: 0.06em !important; text-transform: uppercase !important; text-decoration: none !important;" class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2">
+            <a href="calculator.html" style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important;" class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2">
                 <span class="lang-ua">КАЛЬКУЛЯТОР</span>
                 <span class="lang-en">CALCULATOR</span>
             </a>
-            <a href="service.html" style="font-size: 13px !important; font-weight: 600 !important; letter-spacing: 0.06em !important; text-transform: uppercase !important; text-decoration: none !important;" class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2">
+            <a href="service.html" style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important;" class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2">
                 <span class="lang-ua">СЕРВІС</span>
                 <span class="lang-en">SERVICE</span>
             </a>
-            <a href="terms.html" style="font-size: 13px !important; font-weight: 600 !important; letter-spacing: 0.06em !important; text-transform: uppercase !important; text-decoration: none !important;" class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2">
+            <a href="terms.html" style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important;" class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2">
                 <span class="lang-ua">УМОВИ ОРЕНДИ</span>
                 <span class="lang-en">TERMS</span>
             </a>
-            <a href="faq.html" style="font-size: 13px !important; font-weight: 600 !important; letter-spacing: 0.06em !important; text-transform: uppercase !important; text-decoration: none !important;" class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2">
+            <a href="faq.html" style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important;" class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2">
                 <span>FAQ</span>
             </a>
         </nav>
@@ -897,7 +928,7 @@
         <div style="display: flex !important; align-items: center !important; gap: 20px !important;" class="z-10 shrink-0">
             <!-- 1. Вхід в кабінет -->
             <a href="cabinet.html"
-                style="font-size: 13px !important; font-weight: 600 !important; letter-spacing: 0.06em !important; text-transform: uppercase !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important; gap: 6px !important;"
+                style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important; gap: 6px !important;"
                 class="text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors"
                 title="Особистий кабінет" aria-label="Особистий кабінет">
                 <svg xmlns="http://www.w3.org/2000/svg" style="width: 15px !important; height: 15px !important;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
@@ -912,11 +943,11 @@
             <!-- 2. Перемикач мови UA | EN -->
             <span style="display: inline-flex !important; align-items: center !important; gap: 4px !important;">
                 <button type="button" id="authLangUa" onclick="setSiteLanguage('ua')"
-                    style="background: none !important; border: none !important; padding: 0 !important; cursor: pointer !important; font-size: 13px !important; font-weight: 700 !important; letter-spacing: 0.06em !important;"
+                    style="background: none !important; border: none !important; padding: 0 !important; cursor: pointer !important; font-size: 12px !important; font-weight: 600 !important; letter-spacing: 0.08em !important;"
                     class="transition-colors hover:text-[#1D5D3B] text-zinc-900 dark:text-white">UA</button>
-                <span style="color: #a1a1aa !important; font-size: 13px !important; font-weight: 400 !important;">|</span>
+                <span style="color: #a1a1aa !important; font-size: 12px !important; font-weight: 400 !important;">|</span>
                 <button type="button" id="authLangEn" onclick="setSiteLanguage('en')"
-                    style="background: none !important; border: none !important; padding: 0 !important; cursor: pointer !important; font-size: 13px !important; font-weight: 500 !important; letter-spacing: 0.06em !important;"
+                    style="background: none !important; border: none !important; padding: 0 !important; cursor: pointer !important; font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important;"
                     class="transition-colors hover:text-[#1D5D3B] text-zinc-500 dark:text-zinc-400">EN</button>
             </span>
 
@@ -1050,15 +1081,15 @@
     </script>
 
     <!-- ==================== 2. HERO СЕКЦІЯ ==================== -->
-    <section id="hero-section" class="hero hero-section relative overflow-hidden transition-colors duration-300" style="position: relative; overflow: hidden; height: calc(100vh - 60px); min-height: 560px; margin-bottom: 0; padding-bottom: 0;">
-        <div id="hero-bg-day" style="position: absolute; inset: 0; width: 100%; height: 100%; background-image: url('images/hero_day.jpg'); background-size: cover; background-position: 85% center; background-repeat: no-repeat; transition: opacity 0.6s ease-in-out; z-index: 1;"></div>
-        <div id="hero-bg-night" style="position: absolute; inset: 0; width: 100%; height: 100%; background-image: url('images/hero_night.jpg'); background-size: cover; background-position: 85% center; background-repeat: no-repeat; transition: opacity 0.6s ease-in-out; z-index: 2; opacity: 0;"></div>
+    <section id="hero-section" class="hero hero-section relative overflow-hidden transition-colors duration-300" style="position: relative; overflow: hidden; height: calc(100vh - 46px); min-height: 560px; margin-bottom: 0; padding-bottom: 0;">
+        <div id="hero-bg-day" style="position: absolute; inset: 0; width: 100%; height: 100%; background-image: url('images/hero_day.jpg'); background-size: cover !important; background-position: 100% center !important; background-repeat: no-repeat !important; transition: opacity 0.6s ease-in-out; z-index: 1;"></div>
+        <div id="hero-bg-night" style="position: absolute; inset: 0; width: 100%; height: 100%; background-image: url('images/hero_night.jpg'); background-size: cover !important; background-position: 100% center !important; background-repeat: no-repeat !important; transition: opacity 0.6s ease-in-out; z-index: 2; opacity: 0;"></div>
 
         <div class="hero-container py-12 lg:py-16 relative z-10 w-full" style="position: relative; z-index: 10;">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                 
                 <!-- Левая колонка (текст) -->
-                <div class="hero-text-content lg:col-span-7 text-left" style="max-width: 560px !important; position: relative !important; z-index: 10 !important;">
+                <div class="hero-text-content lg:col-span-7 text-left" style="max-width: 480px !important; position: relative !important; z-index: 10 !important;">
                     <h1 style="font-family: 'Unbounded', sans-serif !important; font-weight: 800 !important; font-size: clamp(1.85rem, 3.8vw, 3rem) !important; line-height: 1.18 !important; letter-spacing: -0.02em !important; margin-bottom: 20px !important; color: #FFFFFF !important; text-shadow: 0 4px 16px rgba(0,0,0,0.8) !important; filter: drop-shadow(0 4px 16px rgba(0,0,0,0.8)) !important;">
                         <span class="lang-ua">Оренда<br>електротранспорту<br><span style="white-space: nowrap;">в&nbsp;Одесі</span></span>
                         <span class="lang-en">Electric vehicle<br>rental<br><span style="white-space: nowrap;">in&nbsp;Odesa</span></span>
