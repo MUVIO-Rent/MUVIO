@@ -143,42 +143,30 @@ body.dark {
 .hero-section,
 .hero,
 #hero {
-    background-image: url('images/aima_a715.jpg') !important;
-    background-size: cover !important;
-    background-position: right -60px top !important;
-    background-repeat: no-repeat !important;
-    background-color: #000000 !important;
-    min-height: 85vh !important;
+    height: calc(100vh - 60px) !important;
+    min-height: 560px !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
     border-bottom: none !important;
     box-shadow: none !important;
     color: var(--text-main) !important;
     position: relative !important;
     overflow: hidden !important;
+    background-image: none !important;
+    background-color: #000000 !important;
+    display: flex !important;
+    align-items: center !important;
+    opacity: 1 !important;
 }
 
-/* Hero Night Layer (Crossfade Headlight Effect) */
+html.dark #hero-bg-night { opacity: 1 !important; }
+html:not(.dark) #hero-bg-night { opacity: 0 !important; }
+
+/* Hero Night Layer / Headlight overlay disabled for clean crisp aima_hero */
 #hero-section::after,
 .hero-section::after,
 .hero::after,
-#hero::after {
-    content: '' !important;
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    background-image: url('images/aima_night.png') !important;
-    background-size: cover !important;
-    background-position: right -60px top !important;
-    background-repeat: no-repeat !important;
-    opacity: 0 !important;
-    transition: opacity 0.5s ease-in-out !important;
-    pointer-events: none !important;
-    z-index: 1 !important;
-    display: block !important;
-}
-
-/* Guaranteed activation for all dark mode selector variants */
+#hero::after,
 body.dark .hero::after,
 html.dark .hero::after,
 [data-theme="dark"] .hero::after,
@@ -205,7 +193,9 @@ html.dark #hero::after,
 [data-theme="dark"] #hero::after,
 body.theme-dark #hero::after,
 html.theme-dark #hero::after {
-    opacity: 1 !important;
+    display: none !important;
+    opacity: 0 !important;
+    content: none !important;
 }
 
 .hero .hero-container,

@@ -399,6 +399,7 @@
                     }
                 }
             });
+            updateHeroBg();
         });
         document.documentElement.style.fontSize = '';
     } catch (e) {}
@@ -478,7 +479,22 @@
                 window.updateCalc();
             }
         } catch (e) {}
+
+        // Принудительная синхронизация слоев Hero День / Ночь
+        updateHeroBg();
     }
+
+    function updateHeroBg() {
+        const isDark = document.documentElement.classList.contains('dark') ||
+                       document.documentElement.classList.contains('theme-dark') ||
+                       (document.body && document.body.classList.contains('dark')) ||
+                       document.documentElement.getAttribute('data-theme') === 'dark';
+        const nightBg = document.getElementById('hero-bg-night');
+        if (nightBg) {
+            nightBg.style.opacity = isDark ? '1' : '0';
+        }
+    }
+    window.updateHeroBg = updateHeroBg;
 
     // --------------------------------------------------------------------------
     // 5. LANGUAGE CONTROLLER (CSS-Based Dual .lang-ua / .lang-en & Placeholders)
@@ -847,5 +863,6 @@
     window.initSettingsUI = initSettingsUI;
     window.hidePagePreloader = hidePagePreloader;
     window.hidePreloader = hidePagePreloader;
+    window.updateHeroBg = updateHeroBg;
 
 })();

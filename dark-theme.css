@@ -307,11 +307,11 @@ html.theme-dark .header-logo-wrap svg path {
     opacity: 1 !important;
 }
 
-html.theme-dark a .header-logo-wrap + div > span:first-child {
+html.theme-dark a .header-logo-wrap+div>span:first-child {
     color: #FFFFFF !important;
 }
 
-html.theme-dark a .header-logo-wrap + div > div {
+html.theme-dark a .header-logo-wrap+div>div {
     color: #9CA3AF !important;
 }
 
@@ -330,8 +330,8 @@ html.theme-dark .border-gray-300,
 html.theme-dark .border-\[\#1D5D3B\]\/20,
 html.theme-dark .border-\[\#1D5D3B\]\/30,
 html.theme-dark .border-\[\#1D5D3B\]\/40,
-html.theme-dark .divide-slate-200 > :not([hidden]) ~ :not([hidden]),
-html.theme-dark .divide-gray-200 > :not([hidden]) ~ :not([hidden]) {
+html.theme-dark .divide-slate-200> :not([hidden])~ :not([hidden]),
+html.theme-dark .divide-gray-200> :not([hidden])~ :not([hidden]) {
     border-color: #222222 !important;
 }
 
@@ -447,6 +447,7 @@ html.theme-dark #catalogGrid .chamfer-badge.bg-\[\#1D5D3B\] {
 html.theme-dark #rentalContractNumber {
     color: #D1D5DB !important;
 }
+
 html.theme-dark #rentalPlateNumber {
     color: #FFFFFF !important;
 }
@@ -468,24 +469,29 @@ html.theme-dark .calc-pill-btn.is-active {
     color: #FFFFFF !important;
     box-shadow: 0 0 10px rgba(29, 93, 59, 0.45) !important;
 }
+
 html.theme-dark .calc-pill-btn:not(.is-active) {
     background-color: #000000 !important;
     border-color: #222222 !important;
     color: #9CA3AF !important;
 }
+
 html.theme-dark .calc-pill-btn:not(.is-active):hover {
     border-color: #287A4E !important;
     color: #FFFFFF !important;
 }
+
 html.theme-dark .calc-addon-card.is-active {
     background-color: #000000 !important;
     border: 1px solid #287A4E !important;
     box-shadow: 0 0 10px rgba(29, 93, 59, 0.4) !important;
 }
+
 html.theme-dark .calc-addon-card:not(.is-active) {
     background-color: #000000 !important;
     border-color: #222222 !important;
 }
+
 html.theme-dark .calc-addon-card:not(.is-active):hover {
     border-color: rgba(40, 122, 78, 0.6) !important;
 }
@@ -561,7 +567,7 @@ html.theme-dark #font-scale-slider {
     background: #1D5D3B;
     cursor: pointer;
     border: 2px solid #FFFFFF;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     transition: transform 0.15s ease, background 0.15s ease;
 }
 
@@ -741,7 +747,8 @@ html.theme-dark .bg-\[\#1D5D3B\].rounded-full {
 }
 
 /* 13. Safari / iOS / macOS 120Hz ProMotion Native Scroll Engine & GPU Acceleration */
-html, body {
+html,
+body {
     overscroll-behavior-y: auto !important;
     -webkit-overflow-scrolling: touch !important;
 }
@@ -875,11 +882,14 @@ html.theme-dark #mobileMenu a:hover {
 
 /* 15. MUVIO Native Logo Preloader Animations */
 @keyframes glowBreatheLight {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: scale(1);
         filter: drop-shadow(0 0 6px rgba(29, 93, 59, 0.3));
         opacity: 0.95;
     }
+
     50% {
         transform: scale(1.06);
         filter: drop-shadow(0 0 16px rgba(29, 93, 59, 0.55));
@@ -888,11 +898,14 @@ html.theme-dark #mobileMenu a:hover {
 }
 
 @keyframes glowBreatheDark {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: scale(1);
         filter: drop-shadow(0 0 2px rgba(46, 139, 87, 0.6));
         opacity: 1;
     }
+
     50% {
         transform: scale(1.05);
         filter: drop-shadow(0 0 3px rgba(46, 139, 87, 0.85));
@@ -901,8 +914,13 @@ html.theme-dark #mobileMenu a:hover {
 }
 
 @keyframes muvioProgress {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(200%); }
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(200%);
+    }
 }
 
 .glow-breathe,
@@ -957,6 +975,7 @@ html.theme-dark #cabinet-btn-pay {
     border: 1px solid #287A4E !important;
     box-shadow: 0 0 10px rgba(29, 93, 59, 0.45) !important;
 }
+
 html.theme-dark #cabinet-btn-pay:hover {
     background-color: #237248 !important;
     box-shadow: 0 0 14px rgba(29, 93, 59, 0.6) !important;
@@ -968,10 +987,12 @@ html.theme-dark #cabinet-btn-buyout {
     border: 1px solid #1D5D3B !important;
     box-shadow: none !important;
 }
+
 html.theme-dark #cabinet-btn-buyout:hover {
     background-color: rgba(29, 93, 59, 0.4) !important;
     border-color: #287A4E !important;
 }
+
 html.theme-dark #cabinet-btn-buyout i,
 html.theme-dark #cabinet-btn-buyout svg {
     color: #34A869 !important;
@@ -982,9 +1003,11 @@ html.theme-dark #cabinet-btn-breakdown {
     color: #F87171 !important;
     border-color: rgba(239, 68, 68, 0.4) !important;
 }
+
 html.theme-dark #cabinet-btn-breakdown:hover {
     background-color: rgba(69, 10, 10, 0.4) !important;
 }
+
 html.theme-dark #cabinet-btn-breakdown i,
 html.theme-dark #cabinet-btn-breakdown svg {
     color: #F87171 !important;
@@ -1009,11 +1032,24 @@ html {
     scroll-margin-top: 5.5rem;
 }
 
-button, .chamfer-btn, .mobile-nav-link, a.btn, a.chamfer-btn, .calc-pill-btn, .calc-addon-card, .faq-trigger {
+button,
+.chamfer-btn,
+.mobile-nav-link,
+a.btn,
+a.chamfer-btn,
+.calc-pill-btn,
+.calc-addon-card,
+.faq-trigger {
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
-button:active, .chamfer-btn:active, a.chamfer-btn:active, .calc-pill-btn:active, .calc-addon-card:active, .faq-trigger:active, .mobile-nav-link:active {
+button:active,
+.chamfer-btn:active,
+a.chamfer-btn:active,
+.calc-pill-btn:active,
+.calc-addon-card:active,
+.faq-trigger:active,
+.mobile-nav-link:active {
     transform: scale(0.98) !important;
 }
 
@@ -1040,8 +1076,8 @@ html.theme-dark .faq-trigger.is-open {
     color: #2E8B57 !important;
 }
 
-html.theme-dark .faq-trigger.is-open span:first-child > span:first-child,
-html.theme-dark .faq-trigger span:first-child > span:first-child.bg-\[\#1D5D3B\]\/10,
+html.theme-dark .faq-trigger.is-open span:first-child>span:first-child,
+html.theme-dark .faq-trigger span:first-child>span:first-child.bg-\[\#1D5D3B\]\/10,
 html.theme-dark .faq-icon-wrap {
     background-color: rgba(29, 93, 59, 0.2) !important;
     color: #2E8B57 !important;
@@ -1163,8 +1199,8 @@ body.dark #hero-section .hero-statusbar {
     border-color: var(--border-subtle) !important;
 }
 
-html.theme-dark #hero-section .hero-statusbar > div > div,
-body.dark #hero-section .hero-statusbar > div > div {
+html.theme-dark #hero-section .hero-statusbar>div>div,
+body.dark #hero-section .hero-statusbar>div>div {
     border-color: var(--border-subtle) !important;
 }
 
@@ -1271,7 +1307,3 @@ html.theme-dark .fleet-card .img-night,
     opacity: 1 !important;
     filter: brightness(1) contrast(1) !important;
 }
-
-
-
-
