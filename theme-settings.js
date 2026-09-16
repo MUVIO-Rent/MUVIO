@@ -359,15 +359,31 @@
         const initS = getSiteSettings();
         if (initS.theme === 'dark') {
             document.documentElement.classList.add('theme-dark', 'dark');
+            document.documentElement.setAttribute('data-theme', 'dark');
+            if (document.body) {
+                document.body.classList.add('theme-dark', 'dark');
+                document.body.setAttribute('data-theme', 'dark');
+            }
         } else {
             document.documentElement.classList.remove('theme-dark', 'dark');
+            document.documentElement.setAttribute('data-theme', 'light');
+            if (document.body) {
+                document.body.classList.remove('theme-dark', 'dark');
+                document.body.setAttribute('data-theme', 'light');
+            }
         }
         const initialZoom = Math.max(80, Math.min(120, parseInt(initS.zoom || initS.fontScale, 10) || 100));
         if (document.body) {
             document.body.style.zoom = (initialZoom / 100);
         } else {
             document.addEventListener('DOMContentLoaded', () => {
-                if (document.body) document.body.style.zoom = (initialZoom / 100);
+                if (document.body) {
+                    document.body.style.zoom = (initialZoom / 100);
+                    if (getSiteSettings().theme === 'dark') {
+                        document.body.classList.add('theme-dark', 'dark');
+                        document.body.setAttribute('data-theme', 'dark');
+                    }
+                }
             });
         }
         document.documentElement.style.fontSize = '';
@@ -392,6 +408,11 @@
 
         if (theme === 'dark') {
             document.documentElement.classList.add('theme-dark', 'dark');
+            document.documentElement.setAttribute('data-theme', 'dark');
+            if (document.body) {
+                document.body.classList.add('theme-dark', 'dark');
+                document.body.setAttribute('data-theme', 'dark');
+            }
             if (metaThemeColor) metaThemeColor.setAttribute('content', '#0F1411');
             if (badge) badge.textContent = 'DARK';
             if (btnDark) {
@@ -402,6 +423,11 @@
             }
         } else {
             document.documentElement.classList.remove('theme-dark', 'dark');
+            document.documentElement.setAttribute('data-theme', 'light');
+            if (document.body) {
+                document.body.classList.remove('theme-dark', 'dark');
+                document.body.setAttribute('data-theme', 'light');
+            }
             if (metaThemeColor) metaThemeColor.setAttribute('content', '#FFFFFF');
             if (badge) badge.textContent = 'LIGHT';
             if (btnLight) {

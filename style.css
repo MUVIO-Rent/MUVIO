@@ -141,6 +141,7 @@ body.dark {
    ========================================================================== */
 #hero-section,
 .hero-section,
+.hero,
 #hero {
     background-image: url('images/aima_a715.jpg') !important;
     background-size: cover !important;
@@ -152,42 +153,68 @@ body.dark {
     box-shadow: none !important;
     color: var(--text-main) !important;
     position: relative !important;
+    overflow: hidden !important;
 }
 
 /* Hero Night Layer (Crossfade Headlight Effect) */
 #hero-section::after,
 .hero-section::after,
+.hero::after,
 #hero::after {
     content: '' !important;
     position: absolute !important;
-    inset: 0 !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
     background-image: url('images/aima_night.png') !important;
     background-size: cover !important;
     background-position: right -60px top !important;
     background-repeat: no-repeat !important;
     opacity: 0 !important;
-    transition: opacity 0.6s ease-in-out !important;
+    transition: opacity 0.5s ease-in-out !important;
     pointer-events: none !important;
     z-index: 1 !important;
     display: block !important;
 }
 
-html.dark #hero-section::after,
-html.theme-dark #hero-section::after,
-.dark #hero-section::after,
-.theme-dark #hero-section::after,
-[data-theme="dark"] #hero-section::after,
+/* Guaranteed activation for all dark mode selector variants */
+body.dark .hero::after,
+html.dark .hero::after,
+[data-theme="dark"] .hero::after,
+body.theme-dark .hero::after,
+html.theme-dark .hero::after,
+.dark .hero::after,
+.theme-dark .hero::after,
+body.dark .hero-section::after,
 html.dark .hero-section::after,
+[data-theme="dark"] .hero-section::after,
+body.theme-dark .hero-section::after,
 html.theme-dark .hero-section::after,
 .dark .hero-section::after,
 .theme-dark .hero-section::after,
-[data-theme="dark"] .hero-section::after,
+body.dark #hero-section::after,
+html.dark #hero-section::after,
+[data-theme="dark"] #hero-section::after,
+body.theme-dark #hero-section::after,
+html.theme-dark #hero-section::after,
+.dark #hero-section::after,
+.theme-dark #hero-section::after,
+body.dark #hero::after,
 html.dark #hero::after,
-html.theme-dark #hero::after,
-.dark #hero::after,
-.theme-dark #hero::after,
-[data-theme="dark"] #hero::after {
+[data-theme="dark"] #hero::after,
+body.theme-dark #hero::after,
+html.theme-dark #hero::after {
     opacity: 1 !important;
+}
+
+.hero .hero-container,
+.hero-section .hero-container,
+#hero-section .hero-container,
+.hero-container,
+.hero-text-content {
+    position: relative !important;
+    z-index: 2 !important;
 }
 
 #hero-section .hero-container {

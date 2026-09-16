@@ -377,12 +377,9 @@
 
         /* Hero Section Background: min-height 85vh, bushes left / headlight right */
         #hero-section,
-        /* Hero Section Background: min-height 85vh, bushes left / headlight right */
-        #hero-section,
-        html.theme-dark #hero-section,
-        html.dark #hero-section,
-        body.dark #hero-section,
-        [data-theme="dark"] #hero-section {
+        .hero-section,
+        .hero,
+        #hero {
             background-image: url('images/aima_a715.jpg') !important;
             background-size: cover !important;
             background-position: right -60px top !important;
@@ -400,32 +397,63 @@
 
         /* Hero Night Layer (Crossfade Headlight Effect) */
         #hero-section::after,
-        .hero-section::after {
+        .hero-section::after,
+        .hero::after,
+        #hero::after {
             content: '' !important;
             position: absolute !important;
-            inset: 0 !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
             background-image: url('images/aima_night.png') !important;
             background-size: cover !important;
             background-position: right -60px top !important;
             background-repeat: no-repeat !important;
             opacity: 0 !important;
-            transition: opacity 0.6s ease-in-out !important;
+            transition: opacity 0.5s ease-in-out !important;
             pointer-events: none !important;
             z-index: 1 !important;
             display: block !important;
         }
 
-        html.dark #hero-section::after,
-        html.theme-dark #hero-section::after,
-        .dark #hero-section::after,
-        .theme-dark #hero-section::after,
-        [data-theme="dark"] #hero-section::after,
+        /* Guaranteed activation for all dark mode selector variants */
+        body.dark .hero::after,
+        html.dark .hero::after,
+        [data-theme="dark"] .hero::after,
+        body.theme-dark .hero::after,
+        html.theme-dark .hero::after,
+        .dark .hero::after,
+        .theme-dark .hero::after,
+        body.dark .hero-section::after,
         html.dark .hero-section::after,
+        [data-theme="dark"] .hero-section::after,
+        body.theme-dark .hero-section::after,
         html.theme-dark .hero-section::after,
         .dark .hero-section::after,
         .theme-dark .hero-section::after,
-        [data-theme="dark"] .hero-section::after {
+        body.dark #hero-section::after,
+        html.dark #hero-section::after,
+        [data-theme="dark"] #hero-section::after,
+        body.theme-dark #hero-section::after,
+        html.theme-dark #hero-section::after,
+        .dark #hero-section::after,
+        .theme-dark #hero-section::after,
+        body.dark #hero::after,
+        html.dark #hero::after,
+        [data-theme="dark"] #hero::after,
+        body.theme-dark #hero::after,
+        html.theme-dark #hero::after {
             opacity: 1 !important;
+        }
+
+        .hero .hero-container,
+        .hero-section .hero-container,
+        #hero-section .hero-container,
+        .hero-container,
+        .hero-text-content {
+            position: relative !important;
+            z-index: 2 !important;
         }
 
         #hero-section .hero-container {
@@ -701,15 +729,28 @@
     <script>
         // Синхронізація мови та теми шапки з cabinet.html
         function toggleAuthTheme() {
-            const isDark = document.documentElement.classList.contains('theme-dark') || document.documentElement.classList.contains('dark');
+            const isDark = document.documentElement.classList.contains('theme-dark') || 
+                           document.documentElement.classList.contains('dark') ||
+                           (document.body && document.body.classList.contains('dark')) ||
+                           document.documentElement.getAttribute('data-theme') === 'dark';
             const nextTheme = isDark ? 'light' : 'dark';
             if (typeof window.setSiteTheme === 'function') {
                 window.setSiteTheme(nextTheme);
             } else {
                 if (nextTheme === 'dark') {
                     document.documentElement.classList.add('theme-dark', 'dark');
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    if (document.body) {
+                        document.body.classList.add('theme-dark', 'dark');
+                        document.body.setAttribute('data-theme', 'dark');
+                    }
                 } else {
                     document.documentElement.classList.remove('theme-dark', 'dark');
+                    document.documentElement.setAttribute('data-theme', 'light');
+                    if (document.body) {
+                        document.body.classList.remove('theme-dark', 'dark');
+                        document.body.setAttribute('data-theme', 'light');
+                    }
                 }
             }
         }
@@ -739,12 +780,12 @@
     </script>
 
     <!-- ==================== 2. HERO СЕКЦІЯ ==================== -->
-    <section id="hero-section" class="relative overflow-hidden transition-colors duration-300" style="background-image: url('images/aima_a715.jpg') !important; background-size: cover !important; background-position: right -60px top !important; background-repeat: no-repeat !important; background-color: #000000 !important; min-height: 85vh !important; position: relative !important; display: flex !important; align-items: center !important;">
-        <div class="hero-container py-12 lg:py-16 relative z-10">
+    <section id="hero-section" class="hero hero-section relative overflow-hidden transition-colors duration-300" style="background-image: url('images/aima_a715.jpg') !important; background-size: cover !important; background-position: right -60px top !important; background-repeat: no-repeat !important; background-color: #000000 !important; min-height: 85vh !important; position: relative !important; overflow: hidden !important; display: flex !important; align-items: center !important;">
+        <div class="hero-container py-12 lg:py-16 relative z-10" style="position: relative !important; z-index: 2 !important;">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                 
                 <!-- Левая колонка (текст) -->
-                <div class="hero-text-content lg:col-span-7 text-left" style="max-width: 560px !important;">
+                <div class="hero-text-content lg:col-span-7 text-left" style="max-width: 560px !important; position: relative !important; z-index: 2 !important;">
                     <h1 style="font-family: 'Unbounded', sans-serif !important; font-weight: 800 !important; font-size: clamp(1.85rem, 3.8vw, 3rem) !important; line-height: 1.18 !important; letter-spacing: -0.02em !important; margin-bottom: 20px !important; color: #FFFFFF !important; text-shadow: 0 2px 12px rgba(0,0,0,0.7) !important;">
                         <span class="lang-ua">Оренда<br>електротранспорту<br><span style="white-space: nowrap;">в&nbsp;Одесі</span></span>
                         <span class="lang-en">Electric vehicle<br>rental<br><span style="white-space: nowrap;">in&nbsp;Odesa</span></span>

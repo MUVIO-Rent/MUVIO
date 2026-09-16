@@ -1072,12 +1072,32 @@ body.dark #hero-section::before {
     background: none !important;
 }
 
-html.theme-dark #hero-section::after,
-body.dark #hero-section::after,
-[data-theme="dark"] #hero-section::after,
-html.theme-dark .hero-section::after,
+body.dark .hero::after,
+html.dark .hero::after,
+[data-theme="dark"] .hero::after,
+body.theme-dark .hero::after,
+html.theme-dark .hero::after,
+.dark .hero::after,
+.theme-dark .hero::after,
 body.dark .hero-section::after,
-[data-theme="dark"] .hero-section::after {
+html.dark .hero-section::after,
+[data-theme="dark"] .hero-section::after,
+body.theme-dark .hero-section::after,
+html.theme-dark .hero-section::after,
+.dark .hero-section::after,
+.theme-dark .hero-section::after,
+body.dark #hero-section::after,
+html.dark #hero-section::after,
+[data-theme="dark"] #hero-section::after,
+body.theme-dark #hero-section::after,
+html.theme-dark #hero-section::after,
+.dark #hero-section::after,
+.theme-dark #hero-section::after,
+body.dark #hero::after,
+html.dark #hero::after,
+[data-theme="dark"] #hero::after,
+body.theme-dark #hero::after,
+html.theme-dark #hero::after {
     opacity: 1 !important;
 }
 
