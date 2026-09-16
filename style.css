@@ -141,6 +141,10 @@ body.dark {
 #hero-section,
 .hero-section,
 #hero {
+    background-image: url('images/2026-09-16 18.51.22.jpg') !important;
+    background-size: cover !important;
+    background-position: right center !important;
+    background-repeat: no-repeat !important;
     border-bottom: none !important;
     box-shadow: none !important;
     color: var(--text-main) !important;
