@@ -375,17 +375,31 @@
         const initialZoom = Math.max(80, Math.min(120, parseInt(initS.zoom || initS.fontScale, 10) || 100));
         if (document.body) {
             document.body.style.zoom = (initialZoom / 100);
-        } else {
-            document.addEventListener('DOMContentLoaded', () => {
-                if (document.body) {
-                    document.body.style.zoom = (initialZoom / 100);
-                    if (getSiteSettings().theme === 'dark') {
-                        document.body.classList.add('theme-dark', 'dark');
-                        document.body.setAttribute('data-theme', 'dark');
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            if (document.body) {
+                document.body.style.zoom = (initialZoom / 100);
+                if (getSiteSettings().theme === 'dark') {
+                    document.body.classList.add('theme-dark', 'dark');
+                    document.body.setAttribute('data-theme', 'dark');
+                }
+            }
+            const curTheme = getSiteSettings().theme;
+            const toggleButtons = document.querySelectorAll('#theme-toggle, [data-theme-toggle]');
+            toggleButtons.forEach(btn => {
+                const moon = btn.querySelector('.moon-icon');
+                const sun = btn.querySelector('.sun-icon');
+                if (moon && sun) {
+                    if (curTheme === 'dark') {
+                        moon.style.setProperty('display', 'none', 'important');
+                        sun.style.setProperty('display', 'block', 'important');
+                    } else {
+                        moon.style.setProperty('display', 'block', 'important');
+                        sun.style.setProperty('display', 'none', 'important');
                     }
                 }
             });
-        }
+        });
         document.documentElement.style.fontSize = '';
     } catch (e) {}
 
@@ -437,6 +451,22 @@
                 btnDark.className = 'py-2 px-3 text-xs font-brand font-bold uppercase tracking-wider chamfer-badge flex items-center justify-center gap-1.5 transition-all bg-slate-100 text-slate-700 hover:bg-slate-200';
             }
         }
+
+        // Synchronize all theme-toggle button icons (Moon for light theme, Sun for dark theme)
+        const toggleButtons = document.querySelectorAll('#theme-toggle, [data-theme-toggle]');
+        toggleButtons.forEach(btn => {
+            const moon = btn.querySelector('.moon-icon');
+            const sun = btn.querySelector('.sun-icon');
+            if (moon && sun) {
+                if (theme === 'dark') {
+                    moon.style.setProperty('display', 'none', 'important');
+                    sun.style.setProperty('display', 'block', 'important');
+                } else {
+                    moon.style.setProperty('display', 'block', 'important');
+                    sun.style.setProperty('display', 'none', 'important');
+                }
+            }
+        });
     }
 
     // --------------------------------------------------------------------------
