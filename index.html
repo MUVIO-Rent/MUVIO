@@ -361,29 +361,29 @@
             animation-delay: 1.9s !important;
         }
 
-        /* Telemetry Cards: High-tech dark chips on dark scooter background */
+        /* Telemetry Cards: Clean white chips */
         .telemetry-card {
-            background-color: rgba(0, 0, 0, 0.80) !important;
-            border: 1px solid rgba(63, 63, 70, 0.90) !important;
-            box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.5) !important;
-            backdrop-filter: blur(12px) !important;
-            -webkit-backdrop-filter: blur(12px) !important;
+            background-color: #ffffff !important;
+            border: 1px solid #e4e4e7 !important;
+            box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.15) !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
             position: relative;
             z-index: 30 !important;
         }
         .telemetry-card .telemetry-text {
-            color: #FFFFFF !important;
+            color: #18181b !important;
         }
 
-        /* Hero Section Scooter Background: 100% Original Brightness, Zero Overlays */
+        /* Hero Section AIMA ONE Background: 100% Original Brightness, Zero Overlays */
         #hero-section,
         html.theme-dark #hero-section,
         html.dark #hero-section,
         body.dark #hero-section,
         [data-theme="dark"] #hero-section {
-            background-image: url('images/scooter_headlight.jpg') !important;
+            background-image: url('images/aima_hero.jpg') !important;
             background-size: cover !important;
-            background-position: center !important;
+            background-position: center right !important;
             background-repeat: no-repeat !important;
             opacity: 1 !important;
             position: relative !important;
@@ -465,8 +465,8 @@
     </div>
 
     <!-- ==================== 1. ХЕДЕР (НАВІГАЦІЯ) ==================== -->
-    <header class="site-header-synced absolute top-0 left-0 right-0 z-50 w-full"
-        style="display: flex !important; justify-content: space-between !important; align-items: center !important; padding: 24px 48px !important; width: 100% !important; box-sizing: border-box !important; background: transparent !important; border-bottom: none !important; backdrop-filter: none !important; box-shadow: none !important;">
+    <header class="site-header-synced w-full"
+        style="background-color: #ffffff !important; width: 100% !important; position: relative !important; z-index: 50 !important; display: flex !important; justify-content: space-between !important; align-items: center !important; padding: 20px 48px !important; border-bottom: 1px solid #e4e4e7 !important; box-sizing: border-box !important;">
 
         <!-- ЛІВА ЧАСТИНА: Бургер (для мобільних) + Чистий прозорий SVG-логотип MUVIO -->
         <div class="flex items-center gap-3 shrink-0 z-10">
@@ -626,8 +626,8 @@
     </script>
 
     <!-- ==================== 2. HERO СЕКЦІЯ ==================== -->
-    <section id="hero-section" class="relative overflow-hidden transition-colors duration-300" style="background-image: url('images/scooter_headlight.jpg'); background-size: cover; background-position: center; opacity: 1 !important;">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 lg:pt-32 pb-12 lg:pb-16 relative z-10">
+    <section id="hero-section" class="relative overflow-hidden transition-colors duration-300" style="background-image: url('images/aima_hero.jpg'); background-size: cover; background-position: center right; opacity: 1 !important;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 relative z-10">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                 
                 <!-- Левая колонка (текст) -->
@@ -679,26 +679,26 @@
 
                         <!-- ВЫНОСКА 1: Сверху-слева от М (Тарифы) -->
                         <div class="telemetry-callout absolute top-4 sm:top-6 -left-2 sm:-left-4 lg:-left-12 z-30 flex items-center">
-                            <div class="telemetry-card callout-text-left callout-delay-1 px-3.5 py-1.5 rounded-lg border border-zinc-700 bg-black/80 backdrop-blur-md shadow-sm flex items-center select-none" style="animation-delay: 1.3s !important; animation-duration: 0.7s !important;">
-                                <span class="telemetry-text font-mono text-[11px] sm:text-xs tracking-wider text-white uppercase whitespace-nowrap">
+                            <div class="telemetry-card callout-text-left callout-delay-1 px-3.5 py-2 rounded-lg flex items-center select-none" style="animation-delay: 1.3s !important; animation-duration: 0.7s !important; background-color: #ffffff !important; border: 1px solid #e4e4e7 !important; box-shadow: 0 4px 20px rgba(0,0,0,0.15) !important;">
+                                <span class="telemetry-text font-mono font-semibold text-[11px] sm:text-xs tracking-wider uppercase whitespace-nowrap" style="color: #18181b !important;">
                                     <span class="lang-ua">ТАРИФИ: ВІД 800 ₴/ДОБА • 1 800 ₴/ТИЖД</span>
                                     <span class="lang-en">RATES: FROM 800 ₴/DAY • 1,800 ₴/WEEK</span>
                                 </span>
                             </div>
                             <div class="callout-line-left callout-delay-1 hidden sm:flex items-center shrink-0" style="animation-delay: 1.3s !important; animation-duration: 0.7s !important;">
-                                <div class="h-[1px] w-6 lg:w-10 bg-[#2E8B57]"></div>
-                                <div class="w-1.5 h-1.5 rounded-full bg-[#2E8B57] shrink-0"></div>
+                                <div class="h-[1px] w-6 lg:w-10 bg-[#1D5D3B]"></div>
+                                <div class="w-1.5 h-1.5 rounded-full bg-[#1D5D3B] shrink-0"></div>
                             </div>
                         </div>
 
                         <!-- ВЫНОСКА 2: Сверху-справа от М (Запас хода) -->
                         <div class="telemetry-callout absolute top-10 sm:top-12 -right-2 sm:-right-4 lg:-right-12 z-30 flex items-center">
                             <div class="callout-line-right callout-delay-2 hidden sm:flex items-center shrink-0" style="animation-delay: 1.5s !important; animation-duration: 0.7s !important;">
-                                <div class="w-1.5 h-1.5 rounded-full bg-[#2E8B57] shrink-0"></div>
-                                <div class="h-[1px] w-6 lg:w-10 bg-[#2E8B57]"></div>
+                                <div class="w-1.5 h-1.5 rounded-full bg-[#1D5D3B] shrink-0"></div>
+                                <div class="h-[1px] w-6 lg:w-10 bg-[#1D5D3B]"></div>
                             </div>
-                            <div class="telemetry-card callout-text-right callout-delay-2 px-3.5 py-1.5 rounded-lg border border-zinc-700 bg-black/80 backdrop-blur-md shadow-sm flex items-center select-none" style="animation-delay: 1.5s !important; animation-duration: 0.7s !important;">
-                                <span class="telemetry-text font-mono text-[11px] sm:text-xs tracking-wider text-white uppercase whitespace-nowrap">
+                            <div class="telemetry-card callout-text-right callout-delay-2 px-3.5 py-2 rounded-lg flex items-center select-none" style="animation-delay: 1.5s !important; animation-duration: 0.7s !important; background-color: #ffffff !important; border: 1px solid #e4e4e7 !important; box-shadow: 0 4px 20px rgba(0,0,0,0.15) !important;">
+                                <span class="telemetry-text font-mono font-semibold text-[11px] sm:text-xs tracking-wider uppercase whitespace-nowrap" style="color: #18181b !important;">
                                     <span class="lang-ua">ЗАПАС ХОДУ: ДО 160 КМ НА ЗАРЯДІ</span>
                                     <span class="lang-en">RANGE: UP TO 160 KM PER CHARGE</span>
                                 </span>
@@ -707,28 +707,28 @@
 
                         <!-- ВЫНОСКА 3: Снизу-слева от М (Сервис) -->
                         <div class="telemetry-callout absolute bottom-12 sm:bottom-14 -left-2 sm:-left-4 lg:-left-12 z-30 flex items-center">
-                            <div class="telemetry-card callout-text-left callout-delay-3 px-3.5 py-1.5 rounded-lg border border-zinc-700 bg-black/80 backdrop-blur-md shadow-sm flex items-center select-none" style="animation-delay: 1.7s !important; animation-duration: 0.7s !important;">
-                                <span class="telemetry-text font-mono text-[11px] sm:text-xs tracking-wider text-white uppercase whitespace-nowrap">
+                            <div class="telemetry-card callout-text-left callout-delay-3 px-3.5 py-2 rounded-lg flex items-center select-none" style="animation-delay: 1.7s !important; animation-duration: 0.7s !important; background-color: #ffffff !important; border: 1px solid #e4e4e7 !important; box-shadow: 0 4px 20px rgba(0,0,0,0.15) !important;">
+                                <span class="telemetry-text font-mono font-semibold text-[11px] sm:text-xs tracking-wider uppercase whitespace-nowrap" style="color: #18181b !important;">
                                     <span class="lang-ua">СЕРВІС: ОДЕСА, ВУЛ. ПРИМОРСЬКА, 22</span>
                                     <span class="lang-en">SERVICE: ODESA, 22 PRYMORSKA STR.</span>
                                 </span>
                             </div>
                             <div class="callout-line-left callout-delay-3 hidden sm:flex items-center shrink-0" style="animation-delay: 1.7s !important; animation-duration: 0.7s !important;">
-                                <div class="h-[1px] w-6 lg:w-10 bg-[#2E8B57]"></div>
-                                <div class="w-1.5 h-1.5 rounded-full bg-[#2E8B57] shrink-0"></div>
+                                <div class="h-[1px] w-6 lg:w-10 bg-[#1D5D3B]"></div>
+                                <div class="w-1.5 h-1.5 rounded-full bg-[#1D5D3B] shrink-0"></div>
                             </div>
                         </div>
 
                         <!-- ВЫНОСКА 4: Снизу-справа от М (Поддержка / Бот) -->
                         <div class="telemetry-callout absolute bottom-4 sm:bottom-6 -right-2 sm:-right-4 lg:-right-12 z-30 flex items-center">
                             <div class="callout-line-right callout-delay-4 hidden sm:flex items-center shrink-0" style="animation-delay: 1.9s !important; animation-duration: 0.7s !important;">
-                                <div class="w-1.5 h-1.5 rounded-full bg-[#2E8B57] shrink-0"></div>
-                                <div class="h-[1px] w-6 lg:w-10 bg-[#2E8B57]"></div>
+                                <div class="w-1.5 h-1.5 rounded-full bg-[#1D5D3B] shrink-0"></div>
+                                <div class="h-[1px] w-6 lg:w-10 bg-[#1D5D3B]"></div>
                             </div>
                             <a href="https://t.me/muviobot" target="_blank" rel="noopener noreferrer"
-                               class="telemetry-card callout-text-right callout-delay-4 px-3.5 py-1.5 rounded-lg border border-zinc-700 hover:border-[#2E8B57] bg-black/80 backdrop-blur-md shadow-sm flex items-center transition-colors group select-none"
-                               style="animation-delay: 1.9s !important; animation-duration: 0.7s !important;">
-                                <span class="telemetry-text font-mono text-[11px] sm:text-xs tracking-wider text-white group-hover:text-emerald-400 uppercase whitespace-nowrap transition-colors">
+                               class="telemetry-card callout-text-right callout-delay-4 px-3.5 py-2 rounded-lg flex items-center transition-colors group select-none"
+                               style="animation-delay: 1.9s !important; animation-duration: 0.7s !important; background-color: #ffffff !important; border: 1px solid #e4e4e7 !important; box-shadow: 0 4px 20px rgba(0,0,0,0.15) !important;">
+                                <span class="telemetry-text font-mono font-semibold text-[11px] sm:text-xs tracking-wider uppercase whitespace-nowrap transition-colors" style="color: #18181b !important;">
                                     <span class="lang-ua">ПІДТРИМКА: ОНЛАЙН-БОТ 24/7 ↗</span>
                                     <span class="lang-en">SUPPORT: 24/7 BOT ↗</span>
                                 </span>
