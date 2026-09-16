@@ -141,7 +141,7 @@ body.dark {
 #hero-section,
 .hero-section,
 #hero {
-    background-image: url('images/aima_new.jpg') !important;
+    background-image: url('images/aima_a715.jpg') !important;
     background-size: cover !important;
     background-position: right center !important;
     background-repeat: no-repeat !important;
@@ -156,16 +156,9 @@ body.dark {
     max-width: 100% !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
-    padding-left: 48px !important;
-    padding-right: 48px !important;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
     box-sizing: border-box !important;
-}
-
-@media (max-width: 1024px) {
-    #hero-section .hero-container {
-        padding-left: 32px !important;
-        padding-right: 32px !important;
-    }
 }
 
 @media (max-width: 640px) {
@@ -176,7 +169,7 @@ body.dark {
 }
 
 #hero-section .hero-text-content {
-    max-width: 500px !important;
+    max-width: 440px !important;
 }
 
 #hero-section .hero-text-content h1,
