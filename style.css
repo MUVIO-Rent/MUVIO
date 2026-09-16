@@ -3,41 +3,25 @@
    Original Native System Typography (-apple-system, BlinkMacSystemFont, "SF Pro Display", etc.)
    ========================================================================== */
 
-/* MUVIO Unified Vector Logo */
-.muvio-logo-mark {
-    fill: #1D5D3B !important;
-    transition: fill 0.2s ease;
+/* Header Logo Image Styling (Light: multiply removes white background; Dark: invert+screen makes background black and transparent) */
+header img,
+.header-logo-img {
+    mix-blend-mode: multiply;
+    transition: filter 0.2s ease, opacity 0.2s ease;
 }
 
-.muvio-logo-letters {
-    fill: #1D5D3B !important;
-    transition: fill 0.2s ease;
-}
-
-/* Dark Theme: Vibrant Emerald Mark, Pure White Letters */
-html.theme-dark .muvio-logo-mark,
-.theme-dark .muvio-logo-mark,
-html.dark .muvio-logo-mark,
-body.theme-dark .muvio-logo-mark,
-body.dark .muvio-logo-mark,
-[data-theme="dark"] .muvio-logo-mark {
-    fill: #2E8B57 !important;
-}
-
-html.theme-dark .muvio-logo-letters,
-.theme-dark .muvio-logo-letters,
-html.dark .muvio-logo-letters,
-body.theme-dark .muvio-logo-letters,
-body.dark .muvio-logo-letters,
-[data-theme="dark"] .muvio-logo-letters,
-html.theme-dark .brand-logo-text,
-.theme-dark .brand-logo-text,
-html.dark .brand-logo-text,
-body.theme-dark .brand-logo-text,
-body.dark .brand-logo-text,
-[data-theme="dark"] .brand-logo-text {
-    fill: #FFFFFF !important;
-    color: #FFFFFF !important;
+html.dark header img,
+html.dark .header-logo-img,
+html.theme-dark header img,
+html.theme-dark .header-logo-img,
+.dark header img,
+.dark .header-logo-img,
+.theme-dark header img,
+.theme-dark .header-logo-img,
+[data-theme="dark"] header img,
+[data-theme="dark"] .header-logo-img {
+    filter: invert(1) hue-rotate(180deg) !important;
+    mix-blend-mode: screen !important;
 }
 
 

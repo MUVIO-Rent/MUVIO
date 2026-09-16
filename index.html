@@ -168,47 +168,44 @@
 
         .main-emblem {
             will-change: transform, opacity;
-            animation: flyInEmblem 0.95s cubic-bezier(0.12, 0.95, 0.25, 1) forwards;
+            animation: flyInEmblem 0.9s cubic-bezier(0.12, 0.95, 0.25, 1) forwards;
         }
         .echo-far {
             will-change: transform, opacity;
-            animation: echoFarMotion 1.05s cubic-bezier(0.12, 0.95, 0.25, 1) forwards;
+            animation: echoFarMotion 0.98s cubic-bezier(0.12, 0.95, 0.25, 1) forwards;
         }
         .echo-near {
             will-change: transform, opacity;
-            animation: echoNearMotion 1.0s cubic-bezier(0.12, 0.95, 0.25, 1) forwards;
+            animation: echoNearMotion 0.94s cubic-bezier(0.12, 0.95, 0.25, 1) forwards;
         }
 
-        /* Header Logo Theme Styling */
-        .muvio-logo-mark {
-            fill: #1D5D3B !important;
-            transition: fill 0.2s ease;
+        /* 1. Header Logo Image (Multiply in light mode, invert+screen in dark mode) */
+        header img,
+        .header-logo-img {
+            mix-blend-mode: multiply;
+            transition: opacity 0.2s ease, filter 0.2s ease;
         }
-        .muvio-logo-letters {
-            fill: #1D5D3B !important;
-            transition: fill 0.2s ease;
-        }
-        html.theme-dark .muvio-logo-mark,
-        html.dark .muvio-logo-mark,
-        .theme-dark .muvio-logo-mark,
-        .dark .muvio-logo-mark {
-            fill: #2E8B57 !important;
-        }
-        html.theme-dark .muvio-logo-letters,
-        html.dark .muvio-logo-letters,
-        .theme-dark .muvio-logo-letters,
-        .dark .muvio-logo-letters,
-        .dark svg .muvio-logo-letters,
-        html.dark svg path.muvio-logo-letters {
-            fill: #FFFFFF !important;
+
+        html.dark header img,
+        html.dark .header-logo-img,
+        html.theme-dark header img,
+        html.theme-dark .header-logo-img,
+        .dark header img,
+        .dark .header-logo-img,
+        .theme-dark header img,
+        .theme-dark .header-logo-img,
+        [data-theme="dark"] header img,
+        [data-theme="dark"] .header-logo-img {
+            filter: invert(1) hue-rotate(180deg) !important;
+            mix-blend-mode: screen !important;
         }
 
         /* 2. ТИПОГРАФИКА ГЛАВНОГО ЗАГОЛОВКА HERO */
         #hero-section h1 {
             font-size: clamp(2.2rem, 5vw, 3.5rem) !important;
-            font-weight: 900 !important;
+            font-weight: 800 !important;
             line-height: 1.05 !important;
-            letter-spacing: -0.035em !important;
+            letter-spacing: -0.03em !important;
             margin-bottom: 20px !important;
             text-transform: none !important;
         }
@@ -408,12 +405,9 @@
                         </svg>
                     </button>
 
-                    <!-- 2-й елемент: фірмовий логотип MUVIO (єдиний монолітний вектор) -->
+                    <!-- 2-й елемент: фірмовий логотип MUVIO (обрізаний вихідник) -->
                     <a href="index.html" class="inline-flex items-center select-none group focus:outline-none" aria-label="MUVIO" style="padding-left: 20px;">
-                        <svg class="h-8 sm:h-9 w-auto transition-opacity group-hover:opacity-90 shrink-0" viewBox="0 0 222 96" fill="none" xmlns="http://www.w3.org/2000/svg" style="fill: #1D5D3B !important;">
-                            <path class="muvio-logo-mark" d="M 28.67,51.38 L 3.54,2.0 L 11.1,36.58 L 0.0,36.66 L 26.14,92.0 L 18.82,52.75 L 28.67,56.37 L 38.52,52.75 L 31.2,92.0 L 57.34,36.66 L 46.24,36.58 L 53.8,2.0 Z" fill="#1D5D3B"/>
-                            <path class="muvio-logo-letters" fill-rule="evenodd" clip-rule="evenodd" d="M 68,2 L 78,2 L 78,76 L 82,80 L 96,80 L 100,76 L 100,2 L 110,2 L 110,80 L 104,86 L 74,86 L 68,80 Z M 114,2 L 124,2 L 137,72 L 150,2 L 160,2 L 143,86 L 131,86 Z M 164,2 L 178,2 L 178,86 L 164,86 Z M 182,8 L 188,2 L 214,2 L 220,8 L 220,80 L 214,86 L 188,86 L 182,80 Z M 192,12 L 210,12 L 210,76 L 192,76 Z" fill="#1D5D3B"/>
-                        </svg>
+                        <img src="images/logo-header.png" alt="MUVIO" class="header-logo-img transition-opacity group-hover:opacity-90" style="height: 48px !important; width: auto !important; display: block !important; mix-blend-mode: multiply;">
                     </a>
                 </div>
 
@@ -626,7 +620,7 @@
                 
                 <!-- Левая колонка (текст) -->
                 <div class="lg:col-span-7 text-left">
-                    <h1 style="font-weight: 900 !important; font-size: clamp(2.2rem, 5vw, 3.5rem) !important; line-height: 1.05 !important; letter-spacing: -0.035em !important; margin-bottom: 20px !important; color: var(--text-main) !important;">
+                    <h1 style="font-weight: 800 !important; font-size: clamp(2.2rem, 5vw, 3.5rem) !important; line-height: 1.05 !important; letter-spacing: -0.03em !important; margin-bottom: 20px !important; color: var(--text-main) !important;">
                         <span class="lang-ua">Оренда<br>електротранспорту в<br>Одесі</span>
                         <span class="lang-en">Electric vehicle<br>rental in<br>Odesa</span>
                     </h1>
