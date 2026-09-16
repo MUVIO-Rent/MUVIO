@@ -89,6 +89,52 @@
             border-color: #27272a !important;
             color: #ffffff !important;
         }
+
+        /* Unified Synced Site Header */
+        .site-header-synced {
+            padding: 24px 48px !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+        }
+        @media (max-width: 1024px) {
+            .site-header-synced {
+                padding: 24px 32px !important;
+            }
+        }
+        @media (max-width: 640px) {
+            .site-header-synced {
+                padding: 16px 20px !important;
+            }
+        }
+
+        /* Pure Transparent Vector Logo */
+        .muvio-logo-svg {
+            height: 40px !important;
+            width: auto !important;
+            display: block !important;
+        }
+        .muvio-logo-mark {
+            fill: #1D5D3B;
+            transition: fill 0.2s ease;
+        }
+        .muvio-logo-letters {
+            fill: #1D5D3B;
+            transition: fill 0.2s ease;
+        }
+        html.dark .muvio-logo-mark,
+        html.theme-dark .muvio-logo-mark,
+        .dark .muvio-logo-mark,
+        .theme-dark .muvio-logo-mark,
+        [data-theme="dark"] .muvio-logo-mark {
+            fill: #2E8B57 !important;
+        }
+        html.dark .muvio-logo-letters,
+        html.theme-dark .muvio-logo-letters,
+        .dark .muvio-logo-letters,
+        .theme-dark .muvio-logo-letters,
+        [data-theme="dark"] .muvio-logo-letters {
+            fill: #FFFFFF !important;
+        }
     </style>
 
 
@@ -106,18 +152,60 @@
 <body class="min-h-screen flex flex-col text-zinc-900 dark:text-white antialiased selection:bg-[#1D5D3B] selection:text-white">
 
     <!-- 1. ХЕДЕР (ЛОГОТИП + МОВА + ТЕМА) -->
-    <header style="display: flex !important; justify-content: space-between !important; align-items: center !important; padding: 14px 40px !important; width: 100% !important; box-sizing: border-box !important; position: relative !important;">
-      <!-- ЛОГОТИП: MUVIO (обрізаний вихідник) -->
-      <a href="index.html" style="display: inline-flex !important; align-items: center !important; text-decoration: none !important;" aria-label="MUVIO">
-        <img src="images/logo-header.png" alt="MUVIO" class="header-logo-img transition-opacity group-hover:opacity-90" style="height: 48px !important; width: auto !important; display: block !important; mix-blend-mode: multiply;">
-      </a>
+    <header class="site-header-synced sticky top-0 z-50 bg-white/95 dark:bg-[#0B0E0C]/95 backdrop-blur-md border-b-2 border-[#1D5D3B] shadow-sm relative w-full"
+        style="display: flex !important; justify-content: space-between !important; align-items: center !important; padding: 24px 48px !important; width: 100% !important; box-sizing: border-box !important;">
+      <!-- ЛОГОТИП: Чистий прозорий векторний SVG MUVIO -->
+      <div class="flex items-center gap-3 shrink-0 z-10">
+          <a href="index.html" style="display: inline-flex !important; align-items: center !important; text-decoration: none !important;" class="group focus:outline-none" aria-label="MUVIO">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 222 96" fill="none" class="muvio-logo-svg transition-opacity group-hover:opacity-90" style="height: 40px !important; width: auto !important; display: block !important;">
+                <!-- Фірмовий знак M: #1D5D3B у світлій темі, смарагдовий у темній -->
+                <path class="muvio-logo-mark" d="M 28.67,51.38 L 3.54,2.0 L 11.1,36.58 L 0.0,36.66 L 26.14,92.0 L 18.82,52.75 L 28.67,56.37 L 38.52,52.75 L 31.2,92.0 L 57.34,36.66 L 46.24,36.58 L 53.8,2.0 Z" fill="currentColor"/>
+                <!-- Букви UVIO: #1D5D3B у світлій темі, чисто білі #FFFFFF у темній -->
+                <path class="muvio-logo-letters" fill-rule="evenodd" clip-rule="evenodd" d="
+                  M 68,2 L 78,2 L 78,76 L 82,80 L 96,80 L 100,76 L 100,2 L 110,2 L 110,80 L 104,86 L 74,86 L 68,80 Z
+                  M 114,2 L 124,2 L 137,72 L 150,2 L 160,2 L 143,86 L 131,86 Z
+                  M 164,2 L 178,2 L 178,86 L 164,86 Z
+                  M 182,8 L 188,2 L 214,2 L 220,8 L 220,80 L 214,86 L 188,86 L 182,80 Z
+                  M 192,12 L 210,12 L 210,76 L 192,76 Z
+                " fill="currentColor"/>
+            </svg>
+          </a>
+      </div>
+
+      <!-- ЦЕНТРАЛЬНЕ МЕНЮ: Строго по центру шапки -->
+      <nav class="hidden md:flex items-center gap-7 lg:gap-8 absolute left-1/2 -translate-x-1/2">
+          <a href="catalog.html"
+              class="text-xs sm:text-[13px] font-medium tracking-normal text-[#111827] dark:text-zinc-200 hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2 leading-normal">
+              <span class="lang-ua">КАТАЛОГ</span>
+              <span class="lang-en">CATALOG</span>
+          </a>
+          <a href="calculator.html"
+              class="text-xs sm:text-[13px] font-medium tracking-normal text-[#111827] dark:text-zinc-200 hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2 leading-normal">
+              <span class="lang-ua">КАЛЬКУЛЯТОР</span>
+              <span class="lang-en">CALCULATOR</span>
+          </a>
+          <a href="service.html"
+              class="text-xs sm:text-[13px] font-medium tracking-normal text-[#111827] dark:text-zinc-200 hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2 leading-normal">
+              <span class="lang-ua">СЕРВІС</span>
+              <span class="lang-en">SERVICE</span>
+          </a>
+          <a href="terms.html"
+              class="text-xs sm:text-[13px] font-medium tracking-normal text-[#111827] dark:text-zinc-200 hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2 leading-normal">
+              <span class="lang-ua">УМОВИ ОРЕНДИ</span>
+              <span class="lang-en">TERMS</span>
+          </a>
+          <a href="faq.html"
+              class="text-xs sm:text-[13px] font-medium tracking-normal text-[#111827] dark:text-zinc-200 hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2 leading-normal font-bold">
+              <span>FAQ</span>
+          </a>
+      </nav>
 
       <!-- ПРАВЫЙ БЛОК (ЯЗЫК И ТЕМА): ВЫРОВНЕН ПО ЦЕНТРУ С ЛОГОТИПОМ -->
-      <div style="display: flex !important; align-items: center !important; gap: 16px !important; font-size: 12px !important; font-weight: 600 !important;">
-        <span style="color: #71717a !important; cursor: pointer !important; display: inline-flex !important; align-items: center !important; gap: 4px !important;">
-          <button type="button" id="authLangUa" onclick="setSiteLanguage('ua')" style="background: none !important; border: none !important; padding: 0 !important; font: inherit !important; color: inherit !important; cursor: pointer !important;">UA</button>
+      <div style="display: flex !important; align-items: center !important; gap: 20px !important;" class="z-10 shrink-0">
+        <span style="color: #71717a !important; cursor: pointer !important; display: inline-flex !important; align-items: center !important; gap: 4px !important; font-size: 12px !important; font-weight: 600 !important;">
+          <button type="button" id="authLangUa" onclick="setSiteLanguage('ua')" style="background: none !important; border: none !important; padding: 0 !important; font: inherit !important; cursor: pointer !important;" class="font-bold text-zinc-900 dark:text-white transition-colors">UA</button>
           <span style="color: #d4d4d8 !important;">|</span>
-          <button type="button" id="authLangEn" onclick="setSiteLanguage('en')" style="background: none !important; border: none !important; padding: 0 !important; font: inherit !important; color: inherit !important; cursor: pointer !important;">EN</button>
+          <button type="button" id="authLangEn" onclick="setSiteLanguage('en')" style="background: none !important; border: none !important; padding: 0 !important; font: inherit !important; cursor: pointer !important;" class="font-medium text-zinc-400 hover:text-[#1D5D3B] dark:hover:text-white transition-colors">EN</button>
         </span>
         <button id="theme-toggle" type="button" onclick="toggleAuthTheme()" style="background: none !important; border: none !important; cursor: pointer !important; padding: 0 !important; color: #71717a !important; display: flex !important; align-items: center !important;" aria-label="Toggle theme">
           <!-- Иконка луны/солнца -->

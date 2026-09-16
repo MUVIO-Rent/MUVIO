@@ -206,12 +206,48 @@
 
         /* Responsive padding for full-width header synchronized with cabinet.html */
         .site-header-synced {
-            padding: 24px 40px !important;
+            padding: 24px 48px !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+        }
+        @media (max-width: 1024px) {
+            .site-header-synced {
+                padding: 24px 32px !important;
+            }
         }
         @media (max-width: 640px) {
             .site-header-synced {
                 padding: 16px 20px !important;
             }
+        }
+
+        /* Pure Transparent Vector Logo */
+        .muvio-logo-svg {
+            height: 40px !important;
+            width: auto !important;
+            display: block !important;
+        }
+        .muvio-logo-mark {
+            fill: #1D5D3B;
+            transition: fill 0.2s ease;
+        }
+        .muvio-logo-letters {
+            fill: #1D5D3B;
+            transition: fill 0.2s ease;
+        }
+        html.dark .muvio-logo-mark,
+        html.theme-dark .muvio-logo-mark,
+        .dark .muvio-logo-mark,
+        .theme-dark .muvio-logo-mark,
+        [data-theme="dark"] .muvio-logo-mark {
+            fill: #2E8B57 !important;
+        }
+        html.dark .muvio-logo-letters,
+        html.theme-dark .muvio-logo-letters,
+        .dark .muvio-logo-letters,
+        .theme-dark .muvio-logo-letters,
+        [data-theme="dark"] .muvio-logo-letters {
+            fill: #FFFFFF !important;
         }
 
         /* 2. ТИПОГРАФИКА ГЛАВНОГО ЗАГОЛОВКА HERO (Unbounded Automotive Tech Grotesque) */
@@ -322,13 +358,15 @@
             animation-delay: 1.9s !important;
         }
 
-        /* Telemetry Cards: Light & Dark Theme Adaptation */
+        /* Telemetry Cards: Adaptive styling & z-index */
         .telemetry-card {
-            background-color: rgba(255, 255, 255, 0.92) !important;
-            border: 1px solid rgba(228, 228, 231, 0.8) !important;
+            background-color: rgba(255, 255, 255, 0.70) !important;
+            border: 1px solid rgba(228, 228, 231, 0.80) !important;
             box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.06) !important;
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
+            position: relative;
+            z-index: 30 !important;
         }
         .telemetry-card .telemetry-text {
             color: #18181b !important;
@@ -337,15 +375,39 @@
         html.dark .telemetry-card,
         .theme-dark .telemetry-card,
         .dark .telemetry-card {
-            background-color: rgba(14, 19, 16, 0.85) !important;
-            border: 1px solid rgba(39, 39, 42, 0.8) !important;
+            background-color: rgba(11, 14, 12, 0.80) !important;
+            border: 1px solid rgba(39, 39, 42, 0.80) !important;
             box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.4) !important;
         }
         html.theme-dark .telemetry-card .telemetry-text,
         html.dark .telemetry-card .telemetry-text,
         .theme-dark .telemetry-card .telemetry-text,
         .dark .telemetry-card .telemetry-text {
-            color: #e4e4e7 !important;
+            color: #f4f4f5 !important;
+        }
+
+        /* Hero Section Headlight Background & Overlay */
+        #hero-section {
+            background-image: url('images/scooter_headlight.jpg') !important;
+            background-size: cover !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+            position: relative !important;
+        }
+        .hero-overlay {
+            background-color: rgba(255, 255, 255, 0.85);
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            transition: background-color 0.3s ease;
+        }
+        html.dark .hero-overlay,
+        html.theme-dark .hero-overlay,
+        .dark .hero-overlay,
+        .theme-dark .hero-overlay,
+        [data-theme="dark"] .hero-overlay {
+            background-color: rgba(0, 0, 0, 0.75) !important;
         }
 
         /* Catalog Cards Scroll Reveal */
@@ -402,13 +464,13 @@
 
     <!-- ==================== 1. ХЕДЕР (НАВІГАЦІЯ) ==================== -->
     <header class="site-header-synced sticky top-0 z-50 bg-white/95 dark:bg-[#0B0E0C]/95 backdrop-blur-md border-b-2 border-[#1D5D3B] shadow-sm relative w-full"
-        style="display: flex !important; justify-content: space-between !important; align-items: center !important; padding: 24px 40px !important; width: 100% !important; box-sizing: border-box !important;">
+        style="display: flex !important; justify-content: space-between !important; align-items: center !important; padding: 24px 48px !important; width: 100% !important; box-sizing: border-box !important;">
 
-        <!-- ЛІВА ЧАСТИНА: Бургер (для мобільних) + Фірмовий логотип MUVIO у крайньому лівому положенні -->
+        <!-- ЛІВА ЧАСТИНА: Бургер (для мобільних) + Чистий прозорий SVG-логотип MUVIO -->
         <div class="flex items-center gap-3 shrink-0 z-10">
             <!-- Кнопка-бургер (#burger-btn) для мобільних екранів -->
             <button id="burger-btn" data-burger="true" type="button" aria-label="Меню"
-                class="header-action-btn md:hidden flex items-center justify-center w-9 h-9 p-1.5 text-[#1D5D3B] hover:text-[#16472d] transition-colors focus:outline-none"
+                class="header-action-btn md:hidden flex items-center justify-center w-9 h-9 p-1.5 text-[#1D5D3B] hover:text-[#16472d] dark:text-[#2E8B57] dark:hover:text-emerald-400 transition-colors focus:outline-none"
                 style="background: transparent !important; border: none !important;">
                 <svg class="w-6 h-6 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -417,9 +479,20 @@
                 </svg>
             </button>
 
-            <!-- Фірмовий логотип MUVIO (крайнє ліве положення згідно cabinet.html) -->
+            <!-- Фірмовий векторний SVG-логотип MUVIO (крайнє ліве положення згідно cabinet.html) -->
             <a href="index.html" style="display: inline-flex !important; align-items: center !important; text-decoration: none !important;" class="group focus:outline-none" aria-label="MUVIO">
-                <img src="images/logo-header.png" alt="MUVIO" class="header-logo-img transition-opacity group-hover:opacity-90" style="height: 48px !important; width: auto !important; display: block !important; mix-blend-mode: multiply;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 222 96" fill="none" class="muvio-logo-svg transition-opacity group-hover:opacity-90" style="height: 40px !important; width: auto !important; display: block !important;">
+                    <!-- Фірмовий знак M: #1D5D3B у світлій темі, смарагдовий у темній -->
+                    <path class="muvio-logo-mark" d="M 28.67,51.38 L 3.54,2.0 L 11.1,36.58 L 0.0,36.66 L 26.14,92.0 L 18.82,52.75 L 28.67,56.37 L 38.52,52.75 L 31.2,92.0 L 57.34,36.66 L 46.24,36.58 L 53.8,2.0 Z" fill="currentColor"/>
+                    <!-- Букви UVIO: #1D5D3B у світлій темі, чисто білі #FFFFFF у темній -->
+                    <path class="muvio-logo-letters" fill-rule="evenodd" clip-rule="evenodd" d="
+                      M 68,2 L 78,2 L 78,76 L 82,80 L 96,80 L 100,76 L 100,2 L 110,2 L 110,80 L 104,86 L 74,86 L 68,80 Z
+                      M 114,2 L 124,2 L 137,72 L 150,2 L 160,2 L 143,86 L 131,86 Z
+                      M 164,2 L 178,2 L 178,86 L 164,86 Z
+                      M 182,8 L 188,2 L 214,2 L 220,8 L 220,80 L 214,86 L 188,86 L 182,80 Z
+                      M 192,12 L 210,12 L 210,76 L 192,76 Z
+                    " fill="currentColor"/>
+                </svg>
             </a>
         </div>
 
@@ -562,7 +635,10 @@
     </script>
 
     <!-- ==================== 2. HERO СЕКЦІЯ ==================== -->
-    <section id="hero-section" class="relative overflow-hidden transition-colors duration-300" style="background-color: var(--bg-main) !important; color: var(--text-main) !important;">
+    <section id="hero-section" class="relative overflow-hidden transition-colors duration-300" style="background-image: url('images/scooter_headlight.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; color: var(--text-main) !important;">
+        <!-- Адаптивний оверлей: світла тема bg-white/85, темна тема bg-black/75 -->
+        <div class="hero-overlay"></div>
+
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 relative z-10">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                 
@@ -594,19 +670,19 @@
                     <div class="hero-brand-stage relative w-full h-[460px] lg:h-[520px] flex items-center justify-center select-none">
 
                         <!-- Шлейф движения (Слои-эхо, схлопывающиеся при приземлении) -->
-                        <div class="echo-layer echo-far absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <div class="echo-layer echo-far absolute inset-0 flex items-center justify-center pointer-events-none z-0" style="opacity: 0.15;">
                             <svg class="h-[320px] lg:h-[380px] w-auto fill-[#1D5D3B]" viewBox="0 0 100 100" style="fill: #1D5D3B !important;">
                                 <path d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z" fill="#1D5D3B"/>
                             </svg>
                         </div>
-                        <div class="echo-layer echo-near absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <div class="echo-layer echo-near absolute inset-0 flex items-center justify-center pointer-events-none z-0" style="opacity: 0.30;">
                             <svg class="h-[320px] lg:h-[380px] w-auto fill-[#1D5D3B]" viewBox="0 0 100 100" style="fill: #1D5D3B !important;">
                                 <path d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z" fill="#1D5D3B"/>
                             </svg>
                         </div>
 
                         <!-- Основной фронтальный знак M -->
-                        <div class="main-emblem relative z-10 flex items-center justify-center">
+                        <div class="main-emblem relative z-10 flex items-center justify-center pointer-events-none">
                             <svg class="h-[320px] lg:h-[380px] w-auto fill-[#1D5D3B]" viewBox="0 0 100 100"
                                  style="fill: #1D5D3B !important; filter: drop-shadow(0 14px 30px rgba(0,0,0,0.35)) drop-shadow(0 2px 8px rgba(29,93,59,0.3)) !important;">
                                 <path d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z" fill="#1D5D3B"/>
@@ -614,29 +690,27 @@
                         </div>
 
                         <!-- ВЫНОСКА 1: Сверху-слева от М (Тарифы) -->
-                        <div class="telemetry-callout absolute top-4 sm:top-6 -left-2 sm:-left-4 lg:-left-12 z-20 flex items-center">
-                            <div class="telemetry-card callout-text-left callout-delay-1 px-3 py-1.5 rounded border border-zinc-200/80 dark:border-zinc-800/80 bg-white/90 dark:bg-[#0E1310]/85 backdrop-blur-md shadow-sm flex items-center gap-2" style="animation-delay: 1.3s !important; animation-duration: 0.7s !important;">
-                                <span class="w-1.5 h-1.5 rounded-full bg-[#1D5D3B] shrink-0"></span>
-                                <span class="telemetry-text font-mono text-[11px] sm:text-xs tracking-wider text-zinc-900 dark:text-zinc-200 uppercase whitespace-nowrap">
+                        <div class="telemetry-callout absolute top-4 sm:top-6 -left-2 sm:-left-4 lg:-left-12 z-30 flex items-center">
+                            <div class="telemetry-card callout-text-left callout-delay-1 px-3.5 py-1.5 rounded-lg border border-zinc-200/80 dark:border-zinc-800/80 bg-white/70 dark:bg-[#0B0E0C]/80 backdrop-blur-md shadow-sm flex items-center select-none" style="animation-delay: 1.3s !important; animation-duration: 0.7s !important;">
+                                <span class="telemetry-text font-mono text-[11px] sm:text-xs tracking-wider text-zinc-900 dark:text-zinc-100 uppercase whitespace-nowrap">
                                     <span class="lang-ua">ТАРИФИ: ВІД 800 ₴/ДОБА • 1 800 ₴/ТИЖД</span>
                                     <span class="lang-en">RATES: FROM 800 ₴/DAY • 1,800 ₴/WEEK</span>
                                 </span>
                             </div>
                             <div class="callout-line-left callout-delay-1 hidden sm:flex items-center shrink-0" style="animation-delay: 1.3s !important; animation-duration: 0.7s !important;">
-                                <div class="h-[1px] w-6 lg:w-10 bg-[#1D5D3B]/50"></div>
+                                <div class="h-[1px] w-6 lg:w-10 bg-[#1D5D3B]/60"></div>
                                 <div class="w-1.5 h-1.5 rounded-full bg-[#1D5D3B] shrink-0"></div>
                             </div>
                         </div>
 
                         <!-- ВЫНОСКА 2: Сверху-справа от М (Запас хода) -->
-                        <div class="telemetry-callout absolute top-10 sm:top-12 -right-2 sm:-right-4 lg:-right-12 z-20 flex items-center">
+                        <div class="telemetry-callout absolute top-10 sm:top-12 -right-2 sm:-right-4 lg:-right-12 z-30 flex items-center">
                             <div class="callout-line-right callout-delay-2 hidden sm:flex items-center shrink-0" style="animation-delay: 1.5s !important; animation-duration: 0.7s !important;">
                                 <div class="w-1.5 h-1.5 rounded-full bg-[#1D5D3B] shrink-0"></div>
-                                <div class="h-[1px] w-6 lg:w-10 bg-[#1D5D3B]/50"></div>
+                                <div class="h-[1px] w-6 lg:w-10 bg-[#1D5D3B]/60"></div>
                             </div>
-                            <div class="telemetry-card callout-text-right callout-delay-2 px-3 py-1.5 rounded border border-zinc-200/80 dark:border-zinc-800/80 bg-white/90 dark:bg-[#0E1310]/85 backdrop-blur-md shadow-sm flex items-center gap-2" style="animation-delay: 1.5s !important; animation-duration: 0.7s !important;">
-                                <span class="w-1.5 h-1.5 rounded-full bg-[#1D5D3B] shrink-0"></span>
-                                <span class="telemetry-text font-mono text-[11px] sm:text-xs tracking-wider text-zinc-900 dark:text-zinc-200 uppercase whitespace-nowrap">
+                            <div class="telemetry-card callout-text-right callout-delay-2 px-3.5 py-1.5 rounded-lg border border-zinc-200/80 dark:border-zinc-800/80 bg-white/70 dark:bg-[#0B0E0C]/80 backdrop-blur-md shadow-sm flex items-center select-none" style="animation-delay: 1.5s !important; animation-duration: 0.7s !important;">
+                                <span class="telemetry-text font-mono text-[11px] sm:text-xs tracking-wider text-zinc-900 dark:text-zinc-100 uppercase whitespace-nowrap">
                                     <span class="lang-ua">ЗАПАС ХОДУ: ДО 160 КМ НА ЗАРЯДІ</span>
                                     <span class="lang-en">RANGE: UP TO 160 KM PER CHARGE</span>
                                 </span>
@@ -644,31 +718,29 @@
                         </div>
 
                         <!-- ВЫНОСКА 3: Снизу-слева от М (Сервис) -->
-                        <div class="telemetry-callout absolute bottom-12 sm:bottom-14 -left-2 sm:-left-4 lg:-left-12 z-20 flex items-center">
-                            <div class="telemetry-card callout-text-left callout-delay-3 px-3 py-1.5 rounded border border-zinc-200/80 dark:border-zinc-800/80 bg-white/90 dark:bg-[#0E1310]/85 backdrop-blur-md shadow-sm flex items-center gap-2" style="animation-delay: 1.7s !important; animation-duration: 0.7s !important;">
-                                <span class="w-1.5 h-1.5 rounded-full bg-[#1D5D3B] shrink-0"></span>
-                                <span class="telemetry-text font-mono text-[11px] sm:text-xs tracking-wider text-zinc-900 dark:text-zinc-200 uppercase whitespace-nowrap">
+                        <div class="telemetry-callout absolute bottom-12 sm:bottom-14 -left-2 sm:-left-4 lg:-left-12 z-30 flex items-center">
+                            <div class="telemetry-card callout-text-left callout-delay-3 px-3.5 py-1.5 rounded-lg border border-zinc-200/80 dark:border-zinc-800/80 bg-white/70 dark:bg-[#0B0E0C]/80 backdrop-blur-md shadow-sm flex items-center select-none" style="animation-delay: 1.7s !important; animation-duration: 0.7s !important;">
+                                <span class="telemetry-text font-mono text-[11px] sm:text-xs tracking-wider text-zinc-900 dark:text-zinc-100 uppercase whitespace-nowrap">
                                     <span class="lang-ua">СЕРВІС: ОДЕСА, ВУЛ. ПРИМОРСЬКА, 22</span>
                                     <span class="lang-en">SERVICE: ODESA, 22 PRYMORSKA STR.</span>
                                 </span>
                             </div>
                             <div class="callout-line-left callout-delay-3 hidden sm:flex items-center shrink-0" style="animation-delay: 1.7s !important; animation-duration: 0.7s !important;">
-                                <div class="h-[1px] w-6 lg:w-10 bg-[#1D5D3B]/50"></div>
+                                <div class="h-[1px] w-6 lg:w-10 bg-[#1D5D3B]/60"></div>
                                 <div class="w-1.5 h-1.5 rounded-full bg-[#1D5D3B] shrink-0"></div>
                             </div>
                         </div>
 
                         <!-- ВЫНОСКА 4: Снизу-справа от М (Поддержка / Бот) -->
-                        <div class="telemetry-callout absolute bottom-4 sm:bottom-6 -right-2 sm:-right-4 lg:-right-12 z-20 flex items-center">
+                        <div class="telemetry-callout absolute bottom-4 sm:bottom-6 -right-2 sm:-right-4 lg:-right-12 z-30 flex items-center">
                             <div class="callout-line-right callout-delay-4 hidden sm:flex items-center shrink-0" style="animation-delay: 1.9s !important; animation-duration: 0.7s !important;">
                                 <div class="w-1.5 h-1.5 rounded-full bg-[#1D5D3B] shrink-0"></div>
-                                <div class="h-[1px] w-6 lg:w-10 bg-[#1D5D3B]/50"></div>
+                                <div class="h-[1px] w-6 lg:w-10 bg-[#1D5D3B]/60"></div>
                             </div>
                             <a href="https://t.me/muviobot" target="_blank" rel="noopener noreferrer"
-                               class="telemetry-card callout-text-right callout-delay-4 px-3 py-1.5 rounded border border-zinc-200/80 dark:border-zinc-800/80 hover:border-[#1D5D3B] dark:hover:border-[#1D5D3B] bg-white/90 dark:bg-[#0E1310]/85 backdrop-blur-md shadow-sm flex items-center gap-2 transition-colors group"
+                               class="telemetry-card callout-text-right callout-delay-4 px-3.5 py-1.5 rounded-lg border border-zinc-200/80 dark:border-zinc-800/80 hover:border-[#1D5D3B] dark:hover:border-[#1D5D3B] bg-white/70 dark:bg-[#0B0E0C]/80 backdrop-blur-md shadow-sm flex items-center transition-colors group select-none"
                                style="animation-delay: 1.9s !important; animation-duration: 0.7s !important;">
-                                <span class="w-1.5 h-1.5 rounded-full bg-[#1D5D3B] animate-pulse shrink-0"></span>
-                                <span class="telemetry-text font-mono text-[11px] sm:text-xs tracking-wider text-zinc-900 dark:text-zinc-200 group-hover:text-emerald-500 uppercase whitespace-nowrap transition-colors">
+                                <span class="telemetry-text font-mono text-[11px] sm:text-xs tracking-wider text-zinc-900 dark:text-zinc-100 group-hover:text-emerald-500 uppercase whitespace-nowrap transition-colors">
                                     <span class="lang-ua">ПІДТРИМКА: ОНЛАЙН-БОТ 24/7 ↗</span>
                                     <span class="lang-en">SUPPORT: 24/7 BOT ↗</span>
                                 </span>

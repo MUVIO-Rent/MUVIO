@@ -3,7 +3,35 @@
    Original Native System Typography (-apple-system, BlinkMacSystemFont, "SF Pro Display", etc.)
    ========================================================================== */
 
-/* Header Logo Image Styling (Light: multiply removes white background; Dark: invert+screen makes background black and transparent) */
+/* Header Logo Image & Pure Vector SVG Styling */
+.muvio-logo-svg {
+    height: 40px !important;
+    width: auto !important;
+    display: block !important;
+}
+.muvio-logo-mark {
+    fill: #1D5D3B;
+    transition: fill 0.2s ease;
+}
+.muvio-logo-letters {
+    fill: #1D5D3B;
+    transition: fill 0.2s ease;
+}
+html.dark .muvio-logo-mark,
+html.theme-dark .muvio-logo-mark,
+.dark .muvio-logo-mark,
+.theme-dark .muvio-logo-mark,
+[data-theme="dark"] .muvio-logo-mark {
+    fill: #2E8B57 !important;
+}
+html.dark .muvio-logo-letters,
+html.theme-dark .muvio-logo-letters,
+.dark .muvio-logo-letters,
+.theme-dark .muvio-logo-letters,
+[data-theme="dark"] .muvio-logo-letters {
+    fill: #FFFFFF !important;
+}
+
 header img,
 .header-logo-img {
     mix-blend-mode: multiply;
