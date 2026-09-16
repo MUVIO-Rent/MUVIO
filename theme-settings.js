@@ -467,6 +467,17 @@
                 }
             }
         });
+
+        // Dispatch global theme-changed event for calculator & dynamic modules
+        try {
+            window.dispatchEvent(new CustomEvent('muvio-theme-changed', { detail: { theme: theme } }));
+            if (typeof window.updateCalculatorPreview === 'function') {
+                window.updateCalculatorPreview();
+            }
+            if (typeof window.updateCalc === 'function') {
+                window.updateCalc();
+            }
+        } catch (e) {}
     }
 
     // --------------------------------------------------------------------------

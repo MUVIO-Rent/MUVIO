@@ -773,6 +773,7 @@
                 name: "Crosser CR-13 №1",
                 power: "2000W", volt: "72V", type: "🛵 Скутер",
                 image: "images/crosser.jpg",
+                image_night: "images/crosser cr-13 night №1.jpg",
                 badge: "85 КМ/ГОД",
                 group: "groupA"
             },
@@ -780,6 +781,7 @@
                 name: "Crosser CR-13 №2",
                 power: "2000W", volt: "72V", type: "🛵 Скутер",
                 image: "images/crosser-cr-13-2.jpg",
+                image_night: "images/crosser cr-13 night №2.jpg",
                 badge: "85 КМ/ГОД",
                 group: "groupA"
             },
@@ -787,6 +789,7 @@
                 name: "Crosser CR-20",
                 power: "2500W", volt: "72V", type: "🛵 Скутер",
                 image: "images/crosser-cr-20.jpg",
+                image_night: "images/crosser cr-20 night.jpg",
                 badge: "ТОП ПОТУЖНІСТЬ",
                 group: "groupA"
             },
@@ -794,6 +797,7 @@
                 name: "Aima Leopard",
                 power: "1200W", volt: "72V", type: "🛵 Скутер",
                 image: "images/leopard.jpg",
+                image_night: "images/leopard.jpg",
                 badge: "КЛАСИКА КОМФОРТУ",
                 group: "groupB"
             },
@@ -801,6 +805,7 @@
                 name: "Aima A700",
                 power: "1200W", volt: "72V", type: "🛵 Скутер",
                 image: "images/a700.jpg",
+                image_night: "images/aima a700 night.jpg",
                 badge: "ПРЕМІУМ КОМФОРТ",
                 group: "groupB"
             },
@@ -808,6 +813,7 @@
                 name: "Aima A715",
                 power: "1200W", volt: "72V", type: "🛵 Скутер",
                 image: "images/a715.jpg",
+                image_night: "images/aima a715 night.jpg",
                 badge: "НАДІЙНИЙ",
                 group: "groupB"
             },
@@ -815,6 +821,7 @@
                 name: "Aima F606 №1",
                 power: "1200W", volt: "72V", type: "🛵 Скутер",
                 image: "images/f606.jpg",
+                image_night: "images/aima f606 night №1.jpg",
                 badge: "ХІТ ПРОКАТУ",
                 group: "groupB"
             },
@@ -822,6 +829,7 @@
                 name: "Aima F606 №2",
                 power: "1200W", volt: "72V", type: "🛵 Скутер",
                 image: "images/f606-2.jpg",
+                image_night: "images/aima f606 night №2.jpg",
                 badge: "ЗБІЛЬШЕНИЙ ХІД",
                 group: "groupB"
             },
@@ -829,6 +837,7 @@
                 name: "Aima Journey",
                 power: "1200W", volt: "72V", type: "🛵 Скутер",
                 image: "images/journey.jpg",
+                image_night: "images/aima journey night.jpg",
                 badge: "ДАЛЕКІ ДИСТАНЦІЇ",
                 group: "groupB"
             },
@@ -836,6 +845,7 @@
                 name: "Aima Mine",
                 power: "800W", volt: "60V", type: "🛵 Скутер",
                 image: "images/mine.jpg",
+                image_night: "images/aima mine night.jpg",
                 badge: "КОМПАКТНИЙ",
                 group: "groupB"
             },
@@ -843,6 +853,7 @@
                 name: "Aima Mine Plus",
                 power: "800W", volt: "60V", type: "🛵 Скутер",
                 image: "images/mine-plus.jpg",
+                image_night: "images/aima mine plus night.jpg",
                 badge: "PLUS СЕРІЯ",
                 group: "groupB"
             },
@@ -850,6 +861,7 @@
                 name: "Like Bike N5",
                 power: "1000W", volt: "60V", type: "🛵 Скутер",
                 image: "images/like-bike-n5.jpg",
+                image_night: "images/like-bike-n5.jpg",
                 badge: "МАНЕВРЕНИЙ",
                 group: "groupB"
             },
@@ -857,6 +869,7 @@
                 name: "Like Bike Bruiser №1",
                 power: "500W", volt: "48V", type: "🚲 Велобайк",
                 image: "images/like-bike-bruiser-1.jpg",
+                image_night: "images/like bike night №1.jpg",
                 badge: "РАМА 180 КГ",
                 group: "groupC"
             },
@@ -864,6 +877,7 @@
                 name: "Like Bike Bruiser №2",
                 power: "500W", volt: "48V", type: "🚲 Велобайк",
                 image: "images/like-bike-bruiser-2.jpg",
+                image_night: "images/like bika night №2.jpg",
                 badge: "РАМА 180 КГ",
                 group: "groupC"
             },
@@ -871,6 +885,7 @@
                 name: "ADO A20F",
                 power: "250W", volt: "48V", type: "🚲 Велобайк",
                 image: "images/ado-a20f.jpg",
+                image_night: "images/ado night.jpg",
                 badge: "ФЕТБАЙК",
                 group: "groupC"
             }
@@ -1199,15 +1214,25 @@
             const isBike = model.type.includes('велосипед') || model.volt === '48V';
             const isEn = (window.getSiteSettings ? window.getSiteSettings().lang : 'ua') === 'en';
 
-            // 1. Оновлення лівої колонки
+            // 1. Оновлення лівої колонки (прев'ю транспорту день / ніч)
+            const isDark = document.documentElement.classList.contains('dark') || 
+                           document.documentElement.classList.contains('theme-dark') || 
+                           (document.body && document.body.classList.contains('dark')) ||
+                           document.documentElement.getAttribute('data-theme') === 'dark';
+            const photoKey = isDark && model.image_night ? model.image_night : model.image;
+
             const imgEl = document.getElementById('calcVehicleImg');
             if (imgEl) {
-                imgEl.src = model.image;
+                if (imgEl.getAttribute('src') !== photoKey) {
+                    imgEl.src = photoKey;
+                }
                 imgEl.alt = model.name;
             }
             const thumbEl = document.getElementById('resThumbnail');
             if (thumbEl) {
-                thumbEl.src = model.image;
+                if (thumbEl.getAttribute('src') !== photoKey) {
+                    thumbEl.src = photoKey;
+                }
                 thumbEl.alt = model.name;
             }
 
@@ -1343,6 +1368,51 @@
             const total = pricing.baseCost + helmetCost + batteryCost;
             const url = generateTelegramRentalLink(calcState.modelKey, calcState.days, total);
             window.location.href = url;
+        }
+
+        // Оновлення фото-прев'ю калькулятора з синхронізацією день / ніч
+        function updateCalculatorPreview() {
+            const model = RENTAL_TARIFFS[calcState.modelKey] || RENTAL_TARIFFS['crosser-cr-13-1'];
+            if (!model) return;
+            const isDark = document.documentElement.classList.contains('dark') || 
+                           document.documentElement.classList.contains('theme-dark') || 
+                           (document.body && document.body.classList.contains('dark')) ||
+                           document.documentElement.getAttribute('data-theme') === 'dark';
+            const photoKey = isDark && model.image_night ? model.image_night : model.image;
+
+            const calcImageEl = document.getElementById('calcVehicleImg');
+            if (calcImageEl) {
+                if (calcImageEl.getAttribute('src') !== photoKey) {
+                    calcImageEl.src = photoKey;
+                }
+                calcImageEl.alt = model.name;
+            }
+            const thumbEl = document.getElementById('resThumbnail');
+            if (thumbEl) {
+                if (thumbEl.getAttribute('src') !== photoKey) {
+                    thumbEl.src = photoKey;
+                }
+                thumbEl.alt = model.name;
+            }
+        }
+        window.updateCalculatorPreview = updateCalculatorPreview;
+
+        // Синхронізація прев'ю калькулятора зі зміною теми (події + MutationObserver)
+        window.addEventListener('muvio-theme-changed', function() {
+            updateCalculatorPreview();
+        });
+
+        if (window.MutationObserver) {
+            const calcThemeObserver = new MutationObserver(function(mutations) {
+                for (let i = 0; i < mutations.length; i++) {
+                    const m = mutations[i];
+                    if (m.attributeName === 'class' || m.attributeName === 'data-theme') {
+                        updateCalculatorPreview();
+                        break;
+                    }
+                }
+            });
+            calcThemeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class', 'data-theme'] });
         }
 
         // Мобільне меню

@@ -475,79 +475,83 @@ html.theme-dark .sun-icon,
 }
 
 /* ==========================================================================
-   CATALOG FLEET CARDS — DAY / NIGHT HEADLIGHT CROSSFADE
+   CATALOG FLEET CARDS — DAY / NIGHT HEADLIGHT CROSSFADE (CINEMATIC FLARE)
    ========================================================================== */
-.fleet-card .img-night,
-.tech-card .img-night,
-.vehicle-card .img-night,
-#catalog .img-night {
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
+.fleet-card [class*="overflow-hidden"],
+.tech-card [class*="overflow-hidden"],
+.vehicle-card [class*="overflow-hidden"],
+#catalog [class*="overflow-hidden"] {
+    position: relative !important;
+    overflow: hidden !important;
 }
 
 .fleet-card .img-day,
 .tech-card .img-day,
 .vehicle-card .img-day,
-#catalog .img-day {
-    opacity: 1;
-    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
+#catalog .img-day,
+.img-day {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    opacity: 1 !important;
+    transition: opacity 700ms ease-in-out !important;
 }
 
-/* Dark Theme: Night photo with glowing headlights crossfades in */
-.dark .fleet-card .img-night,
-html.dark .fleet-card .img-night,
-body.dark .fleet-card .img-night,
-html.theme-dark .fleet-card .img-night,
-body.theme-dark .fleet-card .img-night,
-[data-theme="dark"] .fleet-card .img-night,
-.dark .tech-card .img-night,
-html.dark .tech-card .img-night,
-body.dark .tech-card .img-night,
-html.theme-dark .tech-card .img-night,
-body.theme-dark .tech-card .img-night,
-[data-theme="dark"] .tech-card .img-night,
-.dark .vehicle-card .img-night,
-html.dark .vehicle-card .img-night,
-body.dark .vehicle-card .img-night,
-html.theme-dark .vehicle-card .img-night,
-body.theme-dark .vehicle-card .img-night,
-[data-theme="dark"] .vehicle-card .img-night,
-.dark #catalog .img-night,
-html.dark #catalog .img-night,
-body.dark #catalog .img-night,
-html.theme-dark #catalog .img-night,
-body.theme-dark #catalog .img-night,
-[data-theme="dark"] #catalog .img-night {
-    opacity: 1 !important;
+.fleet-card .img-night,
+.tech-card .img-night,
+.vehicle-card .img-night,
+#catalog .img-night,
+.img-night {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    opacity: 0 !important;
+    filter: brightness(0.8) contrast(1.1) !important;
+    pointer-events: none !important;
+    transition: all 700ms ease-in-out !important;
 }
 
 /* Dark Theme: Day photo crossfades out */
-.dark .fleet-card .img-day,
-html.dark .fleet-card .img-day,
-body.dark .fleet-card .img-day,
-html.theme-dark .fleet-card .img-day,
-body.theme-dark .fleet-card .img-day,
-[data-theme="dark"] .fleet-card .img-day,
-.dark .tech-card .img-day,
-html.dark .tech-card .img-day,
-body.dark .tech-card .img-day,
-html.theme-dark .tech-card .img-day,
-body.theme-dark .tech-card .img-day,
-[data-theme="dark"] .tech-card .img-day,
-.dark .vehicle-card .img-day,
-html.dark .vehicle-card .img-day,
-body.dark .vehicle-card .img-day,
-html.theme-dark .vehicle-card .img-day,
-body.theme-dark .vehicle-card .img-day,
-[data-theme="dark"] .vehicle-card .img-day,
-.dark #catalog .img-day,
+html.dark .img-day,
+html.theme-dark .img-day,
+.dark .img-day,
+.theme-dark .img-day,
+[data-theme="dark"] .img-day,
 html.dark #catalog .img-day,
-body.dark #catalog .img-day,
 html.theme-dark #catalog .img-day,
-body.theme-dark #catalog .img-day,
-[data-theme="dark"] #catalog .img-day {
+.dark #catalog .img-day,
+.theme-dark #catalog .img-day,
+[data-theme="dark"] #catalog .img-day,
+html.dark .fleet-card .img-day,
+html.theme-dark .fleet-card .img-day,
+.dark .fleet-card .img-day,
+.theme-dark .fleet-card .img-day,
+[data-theme="dark"] .fleet-card .img-day {
     opacity: 0 !important;
+}
+
+/* Dark Theme: Night photo with glowing headlights crossfades in with flare */
+html.dark .img-night,
+html.theme-dark .img-night,
+.dark .img-night,
+.theme-dark .img-night,
+[data-theme="dark"] .img-night,
+html.dark #catalog .img-night,
+html.theme-dark #catalog .img-night,
+.dark #catalog .img-night,
+.theme-dark #catalog .img-night,
+[data-theme="dark"] #catalog .img-night,
+html.dark .fleet-card .img-night,
+html.theme-dark .fleet-card .img-night,
+.dark .fleet-card .img-night,
+.theme-dark .fleet-card .img-night,
+[data-theme="dark"] .fleet-card .img-night {
+    opacity: 1 !important;
+    filter: brightness(1) contrast(1) !important;
 }
 
 /* Header Logo: Solid Monolithic #1D5D3B geometry */

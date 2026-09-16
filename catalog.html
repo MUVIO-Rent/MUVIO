@@ -642,8 +642,8 @@
 
                         <!-- Фото транспорту (Кроссфейд День / Ніч) -->
                         <div class="relative w-full h-48 sm:h-56 overflow-hidden rounded-t-xl bg-zinc-900 group">
-                            <img src="${item.image}" class="img-day absolute inset-0 w-full h-full object-cover transition-opacity duration-700" alt="${item.name}" loading="lazy">
-                            <img src="${item.image_night || item.image}" class="img-night absolute inset-0 w-full h-full object-cover transition-opacity duration-700" alt="${item.name} Night" loading="lazy">
+                            <img src="${item.image}" class="img-day absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out" alt="${item.name}" loading="lazy">
+                            <img src="${item.image_night || item.image}" class="img-night absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out" alt="${item.name} Night" loading="lazy">
                         </div>
 
                         <!-- Заголовок та характеристики -->
