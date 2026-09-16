@@ -375,7 +375,7 @@
             color: #18181b !important;
         }
 
-        /* Hero Section Background: fixed 560px, bushes left / headlight right */
+        /* Hero Section Background: min-height 85vh, bushes left / headlight right */
         #hero-section,
         html.theme-dark #hero-section,
         html.dark #hero-section,
@@ -383,15 +383,17 @@
         [data-theme="dark"] #hero-section {
             background-image: url('images/aima_a715.jpg') !important;
             background-size: cover !important;
-            background-position: right center !important;
+            background-position: right top !important;
             background-repeat: no-repeat !important;
-            background-color: #0b0f0e !important;
-            height: 560px !important;
-            min-height: 560px !important;
-            max-height: 600px !important;
+            background-color: #000000 !important;
+            min-height: 85vh !important;
+            height: auto !important;
+            max-height: none !important;
             overflow: hidden !important;
             opacity: 1 !important;
             position: relative !important;
+            display: flex !important;
+            align-items: center !important;
         }
 
         #hero-section .hero-container {
@@ -654,7 +656,7 @@
     </script>
 
     <!-- ==================== 2. HERO СЕКЦІЯ ==================== -->
-    <section id="hero-section" class="relative overflow-hidden transition-colors duration-300" style="background-image: url('images/aima_a715.jpg') !important; background-size: cover !important; background-position: right center !important; background-repeat: no-repeat !important; background-color: #0b0f0e !important; height: 560px !important; min-height: 560px !important; max-height: 600px !important; overflow: hidden !important; opacity: 1 !important;">
+    <section id="hero-section" class="relative overflow-hidden transition-colors duration-300" style="background-image: url('images/aima_a715.jpg') !important; background-size: cover !important; background-position: right top !important; background-repeat: no-repeat !important; background-color: #000000 !important; min-height: 85vh !important; position: relative !important; display: flex !important; align-items: center !important;">
         <div class="hero-container py-12 lg:py-16 relative z-10">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                 

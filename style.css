@@ -128,11 +128,11 @@ a[aria-label*="MUVIO"] span.font-brand {
 
 html.theme-dark,
 body.dark {
-    --bg-main: #0B0E0C;
-    --bg-secondary: #111613;
+    --bg-main: #000000;
+    --bg-secondary: #000000;
     --text-main: #FFFFFF;
     --text-muted: #94A3B8;
-    --border-subtle: #1D2620;
+    --border-subtle: #222222;
 }
 
 /* ==========================================================================
@@ -143,9 +143,10 @@ body.dark {
 #hero {
     background-image: url('images/aima_a715.jpg') !important;
     background-size: cover !important;
-    background-position: right center !important;
+    background-position: right top !important;
     background-repeat: no-repeat !important;
-    background-color: #0b0f0e !important;
+    background-color: #000000 !important;
+    min-height: 85vh !important;
     border-bottom: none !important;
     box-shadow: none !important;
     color: var(--text-main) !important;

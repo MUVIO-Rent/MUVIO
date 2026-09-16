@@ -97,11 +97,11 @@ a[aria-label*="MUVIO"] span.font-brand {
 
 html.theme-dark,
 body.dark {
-    --bg-main: #0B0E0C;
-    --bg-secondary: #111613;
+    --bg-main: #000000;
+    --bg-secondary: #000000;
     --text-main: #FFFFFF;
     --text-muted: #94A3B8;
-    --border-subtle: #1D2620;
+    --border-subtle: #222222;
 }
 
 html.theme-dark {
@@ -138,7 +138,7 @@ html.theme-dark .w-\[1px\].bg-slate-200 {
     background-color: #222222 !important;
 }
 
-/* 2. Containers, Cards, Calculator & Modals (Strict Deep Graphite #111413) */
+/* 2. Containers, Cards, Calculator & Modals (Pure Black #000000 & Strict Dark Border #222222) */
 html.theme-dark .bg-white,
 html.theme-dark [class*="bg-gray-50"],
 html.theme-dark [class*="bg-gray-100"],
@@ -150,18 +150,19 @@ html.theme-dark [class*="bg-[#F8FAFC]"],
 html.theme-dark [class*="bg-[#F9FAFB]"],
 html.theme-dark .chamfer-box,
 html.theme-dark .tech-card,
+html.theme-dark .vehicle-card,
 html.theme-dark .card {
-    background-color: #111413 !important;
+    background-color: #000000 !important;
     color: #FFFFFF !important;
-    border-color: #242826 !important;
+    border-color: #222222 !important;
 }
 
-/* Override green card backgrounds (e.g. Rent-to-Own Card, deposit box) to deep graphite */
+/* Override green card backgrounds to pure black */
 html.theme-dark .chamfer-box.bg-\[\#1D5D3B\],
 html.theme-dark div.bg-\[\#1D5D3B\],
 html.theme-dark [class*="bg-[#1D5D3B]/"] {
-    background-color: #111413 !important;
-    border-color: #242826 !important;
+    background-color: #000000 !important;
+    border-color: #222222 !important;
 }
 
 /* Inner preview frames & gray inner containers */
@@ -172,17 +173,17 @@ html.theme-dark [class*="bg-[#1D5D3B]/15"],
 html.theme-dark [class*="bg-[#1D5D3B]/20"],
 html.theme-dark [class*="bg-[#1D5D3B]/25"],
 html.theme-dark .border-gray-200 {
-    background-color: #161B19 !important;
-    border-color: #262D29 !important;
+    background-color: #000000 !important;
+    border-color: #222222 !important;
 }
 
 /* 3. Header, Mobile Menu & Sticky Drawers */
 html.theme-dark header,
 html.theme-dark header.sticky {
-    background: rgba(15, 20, 17, 0.88) !important;
+    background: #000000 !important;
     backdrop-filter: blur(14px) !important;
     -webkit-backdrop-filter: blur(14px) !important;
-    border-bottom: 1px solid rgba(31, 46, 38, 0.7) !important;
+    border-bottom: 1px solid #222222 !important;
 }
 
 html.theme-dark #mobileMenu,
@@ -191,10 +192,10 @@ html.theme-dark [data-mobile-menu="true"],
 html.theme-dark [class*="bg-white/95"],
 html.theme-dark [class*="bg-white/90"],
 html.theme-dark [class*="bg-white/80"] {
-    background-color: rgba(15, 20, 17, 0.94) !important;
+    background-color: #000000 !important;
     backdrop-filter: blur(14px) !important;
     -webkit-backdrop-filter: blur(14px) !important;
-    border-color: rgba(31, 46, 38, 0.7) !important;
+    border-color: #222222 !important;
 }
 
 /* Header Seamless Vector Logo (Strictly Transparent, No Square Background) */
@@ -388,8 +389,8 @@ html.theme-dark .calc-pill-btn.is-active {
     box-shadow: 0 0 10px rgba(29, 93, 59, 0.45) !important;
 }
 html.theme-dark .calc-pill-btn:not(.is-active) {
-    background-color: #111413 !important;
-    border-color: #242826 !important;
+    background-color: #000000 !important;
+    border-color: #222222 !important;
     color: #9CA3AF !important;
 }
 html.theme-dark .calc-pill-btn:not(.is-active):hover {
@@ -397,13 +398,13 @@ html.theme-dark .calc-pill-btn:not(.is-active):hover {
     color: #FFFFFF !important;
 }
 html.theme-dark .calc-addon-card.is-active {
-    background-color: #131A16 !important;
+    background-color: #000000 !important;
     border: 1px solid #287A4E !important;
     box-shadow: 0 0 10px rgba(29, 93, 59, 0.4) !important;
 }
 html.theme-dark .calc-addon-card:not(.is-active) {
-    background-color: #111413 !important;
-    border-color: #242826 !important;
+    background-color: #000000 !important;
+    border-color: #222222 !important;
 }
 html.theme-dark .calc-addon-card:not(.is-active):hover {
     border-color: rgba(40, 122, 78, 0.6) !important;
@@ -413,9 +414,9 @@ html.theme-dark .calc-addon-card:not(.is-active):hover {
 html.theme-dark input:not([type="range"]),
 html.theme-dark select,
 html.theme-dark textarea {
-    background-color: #0A0C0B !important;
+    background-color: #000000 !important;
     color: #FFFFFF !important;
-    border-color: #2A2E2C !important;
+    border-color: #222222 !important;
 }
 
 html.theme-dark input:focus,
@@ -445,8 +446,8 @@ html.theme-dark input[type="radio"]:checked {
 }
 
 html.theme-dark #settingsDropdown {
-    background-color: #111413 !important;
-    border-color: #2A2E2C !important;
+    background-color: #000000 !important;
+    border-color: #222222 !important;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.95), 0 0 0 1px #222222 !important;
 }
 
@@ -546,7 +547,7 @@ html.theme-dark footer.bg-\[\#123824\] {
 
 /* Preloader Dark Mode Override */
 html.theme-dark #page-preloader {
-    background-color: #0B0E0C !important;
+    background-color: #000000 !important;
 }
 
 html.theme-dark #page-preloader .preloader-logo-wrap svg,
@@ -570,7 +571,7 @@ html.theme-dark #page-preloader .preloader-brand-sub {
 }
 
 html.theme-dark #page-preloader .preloader-bar-track {
-    background-color: #1F2E26 !important;
+    background-color: #222222 !important;
 }
 
 html.theme-dark #page-preloader .preloader-bar-line {
@@ -604,9 +605,9 @@ html.theme-dark .leaflet-container {
 }
 
 html.theme-dark .leaflet-popup-content-wrapper {
-    background-color: #111413 !important;
+    background-color: #000000 !important;
     color: #FFFFFF !important;
-    border: 1px solid #242826 !important;
+    border: 1px solid #222222 !important;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.85) !important;
 }
 
@@ -619,7 +620,7 @@ html.theme-dark .leaflet-popup-content span {
 }
 
 html.theme-dark .leaflet-popup-tip {
-    background: #111413 !important;
+    background: #000000 !important;
 }
 
 /* 12. Terms & Conditions High-Contrast Readability */
@@ -939,12 +940,12 @@ button:active, .chamfer-btn:active, a.chamfer-btn:active, .calc-pill-btn:active,
 /* 20. FAQ Section in Dark Theme */
 html.theme-dark #faq {
     background-color: #000000 !important;
-    border-color: #1F2E26 !important;
+    border-color: #222222 !important;
 }
 
 html.theme-dark .faq-item {
-    background-color: #111413 !important;
-    border-color: #1F2E26 !important;
+    background-color: #000000 !important;
+    border-color: #222222 !important;
 }
 
 html.theme-dark .faq-item:hover {
@@ -975,7 +976,7 @@ html.theme-dark .faq-trigger .faq-icon i {
 
 html.theme-dark .faq-content {
     color: #9CA3AF !important;
-    border-color: #1F2E26 !important;
+    border-color: #222222 !important;
 }
 
 /* 21. Active Navigation Link Indicator (Emerald in Light, Deep Emerald in Dark) */
@@ -1009,7 +1010,7 @@ body.dark #hero {
 
 html.theme-dark #catalog,
 body.dark #catalog {
-    background-color: var(--bg-secondary) !important;
+    background-color: #000000 !important;
     background-image: none !important;
 }
 
