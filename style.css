@@ -141,17 +141,18 @@ body.dark {
 #hero-section,
 .hero-section,
 #hero {
-    background-image: url('images/2026-09-16 18.51.22.jpg') !important;
+    background-image: url('images/aima_new.jpg') !important;
     background-size: cover !important;
     background-position: right center !important;
     background-repeat: no-repeat !important;
+    background-color: #0b0f0e !important;
     border-bottom: none !important;
     box-shadow: none !important;
     color: var(--text-main) !important;
 }
 
 #hero-section .hero-text-content {
-    max-width: 48% !important;
+    max-width: 520px !important;
 }
 
 #hero-section::before,
