@@ -409,16 +409,42 @@
                     </div>
                 </div>
 
-                <!-- Правая колонка (большая буква M) -->
+                <!-- Правая колонка: эффект слоёв-эхо / след скорости -->
                 <div class="lg:col-span-5 flex items-center justify-center py-4">
-                    <svg class="w-[260px] h-[300px] sm:w-[320px] sm:h-[360px] lg:w-[360px] lg:h-[400px] pointer-events-none select-none transition-all duration-300"
-                        viewBox="0 0 100 100" fill="none"
-                        style="fill: #1D5D3B !important; stroke: none !important; opacity: 1 !important; filter: none !important;">
-                        <path d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z"
-                            fill="#1D5D3B"
-                            stroke="none"
-                            style="fill: #1D5D3B !important; stroke: none !important; opacity: 1 !important; filter: none !important;" />
-                    </svg>
+                    <div class="relative w-[300px] h-[340px] sm:w-[360px] sm:h-[400px] lg:w-[400px] lg:h-[440px] select-none pointer-events-none">
+
+                        <!-- Слой 1: Дальнее эхо (самый прозрачный, смещён назад-влево-вверх) -->
+                        <div class="absolute inset-0 flex items-center justify-center"
+                             style="transform: translate(-22px, -14px) scale(0.88); opacity: 0.11; will-change: transform;">
+                            <svg class="w-full h-full" viewBox="0 0 100 100" fill="none"
+                                 style="fill: #1D5D3B !important;">
+                                <path d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z"
+                                      fill="#1D5D3B"/>
+                            </svg>
+                        </div>
+
+                        <!-- Слой 2: Ближнее эхо (средняя прозрачность, лёгкое смещение) -->
+                        <div class="absolute inset-0 flex items-center justify-center"
+                             style="transform: translate(-11px, -7px) scale(0.94); opacity: 0.28; will-change: transform;">
+                            <svg class="w-full h-full" viewBox="0 0 100 100" fill="none"
+                                 style="fill: #1D5D3B !important;">
+                                <path d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z"
+                                      fill="#1D5D3B"/>
+                            </svg>
+                        </div>
+
+                        <!-- Слой 3: Основной фронтальный знак (100%, чёткий, с тенью) -->
+                        <div class="absolute inset-0 flex items-center justify-center"
+                             style="z-index: 10;">
+                            <svg class="w-full h-full" viewBox="0 0 100 100" fill="none"
+                                 style="fill: #1D5D3B !important; stroke: none !important;
+                                        filter: drop-shadow(0 12px 32px rgba(0,0,0,0.45)) drop-shadow(0 2px 8px rgba(29,93,59,0.3)) !important;">
+                                <path d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z"
+                                      fill="#1D5D3B"/>
+                            </svg>
+                        </div>
+
+                    </div>
                 </div>
 
             </div>
