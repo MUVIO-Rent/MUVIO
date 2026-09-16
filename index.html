@@ -155,17 +155,28 @@
             }
         }
 
+        .hero-brand-stage svg,
+        .hero-brand-stage svg path,
+        .main-emblem svg,
+        .main-emblem svg path,
+        .echo-far svg,
+        .echo-far svg path,
+        .echo-near svg,
+        .echo-near svg path {
+            fill: #1D5D3B !important;
+        }
+
         .main-emblem {
             will-change: transform, opacity;
-            animation: flyInEmblem 1.8s cubic-bezier(0.05, 0.9, 0.2, 1) forwards;
+            animation: flyInEmblem 1.8s cubic-bezier(0.12, 0.95, 0.25, 1) forwards;
         }
         .echo-far {
             will-change: transform, opacity;
-            animation: echoFarMotion 2.0s cubic-bezier(0.05, 0.9, 0.2, 1) forwards;
+            animation: echoFarMotion 2.0s cubic-bezier(0.12, 0.95, 0.25, 1) forwards;
         }
         .echo-near {
             will-change: transform, opacity;
-            animation: echoNearMotion 1.9s cubic-bezier(0.05, 0.9, 0.2, 1) forwards;
+            animation: echoNearMotion 1.9s cubic-bezier(0.12, 0.95, 0.25, 1) forwards;
         }
 
         /* Выносные телеметрические линии и метки */
@@ -239,6 +250,32 @@
             animation: revealCalloutTextRight 0.5s cubic-bezier(0.16, 1, 0.3, 1) 2.05s forwards;
         }
 
+        /* Telemetry Cards: Light & Dark Theme Adaptation */
+        .telemetry-card {
+            background-color: rgba(255, 255, 255, 0.92) !important;
+            border: 1px solid rgba(228, 228, 231, 0.8) !important;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.06) !important;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .telemetry-card .telemetry-text {
+            color: #18181b !important;
+        }
+        html.theme-dark .telemetry-card,
+        html.dark .telemetry-card,
+        .theme-dark .telemetry-card,
+        .dark .telemetry-card {
+            background-color: rgba(14, 19, 16, 0.85) !important;
+            border: 1px solid rgba(39, 39, 42, 0.8) !important;
+            box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.4) !important;
+        }
+        html.theme-dark .telemetry-card .telemetry-text,
+        html.dark .telemetry-card .telemetry-text,
+        .theme-dark .telemetry-card .telemetry-text,
+        .dark .telemetry-card .telemetry-text {
+            color: #e4e4e7 !important;
+        }
+
         /* Catalog Cards Scroll Reveal */
         #catalogGrid .vehicle-card {
             opacity: 0;
@@ -259,9 +296,9 @@
                 var s = localStorage.getItem('muvio_site_settings');
                 var t = s ? JSON.parse(s).theme : (localStorage.getItem('muvio_theme') || 'light');
                 if (t === 'dark') {
-                    document.documentElement.classList.add('theme-dark');
+                    document.documentElement.classList.add('theme-dark', 'dark');
                 } else {
-                    document.documentElement.classList.remove('theme-dark');
+                    document.documentElement.classList.remove('theme-dark', 'dark');
                 }
             } catch (e) { }
         })();
@@ -313,7 +350,10 @@
 
                     <!-- 2-й елемент: фірмовий логотип MUVIO (єдиний монолітний вектор) -->
                     <a href="index.html" class="inline-flex items-center select-none group focus:outline-none" aria-label="MUVIO" style="padding-left: 20px;">
-                        <img src="images/logo-header.png" alt="MUVIO" class="transition-opacity group-hover:opacity-90" style="height: 52px !important; width: auto !important; display: block !important;">
+                        <svg class="h-8 sm:h-9 w-auto transition-opacity group-hover:opacity-90 shrink-0" viewBox="0 0 222 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path class="muvio-logo-mark" d="M 28.67,51.38 L 3.54,2.0 L 11.1,36.58 L 0.0,36.66 L 26.14,92.0 L 18.82,52.75 L 28.67,56.37 L 38.52,52.75 L 31.2,92.0 L 57.34,36.66 L 46.24,36.58 L 53.8,2.0 Z" fill="#1D5D3B"/>
+                            <path class="muvio-logo-letters" fill-rule="evenodd" clip-rule="evenodd" d="M 68,2 L 78,2 L 78,76 L 82,80 L 96,80 L 100,76 L 100,2 L 110,2 L 110,80 L 104,86 L 74,86 L 68,80 Z M 114,2 L 124,2 L 137,72 L 150,2 L 160,2 L 143,86 L 131,86 Z M 164,2 L 178,2 L 178,86 L 164,86 Z M 182,8 L 188,2 L 214,2 L 220,8 L 220,80 L 214,86 L 188,86 L 182,80 Z M 192,12 L 210,12 L 210,76 L 192,76 Z" fill="#1D5D3B"/>
+                        </svg>
                     </a>
                 </div>
 
@@ -573,9 +613,9 @@
 
                         <!-- ВЫНОСКА 1: Сверху-слева от М (Тарифы) -->
                         <div class="telemetry-callout absolute top-4 sm:top-6 -left-2 sm:-left-4 lg:-left-12 z-20 flex items-center">
-                            <div class="callout-text-left px-3 py-1.5 rounded border border-zinc-800 bg-[#0B0E0C]/85 backdrop-blur-md shadow-lg flex items-center gap-2">
+                            <div class="telemetry-card callout-text-left px-3 py-1.5 rounded border border-zinc-200/80 dark:border-zinc-800/80 bg-white/90 dark:bg-[#0E1310]/85 backdrop-blur-md shadow-sm flex items-center gap-2">
                                 <span class="w-1.5 h-1.5 rounded-full bg-[#1D5D3B] shrink-0"></span>
-                                <span class="font-mono text-[11px] sm:text-xs tracking-wider text-zinc-300 uppercase whitespace-nowrap">
+                                <span class="telemetry-text font-mono text-[11px] sm:text-xs tracking-wider text-zinc-900 dark:text-zinc-200 uppercase whitespace-nowrap">
                                     <span class="lang-ua">ТАРИФИ: ВІД 800 ₴/ДОБА • 1 800 ₴/ТИЖД</span>
                                     <span class="lang-en">RATES: FROM 800 ₴/DAY • 1,800 ₴/WEEK</span>
                                 </span>
@@ -592,9 +632,9 @@
                                 <div class="w-1.5 h-1.5 rounded-full bg-[#1D5D3B] shrink-0"></div>
                                 <div class="h-[1px] w-6 lg:w-10 bg-[#1D5D3B]/50"></div>
                             </div>
-                            <div class="callout-text-right px-3 py-1.5 rounded border border-zinc-800 bg-[#0B0E0C]/85 backdrop-blur-md shadow-lg flex items-center gap-2">
+                            <div class="telemetry-card callout-text-right px-3 py-1.5 rounded border border-zinc-200/80 dark:border-zinc-800/80 bg-white/90 dark:bg-[#0E1310]/85 backdrop-blur-md shadow-sm flex items-center gap-2">
                                 <span class="w-1.5 h-1.5 rounded-full bg-[#1D5D3B] shrink-0"></span>
-                                <span class="font-mono text-[11px] sm:text-xs tracking-wider text-zinc-300 uppercase whitespace-nowrap">
+                                <span class="telemetry-text font-mono text-[11px] sm:text-xs tracking-wider text-zinc-900 dark:text-zinc-200 uppercase whitespace-nowrap">
                                     <span class="lang-ua">ЗАПАС ХОДУ: ДО 160 КМ НА ЗАРЯДІ</span>
                                     <span class="lang-en">RANGE: UP TO 160 KM PER CHARGE</span>
                                 </span>
@@ -603,9 +643,9 @@
 
                         <!-- ВЫНОСКА 3: Снизу-слева от М (Сервис) -->
                         <div class="telemetry-callout absolute bottom-12 sm:bottom-14 -left-2 sm:-left-4 lg:-left-12 z-20 flex items-center">
-                            <div class="callout-text-left px-3 py-1.5 rounded border border-zinc-800 bg-[#0B0E0C]/85 backdrop-blur-md shadow-lg flex items-center gap-2">
+                            <div class="telemetry-card callout-text-left px-3 py-1.5 rounded border border-zinc-200/80 dark:border-zinc-800/80 bg-white/90 dark:bg-[#0E1310]/85 backdrop-blur-md shadow-sm flex items-center gap-2">
                                 <span class="w-1.5 h-1.5 rounded-full bg-[#1D5D3B] shrink-0"></span>
-                                <span class="font-mono text-[11px] sm:text-xs tracking-wider text-zinc-300 uppercase whitespace-nowrap">
+                                <span class="telemetry-text font-mono text-[11px] sm:text-xs tracking-wider text-zinc-900 dark:text-zinc-200 uppercase whitespace-nowrap">
                                     <span class="lang-ua">СЕРВІС: ОДЕСА, ВУЛ. ПРИМОРСЬКА, 22</span>
                                     <span class="lang-en">SERVICE: ODESA, 22 PRYMORSKA STR.</span>
                                 </span>
@@ -623,9 +663,9 @@
                                 <div class="h-[1px] w-6 lg:w-10 bg-[#1D5D3B]/50"></div>
                             </div>
                             <a href="https://t.me/muviobot" target="_blank" rel="noopener noreferrer"
-                               class="callout-text-right px-3 py-1.5 rounded border border-zinc-800 hover:border-[#1D5D3B] bg-[#0B0E0C]/85 backdrop-blur-md shadow-lg flex items-center gap-2 transition-colors group">
+                               class="telemetry-card callout-text-right px-3 py-1.5 rounded border border-zinc-200/80 dark:border-zinc-800/80 hover:border-[#1D5D3B] dark:hover:border-[#1D5D3B] bg-white/90 dark:bg-[#0E1310]/85 backdrop-blur-md shadow-sm flex items-center gap-2 transition-colors group">
                                 <span class="w-1.5 h-1.5 rounded-full bg-[#1D5D3B] animate-pulse shrink-0"></span>
-                                <span class="font-mono text-[11px] sm:text-xs tracking-wider text-zinc-300 group-hover:text-emerald-400 uppercase whitespace-nowrap transition-colors">
+                                <span class="telemetry-text font-mono text-[11px] sm:text-xs tracking-wider text-zinc-900 dark:text-zinc-200 group-hover:text-emerald-500 uppercase whitespace-nowrap transition-colors">
                                     <span class="lang-ua">ПІДТРИМКА: ОНЛАЙН-БОТ 24/7 ↗</span>
                                     <span class="lang-en">SUPPORT: 24/7 BOT ↗</span>
                                 </span>

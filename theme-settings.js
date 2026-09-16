@@ -358,9 +358,9 @@
 
         const initS = getSiteSettings();
         if (initS.theme === 'dark') {
-            document.documentElement.classList.add('theme-dark');
+            document.documentElement.classList.add('theme-dark', 'dark');
         } else {
-            document.documentElement.classList.remove('theme-dark');
+            document.documentElement.classList.remove('theme-dark', 'dark');
         }
         const initialZoom = Math.max(80, Math.min(120, parseInt(initS.zoom || initS.fontScale, 10) || 100));
         if (document.body) {
@@ -391,7 +391,7 @@
         const metaThemeColor = document.querySelector('meta[name="theme-color"]');
 
         if (theme === 'dark') {
-            document.documentElement.classList.add('theme-dark');
+            document.documentElement.classList.add('theme-dark', 'dark');
             if (metaThemeColor) metaThemeColor.setAttribute('content', '#0F1411');
             if (badge) badge.textContent = 'DARK';
             if (btnDark) {
@@ -401,7 +401,7 @@
                 btnLight.className = 'py-2 px-3 text-xs font-brand font-bold uppercase tracking-wider chamfer-badge flex items-center justify-center gap-1.5 transition-all bg-slate-100 text-slate-700 hover:bg-slate-200';
             }
         } else {
-            document.documentElement.classList.remove('theme-dark');
+            document.documentElement.classList.remove('theme-dark', 'dark');
             if (metaThemeColor) metaThemeColor.setAttribute('content', '#FFFFFF');
             if (badge) badge.textContent = 'LIGHT';
             if (btnLight) {
