@@ -259,6 +259,9 @@
             letter-spacing: -0.02em !important;
             margin-bottom: 20px !important;
             text-transform: none !important;
+            color: #FFFFFF !important;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6) !important;
+            filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.6)) !important;
         }
 
         /* Выносные телеметрические линии и метки */
@@ -358,35 +361,35 @@
             animation-delay: 1.9s !important;
         }
 
-        /* Telemetry Cards: Adaptive styling & z-index */
+        /* Telemetry Cards: High-tech dark chips on headlight background */
         .telemetry-card {
-            background-color: rgba(255, 255, 255, 0.70) !important;
-            border: 1px solid rgba(228, 228, 231, 0.80) !important;
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.06) !important;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background-color: rgba(0, 0, 0, 0.80) !important;
+            border: 1px solid rgba(63, 63, 70, 0.90) !important;
+            box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.5) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
             position: relative;
             z-index: 30 !important;
         }
         .telemetry-card .telemetry-text {
-            color: #18181b !important;
+            color: #FFFFFF !important;
         }
         html.theme-dark .telemetry-card,
         html.dark .telemetry-card,
         .theme-dark .telemetry-card,
         .dark .telemetry-card {
-            background-color: rgba(11, 14, 12, 0.80) !important;
-            border: 1px solid rgba(39, 39, 42, 0.80) !important;
-            box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.4) !important;
+            background-color: rgba(0, 0, 0, 0.85) !important;
+            border: 1px solid rgba(63, 63, 70, 0.90) !important;
+            box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.6) !important;
         }
         html.theme-dark .telemetry-card .telemetry-text,
         html.dark .telemetry-card .telemetry-text,
         .theme-dark .telemetry-card .telemetry-text,
         .dark .telemetry-card .telemetry-text {
-            color: #f4f4f5 !important;
+            color: #FFFFFF !important;
         }
 
-        /* Hero Section Headlight Background & Directional Linear Gradient Overlay */
+        /* Hero Section Headlight Background: 100% Original Brightness, Zero Overlays */
         #hero-section,
         html.theme-dark #hero-section,
         html.dark #hero-section,
@@ -394,25 +397,33 @@
         [data-theme="dark"] #hero-section {
             background-image: url('images/scooter_headlight.jpg') !important;
             background-size: cover !important;
-            background-position: center right !important;
+            background-position: center !important;
             background-repeat: no-repeat !important;
+            opacity: 1 !important;
             position: relative !important;
         }
         .hero-overlay {
-            background: linear-gradient(to right, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.70) 45%, rgba(255, 255, 255, 0.20) 100%) !important;
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            z-index: 0;
-            transition: background 0.3s ease;
+            display: none !important;
         }
-        html.dark .hero-overlay,
-        html.theme-dark .hero-overlay,
-        body.dark .hero-overlay,
-        .dark .hero-overlay,
-        .theme-dark .hero-overlay,
-        [data-theme="dark"] .hero-overlay {
-            background: linear-gradient(to right, rgba(11, 14, 12, 0.95) 0%, rgba(11, 14, 12, 0.70) 45%, rgba(11, 14, 12, 0.20) 100%) !important;
+
+        /* Hero Subtitle & Second Button Glass Styles */
+        #hero-section p.hero-subtitle {
+            color: #D4D4D8 !important;
+            text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6) !important;
+        }
+        #hero-section .hero-calc-btn {
+            background-color: rgba(0, 0, 0, 0.40) !important;
+            border: 1px solid rgba(255, 255, 255, 0.20) !important;
+            color: #FFFFFF !important;
+            backdrop-filter: blur(8px) !important;
+            -webkit-backdrop-filter: blur(8px) !important;
+            transition: all 0.2s ease !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+        }
+        #hero-section .hero-calc-btn:hover {
+            background-color: rgba(0, 0, 0, 0.60) !important;
+            border-color: rgba(255, 255, 255, 0.40) !important;
+            color: #FFFFFF !important;
         }
 
         /* Catalog Cards Scroll Reveal */
@@ -640,20 +651,17 @@
     </script>
 
     <!-- ==================== 2. HERO СЕКЦІЯ ==================== -->
-    <section id="hero-section" class="relative overflow-hidden transition-colors duration-300" style="background-image: url('images/scooter_headlight.jpg'); background-size: cover; background-position: center right; background-repeat: no-repeat; color: var(--text-main) !important;">
-        <!-- Спрямований лінійний градієнт-оверлей: зліва читабельність тексту, справа соковита чітка фара -->
-        <div class="hero-overlay"></div>
-
+    <section id="hero-section" class="relative overflow-hidden transition-colors duration-300" style="background-image: url('images/scooter_headlight.jpg'); background-size: cover; background-position: center; opacity: 1 !important;">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 relative z-10">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                 
                 <!-- Левая колонка (текст) -->
                 <div class="lg:col-span-7 text-left">
-                    <h1 style="font-family: 'Unbounded', sans-serif !important; font-weight: 800 !important; font-size: clamp(2rem, 4.2vw, 3.2rem) !important; line-height: 1.15 !important; letter-spacing: -0.02em !important; margin-bottom: 20px !important; color: var(--text-main) !important;">
+                    <h1 style="font-family: 'Unbounded', sans-serif !important; font-weight: 800 !important; font-size: clamp(2rem, 4.2vw, 3.2rem) !important; line-height: 1.15 !important; letter-spacing: -0.02em !important; margin-bottom: 20px !important; color: #FFFFFF !important; text-shadow: 0 2px 12px rgba(0,0,0,0.6) !important;">
                         <span class="lang-ua">Оренда<br>електротранспорту в<br>Одесі</span>
                         <span class="lang-en">Electric vehicle<br>rental in<br>Odesa</span>
                     </h1>
-                    <p class="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 mb-8 max-w-xl leading-relaxed" style="color: var(--text-muted) !important;">
+                    <p class="hero-subtitle text-base sm:text-lg mb-8 max-w-xl leading-relaxed text-zinc-300" style="color: #D4D4D8 !important; text-shadow: 0 1px 8px rgba(0,0,0,0.6) !important;">
                         <span class="lang-ua">Для кур'єрів та туризму • Всі моделі з АКБ та зарядкою • Безкоштовне сервісне обслуговування</span>
                         <span class="lang-en">For couriers and tourism • All models with battery & charger • Free maintenance</span>
                     </p>
@@ -662,7 +670,7 @@
                             <span class="lang-ua">Обрати транспорт ↓</span>
                             <span class="lang-en">Choose Vehicle ↓</span>
                         </a>
-                        <a href="#calculator" class="hero-calc-btn inline-flex items-center justify-center gap-2.5 border border-zinc-300 dark:border-zinc-800 hover:border-[#1D5D3B] text-zinc-900 dark:text-zinc-200 px-7 py-3.5 rounded-xl font-semibold transition-all">
+                        <a href="#calculator" class="hero-calc-btn inline-flex items-center justify-center gap-2.5 bg-black/40 hover:bg-black/60 border border-white/20 hover:border-white/40 text-white px-7 py-3.5 rounded-xl font-semibold backdrop-blur-md transition-all shadow-lg">
                             <i data-lucide="calculator" class="w-4 h-4"></i>
                             <span class="lang-ua">Калькулятор оренди</span>
                             <span class="lang-en">Rental Calculator</span>
@@ -696,26 +704,26 @@
 
                         <!-- ВЫНОСКА 1: Сверху-слева от М (Тарифы) -->
                         <div class="telemetry-callout absolute top-4 sm:top-6 -left-2 sm:-left-4 lg:-left-12 z-30 flex items-center">
-                            <div class="telemetry-card callout-text-left callout-delay-1 px-3.5 py-1.5 rounded-lg border border-zinc-200/80 dark:border-zinc-800/80 bg-white/70 dark:bg-[#0B0E0C]/80 backdrop-blur-md shadow-sm flex items-center select-none" style="animation-delay: 1.3s !important; animation-duration: 0.7s !important;">
-                                <span class="telemetry-text font-mono text-[11px] sm:text-xs tracking-wider text-zinc-900 dark:text-zinc-100 uppercase whitespace-nowrap">
+                            <div class="telemetry-card callout-text-left callout-delay-1 px-3.5 py-1.5 rounded-lg border border-zinc-700 bg-black/80 backdrop-blur-md shadow-sm flex items-center select-none" style="animation-delay: 1.3s !important; animation-duration: 0.7s !important;">
+                                <span class="telemetry-text font-mono text-[11px] sm:text-xs tracking-wider text-white uppercase whitespace-nowrap">
                                     <span class="lang-ua">ТАРИФИ: ВІД 800 ₴/ДОБА • 1 800 ₴/ТИЖД</span>
                                     <span class="lang-en">RATES: FROM 800 ₴/DAY • 1,800 ₴/WEEK</span>
                                 </span>
                             </div>
                             <div class="callout-line-left callout-delay-1 hidden sm:flex items-center shrink-0" style="animation-delay: 1.3s !important; animation-duration: 0.7s !important;">
-                                <div class="h-[1px] w-6 lg:w-10 bg-[#1D5D3B]/60"></div>
-                                <div class="w-1.5 h-1.5 rounded-full bg-[#1D5D3B] shrink-0"></div>
+                                <div class="h-[1px] w-6 lg:w-10 bg-[#2E8B57]"></div>
+                                <div class="w-1.5 h-1.5 rounded-full bg-[#2E8B57] shrink-0"></div>
                             </div>
                         </div>
 
                         <!-- ВЫНОСКА 2: Сверху-справа от М (Запас хода) -->
                         <div class="telemetry-callout absolute top-10 sm:top-12 -right-2 sm:-right-4 lg:-right-12 z-30 flex items-center">
                             <div class="callout-line-right callout-delay-2 hidden sm:flex items-center shrink-0" style="animation-delay: 1.5s !important; animation-duration: 0.7s !important;">
-                                <div class="w-1.5 h-1.5 rounded-full bg-[#1D5D3B] shrink-0"></div>
-                                <div class="h-[1px] w-6 lg:w-10 bg-[#1D5D3B]/60"></div>
+                                <div class="w-1.5 h-1.5 rounded-full bg-[#2E8B57] shrink-0"></div>
+                                <div class="h-[1px] w-6 lg:w-10 bg-[#2E8B57]"></div>
                             </div>
-                            <div class="telemetry-card callout-text-right callout-delay-2 px-3.5 py-1.5 rounded-lg border border-zinc-200/80 dark:border-zinc-800/80 bg-white/70 dark:bg-[#0B0E0C]/80 backdrop-blur-md shadow-sm flex items-center select-none" style="animation-delay: 1.5s !important; animation-duration: 0.7s !important;">
-                                <span class="telemetry-text font-mono text-[11px] sm:text-xs tracking-wider text-zinc-900 dark:text-zinc-100 uppercase whitespace-nowrap">
+                            <div class="telemetry-card callout-text-right callout-delay-2 px-3.5 py-1.5 rounded-lg border border-zinc-700 bg-black/80 backdrop-blur-md shadow-sm flex items-center select-none" style="animation-delay: 1.5s !important; animation-duration: 0.7s !important;">
+                                <span class="telemetry-text font-mono text-[11px] sm:text-xs tracking-wider text-white uppercase whitespace-nowrap">
                                     <span class="lang-ua">ЗАПАС ХОДУ: ДО 160 КМ НА ЗАРЯДІ</span>
                                     <span class="lang-en">RANGE: UP TO 160 KM PER CHARGE</span>
                                 </span>
@@ -724,28 +732,28 @@
 
                         <!-- ВЫНОСКА 3: Снизу-слева от М (Сервис) -->
                         <div class="telemetry-callout absolute bottom-12 sm:bottom-14 -left-2 sm:-left-4 lg:-left-12 z-30 flex items-center">
-                            <div class="telemetry-card callout-text-left callout-delay-3 px-3.5 py-1.5 rounded-lg border border-zinc-200/80 dark:border-zinc-800/80 bg-white/70 dark:bg-[#0B0E0C]/80 backdrop-blur-md shadow-sm flex items-center select-none" style="animation-delay: 1.7s !important; animation-duration: 0.7s !important;">
-                                <span class="telemetry-text font-mono text-[11px] sm:text-xs tracking-wider text-zinc-900 dark:text-zinc-100 uppercase whitespace-nowrap">
+                            <div class="telemetry-card callout-text-left callout-delay-3 px-3.5 py-1.5 rounded-lg border border-zinc-700 bg-black/80 backdrop-blur-md shadow-sm flex items-center select-none" style="animation-delay: 1.7s !important; animation-duration: 0.7s !important;">
+                                <span class="telemetry-text font-mono text-[11px] sm:text-xs tracking-wider text-white uppercase whitespace-nowrap">
                                     <span class="lang-ua">СЕРВІС: ОДЕСА, ВУЛ. ПРИМОРСЬКА, 22</span>
                                     <span class="lang-en">SERVICE: ODESA, 22 PRYMORSKA STR.</span>
                                 </span>
                             </div>
                             <div class="callout-line-left callout-delay-3 hidden sm:flex items-center shrink-0" style="animation-delay: 1.7s !important; animation-duration: 0.7s !important;">
-                                <div class="h-[1px] w-6 lg:w-10 bg-[#1D5D3B]/60"></div>
-                                <div class="w-1.5 h-1.5 rounded-full bg-[#1D5D3B] shrink-0"></div>
+                                <div class="h-[1px] w-6 lg:w-10 bg-[#2E8B57]"></div>
+                                <div class="w-1.5 h-1.5 rounded-full bg-[#2E8B57] shrink-0"></div>
                             </div>
                         </div>
 
                         <!-- ВЫНОСКА 4: Снизу-справа от М (Поддержка / Бот) -->
                         <div class="telemetry-callout absolute bottom-4 sm:bottom-6 -right-2 sm:-right-4 lg:-right-12 z-30 flex items-center">
                             <div class="callout-line-right callout-delay-4 hidden sm:flex items-center shrink-0" style="animation-delay: 1.9s !important; animation-duration: 0.7s !important;">
-                                <div class="w-1.5 h-1.5 rounded-full bg-[#1D5D3B] shrink-0"></div>
-                                <div class="h-[1px] w-6 lg:w-10 bg-[#1D5D3B]/60"></div>
+                                <div class="w-1.5 h-1.5 rounded-full bg-[#2E8B57] shrink-0"></div>
+                                <div class="h-[1px] w-6 lg:w-10 bg-[#2E8B57]"></div>
                             </div>
                             <a href="https://t.me/muviobot" target="_blank" rel="noopener noreferrer"
-                               class="telemetry-card callout-text-right callout-delay-4 px-3.5 py-1.5 rounded-lg border border-zinc-200/80 dark:border-zinc-800/80 hover:border-[#1D5D3B] dark:hover:border-[#1D5D3B] bg-white/70 dark:bg-[#0B0E0C]/80 backdrop-blur-md shadow-sm flex items-center transition-colors group select-none"
+                               class="telemetry-card callout-text-right callout-delay-4 px-3.5 py-1.5 rounded-lg border border-zinc-700 hover:border-[#2E8B57] bg-black/80 backdrop-blur-md shadow-sm flex items-center transition-colors group select-none"
                                style="animation-delay: 1.9s !important; animation-duration: 0.7s !important;">
-                                <span class="telemetry-text font-mono text-[11px] sm:text-xs tracking-wider text-zinc-900 dark:text-zinc-100 group-hover:text-emerald-500 uppercase whitespace-nowrap transition-colors">
+                                <span class="telemetry-text font-mono text-[11px] sm:text-xs tracking-wider text-white group-hover:text-emerald-400 uppercase whitespace-nowrap transition-colors">
                                     <span class="lang-ua">ПІДТРИМКА: ОНЛАЙН-БОТ 24/7 ↗</span>
                                     <span class="lang-en">SUPPORT: 24/7 BOT ↗</span>
                                 </span>
