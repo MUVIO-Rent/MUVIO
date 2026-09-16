@@ -151,8 +151,38 @@ body.dark {
     color: var(--text-main) !important;
 }
 
+#hero-section .hero-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 48px !important;
+    padding-right: 48px !important;
+    box-sizing: border-box !important;
+}
+
+@media (max-width: 1024px) {
+    #hero-section .hero-container {
+        padding-left: 32px !important;
+        padding-right: 32px !important;
+    }
+}
+
+@media (max-width: 640px) {
+    #hero-section .hero-container {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+}
+
 #hero-section .hero-text-content {
-    max-width: 520px !important;
+    max-width: 500px !important;
+}
+
+#hero-section .hero-text-content h1,
+#hero-section .hero-text-content p,
+#hero-section p.hero-subtitle {
+    color: #FFFFFF !important;
 }
 
 #hero-section::before,
