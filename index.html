@@ -113,15 +113,11 @@
             animation: muvioProgress 1.4s ease-in-out infinite;
         }
 
-        /* Hero Brandmark Entrance & Echo Animations */
+        /* Hero Brandmark Entrance & Echo Animations (Exponential braking without overshoot) */
         @keyframes flyInEmblem {
             0% {
                 transform: translate(-300px, -180px) scale(0.8);
                 opacity: 0;
-            }
-            65% {
-                transform: translate(8px, 4px) scale(1.02);
-                opacity: 1;
             }
             100% {
                 transform: translate(0, 0) scale(1);
@@ -135,7 +131,7 @@
                 transform: translate(-480px, -280px) scale(0.65);
                 opacity: 0;
             }
-            60% {
+            35% {
                 opacity: 0.35;
             }
             100% {
@@ -150,7 +146,7 @@
                 transform: translate(-380px, -220px) scale(0.72);
                 opacity: 0;
             }
-            60% {
+            35% {
                 opacity: 0.55;
             }
             100% {
@@ -159,44 +155,100 @@
             }
         }
 
-        @keyframes popBadgeTech {
-            0% {
-                opacity: 0;
-                transform: translateY(12px) scale(0.95);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
         .main-emblem {
             will-change: transform, opacity;
-            animation: flyInEmblem 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: flyInEmblem 1.8s cubic-bezier(0.05, 0.9, 0.2, 1) forwards;
         }
         .echo-far {
             will-change: transform, opacity;
-            animation: echoFarMotion 2.0s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: echoFarMotion 2.0s cubic-bezier(0.05, 0.9, 0.2, 1) forwards;
         }
         .echo-near {
             will-change: transform, opacity;
-            animation: echoNearMotion 1.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: echoNearMotion 1.9s cubic-bezier(0.05, 0.9, 0.2, 1) forwards;
         }
 
-        .badge-tl {
-            opacity: 0;
-            will-change: transform, opacity;
-            animation: popBadgeTech 0.6s cubic-bezier(0.16, 1, 0.3, 1) 1.8s forwards;
+        /* Выносные телеметрические линии и метки */
+        @keyframes drawLineLeft {
+            0% {
+                transform: scaleX(0);
+                opacity: 0;
+            }
+            100% {
+                transform: scaleX(1);
+                opacity: 1;
+            }
         }
-        .badge-mr {
-            opacity: 0;
-            will-change: transform, opacity;
-            animation: popBadgeTech 0.6s cubic-bezier(0.16, 1, 0.3, 1) 2.0s forwards;
+
+        @keyframes drawLineRight {
+            0% {
+                transform: scaleX(0);
+                opacity: 0;
+            }
+            100% {
+                transform: scaleX(1);
+                opacity: 1;
+            }
         }
-        .badge-bl {
+
+        @keyframes revealCalloutTextLeft {
+            0% {
+                opacity: 0;
+                transform: translateX(6px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes revealCalloutTextRight {
+            0% {
+                opacity: 0;
+                transform: translateX(-6px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .callout-line-left {
+            transform-origin: right center;
             opacity: 0;
             will-change: transform, opacity;
-            animation: popBadgeTech 0.6s cubic-bezier(0.16, 1, 0.3, 1) 2.2s forwards;
+            animation: drawLineLeft 0.45s cubic-bezier(0.16, 1, 0.3, 1) 1.8s forwards;
+        }
+
+        .callout-line-right {
+            transform-origin: left center;
+            opacity: 0;
+            will-change: transform, opacity;
+            animation: drawLineRight 0.45s cubic-bezier(0.16, 1, 0.3, 1) 1.8s forwards;
+        }
+
+        .callout-text-left {
+            opacity: 0;
+            will-change: transform, opacity;
+            animation: revealCalloutTextLeft 0.5s cubic-bezier(0.16, 1, 0.3, 1) 2.05s forwards;
+        }
+
+        .callout-text-right {
+            opacity: 0;
+            will-change: transform, opacity;
+            animation: revealCalloutTextRight 0.5s cubic-bezier(0.16, 1, 0.3, 1) 2.05s forwards;
+        }
+
+        /* Catalog Cards Scroll Reveal */
+        #catalogGrid .vehicle-card {
+            opacity: 0;
+            transform: translateY(36px) scale(0.97);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+        #catalogGrid .vehicle-card.is-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
         }
     </style>
 
@@ -495,110 +547,95 @@
                     </div>
                 </div>
 
-                <!-- Правая колонка: интерактивная анимированная композиция -->
-                <div class="lg:col-span-5 flex items-center justify-center py-4">
-                    <div class="hero-brand-stage relative w-full h-[440px] lg:h-[500px] flex items-center justify-center select-none">
+                <!-- Правая колонка: интерактивная кинематографичная композиция с телеметрическими выносками -->
+                <div class="lg:col-span-5 flex items-center justify-center py-4 relative">
+                    <div class="hero-brand-stage relative w-full h-[460px] lg:h-[520px] flex items-center justify-center select-none">
 
                         <!-- Шлейф движения (Слои-эхо, схлопывающиеся при приземлении) -->
                         <div class="echo-layer echo-far absolute inset-0 flex items-center justify-center pointer-events-none">
-                            <svg class="h-[340px] lg:h-[400px] w-auto fill-[#1D5D3B]" viewBox="0 0 100 100" style="fill: #1D5D3B !important;">
+                            <svg class="h-[320px] lg:h-[380px] w-auto fill-[#1D5D3B]" viewBox="0 0 100 100" style="fill: #1D5D3B !important;">
                                 <path d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z" fill="#1D5D3B"/>
                             </svg>
                         </div>
                         <div class="echo-layer echo-near absolute inset-0 flex items-center justify-center pointer-events-none">
-                            <svg class="h-[340px] lg:h-[400px] w-auto fill-[#1D5D3B]" viewBox="0 0 100 100" style="fill: #1D5D3B !important;">
+                            <svg class="h-[320px] lg:h-[380px] w-auto fill-[#1D5D3B]" viewBox="0 0 100 100" style="fill: #1D5D3B !important;">
                                 <path d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z" fill="#1D5D3B"/>
                             </svg>
                         </div>
 
                         <!-- Основной фронтальный знак M -->
                         <div class="main-emblem relative z-10 flex items-center justify-center">
-                            <svg class="h-[340px] lg:h-[400px] w-auto fill-[#1D5D3B]" viewBox="0 0 100 100"
+                            <svg class="h-[320px] lg:h-[380px] w-auto fill-[#1D5D3B]" viewBox="0 0 100 100"
                                  style="fill: #1D5D3B !important; filter: drop-shadow(0 14px 30px rgba(0,0,0,0.35)) drop-shadow(0 2px 8px rgba(29,93,59,0.3)) !important;">
                                 <path d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z" fill="#1D5D3B"/>
                             </svg>
                         </div>
 
-                        <!-- Технические бейджи (вылетают по сторонам после остановки знака) -->
-                        <!-- Бейдж 1: Верхний левый -->
-                        <div class="badge-metric badge-tl absolute top-6 -left-2 lg:left-2 z-20 px-3 py-1.5 rounded border border-zinc-800 bg-[#0B0E0C]/80 backdrop-blur-md flex items-center gap-2">
-                            <span class="w-1.5 h-1.5 rounded-full bg-[#1D5D3B] animate-ping"></span>
-                            <span class="font-mono text-xs font-semibold text-zinc-300">АКБ 72V // 60Ah</span>
+                        <!-- ВЫНОСКА 1: Сверху-слева от М (Тарифы) -->
+                        <div class="telemetry-callout absolute top-4 sm:top-6 -left-2 sm:-left-4 lg:-left-12 z-20 flex items-center">
+                            <div class="callout-text-left px-3 py-1.5 rounded border border-zinc-800 bg-[#0B0E0C]/85 backdrop-blur-md shadow-lg flex items-center gap-2">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#1D5D3B] shrink-0"></span>
+                                <span class="font-mono text-[11px] sm:text-xs tracking-wider text-zinc-300 uppercase whitespace-nowrap">
+                                    <span class="lang-ua">ТАРИФИ: ВІД 800 ₴/ДОБА • 1 800 ₴/ТИЖД</span>
+                                    <span class="lang-en">RATES: FROM 800 ₴/DAY • 1,800 ₴/WEEK</span>
+                                </span>
+                            </div>
+                            <div class="callout-line-left hidden sm:flex items-center shrink-0">
+                                <div class="h-[1px] w-6 lg:w-10 bg-[#1D5D3B]/50"></div>
+                                <div class="w-1.5 h-1.5 rounded-full bg-[#1D5D3B] shrink-0"></div>
+                            </div>
                         </div>
 
-                        <!-- Бейдж 2: Правый -->
-                        <div class="badge-metric badge-mr absolute top-1/2 -translate-y-1/2 -right-4 lg:-right-8 z-20 px-3.5 py-2 rounded border border-zinc-800 bg-[#0B0E0C]/80 backdrop-blur-md flex flex-col items-start gap-0.5">
-                            <span class="font-mono text-[10px] text-zinc-500 uppercase tracking-widest">Дистанція</span>
-                            <span class="font-mono text-sm font-bold text-white tracking-wide">⚡ 160 КМ</span>
+                        <!-- ВЫНОСКА 2: Сверху-справа от М (Запас хода) -->
+                        <div class="telemetry-callout absolute top-10 sm:top-12 -right-2 sm:-right-4 lg:-right-12 z-20 flex items-center">
+                            <div class="callout-line-right hidden sm:flex items-center shrink-0">
+                                <div class="w-1.5 h-1.5 rounded-full bg-[#1D5D3B] shrink-0"></div>
+                                <div class="h-[1px] w-6 lg:w-10 bg-[#1D5D3B]/50"></div>
+                            </div>
+                            <div class="callout-text-right px-3 py-1.5 rounded border border-zinc-800 bg-[#0B0E0C]/85 backdrop-blur-md shadow-lg flex items-center gap-2">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#1D5D3B] shrink-0"></span>
+                                <span class="font-mono text-[11px] sm:text-xs tracking-wider text-zinc-300 uppercase whitespace-nowrap">
+                                    <span class="lang-ua">ЗАПАС ХОДУ: ДО 160 КМ НА ЗАРЯДІ</span>
+                                    <span class="lang-en">RANGE: UP TO 160 KM PER CHARGE</span>
+                                </span>
+                            </div>
                         </div>
 
-                        <!-- Бейдж 3: Нижний левый -->
-                        <div class="badge-metric badge-bl absolute bottom-6 left-2 lg:left-6 z-20 px-3 py-1.5 rounded border border-zinc-800 bg-[#0B0E0C]/80 backdrop-blur-md flex items-center gap-2">
-                            <span class="font-mono text-xs font-medium text-zinc-400">СЕРВІС // ОДЕСА 24/7</span>
+                        <!-- ВЫНОСКА 3: Снизу-слева от М (Сервис) -->
+                        <div class="telemetry-callout absolute bottom-12 sm:bottom-14 -left-2 sm:-left-4 lg:-left-12 z-20 flex items-center">
+                            <div class="callout-text-left px-3 py-1.5 rounded border border-zinc-800 bg-[#0B0E0C]/85 backdrop-blur-md shadow-lg flex items-center gap-2">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#1D5D3B] shrink-0"></span>
+                                <span class="font-mono text-[11px] sm:text-xs tracking-wider text-zinc-300 uppercase whitespace-nowrap">
+                                    <span class="lang-ua">СЕРВІС: ОДЕСА, ВУЛ. ПРИМОРСЬКА, 22</span>
+                                    <span class="lang-en">SERVICE: ODESA, 22 PRYMORSKA STR.</span>
+                                </span>
+                            </div>
+                            <div class="callout-line-left hidden sm:flex items-center shrink-0">
+                                <div class="h-[1px] w-6 lg:w-10 bg-[#1D5D3B]/50"></div>
+                                <div class="w-1.5 h-1.5 rounded-full bg-[#1D5D3B] shrink-0"></div>
+                            </div>
                         </div>
 
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- 3. Строгий горизонтальний статус-бар із тонкими роздільниками (без коробок) -->
-            <div class="hero-statusbar mt-8 sm:mt-12 pt-6 border-t" style="border-color: var(--border-subtle) !important;">
-                <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-0 divide-y lg:divide-y-0 lg:divide-x text-left" style="border-color: var(--border-subtle) !important;">
-                    <!-- 1. Тарифи -->
-                    <div class="pt-4 lg:pt-0 lg:px-6 first:pl-0" style="border-color: var(--border-subtle) !important;">
-                        <div class="text-xs uppercase tracking-wider font-semibold mb-1" style="color: var(--text-muted) !important;">
-                            <span class="lang-ua">Тарифи</span>
-                            <span class="lang-en">Rates</span>
-                        </div>
-                        <div class="text-sm sm:text-base font-bold whitespace-nowrap" style="color: var(--text-main) !important;">
-                            <span class="lang-ua">від 800 ₴/доба • 1 800 ₴/тижд</span>
-                            <span class="lang-en">from 800 ₴/day • 1,800 ₴/week</span>
-                        </div>
-                    </div>
-
-                    <!-- 2. Запас ходу -->
-                    <div class="pt-4 lg:pt-0 lg:px-6" style="border-color: var(--border-subtle) !important;">
-                        <div class="text-xs uppercase tracking-wider font-semibold mb-1" style="color: var(--text-muted) !important;">
-                            <span class="lang-ua">Запас ходу</span>
-                            <span class="lang-en">Range</span>
-                        </div>
-                        <div class="text-sm sm:text-base font-bold whitespace-nowrap" style="color: var(--text-main) !important;">
-                            <span class="lang-ua">до 160 км на одному заряді</span>
-                            <span class="lang-en">up to 160 km per charge</span>
-                        </div>
-                    </div>
-
-                    <!-- 3. Сервіс -->
-                    <div class="pt-4 lg:pt-0 lg:px-6" style="border-color: var(--border-subtle) !important;">
-                        <div class="text-xs uppercase tracking-wider font-semibold mb-1" style="color: var(--text-muted) !important;">
-                            <span class="lang-ua">Сервіс</span>
-                            <span class="lang-en">Service</span>
-                        </div>
-                        <div class="text-sm sm:text-base font-bold whitespace-nowrap" style="color: var(--text-main) !important;">
-                            <span class="lang-ua">Одеса, вул. Приморська, 22</span>
-                            <span class="lang-en">Odesa, 22 Primorska Str.</span>
-                        </div>
-                    </div>
-
-                    <!-- 4. Підтримка -->
-                    <div class="pt-4 lg:pt-0 lg:px-6 last:pr-0" style="border-color: var(--border-subtle) !important;">
-                        <div class="text-xs uppercase tracking-wider font-semibold mb-1" style="color: var(--text-muted) !important;">
-                            <span class="lang-ua">Підтримка</span>
-                            <span class="lang-en">Support</span>
-                        </div>
-                        <div class="text-sm sm:text-base font-bold">
+                        <!-- ВЫНОСКА 4: Снизу-справа от М (Поддержка / Бот) -->
+                        <div class="telemetry-callout absolute bottom-4 sm:bottom-6 -right-2 sm:-right-4 lg:-right-12 z-20 flex items-center">
+                            <div class="callout-line-right hidden sm:flex items-center shrink-0">
+                                <div class="w-1.5 h-1.5 rounded-full bg-[#1D5D3B] shrink-0"></div>
+                                <div class="h-[1px] w-6 lg:w-10 bg-[#1D5D3B]/50"></div>
+                            </div>
                             <a href="https://t.me/muviobot" target="_blank" rel="noopener noreferrer"
-                                class="inline-flex items-center gap-1 transition-colors group" style="color: var(--text-main) !important;">
-                                <span class="lang-ua">Онлайн-бот у Telegram 24/7</span>
-                                <span class="lang-en">Online Bot in Telegram 24/7</span>
-                                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 group-hover:text-[#1D5D3B] transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 shrink-0"></i>
+                               class="callout-text-right px-3 py-1.5 rounded border border-zinc-800 hover:border-[#1D5D3B] bg-[#0B0E0C]/85 backdrop-blur-md shadow-lg flex items-center gap-2 transition-colors group">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#1D5D3B] animate-pulse shrink-0"></span>
+                                <span class="font-mono text-[11px] sm:text-xs tracking-wider text-zinc-300 group-hover:text-emerald-400 uppercase whitespace-nowrap transition-colors">
+                                    <span class="lang-ua">ПІДТРИМКА: ОНЛАЙН-БОТ 24/7 ↗</span>
+                                    <span class="lang-en">SUPPORT: 24/7 BOT ↗</span>
+                                </span>
                             </a>
                         </div>
+
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
     </section>
 
@@ -3038,11 +3075,16 @@
             if (grid) {
                 const cards = grid.querySelectorAll('.vehicle-card, .tech-card, [data-category]');
                 if (cards.length > 0) {
+                    let visibleIdx = 0;
                     cards.forEach(card => {
                         const cardCat = card.getAttribute('data-category');
                         if (category === 'all' || cardCat === category) {
                             card.style.display = 'flex';
                             card.classList.remove('hidden');
+                            if (card.classList.contains('is-visible')) {
+                                card.style.transitionDelay = `${(visibleIdx % 3) * 0.1}s`;
+                            }
+                            visibleIdx++;
                         } else {
                             card.style.display = 'none';
                             card.classList.add('hidden');
@@ -3059,9 +3101,41 @@
             }
         }
 
+        // Scroll-reveal для карток техніки в каталозі
+        function initCatalogScrollReveal() {
+            const grid = document.getElementById('catalogGrid');
+            if (!grid) return;
+            const cards = grid.querySelectorAll('.vehicle-card');
+            if (!cards.length) return;
+
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries, obs) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const card = entry.target;
+                            const visibleCards = Array.from(grid.querySelectorAll('.vehicle-card')).filter(c => c.style.display !== 'none');
+                            const index = visibleCards.indexOf(card);
+                            const staggerDelay = index >= 0 ? (index % 3) * 0.1 : 0;
+                            card.style.transitionDelay = `${staggerDelay}s`;
+                            card.classList.add('is-visible');
+                            obs.unobserve(card);
+                        }
+                    });
+                }, {
+                    threshold: 0.15,
+                    rootMargin: '0px 0px -30px 0px'
+                });
+
+                cards.forEach(card => observer.observe(card));
+            } else {
+                cards.forEach(card => card.classList.add('is-visible'));
+            }
+        }
+
         // Негайний первинний запуск
         try {
             filterCatalog('all');
+            initCatalogScrollReveal();
         } catch (e) {
             console.error('Initial filterCatalog error:', e);
         }
@@ -3731,6 +3805,9 @@
                 });
                 if (typeof filterCatalog === 'function') {
                     filterCatalog('all');
+                }
+                if (typeof initCatalogScrollReveal === 'function') {
+                    initCatalogScrollReveal();
                 }
             } catch (e) {
                 console.error('Catalog init error:', e);
