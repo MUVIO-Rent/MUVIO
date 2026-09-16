@@ -48,8 +48,9 @@ html.theme-dark .header-logo-img,
 .theme-dark .header-logo-img,
 [data-theme="dark"] header img,
 [data-theme="dark"] .header-logo-img {
-    filter: invert(1) hue-rotate(180deg) !important;
-    mix-blend-mode: screen !important;
+    filter: brightness(0) invert(1) !important;
+    background: transparent !important;
+    background-color: transparent !important;
 }
 
 
@@ -143,7 +144,7 @@ body.dark {
 #hero {
     background-image: url('images/aima_a715.jpg') !important;
     background-size: cover !important;
-    background-position: right top !important;
+    background-position: right -60px top !important;
     background-repeat: no-repeat !important;
     background-color: #000000 !important;
     min-height: 85vh !important;
@@ -170,7 +171,57 @@ body.dark {
 }
 
 #hero-section .hero-text-content {
-    max-width: 440px !important;
+    max-width: 560px !important;
+}
+
+/* Header Dark Mode Navigation */
+html.dark header,
+html.theme-dark header,
+.dark header,
+.theme-dark header,
+[data-theme="dark"] header,
+html.dark .site-header-synced,
+html.theme-dark .site-header-synced,
+.dark .site-header-synced,
+.theme-dark .site-header-synced,
+[data-theme="dark"] .site-header-synced {
+    background: #000000 !important;
+    background-color: #000000 !important;
+    border-bottom: 1px solid #1a1a1a !important;
+}
+
+html.dark .site-header-synced nav a,
+html.theme-dark .site-header-synced nav a,
+.dark .site-header-synced nav a,
+.theme-dark .site-header-synced nav a,
+[data-theme="dark"] .site-header-synced nav a {
+    color: #ffffff !important;
+}
+
+html.dark .site-header-synced nav a:hover,
+html.theme-dark .site-header-synced nav a:hover,
+.dark .site-header-synced nav a:hover,
+.theme-dark .site-header-synced nav a:hover,
+[data-theme="dark"] .site-header-synced nav a:hover {
+    color: #2E8B57 !important;
+}
+
+html.dark .site-header-synced a,
+html.theme-dark .site-header-synced a,
+.dark .site-header-synced a,
+.theme-dark .site-header-synced a,
+[data-theme="dark"] .site-header-synced a,
+html.dark .site-header-synced span,
+html.theme-dark .site-header-synced span,
+.dark .site-header-synced span,
+.theme-dark .site-header-synced span,
+[data-theme="dark"] .site-header-synced span,
+html.dark .site-header-synced button,
+html.theme-dark .site-header-synced button,
+.dark .site-header-synced button,
+.theme-dark .site-header-synced button,
+[data-theme="dark"] .site-header-synced button {
+    color: #ffffff !important;
 }
 
 #hero-section .hero-text-content h1,
