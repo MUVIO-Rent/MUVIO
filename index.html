@@ -112,6 +112,95 @@
         .animate-muvio-progress {
             animation: muvioProgress 1.4s ease-in-out infinite;
         }
+
+        /* Hero Brandmark Entrance & Echo Animations */
+        @keyframes flyInEmblem {
+            0% {
+                transform: translate(-140px, -80px) scale(0.85);
+                opacity: 0;
+            }
+            60% {
+                transform: translate(10px, 5px) scale(1.02);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes echoFarMotion {
+            0% {
+                transform: translate(-220px, -120px) scale(0.75);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.25;
+            }
+            100% {
+                transform: translate(-18px, -10px) scale(0.96);
+                opacity: 0.12;
+            }
+        }
+
+        @keyframes echoNearMotion {
+            0% {
+                transform: translate(-180px, -100px) scale(0.8);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.45;
+            }
+            100% {
+                transform: translate(-9px, -5px) scale(0.98);
+                opacity: 0.25;
+            }
+        }
+
+        @keyframes popBadge {
+            0% {
+                opacity: 0;
+                transform: scale(0.6);
+            }
+            70% {
+                transform: scale(1.05);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Применение анимаций */
+        .main-emblem {
+            will-change: transform, opacity;
+            animation: flyInEmblem 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .echo-far {
+            will-change: transform, opacity;
+            animation: echoFarMotion 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .echo-near {
+            will-change: transform, opacity;
+            animation: echoNearMotion 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Задержка появления бейджей после остановки знака */
+        .badge-tl {
+            opacity: 0;
+            will-change: transform, opacity;
+            animation: popBadge 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.95s forwards;
+        }
+        .badge-mr {
+            opacity: 0;
+            will-change: transform, opacity;
+            animation: popBadge 0.5s cubic-bezier(0.16, 1, 0.3, 1) 1.1s forwards;
+        }
+        .badge-bl {
+            opacity: 0;
+            will-change: transform, opacity;
+            animation: popBadge 0.5s cubic-bezier(0.16, 1, 0.3, 1) 1.25s forwards;
+        }
     </style>
 
     <!-- Anti-flicker Settings Loader -->
@@ -409,39 +498,46 @@
                     </div>
                 </div>
 
-                <!-- Правая колонка: эффект слоёв-эхо / след скорости -->
+                <!-- Правая колонка: интерактивная анимированная композиция -->
                 <div class="lg:col-span-5 flex items-center justify-center py-4">
-                    <div class="relative w-[300px] h-[340px] sm:w-[360px] sm:h-[400px] lg:w-[400px] lg:h-[440px] select-none pointer-events-none">
+                    <div class="hero-brand-stage relative w-full h-[440px] lg:h-[500px] flex items-center justify-center select-none">
 
-                        <!-- Слой 1: Дальнее эхо (самый прозрачный, смещён назад-влево-вверх) -->
-                        <div class="absolute inset-0 flex items-center justify-center"
-                             style="transform: translate(-22px, -14px) scale(0.88); opacity: 0.11; will-change: transform;">
-                            <svg class="w-full h-full" viewBox="0 0 100 100" fill="none"
-                                 style="fill: #1D5D3B !important;">
-                                <path d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z"
-                                      fill="#1D5D3B"/>
+                        <!-- Шлейф движения (Слои-эхо, схлопывающиеся при приземлении) -->
+                        <div class="echo-layer echo-far absolute inset-0 flex items-center justify-center pointer-events-none">
+                            <svg class="h-[340px] lg:h-[400px] w-auto fill-[#1D5D3B]" viewBox="0 0 100 100" style="fill: #1D5D3B !important;">
+                                <path d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z" fill="#1D5D3B"/>
+                            </svg>
+                        </div>
+                        <div class="echo-layer echo-near absolute inset-0 flex items-center justify-center pointer-events-none">
+                            <svg class="h-[340px] lg:h-[400px] w-auto fill-[#1D5D3B]" viewBox="0 0 100 100" style="fill: #1D5D3B !important;">
+                                <path d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z" fill="#1D5D3B"/>
                             </svg>
                         </div>
 
-                        <!-- Слой 2: Ближнее эхо (средняя прозрачность, лёгкое смещение) -->
-                        <div class="absolute inset-0 flex items-center justify-center"
-                             style="transform: translate(-11px, -7px) scale(0.94); opacity: 0.28; will-change: transform;">
-                            <svg class="w-full h-full" viewBox="0 0 100 100" fill="none"
-                                 style="fill: #1D5D3B !important;">
-                                <path d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z"
-                                      fill="#1D5D3B"/>
+                        <!-- Основной фронтальный знак M -->
+                        <div class="main-emblem relative z-10 flex items-center justify-center">
+                            <svg class="h-[340px] lg:h-[400px] w-auto fill-[#1D5D3B]" viewBox="0 0 100 100"
+                                 style="fill: #1D5D3B !important; filter: drop-shadow(0 14px 30px rgba(0,0,0,0.35)) drop-shadow(0 2px 8px rgba(29,93,59,0.3)) !important;">
+                                <path d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z" fill="#1D5D3B"/>
                             </svg>
                         </div>
 
-                        <!-- Слой 3: Основной фронтальный знак (100%, чёткий, с тенью) -->
-                        <div class="absolute inset-0 flex items-center justify-center"
-                             style="z-index: 10;">
-                            <svg class="w-full h-full" viewBox="0 0 100 100" fill="none"
-                                 style="fill: #1D5D3B !important; stroke: none !important;
-                                        filter: drop-shadow(0 12px 32px rgba(0,0,0,0.45)) drop-shadow(0 2px 8px rgba(29,93,59,0.3)) !important;">
-                                <path d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z"
-                                      fill="#1D5D3B"/>
-                            </svg>
+                        <!-- Технические бейджи (вылетают по сторонам после остановки знака) -->
+                        <!-- Бейдж 1: Сверху-слева (Вольтаж АКБ) -->
+                        <div class="badge-metric badge-tl absolute top-6 left-4 lg:left-8 z-20 flex items-center gap-2 px-3.5 py-1.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md shadow-sm">
+                            <span class="w-1.5 h-1.5 rounded-full bg-[#1D5D3B] dark:bg-[#2E8B57]"></span>
+                            <span class="text-xs font-bold font-mono text-zinc-900 dark:text-zinc-100">72V / 60Ah</span>
+                        </div>
+
+                        <!-- Бейдж 2: Справа по центру (Запас хода) -->
+                        <div class="badge-metric badge-mr absolute top-1/2 -translate-y-1/2 right-2 lg:-right-4 z-20 flex items-center gap-2 px-4 py-2 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md shadow-md">
+                            <span class="text-xs font-bold text-[#1D5D3B] dark:text-[#2E8B57] font-mono">⚡ 160 км</span>
+                            <span class="text-[10px] uppercase font-semibold text-zinc-500 tracking-wider">запас</span>
+                        </div>
+
+                        <!-- Бейдж 3: Снизу-слева (Поддержка/Сервис) -->
+                        <div class="badge-metric badge-bl absolute bottom-6 left-6 lg:left-12 z-20 flex items-center gap-2 px-3.5 py-1.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md shadow-sm">
+                            <span class="text-xs font-bold font-mono text-zinc-900 dark:text-zinc-100">24/7 Сервіс</span>
                         </div>
 
                     </div>
