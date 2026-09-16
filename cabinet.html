@@ -203,7 +203,7 @@
     <!-- ==================== 1. ХЕДЕР (НАВІГАЦІЯ) ==================== -->
     <header id="mainSiteHeader" class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b-2 border-[#1D5D3B] shadow-sm relative w-full">
         <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 border-x border-slate-200/60">
-            <div class="relative w-full flex items-center justify-between h-16 sm:h-20">
+            <div class="relative w-full flex items-center justify-between h-14 sm:h-16">
 
                 <!-- ЛІВА ЧАСТИНА: Бургер + Логотип MUVIO -->
                 <div class="flex items-center gap-2.5 sm:gap-3 shrink-0 z-10">
@@ -220,7 +220,7 @@
 
                     <!-- 2-й елемент: фірмовий логотип MUVIO (єдиний монолітний вектор) -->
                     <a href="index.html" style="height: auto !important; width: auto !important; display: flex !important; align-items: center !important; text-decoration: none !important; padding-left: 20px !important;" class="inline-flex items-center select-none group focus:outline-none" aria-label="MUVIO">
-                        <img src="images/logo-header.png" alt="MUVIO" class="transition-opacity group-hover:opacity-90" style="height: 60px !important; width: auto !important; display: block !important;">
+                        <img src="images/logo-header.png" alt="MUVIO" class="transition-opacity group-hover:opacity-90" style="height: 52px !important; width: auto !important; display: block !important;">
                     </a>
                 </div>
 
@@ -429,10 +429,10 @@
     <!-- ==================== СТАН А: ЕКРАН АВТОРИЗАЦІЇ (TESLA AUTH) ==================== -->
     <div id="authSection" class="min-h-screen flex flex-col bg-white dark:bg-[#0B0E0C] text-zinc-900 dark:text-white transition-colors duration-200">
         <!-- 1. Хедер Tesla Auth -->
-        <header style="display: flex !important; justify-content: space-between !important; align-items: center !important; padding: 24px 40px !important; width: 100% !important; box-sizing: border-box !important; position: relative !important;">
+        <header style="display: flex !important; justify-content: space-between !important; align-items: center !important; padding: 14px 40px !important; width: 100% !important; box-sizing: border-box !important; position: relative !important;">
           <!-- ЛОГОТИП: ЄДИНИЙ МОНОЛІТНИЙ SVG MUVIO -->
           <a href="index.html" style="display: inline-flex !important; align-items: center !important; text-decoration: none !important;" aria-label="MUVIO">
-            <img src="images/logo-header.png" alt="MUVIO" style="height: 56px !important; width: auto !important; display: block !important;">
+            <img src="images/logo-header.png" alt="MUVIO" style="height: 48px !important; width: auto !important; display: block !important;">
           </a>
 
           <!-- ПРАВЫЙ БЛОК (ЯЗЫК И ТЕМА): ВЫРОВНЕН ПО ЦЕНТРУ С ЛОГОТИПОМ -->
@@ -449,8 +449,8 @@
           </div>
         </header>
 
-        <!-- 2. Центральний контейнер форми (mx-auto w-full max-w-[360px] px-4 pt-6 sm:pt-10 pb-16) -->
-        <main class="mx-auto w-full max-w-[360px] px-4 pt-6 sm:pt-10 pb-16">
+        <!-- 2. Центральний контейнер форми (mx-auto w-full max-w-[360px] px-4 pt-3 sm:pt-5 pb-16) -->
+        <main class="mx-auto w-full max-w-[360px] px-4 pt-3 sm:pt-5 pb-16">
             <!-- Повідомлення про помилку -->
             <div id="authErrorMsg" class="hidden p-3 mb-6 bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/60 text-rose-700 dark:text-rose-300 text-xs rounded-md flex items-center gap-2">
                 <i data-lucide="alert-circle" class="w-4 h-4 shrink-0"></i>
@@ -523,6 +523,21 @@
                         <span class="lang-en">Create Account</span>
                     </button>
                 </form>
+            </div>
+
+            <!-- MINI FOOTER: тільки під формою входу -->
+            <div id="authMiniFooter" class="mt-10 text-center text-[11px] text-zinc-400 dark:text-zinc-600 leading-relaxed select-none">
+                <span>MUVIO &copy; 2026</span>
+                <span class="mx-2 opacity-40">&middot;</span>
+                <a href="privacy.html" class="hover:text-zinc-600 dark:hover:text-zinc-400 transition-colors underline-offset-2 hover:underline">
+                    <span class="lang-ua">Конфіденційність</span>
+                    <span class="lang-en">Privacy</span>
+                </a>
+                <span class="mx-2 opacity-40">&middot;</span>
+                <a href="index.html#contacts" class="hover:text-zinc-600 dark:hover:text-zinc-400 transition-colors underline-offset-2 hover:underline">
+                    <span class="lang-ua">Контакти</span>
+                    <span class="lang-en">Contacts</span>
+                </a>
             </div>
 
             <!-- РЕЄСТРАЦІЯ / REGISTER -->
@@ -1760,17 +1775,20 @@
             const regView = document.getElementById('authRegisterView');
             const formLogin = document.getElementById('loginForm');
             const formReg = document.getElementById('registerForm');
+            const miniFooter = document.getElementById('authMiniFooter');
 
             if (tab === 'login') {
                 if (loginView) loginView.classList.remove('hidden');
                 if (regView) regView.classList.add('hidden');
                 if (formLogin) formLogin.classList.remove('hidden');
                 if (formReg) formReg.classList.add('hidden');
+                if (miniFooter) miniFooter.classList.remove('hidden');
             } else {
                 if (loginView) loginView.classList.add('hidden');
                 if (regView) regView.classList.remove('hidden');
                 if (formReg) formReg.classList.remove('hidden');
                 if (formLogin) formLogin.classList.add('hidden');
+                if (miniFooter) miniFooter.classList.add('hidden');
             }
             if (window.lucide) window.lucide.createIcons();
         }

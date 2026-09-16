@@ -106,10 +106,10 @@
 <body class="min-h-screen flex flex-col text-zinc-900 dark:text-white antialiased selection:bg-[#1D5D3B] selection:text-white">
 
     <!-- 1. ХЕДЕР (ЛОГОТИП + МОВА + ТЕМА) -->
-    <header style="display: flex !important; justify-content: space-between !important; align-items: center !important; padding: 24px 40px !important; width: 100% !important; box-sizing: border-box !important; position: relative !important;">
+    <header style="display: flex !important; justify-content: space-between !important; align-items: center !important; padding: 14px 40px !important; width: 100% !important; box-sizing: border-box !important; position: relative !important;">
       <!-- ЛОГОТИП: ЄДИНИЙ МОНОЛІТНИЙ SVG MUVIO -->
       <a href="index.html" style="display: inline-flex !important; align-items: center !important; text-decoration: none !important;" aria-label="MUVIO">
-        <img src="images/logo-header.png" alt="MUVIO" style="height: 56px !important; width: auto !important; display: block !important;">
+        <img src="images/logo-header.png" alt="MUVIO" style="height: 48px !important; width: auto !important; display: block !important;">
       </a>
 
       <!-- ПРАВЫЙ БЛОК (ЯЗЫК И ТЕМА): ВЫРОВНЕН ПО ЦЕНТРУ С ЛОГОТИПОМ -->
@@ -126,8 +126,8 @@
       </div>
     </header>
 
-    <!-- 2. ЦЕНТРАЛЬНИЙ КОНТЕЙНЕР ФОРМИ (mx-auto w-full max-w-[360px] px-4 pt-6 sm:pt-10 pb-16) -->
-    <main class="mx-auto w-full max-w-[360px] px-4 pt-6 sm:pt-10 pb-16">
+    <!-- 2. ЦЕНТРАЛЬНИЙ КОНТЕЙНЕР ФОРМИ (mx-auto w-full max-w-[360px] px-4 pt-3 sm:pt-5 pb-16) -->
+    <main class="mx-auto w-full max-w-[360px] px-4 pt-3 sm:pt-5 pb-16">
         <!-- Повідомлення про помилку -->
         <div id="authErrorMsg" class="hidden p-3 mb-6 bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/60 text-rose-700 dark:text-rose-300 text-xs rounded-md flex items-center gap-2">
             <i data-lucide="alert-circle" class="w-4 h-4 shrink-0"></i>
@@ -200,6 +200,21 @@
                     <span class="lang-en">Create Account</span>
                 </button>
             </form>
+        </div>
+
+        <!-- MINI FOOTER: тільки під формою входу -->
+        <div id="authMiniFooter" class="mt-10 text-center text-[11px] text-zinc-400 dark:text-zinc-600 leading-relaxed select-none">
+            <span>MUVIO &copy; 2026</span>
+            <span class="mx-2 opacity-40">&middot;</span>
+            <a href="privacy.html" class="hover:text-zinc-600 dark:hover:text-zinc-400 transition-colors underline-offset-2 hover:underline">
+                <span class="lang-ua">Конфіденційність</span>
+                <span class="lang-en">Privacy</span>
+            </a>
+            <span class="mx-2 opacity-40">&middot;</span>
+            <a href="index.html#contacts" class="hover:text-zinc-600 dark:hover:text-zinc-400 transition-colors underline-offset-2 hover:underline">
+                <span class="lang-ua">Контакти</span>
+                <span class="lang-en">Contacts</span>
+            </a>
         </div>
 
         <!-- РЕЄСТРАЦІЯ / REGISTER -->
@@ -474,17 +489,20 @@
             const regView = document.getElementById('authRegisterView');
             const formLogin = document.getElementById('loginForm');
             const formReg = document.getElementById('registerForm');
+            const miniFooter = document.getElementById('authMiniFooter');
 
             if (tab === 'login') {
                 if (loginView) loginView.classList.remove('hidden');
                 if (regView) regView.classList.add('hidden');
                 if (formLogin) formLogin.classList.remove('hidden');
                 if (formReg) formReg.classList.add('hidden');
+                if (miniFooter) miniFooter.classList.remove('hidden');
             } else {
                 if (loginView) loginView.classList.add('hidden');
                 if (regView) regView.classList.remove('hidden');
                 if (formReg) formReg.classList.remove('hidden');
                 if (formLogin) formLogin.classList.add('hidden');
+                if (miniFooter) miniFooter.classList.add('hidden');
             }
             if (window.lucide) window.lucide.createIcons();
         }
