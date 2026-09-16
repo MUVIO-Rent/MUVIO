@@ -386,28 +386,33 @@
             color: #f4f4f5 !important;
         }
 
-        /* Hero Section Headlight Background & Overlay */
-        #hero-section {
+        /* Hero Section Headlight Background & Directional Linear Gradient Overlay */
+        #hero-section,
+        html.theme-dark #hero-section,
+        html.dark #hero-section,
+        body.dark #hero-section,
+        [data-theme="dark"] #hero-section {
             background-image: url('images/scooter_headlight.jpg') !important;
             background-size: cover !important;
-            background-position: center !important;
+            background-position: center right !important;
             background-repeat: no-repeat !important;
             position: relative !important;
         }
         .hero-overlay {
-            background-color: rgba(255, 255, 255, 0.85);
+            background: linear-gradient(to right, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.70) 45%, rgba(255, 255, 255, 0.20) 100%) !important;
             position: absolute;
             inset: 0;
             pointer-events: none;
             z-index: 0;
-            transition: background-color 0.3s ease;
+            transition: background 0.3s ease;
         }
         html.dark .hero-overlay,
         html.theme-dark .hero-overlay,
+        body.dark .hero-overlay,
         .dark .hero-overlay,
         .theme-dark .hero-overlay,
         [data-theme="dark"] .hero-overlay {
-            background-color: rgba(0, 0, 0, 0.75) !important;
+            background: linear-gradient(to right, rgba(11, 14, 12, 0.95) 0%, rgba(11, 14, 12, 0.70) 45%, rgba(11, 14, 12, 0.20) 100%) !important;
         }
 
         /* Catalog Cards Scroll Reveal */
@@ -635,8 +640,8 @@
     </script>
 
     <!-- ==================== 2. HERO СЕКЦІЯ ==================== -->
-    <section id="hero-section" class="relative overflow-hidden transition-colors duration-300" style="background-image: url('images/scooter_headlight.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; color: var(--text-main) !important;">
-        <!-- Адаптивний оверлей: світла тема bg-white/85, темна тема bg-black/75 -->
+    <section id="hero-section" class="relative overflow-hidden transition-colors duration-300" style="background-image: url('images/scooter_headlight.jpg'); background-size: cover; background-position: center right; background-repeat: no-repeat; color: var(--text-main) !important;">
+        <!-- Спрямований лінійний градієнт-оверлей: зліва читабельність тексту, справа соковита чітка фара -->
         <div class="hero-overlay"></div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 relative z-10">

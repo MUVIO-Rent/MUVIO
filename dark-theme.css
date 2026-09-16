@@ -1003,8 +1003,6 @@ html.theme-dark #hero,
 body.dark #hero-section,
 body.dark .hero-section,
 body.dark #hero {
-    background-color: var(--bg-main) !important;
-    background-image: none !important;
     border-bottom: none !important;
     color: var(--text-main) !important;
 }

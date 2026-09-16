@@ -141,8 +141,6 @@ body.dark {
 #hero-section,
 .hero-section,
 #hero {
-    background-color: var(--bg-main) !important;
-    background-image: none !important;
     border-bottom: none !important;
     box-shadow: none !important;
     color: var(--text-main) !important;
