@@ -1066,12 +1066,19 @@ body.dark #catalog h2 {
 }
 
 html.theme-dark #hero-section::before,
-html.theme-dark #hero-section::after,
-body.dark #hero-section::before,
-body.dark #hero-section::after {
+body.dark #hero-section::before {
     display: none !important;
     content: none !important;
     background: none !important;
+}
+
+html.theme-dark #hero-section::after,
+body.dark #hero-section::after,
+[data-theme="dark"] #hero-section::after,
+html.theme-dark .hero-section::after,
+body.dark .hero-section::after,
+[data-theme="dark"] .hero-section::after {
+    opacity: 1 !important;
 }
 
 html.theme-dark #hero-section h1,

@@ -398,7 +398,39 @@
             align-items: center !important;
         }
 
+        /* Hero Night Layer (Crossfade Headlight Effect) */
+        #hero-section::after,
+        .hero-section::after {
+            content: '' !important;
+            position: absolute !important;
+            inset: 0 !important;
+            background-image: url('images/aima_night.png') !important;
+            background-size: cover !important;
+            background-position: right -60px top !important;
+            background-repeat: no-repeat !important;
+            opacity: 0 !important;
+            transition: opacity 0.6s ease-in-out !important;
+            pointer-events: none !important;
+            z-index: 1 !important;
+            display: block !important;
+        }
+
+        html.dark #hero-section::after,
+        html.theme-dark #hero-section::after,
+        .dark #hero-section::after,
+        .theme-dark #hero-section::after,
+        [data-theme="dark"] #hero-section::after,
+        html.dark .hero-section::after,
+        html.theme-dark .hero-section::after,
+        .dark .hero-section::after,
+        .theme-dark .hero-section::after,
+        [data-theme="dark"] .hero-section::after {
+            opacity: 1 !important;
+        }
+
         #hero-section .hero-container {
+            position: relative !important;
+            z-index: 2 !important;
             width: 100% !important;
             max-width: 100% !important;
             margin-left: 0 !important;
