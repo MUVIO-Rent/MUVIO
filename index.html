@@ -560,6 +560,78 @@
             opacity: 1;
             transform: translateY(0) scale(1);
         }
+
+        /* Catalog Cards Day / Night Headlight Crossfade */
+        .fleet-card .img-night,
+        .tech-card .img-night,
+        .vehicle-card .img-night,
+        #catalog .img-night {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        }
+
+        .fleet-card .img-day,
+        .tech-card .img-day,
+        .vehicle-card .img-day,
+        #catalog .img-day {
+            opacity: 1;
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        }
+
+        .dark .fleet-card .img-night,
+        html.dark .fleet-card .img-night,
+        body.dark .fleet-card .img-night,
+        html.theme-dark .fleet-card .img-night,
+        body.theme-dark .fleet-card .img-night,
+        [data-theme="dark"] .fleet-card .img-night,
+        .dark .tech-card .img-night,
+        html.dark .tech-card .img-night,
+        body.dark .tech-card .img-night,
+        html.theme-dark .tech-card .img-night,
+        body.theme-dark .tech-card .img-night,
+        [data-theme="dark"] .tech-card .img-night,
+        .dark .vehicle-card .img-night,
+        html.dark .vehicle-card .img-night,
+        body.dark .vehicle-card .img-night,
+        html.theme-dark .vehicle-card .img-night,
+        body.theme-dark .vehicle-card .img-night,
+        [data-theme="dark"] .vehicle-card .img-night,
+        .dark #catalog .img-night,
+        html.dark #catalog .img-night,
+        body.dark #catalog .img-night,
+        html.theme-dark #catalog .img-night,
+        body.theme-dark #catalog .img-night,
+        [data-theme="dark"] #catalog .img-night {
+            opacity: 1 !important;
+        }
+
+        .dark .fleet-card .img-day,
+        html.dark .fleet-card .img-day,
+        body.dark .fleet-card .img-day,
+        html.theme-dark .fleet-card .img-day,
+        body.theme-dark .fleet-card .img-day,
+        [data-theme="dark"] .fleet-card .img-day,
+        .dark .tech-card .img-day,
+        html.dark .tech-card .img-day,
+        body.dark .tech-card .img-day,
+        html.theme-dark .tech-card .img-day,
+        body.theme-dark .tech-card .img-day,
+        [data-theme="dark"] .tech-card .img-day,
+        .dark .vehicle-card .img-day,
+        html.dark .vehicle-card .img-day,
+        body.dark .vehicle-card .img-day,
+        html.theme-dark .vehicle-card .img-day,
+        body.theme-dark .vehicle-card .img-day,
+        [data-theme="dark"] .vehicle-card .img-day,
+        .dark #catalog .img-day,
+        html.dark #catalog .img-day,
+        body.dark #catalog .img-day,
+        html.theme-dark #catalog .img-day,
+        body.theme-dark #catalog .img-day,
+        [data-theme="dark"] #catalog .img-day {
+            opacity: 0 !important;
+        }
     </style>
 
     <!-- Anti-flicker Settings Loader -->
@@ -942,7 +1014,7 @@
 
             <!-- Сітка карток -->
             <div id="catalogGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between" data-category="scooter" style="display: flex;">
+                <div class="fleet-card tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between" data-category="scooter" style="display: flex;">
                     <div>
                         <!-- Верхня плашка -->
                         <div class="p-4 pb-0 flex items-center justify-between">
@@ -956,8 +1028,9 @@
                         </div>
 
                         <!-- Фото транспорту -->
-                        <div class="min-h-[240px] md:min-h-[290px] p-4 flex items-center justify-center overflow-hidden group bg-slate-50/50">
-                            <img src="images/crosser.jpg" alt="Crosser CR-13 №1" class="max-h-[240px] md:max-h-[280px] w-auto object-contain transition-transform duration-300 group-hover:scale-105" loading="lazy">
+                        <div class="relative w-full h-48 sm:h-56 overflow-hidden rounded-t-xl bg-zinc-900 group">
+                            <img src="images/crosser.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-opacity duration-700" alt="Crosser CR-13 №1" loading="lazy">
+                            <img src="images/crosser cr-13 night №1.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-opacity duration-700" alt="Crosser CR-13 №1 Night" loading="lazy">
                         </div>
 
                         <!-- Заголовок та характеристики -->
@@ -1019,7 +1092,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between" data-category="scooter" style="display: flex;">
+                <div class="fleet-card tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between" data-category="scooter" style="display: flex;">
                     <div>
                         <!-- Верхня плашка -->
                         <div class="p-4 pb-0 flex items-center justify-between">
@@ -1033,8 +1106,9 @@
                         </div>
 
                         <!-- Фото транспорту -->
-                        <div class="min-h-[240px] md:min-h-[290px] p-4 flex items-center justify-center overflow-hidden group bg-slate-50/50">
-                            <img src="images/crosser-cr-20.jpg" alt="Crosser CR-20" class="max-h-[240px] md:max-h-[280px] w-auto object-contain transition-transform duration-300 group-hover:scale-105" loading="lazy">
+                        <div class="relative w-full h-48 sm:h-56 overflow-hidden rounded-t-xl bg-zinc-900 group">
+                            <img src="images/crosser-cr-20.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-opacity duration-700" alt="Crosser CR-20" loading="lazy">
+                            <img src="images/crosser cr-20 night.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-opacity duration-700" alt="Crosser CR-20 Night" loading="lazy">
                         </div>
 
                         <!-- Заголовок та характеристики -->
@@ -1096,7 +1170,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between" data-category="scooter" style="display: flex;">
+                <div class="fleet-card tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between" data-category="scooter" style="display: flex;">
                     <div>
                         <!-- Верхня плашка -->
                         <div class="p-4 pb-0 flex items-center justify-between">
@@ -1110,8 +1184,9 @@
                         </div>
 
                         <!-- Фото транспорту -->
-                        <div class="min-h-[240px] md:min-h-[290px] p-4 flex items-center justify-center overflow-hidden group bg-slate-50/50">
-                            <img src="images/a700.jpg" alt="Aima A700" class="max-h-[240px] md:max-h-[280px] w-auto object-contain transition-transform duration-300 group-hover:scale-105" loading="lazy">
+                        <div class="relative w-full h-48 sm:h-56 overflow-hidden rounded-t-xl bg-zinc-900 group">
+                            <img src="images/a700.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-opacity duration-700" alt="Aima A700" loading="lazy">
+                            <img src="images/aima a700 night.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-opacity duration-700" alt="Aima A700 Night" loading="lazy">
                         </div>
 
                         <!-- Заголовок та характеристики -->
@@ -1173,7 +1248,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between" data-category="scooter" style="display: flex;">
+                <div class="fleet-card tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between" data-category="scooter" style="display: flex;">
                     <div>
                         <!-- Верхня плашка -->
                         <div class="p-4 pb-0 flex items-center justify-between">
@@ -1187,8 +1262,9 @@
                         </div>
 
                         <!-- Фото транспорту -->
-                        <div class="min-h-[240px] md:min-h-[290px] p-4 flex items-center justify-center overflow-hidden group bg-slate-50/50">
-                            <img src="images/f606.jpg" alt="Aima F606 №1" class="max-h-[240px] md:max-h-[280px] w-auto object-contain transition-transform duration-300 group-hover:scale-105" loading="lazy">
+                        <div class="relative w-full h-48 sm:h-56 overflow-hidden rounded-t-xl bg-zinc-900 group">
+                            <img src="images/f606.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-opacity duration-700" alt="Aima F606 №1" loading="lazy">
+                            <img src="images/aima f606 night №1.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-opacity duration-700" alt="Aima F606 №1 Night" loading="lazy">
                         </div>
 
                         <!-- Заголовок та характеристики -->
@@ -1250,7 +1326,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between" data-category="scooter" style="display: flex;">
+                <div class="fleet-card tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between" data-category="scooter" style="display: flex;">
                     <div>
                         <!-- Верхня плашка -->
                         <div class="p-4 pb-0 flex items-center justify-between">
@@ -1264,8 +1340,9 @@
                         </div>
 
                         <!-- Фото транспорту -->
-                        <div class="min-h-[240px] md:min-h-[290px] p-4 flex items-center justify-center overflow-hidden group bg-slate-50/50">
-                            <img src="images/a715.jpg" alt="Aima A715" class="max-h-[240px] md:max-h-[280px] w-auto object-contain transition-transform duration-300 group-hover:scale-105" loading="lazy">
+                        <div class="relative w-full h-48 sm:h-56 overflow-hidden rounded-t-xl bg-zinc-900 group">
+                            <img src="images/a715.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-opacity duration-700" alt="Aima A715" loading="lazy">
+                            <img src="images/aima a715 night.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-opacity duration-700" alt="Aima A715 Night" loading="lazy">
                         </div>
 
                         <!-- Заголовок та характеристики -->
@@ -1327,7 +1404,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between" data-category="scooter" style="display: flex;">
+                <div class="fleet-card tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between" data-category="scooter" style="display: flex;">
                     <div>
                         <!-- Верхня плашка -->
                         <div class="p-4 pb-0 flex items-center justify-between">
@@ -1341,8 +1418,9 @@
                         </div>
 
                         <!-- Фото транспорту -->
-                        <div class="min-h-[240px] md:min-h-[290px] p-4 flex items-center justify-center overflow-hidden group bg-slate-50/50">
-                            <img src="images/journey.jpg" alt="Aima Journey" class="max-h-[240px] md:max-h-[280px] w-auto object-contain transition-transform duration-300 group-hover:scale-105" loading="lazy">
+                        <div class="relative w-full h-48 sm:h-56 overflow-hidden rounded-t-xl bg-zinc-900 group">
+                            <img src="images/journey.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-opacity duration-700" alt="Aima Journey" loading="lazy">
+                            <img src="images/aima journey night.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-opacity duration-700" alt="Aima Journey Night" loading="lazy">
                         </div>
 
                         <!-- Заголовок та характеристики -->
@@ -1404,7 +1482,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between" data-category="scooter" style="display: flex;">
+                <div class="fleet-card tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between" data-category="scooter" style="display: flex;">
                     <div>
                         <!-- Верхня плашка -->
                         <div class="p-4 pb-0 flex items-center justify-between">
@@ -1418,8 +1496,9 @@
                         </div>
 
                         <!-- Фото транспорту -->
-                        <div class="min-h-[240px] md:min-h-[290px] p-4 flex items-center justify-center overflow-hidden group bg-slate-50/50">
-                            <img src="images/f606-2.jpg" alt="Aima F606 №2" class="max-h-[240px] md:max-h-[280px] w-auto object-contain transition-transform duration-300 group-hover:scale-105" loading="lazy">
+                        <div class="relative w-full h-48 sm:h-56 overflow-hidden rounded-t-xl bg-zinc-900 group">
+                            <img src="images/f606-2.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-opacity duration-700" alt="Aima F606 №2" loading="lazy">
+                            <img src="images/aima f606 night №2.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-opacity duration-700" alt="Aima F606 №2 Night" loading="lazy">
                         </div>
 
                         <!-- Заголовок та характеристики -->
@@ -1481,7 +1560,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between" data-category="scooter" style="display: flex;">
+                <div class="fleet-card tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between" data-category="scooter" style="display: flex;">
                     <div>
                         <!-- Верхня плашка -->
                         <div class="p-4 pb-0 flex items-center justify-between">
@@ -1495,8 +1574,9 @@
                         </div>
 
                         <!-- Фото транспорту -->
-                        <div class="min-h-[240px] md:min-h-[290px] p-4 flex items-center justify-center overflow-hidden group bg-slate-50/50">
-                            <img src="images/crosser-cr-13-2.jpg" alt="Crosser CR-13 №2" class="max-h-[240px] md:max-h-[280px] w-auto object-contain transition-transform duration-300 group-hover:scale-105" loading="lazy">
+                        <div class="relative w-full h-48 sm:h-56 overflow-hidden rounded-t-xl bg-zinc-900 group">
+                            <img src="images/crosser-cr-13-2.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-opacity duration-700" alt="Crosser CR-13 №2" loading="lazy">
+                            <img src="images/crosser cr-13 night №2.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-opacity duration-700" alt="Crosser CR-13 №2 Night" loading="lazy">
                         </div>
 
                         <!-- Заголовок та характеристики -->
@@ -1558,7 +1638,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between" data-category="scooter" style="display: flex;">
+                <div class="fleet-card tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between" data-category="scooter" style="display: flex;">
                     <div>
                         <!-- Верхня плашка -->
                         <div class="p-4 pb-0 flex items-center justify-between">
@@ -1572,8 +1652,9 @@
                         </div>
 
                         <!-- Фото транспорту -->
-                        <div class="min-h-[240px] md:min-h-[290px] p-4 flex items-center justify-center overflow-hidden group bg-slate-50/50">
-                            <img src="images/mine.jpg" alt="Aima Mine" class="max-h-[240px] md:max-h-[280px] w-auto object-contain transition-transform duration-300 group-hover:scale-105" loading="lazy">
+                        <div class="relative w-full h-48 sm:h-56 overflow-hidden rounded-t-xl bg-zinc-900 group">
+                            <img src="images/mine.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-opacity duration-700" alt="Aima Mine" loading="lazy">
+                            <img src="images/aima mine night.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-opacity duration-700" alt="Aima Mine Night" loading="lazy">
                         </div>
 
                         <!-- Заголовок та характеристики -->
@@ -1635,7 +1716,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between" data-category="scooter" style="display: flex;">
+                <div class="fleet-card tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between" data-category="scooter" style="display: flex;">
                     <div>
                         <!-- Верхня плашка -->
                         <div class="p-4 pb-0 flex items-center justify-between">
@@ -1649,8 +1730,9 @@
                         </div>
 
                         <!-- Фото транспорту -->
-                        <div class="min-h-[240px] md:min-h-[290px] p-4 flex items-center justify-center overflow-hidden group bg-slate-50/50">
-                            <img src="images/like-bike-n5.jpg" alt="Like Bike N5" class="max-h-[240px] md:max-h-[280px] w-auto object-contain transition-transform duration-300 group-hover:scale-105" loading="lazy">
+                        <div class="relative w-full h-48 sm:h-56 overflow-hidden rounded-t-xl bg-zinc-900 group">
+                            <img src="images/like-bike-n5.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-opacity duration-700" alt="Like Bike N5" loading="lazy">
+                            <img src="images/like-bike-n5.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-opacity duration-700" alt="Like Bike N5 Night" loading="lazy">
                         </div>
 
                         <!-- Заголовок та характеристики -->
@@ -1712,7 +1794,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between" data-category="scooter" style="display: flex;">
+                <div class="fleet-card tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between" data-category="scooter" style="display: flex;">
                     <div>
                         <!-- Верхня плашка -->
                         <div class="p-4 pb-0 flex items-center justify-between">
@@ -1726,8 +1808,9 @@
                         </div>
 
                         <!-- Фото транспорту -->
-                        <div class="min-h-[240px] md:min-h-[290px] p-4 flex items-center justify-center overflow-hidden group bg-slate-50/50">
-                            <img src="images/mine-plus.jpg" alt="Aima Mine Plus" class="max-h-[240px] md:max-h-[280px] w-auto object-contain transition-transform duration-300 group-hover:scale-105" loading="lazy">
+                        <div class="relative w-full h-48 sm:h-56 overflow-hidden rounded-t-xl bg-zinc-900 group">
+                            <img src="images/mine-plus.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-opacity duration-700" alt="Aima Mine Plus" loading="lazy">
+                            <img src="images/aima mine plus night.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-opacity duration-700" alt="Aima Mine Plus Night" loading="lazy">
                         </div>
 
                         <!-- Заголовок та характеристики -->
@@ -1789,7 +1872,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between" data-category="scooter" style="display: flex;">
+                <div class="fleet-card tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between" data-category="scooter" style="display: flex;">
                     <div>
                         <!-- Верхня плашка -->
                         <div class="p-4 pb-0 flex items-center justify-between">
@@ -1803,8 +1886,9 @@
                         </div>
 
                         <!-- Фото транспорту -->
-                        <div class="min-h-[240px] md:min-h-[290px] p-4 flex items-center justify-center overflow-hidden group bg-slate-50/50">
-                            <img src="images/leopard.jpg" alt="Aima Leopard" class="max-h-[240px] md:max-h-[280px] w-auto object-contain transition-transform duration-300 group-hover:scale-105" loading="lazy">
+                        <div class="relative w-full h-48 sm:h-56 overflow-hidden rounded-t-xl bg-zinc-900 group">
+                            <img src="images/leopard.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-opacity duration-700" alt="Aima Leopard" loading="lazy">
+                            <img src="images/leopard.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-opacity duration-700" alt="Aima Leopard Night" loading="lazy">
                         </div>
 
                         <!-- Заголовок та характеристики -->
@@ -1866,7 +1950,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between" data-category="bike" style="display: flex;">
+                <div class="fleet-card tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between" data-category="bike" style="display: flex;">
                     <div>
                         <!-- Верхня плашка -->
                         <div class="p-4 pb-0 flex items-center justify-between">
@@ -1880,8 +1964,9 @@
                         </div>
 
                         <!-- Фото транспорту -->
-                        <div class="min-h-[240px] md:min-h-[290px] p-4 flex items-center justify-center overflow-hidden group bg-slate-50/50">
-                            <img src="images/like-bike-bruiser-1.jpg" alt="Like Bike Bruiser №1" class="max-h-[240px] md:max-h-[280px] w-auto object-contain transition-transform duration-300 group-hover:scale-105" loading="lazy">
+                        <div class="relative w-full h-48 sm:h-56 overflow-hidden rounded-t-xl bg-zinc-900 group">
+                            <img src="images/like-bike-bruiser-1.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-opacity duration-700" alt="Like Bike Bruiser №1" loading="lazy">
+                            <img src="images/like bike night №1.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-opacity duration-700" alt="Like Bike Bruiser №1 Night" loading="lazy">
                         </div>
 
                         <!-- Заголовок та характеристики -->
@@ -1943,7 +2028,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between" data-category="bike" style="display: flex;">
+                <div class="fleet-card tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between" data-category="bike" style="display: flex;">
                     <div>
                         <!-- Верхня плашка -->
                         <div class="p-4 pb-0 flex items-center justify-between">
@@ -1957,8 +2042,9 @@
                         </div>
 
                         <!-- Фото транспорту -->
-                        <div class="min-h-[240px] md:min-h-[290px] p-4 flex items-center justify-center overflow-hidden group bg-slate-50/50">
-                            <img src="images/like-bike-bruiser-2.jpg" alt="Like Bike Bruiser №2" class="max-h-[240px] md:max-h-[280px] w-auto object-contain transition-transform duration-300 group-hover:scale-105" loading="lazy">
+                        <div class="relative w-full h-48 sm:h-56 overflow-hidden rounded-t-xl bg-zinc-900 group">
+                            <img src="images/like-bike-bruiser-2.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-opacity duration-700" alt="Like Bike Bruiser №2" loading="lazy">
+                            <img src="images/like bika night №2.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-opacity duration-700" alt="Like Bike Bruiser №2 Night" loading="lazy">
                         </div>
 
                         <!-- Заголовок та характеристики -->
@@ -2020,7 +2106,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between" data-category="bike" style="display: flex;">
+                <div class="fleet-card tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between" data-category="bike" style="display: flex;">
                     <div>
                         <!-- Верхня плашка -->
                         <div class="p-4 pb-0 flex items-center justify-between">
@@ -2034,8 +2120,9 @@
                         </div>
 
                         <!-- Фото транспорту -->
-                        <div class="min-h-[240px] md:min-h-[290px] p-4 flex items-center justify-center overflow-hidden group bg-slate-50/50">
-                            <img src="images/ado-a20f.jpg" alt="ADO A20F" class="max-h-[240px] md:max-h-[280px] w-auto object-contain transition-transform duration-300 group-hover:scale-105" loading="lazy">
+                        <div class="relative w-full h-48 sm:h-56 overflow-hidden rounded-t-xl bg-zinc-900 group">
+                            <img src="images/ado-a20f.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-opacity duration-700" alt="ADO A20F" loading="lazy">
+                            <img src="images/ado night.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-opacity duration-700" alt="ADO A20F Night" loading="lazy">
                         </div>
 
                         <!-- Заголовок та характеристики -->
@@ -3019,7 +3106,7 @@
         }
 
         // 1. АВТОПАРК З РЕАЛЬНИМИ ЦІНАМИ В ЗБОРІ
-        const FLEET = [{ "key": "crosser_cr13_1", "name": "Crosser CR-13 №1", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 160 км", "speed": "85 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 1000, "price_week": 2500, "price_month": 8500, "deposit": 4500, "buyout_available": true, "buyout_base_price": 80000, "image": "images/crosser.jpg", "badge": "85 КМ/ГОД", "is_top": true, "power": "2000W" }, { "key": "crosser_cr20", "name": "Crosser CR-20", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 160 км", "speed": "75 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 1000, "price_week": 2500, "price_month": 8500, "deposit": 4500, "buyout_available": true, "buyout_base_price": 77000, "image": "images/crosser-cr-20.jpg", "badge": "ТОП ПОТУЖНІСТЬ", "is_top": true, "power": "2500W" }, { "key": "aima_a700", "name": "Aima A700", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 150 км", "speed": "47 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 70000, "image": "images/a700.jpg", "badge": "ПРЕМІУМ КОМФОРТ", "is_top": true, "power": "1200W" }, { "key": "aima_f606_1", "name": "Aima F606 №1", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 100 км", "speed": "70 км/год", "charging": "10Ач (4 години)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 60000, "image": "images/f606.jpg", "badge": "ХІТ ПРОКАТУ", "is_top": true, "power": "1200W" }, { "key": "aima_a715", "name": "Aima A715", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 150 км", "speed": "65 км/год", "charging": "10Ач (4 години)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 68000, "image": "images/a715.jpg", "badge": "НАДІЙНИЙ", "is_top": false, "power": "1200W" }, { "key": "aima_journey", "name": "Aima Journey", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 160 км", "speed": "60 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 68000, "image": "images/journey.jpg", "badge": "ДАЛЕКІ ДИСТАНЦІЇ", "is_top": false, "power": "1200W" }, { "key": "aima_f606_2", "name": "Aima F606 №2", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 130 км", "speed": "70 км/год", "charging": "10Ач (4 години)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 60000, "image": "images/f606-2.jpg", "badge": "ЗБІЛЬШЕНИЙ ХІД", "is_top": false, "power": "1200W" }, { "key": "crosser_cr13_2", "name": "Crosser CR-13 №2", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 160 км", "speed": "85 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 1000, "price_week": 2500, "price_month": 8500, "deposit": 4500, "buyout_available": true, "buyout_base_price": 80000, "image": "images/crosser-cr-13-2.jpg", "badge": "85 КМ/ГОД", "is_top": false, "power": "2000W" }, { "key": "aima_mine", "name": "Aima Mine", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "60V", "range": "до 130 км", "speed": "55 км/год", "charging": "7Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 60000, "image": "images/mine.jpg", "badge": "КОМПАКТНИЙ", "is_top": false, "power": "800W" }, { "key": "like_bike_n5", "name": "Like Bike N5", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "60V", "range": "до 130 км", "speed": "65 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 57000, "image": "images/like-bike-n5.jpg", "badge": "МАНЕВРЕНИЙ", "is_top": false, "power": "1000W" }, { "key": "aima_mine_plus", "name": "Aima Mine Plus", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "60V", "range": "до 130 км", "speed": "60 км/год", "charging": "7Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 55000, "image": "images/mine-plus.jpg", "badge": "PLUS СЕРІЯ", "is_top": false, "power": "800W" }, { "key": "aima_leopard", "name": "Aima Leopard", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 150 км", "speed": "48 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 50000, "image": "images/leopard.jpg", "badge": "КЛАСИКА", "is_top": false, "power": "1200W" }, { "key": "like_bike_bruser_1", "name": "Like Bike Bruiser №1", "category": "bike", "type": "🚲 Електровелосипед", "voltage": "48V", "range": "до 80 км", "speed": "45 км/год", "charging": "7Ач (4 години)", "battery": "10Ah-40Ah (Знімна)", "price_day": 800, "price_week": 1800, "price_month": 6000, "deposit": 3000, "buyout_available": true, "buyout_base_price": 28000, "image": "images/like-bike-bruiser-1.jpg", "badge": "РАМА 180 КГ", "is_top": false, "power": "500W" }, { "key": "like_bike_bruser_2", "name": "Like Bike Bruiser №2", "category": "bike", "type": "🚲 Електровелосипед", "voltage": "48V", "range": "до 80 км", "speed": "45 км/год", "charging": "7Ач (4 години)", "battery": "10Ah-40Ah (Знімна)", "price_day": 800, "price_week": 1800, "price_month": 6000, "deposit": 3000, "buyout_available": true, "buyout_base_price": 28000, "image": "images/like-bike-bruiser-2.jpg", "badge": "РАМА 180 КГ", "is_top": false, "power": "500W" }, { "key": "ado_a20f", "name": "ADO A20F", "category": "bike", "type": "🚲 Електровелосипед", "voltage": "48V", "range": "до 150 км", "speed": "40 км/год", "charging": "10Ач (4 години)", "battery": "10Ah-40Ah (Знімна)", "price_day": 800, "price_week": 1800, "price_month": 6000, "deposit": 3000, "buyout_available": true, "buyout_base_price": 28000, "image": "images/ado-a20f.jpg", "badge": "ФЕТБАЙК", "is_top": false, "power": "250W" }];
+        const FLEET = [{"key": "crosser_cr13_1", "name": "Crosser CR-13 №1", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 160 км", "speed": "85 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 1000, "price_week": 2500, "price_month": 8500, "deposit": 4500, "buyout_available": true, "buyout_base_price": 80000, "image": "images/crosser.jpg", "badge": "85 КМ/ГОД", "is_top": true, "power": "2000W", "image_night": "images/crosser cr-13 night №1.jpg"}, {"key": "crosser_cr20", "name": "Crosser CR-20", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 160 км", "speed": "75 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 1000, "price_week": 2500, "price_month": 8500, "deposit": 4500, "buyout_available": true, "buyout_base_price": 77000, "image": "images/crosser-cr-20.jpg", "badge": "ТОП ПОТУЖНІСТЬ", "is_top": true, "power": "2500W", "image_night": "images/crosser cr-20 night.jpg"}, {"key": "aima_a700", "name": "Aima A700", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 150 км", "speed": "47 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 70000, "image": "images/a700.jpg", "badge": "ПРЕМІУМ КОМФОРТ", "is_top": true, "power": "1200W", "image_night": "images/aima a700 night.jpg"}, {"key": "aima_f606_1", "name": "Aima F606 №1", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 100 км", "speed": "70 км/год", "charging": "10Ач (4 години)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 60000, "image": "images/f606.jpg", "badge": "ХІТ ПРОКАТУ", "is_top": true, "power": "1200W", "image_night": "images/aima f606 night №1.jpg"}, {"key": "aima_a715", "name": "Aima A715", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 150 км", "speed": "65 км/год", "charging": "10Ач (4 години)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 68000, "image": "images/a715.jpg", "badge": "НАДІЙНИЙ", "is_top": false, "power": "1200W", "image_night": "images/aima a715 night.jpg"}, {"key": "aima_journey", "name": "Aima Journey", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 160 км", "speed": "60 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 68000, "image": "images/journey.jpg", "badge": "ДАЛЕКІ ДИСТАНЦІЇ", "is_top": false, "power": "1200W", "image_night": "images/aima journey night.jpg"}, {"key": "aima_f606_2", "name": "Aima F606 №2", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 130 км", "speed": "70 км/год", "charging": "10Ач (4 години)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 60000, "image": "images/f606-2.jpg", "badge": "ЗБІЛЬШЕНИЙ ХІД", "is_top": false, "power": "1200W", "image_night": "images/aima f606 night №2.jpg"}, {"key": "crosser_cr13_2", "name": "Crosser CR-13 №2", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 160 км", "speed": "85 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 1000, "price_week": 2500, "price_month": 8500, "deposit": 4500, "buyout_available": true, "buyout_base_price": 80000, "image": "images/crosser-cr-13-2.jpg", "badge": "85 КМ/ГОД", "is_top": false, "power": "2000W", "image_night": "images/crosser cr-13 night №2.jpg"}, {"key": "aima_mine", "name": "Aima Mine", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "60V", "range": "до 130 км", "speed": "55 км/год", "charging": "7Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 60000, "image": "images/mine.jpg", "badge": "КОМПАКТНИЙ", "is_top": false, "power": "800W", "image_night": "images/aima mine night.jpg"}, {"key": "like_bike_n5", "name": "Like Bike N5", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "60V", "range": "до 130 км", "speed": "65 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 57000, "image": "images/like-bike-n5.jpg", "badge": "МАНЕВРЕНИЙ", "is_top": false, "power": "1000W", "image_night": "images/like-bike-n5.jpg"}, {"key": "aima_mine_plus", "name": "Aima Mine Plus", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "60V", "range": "до 130 км", "speed": "60 км/год", "charging": "7Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 55000, "image": "images/mine-plus.jpg", "badge": "PLUS СЕРІЯ", "is_top": false, "power": "800W", "image_night": "images/aima mine plus night.jpg"}, {"key": "aima_leopard", "name": "Aima Leopard", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 150 км", "speed": "48 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 50000, "image": "images/leopard.jpg", "badge": "КЛАСИКА", "is_top": false, "power": "1200W", "image_night": "images/leopard.jpg"}, {"key": "like_bike_bruser_1", "name": "Like Bike Bruiser №1", "category": "bike", "type": "🚲 Електровелосипед", "voltage": "48V", "range": "до 80 км", "speed": "45 км/год", "charging": "7Ач (4 години)", "battery": "10Ah-40Ah (Знімна)", "price_day": 800, "price_week": 1800, "price_month": 6000, "deposit": 3000, "buyout_available": true, "buyout_base_price": 28000, "image": "images/like-bike-bruiser-1.jpg", "badge": "РАМА 180 КГ", "is_top": false, "power": "500W", "image_night": "images/like bike night №1.jpg"}, {"key": "like_bike_bruser_2", "name": "Like Bike Bruiser №2", "category": "bike", "type": "🚲 Електровелосипед", "voltage": "48V", "range": "до 80 км", "speed": "45 км/год", "charging": "7Ач (4 години)", "battery": "10Ah-40Ah (Знімна)", "price_day": 800, "price_week": 1800, "price_month": 6000, "deposit": 3000, "buyout_available": true, "buyout_base_price": 28000, "image": "images/like-bike-bruiser-2.jpg", "badge": "РАМА 180 КГ", "is_top": false, "power": "500W", "image_night": "images/like bika night №2.jpg"}, {"key": "ado_a20f", "name": "ADO A20F", "category": "bike", "type": "🚲 Електровелосипед", "voltage": "48V", "range": "до 150 км", "speed": "40 км/год", "charging": "10Ач (4 години)", "battery": "10Ah-40Ah (Знімна)", "price_day": 800, "price_week": 1800, "price_month": 6000, "deposit": 3000, "buyout_available": true, "buyout_base_price": 28000, "image": "images/ado-a20f.jpg", "badge": "ФЕТБАЙК", "is_top": false, "power": "250W", "image_night": "images/ado night.jpg"}];
 
         // 2. СТУПЕНЧАТА ТАРИФНА СІТКА ПО КАТЕГОРИЯХ (ГРУПИ А, Б, В)
         const TARIFF_TIERS = {
@@ -3198,7 +3285,7 @@
 
             filtered.forEach(item => {
                 const card = document.createElement('div');
-                card.className = 'tech-card bg-white chamfer-box flex flex-col justify-between';
+                card.className = 'fleet-card tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between';
 
                 const tgRentUrl = `https://t.me/muviobot?start=rent_${item.key}`;
 
@@ -3230,9 +3317,10 @@
                             </span>
                         </div>
 
-                        <!-- Фото транспорту (Збільшене, min-h-[220px] md:min-h-[280px]) -->
-                        <div class="min-h-[240px] md:min-h-[290px] p-4 flex items-center justify-center overflow-hidden group bg-slate-50/50">
-                            <img src="${item.image}" alt="${item.name}" class="max-h-[240px] md:max-h-[280px] w-auto object-contain transition-transform duration-300 group-hover:scale-105" loading="lazy">
+                        <!-- Фото транспорту (Кроссфейд День / Ніч) -->
+                        <div class="relative w-full h-48 sm:h-56 overflow-hidden rounded-t-xl bg-zinc-900 group">
+                            <img src="${item.image}" class="img-day absolute inset-0 w-full h-full object-cover transition-opacity duration-700" alt="${item.name}" loading="lazy">
+                            <img src="${item.image_night || item.image}" class="img-night absolute inset-0 w-full h-full object-cover transition-opacity duration-700" alt="${item.name} Night" loading="lazy">
                         </div>
 
                         <!-- Заголовок та характеристики -->

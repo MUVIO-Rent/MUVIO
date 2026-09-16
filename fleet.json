@@ -16,7 +16,9 @@
         "status": "rented",
         "photo_id": "AgACAgIAAxkBAAIBbWp2ayvzapBBYZb1LwoxMVa5nTBAAALsFmsb8yW4S-9KmRAVh0-yAQADAgADeQADPQQ",
         "reserved_by": 338544776,
-        "custom_parts_prices": {}
+        "custom_parts_prices": {},
+        "image": "images/a700.jpg",
+        "image_night": "images/aima a700 night.jpg"
     },
     "aima_a715": {
         "name": "Aima A715",
@@ -35,7 +37,9 @@
         "status": "rented",
         "photo_id": "AgACAgIAAxkBAAIBhmp2a4OYYWjGFFe1EJ7pRm-FUWQLAALxFmsb8yW4S5gbgYO2T091AQADAgADeQADPQQ",
         "reserved_by": 6632329023,
-        "custom_parts_prices": {}
+        "custom_parts_prices": {},
+        "image": "images/a715.jpg",
+        "image_night": "images/aima a715 night.jpg"
     },
     "aima_f606_1": {
         "name": "Aima F606 №1",
@@ -54,7 +58,9 @@
         "status": "rented",
         "photo_id": "AgACAgIAAxkBAAIBfGp2a2G2JmjYcE73YuAk2xRYF8bXAALvFmsb8yW4S0WLaQ2SuG_NAQADAgADeQADPQQ",
         "reserved_by": 1296967589,
-        "custom_parts_prices": {}
+        "custom_parts_prices": {},
+        "image": "images/f606.jpg",
+        "image_night": "images/aima f606 night №1.jpg"
     },
     "aima_journey": {
         "name": "Aima Journey",
@@ -73,7 +79,9 @@
         "status": "rented",
         "photo_id": "AgACAgIAAxkDAAIl42qZg_FAKwHdckGhnTAsk8yblWKoAAJtHmsbtbnISCN39uZr99L9AQADAgADeQADPQQ",
         "reserved_by": 883674737,
-        "custom_parts_prices": {}
+        "custom_parts_prices": {},
+        "image": "images/journey.jpg",
+        "image_night": "images/aima journey night.jpg"
     },
     "aima_leopard": {
         "name": "Aima Leopard",
@@ -92,7 +100,9 @@
         "status": "rented",
         "photo_id": "AgACAgIAAxkBAAIBgWp2a3MqPa4KK1WIXS3B__jNNBBAAALwFmsb8yW4S9tw2ajiGzq2AQADAgADeQADPQQ",
         "reserved_by": 1912977838,
-        "custom_parts_prices": {}
+        "custom_parts_prices": {},
+        "image": "images/leopard.jpg",
+        "image_night": "images/leopard.jpg"
     },
     "aima_mine": {
         "name": "Aima Mine",
@@ -111,7 +121,9 @@
         "status": "reserved",
         "photo_id": "AgACAgIAAxkDAAIl4mqZg-m6NG2rV1HIGx6SpNzMBdOhAAJsHmsbtbnISL9-I7CdeepuAQADAgADeQADPQQ",
         "reserved_by": 7288164492,
-        "custom_parts_prices": {}
+        "custom_parts_prices": {},
+        "image": "images/mine.jpg",
+        "image_night": "images/aima mine night.jpg"
     },
     "crosser_cr13_1": {
         "name": "Crosser CR-13 №1",
@@ -130,7 +142,9 @@
         "status": "rented",
         "photo_id": "AgACAgIAAxkBAAIBXmp2avXqRC4Pwq8smIxh4NH12NhqAALqFmsb8yW4S-_FhLFx-hJNAQADAgADeQADPQQ",
         "reserved_by": 803346067,
-        "custom_parts_prices": {}
+        "custom_parts_prices": {},
+        "image": "images/crosser.jpg",
+        "image_night": "images/crosser cr-13 night №1.jpg"
     },
     "like_bike_bruser_1": {
         "name": "Like Bike Bruser №1",
@@ -149,7 +163,9 @@
         "status": "rented",
         "photo_id": "AgACAgIAAxkBAAIBWWp2auSdEUcsDjGw0bY3K5PB_jrWAALpFmsb8yW4S4YBsQ-L3u5jAQADAgADeQADPQQ",
         "reserved_by": 5707941121,
-        "custom_parts_prices": {}
+        "custom_parts_prices": {},
+        "image": "images/like-bike-bruiser-1.jpg",
+        "image_night": "images/like bike night №1.jpg"
     },
     "crosser_cr13_2": {
         "name": "Crosser CR-13 №2",
@@ -168,7 +184,9 @@
         "status": "rented",
         "photo_id": "AgACAgIAAxkBAAIBXmp2avXqRC4Pwq8smIxh4NH12NhqAALqFmsb8yW4S-_FhLFx-hJNAQADAgADeQADPQQ",
         "reserved_by": 8587132258,
-        "custom_parts_prices": {}
+        "custom_parts_prices": {},
+        "image": "images/crosser-cr-13-2.jpg",
+        "image_night": "images/crosser cr-13 night №2.jpg"
     },
     "aima_f606_2": {
         "name": "Aima F606 №2",
@@ -187,7 +205,9 @@
         "status": "rented",
         "photo_id": "AgACAgIAAxkBAAIBd2p2a1DTMUhsNAG2Akbu8xKGyhrFAALuFmsb8yW4SyPoSStBBjnaAQADAgADeQADPQQ",
         "reserved_by": 8637405809,
-        "custom_parts_prices": {}
+        "custom_parts_prices": {},
+        "image": "images/f606-2.jpg",
+        "image_night": "images/aima f606 night №2.jpg"
     },
     "ado_a20f": {
         "name": "ADO A20F",
@@ -206,7 +226,9 @@
         "status": "rented",
         "photo_id": "AgACAgIAAxkBAAIBcmp2azufqzkOpqgoHuFZCWvtgVmPAALtFmsb8yW4S8gUDr-nTN1KAQADAgADeQADPQQ",
         "reserved_by": 703054638,
-        "custom_parts_prices": {}
+        "custom_parts_prices": {},
+        "image": "images/ado-a20f.jpg",
+        "image_night": "images/ado night.jpg"
     },
     "crosser_cr20": {
         "name": "Crosser CR-20",
@@ -225,7 +247,9 @@
         "status": "rented",
         "photo_id": "AgACAgIAAxkBAAIBSmp2aq3bNdkLLgoQ7OVERmetC2O8AALmFmsb8yW4S2v-WlmyHtWOAQADAgADeQADPQQ",
         "reserved_by": 779339980,
-        "custom_parts_prices": {}
+        "custom_parts_prices": {},
+        "image": "images/crosser-cr-20.jpg",
+        "image_night": "images/crosser cr-20 night.jpg"
     },
     "aima_mine_plus": {
         "name": "Aima Mine Plus",
@@ -244,7 +268,9 @@
         "status": "rented",
         "photo_id": "AgACAgIAAxkBAAIBT2p2asH94zfaYTZ5-8KVr2HvOQGNAALnFmsb8yW4SzRm7IrpH148AQADAgADeQADPQQ",
         "reserved_by": 1365485759,
-        "custom_parts_prices": {}
+        "custom_parts_prices": {},
+        "image": "images/mine-plus.jpg",
+        "image_night": "images/aima mine plus night.jpg"
     },
     "like_bike_n5": {
         "name": "Like Bike N5",
@@ -263,7 +289,9 @@
         "status": "rented",
         "photo_id": "AgACAgIAAxkBAAIBaGp2axUh0D7XH63eRR_EVC1bx2JWAALrFmsb8yW4S6pyKRZ26QVQAQADAgADeQADPQQ",
         "reserved_by": 973669356,
-        "custom_parts_prices": {}
+        "custom_parts_prices": {},
+        "image": "images/like-bike-n5.jpg",
+        "image_night": "images/like-bike-n5.jpg"
     },
     "like_bike_bruser_2": {
         "name": "Like Bike Bruser №2",
@@ -282,6 +310,8 @@
         "status": "rented",
         "photo_id": "AgACAgIAAxkBAAIBVGp2atLk5M-889oFZb8CHb3T4ia_AALoFmsb8yW4S09WyGd0sT9IAQADAgADeQADPQQ",
         "reserved_by": 1474872117,
-        "custom_parts_prices": {}
+        "custom_parts_prices": {},
+        "image": "images/like-bike-bruiser-2.jpg",
+        "image_night": "images/like bika night №2.jpg"
     }
 }
