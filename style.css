@@ -143,9 +143,8 @@ body.dark {
 .hero-section,
 .hero,
 #hero {
-    height: 560px !important;
-    min-height: 560px !important;
-    max-height: 600px !important;
+    height: calc(100vh - 46px) !important;
+    min-height: calc(100vh - 46px) !important;
     background-color: #0d120f !important;
     margin: 0 !important;
     padding-bottom: 0 !important;
@@ -226,7 +225,7 @@ html.theme-dark #hero::after {
 }
 
 #hero-section .hero-text-content {
-    max-width: 480px !important;
+    max-width: 460px !important;
 }
 
 /* ==================== 1. ФИКСАЦИЯ ШАПКИ ПРИ СКРОЛЛЕ (STICKY HEADER) ==================== */
