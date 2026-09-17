@@ -149,7 +149,7 @@
             color: #ffffff !important;
         }
 
-        /* ==================== 1. ФИКСАЦИЯ ШАПКИ ПРИ СКРОЛЛЕ (STICKY HEADER) ==================== */
+        /* ==================== 1. УЛЬТРАТОНКАЯ ШАПКА В СТИЛЕ TESLA ==================== */
         header,
         .site-header-synced {
             position: sticky !important;
@@ -157,22 +157,25 @@
             left: 0 !important;
             width: 100% !important;
             z-index: 100 !important;
-            background: rgba(255, 255, 255, 0.92) !important;
-            background-color: rgba(255, 255, 255, 0.92) !important;
-            backdrop-filter: blur(12px) !important;
-            -webkit-backdrop-filter: blur(12px) !important;
-            border-bottom: 1px solid rgba(228, 228, 231, 0.8) !important;
-            padding: 24px 48px !important;
+            min-height: 46px !important;
+            height: 46px !important;
+            padding: 0 36px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            background: #ffffff !important;
+            background-color: #ffffff !important;
+            border-bottom: 1px solid #e4e4e7 !important;
             box-sizing: border-box !important;
         }
         @media (max-width: 1024px) {
             .site-header-synced {
-                padding: 24px 32px !important;
+                padding: 0 24px !important;
             }
         }
         @media (max-width: 640px) {
             .site-header-synced {
-                padding: 16px 20px !important;
+                padding: 0 16px !important;
             }
         }
 
@@ -181,8 +184,6 @@
         header .header-nav-link,
         header a,
         header button,
-        header #theme-toggle,
-        header #burger-btn,
         header .header-user-name,
         header #authLangUa,
         header #authLangEn,
@@ -190,12 +191,14 @@
         .site-header-synced .header-nav-link,
         .site-header-synced a,
         .site-header-synced button,
-        .site-header-synced #theme-toggle,
-        .site-header-synced #burger-btn,
         .site-header-synced .header-user-name,
         .site-header-synced #authLangUa,
         .site-header-synced #authLangEn {
-            color: #18181b !important;
+            font-size: 12px !important;
+            font-weight: 500 !important;
+            letter-spacing: 0.08em !important;
+            text-transform: uppercase !important;
+            color: #171717 !important;
             opacity: 1 !important;
         }
 
@@ -209,8 +212,8 @@
         .site-header-synced button svg,
         .site-header-synced #theme-toggle svg,
         .site-header-synced #burger-btn svg {
-            color: #18181b !important;
-            stroke: #18181b !important;
+            color: #171717 !important;
+            stroke: #171717 !important;
             opacity: 1 !important;
         }
 
@@ -219,6 +222,20 @@
         .site-header-synced nav a:hover,
         .site-header-synced .header-nav-link:hover {
             color: #1D5D3B !important;
+        }
+
+        /* Активна виділена кнопка ВХІД у шапці */
+        header .header-auth-btn-active,
+        .site-header-synced .header-auth-btn-active,
+        header .header-auth-btn-active span,
+        .site-header-synced .header-auth-btn-active span {
+            color: #1D5D3B !important;
+            font-weight: 600 !important;
+        }
+        header .header-auth-btn-active svg,
+        .site-header-synced .header-auth-btn-active svg {
+            color: #1D5D3B !important;
+            stroke: #1D5D3B !important;
         }
 
         /* ==================== ТЕМНАЯ ТЕМА: ШАПКА И КОНТРАСТ ==================== */
@@ -232,11 +249,40 @@
         .dark .site-header-synced,
         .theme-dark .site-header-synced,
         [data-theme="dark"] .site-header-synced {
-            background: rgba(11, 14, 12, 0.92) !important;
-            background-color: rgba(11, 14, 12, 0.92) !important;
-            backdrop-filter: blur(12px) !important;
-            -webkit-backdrop-filter: blur(12px) !important;
-            border-bottom: 1px solid rgba(39, 39, 42, 0.8) !important;
+            background: #0B0E0C !important;
+            background-color: #0B0E0C !important;
+            border-bottom: 1px solid #27272a !important;
+        }
+
+        html.dark header .header-auth-btn-active,
+        html.dark .site-header-synced .header-auth-btn-active,
+        html.theme-dark header .header-auth-btn-active,
+        html.theme-dark .site-header-synced .header-auth-btn-active,
+        .dark header .header-auth-btn-active,
+        .dark .site-header-synced .header-auth-btn-active,
+        [data-theme="dark"] header .header-auth-btn-active,
+        [data-theme="dark"] .site-header-synced .header-auth-btn-active,
+        html.dark header .header-auth-btn-active span,
+        html.dark .site-header-synced .header-auth-btn-active span,
+        html.theme-dark header .header-auth-btn-active span,
+        html.theme-dark .site-header-synced .header-auth-btn-active span,
+        .dark header .header-auth-btn-active span,
+        .dark .site-header-synced .header-auth-btn-active span,
+        [data-theme="dark"] header .header-auth-btn-active span,
+        [data-theme="dark"] .site-header-synced .header-auth-btn-active span {
+            color: #2E8B57 !important;
+            font-weight: 600 !important;
+        }
+        html.dark header .header-auth-btn-active svg,
+        html.dark .site-header-synced .header-auth-btn-active svg,
+        html.theme-dark header .header-auth-btn-active svg,
+        html.theme-dark .site-header-synced .header-auth-btn-active svg,
+        .dark header .header-auth-btn-active svg,
+        .dark .site-header-synced .header-auth-btn-active svg,
+        [data-theme="dark"] header .header-auth-btn-active svg,
+        [data-theme="dark"] .site-header-synced .header-auth-btn-active svg {
+            color: #2E8B57 !important;
+            stroke: #2E8B57 !important;
         }
 
         html.dark header nav a,
@@ -281,7 +327,11 @@
         [data-theme="dark"] header button,
         [data-theme="dark"] .site-header-synced a,
         [data-theme="dark"] .site-header-synced button {
-            color: #f4f4f5 !important;
+            font-size: 12px !important;
+            font-weight: 500 !important;
+            letter-spacing: 0.08em !important;
+            text-transform: uppercase !important;
+            color: #F4F4F5 !important;
             opacity: 1 !important;
         }
 
@@ -301,8 +351,8 @@
         .dark .site-header-synced button svg,
         [data-theme="dark"] header a svg,
         [data-theme="dark"] header button svg {
-            color: #f4f4f5 !important;
-            stroke: #f4f4f5 !important;
+            color: #F4F4F5 !important;
+            stroke: #F4F4F5 !important;
             opacity: 1 !important;
         }
 
@@ -352,7 +402,7 @@
 
         /* Pure Transparent Vector Logo */
         .muvio-logo-svg {
-            height: 40px !important;
+            height: 24px !important;
             width: auto !important;
             display: block !important;
         }
@@ -431,16 +481,16 @@
     </div>
 
     <!-- ==================== 1. ХЕДЕР (НАВІГАЦІЯ) ==================== -->
-    <header id="mainSiteHeader" class="site-header-synced w-full"
-        style="position: sticky !important; top: 0 !important; left: 0 !important; width: 100% !important; z-index: 100 !important; display: flex !important; justify-content: space-between !important; align-items: center !important; padding: 24px 48px !important; box-sizing: border-box !important;">
+    <header id="mainSiteHeader" class="site-header-synced w-full bg-white dark:bg-[#0B0E0C] border-b border-zinc-200 dark:border-zinc-800"
+        style="width: 100% !important; position: sticky !important; top: 0 !important; left: 0 !important; z-index: 100 !important; min-height: 46px !important; height: 46px !important; padding: 0 36px !important; display: flex !important; align-items: center !important; justify-content: space-between !important; box-sizing: border-box !important;">
 
         <!-- ЛІВА ЧАСТИНА: Бургер (для мобільних) + Чистий прозорий SVG-логотип MUVIO -->
         <div class="flex items-center gap-3 shrink-0 z-10">
             <!-- Кнопка-бургер (#burger-btn) для мобільних екранів -->
             <button id="burger-btn" data-burger="true" type="button" aria-label="Меню"
-                class="header-action-btn md:hidden flex items-center justify-center w-9 h-9 p-1.5 text-[#1D5D3B] hover:text-[#16472d] dark:text-[#2E8B57] dark:hover:text-emerald-400 transition-colors focus:outline-none"
+                class="header-action-btn md:hidden flex items-center justify-center w-8 h-8 p-1 text-[#1D5D3B] hover:text-[#16472d] dark:text-[#2E8B57] dark:hover:text-emerald-400 transition-colors focus:outline-none"
                 style="background: transparent !important; border: none !important;">
-                <svg class="w-6 h-6 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg class="w-5 h-5 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="3" y1="6" x2="21" y2="6"></line>
                     <line x1="3" y1="12" x2="21" y2="12"></line>
                     <line x1="3" y1="18" x2="21" y2="18"></line>
@@ -449,7 +499,7 @@
 
             <!-- Фірмовий векторний SVG-логотип MUVIO -->
             <a href="index.html" style="display: inline-flex !important; align-items: center !important; text-decoration: none !important;" class="group focus:outline-none" aria-label="MUVIO">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 222 96" fill="none" class="muvio-logo-svg transition-opacity group-hover:opacity-90" style="height: 40px !important; width: auto !important; display: block !important;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 222 96" fill="none" class="muvio-logo-svg transition-opacity group-hover:opacity-90" style="height: 24px !important; width: auto !important; display: block !important;">
                     <!-- Фірмовий знак M: #1D5D3B у світлій темі, смарагдовий у темній -->
                     <path class="muvio-logo-mark" d="M 28.67,51.38 L 3.54,2.0 L 11.1,36.58 L 0.0,36.66 L 26.14,92.0 L 18.82,52.75 L 28.67,56.37 L 38.52,52.75 L 31.2,92.0 L 57.34,36.66 L 46.24,36.58 L 53.8,2.0 Z" fill="currentColor"/>
                     <!-- Букви UVIO: #1D5D3B у світлій темі, чисто білі #FFFFFF у темній -->
@@ -464,53 +514,54 @@
             </a>
         </div>
 
-        <!-- ЦЕНТРАЛЬНЕ МЕНЮ: Строго по центру шапки -->
+        <!-- ЦЕНТРАЛЬНЕ МЕНЮ: Строго по центру шапки (посилання ведуть на головну) -->
         <nav class="hidden md:flex items-center gap-7 lg:gap-8 absolute left-1/2 -translate-x-1/2">
-            <a href="catalog.html"
-                class="text-xs sm:text-[13px] font-medium tracking-normal text-[#111827] dark:text-zinc-200 hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2 leading-normal">
+            <a href="index.html#catalog" style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important;" class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2">
                 <span class="lang-ua">КАТАЛОГ</span>
                 <span class="lang-en">CATALOG</span>
             </a>
-            <a href="calculator.html"
-                class="text-xs sm:text-[13px] font-medium tracking-normal text-[#111827] dark:text-zinc-200 hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2 leading-normal">
+            <a href="index.html#calculator" style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important;" class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2">
                 <span class="lang-ua">КАЛЬКУЛЯТОР</span>
                 <span class="lang-en">CALCULATOR</span>
             </a>
-            <a href="service.html"
-                class="text-xs sm:text-[13px] font-medium tracking-normal text-[#111827] dark:text-zinc-200 hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2 leading-normal">
+            <a href="index.html#service" style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important;" class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2">
                 <span class="lang-ua">СЕРВІС</span>
                 <span class="lang-en">SERVICE</span>
             </a>
-            <a href="terms.html"
-                class="text-xs sm:text-[13px] font-medium tracking-normal text-[#111827] dark:text-zinc-200 hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2 leading-normal">
+            <a href="index.html#terms" style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important;" class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2">
                 <span class="lang-ua">УМОВИ ОРЕНДИ</span>
                 <span class="lang-en">TERMS</span>
             </a>
-            <a href="faq.html"
-                class="text-xs sm:text-[13px] font-medium tracking-normal text-[#111827] dark:text-zinc-200 hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2 leading-normal font-bold">
+            <a href="index.html#faq" style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important;" class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2">
                 <span>FAQ</span>
             </a>
         </nav>
 
         <!-- ПРАВИЙ БЛОК УПРАВЛІННЯ: Чиста лінія (align-items: center, gap: 20px) -->
         <div style="display: flex !important; align-items: center !important; gap: 20px !important;" class="z-10 shrink-0">
-            <!-- 1. Профіль користувача / Вхід -->
-            <a href="cabinet.html" class="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[#1D5D3B] hover:text-[#16472d] dark:text-zinc-200 dark:hover:text-white transition-colors"
-                style="text-decoration: none !important; display: inline-flex !important; align-items: center !important;" title="Особистий кабінет" aria-label="Особистий кабінет">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-current" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+            <!-- 1. Профіль користувача / Вхід (активна виділена кнопка) -->
+            <a href="cabinet.html"
+                style="font-size: 12px !important; font-weight: 600 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important; gap: 6px !important;"
+                class="header-auth-btn-active text-[#1D5D3B] dark:text-[#2E8B57] transition-colors"
+                title="Вхід" aria-label="Вхід">
+                <svg xmlns="http://www.w3.org/2000/svg" style="width: 15px !important; height: 15px !important;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
-                <span id="header-user-name" class="header-user-name text-xs font-semibold tracking-wider">
-                    <span class="lang-ua">КАБІНЕТ</span>
-                    <span class="lang-en">CABINET</span>
+                <span id="header-user-name" class="header-user-name font-semibold">
+                    <span class="lang-ua">ВХІД</span>
+                    <span class="lang-en">LOGIN</span>
                 </span>
             </a>
 
             <!-- 2. Перемикач мови UA | EN -->
-            <span style="color: #71717a !important; cursor: pointer !important; display: inline-flex !important; align-items: center !important; gap: 4px !important; font-size: 12px !important; font-weight: 600 !important;">
-                <button type="button" id="authLangUa" onclick="setSiteLanguage('ua')" style="background: none !important; border: none !important; padding: 0 !important; font: inherit !important; cursor: pointer !important;" class="font-bold text-zinc-900 dark:text-white transition-colors">UA</button>
-                <span style="color: #d4d4d8 !important;">|</span>
-                <button type="button" id="authLangEn" onclick="setSiteLanguage('en')" style="background: none !important; border: none !important; padding: 0 !important; font: inherit !important; cursor: pointer !important;" class="font-medium text-zinc-400 hover:text-[#1D5D3B] dark:hover:text-white transition-colors">EN</button>
+            <span style="display: inline-flex !important; align-items: center !important; gap: 4px !important;">
+                <button type="button" id="authLangUa" onclick="setSiteLanguage('ua')"
+                    style="background: none !important; border: none !important; padding: 0 !important; cursor: pointer !important; font-size: 12px !important; font-weight: 600 !important; letter-spacing: 0.08em !important;"
+                    class="transition-colors hover:text-[#1D5D3B] text-zinc-900 dark:text-white">UA</button>
+                <span style="color: #a1a1aa !important; font-size: 12px !important; font-weight: 400 !important;">|</span>
+                <button type="button" id="authLangEn" onclick="setSiteLanguage('en')"
+                    style="background: none !important; border: none !important; padding: 0 !important; cursor: pointer !important; font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important;"
+                    class="transition-colors hover:text-[#1D5D3B] text-zinc-500 dark:text-zinc-400">EN</button>
             </span>
 
             <!-- 3. Перемикач теми: іконка луни (світла) / сонця (темна) -->
@@ -542,27 +593,27 @@
                     </svg>
                 </button>
             </div>
-            <a href="catalog.html"
+            <a href="index.html#catalog"
                 class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-[#111827] dark:text-zinc-200 hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] py-2 px-2 transition-colors rounded">
                 <span class="lang-ua">КАТАЛОГ</span>
                 <span class="lang-en">CATALOG</span>
             </a>
-            <a href="calculator.html"
+            <a href="index.html#calculator"
                 class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-[#111827] dark:text-zinc-200 hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] py-2 px-2 transition-colors rounded">
                 <span class="lang-ua">КАЛЬКУЛЯТОР</span>
                 <span class="lang-en">CALCULATOR</span>
             </a>
-            <a href="service.html"
+            <a href="index.html#service"
                 class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-[#111827] dark:text-zinc-200 hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] py-2 px-2 transition-colors rounded">
                 <span class="lang-ua">СЕРВІС</span>
                 <span class="lang-en">SERVICE</span>
             </a>
-            <a href="terms.html"
+            <a href="index.html#terms"
                 class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-[#111827] dark:text-zinc-200 hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] py-2 px-2 transition-colors rounded">
                 <span class="lang-ua">УМОВИ ОРЕНДИ</span>
                 <span class="lang-en">TERMS</span>
             </a>
-            <a href="faq.html"
+            <a href="index.html#faq"
                 class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-[#111827] dark:text-zinc-200 hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] py-2 px-2 transition-colors rounded font-bold">
                 <span>FAQ</span>
             </a>
@@ -570,10 +621,10 @@
     </header>
 
     <!-- ==================== СТАН А: ЕКРАН АВТОРИЗАЦІЇ (TESLA AUTH) ==================== -->
-    <div id="authSection" class="min-h-screen flex flex-col bg-white dark:bg-[#0B0E0C] text-zinc-900 dark:text-white transition-colors duration-200">
+    <div id="authSection" class="min-h-[calc(100vh-46px)] flex flex-col bg-white dark:bg-[#0B0E0C] text-zinc-900 dark:text-white transition-colors duration-200 relative justify-between">
 
-        <!-- 2. Центральний контейнер форми (mx-auto w-full max-w-[360px] px-4 pt-3 sm:pt-5 pb-16) -->
-        <main class="mx-auto w-full max-w-[360px] px-4 pt-3 sm:pt-5 pb-16">
+        <!-- 2. Центральний контейнер форми (mx-auto w-full max-w-[360px] px-4 pt-4 sm:pt-6 pb-6 my-auto) -->
+        <main class="mx-auto w-full max-w-[360px] px-4 pt-4 sm:pt-6 pb-6 my-auto">
             <!-- Повідомлення про помилку -->
             <div id="authErrorMsg" class="hidden p-3 mb-6 bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/60 text-rose-700 dark:text-rose-300 text-xs rounded-md flex items-center gap-2">
                 <i data-lucide="alert-circle" class="w-4 h-4 shrink-0"></i>
@@ -648,21 +699,6 @@
                 </form>
             </div>
 
-            <!-- MINI FOOTER: тільки під формою входу -->
-            <div id="authMiniFooter" class="mt-10 text-center text-[11px] text-zinc-400 dark:text-zinc-600 leading-relaxed select-none">
-                <span>MUVIO &copy; 2026</span>
-                <span class="mx-2 opacity-40">&middot;</span>
-                <a href="privacy.html" class="hover:text-zinc-600 dark:hover:text-zinc-400 transition-colors underline-offset-2 hover:underline">
-                    <span class="lang-ua">Конфіденційність</span>
-                    <span class="lang-en">Privacy</span>
-                </a>
-                <span class="mx-2 opacity-40">&middot;</span>
-                <a href="index.html#contacts" class="hover:text-zinc-600 dark:hover:text-zinc-400 transition-colors underline-offset-2 hover:underline">
-                    <span class="lang-ua">Контакти</span>
-                    <span class="lang-en">Contacts</span>
-                </a>
-            </div>
-
             <!-- РЕЄСТРАЦІЯ / REGISTER -->
             <div id="authRegisterView" class="hidden">
                 <h1 class="text-[32px] leading-[1.2] font-semibold text-zinc-900 dark:text-white tracking-tight mb-6 text-left">
@@ -734,19 +770,19 @@
             <button id="authTabRegister" type="button" class="hidden"></button>
         </main>
 
-        <!-- 3. Подвал Tesla Auth -->
-        <footer class="mt-auto py-8 px-4">
-            <div class="max-w-md mx-auto text-xs text-zinc-400 dark:text-zinc-500 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-center">
-                <span>MUVIO © 2026</span>
-                <span class="text-zinc-300 dark:text-zinc-700">•</span>
-                <a href="terms.html" class="hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors">
-                    <span class="lang-ua">Умови та конфіденційність</span>
-                    <span class="lang-en">Privacy & Terms</span>
+        <!-- 3. Подвал Tesla Auth (прижат к самому низу) -->
+        <footer class="mt-auto py-5 px-4 text-center select-none w-full">
+            <div class="max-w-md mx-auto text-xs text-zinc-400 dark:text-zinc-500">
+                <span>MUVIO &copy; 2026</span>
+                <span class="mx-2 opacity-50">&middot;</span>
+                <a href="#privacy-modal" onclick="event.preventDefault(); openPrivacyModal();" class="hover:underline transition-colors hover:text-zinc-600 dark:hover:text-zinc-300">
+                    <span class="lang-ua">Умови конфіденційності</span>
+                    <span class="lang-en">Privacy Policy</span>
                 </a>
-                <span class="text-zinc-300 dark:text-zinc-700">•</span>
-                <a href="https://t.me/muviobot" target="_blank" rel="noopener noreferrer" class="hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors">
-                    <span class="lang-ua">Підтримка</span>
-                    <span class="lang-en">Support</span>
+                <span class="mx-2 opacity-50">&middot;</span>
+                <a href="#contacts-modal" onclick="event.preventDefault(); openContactsModal();" class="hover:underline transition-colors hover:text-zinc-600 dark:hover:text-zinc-300">
+                    <span class="lang-ua">Контакти</span>
+                    <span class="lang-en">Contacts</span>
                 </a>
             </div>
         </footer>
@@ -1344,6 +1380,197 @@
                     </button>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <!-- ==================== МОДАЛЬНЕ ВІКНО: УМОВИ КОНФІДЕНЦІЙНОСТІ ==================== -->
+    <div id="privacy-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4 transition-all" onclick="if(event.target === this) closePrivacyModal()">
+        <div class="bg-white dark:bg-[#0B0E0C] border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 sm:p-8 shadow-2xl max-w-[540px] w-full space-y-5 relative max-h-[90vh] overflow-y-auto">
+            <button type="button" onclick="closePrivacyModal()" class="absolute top-5 right-5 text-zinc-400 hover:text-zinc-800 dark:hover:text-white transition-colors p-1" aria-label="Закрити">
+                <svg class="w-5 h-5 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+
+            <div>
+                <h3 class="font-bold text-2xl text-zinc-900 dark:text-white tracking-tight">
+                    <span class="lang-ua">Умови конфіденційності</span>
+                    <span class="lang-en">Privacy Policy</span>
+                </h3>
+                <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
+                    <span class="lang-ua">Правовий регламент та захист даних клієнтів MUVIO</span>
+                    <span class="lang-en">Legal regulations & client data protection at MUVIO</span>
+                </p>
+            </div>
+
+            <div class="space-y-3.5 text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
+                <!-- 1. Захист персональних даних -->
+                <div class="p-3.5 bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 rounded-lg">
+                    <h4 class="font-semibold text-zinc-900 dark:text-white mb-1.5 flex items-center gap-2">
+                        <svg class="w-4 h-4 text-[#1D5D3B] dark:text-[#2E8B57] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                        <span class="lang-ua">Захист персональних даних</span>
+                        <span class="lang-en">Personal Data Protection</span>
+                    </h4>
+                    <p class="text-xs sm:text-[13px] text-zinc-600 dark:text-zinc-300">
+                        <span class="lang-ua">Збір ПІБ, номерів телефонів та документів клієнтів здійснюється виключно для укладання договору оренди та ідентифікації клієнта відповідно до Закону України «Про захист персональних даних».</span>
+                        <span class="lang-en">Collection of client full name, phone numbers, and documents is conducted exclusively for concluding rental agreements and identification under the Law of Ukraine "On Personal Data Protection".</span>
+                    </p>
+                </div>
+
+                <!-- 2. Безпека авторизації -->
+                <div class="p-3.5 bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 rounded-lg">
+                    <h4 class="font-semibold text-zinc-900 dark:text-white mb-1.5 flex items-center gap-2">
+                        <svg class="w-4 h-4 text-[#1D5D3B] dark:text-[#2E8B57] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                        <span class="lang-ua">Безпека авторизації</span>
+                        <span class="lang-en">Authorization Security</span>
+                    </h4>
+                    <p class="text-xs sm:text-[13px] text-zinc-600 dark:text-zinc-300">
+                        <span class="lang-ua">Паролі та активні сесії надійно шифруються за сучасними галузевими криптографічними протоколами. Доступ третім особам суворо заборонено.</span>
+                        <span class="lang-en">Passwords and user sessions are encrypted using industry-standard cryptographic protocols. Any third-party access is strictly prohibited.</span>
+                    </p>
+                </div>
+
+                <!-- 3. Комерційне використання -->
+                <div class="p-3.5 bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 rounded-lg">
+                    <h4 class="font-semibold text-zinc-900 dark:text-white mb-1.5 flex items-center gap-2">
+                        <svg class="w-4 h-4 text-[#1D5D3B] dark:text-[#2E8B57] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                        <span class="lang-ua">Комерційне використання</span>
+                        <span class="lang-en">Commercial Use</span>
+                    </h4>
+                    <p class="text-xs sm:text-[13px] text-zinc-600 dark:text-zinc-300">
+                        <span class="lang-ua">Сервіс MUVIO використовує отримані дані виключно для надання послуг прокату електросамокатів, електровелосипедів та технічного обслуговування.</span>
+                        <span class="lang-en">MUVIO service utilizes collected information solely for providing electric scooter, electric bike rental and technical maintenance services.</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="pt-2">
+                <button type="button" onclick="closePrivacyModal()" class="w-full bg-[#1D5D3B] hover:bg-[#237248] text-white font-medium text-sm py-2.5 rounded-lg shadow-sm transition-all text-center">
+                    <span class="lang-ua">Зрозуміло</span>
+                    <span class="lang-en">Understood</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== МОДАЛЬНЕ ВІКНО: КОНТАКТИ ==================== -->
+    <div id="contacts-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4 transition-all" onclick="if(event.target === this) closeContactsModal()">
+        <div class="bg-white dark:bg-[#0B0E0C] border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 sm:p-8 shadow-2xl max-w-[480px] w-full space-y-5 relative max-h-[90vh] overflow-y-auto">
+            <button type="button" onclick="closeContactsModal()" class="absolute top-5 right-5 text-zinc-400 hover:text-zinc-800 dark:hover:text-white transition-colors p-1" aria-label="Закрити">
+                <svg class="w-5 h-5 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+
+            <div>
+                <h3 class="font-bold text-2xl text-zinc-900 dark:text-white tracking-tight">
+                    <span class="lang-ua">Контакти сервісу</span>
+                    <span class="lang-en">Service Contacts</span>
+                </h3>
+                <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
+                    <span class="lang-ua">Цілодобова підтримка та сервісний центр MUVIO</span>
+                    <span class="lang-en">24/7 customer care & MUVIO service center</span>
+                </p>
+            </div>
+
+            <div class="space-y-3">
+                <!-- 1. Телефон / Гаряча лінія -->
+                <div class="flex items-start gap-3.5 p-3.5 bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 rounded-lg">
+                    <div class="w-9 h-9 rounded-lg bg-[#1D5D3B]/10 text-[#1D5D3B] dark:text-[#2E8B57] flex items-center justify-center shrink-0 mt-0.5">
+                        <svg class="w-4 h-4 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider">
+                            <span class="lang-ua">Телефон / Гаряча лінія</span>
+                            <span class="lang-en">Phone / Hotline</span>
+                        </div>
+                        <div class="mt-0.5">
+                            <a href="tel:+380638316361" class="font-semibold text-sm text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors">
+                                +380 (63) 831-63-61
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Telegram-бот підтримки -->
+                <div class="flex items-start gap-3.5 p-3.5 bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 rounded-lg">
+                    <div class="w-9 h-9 rounded-lg bg-[#1D5D3B]/10 text-[#1D5D3B] dark:text-[#2E8B57] flex items-center justify-center shrink-0 mt-0.5">
+                        <svg class="w-4 h-4 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider">
+                            <span class="lang-ua">Telegram-бот підтримки</span>
+                            <span class="lang-en">Telegram Support Bot</span>
+                        </div>
+                        <div class="mt-0.5">
+                            <a href="https://t.me/muvio_support_bot" target="_blank" rel="noopener noreferrer" class="font-semibold text-sm text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors inline-flex items-center gap-1">
+                                @muvio_support_bot
+                                <svg class="w-3.5 h-3.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Адреса сервісного центру -->
+                <div class="flex items-start gap-3.5 p-3.5 bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 rounded-lg">
+                    <div class="w-9 h-9 rounded-lg bg-[#1D5D3B]/10 text-[#1D5D3B] dark:text-[#2E8B57] flex items-center justify-center shrink-0 mt-0.5">
+                        <svg class="w-4 h-4 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider">
+                            <span class="lang-ua">Адреса сервісного центру</span>
+                            <span class="lang-en">Service Center Address</span>
+                        </div>
+                        <div class="font-semibold text-sm text-zinc-900 dark:text-white mt-0.5">
+                            <span class="lang-ua">м. Одеса, вул. Приморська, 22</span>
+                            <span class="lang-en">Odesa, 22 Prymorska Str.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Графік роботи -->
+                <div class="flex items-start gap-3.5 p-3.5 bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 rounded-lg">
+                    <div class="w-9 h-9 rounded-lg bg-[#1D5D3B]/10 text-[#1D5D3B] dark:text-[#2E8B57] flex items-center justify-center shrink-0 mt-0.5">
+                        <svg class="w-4 h-4 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider">
+                            <span class="lang-ua">Графік роботи</span>
+                            <span class="lang-en">Working Hours</span>
+                        </div>
+                        <div class="font-semibold text-sm text-zinc-900 dark:text-white mt-0.5">
+                            <span class="lang-ua">24/7 (онлайн-підтримка)</span>
+                            <span class="lang-en">24/7 (online support)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-2">
+                <button type="button" onclick="closeContactsModal()" class="w-full bg-[#1D5D3B] hover:bg-[#237248] text-white font-medium text-sm py-2.5 rounded-lg shadow-sm transition-all text-center">
+                    <span class="lang-ua">Зрозуміло</span>
+                    <span class="lang-en">Close</span>
+                </button>
+            </div>
         </div>
     </div>
 
@@ -2133,6 +2360,63 @@
             if (smsToastTimeout) clearTimeout(smsToastTimeout);
         }
 
+        // Керування модальними вікнами: Конфіденційність та Контакти
+        function openPrivacyModal() {
+            const modal = document.getElementById('privacy-modal');
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            }
+        }
+
+        function closePrivacyModal() {
+            const modal = document.getElementById('privacy-modal');
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+            if (window.location.hash === '#privacy-modal') {
+                history.replaceState(null, '', window.location.pathname);
+            }
+        }
+
+        function openContactsModal() {
+            const modal = document.getElementById('contacts-modal');
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            }
+        }
+
+        function closeContactsModal() {
+            const modal = document.getElementById('contacts-modal');
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+            if (window.location.hash === '#contacts-modal') {
+                history.replaceState(null, '', window.location.pathname);
+            }
+        }
+
+        window.openPrivacyModal = openPrivacyModal;
+        window.closePrivacyModal = closePrivacyModal;
+        window.openContactsModal = openContactsModal;
+        window.closeContactsModal = closeContactsModal;
+
+        window.addEventListener('hashchange', () => {
+            if (window.location.hash === '#privacy-modal') openPrivacyModal();
+            if (window.location.hash === '#contacts-modal') openContactsModal();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closePrivacyModal();
+                closeContactsModal();
+                if (typeof closeResetPasswordModal === 'function') closeResetPasswordModal();
+            }
+        });
+
         function openResetPasswordModal() {
             const modal = document.getElementById('resetPasswordModal');
             if (modal) {
@@ -2845,6 +3129,10 @@
                     renderProfileUI(currentProfileData);
                 }
             };
+
+            // Перевірка хешу для відкриття модалок при переході
+            if (window.location.hash === '#privacy-modal') openPrivacyModal();
+            if (window.location.hash === '#contacts-modal') openContactsModal();
 
             // Приховуємо прелоадер
             setTimeout(hidePreloader, 200);
