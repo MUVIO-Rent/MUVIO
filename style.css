@@ -143,9 +143,11 @@ body.dark {
 .hero-section,
 .hero,
 #hero {
-    height: calc(100vh - 60px) !important;
-    min-height: 560px !important;
-    margin-bottom: 0 !important;
+    height: 580px !important;
+    min-height: 580px !important;
+    max-height: 580px !important;
+    background-color: #0d120f !important;
+    margin: 0 !important;
     padding-bottom: 0 !important;
     border-bottom: none !important;
     box-shadow: none !important;
@@ -212,8 +214,8 @@ html.theme-dark #hero::after {
     max-width: 100% !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
-    padding-left: 24px !important;
-    padding-right: 24px !important;
+    padding-left: 48px !important;
+    padding-right: 36px !important;
     box-sizing: border-box !important;
 }
 
@@ -225,7 +227,7 @@ html.theme-dark #hero::after {
 }
 
 #hero-section .hero-text-content {
-    max-width: 560px !important;
+    max-width: 480px !important;
 }
 
 /* ==================== 1. ФИКСАЦИЯ ШАПКИ ПРИ СКРОЛЛЕ (STICKY HEADER) ==================== */
