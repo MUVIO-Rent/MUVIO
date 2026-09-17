@@ -143,9 +143,9 @@ body.dark {
 .hero-section,
 .hero,
 #hero {
-    height: 580px !important;
-    min-height: 580px !important;
-    max-height: 580px !important;
+    height: 560px !important;
+    min-height: 560px !important;
+    max-height: 600px !important;
     background-color: #0d120f !important;
     margin: 0 !important;
     padding-bottom: 0 !important;
@@ -155,7 +155,6 @@ body.dark {
     position: relative !important;
     overflow: hidden !important;
     background-image: none !important;
-    background-color: #000000 !important;
     display: flex !important;
     align-items: center !important;
     opacity: 1 !important;
