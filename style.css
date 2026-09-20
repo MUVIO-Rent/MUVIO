@@ -167,15 +167,24 @@ body.dark {
     inset: 0 !important;
     top: 0 !important;
     left: 0 !important;
-    width: 100% !important;
+    width: calc(100% + 250px) !important;
     height: 100% !important;
     background-size: cover !important;
     background-position: right center !important;
     background-repeat: no-repeat !important;
-    transform: translateX(-8px) scale(1.015) !important;
-    transform-origin: right center !important;
+    transform: translateX(-180px) !important;
     transition: opacity 0.6s ease-in-out !important;
     pointer-events: none !important;
+}
+
+@media (max-width: 768px) {
+    #hero-bg-day,
+    #hero-bg-night,
+    .hero-bg-day,
+    .hero-bg-night {
+        width: 100% !important;
+        transform: none !important;
+    }
 }
 
 html.dark #hero-bg-night { opacity: 1 !important; }
