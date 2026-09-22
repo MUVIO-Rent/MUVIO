@@ -192,6 +192,19 @@ html.theme-dark .border-gray-200 {
 }
 
 /* 3. Header, Mobile Menu & Sticky Drawers */
+header,
+.site-header-synced,
+.header {
+    height: 72px !important;
+    min-height: 72px !important;
+    max-height: 72px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    box-sizing: border-box !important;
+}
+
 html.theme-dark header,
 html.theme-dark header.sticky,
 html.dark header,

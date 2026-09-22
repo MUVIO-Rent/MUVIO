@@ -156,8 +156,8 @@ body.dark-theme {
 .hero-section,
 .hero,
 #hero {
-    height: calc(100vh - 46px) !important;
-    min-height: calc(100vh - 46px) !important;
+    height: calc(100vh - 72px) !important;
+    min-height: calc(100vh - 72px) !important;
     background-color: #0d120f !important;
     margin: 0 !important;
     padding-bottom: 0 !important;
@@ -183,7 +183,7 @@ body.dark-theme {
     width: 100% !important;
     height: 100% !important;
     background-size: cover !important;
-    background-position: right 7% center !important;
+    background-position: right 0% center !important;
     background-repeat: no-repeat !important;
     transform: none !important;
     transition: opacity 0.6s ease-in-out !important;
@@ -275,7 +275,16 @@ html.theme-dark #hero::after {
 
 /* ==================== 1. ФИКСАЦИЯ ШАПКИ ПРИ СКРОЛЛЕ (STICKY HEADER) ==================== */
 header,
-.site-header-synced {
+.site-header-synced,
+.header {
+    height: 72px !important;
+    min-height: 72px !important;
+    max-height: 72px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    box-sizing: border-box !important;
     position: sticky !important;
     top: 0 !important;
     left: 0 !important;
