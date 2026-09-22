@@ -889,11 +889,18 @@
         const preloader = document.getElementById('page-preloader');
         if (!preloader || preloader.dataset.hidden === 'true') return;
         preloader.dataset.hidden = 'true';
+        preloader.style.pointerEvents = 'none';
+        preloader.classList.add('opacity-0', 'pointer-events-none');
         preloader.style.transition = 'opacity 0.25s ease';
         preloader.style.opacity = '0';
         setTimeout(() => {
-            preloader.classList.add('hidden');
-            preloader.style.display = 'none';
+            preloader.classList.add('hidden', 'preloader-hidden');
+            preloader.style.setProperty('display', 'none', 'important');
+            preloader.style.setProperty('pointer-events', 'none', 'important');
+            preloader.style.setProperty('z-index', '-9999', 'important');
+            if (preloader.parentNode) {
+                try { preloader.parentNode.removeChild(preloader); } catch (e) {}
+            }
         }, 250);
     }
 

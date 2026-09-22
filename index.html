@@ -437,12 +437,12 @@
             inset: 0 !important;
             top: 0 !important;
             left: 0 !important;
-            width: calc(100% + 250px) !important;
+            width: 100% !important;
             height: 100% !important;
             background-size: cover !important;
-            background-position: right center !important;
+            background-position: right 7% center !important;
             background-repeat: no-repeat !important;
-            transform: translateX(-180px) !important;
+            transform: none !important;
             transition: opacity 0.6s ease-in-out !important;
             pointer-events: none !important;
         }
@@ -1161,10 +1161,10 @@
     <section id="hero-section" class="hero hero-section relative overflow-hidden transition-colors duration-300"
         style="position: relative !important; width: 100% !important; height: calc(100vh - 46px) !important; min-height: calc(100vh - 46px) !important; overflow: hidden !important; margin: 0 !important; padding: 0 !important; background-color: #0d120f !important;">
         <div id="hero-bg-day"
-            style="position: absolute !important; inset: 0 !important; width: calc(100% + 250px) !important; height: 100% !important; background-image: url('images/hero_day.jpg'); background-size: cover !important; background-position: right center !important; background-repeat: no-repeat !important; transform: translateX(-180px) !important; transition: opacity 0.6s ease-in-out; z-index: 1;">
+            style="position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; background-image: url('images/hero_day.jpg'); background-size: cover !important; background-position: right 7% center !important; background-repeat: no-repeat !important; transition: opacity 0.6s ease-in-out; z-index: 1;">
         </div>
         <div id="hero-bg-night"
-            style="position: absolute !important; inset: 0 !important; width: calc(100% + 250px) !important; height: 100% !important; background-image: url('images/hero_night.jpg'); background-size: cover !important; background-position: right center !important; background-repeat: no-repeat !important; transform: translateX(-180px) !important; transition: opacity 0.6s ease-in-out; z-index: 2; opacity: 0;">
+            style="position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; background-image: url('images/hero_night.jpg'); background-size: cover !important; background-position: right 7% center !important; background-repeat: no-repeat !important; transition: opacity 0.6s ease-in-out; z-index: 2; opacity: 0;">
         </div>
 
         <div class="hero-container relative z-10 w-full"
@@ -4854,7 +4854,9 @@
         window.updateCalc = updateCalc;
         window.updateCalculatorPreview = updateCalculatorPreview;
         window.setCalcDuration = setCalcDuration;
-        window.onSliderDaysChange = onSliderDaysChange;
+        if (typeof onSliderDaysChange !== 'undefined') {
+            window.onSliderDaysChange = onSliderDaysChange;
+        }
         window.handleRentalApplyClick = handleRentalApplyClick;
 
         // Мобільне меню
@@ -4978,10 +4980,15 @@
         function hidePreloader() {
             const p = document.getElementById('page-preloader');
             if (p) {
-                p.classList.add('opacity-0', 'pointer-events-none');
+                p.classList.add('opacity-0', 'pointer-events-none', 'hidden');
+                p.style.setProperty('pointer-events', 'none', 'important');
+                p.style.setProperty('display', 'none', 'important');
+                p.style.setProperty('z-index', '-9999', 'important');
                 setTimeout(() => {
-                    if (p && p.parentNode) p.parentNode.removeChild(p);
-                }, 350);
+                    if (p && p.parentNode) {
+                        try { p.parentNode.removeChild(p); } catch (e) {}
+                    }
+                }, 200);
             }
         }
         if (document.readyState === 'complete') {
