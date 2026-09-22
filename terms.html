@@ -76,12 +76,15 @@
     <script>
         (function () {
             try {
+                var p = (new URLSearchParams(window.location.search)).get('theme');
                 var s = localStorage.getItem('muvio_site_settings');
-                var t = s ? JSON.parse(s).theme : (localStorage.getItem('muvio_theme') || 'light');
+                var t = (p === 'dark' || p === 'light') ? p : (s ? JSON.parse(s).theme : (localStorage.getItem('muvio_theme') || 'light'));
                 if (t === 'dark') {
-                    document.documentElement.classList.add('theme-dark');
+                    document.documentElement.classList.add('dark', 'theme-dark', 'dark-theme');
+                    document.documentElement.setAttribute('data-theme', 'dark');
                 } else {
-                    document.documentElement.classList.remove('theme-dark');
+                    document.documentElement.classList.remove('dark', 'theme-dark', 'dark-theme');
+                    document.documentElement.setAttribute('data-theme', 'light');
                 }
             } catch (e) { }
         })();

@@ -677,16 +677,16 @@
         });
 
         function toggleAuthTheme() {
-            const isDark = document.documentElement.classList.contains('theme-dark');
+            if (typeof window.toggleAuthTheme === 'function' && window.toggleAuthTheme !== toggleAuthTheme) {
+                return window.toggleAuthTheme();
+            }
+            const isDark = document.documentElement.classList.contains('dark') ||
+                document.documentElement.classList.contains('theme-dark') ||
+                document.documentElement.classList.contains('dark-theme') ||
+                document.documentElement.getAttribute('data-theme') === 'dark';
             const nextTheme = isDark ? 'light' : 'dark';
             if (typeof window.setSiteTheme === 'function') {
                 window.setSiteTheme(nextTheme);
-            } else {
-                if (nextTheme === 'dark') {
-                    document.documentElement.classList.add('theme-dark');
-                } else {
-                    document.documentElement.classList.remove('theme-dark');
-                }
             }
         }
 

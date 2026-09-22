@@ -136,7 +136,12 @@ a[aria-label*="MUVIO"] span.font-brand {
 }
 
 html.theme-dark,
-body.dark {
+html.dark,
+html.dark-theme,
+[data-theme="dark"],
+body.dark,
+body.theme-dark,
+body.dark-theme {
     --bg-main: #000000;
     --bg-secondary: #000000;
     --text-main: #FFFFFF;
@@ -195,8 +200,12 @@ body.dark {
     }
 }
 
-html.dark #hero-bg-night { opacity: 1 !important; }
-html:not(.dark) #hero-bg-night { opacity: 0 !important; }
+html.dark #hero-bg-night,
+html.theme-dark #hero-bg-night,
+html.dark-theme #hero-bg-night,
+[data-theme="dark"] #hero-bg-night { opacity: 1 !important; }
+
+html:not(.dark):not(.theme-dark):not(.dark-theme):not([data-theme="dark"]) #hero-bg-night { opacity: 0 !important; }
 
 /* Hero Night Layer / Headlight overlay disabled for clean crisp aima_hero */
 #hero-section::after,

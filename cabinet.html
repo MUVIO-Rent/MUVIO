@@ -437,12 +437,15 @@
     <script>
         (function () {
             try {
+                var p = (new URLSearchParams(window.location.search)).get('theme');
                 var s = localStorage.getItem('muvio_site_settings');
-                var t = s ? JSON.parse(s).theme : (localStorage.getItem('muvio_theme') || 'light');
+                var t = (p === 'dark' || p === 'light') ? p : (s ? JSON.parse(s).theme : (localStorage.getItem('muvio_theme') || 'light'));
                 if (t === 'dark') {
-                    document.documentElement.classList.add('theme-dark');
+                    document.documentElement.classList.add('dark', 'theme-dark', 'dark-theme');
+                    document.documentElement.setAttribute('data-theme', 'dark');
                 } else {
-                    document.documentElement.classList.remove('theme-dark');
+                    document.documentElement.classList.remove('dark', 'theme-dark', 'dark-theme');
+                    document.documentElement.setAttribute('data-theme', 'light');
                 }
                 if (s) {
                     var parsed = JSON.parse(s);
@@ -2087,16 +2090,16 @@
 
         // Перемикання темної / світлої теми у Tesla Auth
         function toggleAuthTheme() {
-            const isDark = document.documentElement.classList.contains('theme-dark');
+            if (typeof window.toggleAuthTheme === 'function' && window.toggleAuthTheme !== toggleAuthTheme) {
+                return window.toggleAuthTheme();
+            }
+            const isDark = document.documentElement.classList.contains('dark') ||
+                document.documentElement.classList.contains('theme-dark') ||
+                document.documentElement.classList.contains('dark-theme') ||
+                document.documentElement.getAttribute('data-theme') === 'dark';
             const nextTheme = isDark ? 'light' : 'dark';
             if (typeof window.setSiteTheme === 'function') {
                 window.setSiteTheme(nextTheme);
-            } else {
-                if (nextTheme === 'dark') {
-                    document.documentElement.classList.add('theme-dark');
-                } else {
-                    document.documentElement.classList.remove('theme-dark');
-                }
             }
         }
 

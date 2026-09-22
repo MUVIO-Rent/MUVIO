@@ -309,19 +309,25 @@
         try {
             const raw = localStorage.getItem('muvio_site_settings');
             let lang = localStorage.getItem('muvio_lang');
+            let theme = localStorage.getItem('muvio_theme');
+            let parsed = {};
             if (raw) {
-                const parsed = JSON.parse(raw);
-                let z = parsed.zoom !== undefined ? parsed.zoom : parsed.fontScale;
-                z = parseInt(z, 10);
-                if (isNaN(z) || z < 80 || z > 120) z = 100;
-                parsed.zoom = z;
-                parsed.fontScale = z;
-                if (lang) parsed.lang = (lang === 'en') ? 'en' : 'ua';
-                return Object.assign({}, DEFAULT_SETTINGS, parsed);
+                try {
+                    parsed = JSON.parse(raw) || {};
+                } catch (e) {}
+            }
+            if (theme && !parsed.theme) {
+                parsed.theme = theme;
             }
             if (lang) {
-                return Object.assign({}, DEFAULT_SETTINGS, { lang: lang === 'en' ? 'en' : 'ua' });
+                parsed.lang = (lang === 'en') ? 'en' : 'ua';
             }
+            let z = parsed.zoom !== undefined ? parsed.zoom : parsed.fontScale;
+            z = parseInt(z, 10);
+            if (isNaN(z) || z < 80 || z > 120) z = 100;
+            parsed.zoom = z;
+            parsed.fontScale = z;
+            return Object.assign({}, DEFAULT_SETTINGS, parsed);
         } catch (e) {
             console.warn('Failed to parse muvio_site_settings:', e);
         }
@@ -331,6 +337,12 @@
     function saveSiteSettings(settings) {
         try {
             localStorage.setItem('muvio_site_settings', JSON.stringify(settings));
+            if (settings && settings.theme) {
+                localStorage.setItem('muvio_theme', settings.theme);
+            }
+            if (settings && settings.lang) {
+                localStorage.setItem('muvio_lang', settings.lang === 'en' ? 'en' : 'uk');
+            }
         } catch (e) {
             console.warn('Failed to save muvio_site_settings:', e);
         }
@@ -343,6 +355,25 @@
         // Instant synchronous lang setup on documentElement
         let initialLang = 'uk';
         try {
+            const urlParams = new URLSearchParams(window.location.search);
+            const urlTheme = urlParams.get('theme');
+            if (urlTheme === 'dark' || urlTheme === 'light') {
+                localStorage.setItem('muvio_theme', urlTheme);
+                const s = localStorage.getItem('muvio_site_settings');
+                const parsed = s ? JSON.parse(s) : {};
+                parsed.theme = urlTheme;
+                localStorage.setItem('muvio_site_settings', JSON.stringify(parsed));
+            }
+            const urlLang = urlParams.get('lang');
+            if (urlLang === 'en' || urlLang === 'ua') {
+                const norm = urlLang === 'en' ? 'en' : 'uk';
+                localStorage.setItem('muvio_lang', norm);
+                const s = localStorage.getItem('muvio_site_settings');
+                const parsed = s ? JSON.parse(s) : {};
+                parsed.lang = urlLang;
+                localStorage.setItem('muvio_site_settings', JSON.stringify(parsed));
+            }
+
             const rawLang = localStorage.getItem('muvio_lang');
             if (rawLang === 'en') {
                 initialLang = 'en';
@@ -358,17 +389,17 @@
 
         const initS = getSiteSettings();
         if (initS.theme === 'dark') {
-            document.documentElement.classList.add('theme-dark', 'dark');
+            document.documentElement.classList.add('dark', 'theme-dark', 'dark-theme');
             document.documentElement.setAttribute('data-theme', 'dark');
             if (document.body) {
-                document.body.classList.add('theme-dark', 'dark');
+                document.body.classList.add('dark', 'theme-dark', 'dark-theme');
                 document.body.setAttribute('data-theme', 'dark');
             }
         } else {
-            document.documentElement.classList.remove('theme-dark', 'dark');
+            document.documentElement.classList.remove('dark', 'theme-dark', 'dark-theme');
             document.documentElement.setAttribute('data-theme', 'light');
             if (document.body) {
-                document.body.classList.remove('theme-dark', 'dark');
+                document.body.classList.remove('dark', 'theme-dark', 'dark-theme');
                 document.body.setAttribute('data-theme', 'light');
             }
         }
@@ -380,8 +411,11 @@
             if (document.body) {
                 document.body.style.zoom = (initialZoom / 100);
                 if (getSiteSettings().theme === 'dark') {
-                    document.body.classList.add('theme-dark', 'dark');
+                    document.body.classList.add('dark', 'theme-dark', 'dark-theme');
                     document.body.setAttribute('data-theme', 'dark');
+                } else {
+                    document.body.classList.remove('dark', 'theme-dark', 'dark-theme');
+                    document.body.setAttribute('data-theme', 'light');
                 }
             }
             const curTheme = getSiteSettings().theme;
@@ -409,9 +443,11 @@
     // --------------------------------------------------------------------------
     function setSiteTheme(theme) {
         const settings = getSiteSettings();
-        if (settings.theme === theme) return;
         settings.theme = theme;
         saveSiteSettings(settings);
+        try {
+            localStorage.setItem('muvio_theme', theme);
+        } catch (e) {}
         applySiteTheme(theme);
     }
 
@@ -422,10 +458,10 @@
         const metaThemeColor = document.querySelector('meta[name="theme-color"]');
 
         if (theme === 'dark') {
-            document.documentElement.classList.add('theme-dark', 'dark');
+            document.documentElement.classList.add('dark', 'theme-dark', 'dark-theme');
             document.documentElement.setAttribute('data-theme', 'dark');
             if (document.body) {
-                document.body.classList.add('theme-dark', 'dark');
+                document.body.classList.add('dark', 'theme-dark', 'dark-theme');
                 document.body.setAttribute('data-theme', 'dark');
             }
             if (metaThemeColor) metaThemeColor.setAttribute('content', '#0F1411');
@@ -437,10 +473,10 @@
                 btnLight.className = 'py-2 px-3 text-xs font-brand font-bold uppercase tracking-wider chamfer-badge flex items-center justify-center gap-1.5 transition-all bg-slate-100 text-slate-700 hover:bg-slate-200';
             }
         } else {
-            document.documentElement.classList.remove('theme-dark', 'dark');
+            document.documentElement.classList.remove('dark', 'theme-dark', 'dark-theme');
             document.documentElement.setAttribute('data-theme', 'light');
             if (document.body) {
-                document.body.classList.remove('theme-dark', 'dark');
+                document.body.classList.remove('dark', 'theme-dark', 'dark-theme');
                 document.body.setAttribute('data-theme', 'light');
             }
             if (metaThemeColor) metaThemeColor.setAttribute('content', '#FFFFFF');
@@ -874,7 +910,16 @@
     // 13. GLOBAL API EXPORTS
     // --------------------------------------------------------------------------
     function toggleAuthTheme() {
-        const isDark = document.documentElement.classList.contains('dark') || document.documentElement.classList.contains('theme-dark');
+        const isDark = document.documentElement.classList.contains('dark') ||
+                       document.documentElement.classList.contains('theme-dark') ||
+                       document.documentElement.classList.contains('dark-theme') ||
+                       document.documentElement.getAttribute('data-theme') === 'dark' ||
+                       (document.body && (
+                           document.body.classList.contains('dark') ||
+                           document.body.classList.contains('theme-dark') ||
+                           document.body.classList.contains('dark-theme') ||
+                           document.body.getAttribute('data-theme') === 'dark'
+                       ));
         setSiteTheme(isDark ? 'light' : 'dark');
     }
 

@@ -96,7 +96,12 @@ a[aria-label*="MUVIO"] span.font-brand {
 }
 
 html.theme-dark,
-body.dark {
+html.dark,
+html.dark-theme,
+[data-theme="dark"],
+body.dark,
+body.theme-dark,
+body.dark-theme {
     --bg-main: #000000;
     --bg-secondary: #000000;
     --text-main: #FFFFFF;
@@ -104,7 +109,10 @@ body.dark {
     --border-subtle: #222222;
 }
 
-html.theme-dark {
+html.theme-dark,
+html.dark,
+html.dark-theme,
+[data-theme="dark"] {
     color-scheme: dark;
     background-color: #000000 !important;
     --accent-primary: #1D5D3B;
@@ -117,7 +125,13 @@ html.theme-dark {
     --badge-border: #1D5D3B;
 }
 
-html.theme-dark body {
+html.theme-dark body,
+html.dark body,
+html.dark-theme body,
+[data-theme="dark"] body,
+body.dark,
+body.theme-dark,
+body.dark-theme {
     background-color: #000000 !important;
     color: #FFFFFF !important;
 }
