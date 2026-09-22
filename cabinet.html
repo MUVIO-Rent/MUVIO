@@ -34,8 +34,8 @@
                         }
                     },
                     fontFamily: {
-                        brand: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'sans-serif'],
-                        sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'sans-serif']
+                        brand: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', '"Segoe UI"', 'Roboto', 'sans-serif'],
+                        sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', '"Segoe UI"', 'Roboto', 'sans-serif']
                     }
                 }
             }
@@ -45,15 +45,389 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- Google Font Tektur -->
+    <!-- Google Fonts: Plus Jakarta Sans & Tektur -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tektur:wght@700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Tektur:wght@700;800;900&display=swap" rel="stylesheet">
     <!-- MUVIO Styles & Dark Theme -->
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./dark-theme.css">
 
     <style>
+        /* ==================== MUVIO PREMIUM CABINET (FINTECH / MOBILITY UI) ==================== */
+        #cabinetMainContainer,
+        #cabinetMainContainer *,
+        #profileSection,
+        #profileSection * {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        #cabinetMainContainer {
+            border-color: rgba(226, 232, 240, 0.6);
+        }
+        html.theme-dark #cabinetMainContainer,
+        html.dark #cabinetMainContainer,
+        [data-theme="dark"] #cabinetMainContainer {
+            border-color: rgba(255, 255, 255, 0.05) !important;
+        }
+
+        /* 1. Base Surface Card */
+        .cabinet-card {
+            background: linear-gradient(180deg, #FFFFFF 0%, #F9FAFB 100%);
+            background-color: #FFFFFF;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.03);
+            clip-path: none !important;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        html.theme-dark .cabinet-card,
+        html.dark .cabinet-card,
+        [data-theme="dark"] .cabinet-card,
+        body.theme-dark .cabinet-card {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%), #111417 !important;
+            background-color: #111417 !important;
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            border-radius: 20px !important;
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5) !important;
+            clip-path: none !important;
+        }
+
+        /* 2. Typography Hierarchy */
+        .cabinet-heading {
+            font-family: 'Plus Jakarta Sans', sans-serif !important;
+            font-weight: 700 !important;
+            letter-spacing: -0.02em !important;
+            line-height: 1.25 !important;
+        }
+
+        .cabinet-label {
+            text-transform: uppercase !important;
+            font-size: 11px !important;
+            font-weight: 500 !important;
+            letter-spacing: 0.05em !important;
+            color: #64748B;
+            opacity: 0.8;
+        }
+
+        html.theme-dark .cabinet-label,
+        html.dark .cabinet-label,
+        [data-theme="dark"] .cabinet-label {
+            color: rgba(255, 255, 255, 0.6) !important;
+            opacity: 0.7 !important;
+        }
+
+        .cabinet-value {
+            font-family: 'Plus Jakarta Sans', sans-serif !important;
+            font-weight: 700 !important;
+            letter-spacing: -0.01em !important;
+        }
+
+        /* 3. Avatar */
+        .cabinet-avatar {
+            background: linear-gradient(135deg, #10B981 0%, #064E3B 100%);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.35);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            border-radius: 18px;
+        }
+
+        /* 4. Pills Badge */
+        .cabinet-pill-badge,
+        .badge-status-paid,
+        [data-status="paid"],
+        #rentalStatusBadge,
+        #userStatusBadge[data-status="active"] {
+            background: rgba(16, 185, 129, 0.12) !important;
+            border: 1px solid rgba(16, 185, 129, 0.25) !important;
+            color: #059669 !important;
+            border-radius: 9999px !important;
+            clip-path: none !important;
+            padding: 4px 12px !important;
+        }
+
+        html.theme-dark .cabinet-pill-badge,
+        html.dark .cabinet-pill-badge,
+        [data-theme="dark"] .cabinet-pill-badge,
+        html.theme-dark .badge-status-paid,
+        html.dark .badge-status-paid,
+        html.theme-dark [data-status="paid"],
+        html.dark [data-status="paid"],
+        html.theme-dark #rentalStatusBadge,
+        html.theme-dark #userStatusBadge[data-status="active"] {
+            background: rgba(16, 185, 129, 0.15) !important;
+            border: 1px solid rgba(16, 185, 129, 0.3) !important;
+            color: #10B981 !important;
+            box-shadow: 0 0 14px rgba(16, 185, 129, 0.15) !important;
+        }
+
+        .cabinet-pill-badge-inactive {
+            background: rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            color: #64748B;
+            border-radius: 9999px;
+            padding: 5px 12px;
+        }
+
+        html.theme-dark .cabinet-pill-badge-inactive,
+        html.dark .cabinet-pill-badge-inactive {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #94A3B8;
+        }
+
+        /* Pulse animation */
+        @keyframes pulse-emerald-glow {
+            0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 8px #10B981; }
+            50% { opacity: 0.5; transform: scale(0.85); box-shadow: 0 0 2px #10B981; }
+        }
+        .animate-pulse-emerald {
+            animation: pulse-emerald-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        /* 5. Ghost button */
+        .cabinet-ghost-btn {
+            background: transparent;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 12px;
+            color: #64748B;
+            transition: all 0.2s ease;
+            clip-path: none !important;
+        }
+        .cabinet-ghost-btn:hover {
+            background: rgba(244, 63, 94, 0.08);
+            border-color: rgba(244, 63, 94, 0.25);
+            color: #E11D48;
+        }
+        html.theme-dark .cabinet-ghost-btn,
+        html.dark .cabinet-ghost-btn {
+            border-color: rgba(255, 255, 255, 0.08);
+            color: #94A3B8;
+        }
+        html.theme-dark .cabinet-ghost-btn:hover,
+        html.dark .cabinet-ghost-btn:hover {
+            background: rgba(244, 63, 94, 0.12);
+            border-color: rgba(244, 63, 94, 0.3);
+            color: #FB7185;
+        }
+
+        /* 6. Metric Cards & Widgets */
+        .cabinet-widget,
+        .cabinet-metric-card {
+            background: #F8FAFC;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: 14px;
+            padding: 12px 16px;
+            transition: border-color 0.2s ease, background-color 0.2s ease;
+            clip-path: none !important;
+        }
+        html.theme-dark .cabinet-widget,
+        html.dark .cabinet-widget,
+        html.theme-dark .cabinet-metric-card,
+        html.dark .cabinet-metric-card {
+            background: rgba(255, 255, 255, 0.03) !important;
+            border: 1px solid rgba(255, 255, 255, 0.07) !important;
+        }
+
+        /* 7. Scooter Card Photo display with radial backdrop glow */
+        .cabinet-vehicle-display {
+            background: radial-gradient(circle at center, rgba(16, 185, 129, 0.08) 0%, rgba(241, 245, 249, 0.6) 70%), #F8FAFC;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: 16px;
+            clip-path: none !important;
+        }
+        html.theme-dark .cabinet-vehicle-display,
+        html.dark .cabinet-vehicle-display {
+            background: radial-gradient(circle at center, rgba(16, 185, 129, 0.12) 0%, rgba(17, 20, 23, 0.8) 70%), #0D1013 !important;
+            border: 1px solid rgba(255, 255, 255, 0.06) !important;
+        }
+
+        /* 8. Progress Bar */
+        .cabinet-progress-track {
+            height: 7px;
+            border-radius: 9999px;
+            background: #E2E8F0;
+            overflow: hidden;
+            position: relative;
+        }
+        html.theme-dark .cabinet-progress-track,
+        html.dark .cabinet-progress-track {
+            background: rgba(255, 255, 255, 0.08) !important;
+        }
+
+        .cabinet-progress-fill {
+            height: 100%;
+            border-radius: 9999px;
+            background: linear-gradient(90deg, #059669 0%, #10B981 60%, #34D399 100%);
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+            transition: width 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* 9. Action Buttons */
+        .cabinet-action-btn-pay,
+        #cabinet-btn-pay {
+            height: 50px !important;
+            border-radius: 12px !important;
+            font-weight: 600 !important;
+            font-size: 14px !important;
+            letter-spacing: 0.04em !important;
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%) !important;
+            color: #FFFFFF !important;
+            border: 1px solid rgba(16, 185, 129, 0.4) !important;
+            box-shadow: 0 10px 24px -6px rgba(16, 185, 129, 0.35) !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 8px !important;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease !important;
+            cursor: pointer !important;
+            text-transform: uppercase !important;
+            width: 100% !important;
+            clip-path: none !important;
+        }
+        .cabinet-action-btn-pay:hover,
+        #cabinet-btn-pay:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 14px 28px -6px rgba(16, 185, 129, 0.45) !important;
+            filter: brightness(1.06) !important;
+        }
+        .cabinet-action-btn-pay:active,
+        #cabinet-btn-pay:active {
+            transform: translateY(0) !important;
+            box-shadow: 0 6px 14px -4px rgba(16, 185, 129, 0.35) !important;
+        }
+
+        .cabinet-action-btn-breakdown,
+        #cabinet-btn-breakdown {
+            height: 50px !important;
+            border-radius: 12px !important;
+            font-weight: 600 !important;
+            font-size: 14px !important;
+            letter-spacing: 0.04em !important;
+            background: rgba(239, 68, 68, 0.05) !important;
+            color: #DC2626 !important;
+            border: 1px solid rgba(239, 68, 68, 0.22) !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 8px !important;
+            transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease !important;
+            cursor: pointer !important;
+            text-transform: uppercase !important;
+            width: 100% !important;
+            clip-path: none !important;
+        }
+        .cabinet-action-btn-breakdown:hover,
+        #cabinet-btn-breakdown:hover {
+            background: rgba(239, 68, 68, 0.1) !important;
+            border-color: rgba(239, 68, 68, 0.35) !important;
+            transform: translateY(-1px) !important;
+            color: #B91C1C !important;
+        }
+        html.theme-dark .cabinet-action-btn-breakdown,
+        html.dark .cabinet-action-btn-breakdown,
+        html.theme-dark #cabinet-btn-breakdown,
+        html.dark #cabinet-btn-breakdown {
+            background: rgba(239, 68, 68, 0.08) !important;
+            color: #F87171 !important;
+            border: 1px solid rgba(239, 68, 68, 0.25) !important;
+        }
+        html.theme-dark .cabinet-action-btn-breakdown:hover,
+        html.dark .cabinet-action-btn-breakdown:hover,
+        html.theme-dark #cabinet-btn-breakdown:hover,
+        html.dark #cabinet-btn-breakdown:hover {
+            background: rgba(239, 68, 68, 0.15) !important;
+            border-color: rgba(239, 68, 68, 0.45) !important;
+            color: #FCA5A5 !important;
+        }
+
+        /* Secondary / Buyout button */
+        .cabinet-action-btn-secondary,
+        #cabinet-btn-buyout {
+            height: 50px !important;
+            border-radius: 12px !important;
+            font-weight: 600 !important;
+            font-size: 14px !important;
+            letter-spacing: 0.04em !important;
+            background: rgba(16, 185, 129, 0.08) !important;
+            color: #059669 !important;
+            border: 1px solid rgba(16, 185, 129, 0.25) !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 8px !important;
+            transition: transform 0.2s ease, background-color 0.2s ease !important;
+            cursor: pointer !important;
+            text-transform: uppercase !important;
+            width: 100% !important;
+            clip-path: none !important;
+        }
+        html.theme-dark .cabinet-action-btn-secondary,
+        html.dark .cabinet-action-btn-secondary,
+        html.theme-dark #cabinet-btn-buyout {
+            background: rgba(16, 185, 129, 0.12) !important;
+            color: #10B981 !important;
+            border-color: rgba(16, 185, 129, 0.3) !important;
+        }
+
+        /* 10. Modern Tabs */
+        .cabinet-tab-btn {
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 13px;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            background: #F1F5F9;
+            color: #475569;
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+            clip-path: none !important;
+            cursor: pointer;
+        }
+        .cabinet-tab-btn:hover {
+            background: #E2E8F0;
+            color: #0F172A;
+        }
+        .cabinet-tab-btn.active {
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%) !important;
+            color: #FFFFFF !important;
+            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3) !important;
+            border-color: rgba(16, 185, 129, 0.4) !important;
+        }
+        html.theme-dark .cabinet-tab-btn,
+        html.dark .cabinet-tab-btn {
+            background: rgba(255, 255, 255, 0.04);
+            color: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        html.theme-dark .cabinet-tab-btn:hover,
+        html.dark .cabinet-tab-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #FFFFFF;
+        }
+        html.theme-dark .cabinet-tab-btn.active,
+        html.dark .cabinet-tab-btn.active {
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%) !important;
+            color: #FFFFFF !important;
+            border-color: rgba(16, 185, 129, 0.4) !important;
+            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3) !important;
+        }
+
+        /* 11. Table row & cell contrast in dark mode */
+        html.theme-dark #paymentsTableBody tr:hover,
+        html.dark #paymentsTableBody tr:hover,
+        html.theme-dark #repairsTableBody tr:hover,
+        html.dark #repairsTableBody tr:hover {
+            background-color: rgba(255, 255, 255, 0.03) !important;
+        }
+        html.theme-dark #paymentsTableBody td,
+        html.dark #paymentsTableBody td,
+        html.theme-dark #repairsTableBody td,
+        html.dark #repairsTableBody td {
+            color: #E2E8F0 !important;
+        }
+
         .text-primary {
             color: #1D5D3B;
         }
@@ -808,47 +1182,49 @@
         <div id="profileSection" class="hidden space-y-8">
 
             <!-- Шапка користувача та баланс -->
-            <div class="bg-white border-2 border-[#1D5D3B] p-6 chamfer-box shadow-md flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-                <div class="flex items-center gap-4">
+            <div class="cabinet-card p-6 sm:p-7 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                <div class="flex items-center gap-4 sm:gap-5">
                     <div id="userAvatarWrap"
-                        class="w-14 h-14 bg-[#1D5D3B] text-white font-brand font-bold text-xl flex items-center justify-center chamfer-badge border-2 border-[#1D5D3B] overflow-hidden">
-                        <span id="userAvatarText">M</span>
+                        class="cabinet-avatar w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 overflow-hidden relative">
+                        <span id="userAvatarText" class="text-white font-extrabold text-2xl tracking-tight">M</span>
                         <img id="userAvatarImg" src="" alt="Avatar" class="w-full h-full object-cover hidden">
                     </div>
-                    <div>
-                        <div class="flex items-center gap-2">
-                            <h2 id="userNameDisplay" class="font-brand font-bold text-xl sm:text-2xl text-[#111827] uppercase">
+                    <div class="space-y-1.5">
+                        <div class="flex flex-wrap items-center gap-2.5">
+                            <h2 id="userNameDisplay" class="cabinet-heading text-xl sm:text-2xl text-zinc-900 dark:text-white uppercase">
                                 Клієнт MUVIO
                             </h2>
-                            <span id="userVerifiedBadge" class="text-[#10B981]"><i data-lucide="check-circle-2" class="w-5 h-5"></i></span>
+                            <span id="userVerifiedBadge" class="text-emerald-500 flex items-center"><i data-lucide="check-circle-2" class="w-5 h-5"></i></span>
                         </div>
-                        <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-slate-500 font-mono mt-0.5">
-                            <span id="userUsernameDisplay">@username</span>
-                            <span>ID: <span id="userIdDisplay" class="text-slate-700 font-bold">—</span></span>
+                        <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-zinc-500 dark:text-zinc-400 font-mono">
+                            <span id="userUsernameDisplay" class="text-zinc-700 dark:text-zinc-300 font-medium">@username</span>
+                            <span class="opacity-40">•</span>
+                            <span>ID: <span id="userIdDisplay" class="text-zinc-800 dark:text-zinc-200 font-semibold">—</span></span>
+                            <span class="opacity-40">•</span>
                             <span id="userPhoneDisplay">Телефон не вказано</span>
                         </div>
-                        <div class="mt-2" id="userStatusBadgeWrap">
-                            <span id="userStatusBadge" class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-100 text-slate-600 font-brand font-bold text-xs uppercase tracking-wider chamfer-badge">
-                                <span id="userStatusDot" class="w-2 h-2 bg-slate-400 rounded-full"></span>
+                        <div id="userStatusBadgeWrap" class="pt-0.5">
+                            <span id="userStatusBadge" class="cabinet-pill-badge inline-flex items-center gap-2 px-3 py-1 text-xs font-semibold uppercase tracking-wider">
+                                <span id="userStatusDot" class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse-emerald"></span>
                                 <span id="userStatusText">Немає активної техніки в оренді</span>
                             </span>
                         </div>
                     </div>
                 </div>
 
-                <div class="flex items-center gap-4 self-stretch md:self-auto justify-between md:justify-end border-t md:border-t-0 pt-4 md:pt-0 border-slate-100">
+                <div class="flex items-center gap-3 sm:gap-4 self-stretch md:self-auto justify-between md:justify-end border-t md:border-t-0 pt-4 md:pt-0 border-zinc-200/60 dark:border-white/5">
                     <!-- Бонуси -->
-                    <div class="bg-[#F8FAFC] border border-[#1D5D3B]/40 px-4 py-2 chamfer-badge text-right">
-                        <div class="text-[10px] uppercase font-brand tracking-wider text-slate-500">
+                    <div class="cabinet-widget px-4 py-2.5 text-right">
+                        <div class="cabinet-label">
                             <span class="lang-ua">БОНУСНИЙ РАХУНОК</span>
                             <span class="lang-en">BONUS BALANCE</span>
                         </div>
-                        <div id="userBonusDisplay" class="font-brand font-bold text-lg text-[#1D5D3B]">0.00 ₴</div>
+                        <div id="userBonusDisplay" class="cabinet-value text-lg sm:text-xl text-emerald-600 dark:text-emerald-400">0.00 ₴</div>
                     </div>
 
-                    <!-- Кнопка виходу -->
+                    <!-- Кнопка виходу (ghost-btn) -->
                     <button type="button" onclick="logoutUser()"
-                        class="chamfer-btn bg-slate-100 hover:bg-rose-50 hover:text-rose-600 text-slate-600 border border-slate-300 font-brand font-bold text-xs uppercase px-4 py-2.5 flex items-center gap-1.5 transition-colors">
+                        class="cabinet-ghost-btn px-3.5 py-2.5 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider">
                         <i data-lucide="log-out" class="w-4 h-4"></i>
                         <span class="lang-ua">ВИЙТИ</span>
                         <span class="lang-en">LOGOUT</span>
@@ -857,30 +1233,30 @@
             </div>
 
             <!-- СТАН А: БЛОК БЕЗ ОРЕНДИ (ЯК У БОТІ) -->
-            <div id="noRentalState" class="bg-white border-2 border-slate-300 p-8 sm:p-12 chamfer-box text-center space-y-6 shadow-sm">
-                <div class="w-16 h-16 mx-auto bg-[#1D5D3B]/10 border border-[#1D5D3B]/30 chamfer-badge flex items-center justify-center text-[#1D5D3B]">
+            <div id="noRentalState" class="cabinet-card p-8 sm:p-12 text-center space-y-6">
+                <div class="w-16 h-16 mx-auto bg-emerald-500/10 border border-emerald-500/25 rounded-2xl flex items-center justify-center text-emerald-600 dark:text-emerald-400">
                     <i data-lucide="bike" class="w-8 h-8"></i>
                 </div>
                 <div class="max-w-md mx-auto space-y-2">
-                    <h3 class="font-brand font-bold text-xl sm:text-2xl uppercase tracking-wider text-[#111827]">
+                    <h3 class="cabinet-heading text-xl sm:text-2xl uppercase tracking-wider text-zinc-900 dark:text-white">
                         <span class="lang-ua">Немає активної техніки</span>
                         <span class="lang-en">No Active Vehicles</span>
                     </h3>
-                    <p class="text-sm text-slate-600 leading-relaxed">
+                    <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
                         <span class="lang-ua">У вас немає активної оренди. Оберіть скутер у каталозі або зверніться до бота для оформлення.</span>
                         <span class="lang-en">You have no active rentals. Choose a scooter in our catalog or contact the bot.</span>
                     </p>
                 </div>
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
                     <a href="catalog.html"
-                        class="chamfer-btn bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs sm:text-sm uppercase tracking-wider px-6 py-3 flex items-center justify-center gap-2 border border-[#1D5D3B]">
+                        class="cabinet-action-btn-pay !w-auto !px-6 !h-11">
                         <i data-lucide="layers" class="w-4 h-4"></i>
                         <span class="lang-ua">Обрати транспорт у каталозі</span>
                         <span class="lang-en">Choose in Catalog</span>
                     </a>
                     <a href="https://t.me/muviobot" target="_blank" rel="noopener noreferrer"
-                        class="chamfer-btn bg-white hover:bg-slate-50 text-[#111827] border border-slate-300 font-brand font-bold text-xs sm:text-sm uppercase tracking-wider px-6 py-3 flex items-center justify-center gap-2">
-                        <i data-lucide="send" class="w-4 h-4 text-[#1D5D3B]"></i>
+                        class="cabinet-ghost-btn px-5 py-2.5 flex items-center justify-center gap-2 text-xs sm:text-sm font-semibold uppercase tracking-wider text-zinc-800 dark:text-zinc-200">
+                        <i data-lucide="send" class="w-4 h-4 text-emerald-500"></i>
                         <span class="lang-ua">Зв'язатися з менеджером</span>
                         <span class="lang-en">Contact Manager</span>
                     </a>
@@ -891,28 +1267,28 @@
             <div id="activeRentalSection" class="hidden space-y-8 w-full">
 
                 <!-- 1. ПОТОЧНИЙ СТАТУС ОРЕНДИ -->
-                <div id="activeRentalCard" class="hidden w-full bg-white border-2 border-[#1D5D3B] p-6 sm:p-8 chamfer-box shadow-md flex-col">
+                <div id="activeRentalCard" class="hidden w-full cabinet-card p-6 sm:p-8 flex-col">
                     
-                    <!-- ВЕРХНІЙ РЯД: Основна інформація -->
-                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                    <!-- ВЕРХНІЙ РЯД: Основна інформація у 2 колонках -->
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
                         
-                        <!-- ЗЛІВА (ок. 5 колонок): фото скутера -->
-                        <div class="md:col-span-5 rounded-xl bg-gray-50 border border-gray-200 overflow-hidden flex items-center justify-center p-3 sm:p-4 min-h-[220px] sm:min-h-[260px]">
+                        <!-- ЗЛІВА (lg:col-span-5): фото скутера з м'яким радіальним підсвічуванням -->
+                        <div class="lg:col-span-5 cabinet-vehicle-display flex items-center justify-center p-4 sm:p-6 min-h-[220px] sm:min-h-[260px] relative overflow-hidden">
                             <img id="rentalVehicleImg" src="images/f606.jpg" alt="Aima F606 №1"
-                                class="w-full h-48 sm:h-56 object-contain hover:scale-105 transition-transform duration-300">
+                                class="w-full h-48 sm:h-56 object-contain relative z-10 transition-transform duration-500 hover:scale-105">
                         </div>
 
-                        <!-- СПРАВА (ок. 7 колонок): блок з характеристиками та статусом -->
-                        <div class="md:col-span-7 flex flex-col justify-center space-y-4">
+                        <!-- СПРАВА (lg:col-span-7): блок з назвою, договором та сіткою 4 метрик -->
+                        <div class="lg:col-span-7 flex flex-col justify-between space-y-4">
                             
                             <!-- Назва та статус-бейдж -->
-                            <div class="flex flex-wrap items-center justify-between gap-3 pb-2 border-b border-gray-100">
-                                <h3 id="rentalVehicleTitle" class="font-brand font-bold text-2xl text-gray-900 tracking-tight">
+                            <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-zinc-200/60 dark:border-white/5">
+                                <h3 id="rentalVehicleTitle" class="cabinet-heading text-2xl sm:text-3xl text-zinc-900 dark:text-white">
                                     Aima F606 №1
                                 </h3>
                                 <span id="rentalStatusBadge"
-                                    class="badge-status-active inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-[#1D5D3B] border border-emerald-200 font-brand font-bold text-xs uppercase tracking-wider chamfer-badge" data-status="active">
-                                    <span class="w-2 h-2 bg-[#10B981] rounded-full pulse-emerald"></span>
+                                    class="badge-status-active cabinet-pill-badge inline-flex items-center gap-2 px-3 py-1 text-xs font-semibold uppercase tracking-wider" data-status="active">
+                                    <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse-emerald"></span>
                                     <span id="rentalStatusText">
                                         <span class="lang-ua">АКТИВНА ОРЕНДА</span>
                                         <span class="lang-en">ACTIVE RENTAL</span>
@@ -921,58 +1297,58 @@
                             </div>
 
                             <!-- Номер рами / ID та Договір -->
-                            <div class="text-xs sm:text-sm text-gray-300 font-mono font-medium flex flex-wrap items-center gap-x-2">
+                            <div class="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 font-mono flex flex-wrap items-center gap-x-2 gap-y-1">
                                 <span>
                                     <span class="lang-ua">Номер рами / ID:</span>
                                     <span class="lang-en">Frame ID:</span>
-                                    <span id="rentalPlateNumber" class="text-white font-bold">F606-OD-001</span>
+                                    <span id="rentalPlateNumber" class="text-zinc-900 dark:text-white font-bold ml-1">F606-OD-001</span>
                                 </span>
-                                <span class="text-gray-400">|</span>
+                                <span class="opacity-40">|</span>
                                 <span>
                                     <span class="lang-ua">Договір:</span>
                                     <span class="lang-en">Contract:</span>
-                                    <span id="rentalContractNumber" class="text-gray-300 font-medium">№1409 від 14.09.2026</span>
+                                    <span id="rentalContractNumber" class="text-zinc-700 dark:text-zinc-300 font-medium ml-1">№1409 від 14.09.2026</span>
                                 </span>
                             </div>
 
-                            <!-- Сітка параметрів (2x2) -->
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 bg-gray-50 p-4 rounded-xl border border-gray-200 text-xs sm:text-sm">
-                                <div>
-                                    <span class="text-gray-500 block text-xs mb-0.5">
+                            <!-- 4 міні-віджети (metric cards) у сітці 2x2 -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                                <div class="cabinet-metric-card">
+                                    <span class="cabinet-label block mb-1">
                                         <span class="lang-ua">Діє до:</span>
                                         <span class="lang-en">Valid until:</span>
                                     </span>
-                                    <span id="rentalEndDate" class="font-brand font-bold text-sm text-gray-900">
+                                    <span id="rentalEndDate" class="cabinet-value text-sm sm:text-[15px] text-zinc-900 dark:text-white block">
                                         <span class="lang-ua">2026-09-20 23:59 (До кінця оренди: 6 дн. 21 год.)</span>
                                         <span class="lang-en">2026-09-20 23:59 (Remaining: 6 d. 21 h.)</span>
                                     </span>
                                 </div>
-                                <div>
-                                    <span class="text-gray-500 block text-xs mb-0.5">
+                                <div class="cabinet-metric-card">
+                                    <span class="cabinet-label block mb-1">
                                         <span class="lang-ua">Тариф / До сплати:</span>
                                         <span class="lang-en">Rate / To pay:</span>
                                     </span>
-                                    <span id="rentalRate" class="font-brand font-bold text-sm text-[#1D5D3B]">
+                                    <span id="rentalRate" class="cabinet-value text-sm sm:text-[15px] text-emerald-600 dark:text-emerald-400 block font-bold">
                                         <span class="lang-ua">2 200.00 грн / тиждень</span>
                                         <span class="lang-en">2,200.00 UAH / week</span>
                                     </span>
                                 </div>
-                                <div>
-                                    <span class="text-gray-500 block text-xs mb-0.5">
+                                <div class="cabinet-metric-card">
+                                    <span class="cabinet-label block mb-1">
                                         <span class="lang-ua">Бонусний баланс:</span>
                                         <span class="lang-en">Bonus balance:</span>
                                     </span>
-                                    <span id="rentalBonusBalance" class="font-brand font-bold text-sm text-emerald-700">
+                                    <span id="rentalBonusBalance" class="cabinet-value text-sm sm:text-[15px] text-emerald-600 dark:text-emerald-400 block font-bold">
                                         <span class="lang-ua">0.00 грн</span>
                                         <span class="lang-en">0.00 UAH</span>
                                     </span>
                                 </div>
-                                <div>
-                                    <span class="text-gray-500 block text-xs mb-0.5">
+                                <div class="cabinet-metric-card">
+                                    <span class="cabinet-label block mb-1">
                                         <span class="lang-ua">Сервісний хаб:</span>
                                         <span class="lang-en">Service hub:</span>
                                     </span>
-                                    <span id="rentalServiceHub" class="font-brand font-bold text-sm text-gray-800">
+                                    <span id="rentalServiceHub" class="cabinet-value text-sm sm:text-[15px] text-zinc-800 dark:text-zinc-200 block">
                                         <span class="lang-ua">Одеса, вул. Приморська, 22</span>
                                         <span class="lang-en">Odesa, 22 Prymorska Str.</span>
                                     </span>
@@ -982,26 +1358,26 @@
                         </div>
                     </div>
 
-                    <!-- СЕРЕДНІЙ РЯД: Шкала розрахункового періоду -->
-                    <div class="w-full mt-6 pt-6 border-t border-gray-100 space-y-2.5">
-                        <div class="flex flex-wrap justify-between items-center gap-2 text-xs font-brand uppercase tracking-wider">
-                            <span class="text-gray-700 font-bold flex items-center gap-1.5">
-                                <i data-lucide="clock" class="w-4 h-4 text-[#1D5D3B]"></i>
+                    <!-- СЕРЕДНІЙ РЯД: Ультратонкий Progress-bar розрахункового періоду -->
+                    <div class="w-full mt-7 pt-6 border-t border-zinc-200/60 dark:border-white/5 space-y-2.5">
+                        <div class="flex flex-wrap justify-between items-center gap-2">
+                            <span class="cabinet-label flex items-center gap-1.5 text-zinc-600 dark:text-zinc-300 font-bold">
+                                <i data-lucide="clock" class="w-3.5 h-3.5 text-emerald-500"></i>
                                 <span class="lang-ua">ШКАЛА РОЗРАХУНКОВОГО ПЕРІОДУ</span>
                                 <span class="lang-en">BILLING CYCLE TIMELINE</span>
                             </span>
-                            <span id="rentalPeriodScaleText" class="text-[#1D5D3B] font-bold font-mono text-xs sm:text-sm">
+                            <span id="rentalPeriodScaleText" class="text-emerald-600 dark:text-emerald-400 font-bold font-mono text-xs sm:text-sm tracking-tight">
                                 <span class="lang-ua">ОПЛАЧЕНО ДО 2026-09-20 (ЗАЛИШИЛОСЬ: 6 ДН. 21 ГОД.)</span>
                                 <span class="lang-en">PAID UNTIL 2026-09-20 (REMAINING: 6 D. 21 H.)</span>
                             </span>
                         </div>
-                        <div class="w-full bg-gray-200 h-3 sm:h-3.5 rounded-full overflow-hidden p-0.5 border border-gray-200">
+                        <div class="w-full cabinet-progress-track">
                             <div id="rentalPeriodProgressBar"
-                                class="bg-gradient-to-r from-[#1D5D3B] to-[#10B981] h-full rounded-full transition-all duration-700"
+                                class="cabinet-progress-fill"
                                 style="width: 85%;">
                             </div>
                         </div>
-                        <div class="flex justify-between text-[11px] font-mono text-gray-400 px-0.5">
+                        <div class="flex justify-between text-[11px] font-mono text-zinc-400 dark:text-zinc-500 px-0.5">
                             <span>
                                 <span class="lang-ua">Початок періоду</span>
                                 <span class="lang-en">Cycle start</span>
@@ -1010,31 +1386,31 @@
                                 <span class="lang-ua">Екватор тижня</span>
                                 <span class="lang-en">Midweek</span>
                             </span>
-                            <span class="text-[#1D5D3B] font-bold">
+                            <span class="text-emerald-500 font-semibold">
                                 <span class="lang-ua">Оплачено</span>
                                 <span class="lang-en">Paid</span>
                             </span>
                         </div>
                     </div>
 
-                    <!-- НИЖНІЙ РЯД: Кнопки дій (Оренда + Поломка) -->
+                    <!-- НИЖНІЙ РЯД: Кнопки дій (Оплата + Поломка) -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
                         <button type="button" id="cabinet-btn-pay" onclick="showPaymentModal('rent')"
-                            class="w-full bg-[#1D5D3B] text-white hover:bg-[#16472d] font-brand font-semibold text-xs sm:text-sm uppercase py-3 px-4 rounded-lg shadow-sm flex items-center justify-center gap-2 transition-all">
+                            class="cabinet-action-btn-pay">
                             <i data-lucide="credit-card" class="w-4 h-4 shrink-0"></i>
                             <span class="lang-ua">ОПЛАТА ОРЕНДИ</span>
                             <span class="lang-en">PAY RENT</span>
                         </button>
                         <!-- HIDDEN BUYOUT BUTTON. TO RESTORE REMOVE 'hidden' -->
                         <button type="button" id="cabinet-btn-buyout" onclick="handleBuyoutRequest()"
-                            class="hidden w-full bg-white text-[#1D5D3B] border-2 border-[#1D5D3B] hover:bg-emerald-50/50 font-brand font-semibold text-xs sm:text-sm uppercase py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition-all group">
+                            class="hidden cabinet-action-btn-secondary">
                             <i data-lucide="award" class="w-4 h-4 shrink-0"></i>
                             <span class="lang-ua">ПОДАТИ ЗАЯВКУ НА ВИКУП</span>
                             <span class="lang-en">APPLY FOR BUYOUT</span>
                         </button>
                         <a href="https://t.me/muviobot?start=sos" target="_blank" rel="noopener noreferrer" id="cabinet-btn-breakdown"
-                            class="w-full bg-white text-red-600 border-2 border-red-300 hover:bg-red-50 font-brand font-semibold text-xs sm:text-sm uppercase py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition-all">
-                            <i data-lucide="alert-triangle" class="w-4 h-4 shrink-0 text-red-500"></i>
+                            class="cabinet-action-btn-breakdown">
+                            <i data-lucide="alert-triangle" class="w-4 h-4 shrink-0"></i>
                             <span class="lang-ua">ПОВІДОМИТИ ПРО ПОЛОМКУ</span>
                             <span class="lang-en">REPORT BREAKDOWN</span>
                         </a>
@@ -1043,18 +1419,18 @@
 
                 <!-- 2. ПРОГРЕС ВИКУПУ (RENT-TO-OWN) -->
                 <!-- HIDDEN BUYOUT PROGRESS. TO RESTORE REMOVE 'hidden' AND style="display: none !important;" -->
-                <div id="activeBuyoutCard" class="hidden w-full bg-white border-2 border-[#1D5D3B] p-6 sm:p-8 chamfer-box shadow-md flex-col justify-between" style="display: none !important;">
+                <div id="activeBuyoutCard" class="hidden w-full cabinet-card p-6 sm:p-8 flex-col justify-between" style="display: none !important;">
                     <div class="space-y-5">
-                        <div class="flex items-center justify-between pb-3 border-b border-slate-200">
+                        <div class="flex items-center justify-between pb-3 border-b border-zinc-200/60 dark:border-white/5">
                             <div class="flex items-center gap-2">
-                                <i data-lucide="award" class="w-5 h-5 text-[#1D5D3B]"></i>
-                                <h3 class="font-brand font-bold text-lg uppercase tracking-wider text-[#111827]">
+                                <i data-lucide="award" class="w-5 h-5 text-emerald-500"></i>
+                                <h3 class="cabinet-heading text-lg uppercase tracking-wider text-zinc-900 dark:text-white">
                                     <span class="lang-ua">ПРОГРАМА ВИКУПУ (RENT-TO-OWN)</span>
                                     <span class="lang-en">BUYOUT PROGRAM (RENT-TO-OWN)</span>
                                 </h3>
                             </div>
                             <span id="buyoutStatusBadge"
-                                class="inline-flex items-center px-2.5 py-1 bg-[#1D5D3B]/10 text-[#1D5D3B] font-brand font-bold text-xs uppercase tracking-wider chamfer-badge">
+                                class="cabinet-pill-badge inline-flex items-center px-3 py-1 text-xs font-semibold uppercase tracking-wider">
                                 <span class="lang-ua">ДОГОВІР АКТИВНИЙ</span>
                                 <span class="lang-en">CONTRACT ACTIVE</span>
                             </span>
@@ -1062,10 +1438,10 @@
 
                         <!-- Модель у викупі -->
                         <div>
-                            <div id="buyoutVehicleTitle" class="font-brand font-bold text-lg text-[#111827]">
+                            <div id="buyoutVehicleTitle" class="cabinet-heading text-lg text-zinc-900 dark:text-white">
                                 —
                             </div>
-                            <div class="text-xs text-slate-500 font-mono">
+                            <div class="text-xs text-zinc-500 dark:text-zinc-400 font-mono mt-0.5">
                                 <span class="lang-ua">Термін викупу:</span>
                                 <span class="lang-en">Buyout term:</span>
                                 <span id="buyoutTerm">—</span> // 
@@ -1076,46 +1452,46 @@
                         </div>
 
                         <!-- Фінансові цифри викупу -->
-                        <div class="grid grid-cols-3 gap-2 text-center bg-[#F8FAFC] p-3 border border-slate-200">
-                            <div>
-                                <span class="text-[10px] uppercase font-brand text-slate-500 block">
+                        <div class="grid grid-cols-3 gap-3 text-center">
+                            <div class="cabinet-metric-card">
+                                <span class="cabinet-label block mb-1">
                                     <span class="lang-ua">Повна ціна</span>
                                     <span class="lang-en">Full Price</span>
                                 </span>
-                                <span id="buyoutTotalPrice" class="font-brand font-bold text-base text-slate-800">— ₴</span>
+                                <span id="buyoutTotalPrice" class="cabinet-value text-base text-zinc-900 dark:text-white block">— ₴</span>
                             </div>
-                            <div>
-                                <span class="text-[10px] uppercase font-brand text-[#1D5D3B] block">
+                            <div class="cabinet-metric-card">
+                                <span class="cabinet-label block mb-1 text-emerald-600 dark:text-emerald-400">
                                     <span class="lang-ua">Виплачено</span>
                                     <span class="lang-en">Paid Off</span>
                                 </span>
-                                <span id="buyoutPaidAmount" class="font-brand font-bold text-base text-[#1D5D3B]">0 ₴</span>
+                                <span id="buyoutPaidAmount" class="cabinet-value text-base text-emerald-600 dark:text-emerald-400 block">0 ₴</span>
                             </div>
-                            <div>
-                                <span class="text-[10px] uppercase font-brand text-amber-600 block">
+                            <div class="cabinet-metric-card">
+                                <span class="cabinet-label block mb-1 text-amber-500">
                                     <span class="lang-ua">Залишок</span>
                                     <span class="lang-en">Remaining</span>
                                 </span>
-                                <span id="buyoutRemainingAmount" class="font-brand font-bold text-base text-amber-700">— ₴</span>
+                                <span id="buyoutRemainingAmount" class="cabinet-value text-base text-amber-500 block">— ₴</span>
                             </div>
                         </div>
 
                         <!-- Шкала прогресу -->
                         <div class="space-y-2">
-                            <div class="flex justify-between items-center text-xs font-brand font-bold uppercase tracking-wider">
-                                <span class="text-slate-600">
+                            <div class="flex justify-between items-center text-xs">
+                                <span class="cabinet-label">
                                     <span class="lang-ua">Прогрес до власності:</span>
                                     <span class="lang-en">Progress to ownership:</span>
                                 </span>
-                                <span id="buyoutPercentDisplay" class="text-[#1D5D3B] text-sm">0%</span>
+                                <span id="buyoutPercentDisplay" class="cabinet-value text-emerald-500 text-sm">0%</span>
                             </div>
-                            <div class="w-full bg-slate-200 h-4 rounded-none overflow-hidden border border-slate-300">
+                            <div class="w-full cabinet-progress-track">
                                 <div id="buyoutProgressBar"
-                                    class="bg-gradient-to-r from-[#1D5D3B] to-[#10B981] h-full transition-all duration-700 relative"
+                                    class="cabinet-progress-fill"
                                     style="width: 0%;">
                                 </div>
                             </div>
-                            <div class="flex justify-between text-[10px] font-mono text-slate-400">
+                            <div class="flex justify-between text-[10px] font-mono text-zinc-400">
                                 <span><span class="lang-ua">Старт</span><span class="lang-en">Start</span></span>
                                 <span>50%</span>
                                 <span><span class="lang-ua">100% ВЛАСНИК</span><span class="lang-en">100% OWNER</span></span>
@@ -1124,9 +1500,9 @@
                     </div>
 
                     <!-- Дія викупу -->
-                    <div class="pt-6 border-t border-slate-200 mt-6 flex flex-col sm:flex-row gap-2">
+                    <div class="pt-6 border-t border-zinc-200/60 dark:border-white/5 mt-6 flex flex-col sm:flex-row gap-2">
                         <button type="button" onclick="showPaymentModal('buyout')"
-                            class="chamfer-btn flex-1 bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs uppercase py-2.5 flex items-center justify-center gap-1.5">
+                            class="cabinet-action-btn-pay">
                             <i data-lucide="wallet" class="w-4 h-4"></i>
                             <span class="lang-ua">СПЛАТИТИ ВНЕСОК ЗА ВИКУП (IBAN)</span>
                             <span class="lang-en">PAY BUYOUT INSTALLMENT (IBAN)</span>
@@ -1137,21 +1513,21 @@
             </div>
 
             <!-- Нижня секція: Вкладки історії платежів, ремонтів та техпідтримки -->
-            <div class="bg-white border-2 border-[#1D5D3B] p-6 sm:p-8 chamfer-box shadow-md">
+            <div class="cabinet-card p-6 sm:p-8">
                 <!-- Заголовки вкладок -->
-                <div class="flex flex-wrap gap-2.5 border-b-2 border-slate-200 pb-4">
+                <div class="flex flex-wrap gap-2.5 border-b border-zinc-200/60 dark:border-white/5 pb-4">
                     <button type="button" id="tabBtnPayments" onclick="switchCabinetTab('payments')"
-                        class="chamfer-badge px-5 py-2.5 font-brand font-semibold text-sm sm:text-[15px] uppercase tracking-wider bg-[#1D5D3B] text-white transition-all leading-normal">
+                        class="cabinet-tab-btn active">
                         <span class="lang-ua">💳 ІСТОРІЯ ПЛАТЕЖІВ</span>
                         <span class="lang-en">💳 PAYMENT HISTORY</span>
                     </button>
                     <button type="button" id="tabBtnRepairs" onclick="switchCabinetTab('repairs')"
-                        class="chamfer-badge px-5 py-2.5 font-brand font-semibold text-sm sm:text-[15px] uppercase tracking-wider bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all leading-normal">
+                        class="cabinet-tab-btn">
                         <span class="lang-ua">🛠 ІСТОРІЯ ТО ТА РЕМОНТІВ</span>
                         <span class="lang-en">🛠 MAINTENANCE & REPAIRS</span>
                     </button>
                     <button type="button" id="tabBtnService" onclick="switchCabinetTab('service')"
-                        class="chamfer-badge px-5 py-2.5 font-brand font-semibold text-sm sm:text-[15px] uppercase tracking-wider bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all leading-normal">
+                        class="cabinet-tab-btn">
                         <span class="lang-ua">📍 СЕРВІСНИЙ ХАБ ТА SOS</span>
                         <span class="lang-en">📍 SERVICE HUB & SOS</span>
                     </button>
@@ -1159,18 +1535,18 @@
 
                 <!-- ВМІСТ 1: Історія платежів -->
                 <div id="tabContentPayments" class="pt-6">
-                    <div class="overflow-x-auto">
+                    <div class="overflow-x-auto rounded-xl border border-zinc-200/60 dark:border-white/5">
                         <table class="w-full text-left text-xs border-collapse">
                             <thead>
-                                <tr class="bg-slate-100 border-b border-slate-200 font-brand uppercase tracking-wider text-slate-600">
-                                    <th class="p-3"><span class="lang-ua">Дата</span><span class="lang-en">Date</span></th>
-                                    <th class="p-3"><span class="lang-ua">Призначення</span><span class="lang-en">Description</span></th>
-                                    <th class="p-3"><span class="lang-ua">Сума</span><span class="lang-en">Amount</span></th>
-                                    <th class="p-3"><span class="lang-ua">Бонуси</span><span class="lang-en">Bonuses</span></th>
-                                    <th class="p-3"><span class="lang-ua">Статус</span><span class="lang-en">Status</span></th>
+                                <tr class="bg-zinc-50 dark:bg-white/[0.02] border-b border-zinc-200/60 dark:border-white/5 font-brand uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+                                    <th class="p-3.5"><span class="lang-ua">Дата</span><span class="lang-en">Date</span></th>
+                                    <th class="p-3.5"><span class="lang-ua">Призначення</span><span class="lang-en">Description</span></th>
+                                    <th class="p-3.5"><span class="lang-ua">Сума</span><span class="lang-en">Amount</span></th>
+                                    <th class="p-3.5"><span class="lang-ua">Бонуси</span><span class="lang-en">Bonuses</span></th>
+                                    <th class="p-3.5"><span class="lang-ua">Статус</span><span class="lang-en">Status</span></th>
                                 </tr>
                             </thead>
-                            <tbody id="paymentsTableBody" class="divide-y divide-slate-200 font-mono">
+                            <tbody id="paymentsTableBody" class="divide-y divide-zinc-200/60 dark:divide-white/5 font-mono">
                                 <!-- Рендериться динамічно через JS -->
                             </tbody>
                         </table>
@@ -1179,18 +1555,18 @@
 
                 <!-- ВМІСТ 2: Історія ремонтів -->
                 <div id="tabContentRepairs" class="pt-6 hidden">
-                    <div class="overflow-x-auto">
+                    <div class="overflow-x-auto rounded-xl border border-zinc-200/60 dark:border-white/5">
                         <table class="w-full text-left text-xs border-collapse">
                             <thead>
-                                <tr class="bg-slate-100 border-b border-slate-200 font-brand uppercase tracking-wider text-slate-600">
-                                    <th class="p-3"><span class="lang-ua">Дата</span><span class="lang-en">Date</span></th>
-                                    <th class="p-3"><span class="lang-ua">Вид робіт / Запчастини</span><span class="lang-en">Work / Parts</span></th>
-                                    <th class="p-3"><span class="lang-ua">Категорія</span><span class="lang-en">Category</span></th>
-                                    <th class="p-3"><span class="lang-ua">Вартість для клієнта</span><span class="lang-en">Cost</span></th>
-                                    <th class="p-3"><span class="lang-ua">Статус</span><span class="lang-en">Status</span></th>
+                                <tr class="bg-zinc-50 dark:bg-white/[0.02] border-b border-zinc-200/60 dark:border-white/5 font-brand uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+                                    <th class="p-3.5"><span class="lang-ua">Дата</span><span class="lang-en">Date</span></th>
+                                    <th class="p-3.5"><span class="lang-ua">Вид робіт / Запчастини</span><span class="lang-en">Work / Parts</span></th>
+                                    <th class="p-3.5"><span class="lang-ua">Категорія</span><span class="lang-en">Category</span></th>
+                                    <th class="p-3.5"><span class="lang-ua">Вартість для клієнта</span><span class="lang-en">Cost</span></th>
+                                    <th class="p-3.5"><span class="lang-ua">Статус</span><span class="lang-en">Status</span></th>
                                 </tr>
                             </thead>
-                            <tbody id="repairsTableBody" class="divide-y divide-slate-200 font-mono">
+                            <tbody id="repairsTableBody" class="divide-y divide-zinc-200/60 dark:divide-white/5 font-mono">
                                 <!-- Рендериться динамічно через JS -->
                             </tbody>
                         </table>
@@ -1200,36 +1576,36 @@
                 <!-- ВМІСТ 3: Сервісний хаб та SOS -->
                 <div id="tabContentService" class="pt-6 hidden space-y-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="bg-[#F8FAFC] border border-[#1D5D3B] p-5 chamfer-box space-y-3">
+                        <div class="cabinet-metric-card p-5 space-y-3">
                             <div class="flex items-center gap-2">
-                                <i data-lucide="map-pin" class="w-5 h-5 text-[#1D5D3B]"></i>
-                                <span class="font-brand font-bold text-sm uppercase tracking-wider text-[#111827]">
+                                <i data-lucide="map-pin" class="w-5 h-5 text-emerald-500"></i>
+                                <span class="cabinet-heading text-sm uppercase tracking-wider text-zinc-900 dark:text-white">
                                     ТОЧКА ВИДАЧІ ТА СЕРВІС В ОДЕСІ
                                 </span>
                             </div>
-                            <div class="text-xs text-slate-600 space-y-1">
-                                <p><strong>Адреса:</strong> м. Одеса, вул. Приморська, 22 (біля Військового узвозу)</p>
-                                <p><strong>Графік роботи:</strong> Щодня 11:00 — 22:00 без вихідних</p>
-                                <p><strong>Послуги:</strong> Планове ТО (безкоштовно), швидка заміна АКБ (Swap), підкачка коліс, протяжка гальм.</p>
+                            <div class="text-xs text-zinc-600 dark:text-zinc-400 space-y-1.5 leading-relaxed">
+                                <p><strong class="text-zinc-800 dark:text-zinc-200">Адреса:</strong> м. Одеса, вул. Приморська, 22 (біля Військового узвозу)</p>
+                                <p><strong class="text-zinc-800 dark:text-zinc-200">Графік роботи:</strong> Щодня 11:00 — 22:00 без вихідних</p>
+                                <p><strong class="text-zinc-800 dark:text-zinc-200">Послуги:</strong> Планове ТО (безкоштовно), швидка заміна АКБ (Swap), підкачка коліс, протяжка гальм.</p>
                             </div>
                         </div>
 
-                        <div class="bg-[#F8FAFC] border border-[#1D5D3B] p-5 chamfer-box space-y-3">
+                        <div class="cabinet-metric-card p-5 space-y-3">
                             <div class="flex items-center gap-2">
-                                <i data-lucide="phone-call" class="w-5 h-5 text-[#1D5D3B]"></i>
-                                <span class="font-brand font-bold text-sm uppercase tracking-wider text-[#111827]">
+                                <i data-lucide="phone-call" class="w-5 h-5 text-emerald-500"></i>
+                                <span class="cabinet-heading text-sm uppercase tracking-wider text-zinc-900 dark:text-white">
                                     ШВИДКИЙ ЗВ'ЯЗОК З МАЙСТРОМ / SOS
                                 </span>
                             </div>
-                            <div class="text-xs text-slate-600 space-y-2">
+                            <div class="text-xs text-zinc-600 dark:text-zinc-400 space-y-2">
                                 <p>Якщо скутер пошкоджено, пробито колесо або потрібна евакуація в Одесі:</p>
                                 <div class="flex flex-col sm:flex-row gap-2 pt-1">
                                     <a href="tel:+380638316361"
-                                        class="chamfer-btn bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs uppercase py-2 px-3 text-center">
+                                        class="cabinet-action-btn-pay !h-9 !text-xs !px-4">
                                         📞 +38(063)-831-63-61
                                     </a>
                                     <a href="https://t.me/Muvio_Odesa" target="_blank"
-                                        class="chamfer-btn bg-white border border-[#1D5D3B] text-[#1D5D3B] font-brand font-bold text-xs uppercase py-2 px-3 text-center">
+                                        class="cabinet-ghost-btn !h-9 !text-xs !px-4 flex items-center justify-center">
                                         💬 ЧАТ ТЕХПІДТРИМКИ
                                     </a>
                                 </div>
@@ -1245,59 +1621,61 @@
     </main>
 
     <!-- ==================== МОДАЛЬНЕ ВІКНО РЕКВІЗИТІВ IBAN (ДЛЯ ОРЕНДИ / ВИКУПУ) ==================== -->
-    <div id="paymentModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white border-2 border-[#1D5D3B] max-w-lg w-full p-6 sm:p-8 chamfer-box space-y-5 shadow-2xl">
-            <div class="flex items-center justify-between pb-3 border-b border-slate-200">
-                <div class="flex items-center gap-2">
-                    <i data-lucide="building-2" class="w-5 h-5 text-[#1D5D3B]"></i>
-                    <h3 id="modalPaymentTitle" class="font-brand font-bold text-base uppercase tracking-wider text-[#111827]">
+    <div id="paymentModal" class="fixed inset-0 bg-black/75 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="cabinet-card max-w-lg w-full p-6 sm:p-8 space-y-5 shadow-2xl relative">
+            <div class="flex items-center justify-between pb-3.5 border-b border-zinc-200/60 dark:border-white/5">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-500">
+                        <i data-lucide="building-2" class="w-4 h-4"></i>
+                    </div>
+                    <h3 id="modalPaymentTitle" class="cabinet-heading text-base uppercase tracking-wider text-zinc-900 dark:text-white">
                         ОПЛАТА ЗА РЕКВІЗИТАМИ ФОП
                     </h3>
                 </div>
-                <button type="button" onclick="closePaymentModal()" class="text-slate-400 hover:text-slate-700">
+                <button type="button" onclick="closePaymentModal()" class="text-zinc-400 hover:text-zinc-700 dark:hover:text-white p-1 rounded-lg transition-colors">
                     <i data-lucide="x" class="w-5 h-5"></i>
                 </button>
             </div>
 
-            <div class="space-y-3 text-xs">
+            <div class="space-y-3.5 text-xs">
                 <div>
-                    <span class="text-slate-500 block">Отримувач:</span>
-                    <span class="font-semibold text-slate-900">ФОП Привалов Максим Олександрович</span>
+                    <span class="cabinet-label block mb-1">Отримувач:</span>
+                    <span class="font-semibold text-zinc-900 dark:text-white text-sm">ФОП Привалов Максим Олександрович</span>
                 </div>
                 <div>
-                    <span class="text-slate-500 block">Код ЄДРПОУ/РНОКПП:</span>
-                    <div class="flex items-center justify-between bg-slate-100 p-2 chamfer-badge mt-1">
-                        <code class="font-mono text-xs font-bold text-slate-800">3894802591</code>
-                        <button onclick="copyToClipboard('3894802591', this)" class="text-[#1D5D3B] hover:underline font-brand font-bold uppercase text-[10px]">Копіювати</button>
+                    <span class="cabinet-label block mb-1">Код ЄДРПОУ/РНОКПП:</span>
+                    <div class="flex items-center justify-between cabinet-metric-card !p-2.5 mt-1">
+                        <code class="font-mono text-xs font-bold text-zinc-900 dark:text-zinc-100">3894802591</code>
+                        <button onclick="copyToClipboard('3894802591', this)" class="text-emerald-600 dark:text-emerald-400 hover:underline font-brand font-semibold uppercase text-[11px] tracking-wide">Копіювати</button>
                     </div>
                 </div>
                 <div>
-                    <span class="text-slate-500 block">Рахунок IBAN (ПриватБанк):</span>
-                    <div class="flex items-center justify-between bg-slate-100 p-2 chamfer-badge mt-1">
-                        <code class="font-mono text-xs font-bold text-slate-800 break-all">UA213220010000026005350116194</code>
-                        <button onclick="copyToClipboard('UA213220010000026005350116194', this)" class="text-[#1D5D3B] hover:underline font-brand font-bold uppercase text-[10px] ml-2 flex-shrink-0">Копіювати</button>
+                    <span class="cabinet-label block mb-1">Рахунок IBAN (ПриватБанк):</span>
+                    <div class="flex items-center justify-between cabinet-metric-card !p-2.5 mt-1">
+                        <code class="font-mono text-xs font-bold text-zinc-900 dark:text-zinc-100 break-all">UA213220010000026005350116194</code>
+                        <button onclick="copyToClipboard('UA213220010000026005350116194', this)" class="text-emerald-600 dark:text-emerald-400 hover:underline font-brand font-semibold uppercase text-[11px] tracking-wide ml-2 flex-shrink-0">Копіювати</button>
                     </div>
                 </div>
                 <div>
-                    <span class="text-slate-500 block">Обов'язкове призначення платежу:</span>
-                    <div class="bg-emerald-50 border border-emerald-300 p-3 chamfer-badge mt-1 space-y-2">
-                        <p id="modalPaymentPurpose" class="font-mono text-[11px] text-emerald-950 leading-relaxed break-words">
+                    <span class="cabinet-label block mb-1">Обов'язкове призначення платежу:</span>
+                    <div class="cabinet-metric-card !border-emerald-500/30 !bg-emerald-500/5 mt-1 space-y-2">
+                        <p id="modalPaymentPurpose" class="font-mono text-[11px] text-zinc-800 dark:text-emerald-300 leading-relaxed break-words">
                             Платіж за оренду або викуп транспортного засобу. Без ПДВ.
                         </p>
                         <button onclick="copyToClipboard(document.getElementById('modalPaymentPurpose').innerText, this)"
-                            class="chamfer-btn bg-[#1D5D3B] text-white font-brand font-bold text-[10px] uppercase px-3 py-1">
+                            class="cabinet-action-btn-pay !h-8 !text-[11px] !px-3 !w-auto">
                             Скопіювати призначення
                         </button>
                     </div>
                 </div>
             </div>
 
-            <p class="text-[11px] text-slate-500 italic">
-                ℹ️ Після оплати надішліть квитанцію адміністратору в Telegram <a href="https://t.me/Muvio_Odesa" target="_blank" class="text-[#1D5D3B] font-bold underline">@Muvio_Odesa</a> для миттєвого зарахування до вашого профілю.
+            <p class="text-[11px] text-zinc-500 dark:text-zinc-400 leading-relaxed italic">
+                ℹ️ Після оплати надішліть квитанцію адміністратору в Telegram <a href="https://t.me/Muvio_Odesa" target="_blank" class="text-emerald-600 dark:text-emerald-400 font-semibold underline">@Muvio_Odesa</a> для миттєвого зарахування до вашого профілю.
             </p>
 
             <button type="button" onclick="closePaymentModal()"
-                class="chamfer-btn w-full bg-slate-100 hover:bg-slate-200 text-slate-800 font-brand font-bold text-xs uppercase py-2.5">
+                class="cabinet-ghost-btn w-full !h-10 text-xs font-semibold uppercase tracking-wider flex items-center justify-center">
                 ЗАКРИТИ
             </button>
         </div>
@@ -2678,24 +3056,24 @@
             const hasBuyout = Boolean(buyout);
 
             if (hasRental) {
-                statusBadge.className = 'badge-status-active inline-flex items-center gap-1.5 px-2.5 py-1 bg-emerald-50 text-[#1D5D3B] border border-emerald-200 font-brand font-bold text-xs uppercase tracking-wider chamfer-badge';
+                statusBadge.className = 'badge-status-active cabinet-pill-badge inline-flex items-center gap-2 px-3 py-1 font-brand font-semibold text-xs uppercase tracking-wider';
                 statusBadge.setAttribute('data-status', 'active');
                 if (dotEl) {
-                    dotEl.className = 'w-2 h-2 bg-[#10B981] rounded-full pulse-emerald';
+                    dotEl.className = 'w-2 h-2 bg-emerald-500 rounded-full animate-pulse-emerald';
                 }
                 statusText.textContent = isEn ? 'ACTIVE RENTAL' : 'АКТИВНА ОРЕНДА';
             } else if (hasBuyout) {
-                statusBadge.className = 'badge-status-active inline-flex items-center gap-1.5 px-2.5 py-1 bg-emerald-50 text-[#1D5D3B] border border-emerald-200 font-brand font-bold text-xs uppercase tracking-wider chamfer-badge';
+                statusBadge.className = 'badge-status-active cabinet-pill-badge inline-flex items-center gap-2 px-3 py-1 font-brand font-semibold text-xs uppercase tracking-wider';
                 statusBadge.setAttribute('data-status', 'active');
                 if (dotEl) {
-                    dotEl.className = 'w-2 h-2 bg-[#10B981] rounded-full pulse-emerald';
+                    dotEl.className = 'w-2 h-2 bg-emerald-500 rounded-full animate-pulse-emerald';
                 }
                 statusText.textContent = isEn ? 'ACTIVE BUYOUT' : 'АКТИВНИЙ ВИКУП';
             } else {
-                statusBadge.className = 'inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-100 text-slate-600 border border-slate-200 font-brand font-bold text-xs uppercase tracking-wider chamfer-badge';
+                statusBadge.className = 'cabinet-pill-badge-inactive inline-flex items-center gap-2 px-3 py-1 font-brand font-medium text-xs uppercase tracking-wider';
                 statusBadge.removeAttribute('data-status');
                 if (dotEl) {
-                    dotEl.className = 'w-2 h-2 bg-slate-400 rounded-full';
+                    dotEl.className = 'w-2 h-2 bg-zinc-400 rounded-full';
                 }
                 statusText.textContent = isEn ? 'No active vehicle in rental' : 'Немає активної техніки в оренді';
             }
@@ -2882,20 +3260,22 @@
 
             // Скидання стилів кнопок
             [btnPay, btnRep, btnSrv].forEach(btn => {
-                btn.className = 'chamfer-badge px-5 py-2.5 font-brand font-semibold text-sm sm:text-[15px] uppercase tracking-wider bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all leading-normal';
+                if (btn) btn.className = 'cabinet-tab-btn';
             });
             // Приховування вмісту
-            [conPay, conRep, conSrv].forEach(con => con.classList.add('hidden'));
+            [conPay, conRep, conSrv].forEach(con => {
+                if (con) con.classList.add('hidden');
+            });
 
             if (tabName === 'payments') {
-                btnPay.className = 'chamfer-badge px-5 py-2.5 font-brand font-semibold text-sm sm:text-[15px] uppercase tracking-wider bg-[#1D5D3B] text-white transition-all leading-normal';
-                conPay.classList.remove('hidden');
+                if (btnPay) btnPay.className = 'cabinet-tab-btn active';
+                if (conPay) conPay.classList.remove('hidden');
             } else if (tabName === 'repairs') {
-                btnRep.className = 'chamfer-badge px-5 py-2.5 font-brand font-semibold text-sm sm:text-[15px] uppercase tracking-wider bg-[#1D5D3B] text-white transition-all leading-normal';
-                conRep.classList.remove('hidden');
+                if (btnRep) btnRep.className = 'cabinet-tab-btn active';
+                if (conRep) conRep.classList.remove('hidden');
             } else if (tabName === 'service') {
-                btnSrv.className = 'chamfer-badge px-5 py-2.5 font-brand font-semibold text-sm sm:text-[15px] uppercase tracking-wider bg-[#1D5D3B] text-white transition-all leading-normal';
-                conSrv.classList.remove('hidden');
+                if (btnSrv) btnSrv.className = 'cabinet-tab-btn active';
+                if (conSrv) conSrv.classList.remove('hidden');
             }
         }
 

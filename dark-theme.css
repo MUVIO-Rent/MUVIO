@@ -423,8 +423,7 @@ html.theme-dark button.bg-\[\#1D5D3B\],
 html.theme-dark .chamfer-btn.bg-\[\#1D5D3B\],
 html.theme-dark #calcTelegramBtn,
 html.theme-dark #hero-choose-btn,
-html.theme-dark #tab-all.bg-\[\#1D5D3B\],
-html.theme-dark #cabinet-btn-pay {
+html.theme-dark #tab-all.bg-\[\#1D5D3B\] {
     background-color: #1D5D3B !important;
     border: 1px solid #287A4E !important;
     color: #FFFFFF !important;
@@ -437,8 +436,7 @@ html.theme-dark button.bg-\[\#1D5D3B\]:hover,
 html.theme-dark .chamfer-btn.bg-\[\#1D5D3B\]:hover,
 html.theme-dark #calcTelegramBtn:hover,
 html.theme-dark #hero-choose-btn:hover,
-html.theme-dark #tab-all.bg-\[\#1D5D3B\]:hover,
-html.theme-dark #cabinet-btn-pay:hover {
+html.theme-dark #tab-all.bg-\[\#1D5D3B\]:hover {
     background-color: #237248 !important;
     border-color: #2D8A58 !important;
     box-shadow: 0 0 14px rgba(29, 93, 59, 0.6) !important;
@@ -449,8 +447,7 @@ html.theme-dark button.bg-\[\#1D5D3B\]:active,
 html.theme-dark .chamfer-btn.bg-\[\#1D5D3B\]:active,
 html.theme-dark #calcTelegramBtn:active,
 html.theme-dark #hero-choose-btn:active,
-html.theme-dark #tab-all.bg-\[\#1D5D3B\]:active,
-html.theme-dark #cabinet-btn-pay:active {
+html.theme-dark #tab-all.bg-\[\#1D5D3B\]:active {
     transform: scale(0.97) !important;
     box-shadow: 0 0 6px rgba(29, 93, 59, 0.3) !important;
 }
@@ -986,42 +983,47 @@ html.theme-dark #burger-btn:hover svg {
 
 /* 17. Cabinet Rental Control Buttons */
 html.theme-dark #cabinet-btn-pay {
-    background-color: #1D5D3B !important;
+    background: linear-gradient(135deg, #10B981 0%, #059669 100%) !important;
+    background-color: #10B981 !important;
     color: #FFFFFF !important;
-    border: 1px solid #287A4E !important;
-    box-shadow: 0 0 10px rgba(29, 93, 59, 0.45) !important;
+    border: 1px solid rgba(16, 185, 129, 0.4) !important;
+    box-shadow: 0 10px 24px -6px rgba(16, 185, 129, 0.35) !important;
 }
 
 html.theme-dark #cabinet-btn-pay:hover {
-    background-color: #237248 !important;
-    box-shadow: 0 0 14px rgba(29, 93, 59, 0.6) !important;
+    background: linear-gradient(135deg, #10B981 0%, #047857 100%) !important;
+    box-shadow: 0 14px 28px -6px rgba(16, 185, 129, 0.45) !important;
+    filter: brightness(1.06) !important;
 }
 
 html.theme-dark #cabinet-btn-buyout {
-    background-color: rgba(29, 93, 59, 0.25) !important;
-    color: #34A869 !important;
-    border: 1px solid #1D5D3B !important;
+    background-color: rgba(16, 185, 129, 0.12) !important;
+    color: #10B981 !important;
+    border: 1px solid rgba(16, 185, 129, 0.3) !important;
     box-shadow: none !important;
 }
 
 html.theme-dark #cabinet-btn-buyout:hover {
-    background-color: rgba(29, 93, 59, 0.4) !important;
-    border-color: #287A4E !important;
+    background-color: rgba(16, 185, 129, 0.22) !important;
+    border-color: rgba(16, 185, 129, 0.45) !important;
 }
 
 html.theme-dark #cabinet-btn-buyout i,
 html.theme-dark #cabinet-btn-buyout svg {
-    color: #34A869 !important;
+    color: #10B981 !important;
 }
 
 html.theme-dark #cabinet-btn-breakdown {
-    background-color: #161111 !important;
+    background-color: rgba(239, 68, 68, 0.08) !important;
     color: #F87171 !important;
-    border-color: rgba(239, 68, 68, 0.4) !important;
+    border: 1px solid rgba(239, 68, 68, 0.25) !important;
+    box-shadow: none !important;
 }
 
 html.theme-dark #cabinet-btn-breakdown:hover {
-    background-color: rgba(69, 10, 10, 0.4) !important;
+    background-color: rgba(239, 68, 68, 0.15) !important;
+    border-color: rgba(239, 68, 68, 0.45) !important;
+    color: #FCA5A5 !important;
 }
 
 html.theme-dark #cabinet-btn-breakdown i,
@@ -1029,14 +1031,18 @@ html.theme-dark #cabinet-btn-breakdown svg {
     color: #F87171 !important;
 }
 
-/* 18. Fix Status Badges in Cabinet (Blackout active & paid badges) */
+/* 18. Fix Status Badges in Cabinet (Pills styling with live emerald glow) */
 html.theme-dark .badge-status-active,
 html.theme-dark [data-status="active"],
-html.theme-dark [data-status="paid"] {
-    background-color: rgba(29, 93, 59, 0.25) !important;
-    color: #34A869 !important;
-    border: 1px solid #1D5D3B !important;
-    box-shadow: none !important;
+html.theme-dark [data-status="paid"],
+html.theme-dark #rentalStatusBadge,
+html.theme-dark #userStatusBadge[data-status="active"] {
+    background-color: rgba(16, 185, 129, 0.15) !important;
+    color: #10B981 !important;
+    border: 1px solid rgba(16, 185, 129, 0.3) !important;
+    border-radius: 9999px !important;
+    box-shadow: 0 0 12px rgba(16, 185, 129, 0.15) !important;
+    clip-path: none !important;
 }
 
 /* 19. Apple-like Smooth UX, Micro-Animations & Tactile Feedback */
