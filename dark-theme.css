@@ -602,52 +602,12 @@ html.theme-dark footer.bg-\[\#123824\] {
     border-color: #222222 !important;
 }
 
-/* 10. Preloader (Pure White in Light, Deep Black #0B0E0C in Dark) */
+/* 10. Minimalist Preloader / Splash Screen */
 #page-preloader {
     background-color: #FFFFFF !important;
     -webkit-backdrop-filter: none !important;
     backdrop-filter: none !important;
     opacity: 1;
-}
-
-#page-preloader .preloader-logo-wrap svg {
-    color: #1D5D3B !important;
-    fill: #1D5D3B !important;
-}
-
-#page-preloader .preloader-brand-title {
-    color: #111827 !important;
-}
-
-#page-preloader .preloader-brand-sub {
-    color: #1D5D3B !important;
-}
-
-#page-preloader .preloader-bar-track {
-    background-color: #E5E7EB !important;
-}
-
-#page-preloader .preloader-bar-line {
-    background-color: #1D5D3B !important;
-}
-
-/* Preloader Dark Mode Override */
-html.theme-dark #page-preloader {
-    background-color: #000000 !important;
-}
-
-html.theme-dark #page-preloader .preloader-logo-wrap svg,
-html.theme-dark #page-preloader .preloader-logo-wrap svg path {
-    color: #1D5D3B !important;
-    fill: #1D5D3B !important;
-    stroke: #2E8B57 !important;
-    stroke-width: 1.2px !important;
-    stroke-linejoin: round !important;
-    paint-order: stroke fill !important;
-    filter: drop-shadow(0 0 2px rgba(46, 139, 87, 0.6)) !important;
-    opacity: 1 !important;
-}
-
 html.theme-dark #page-preloader .preloader-brand-title {
     color: #FFFFFF !important;
 }
