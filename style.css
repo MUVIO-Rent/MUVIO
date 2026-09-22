@@ -5,7 +5,15 @@
 
 /* Header Logo Image & Pure Vector SVG Styling */
 .muvio-logo-svg {
-    height: 40px !important;
+    height: 28px !important;
+    width: auto !important;
+    display: block !important;
+}
+header .header-logo-img,
+header .muvio-logo-svg,
+.site-header-synced .header-logo-img,
+.site-header-synced .muvio-logo-svg {
+    height: 28px !important;
     width: auto !important;
     display: block !important;
 }
@@ -280,17 +288,13 @@ header button,
 header #theme-toggle,
 header #burger-btn,
 header .header-user-name,
-header #authLangUa,
-header #authLangEn,
 .site-header-synced nav a,
 .site-header-synced .header-nav-link,
 .site-header-synced a,
 .site-header-synced button,
 .site-header-synced #theme-toggle,
 .site-header-synced #burger-btn,
-.site-header-synced .header-user-name,
-.site-header-synced #authLangUa,
-.site-header-synced #authLangEn {
+.site-header-synced .header-user-name {
     color: #18181b !important;
     opacity: 1 !important;
 }
@@ -342,8 +346,6 @@ html.dark header button,
 html.dark header #theme-toggle,
 html.dark header #burger-btn,
 html.dark header .header-user-name,
-html.dark header #authLangUa,
-html.dark header #authLangEn,
 html.dark .site-header-synced nav a,
 html.dark .site-header-synced .header-nav-link,
 html.dark .site-header-synced a,
@@ -351,24 +353,18 @@ html.dark .site-header-synced button,
 html.dark .site-header-synced #theme-toggle,
 html.dark .site-header-synced #burger-btn,
 html.dark .site-header-synced .header-user-name,
-html.dark .site-header-synced #authLangUa,
-html.dark .site-header-synced #authLangEn,
 html.theme-dark header nav a,
 html.theme-dark header .header-nav-link,
 html.theme-dark header a,
 html.theme-dark header button,
 html.theme-dark header #theme-toggle,
 html.theme-dark header .header-user-name,
-html.theme-dark header #authLangUa,
-html.theme-dark header #authLangEn,
 html.theme-dark .site-header-synced nav a,
 html.theme-dark .site-header-synced .header-nav-link,
 html.theme-dark .site-header-synced a,
 html.theme-dark .site-header-synced button,
 html.theme-dark .site-header-synced #theme-toggle,
 html.theme-dark .site-header-synced .header-user-name,
-html.theme-dark .site-header-synced #authLangUa,
-html.theme-dark .site-header-synced #authLangEn,
 .dark header a,
 .dark header button,
 .dark .site-header-synced a,
@@ -577,6 +573,112 @@ html.theme-dark .fleet-card .img-night,
 .header-logo-wrap svg path {
     color: #1D5D3B !important;
     fill: #1D5D3B !important;
+    stroke: none !important;
+    filter: none !important;
+}
+
+/* ==========================================================================
+   LANGUAGE SWITCHER (UA | EN) — SMOOTH TRANSITION & WEIGHT TOGGLE
+   ========================================================================== */
+.lang-switch-btn,
+#authLangUa,
+#authLangEn {
+    font-size: 12px !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+    cursor: pointer !important;
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    line-height: 1 !important;
+    transition: color 0.2s ease, font-weight 0.2s ease, opacity 0.2s ease !important;
+    display: inline-block !important;
+    vertical-align: middle !important;
+}
+
+/* Inactive state: 400 normal weight, muted gray */
+.lang-switch-btn:not(.active-lang),
+#authLangUa:not(.active-lang),
+#authLangEn:not(.active-lang) {
+    font-weight: 400 !important;
+    color: #71717a !important;
+    opacity: 0.75 !important;
+}
+
+html.dark .lang-switch-btn:not(.active-lang),
+html.dark #authLangUa:not(.active-lang),
+html.dark #authLangEn:not(.active-lang),
+html.theme-dark .lang-switch-btn:not(.active-lang),
+html.theme-dark #authLangUa:not(.active-lang),
+html.theme-dark #authLangEn:not(.active-lang) {
+    color: #a1a1aa !important;
+    opacity: 0.75 !important;
+}
+
+/* Active state: 700 bold weight, high contrast */
+.lang-switch-btn.active-lang,
+#authLangUa.active-lang,
+#authLangEn.active-lang {
+    font-weight: 700 !important;
+    color: #18181b !important;
+    opacity: 1 !important;
+}
+
+html.dark .lang-switch-btn.active-lang,
+html.dark #authLangUa.active-lang,
+html.dark #authLangEn.active-lang,
+html.theme-dark .lang-switch-btn.active-lang,
+html.theme-dark #authLangUa.active-lang,
+html.theme-dark #authLangEn.active-lang {
+    color: #ffffff !important;
+    opacity: 1 !important;
+}
+
+.lang-switch-btn:hover,
+#authLangUa:hover,
+#authLangEn:hover {
+    color: #1D5D3B !important;
+    opacity: 1 !important;
+}
+
+html.dark .lang-switch-btn:hover,
+html.dark #authLangUa:hover,
+html.dark #authLangEn:hover,
+html.theme-dark .lang-switch-btn:hover,
+html.theme-dark #authLangUa:hover,
+html.theme-dark #authLangEn:hover {
+    color: #2E8B57 !important;
+}
+
+/* ==========================================================================
+   MINIMALIST PRELOADER / SPLASH SCREEN (M-LOGO ONLY)
+   ========================================================================== */
+#page-preloader {
+    background-color: #FFFFFF !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    opacity: 1;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+#page-preloader .preloader-m-logo {
+    color: #1D5D3B !important;
+    fill: #1D5D3B !important;
+}
+
+html.dark #page-preloader,
+html.theme-dark #page-preloader,
+[data-theme="dark"] #page-preloader {
+    background-color: #000000 !important;
+}
+
+html.dark #page-preloader .preloader-m-logo,
+html.theme-dark #page-preloader .preloader-m-logo,
+[data-theme="dark"] #page-preloader .preloader-m-logo {
+    color: #FFFFFF !important;
+    fill: #FFFFFF !important;
     stroke: none !important;
     filter: none !important;
 }

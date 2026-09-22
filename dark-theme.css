@@ -608,21 +608,30 @@ html.theme-dark footer.bg-\[\#123824\] {
     -webkit-backdrop-filter: none !important;
     backdrop-filter: none !important;
     opacity: 1;
-html.theme-dark #page-preloader .preloader-brand-title {
-    color: #FFFFFF !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
 
-html.theme-dark #page-preloader .preloader-brand-sub {
+#page-preloader .preloader-m-logo {
     color: #1D5D3B !important;
+    fill: #1D5D3B !important;
 }
 
-html.theme-dark #page-preloader .preloader-bar-track {
-    background-color: #222222 !important;
+/* Preloader Dark Mode Override */
+html.dark #page-preloader,
+html.theme-dark #page-preloader,
+[data-theme="dark"] #page-preloader {
+    background-color: #000000 !important;
 }
 
-html.theme-dark #page-preloader .preloader-bar-line {
-    background-color: #1D5D3B !important;
-    box-shadow: 0 0 6px rgba(29, 93, 59, 0.5) !important;
+html.dark #page-preloader .preloader-m-logo,
+html.theme-dark #page-preloader .preloader-m-logo,
+[data-theme="dark"] #page-preloader .preloader-m-logo {
+    color: #FFFFFF !important;
+    fill: #FFFFFF !important;
+    stroke: none !important;
+    filter: none !important;
 }
 
 /* 10.1 Calculator Duration Badge In Dark Mode */

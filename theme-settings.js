@@ -547,6 +547,23 @@
             }
         }
 
+        const activeLang = (normalized === 'en') ? 'en' : 'ua';
+        document.querySelectorAll('#authLangUa, .auth-lang-ua').forEach(el => {
+            if (activeLang === 'ua') {
+                el.classList.add('active-lang');
+            } else {
+                el.classList.remove('active-lang');
+            }
+        });
+        document.querySelectorAll('#authLangEn, .auth-lang-en').forEach(el => {
+            if (activeLang === 'en') {
+                el.classList.add('active-lang');
+            } else {
+                el.classList.remove('active-lang');
+            }
+        });
+        window.dispatchEvent(new CustomEvent('muvio:langchange', { detail: { lang: activeLang } }));
+
         // Update form inputs with data-placeholder-ua and data-placeholder-en
         updateFormPlaceholders(normalized);
 
@@ -726,6 +743,15 @@
         const btnEn = document.getElementById('langBtnEn');
         if (btnEn) btnEn.onclick = () => setSiteLanguage('en');
 
+        const authBtnUa = document.getElementById('authLangUa');
+        if (authBtnUa) authBtnUa.onclick = () => setSiteLanguage('ua');
+
+        const authBtnEn = document.getElementById('authLangEn');
+        if (authBtnEn) authBtnEn.onclick = () => setSiteLanguage('en');
+
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        if (themeToggleBtn) themeToggleBtn.onclick = () => toggleAuthTheme();
+
         // Bind settings toggle button (#options-btn or #settingsBtn)
         const gearBtn = document.getElementById('options-btn') || document.getElementById('settingsBtn');
         if (gearBtn) gearBtn.onclick = toggleSettingsModal;
@@ -847,6 +873,12 @@
     // --------------------------------------------------------------------------
     // 13. GLOBAL API EXPORTS
     // --------------------------------------------------------------------------
+    function toggleAuthTheme() {
+        const isDark = document.documentElement.classList.contains('dark') || document.documentElement.classList.contains('theme-dark');
+        setSiteTheme(isDark ? 'light' : 'dark');
+    }
+
+    window.toggleAuthTheme = toggleAuthTheme;
     window.setSiteTheme = setSiteTheme;
     window.applySiteTheme = applySiteTheme;
     window.setSiteLanguage = setSiteLanguage;

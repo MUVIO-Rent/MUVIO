@@ -562,7 +562,7 @@
 
         .header-logo-img,
         .muvio-logo-svg {
-            height: 24px !important;
+            height: 28px !important;
             width: auto !important;
             display: block !important;
         }
@@ -573,15 +573,11 @@
         header a,
         header button,
         header .header-user-name,
-        header #authLangUa,
-        header #authLangEn,
         .site-header-synced nav a,
         .site-header-synced .header-nav-link,
         .site-header-synced a,
         .site-header-synced button,
-        .site-header-synced .header-user-name,
-        .site-header-synced #authLangUa,
-        .site-header-synced #authLangEn {
+        .site-header-synced .header-user-name {
             font-size: 12px !important;
             font-weight: 500 !important;
             letter-spacing: 0.08em !important;
@@ -635,29 +631,21 @@
         html.dark header a,
         html.dark header button,
         html.dark header .header-user-name,
-        html.dark header #authLangUa,
-        html.dark header #authLangEn,
         html.dark .site-header-synced nav a,
         html.dark .site-header-synced .header-nav-link,
         html.dark .site-header-synced a,
         html.dark .site-header-synced button,
         html.dark .site-header-synced .header-user-name,
-        html.dark .site-header-synced #authLangUa,
-        html.dark .site-header-synced #authLangEn,
         html.theme-dark header nav a,
         html.theme-dark header .header-nav-link,
         html.theme-dark header a,
         html.theme-dark header button,
         html.theme-dark header .header-user-name,
-        html.theme-dark header #authLangUa,
-        html.theme-dark header #authLangEn,
         html.theme-dark .site-header-synced nav a,
         html.theme-dark .site-header-synced .header-nav-link,
         html.theme-dark .site-header-synced a,
         html.theme-dark .site-header-synced button,
         html.theme-dark .site-header-synced .header-user-name,
-        html.theme-dark .site-header-synced #authLangUa,
-        html.theme-dark .site-header-synced #authLangEn,
         .dark header a,
         .dark header button,
         .dark .site-header-synced a,
@@ -910,23 +898,13 @@
 
     <!-- ==================== ПРЕЛОАДЕР MUVIO ==================== -->
     <div id="page-preloader"
-        class="fixed inset-0 z-[9999] flex flex-col items-center justify-center transition-opacity duration-300">
-        <div class="preloader-logo-wrap animate-pulse mb-3">
-            <!-- Точный родной SVG-логотип MUVIO -->
-            <svg class="w-16 h-16 glow-breathe" viewBox="0 0 100 100" fill="currentColor">
+        class="fixed inset-0 z-[9999] flex items-center justify-center transition-opacity duration-300">
+        <div class="preloader-logo-wrap animate-pulse">
+            <!-- Точный фирменный знак "М" бренда MUVIO -->
+            <svg class="preloader-m-logo w-16 h-16 sm:w-20 sm:h-20" viewBox="0 0 100 100" fill="currentColor">
                 <path
                     d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z" />
             </svg>
-        </div>
-        <div class="text-center">
-            <div class="preloader-brand-title font-bold tracking-widest text-lg">MUVIO</div>
-            <div class="preloader-brand-sub text-[10px] tracking-[0.25em] uppercase font-semibold">
-                <span class="lang-ua">ТВОЄ ELECTRO CITY</span>
-                <span class="lang-en">YOUR ELECTRO CITY</span>
-            </div>
-        </div>
-        <div class="preloader-bar-track w-28 h-0.5 rounded-full mt-4 overflow-hidden relative">
-            <div class="preloader-bar-line absolute left-0 top-0 h-full w-1/2"></div>
         </div>
     </div>
 
@@ -953,7 +931,7 @@
                 style="display: inline-flex !important; align-items: center !important; text-decoration: none !important; background: transparent !important;"
                 class="group focus:outline-none" aria-label="MUVIO">
                 <img src="images/logo-header-trans.png" alt="MUVIO"
-                    style="height: 24px !important; width: auto !important; display: block !important; transition: opacity 0.2s; background: transparent !important;"
+                    style="height: 28px !important; width: auto !important; display: block !important; transition: opacity 0.2s; background: transparent !important;"
                     class="header-logo-img group-hover:opacity-90" />
             </a>
         </div>
@@ -1013,13 +991,13 @@
             <!-- 2. Перемикач мови UA | EN -->
             <span style="display: inline-flex !important; align-items: center !important; gap: 4px !important;">
                 <button type="button" id="authLangUa" onclick="setSiteLanguage('ua')"
-                    style="background: none !important; border: none !important; padding: 0 !important; cursor: pointer !important; font-size: 12px !important; font-weight: 600 !important; letter-spacing: 0.08em !important;"
-                    class="transition-colors hover:text-[#1D5D3B] text-zinc-900 dark:text-white">UA</button>
+                    class="lang-switch-btn active-lang"
+                    style="background: none !important; border: none !important; padding: 0 !important; cursor: pointer !important; font-size: 12px !important; letter-spacing: 0.08em !important; transition: all 0.2s ease !important;">UA</button>
                 <span
                     style="color: #a1a1aa !important; font-size: 12px !important; font-weight: 400 !important;">|</span>
                 <button type="button" id="authLangEn" onclick="setSiteLanguage('en')"
-                    style="background: none !important; border: none !important; padding: 0 !important; cursor: pointer !important; font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important;"
-                    class="transition-colors hover:text-[#1D5D3B] text-zinc-500 dark:text-zinc-400">EN</button>
+                    class="lang-switch-btn"
+                    style="background: none !important; border: none !important; padding: 0 !important; cursor: pointer !important; font-size: 12px !important; letter-spacing: 0.08em !important; transition: all 0.2s ease !important;">EN</button>
             </span>
 
             <!-- 3. Перемикач теми: іконка луни (світла) / сонця (темна) -->
@@ -1136,11 +1114,11 @@
             const btnEn = document.getElementById('authLangEn');
             if (btnUa && btnEn) {
                 if (currentLang === 'en') {
-                    btnEn.className = 'font-bold text-zinc-900 dark:text-white transition-colors';
-                    btnUa.className = 'font-medium text-zinc-400 hover:text-[#1D5D3B] dark:hover:text-white transition-colors';
+                    btnEn.classList.add('active-lang');
+                    btnUa.classList.remove('active-lang');
                 } else {
-                    btnUa.className = 'font-bold text-zinc-900 dark:text-white transition-colors';
-                    btnEn.className = 'font-medium text-zinc-400 hover:text-[#1D5D3B] dark:hover:text-white transition-colors';
+                    btnUa.classList.add('active-lang');
+                    btnEn.classList.remove('active-lang');
                 }
             }
         }
