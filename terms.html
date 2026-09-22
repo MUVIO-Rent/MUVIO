@@ -33,8 +33,9 @@
                         }
                     },
                     fontFamily: {
-                        brand: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'sans-serif'],
-                        sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'sans-serif']
+                        brand: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', '"Segoe UI"', 'Roboto', 'sans-serif'],
+                        sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', '"Segoe UI"', 'Roboto', 'sans-serif'],
+                        mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace']
                     }
                 }
             }
@@ -44,32 +45,129 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+
     <!-- MUVIO Styles & Dark Theme -->
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./dark-theme.css">
 
     <style>
+        /* ==================== MUVIO LEGAL & TERMS (PREMIUM MINIMALIST STYLE) ==================== */
+        body, main, h1, h2, h3, p, span, li, a, button {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        .legal-card {
+            background-color: #FFFFFF;
+            border: 1px solid rgba(0, 0, 0, 0.07);
+            border-radius: 16px;
+            padding: 32px 36px;
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.02);
+            clip-path: none !important;
+            transition: border-color 0.2s ease;
+        }
+
+        @media (max-width: 640px) {
+            .legal-card {
+                padding: 24px 20px;
+            }
+        }
+
+        html.theme-dark .legal-card,
+        html.dark .legal-card,
+        [data-theme="dark"] .legal-card,
+        body.theme-dark .legal-card {
+            background-color: #0E1114 !important;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.005) 100%), #0E1114 !important;
+            border: 1px solid rgba(255, 255, 255, 0.07) !important;
+            border-radius: 16px !important;
+            box-shadow: none !important;
+            clip-path: none !important;
+        }
+
+        html.theme-dark .legal-card:hover,
+        html.dark .legal-card:hover {
+            border-color: rgba(255, 255, 255, 0.12) !important;
+        }
+
+        .legal-section-number {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            color: #64748B;
+            background: rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            padding: 2.5px 8px;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        html.theme-dark .legal-section-number,
+        html.dark .legal-section-number {
+            color: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.09);
+        }
+
+        .legal-btn-primary {
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            color: #FFFFFF;
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            padding: 14px 28px;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+            box-shadow: 0 10px 24px -6px rgba(16, 185, 129, 0.35);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .legal-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 28px -6px rgba(16, 185, 129, 0.45);
+            filter: brightness(1.05);
+        }
+
+        .legal-btn-secondary {
+            background: transparent;
+            color: #18181B;
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            padding: 14px 28px;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .legal-btn-secondary:hover {
+            background: rgba(0, 0, 0, 0.04);
+        }
+        html.theme-dark .legal-btn-secondary,
+        html.dark .legal-btn-secondary {
+            color: #FFFFFF;
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+        html.theme-dark .legal-btn-secondary:hover,
+        html.dark .legal-btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+
         .text-primary {
             color: #1D5D3B;
-        }
-
-        /* MUVIO High-Tech Geometric Styles */
-        .chamfer-box {
-            clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
-        }
-
-        .chamfer-btn {
-            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-            transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-        }
-
-        .chamfer-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px -4px rgba(29, 93, 59, 0.35);
-        }
-
-        .chamfer-badge {
-            clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
         }
     </style>
     <!-- Anti-flicker Settings Loader -->
@@ -265,22 +363,22 @@
     </header>
 
     <!-- ==================== 2. ГОЛОВНИЙ БЛОК: ЗАГОЛОВОК СТОРІНКИ ==================== -->
-    <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
         
         <!-- Заголовок сторінки -->
-        <div class="mb-10 text-center md:text-left border-b border-[#1D5D3B]/20 pb-8">
-            <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#1D5D3B]/10 text-[#1D5D3B] font-brand font-bold text-xs uppercase tracking-widest chamfer-badge mb-3">
-                <i data-lucide="shield-check" class="w-4 h-4"></i>
+        <div class="mb-10 sm:mb-12 text-center md:text-left border-b border-zinc-200/80 dark:border-white/[0.08] pb-8 md:pb-10">
+            <div class="inline-flex items-center gap-2 px-3 py-1 bg-zinc-100 dark:bg-white/[0.04] text-zinc-600 dark:text-zinc-400 border border-zinc-200/80 dark:border-white/15 rounded-full font-mono text-[11px] uppercase tracking-widest mb-4">
+                <i data-lucide="shield-check" class="w-3.5 h-3.5 text-zinc-500 dark:text-zinc-400"></i>
                 <span>
                     <span class="lang-ua">ОФІЦІЙНИЙ РЕГЛАМЕНТ 2026</span>
                     <span class="lang-en">OFFICIAL REGULATIONS 2026</span>
                 </span>
             </div>
-            <h1 class="font-brand font-bold text-2xl sm:text-3xl md:text-4xl uppercase tracking-tight text-[#111827] leading-tight">
-                <span class="lang-ua">📋 УМОВИ ОРЕНДИ ТА ФІНАНСОВА ВІДПОВІДАЛЬНІСТЬ MUVIO RENT</span>
-                <span class="lang-en">📋 RENTAL TERMS & FINANCIAL LIABILITY MUVIO RENT</span>
+            <h1 class="font-brand font-bold text-2xl sm:text-3xl md:text-4xl uppercase tracking-tight text-zinc-900 dark:text-white leading-tight">
+                <span class="lang-ua">УМОВИ ОРЕНДИ ТА ФІНАНСОВА ВІДПОВІДАЛЬНІСТЬ MUVIO RENT</span>
+                <span class="lang-en">RENTAL TERMS & FINANCIAL LIABILITY MUVIO RENT</span>
             </h1>
-            <p class="mt-3 text-sm md:text-base text-[#4B5563] max-w-3xl leading-relaxed font-sans">
+            <p class="mt-3.5 text-sm md:text-base text-zinc-600 dark:text-zinc-400 max-w-3xl leading-relaxed font-sans">
                 <span class="lang-ua">Правила користування комерційним та приватним електротранспортом, порядок взаєморозрахунків, доставки по Одесі та області, а також умови сервісного обслуговування.</span>
                 <span class="lang-en">Terms of use for commercial and private electric vehicles, billing procedures, delivery across Odesa and the region, and technical maintenance conditions.</span>
             </p>
@@ -289,34 +387,34 @@
         <!-- ==================== СЕКЦІЇ УМОВ (6 КАРТОК) ==================== -->
         <div class="space-y-6">
 
-            <!-- Секція 1 — 💵 Правила оплати та застави -->
-            <section class="bg-white border-2 border-[#1D5D3B] chamfer-box p-6 md:p-8 shadow-sm">
-                <div class="flex items-center gap-3 pb-4 border-b border-[#1D5D3B]/20 mb-4">
-                    <div class="w-10 h-10 bg-[#1D5D3B] text-white flex items-center justify-center chamfer-badge shrink-0">
-                        <i data-lucide="banknote" class="w-5 h-5"></i>
+            <!-- Секція 1 — Правила оплати та застави -->
+            <section class="legal-card">
+                <div class="flex items-center justify-between pb-4 border-b border-zinc-100 dark:border-white/[0.06] mb-5">
+                    <div class="flex items-center gap-3">
+                        <span class="legal-section-number">01</span>
+                        <h2 class="font-brand font-bold text-base sm:text-lg tracking-tight uppercase text-zinc-900 dark:text-white">
+                            <span class="lang-ua">Правила оплати та застави</span>
+                            <span class="lang-en">PAYMENT & DEPOSIT TERMS</span>
+                        </h2>
                     </div>
-                    <h2 class="font-brand font-bold text-lg sm:text-xl uppercase tracking-wide text-[#111827]">
-                        <span class="lang-ua">💵 Правила оплати та застави</span>
-                        <span class="lang-en">💵 PAYMENT & DEPOSIT TERMS</span>
-                    </h2>
                 </div>
-                <ul class="space-y-3 text-sm md:text-base text-[#1F2937] leading-relaxed">
-                    <li class="flex items-start gap-2.5">
-                        <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
+                <ul class="divide-y divide-zinc-100 dark:divide-white/[0.05] text-sm md:text-[15px] text-zinc-700 dark:text-zinc-300 leading-relaxed">
+                    <li class="py-3 first:pt-0 last:pb-0 flex items-start gap-3">
+                        <span class="text-zinc-400 dark:text-zinc-500 font-mono select-none shrink-0 text-xs mt-1">—</span>
                         <span>
                             <span class="lang-ua">Мінімальний термін оренди — 1 доба.</span>
                             <span class="lang-en">Minimum rental period — 1 day</span>
                         </span>
                     </li>
-                    <li class="flex items-start gap-2.5">
-                        <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
+                    <li class="py-3 first:pt-0 last:pb-0 flex items-start gap-3">
+                        <span class="text-zinc-400 dark:text-zinc-500 font-mono select-none shrink-0 text-xs mt-1">—</span>
                         <span>
                             <span class="lang-ua"><b>Перерахунок не проводиться:</b> при достроковому поверненні транспорту з ініціативи орендаря оплата за сплачений період не повертається.</span>
                             <span class="lang-en"><b>No recalculation:</b> early return does not refund paid period</span>
                         </span>
                     </li>
-                    <li class="flex items-start gap-2.5">
-                        <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
+                    <li class="py-3 first:pt-0 last:pb-0 flex items-start gap-3">
+                        <span class="text-zinc-400 dark:text-zinc-500 font-mono select-none shrink-0 text-xs mt-1">—</span>
                         <span>
                             <span class="lang-ua"><b>Повернення застави:</b> здійснюється протягом від 1 до 5 днів після здачі скутера назад.</span>
                             <span class="lang-en"><b>Deposit refund:</b> processed within 1 to 5 business days after return</span>
@@ -325,48 +423,48 @@
                 </ul>
             </section>
 
-            <!-- Секція 2 — 📍 Доставка та зона експлуатації -->
-            <section class="bg-white border-2 border-[#1D5D3B] chamfer-box p-6 md:p-8 shadow-sm">
-                <div class="flex items-center gap-3 pb-4 border-b border-[#1D5D3B]/20 mb-4">
-                    <div class="w-10 h-10 bg-[#1D5D3B] text-white flex items-center justify-center chamfer-badge shrink-0">
-                        <i data-lucide="map-pin" class="w-5 h-5"></i>
+            <!-- Секція 2 — Доставка та зона експлуатації -->
+            <section class="legal-card">
+                <div class="flex items-center justify-between pb-4 border-b border-zinc-100 dark:border-white/[0.06] mb-5">
+                    <div class="flex items-center gap-3">
+                        <span class="legal-section-number">02</span>
+                        <h2 class="font-brand font-bold text-base sm:text-lg tracking-tight uppercase text-zinc-900 dark:text-white">
+                            <span class="lang-ua">Доставка та зона експлуатації</span>
+                            <span class="lang-en">DELIVERY & OPERATING AREA</span>
+                        </h2>
                     </div>
-                    <h2 class="font-brand font-bold text-lg sm:text-xl uppercase tracking-wide text-[#111827]">
-                        <span class="lang-ua">📍 Доставка та зона експлуатації</span>
-                        <span class="lang-en">📍 DELIVERY & OPERATING AREA</span>
-                    </h2>
                 </div>
-                <ul class="space-y-3 text-sm md:text-base text-[#1F2937] leading-relaxed">
-                    <li class="flex items-start gap-2.5">
-                        <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
+                <ul class="divide-y divide-zinc-100 dark:divide-white/[0.05] text-sm md:text-[15px] text-zinc-700 dark:text-zinc-300 leading-relaxed">
+                    <li class="py-3 first:pt-0 last:pb-0 flex items-start gap-3">
+                        <span class="text-zinc-400 dark:text-zinc-500 font-mono select-none shrink-0 text-xs mt-1">—</span>
                         <span>
                             <span class="lang-ua">Самовивіз з нашої локації або доставка по місту (тариф виїзду до клієнта) — <b>500–700 грн</b>.</span>
                             <span class="lang-en">Self-pickup from hub or delivery within city — <b>500-700 UAH</b></span>
                         </span>
                     </li>
-                    <li class="flex items-start gap-2.5">
-                        <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
+                    <li class="py-3 first:pt-0 last:pb-0 flex items-start gap-3">
+                        <span class="text-zinc-400 dark:text-zinc-500 font-mono select-none shrink-0 text-xs mt-1">—</span>
                         <span>
                             <span class="lang-ua">Доставка за межі міста (область) — <b>700–1000 грн</b>.</span>
                             <span class="lang-en">Out-of-town delivery (region) — <b>700–1000 UAH</b>.</span>
                         </span>
                     </li>
-                    <li class="flex items-start gap-2.5">
-                        <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
+                    <li class="py-3 first:pt-0 last:pb-0 flex items-start gap-3">
+                        <span class="text-zinc-400 dark:text-zinc-500 font-mono select-none shrink-0 text-xs mt-1">—</span>
                         <span>
                             <span class="lang-ua">Про необхідність доставки слід попереджати завчасно.</span>
                             <span class="lang-en">Delivery requests must be submitted in advance.</span>
                         </span>
                     </li>
-                    <li class="flex items-start gap-2.5">
-                        <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
+                    <li class="py-3 first:pt-0 last:pb-0 flex items-start gap-3">
+                        <span class="text-zinc-400 dark:text-zinc-500 font-mono select-none shrink-0 text-xs mt-1">—</span>
                         <span>
                             <span class="lang-ua"><b>Основна зона:</b> м. Одеса.</span>
                             <span class="lang-en"><b>Primary zone:</b> Odesa city.</span>
                         </span>
                     </li>
-                    <li class="flex items-start gap-2.5">
-                        <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
+                    <li class="py-3 first:pt-0 last:pb-0 flex items-start gap-3">
+                        <span class="text-zinc-400 dark:text-zinc-500 font-mono select-none shrink-0 text-xs mt-1">—</span>
                         <span>
                             <span class="lang-ua">Їзда за межі міста дозволена виключно за попередньою домовленістю з менеджером.</span>
                             <span class="lang-en">Riding beyond city borders requires prior manager approval.</span>
@@ -375,34 +473,34 @@
                 </ul>
             </section>
 
-            <!-- Секція 3 — ⏰ Терміни, повернення та штрафи -->
-            <section class="bg-white border-2 border-[#1D5D3B] chamfer-box p-6 md:p-8 shadow-sm">
-                <div class="flex items-center gap-3 pb-4 border-b border-[#1D5D3B]/20 mb-4">
-                    <div class="w-10 h-10 bg-[#1D5D3B] text-white flex items-center justify-center chamfer-badge shrink-0">
-                        <i data-lucide="clock" class="w-5 h-5"></i>
+            <!-- Секція 3 — Терміни, повернення та штрафи -->
+            <section class="legal-card">
+                <div class="flex items-center justify-between pb-4 border-b border-zinc-100 dark:border-white/[0.06] mb-5">
+                    <div class="flex items-center gap-3">
+                        <span class="legal-section-number">03</span>
+                        <h2 class="font-brand font-bold text-base sm:text-lg tracking-tight uppercase text-zinc-900 dark:text-white">
+                            <span class="lang-ua">Терміни, повернення та штрафи</span>
+                            <span class="lang-en">TERMS, RETURNS & PENALTIES</span>
+                        </h2>
                     </div>
-                    <h2 class="font-brand font-bold text-lg sm:text-xl uppercase tracking-wide text-[#111827]">
-                        <span class="lang-ua">⏰ Терміни, повернення та штрафи</span>
-                        <span class="lang-en">⏰ TERMS, RETURNS & PENALTIES</span>
-                    </h2>
                 </div>
-                <ul class="space-y-3 text-sm md:text-base text-[#1F2937] leading-relaxed">
-                    <li class="flex items-start gap-2.5">
-                        <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
+                <ul class="divide-y divide-zinc-100 dark:divide-white/[0.05] text-sm md:text-[15px] text-zinc-700 dark:text-zinc-300 leading-relaxed">
+                    <li class="py-3 first:pt-0 last:pb-0 flex items-start gap-3">
+                        <span class="text-zinc-400 dark:text-zinc-500 font-mono select-none shrink-0 text-xs mt-1">—</span>
                         <span>
                             <span class="lang-ua">Повернення скутера відбувається в останній день оренди у час, узгоджений з менеджером.</span>
                             <span class="lang-en">Vehicle return takes place on the last contract day at the agreed appointment time.</span>
                         </span>
                     </li>
-                    <li class="flex items-start gap-2.5">
-                        <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
+                    <li class="py-3 first:pt-0 last:pb-0 flex items-start gap-3">
+                        <span class="text-zinc-400 dark:text-zinc-500 font-mono select-none shrink-0 text-xs mt-1">—</span>
                         <span>
                             <span class="lang-ua">У разі не приїзду в призначену годину стягується штраф <b>100 грн</b>.</span>
                             <span class="lang-en">Unannounced delay past the scheduled appointment incurs a <b>100 UAH</b> late fee.</span>
                         </span>
                     </li>
-                    <li class="flex items-start gap-2.5">
-                        <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
+                    <li class="py-3 first:pt-0 last:pb-0 flex items-start gap-3">
+                        <span class="text-zinc-400 dark:text-zinc-500 font-mono select-none shrink-0 text-xs mt-1">—</span>
                         <span>
                             <span class="lang-ua">Затримка повернення скутера без попереднього обговорення з менеджером карається штрафом <b>10% за добу</b>.</span>
                             <span class="lang-en">Overdue returns without prior extension agreement incur a <b>10% daily surcharge</b>.</span>
@@ -411,41 +509,41 @@
                 </ul>
             </section>
 
-            <!-- Секція 4 — 🛠 Розподіл відповідальності при поломках та ДТП -->
-            <section class="bg-white border-2 border-[#1D5D3B] chamfer-box p-6 md:p-8 shadow-sm">
-                <div class="flex items-center gap-3 pb-4 border-b border-[#1D5D3B]/20 mb-4">
-                    <div class="w-10 h-10 bg-[#1D5D3B] text-white flex items-center justify-center chamfer-badge shrink-0">
-                        <i data-lucide="wrench" class="w-5 h-5"></i>
+            <!-- Секція 4 — Розподіл відповідальності при поломках та ДТП -->
+            <section class="legal-card">
+                <div class="flex items-center justify-between pb-4 border-b border-zinc-100 dark:border-white/[0.06] mb-5">
+                    <div class="flex items-center gap-3">
+                        <span class="legal-section-number">04</span>
+                        <h2 class="font-brand font-bold text-base sm:text-lg tracking-tight uppercase text-zinc-900 dark:text-white">
+                            <span class="lang-ua">Розподіл відповідальності при поломках та ДТП</span>
+                            <span class="lang-en">Maintenance, Damage & Accident Liability</span>
+                        </h2>
                     </div>
-                    <h2 class="font-brand font-bold text-lg sm:text-xl uppercase tracking-wide text-[#111827]">
-                        <span class="lang-ua">🛠 Розподіл відповідальності при поломках та ДТП</span>
-                        <span class="lang-en">🛠 Maintenance, Damage & Accident Liability</span>
-                    </h2>
                 </div>
-                <ul class="space-y-3 text-sm md:text-base text-[#1F2937] leading-relaxed">
-                    <li class="flex items-start gap-2.5">
-                        <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
+                <ul class="divide-y divide-zinc-100 dark:divide-white/[0.05] text-sm md:text-[15px] text-zinc-700 dark:text-zinc-300 leading-relaxed">
+                    <li class="py-3 first:pt-0 last:pb-0 flex items-start gap-3">
+                        <span class="text-zinc-400 dark:text-zinc-500 font-mono select-none shrink-0 text-xs mt-1">—</span>
                         <span>
                             <span class="lang-ua"><b>Технічні поломки:</b> ремонт вузлів, які вийшли з ладу через технічну несправність, здійснюється за рахунок компанії.</span>
                             <span class="lang-en"><b>Factory breakdowns:</b> repairs caused by technical or factory faults are 100% covered by MUVIO.</span>
                         </span>
                     </li>
-                    <li class="flex items-start gap-2.5">
-                        <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
+                    <li class="py-3 first:pt-0 last:pb-0 flex items-start gap-3">
+                        <span class="text-zinc-400 dark:text-zinc-500 font-mono select-none shrink-0 text-xs mt-1">—</span>
                         <span>
                             <span class="lang-ua"><b>Проколи та знос:</b> пробиття або передчасний знос покришки — за рахунок клієнта.</span>
                             <span class="lang-en"><b>Punctures & tires:</b> road punctures and premature tire wear are covered by the renter.</span>
                         </span>
                     </li>
-                    <li class="flex items-start gap-2.5">
-                        <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
+                    <li class="py-3 first:pt-0 last:pb-0 flex items-start gap-3">
+                        <span class="text-zinc-400 dark:text-zinc-500 font-mono select-none shrink-0 text-xs mt-1">—</span>
                         <span>
                             <span class="lang-ua"><b>Механічні пошкодження / падіння:</b> пошкодження внаслідок падіння оплачуються клієнтом.</span>
                             <span class="lang-en"><b>Accidental damage:</b> cosmetic and structural damage caused by crashes or drops are billed to the client.</span>
                         </span>
                     </li>
-                    <li class="flex items-start gap-2.5">
-                        <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
+                    <li class="py-3 first:pt-0 last:pb-0 flex items-start gap-3">
+                        <span class="text-zinc-400 dark:text-zinc-500 font-mono select-none shrink-0 text-xs mt-1">—</span>
                         <span>
                             <span class="lang-ua"><b>ДТП:</b> у разі ДТП клієнт зобов'язаний терміново зв'язатись з менеджером. Простій скутера на штрафстоянці — за рахунок клієнта. Якщо клієнт вирішив питання самостійно з винуватцем і по факту не отримав оплату за збиток — виплата покладається на клієнта.</span>
                             <span class="lang-en"><b>Traffic accidents:</b> renter must report accidents immediately. Impound fees and vehicle downtime are covered by client. Unrecovered damages from third parties remain client's responsibility.</span>
@@ -454,27 +552,27 @@
                 </ul>
             </section>
 
-            <!-- Секція 5 — 🔋 Комплектація транспорту та викуп -->
-            <section class="bg-white border-2 border-[#1D5D3B] chamfer-box p-6 md:p-8 shadow-sm">
-                <div class="flex items-center gap-3 pb-4 border-b border-[#1D5D3B]/20 mb-4">
-                    <div class="w-10 h-10 bg-[#1D5D3B] text-white flex items-center justify-center chamfer-badge shrink-0">
-                        <i data-lucide="battery-charging" class="w-5 h-5"></i>
+            <!-- Секція 5 — Комплектація транспорту -->
+            <section class="legal-card">
+                <div class="flex items-center justify-between pb-4 border-b border-zinc-100 dark:border-white/[0.06] mb-5">
+                    <div class="flex items-center gap-3">
+                        <span class="legal-section-number">05</span>
+                        <h2 class="font-brand font-bold text-base sm:text-lg tracking-tight uppercase text-zinc-900 dark:text-white">
+                            <span class="lang-ua">Комплектація транспорту</span>
+                            <span class="lang-en">Fleet Equipment & Battery</span>
+                        </h2>
                     </div>
-                    <h2 class="font-brand font-bold text-lg sm:text-xl uppercase tracking-wide text-[#111827]">
-                        <span class="lang-ua">🔋 Комплектація транспорту</span>
-                        <span class="lang-en">🔋 Fleet Equipment & Battery</span>
-                    </h2>
                 </div>
-                <ul class="space-y-3 text-sm md:text-base text-[#1F2937] leading-relaxed">
-                    <li class="flex items-start gap-2.5">
-                        <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
+                <ul class="divide-y divide-zinc-100 dark:divide-white/[0.05] text-sm md:text-[15px] text-zinc-700 dark:text-zinc-300 leading-relaxed">
+                    <li class="py-3 first:pt-0 last:pb-0 flex items-start gap-3">
+                        <span class="text-zinc-400 dark:text-zinc-500 font-mono select-none shrink-0 text-xs mt-1">—</span>
                         <span>
                             <span class="lang-ua">Вся техніка передається в користування виключно укомплектованою.</span>
                             <span class="lang-en">All transport units are handed over fully equipped with verified electronics.</span>
                         </span>
                     </li>
-                    <li class="flex items-start gap-2.5">
-                        <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
+                    <li class="py-3 first:pt-0 last:pb-0 flex items-start gap-3">
+                        <span class="text-zinc-400 dark:text-zinc-500 font-mono select-none shrink-0 text-xs mt-1">—</span>
                         <span>
                             <span class="lang-ua">Мінімальна базова комплектація для скутерів включає акумулятор 40Ah, для електровелосипедів — 10Ah. Комплект включає повне оснащення: транспорт + знімний АКБ + фірмовий зарядний пристрій.</span>
                             <span class="lang-en">Base configuration includes 40Ah battery for scooters, 10Ah for e-bikes. Equipment includes full turn-key package (vehicle + battery + charger).</span>
@@ -483,34 +581,34 @@
                 </ul>
             </section>
 
-            <!-- Секція 6 — 📄 Оформлення -->
-            <section class="bg-white border-2 border-[#1D5D3B] chamfer-box p-6 md:p-8 shadow-sm">
-                <div class="flex items-center gap-3 pb-4 border-b border-[#1D5D3B]/20 mb-4">
-                    <div class="w-10 h-10 bg-[#1D5D3B] text-white flex items-center justify-center chamfer-badge shrink-0">
-                        <i data-lucide="file-check" class="w-5 h-5"></i>
+            <!-- Секція 6 — Оформлення -->
+            <section class="legal-card">
+                <div class="flex items-center justify-between pb-4 border-b border-zinc-100 dark:border-white/[0.06] mb-5">
+                    <div class="flex items-center gap-3">
+                        <span class="legal-section-number">06</span>
+                        <h2 class="font-brand font-bold text-base sm:text-lg tracking-tight uppercase text-zinc-900 dark:text-white">
+                            <span class="lang-ua">Оформлення</span>
+                            <span class="lang-en">Contracting & Signing</span>
+                        </h2>
                     </div>
-                    <h2 class="font-brand font-bold text-lg sm:text-xl uppercase tracking-wide text-[#111827]">
-                        <span class="lang-ua">📄 Оформлення</span>
-                        <span class="lang-en">📄 Contracting & Signing</span>
-                    </h2>
                 </div>
-                <ul class="space-y-3 text-sm md:text-base text-[#1F2937] leading-relaxed">
-                    <li class="flex items-start gap-2.5">
-                        <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
+                <ul class="divide-y divide-zinc-100 dark:divide-white/[0.05] text-sm md:text-[15px] text-zinc-700 dark:text-zinc-300 leading-relaxed">
+                    <li class="py-3 first:pt-0 last:pb-0 flex items-start gap-3">
+                        <span class="text-zinc-400 dark:text-zinc-500 font-mono select-none shrink-0 text-xs mt-1">—</span>
                         <span>
                             <span class="lang-ua">Угода фіксується в електронному договорі перед видачею ключа.</span>
                             <span class="lang-en">All deals are recorded via official digital agreement before keys are issued.</span>
                         </span>
                     </li>
-                    <li class="flex items-start gap-2.5">
-                        <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
+                    <li class="py-3 first:pt-0 last:pb-0 flex items-start gap-3">
+                        <span class="text-zinc-400 dark:text-zinc-500 font-mono select-none shrink-0 text-xs mt-1">—</span>
                         <span>
                             <span class="lang-ua">Договір підписується в цифровому вигляді за допомогою КЕП (кваліфікованого електронного підпису).</span>
                             <span class="lang-en">Contracts are signed legally using Diia or qualified electronic digital signatures (QES).</span>
                         </span>
                     </li>
-                    <li class="flex items-start gap-2.5">
-                        <span class="w-2 h-2 bg-[#1D5D3B] rounded-full mt-2 shrink-0"></span>
+                    <li class="py-3 first:pt-0 last:pb-0 flex items-start gap-3">
+                        <span class="text-zinc-400 dark:text-zinc-500 font-mono select-none shrink-0 text-xs mt-1">—</span>
                         <span>
                             <span class="lang-ua">У разі проблем із КЕП питання обговорюється з менеджером.</span>
                             <span class="lang-en">In case of digital signature issues, our manager will assist with alternative verification.</span>
@@ -522,14 +620,14 @@
         </div>
 
         <!-- Кнопка швидкого переходу до каталогу або бота -->
-        <div class="mt-12 flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <div class="mt-14 flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a href="catalog.html"
-                class="chamfer-btn w-full sm:w-auto bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-sm uppercase tracking-wider py-3.5 px-8 text-center border border-[#1D5D3B]">
+                class="legal-btn-primary w-full sm:w-auto text-center">
                 <span class="lang-ua">Переглянути каталог транспорту →</span>
                 <span class="lang-en">View Transport Catalog →</span>
             </a>
             <a href="https://t.me/muviobot" target="_blank" rel="noopener noreferrer"
-                class="chamfer-btn w-full sm:w-auto bg-white hover:bg-slate-50 text-[#1D5D3B] font-brand font-bold text-sm uppercase tracking-wider py-3.5 px-8 text-center border-2 border-[#1D5D3B] flex items-center justify-center gap-2">
+                class="legal-btn-secondary w-full sm:w-auto flex items-center justify-center gap-2 text-center">
                 <i data-lucide="send" class="w-4 h-4"></i>
                 <span class="lang-ua">Зв'язатись з менеджером у Telegram</span>
                 <span class="lang-en">Contact Manager in Telegram</span>
