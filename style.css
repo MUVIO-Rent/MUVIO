@@ -156,8 +156,8 @@ body.dark-theme {
 .hero-section,
 .hero,
 #hero {
-    height: calc(100vh - 72px) !important;
-    min-height: calc(100vh - 72px) !important;
+    height: calc(100vh - 46px) !important;
+    min-height: calc(100vh - 46px) !important;
     background-color: #0d120f !important;
     margin: 0 !important;
     padding-bottom: 0 !important;
@@ -183,7 +183,7 @@ body.dark-theme {
     width: 100% !important;
     height: 100% !important;
     background-size: cover !important;
-    background-position: right 0% center !important;
+    background-position: right -100px center !important;
     background-repeat: no-repeat !important;
     transform: none !important;
     transition: opacity 0.6s ease-in-out !important;
@@ -277,9 +277,9 @@ html.theme-dark #hero::after {
 header,
 .site-header-synced,
 .header {
-    height: 72px !important;
-    min-height: 72px !important;
-    max-height: 72px !important;
+    height: 46px !important;
+    min-height: 46px !important;
+    max-height: 46px !important;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
     display: flex !important;
