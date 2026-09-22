@@ -298,6 +298,47 @@ header,
     box-sizing: border-box !important;
 }
 
+/* ==================== НАВИГАЦИОННОЕ МЕНЮ (СТРОГО ПО ЦЕНТРУ ШАПКИ) ==================== */
+header nav,
+.site-header-synced nav {
+    display: flex;
+    align-items: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+@media (min-width: 768px) {
+    header nav,
+    .site-header-synced nav {
+        display: flex !important;
+        align-items: center !important;
+        position: absolute !important;
+        left: 50% !important;
+        top: 0 !important;
+        bottom: 0 !important;
+        height: 100% !important;
+        transform: translateX(-50%) !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+}
+
+@media (max-width: 767px) {
+    header nav,
+    .site-header-synced nav {
+        display: none !important;
+    }
+}
+
+header nav a,
+.site-header-synced nav a,
+header .header-nav-link,
+.site-header-synced .header-nav-link {
+    display: inline-flex !important;
+    align-items: center !important;
+    line-height: 1 !important;
+}
+
 /* ==================== 2. ЧИТАЕМОСТЬ ТЕКСТА И ИКОНОК В СВЕТЛОЙ ТЕМЕ ==================== */
 header nav a,
 header .header-nav-link,
