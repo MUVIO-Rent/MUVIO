@@ -505,6 +505,18 @@
             }
         });
 
+        // Synchronize header logo image across light/dark themes
+        const logoImgs = document.querySelectorAll('.header-logo-img, header a[aria-label="MUVIO"] img, .site-header-synced img');
+        logoImgs.forEach(img => {
+            if (theme === 'dark') {
+                img.style.setProperty('filter', 'brightness(0) invert(1)', 'important');
+                img.style.setProperty('mix-blend-mode', 'normal', 'important');
+            } else {
+                img.style.removeProperty('filter');
+                img.style.removeProperty('mix-blend-mode');
+            }
+        });
+
         // Dispatch global theme-changed event for calculator & dynamic modules
         try {
             window.dispatchEvent(new CustomEvent('muvio-theme-changed', { detail: { theme: theme } }));

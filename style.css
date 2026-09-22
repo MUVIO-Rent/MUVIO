@@ -42,7 +42,6 @@ html.theme-dark .muvio-logo-letters,
 
 header img,
 .header-logo-img {
-    mix-blend-mode: multiply;
     transition: filter 0.2s ease, opacity 0.2s ease;
 }
 
@@ -50,13 +49,22 @@ html.dark header img,
 html.dark .header-logo-img,
 html.theme-dark header img,
 html.theme-dark .header-logo-img,
+body.dark header img,
+body.dark .header-logo-img,
+body.theme-dark header img,
+body.theme-dark .header-logo-img,
 .dark header img,
 .dark .header-logo-img,
 .theme-dark header img,
 .theme-dark .header-logo-img,
 [data-theme="dark"] header img,
-[data-theme="dark"] .header-logo-img {
+[data-theme="dark"] .header-logo-img,
+html.dark .header .logo img,
+body.dark .header .logo img,
+.dark-theme .header-logo img,
+.dark-theme .header-logo-img {
     filter: brightness(0) invert(1) !important;
+    mix-blend-mode: normal !important;
     background: transparent !important;
     background-color: transparent !important;
 }

@@ -307,13 +307,22 @@ html.dark header img,
 html.dark .header-logo-img,
 html.theme-dark header img,
 html.theme-dark .header-logo-img,
+body.dark header img,
+body.dark .header-logo-img,
+body.theme-dark header img,
+body.theme-dark .header-logo-img,
 .dark header img,
 .dark .header-logo-img,
 .theme-dark header img,
 .theme-dark .header-logo-img,
 [data-theme="dark"] header img,
-[data-theme="dark"] .header-logo-img {
+[data-theme="dark"] .header-logo-img,
+html.dark .header .logo img,
+body.dark .header .logo img,
+.dark-theme .header-logo img,
+.dark-theme .header-logo-img {
     filter: brightness(0) invert(1) !important;
+    mix-blend-mode: normal !important;
     background: transparent !important;
     background-color: transparent !important;
 }
@@ -1230,9 +1239,20 @@ body.dark header img,
 .dark header img,
 [data-theme="dark"] header img,
 html.dark .header-logo-img,
-.dark .header-logo-img {
-    filter: invert(1) hue-rotate(180deg) !important;
-    mix-blend-mode: screen !important;
+html.theme-dark .header-logo-img,
+body.dark .header-logo-img,
+body.theme-dark .header-logo-img,
+.dark .header-logo-img,
+.theme-dark .header-logo-img,
+[data-theme="dark"] .header-logo-img,
+html.dark .header .logo img,
+body.dark .header .logo img,
+.dark-theme .header-logo img,
+.dark-theme .header-logo-img {
+    filter: brightness(0) invert(1) !important;
+    mix-blend-mode: normal !important;
+    background: transparent !important;
+    background-color: transparent !important;
 }
 
 /* ==========================================================================

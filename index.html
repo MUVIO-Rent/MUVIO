@@ -201,10 +201,9 @@
             animation: echoNearMotion 1.24s cubic-bezier(0.12, 0.95, 0.25, 1) forwards;
         }
 
-        /* 1. Header Logo Image (Multiply in light mode, invert+screen in dark mode) */
+        /* 1. Header Logo Image (Clean transparent in light mode, pure white in dark mode) */
         header img,
         .header-logo-img {
-            mix-blend-mode: multiply;
             transition: opacity 0.2s ease, filter 0.2s ease;
         }
 
@@ -212,14 +211,24 @@
         html.dark .header-logo-img,
         html.theme-dark header img,
         html.theme-dark .header-logo-img,
+        body.dark header img,
+        body.dark .header-logo-img,
+        body.theme-dark header img,
+        body.theme-dark .header-logo-img,
         .dark header img,
         .dark .header-logo-img,
         .theme-dark header img,
         .theme-dark .header-logo-img,
         [data-theme="dark"] header img,
-        [data-theme="dark"] .header-logo-img {
-            filter: invert(1) hue-rotate(180deg) !important;
-            mix-blend-mode: screen !important;
+        [data-theme="dark"] .header-logo-img,
+        html.dark .header .logo img,
+        body.dark .header .logo img,
+        .dark-theme .header-logo img,
+        .dark-theme .header-logo-img {
+            filter: brightness(0) invert(1) !important;
+            mix-blend-mode: normal !important;
+            background: transparent !important;
+            background-color: transparent !important;
         }
 
         /* Responsive padding for full-width header synchronized with cabinet.html */
