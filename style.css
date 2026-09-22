@@ -760,3 +760,29 @@ html.theme-dark #page-preloader .preloader-m-logo,
     stroke: none !important;
     filter: none !important;
 }
+
+/* ==========================================================================
+   ЛОГОТИП В ПОДВАЛЕ (FOOTER LOGO)
+   ========================================================================== */
+.footer-logo-svg,
+.footer-brand svg {
+    height: 36px !important;
+    width: auto !important;
+    display: block !important;
+    transition: opacity 0.2s ease;
+}
+
+.footer-brand:hover .footer-logo-svg {
+    opacity: 0.9;
+}
+
+.footer-logo-mark {
+    fill: #10B981 !important;
+    transition: fill 0.2s ease;
+}
+
+.footer-logo-letters {
+    fill: #FFFFFF !important;
+    transition: fill 0.2s ease;
+}
+

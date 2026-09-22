@@ -1334,3 +1334,26 @@ html.theme-dark .fleet-card .img-night,
     opacity: 1 !important;
     filter: brightness(1) contrast(1) !important;
 }
+
+/* ==========================================================================
+   FOOTER LOGO IN DARK THEME
+   ========================================================================== */
+html.dark .footer-logo-mark,
+html.theme-dark .footer-logo-mark,
+body.dark .footer-logo-mark,
+body.theme-dark .footer-logo-mark,
+.dark .footer-logo-mark,
+.theme-dark .footer-logo-mark,
+[data-theme="dark"] .footer-logo-mark {
+    fill: #10B981 !important;
+}
+
+html.dark .footer-logo-letters,
+html.theme-dark .footer-logo-letters,
+body.dark .footer-logo-letters,
+body.theme-dark .footer-logo-letters,
+.dark .footer-logo-letters,
+.theme-dark .footer-logo-letters,
+[data-theme="dark"] .footer-logo-letters {
+    fill: #FFFFFF !important;
+}
