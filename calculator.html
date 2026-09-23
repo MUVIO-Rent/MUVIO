@@ -47,40 +47,179 @@
     <!-- MUVIO Styles & Dark Theme -->
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./dark-theme.css">
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #0A0D0B;
+            color: #FFFFFF;
+        }
+
         .text-primary {
-            color: #1D5D3B;
+            color: #1AB370;
         }
 
-        /* MUVIO High-Tech Geometric Styles */
-        .chamfer-box {
-            clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+        /* Tesla / Apple Configurator Style */
+        #calculator {
+            background-color: #0A0D0B !important;
+            color: #FFFFFF !important;
         }
 
-        .chamfer-btn {
-            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-            transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        .calc-tesla-container {
+            background: #111613;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
         }
 
-        .chamfer-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px -4px rgba(29, 93, 59, 0.35);
+        .calc-preview-box {
+            background: #0A0D0B;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
         }
 
-        .chamfer-badge {
-            clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+        .calc-select-tesla {
+            background-color: #161C18 !important;
+            border: 1px solid rgba(255, 255, 255, 0.12) !important;
+            color: #FFFFFF !important;
+            border-radius: 12px !important;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .calc-select-tesla:focus {
+            border-color: #1AB370 !important;
+            box-shadow: 0 0 0 2px rgba(26, 179, 112, 0.2) !important;
+            outline: none !important;
         }
 
-        .tech-card {
-            border: 2px solid #1D5D3B;
-            transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+        /* Duration Cards (Tesla Minimal 1px border) */
+        .calc-pill-btn {
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            background: rgba(255, 255, 255, 0.02) !important;
+            color: #E4E4E7 !important;
+            border-radius: 12px !important;
+            clip-path: none !important;
+            transition: all 0.2s ease !important;
+        }
+        .calc-pill-btn:hover {
+            border-color: rgba(255, 255, 255, 0.25) !important;
+            background: rgba(255, 255, 255, 0.05) !important;
+        }
+        .calc-pill-btn.is-active {
+            border-color: #1AB370 !important;
+            background: rgba(26, 179, 112, 0.08) !important;
+            box-shadow: 0 0 20px rgba(26, 179, 112, 0.12) !important;
+            color: #FFFFFF !important;
         }
 
-        .tech-card:hover {
-            border-color: #24754A;
-            transform: translateY(-4px);
-            box-shadow: 0 16px 32px -8px rgba(29, 93, 59, 0.22);
+        /* Tesla 4px Track Range Slider */
+        input[type=range].tesla-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 9999px;
+            outline: none;
+            cursor: pointer;
+        }
+        input[type=range].tesla-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #1AB370;
+            border: 2px solid #FFFFFF;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5), 0 0 10px rgba(26, 179, 112, 0.5);
+            transition: transform 0.15s ease;
+        }
+        input[type=range].tesla-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+        }
+        input[type=range].tesla-slider::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #1AB370;
+            border: 2px solid #FFFFFF;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5), 0 0 10px rgba(26, 179, 112, 0.5);
+        }
+
+        /* Addon Options */
+        .calc-addon-card {
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            background: rgba(255, 255, 255, 0.02) !important;
+            border-radius: 14px !important;
+            clip-path: none !important;
+            transition: all 0.2s ease !important;
+        }
+        .calc-addon-card:hover {
+            border-color: rgba(255, 255, 255, 0.22) !important;
+            background: rgba(255, 255, 255, 0.04) !important;
+        }
+        .calc-addon-card.is-active {
+            border-color: #1AB370 !important;
+            background: rgba(26, 179, 112, 0.08) !important;
+            box-shadow: 0 0 20px rgba(26, 179, 112, 0.1) !important;
+        }
+
+        /* Tesla Segmented Pill Switch (40Ah | 60Ah) */
+        .tesla-segmented {
+            background: rgba(0, 0, 0, 0.45);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 3px;
+            display: flex;
+            gap: 4px;
+        }
+        .tesla-segmented-btn {
+            flex: 1;
+            padding: 6px 12px;
+            border-radius: 7px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: #A1A1AA;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .tesla-segmented-btn:hover {
+            color: #FFFFFF;
+        }
+        .tesla-segmented-btn.is-active {
+            background: #1AB370;
+            color: #FFFFFF;
+            font-weight: 700;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* CTA Button: Pure #1AB370, 10px radius, 50px height */
+        .calc-cta-btn {
+            background: #1AB370 !important;
+            color: #FFFFFF !important;
+            border-radius: 10px !important;
+            clip-path: none !important;
+            border: none !important;
+            min-height: 50px !important;
+            height: 50px !important;
+            font-size: 13px !important;
+            font-weight: 700 !important;
+            letter-spacing: 0.06em !important;
+            text-transform: uppercase !important;
+            transition: all 0.2s ease !important;
+        }
+        .calc-cta-btn:hover {
+            background: #15985E !important;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 24px -4px rgba(26, 179, 112, 0.4) !important;
         }
     </style>
     <!-- Anti-flicker Settings Loader -->
@@ -269,128 +408,123 @@
                 <span class="lang-en">TERMS</span>
             </a>
             <a href="faq.html"
-                class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-[#111827] dark:text-zinc-200 hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] py-2 px-2 transition-colors rounded font-bold">
+                class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-[#111827] dark:text-zinc-200 hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] py-2 px-2 transition-colors rounded">
                 <span>FAQ</span>
             </a>
         </div>
     </header>
 
-    <!-- ==================== КАЛЬКУЛЯТОР ОРЕНДИ ==================== -->
-    <section id="calculator" class="py-16 md:py-24 bg-[#123824] text-white border-b-2 border-[#1D5D3B]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-x border-slate-200/60">
+    <!-- ==================== КАЛЬКУЛЯТОР ОРЕНДИ (TESLA DESIGN STUDIO) ==================== -->
+    <section id="calculator" class="py-16 md:py-24 bg-[#0A0D0B] text-white border-b border-white/[0.08]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-x border-white/[0.05]">
 
             <div class="text-center max-w-3xl mx-auto mb-12">
-                <div
-                    class="inline-flex items-center gap-2 px-3 py-1 bg-white/10 border border-white/30 chamfer-badge mb-3">
-                    <span class="font-brand font-bold text-xs tracking-wider text-white uppercase">
+                <div class="inline-flex items-center gap-2 px-3 py-1 bg-white/[0.04] border border-white/10 rounded-full mb-3">
+                    <span class="font-brand font-bold text-xs tracking-wider text-emerald-400 uppercase">
                         <span class="lang-ua">ТАРИФИ ТА РОЗРАХУНОК</span>
                         <span class="lang-en">RATES & CALCULATION</span>
                     </span>
                 </div>
-                <h2 class="font-brand font-bold text-3xl sm:text-4xl uppercase tracking-tight text-white">
+                <h1 class="font-brand font-extrabold text-3xl sm:text-4xl lg:text-5xl uppercase tracking-tight text-white">
                     <span class="lang-ua">КАЛЬКУЛЯТОР ОРЕНДИ</span>
                     <span class="lang-en">RENTAL CALCULATOR</span>
-                </h2>
-                <p class="text-sm sm:text-base text-emerald-100 mt-2">
+                </h1>
+                <p class="text-sm sm:text-base text-zinc-400 mt-3 max-w-2xl mx-auto leading-relaxed">
                     <span class="lang-ua">Оберіть модель транспорту, термін оренди та додаткові опції. Що довший термін оренди — то нижча вартість за добу.</span>
                     <span class="lang-en">Select a vehicle model, rental duration and additional options. Longer rental periods mean lower daily rates.</span>
                 </p>
             </div>
 
-            <!-- Блок калькулятора -->
-            <div
-                class="max-w-5xl mx-auto bg-white text-[#111827] border-2 border-[#1D5D3B] chamfer-box p-6 md:p-10 shadow-2xl">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Блок калькулятора (Tesla Design Studio) -->
+            <div class="max-w-5xl mx-auto calc-tesla-container p-6 sm:p-8 lg:p-10 shadow-2xl">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
 
                     <!-- Ліва колонка: Вибір комплектації та періоду -->
-                    <div class="lg:col-span-7 space-y-6">
+                    <div class="lg:col-span-7 space-y-7">
 
                         <!-- 1. Модель транспорту -->
                         <div>
-                            <label
-                                class="block font-brand font-bold text-sm uppercase tracking-wider text-[#111827] mb-2 flex items-center justify-between">
-                                <span>
+                            <div class="flex items-center justify-between mb-3">
+                                <label for="calcModelSelect" class="font-brand font-bold text-xs uppercase tracking-wider text-zinc-300">
                                     <span class="lang-ua">1. ОБЕРІТЬ МОДЕЛЬ ТРАНСПОРТУ:</span>
                                     <span class="lang-en">1. SELECT VEHICLE MODEL:</span>
-                                </span>
-                                <div class="flex items-center gap-1.5">
-                                    <span id="modelTypeBadge"
-                                        class="text-xs font-mono font-bold px-2 py-0.5 bg-[#131A16] text-[#2E8B57] border border-[#1D5D3B]/60 chamfer-badge">🛵 Скутер</span>
-                                    <span id="modelPowerBadge"
-                                        class="text-xs font-mono font-bold px-2 py-0.5 bg-[#1D5D3B]/15 text-[#1D5D3B] border border-[#1D5D3B] chamfer-badge">2000W</span>
-                                    <span id="modelVoltBadge"
-                                        class="text-xs font-mono font-bold px-2 py-0.5 bg-[#1D5D3B] text-white chamfer-badge">72V</span>
+                                </label>
+                                <!-- Приховані бейджі для сумісності з DOM-скриптами -->
+                                <div class="hidden">
+                                    <span id="modelTypeBadge"></span>
+                                    <span id="modelPowerBadge"></span>
+                                    <span id="modelVoltBadge"></span>
+                                    <span id="calcVehicleBadge"></span>
                                 </div>
-                            </label>
+                            </div>
 
-                            <!-- PHOTO PREVIEW INTEGRATION -->
-                            <div class="relative rounded-xl overflow-hidden bg-[#F8FAFC] border-2 border-[#1D5D3B]/25 p-3 mb-3 flex items-center justify-center min-h-[170px] sm:min-h-[210px] group">
-                                <span id="calcVehicleBadge"
-                                    class="absolute top-3 left-3 z-20 bg-[#131A16]/90 backdrop-blur-md text-[#2E8B57] border border-[#1D5D3B]/70 px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider shadow-sm">
-                                    <span class="lang-ua">85 КМ/ГОД</span>
-                                    <span class="lang-en">85 KM/H</span>
-                                </span>
+                            <!-- PHOTO PREVIEW (Tesla Style Minimal - чисте фото без плашок) -->
+                            <div class="calc-preview-box relative p-4 mb-3 flex items-center justify-center min-h-[180px] sm:min-h-[220px] group select-none">
                                 <img id="calcVehicleImg" src="images/crosser.jpg" alt="Обраний транспорт"
-                                    class="relative z-0 h-36 sm:h-44 w-auto object-contain transition-all duration-300 drop-shadow-md group-hover:scale-105 pointer-events-none">
+                                    class="relative z-0 h-36 sm:h-48 w-auto object-contain transition-transform duration-500 group-hover:scale-105 pointer-events-none drop-shadow-2xl">
                             </div>
 
                             <div class="relative">
                                 <select id="calcModelSelect" onchange="onModelChange()"
-                                    class="w-full bg-[#F8FAFC] border-2 border-[#1D5D3B] font-brand font-bold text-[#111827] px-4 py-3.5 focus:outline-none focus:ring-2 focus:ring-[#1D5D3B] chamfer-box cursor-pointer">
+                                    class="calc-select-tesla w-full font-brand font-semibold text-sm px-4 py-3.5 pr-10 cursor-pointer appearance-none">
                                     <!-- Опції генеруються JS -->
                                 </select>
+                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-zinc-400">
+                                    <svg class="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24" stroke-width="2">
+                                        <polyline points="6 9 12 15 18 9"></polyline>
+                                    </svg>
+                                </div>
                             </div>
                         </div>
 
                         <!-- 2. Термін оренди -->
                         <div>
-                            <label
-                                class="block font-brand font-bold text-sm uppercase tracking-wider text-[#111827] mb-2 flex items-center justify-between">
-                                <span>
+                            <div class="flex items-center justify-between mb-3">
+                                <label class="font-brand font-bold text-xs uppercase tracking-wider text-zinc-300">
                                     <span class="lang-ua">2. ОБЕРІТЬ ТЕРМІН ОРЕНДИ:</span>
                                     <span class="lang-en">2. SELECT RENTAL PERIOD:</span>
-                                </span>
+                                </label>
                                 <span id="durationDaysBadge"
-                                    class="bg-emerald-50 text-[#1D5D3B] border border-emerald-300 px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider font-mono">7 днів (тиждень)</span>
-                            </label>
-
-                            <!-- Кнопки швидкого вибору періоду: рівно 5 фіксованих кнопок -->
-                            <div class="grid grid-cols-2 sm:grid-cols-5 gap-2" id="durationPillsContainer">
-                                <!-- Опції генеруються JS: [1 ДЕНЬ] [2 ДНІ] [3 ДНІ] [7 ДНІВ (ТИЖДЕНЬ)] [28 ДНІВ (МІСЯЦЬ)] -->
+                                    class="px-3 py-1 rounded-full text-xs font-mono font-medium text-emerald-400 border border-emerald-500/20 bg-emerald-500/10">7 днів (тиждень)</span>
                             </div>
 
-                            <!-- Додатковий слайдер для дискретного вибору [1, 2, 3, 7, 28] з блокуванням 4-6 днів -->
-                            <div class="mt-3 p-3 bg-[#F8FAFC] border border-[#1D5D3B]/20 chamfer-box">
-                                <div class="flex items-center justify-between text-xs font-mono text-[#4B5563] mb-1.5">
+                            <!-- Кнопки швидкого вибору періоду: 5 мінімалістичних карток -->
+                            <div class="grid grid-cols-2 sm:grid-cols-5 gap-2" id="durationPillsContainer">
+                                <!-- Опції генеруються JS: [1 ДЕНЬ] [2 ДНІ] [3 ДНІ] [7 ДНІВ] [28 ДНІВ] -->
+                            </div>
+
+                            <!-- Слайдер днів (Tesla Ultra-thin 4px Track) -->
+                            <div class="mt-4 p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
+                                <div class="flex items-center justify-between text-xs font-mono text-zinc-400 mb-2.5">
                                     <span>
                                         <span class="lang-ua">Шкала фіксованих тарифів:</span>
                                         <span class="lang-en">Fixed tariffs scale:</span>
                                     </span>
                                     <div class="flex items-center gap-2">
-                                        <span class="font-bold text-[#1D5D3B] text-sm">
+                                        <span class="font-bold text-[#1AB370] text-sm font-mono">
                                             <span id="sliderDaysDisplay">7</span> <span class="lang-ua">дн.</span><span class="lang-en">d.</span>
                                         </span>
                                         <input type="number" id="manualDaysInput" min="1" max="28" value="7"
                                             onchange="onManualDaysChange(this.value)"
                                             onkeyup="if(event.key==='Enter')onManualDaysChange(this.value)"
-                                            class="w-14 px-1.5 py-0.5 text-xs font-bold text-center border border-[#1D5D3B]/40 rounded bg-white text-[#111827] focus:outline-none focus:border-[#1D5D3B]"
+                                            class="w-12 px-1.5 py-1 text-xs font-bold text-center border border-white/10 rounded-lg bg-black/40 text-white focus:outline-none focus:border-[#1AB370]"
                                             title="Введіть кількість днів">
                                     </div>
                                 </div>
                                 <input type="range" id="calcDaysSlider" min="0" max="4" value="3" step="1"
                                     oninput="onSliderStepChange(this.value)"
-                                    class="w-full accent-[#1D5D3B] cursor-pointer h-2 bg-slate-200 rounded-lg">
-                                <div class="flex justify-between text-[10px] font-mono text-[#4B5563] mt-1.5 px-0.5">
-                                    <span class="cursor-pointer font-semibold hover:text-[#1D5D3B]" onclick="setCalcDuration(1)">1 <span class="lang-ua">день</span><span class="lang-en">day</span></span>
-                                    <span class="cursor-pointer font-semibold hover:text-[#1D5D3B]" onclick="setCalcDuration(2)">2 <span class="lang-ua">дні</span><span class="lang-en">days</span></span>
-                                    <span class="cursor-pointer font-semibold hover:text-[#1D5D3B]" onclick="setCalcDuration(3)">3 <span class="lang-ua">дні</span><span class="lang-en">days</span></span>
-                                    <span class="cursor-pointer font-semibold hover:text-[#1D5D3B]" onclick="setCalcDuration(7)">7 <span class="lang-ua">днів</span><span class="lang-en">days</span></span>
-                                    <span class="cursor-pointer font-semibold hover:text-[#1D5D3B]" onclick="setCalcDuration(28)">28 <span class="lang-ua">днів</span><span class="lang-en">days</span></span>
+                                    class="tesla-slider">
+                                <div class="flex justify-between text-[11px] font-mono text-zinc-400 mt-2 px-0.5">
+                                    <span class="cursor-pointer hover:text-white transition-colors" onclick="setCalcDuration(1)">1 <span class="lang-ua">д.</span><span class="lang-en">d.</span></span>
+                                    <span class="cursor-pointer hover:text-white transition-colors" onclick="setCalcDuration(2)">2 <span class="lang-ua">д.</span><span class="lang-en">d.</span></span>
+                                    <span class="cursor-pointer hover:text-white transition-colors" onclick="setCalcDuration(3)">3 <span class="lang-ua">д.</span><span class="lang-en">d.</span></span>
+                                    <span class="cursor-pointer hover:text-white transition-colors" onclick="setCalcDuration(7)">7 <span class="lang-ua">д.</span><span class="lang-en">d.</span></span>
+                                    <span class="cursor-pointer hover:text-white transition-colors" onclick="setCalcDuration(28)">28 <span class="lang-ua">д.</span><span class="lang-en">d.</span></span>
                                 </div>
 
-                                <!-- Повідомлення про блокування 4-6 днів -->
-                                <div id="forbiddenDaysWarning" class="hidden mt-2.5 p-2.5 bg-amber-50 border border-amber-300 text-amber-900 rounded text-xs font-medium flex items-center gap-2">
-                                    <i data-lucide="alert-circle" class="w-4 h-4 shrink-0 text-amber-600"></i>
+                                <!-- Попередження про 4-6 днів -->
+                                <div id="forbiddenDaysWarning" class="hidden mt-3 p-2.5 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-300 text-xs font-medium flex items-center gap-2">
+                                    <i data-lucide="alert-circle" class="w-4 h-4 shrink-0 text-amber-400"></i>
                                     <span>
                                         <span class="lang-ua">Оренда на 4-6 днів недоступна. Оберіть тариф на 7 днів (тиждень).</span>
                                         <span class="lang-en">Rental for 4-6 days is not available. Please choose the 7-day rate (week).</span>
@@ -401,39 +535,39 @@
 
                         <!-- 3. Додаткові опції -->
                         <div>
-                            <label
-                                class="block font-brand font-bold text-sm uppercase tracking-wider text-[#111827] mb-2 flex items-center justify-between">
-                                <span>
+                            <div class="flex items-center justify-between mb-3">
+                                <label class="font-brand font-bold text-xs uppercase tracking-wider text-zinc-300">
                                     <span class="lang-ua">3. ДОДАТКОВІ ОПЦІЇ ТА ОБЛАДНАННЯ:</span>
                                     <span class="lang-en">3. ADDITIONAL OPTIONS & GEAR:</span>
-                                </span>
-                                <span id="optionsCountBadge" class="text-xs font-mono font-normal text-[#4B5563]">0 опцій обрано</span>
-                            </label>
-                            <div id="rentalAddonsContainer" class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-                                <!-- Опції генеруються JS: Шолом + тримач (+0 грн), Другий АКБ, Швидка зарядка -->
+                                </label>
+                                <span id="optionsCountBadge" class="text-xs font-mono text-zinc-500">0 опцій обрано</span>
+                            </div>
+                            <div id="rentalAddonsContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <!-- Опції генеруються JS: Шолом + АКБ 40Ah / 60Ah -->
                             </div>
                         </div>
 
                     </div>
 
-                    <!-- Права колонка: Фінальний розрахунок -->
-                    <div
-                        class="lg:col-span-5 flex flex-col justify-between bg-[#F8FAFC] border-2 border-[#1D5D3B] p-6 chamfer-box">
+                    <!-- Права колонка: Фінальний розрахунок (Tesla Summary Card) -->
+                    <div class="lg:col-span-5 flex flex-col justify-between rounded-2xl bg-[#0E1210] border border-white/[0.08] p-6 sm:p-7">
 
-                        <div class="space-y-5">
-                            <div class="border-b border-[#1D5D3B]/20 pb-4">
-                                <div class="font-brand font-bold text-xs uppercase tracking-widest text-[#4B5563]">
+                        <div class="space-y-6">
+                            <div class="border-b border-white/[0.08] pb-4">
+                                <div class="font-brand font-bold text-[11px] uppercase tracking-widest text-zinc-400">
                                     <span class="lang-ua">ПІДСУМОК ОРЕНДИ</span>
                                     <span class="lang-en">RENTAL SUMMARY</span>
                                 </div>
-                                <div class="flex items-center gap-3 mt-2">
-                                    <img id="resThumbnail" src="images/crosser.jpg" alt="Прев'ю"
-                                        class="w-12 h-12 object-contain bg-white border border-[#1D5D3B]/30 p-1 chamfer-badge">
+                                <div class="flex items-center gap-3.5 mt-3">
+                                    <div class="w-14 h-14 rounded-xl bg-black/40 border border-white/10 p-1 flex items-center justify-center shrink-0">
+                                        <img id="resThumbnail" src="images/crosser.jpg" alt="Прев'ю"
+                                            class="w-full h-full object-contain">
+                                    </div>
                                     <div class="min-w-0">
-                                        <div id="resModelTitle" class="font-brand font-bold text-lg sm:text-xl text-[#111827] truncate">
+                                        <div id="resModelTitle" class="font-brand font-bold text-lg sm:text-xl text-white truncate">
                                             Crosser CR-13 №1
                                         </div>
-                                        <div id="resConfigSummary" class="text-xs text-[#4B5563] font-mono mt-0.5">
+                                        <div id="resConfigSummary" class="text-xs text-zinc-400 font-mono mt-0.5">
                                             2000W | 72V | 7 днів (тиждень)
                                         </div>
                                     </div>
@@ -441,52 +575,49 @@
                             </div>
 
                             <div class="space-y-4">
-
-                                <!-- Вартість оренди -->
-                                <div class="bg-white border-2 border-[#1D5D3B]/40 p-3.5 chamfer-box">
-                                    <div class="text-xs uppercase font-brand font-bold tracking-wider text-[#4B5563]">
+                                <!-- Вартість оренди: Крупна, чітка сума без кислотних рамок -->
+                                <div>
+                                    <div class="text-[11px] uppercase font-brand font-bold tracking-wider text-zinc-400">
                                         <span class="lang-ua">РАЗОМ ДО ОПЛАТИ:</span>
                                         <span class="lang-en">TOTAL TO PAY:</span>
                                     </div>
                                     <div id="resTotalPrice"
-                                        class="font-brand font-bold text-2xl sm:text-3xl text-[#1D5D3B] mt-0.5">
+                                        class="font-brand font-extrabold text-3xl sm:text-4xl text-white mt-1 tracking-tight">
                                         3 360 грн
                                     </div>
                                 </div>
 
-                                <!-- Застава / Депозит -->
-                                <div class="bg-[#1D5D3B]/10 border-2 border-[#1D5D3B] p-3.5 chamfer-box">
-                                    <div
-                                        class="text-xs uppercase font-brand font-bold tracking-wider text-[#1D5D3B] flex items-center justify-between">
-                                        <span>
-                                            <span class="lang-ua">ЗАСТАВА ЗА ТРАНСПОРТ:</span>
-                                            <span class="lang-en">SECURITY DEPOSIT:</span>
-                                        </span>
-                                        <i data-lucide="shield-check" class="w-4 h-4 text-[#1D5D3B]"></i>
+                                <!-- Застава / Депозит: Компактний акуратний підпис -->
+                                <div class="flex items-center justify-between pt-2 border-t border-white/[0.06]">
+                                    <div class="text-xs text-zinc-400">
+                                        <span class="lang-ua">ЗАСТАВА ЗА ТРАНСПОРТ:</span>
+                                        <span class="lang-en">SECURITY DEPOSIT:</span>
                                     </div>
-                                    <div id="resDeposit"
-                                        class="font-brand font-bold text-2xl sm:text-3xl text-[#1D5D3B] mt-0.5">
+                                    <div id="resDeposit" class="font-mono font-bold text-sm sm:text-base text-zinc-200">
                                         2 000 грн
                                     </div>
+                                </div>
+                                <div class="text-[11px] text-zinc-500 font-mono">
+                                    <span class="lang-ua">Або без застави за умови верифікації через Дію</span>
+                                    <span class="lang-en">Or without deposit subject to Diia verification</span>
                                 </div>
 
                                 <!-- Деталізація вартості -->
                                 <div id="resBreakdownBox"
-                                    class="bg-slate-100/80 border border-slate-200 p-3 chamfer-box text-xs font-mono space-y-1 text-[#4B5563]">
+                                    class="pt-3 border-t border-white/[0.06] text-xs font-mono space-y-1.5 text-zinc-400">
                                     <!-- Деталі розрахунку JS -->
                                 </div>
-
                             </div>
                         </div>
 
-                        <!-- Кнопка заявки в Telegram -->
-                        <div class="mt-6 pt-4 border-t border-[#1D5D3B]/20">
+                        <!-- Кнопка заявки в Telegram: Фірмова геометрія без скошених кутів -->
+                        <div class="mt-8 pt-5 border-t border-white/[0.08]">
                             <a id="calcTelegramBtn" href="#" target="_blank" rel="noopener noreferrer"
-                                class="chamfer-btn w-full bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-sm uppercase tracking-widest py-4 px-4 flex items-center justify-center gap-2 border border-[#1D5D3B] text-center shadow-lg transition-all">
-                                <i data-lucide="send" class="w-5 h-5"></i>
-                                <span>НАДІСЛАТИ ЗАЯВКУ В TELEGRAM (3 360 ГРН)</span>
+                                class="calc-cta-btn w-full flex items-center justify-center gap-2 transition-all">
+                                <i data-lucide="send" class="w-4 h-4"></i>
+                                <span>НАДІСЛАТИ ЗАЯВКУ В TELEGRAM</span>
                             </a>
-                            <p class="text-[11px] text-center text-[#4B5563] mt-2">
+                            <p class="text-[11px] text-center text-zinc-500 mt-2.5">
                                 <span class="lang-ua">Сформована заявка надсилається до офіційного бота @muviobot</span>
                                 <span class="lang-en">Application will be sent directly to @muviobot</span>
                             </p>
@@ -496,53 +627,40 @@
 
                 </div>
 
-                <!-- Правила оренди (Сухі факти) -->
-                <div class="mt-8 pt-6 border-t-2 border-[#1D5D3B]/20 grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="p-3.5 bg-[#F8FAFC] border border-[#1D5D3B]/30 chamfer-box">
-                        <div
-                            class="font-brand font-bold text-xs uppercase text-[#1D5D3B] flex items-center gap-1.5 mb-1">
-                            <i data-lucide="percent" class="w-4 h-4"></i>
-                            <span>
-                                <span class="lang-ua">1. ДИНАМІЧНИЙ ТАРИФ</span>
-                                <span class="lang-en">1. DYNAMIC RATES</span>
-                            </span>
+                <!-- Нижні блоки (3 колонки на загальному фоні з тонкими роздільниками без колгоспу) -->
+                <div class="mt-10 pt-8 border-t border-white/[0.08] grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 divide-y md:divide-y-0 md:divide-x divide-white/[0.08]">
+                    <div class="pt-4 md:pt-0 md:pr-4">
+                        <div class="font-brand font-bold text-xs uppercase tracking-wider text-[#1AB370] mb-1.5">
+                            <span class="lang-ua">1. ДИНАМІЧНИЙ ТАРИФ</span>
+                            <span class="lang-en">1. DYNAMIC RATES</span>
                         </div>
-                        <p class="text-xs text-[#4B5563] leading-relaxed">
+                        <p class="text-xs text-zinc-400 leading-relaxed">
                             <span class="lang-ua">Що довший термін оренди — то нижча ціна за добу. При оренді від 28 днів щоденний тариф знижується до ~300 грн/доба.</span>
                             <span class="lang-en">Longer rental periods mean lower daily rates. For 28+ day rentals, daily rates decrease to ~300 UAH/day.</span>
                         </p>
                     </div>
 
-                    <div class="p-3.5 bg-[#F8FAFC] border border-[#1D5D3B]/30 chamfer-box">
-                        <div
-                            class="font-brand font-bold text-xs uppercase text-[#1D5D3B] flex items-center gap-1.5 mb-1">
-                            <i data-lucide="wrench" class="w-4 h-4"></i>
-                            <span>
-                                <span class="lang-ua">2. ТЕХНІЧНИЙ СЕРВІС</span>
-                                <span class="lang-en">2. TECHNICAL SERVICE</span>
-                            </span>
+                    <div class="pt-4 md:pt-0 md:px-4">
+                        <div class="font-brand font-bold text-xs uppercase tracking-wider text-[#1AB370] mb-1.5">
+                            <span class="lang-ua">2. ТЕХНІЧНИЙ СЕРВІС</span>
+                            <span class="lang-en">2. TECHNICAL SERVICE</span>
                         </div>
-                        <p class="text-xs text-[#4B5563] leading-relaxed">
+                        <p class="text-xs text-zinc-400 leading-relaxed">
                             <span class="lang-ua">Планове ТО, регламентні роботи та заміна зношених розхідників проводяться нашими майстрами безкоштовно.</span>
                             <span class="lang-en">Scheduled maintenance, regular inspections, and consumable parts replacement are provided free of charge.</span>
                         </p>
                     </div>
 
-                    <div class="p-3.5 bg-[#F8FAFC] border border-[#1D5D3B]/30 chamfer-box">
-                        <div
-                            class="font-brand font-bold text-xs uppercase text-[#1D5D3B] flex items-center gap-1.5 mb-1">
-                            <i data-lucide="file-text" class="w-4 h-4"></i>
-                            <span>
-                                <span class="lang-ua">3. ОФІЦІЙНИЙ ДОГОВІР</span>
-                                <span class="lang-en">3. OFFICIAL CONTRACT</span>
-                            </span>
+                    <div class="pt-4 md:pt-0 md:pl-4">
+                        <div class="font-brand font-bold text-xs uppercase tracking-wider text-[#1AB370] mb-1.5">
+                            <span class="lang-ua">3. ОФІЦІЙНИЙ ДОГОВІР</span>
+                            <span class="lang-en">3. OFFICIAL CONTRACT</span>
                         </div>
-                        <p class="text-xs text-[#4B5563] leading-relaxed">
-                            <span class="lang-ua">Прозорий договір оренди та акт прийому-передачі техніки.</span>
-                            <span class="lang-en">Transparent lease agreement and vehicle transfer acceptance act.</span>
+                        <p class="text-xs text-zinc-400 leading-relaxed">
+                            <span class="lang-ua">Прозорий договір оренди та акт прийому-передачі техніки. Повна юридична безпека.</span>
+                            <span class="lang-en">Transparent lease agreement and vehicle transfer acceptance act. Full legal security.</span>
                         </p>
                     </div>
-                </div>
                 </div>
 
             </div>
@@ -839,8 +957,20 @@
             modelKey: 'crosser-cr-13-1',
             days: 7,
             hasHelmet: false,
-            batteryOption: 'none' // 'none' | 'removable'
+            batteryOption: 'none', // 'none' | 'removable'
+            batteryCapacity: '40ah' // '40ah' | '60ah'
         };
+
+        function setBatteryCapacity(cap, event) {
+            if (event) {
+                event.stopPropagation();
+            }
+            calcState.batteryCapacity = cap;
+            calcState.batteryOption = 'removable';
+            renderAddonOptions();
+            updateCalc();
+        }
+        window.setBatteryCapacity = setBatteryCapacity;
 
         function normalizeModelKey(rawKey) {
             if (!rawKey) return null;
@@ -1005,7 +1135,7 @@
             setCalcDuration(d);
         }
 
-        // Чисті кнопки строків оренди у 2 рядки без сміття
+        // Вибір строків оренди (Tesla Design Studio: строгі мінімалістичні картки)
         function renderDurationPills() {
             const container = document.getElementById('durationPillsContainer');
             if (!container) return;
@@ -1014,7 +1144,7 @@
             const isEn = (window.getSiteSettings ? window.getSiteSettings().lang : 'ua') === 'en';
             const groupKey = getVehicleGroup(calcState.modelKey);
             const tier = TARIFF_TIERS[groupKey];
-            const currSign = isEn ? 'UAH' : '₴';
+            const currSign = isEn ? 'UAH' : 'грн';
 
             STANDARD_PERIODS.forEach(p => {
                 const isSelected = (calcState.days === p.days);
@@ -1024,14 +1154,14 @@
                 const btn = document.createElement('button');
                 btn.type = 'button';
                 btn.onclick = () => setCalcDuration(p.days);
-                btn.className = `calc-pill-btn px-1 py-2 sm:px-2.5 sm:py-2.5 border-2 font-brand text-center chamfer-badge transition-all flex flex-col items-center justify-center cursor-pointer min-h-[66px] sm:min-h-[72px] ${
+                btn.className = `calc-pill-btn p-2.5 sm:p-3 border font-brand text-center transition-all flex flex-col items-center justify-center cursor-pointer min-h-[64px] sm:min-h-[70px] rounded-xl ${
                     isSelected 
-                        ? 'is-active border-[#1D5D3B] bg-[#1D5D3B] text-white shadow-md font-bold' 
-                        : 'border-slate-300 bg-white text-[#111827] hover:border-[#1D5D3B]/60 hover:bg-[#1D5D3B]/5'
+                        ? 'is-active border-[#1AB370] bg-[#1AB370]/[0.08] text-white shadow-sm ring-1 ring-[#1AB370]' 
+                        : 'border-white/10 bg-white/[0.03] text-zinc-300 hover:border-white/20 hover:bg-white/[0.06]'
                 }`;
                 btn.innerHTML = `
-                    <span class="font-bold text-[10px] sm:text-xs uppercase tracking-tight block text-center leading-tight ${isSelected ? 'text-white' : 'text-[#111827]'}">${label}</span>
-                    <span class="font-extrabold text-xs sm:text-sm md:text-base block text-center mt-1 sm:mt-1.5 whitespace-nowrap ${isSelected ? 'text-emerald-300' : 'text-[#1D5D3B]'}">${totalCost.toLocaleString(isEn ? 'en-US' : 'uk-UA')} ${currSign}</span>
+                    <span class="font-bold text-[10px] sm:text-xs uppercase tracking-wider block text-center leading-tight ${isSelected ? 'text-[#1AB370]' : 'text-zinc-400'}">${label}</span>
+                    <span class="font-extrabold text-xs sm:text-sm md:text-base block text-center mt-1 sm:mt-1.5 whitespace-nowrap text-white">${totalCost.toLocaleString(isEn ? 'en-US' : 'uk-UA')} ${currSign}</span>
                 `;
                 container.appendChild(btn);
             });
@@ -1051,18 +1181,23 @@
             }
         }
 
-        // Блок 3: Додаткові опції (Шолом +200 грн чекбокс, Другий знімний АКБ +800 грн)
+        // Блок 3: Додаткові опції (Шолом +200 грн, Другий знімний АКБ: 40Ah +800 / 60Ah +1200)
         function renderAddonOptions() {
             const container = document.getElementById('rentalAddonsContainer');
             if (!container) return;
             container.innerHTML = '';
 
             const isEn = (window.getSiteSettings ? window.getSiteSettings().lang : 'ua') === 'en';
+            const currSign = isEn ? 'UAH' : 'грн';
+
+            const isBatteryActive = (calcState.batteryOption !== 'none');
+            const batteryPriceText = calcState.batteryCapacity === '60ah' 
+                ? (isEn ? '+1,200 UAH' : '+1 200 грн')
+                : (isEn ? '+800 UAH' : '+800 грн');
 
             const options = [
                 {
                     id: 'helmet',
-                    type: 'checkbox',
                     title: isEn ? "HELMET + PHONE MOUNT" : "ШОЛОМ + ТРИМАЧ ДЛЯ ТЕЛЕФОНУ",
                     priceLabel: isEn ? "+200 UAH" : "+200 грн",
                     isActive: calcState.hasHelmet,
@@ -1072,22 +1207,26 @@
                 },
                 {
                     id: 'battery',
-                    type: 'checkbox',
                     title: isEn ? "SECOND REMOVABLE BATTERY" : "ДРУГИЙ ЗНІМНИЙ АКБ",
-                    priceLabel: isEn ? "+800 UAH" : "+800 грн",
-                    isActive: (calcState.batteryOption === 'removable' || calcState.batteryOption === '40ah'),
+                    priceLabel: isBatteryActive ? batteryPriceText : (isEn ? "40Ah / 60Ah" : "40Ah / 60Ah"),
+                    isActive: isBatteryActive,
                     onToggle: () => {
-                        calcState.batteryOption = (calcState.batteryOption === 'removable' || calcState.batteryOption === '40ah') ? 'none' : 'removable';
+                        if (calcState.batteryOption !== 'none') {
+                            calcState.batteryOption = 'none';
+                        } else {
+                            calcState.batteryOption = 'removable';
+                            if (!calcState.batteryCapacity) calcState.batteryCapacity = '40ah';
+                        }
                     }
                 }
             ];
 
             options.forEach(opt => {
                 const card = document.createElement('div');
-                card.className = `calc-addon-card p-3 border-2 cursor-pointer chamfer-badge transition-all flex items-center justify-between min-h-[64px] ${
+                card.className = `calc-addon-card p-3.5 sm:p-4 border rounded-xl cursor-pointer transition-all flex flex-col justify-between ${
                     opt.isActive 
-                        ? 'is-active border-[#1D5D3B] bg-[#1D5D3B]/10 font-bold ring-1 ring-[#1D5D3B]' 
-                        : 'border-slate-300 bg-white hover:border-[#1D5D3B]/50'
+                        ? 'is-active border-[#1AB370] bg-[#1AB370]/[0.08] ring-1 ring-[#1AB370]' 
+                        : 'border-white/10 bg-white/[0.03] hover:border-white/20 hover:bg-white/[0.05]'
                 }`;
                 card.onclick = () => {
                     opt.onToggle();
@@ -1095,28 +1234,52 @@
                     updateCalc();
                 };
 
-                let indicatorHtml = '';
-                if (opt.type === 'checkbox') {
-                    indicatorHtml = `
-                        <div class="w-5 h-5 rounded border-2 border-[#1D5D3B] flex items-center justify-center shrink-0 transition-colors ${opt.isActive ? 'bg-[#1D5D3B] text-white' : 'bg-white'}">
-                            ${opt.isActive ? '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>' : ''}
+                const topRow = `
+                    <div class="flex items-center justify-between gap-3">
+                        <div class="min-w-0">
+                            <div class="text-xs font-brand uppercase text-white font-bold tracking-wide">${opt.title}</div>
+                            <div class="text-xs font-mono font-bold text-[#1AB370] mt-0.5">${opt.priceLabel}</div>
                         </div>
-                    `;
-                } else {
-                    indicatorHtml = `
-                        <div class="w-5 h-5 rounded-full border-2 border-[#1D5D3B] flex items-center justify-center shrink-0 transition-colors bg-white">
-                            ${opt.isActive ? '<div class="w-2.5 h-2.5 bg-[#1D5D3B] rounded-full"></div>' : ''}
+                        <div class="w-5 h-5 rounded-md border flex items-center justify-center shrink-0 transition-colors ${
+                            opt.isActive 
+                                ? 'border-[#1AB370] bg-[#1AB370] text-black' 
+                                : 'border-white/20 bg-white/[0.05]'
+                        }">
+                            ${opt.isActive ? '<svg class="w-3.5 h-3.5 stroke-[3]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>' : ''}
+                        </div>
+                    </div>
+                `;
+
+                let segmentedControl = '';
+                if (opt.id === 'battery' && opt.isActive) {
+                    segmentedControl = `
+                        <div class="tesla-segmented mt-3 pt-3 border-t border-white/[0.08] flex items-center gap-2" onclick="event.stopPropagation()">
+                            <span class="text-[11px] font-mono uppercase tracking-wider text-zinc-400 shrink-0">${isEn ? 'Capacity:' : 'Ємність:'}</span>
+                            <div class="grid grid-cols-2 gap-1.5 flex-1">
+                                <button type="button" 
+                                    onclick="setBatteryCapacity('40ah', event)" 
+                                    class="px-2.5 py-1.5 rounded-lg text-xs font-mono font-bold transition-all text-center border ${
+                                        calcState.batteryCapacity === '40ah' 
+                                            ? 'border-[#1AB370] bg-[#1AB370] text-black shadow-sm font-black' 
+                                            : 'border-white/10 bg-white/[0.04] text-zinc-300 hover:border-white/20 hover:text-white'
+                                    }">
+                                    40Ah (+800 ${currSign})
+                                </button>
+                                <button type="button" 
+                                    onclick="setBatteryCapacity('60ah', event)" 
+                                    class="px-2.5 py-1.5 rounded-lg text-xs font-mono font-bold transition-all text-center border ${
+                                        calcState.batteryCapacity === '60ah' 
+                                            ? 'border-[#1AB370] bg-[#1AB370] text-black shadow-sm font-black' 
+                                            : 'border-white/10 bg-white/[0.04] text-zinc-300 hover:border-white/20 hover:text-white'
+                                    }">
+                                    60Ah (+1 200 ${currSign})
+                                </button>
+                            </div>
                         </div>
                     `;
                 }
 
-                card.innerHTML = `
-                    <div class="pr-2 min-w-0">
-                        <div class="text-xs font-brand uppercase text-[#111827] leading-tight font-bold">${opt.title}</div>
-                        <div class="text-xs font-mono font-bold text-[#1D5D3B] mt-1">${opt.priceLabel}</div>
-                    </div>
-                    ${indicatorHtml}
-                `;
+                card.innerHTML = topRow + segmentedControl;
                 container.appendChild(card);
             });
 
@@ -1131,7 +1294,7 @@
             }
         }
 
-        // Перерахунок суми «РАЗОМ ДО ОПЛАТИ» та оновлення чека
+        // Перерахунок суми «РАЗОМ ДО ОПЛАТИ» та оновлення чека (Tesla Design Studio)
         function updateCalc() {
             const model = RENTAL_TARIFFS[calcState.modelKey] || RENTAL_TARIFFS['crosser-cr-13-1'];
             const days = calcState.days || 1;
@@ -1178,10 +1341,12 @@
             const baseRentalCost = pricing.baseCost;
             const deposit = pricing.deposit;
 
-            // 2. Додаткові опції: Шлем (+200 грн), Другий знімний АКБ (+800 грн)
+            // 2. Додаткові опції: Шолом (+200 грн), Другий знімний АКБ (40Ah: +800 грн, 60Ah: +1200 грн)
             const helmetCost = calcState.hasHelmet ? 200 : 0;
             let batteryCost = 0;
-            if (calcState.batteryOption === 'removable' || calcState.batteryOption === '40ah') batteryCost = 800;
+            if (calcState.batteryOption !== 'none') {
+                batteryCost = (calcState.batteryCapacity === '60ah') ? 1200 : 800;
+            }
 
             const totalCost = baseRentalCost + helmetCost + batteryCost;
 
@@ -1198,7 +1363,7 @@
                 document.getElementById('resConfigSummary').textContent = `${model.power} | ${model.volt} | ${periodText}`;
             }
 
-            // Крупна сума зеленим акцентом
+            // Крупна сума без кислотних відтінків (Tesla Design Studio)
             if (document.getElementById('resTotalPrice')) {
                 document.getElementById('resTotalPrice').textContent = isEn
                     ? `${totalCost.toLocaleString('en-US')} UAH`
@@ -1223,19 +1388,22 @@
                 else if (days === 28 || days === 30) periodName = isEn ? '28 days (month)' : '28 днів (місяць)';
 
                 let html = isEn
-                    ? `<div class="flex justify-between items-center py-0.5"><span>Rental (${periodName}):</span><span class="font-bold text-[#111827] dark:text-white">${baseRentalCost.toLocaleString('en-US')} UAH</span></div>`
-                    : `<div class="flex justify-between items-center py-0.5"><span>Оренда (${periodName}):</span><span class="font-bold text-[#111827] dark:text-white">${baseRentalCost.toLocaleString('uk-UA')} грн</span></div>`;
+                    ? `<div class="flex justify-between items-center py-1 text-zinc-300"><span class="text-zinc-400">Rental (${periodName}):</span><span class="font-bold text-white font-mono">${baseRentalCost.toLocaleString('en-US')} UAH</span></div>`
+                    : `<div class="flex justify-between items-center py-1 text-zinc-300"><span class="text-zinc-400">Оренда (${periodName}):</span><span class="font-bold text-white font-mono">${baseRentalCost.toLocaleString('uk-UA')} грн</span></div>`;
                 
                 if (calcState.hasHelmet) {
                     html += isEn
-                        ? `<div class="flex justify-between items-center py-0.5 text-[#1D5D3B]"><span>Helmet + phone mount:</span><span class="font-bold">+200 UAH</span></div>`
-                        : `<div class="flex justify-between items-center py-0.5 text-[#1D5D3B]"><span>Шолом + тримач:</span><span class="font-bold">+200 грн</span></div>`;
+                        ? `<div class="flex justify-between items-center py-1 text-zinc-300"><span class="text-zinc-400">Helmet + mount:</span><span class="font-bold text-[#1AB370] font-mono">+200 UAH</span></div>`
+                        : `<div class="flex justify-between items-center py-1 text-zinc-300"><span class="text-zinc-400">Шолом + тримач:</span><span class="font-bold text-[#1AB370] font-mono">+200 грн</span></div>`;
                 }
 
-                if (calcState.batteryOption === 'removable' || calcState.batteryOption === '40ah') {
+                if (calcState.batteryOption !== 'none') {
+                    const capLabel = (calcState.batteryCapacity === '60ah') ? '60Ah' : '40Ah';
+                    const capCostStr = (calcState.batteryCapacity === '60ah') ? '1 200' : '800';
+                    const capCostStrEn = (calcState.batteryCapacity === '60ah') ? '1,200' : '800';
                     html += isEn
-                        ? `<div class="flex justify-between items-center py-0.5 text-[#1D5D3B]"><span>Second Removable Battery:</span><span class="font-bold">+800 UAH</span></div>`
-                        : `<div class="flex justify-between items-center py-0.5 text-[#1D5D3B]"><span>Другий знімний АКБ:</span><span class="font-bold">+800 грн</span></div>`;
+                        ? `<div class="flex justify-between items-center py-1 text-zinc-300"><span class="text-zinc-400">2nd Battery (${capLabel}):</span><span class="font-bold text-[#1AB370] font-mono">+${capCostStrEn} UAH</span></div>`
+                        : `<div class="flex justify-between items-center py-1 text-zinc-300"><span class="text-zinc-400">Другий АКБ (${capLabel}):</span><span class="font-bold text-[#1AB370] font-mono">+${capCostStr} грн</span></div>`;
                 }
 
                 breakdownBox.innerHTML = html;
@@ -1260,7 +1428,7 @@
                 ? `SEND APPLICATION TO TELEGRAM (${totalCost.toLocaleString('en-US')} UAH)`
                 : `НАДІСЛАТИ ЗАЯВКУ В TELEGRAM (${totalCost.toLocaleString('uk-UA')} ГРН)`;
             tgBtn.innerHTML = `
-                <i data-lucide="send" class="w-5 h-5"></i>
+                <i data-lucide="send" class="w-4 h-4"></i>
                 <span>${btnText}</span>
             `;
             if (window.lucide) {
@@ -1282,7 +1450,9 @@
             const pricing = getRentalPricing(calcState.modelKey, calcState.days);
             const helmetCost = calcState.hasHelmet ? 200 : 0;
             let batteryCost = 0;
-            if (calcState.batteryOption === 'removable' || calcState.batteryOption === '40ah') batteryCost = 800;
+            if (calcState.batteryOption !== 'none') {
+                batteryCost = (calcState.batteryCapacity === '60ah') ? 1200 : 800;
+            }
             const total = pricing.baseCost + helmetCost + batteryCost;
             const url = generateTelegramRentalLink(calcState.modelKey, calcState.days, total);
             window.location.href = url;
