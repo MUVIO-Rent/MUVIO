@@ -1690,6 +1690,131 @@ body.dark-theme .hero-headlight-lens {
     }
 }
 
+/* ==========================================================================
+   HERO LIKE.BIKE BRUISER FULL-SCREEN HERO STAGE (SLIDE 3)
+   Полноразмерное позиционирование по аналогии со слайдом 1
+   ========================================================================== */
+.hero-bike-stage {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+    pointer-events: none;
+    overflow: hidden;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.hero-bike-wrapper {
+    position: relative;
+    height: 100%;
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.hero-bike-hero-img {
+    height: 100% !important;
+    width: auto !important;
+    max-width: none !important;
+    object-fit: contain !important;
+    object-position: right center !important;
+    margin-right: -40px;
+    filter: drop-shadow(0 25px 45px rgba(0, 0, 0, 0.85)) !important;
+    user-select: none;
+    -webkit-user-drag: none;
+    mix-blend-mode: normal !important;
+}
+
+.bike-hero-headlight {
+    width: 38px;
+    height: 38px;
+    left: 52.6%;
+    top: 35.0%;
+    background: radial-gradient(circle, #ffffff 0%, rgba(255, 255, 255, 0.95) 25%, rgba(180, 230, 255, 0.7) 55%, transparent 75%);
+    box-shadow: 0 0 25px 10px rgba(255, 255, 255, 0.95),
+                0 0 65px 25px rgba(180, 220, 255, 0.7),
+                0 0 120px 45px rgba(26, 179, 112, 0.4);
+    filter: drop-shadow(0 0 16px #ffffff);
+}
+
+.bike-hero-headlight::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translateY(-50%);
+    width: 480px;
+    height: 220px;
+    background: radial-gradient(ellipse at right center, rgba(255, 255, 255, 0.5) 0%, rgba(200, 240, 255, 0.25) 30%, rgba(26, 179, 112, 0.1) 60%, transparent 80%);
+    clip-path: polygon(100% 45%, 0 0%, 0 100%, 100% 55%);
+    pointer-events: none;
+    filter: blur(10px);
+}
+
+.hero-bike-text {
+    width: 44% !important;
+    max-width: 480px !important;
+    position: relative !important;
+    z-index: 10 !important;
+    padding-left: 48px !important;
+    pointer-events: auto !important;
+}
+
+@media (max-width: 1600px) {
+    .hero-bike-hero-img {
+        margin-right: -120px;
+    }
+}
+
+@media (max-width: 1440px) {
+    .hero-bike-hero-img {
+        margin-right: -200px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .hero-bike-hero-img {
+        margin-right: -250px;
+    }
+    .hero-bike-text {
+        width: 46% !important;
+        padding-left: 36px !important;
+    }
+}
+
+@media (max-width: 991px) {
+    .hero-bike-hero-img {
+        margin-right: -260px;
+        opacity: 0.85;
+    }
+    .hero-bike-text {
+        width: 48% !important;
+        padding-left: 32px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-bike-stage {
+        opacity: 0.4;
+    }
+    .hero-bike-hero-img {
+        margin-right: -100px;
+        height: 75% !important;
+    }
+    .hero-bike-text {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+}
+
 
 
 
