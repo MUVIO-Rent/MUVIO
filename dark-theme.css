@@ -207,6 +207,9 @@ header,
 header,
 .site-header-synced,
 .header {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 0 24px !important;
     height: 46px !important;
     min-height: 46px !important;
     max-height: 46px !important;
@@ -216,14 +219,13 @@ header,
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
-    box-sizing: border-box !important;
 }
 
 .header-actions,
 .header-right {
     display: flex !important;
     align-items: center !important;
-    gap: 14px !important;
+    gap: 16px !important;
     margin-right: 0 !important;
     flex-shrink: 0 !important;
 }

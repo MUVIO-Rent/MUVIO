@@ -37,8 +37,8 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <!-- Global Styles & Dark Theme -->
-    <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="./dark-theme.css">
+    <link rel="stylesheet" href="./style.css?v=3.0">
+    <link rel="stylesheet" href="./dark-theme.css?v=3.0">
 
     <style>
         body {
@@ -146,7 +146,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Tektur:wght@700;800;900&display=swap" rel="stylesheet">
 
     <!-- Custom Theme & Settings Engine -->
-    <script src="theme-settings.js"></script>
+    <script src="./theme-settings.js?v=3.0"></script>
 </head>
 
 <body class="min-h-screen flex flex-col text-zinc-900 dark:text-white antialiased selection:bg-[#1D5D3B] selection:text-white">
@@ -213,48 +213,27 @@
         </nav>
 
         <!-- ПРАВИЙ БЛОК УПРАВЛІННЯ -->
-        <div class="header-right header-actions z-10 shrink-0"
-            style="display: flex !important; align-items: center !important; gap: 14px !important; height: 100% !important; margin: 0 !important; padding: 0 !important; flex-shrink: 0 !important;">
-            <!-- 1. Вхід в кабінет -->
-            <a href="cabinet.html"
-                style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important; gap: 6px !important;"
-                class="text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors"
-                title="Особистий кабінет" aria-label="Особистий кабінет">
-                <svg xmlns="http://www.w3.org/2000/svg" style="width: 15px !important; height: 15px !important;"
+        <div class="header-right">
+            <a href="cabinet.html" class="header-user-btn" id="header-user-btn" title="Особистий кабінет" aria-label="Особистий кабінет">
+                <svg xmlns="http://www.w3.org/2000/svg" style="width: 15px !important; height: 15px !important; flex-shrink: 0;"
                     fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
-                <span id="header-user-name" class="header-user-name">
-                    <span class="lang-ua">ВХІД</span>
-                    <span class="lang-en">LOGIN</span>
-                </span>
+                <span id="header-user-name" class="header-user-name">MUVIO</span>
             </a>
-
-            <!-- 2. Перемикач мови UA | EN -->
-            <span style="display: inline-flex !important; align-items: center !important; gap: 4px !important;">
-                <button type="button" id="authLangUa" onclick="setSiteLanguage('ua')"
-                    class="lang-switch-btn active-lang"
-                    style="background: none !important; border: none !important; padding: 0 !important; cursor: pointer !important; font-size: 12px !important; letter-spacing: 0.08em !important; transition: all 0.2s ease !important;">UA</button>
-                <span
-                    style="color: #a1a1aa !important; font-size: 12px !important; font-weight: 400 !important;">|</span>
-                <button type="button" id="authLangEn" onclick="setSiteLanguage('en')"
-                    class="lang-switch-btn"
-                    style="background: none !important; border: none !important; padding: 0 !important; cursor: pointer !important; font-size: 12px !important; letter-spacing: 0.08em !important; transition: all 0.2s ease !important;">EN</button>
-            </span>
-
-            <!-- 3. Перемикач теми: іконка луни (світла) / сонця (темна) -->
-            <button id="theme-toggle" type="button" onclick="toggleAuthTheme()" aria-label="Toggle theme"
-                class="p-1 cursor-pointer transition-colors"
-                style="background: none !important; border: none !important; cursor: pointer !important; padding: 4px !important; display: flex !important; align-items: center !important; justify-content: center !important;">
-                <!-- Иконка Луны (видна только в светлой теме) -->
+            <div class="lang-switch">
+                <button type="button" id="authLangUa" onclick="setSiteLanguage('ua')" class="lang-btn active">UA</button>
+                <span class="lang-divider">|</span>
+                <button type="button" id="authLangEn" onclick="setSiteLanguage('en')" class="lang-btn">EN</button>
+            </div>
+            <button id="theme-toggle" class="theme-toggle-btn" type="button" onclick="toggleAuthTheme()" aria-label="Toggle theme">
                 <svg class="w-4 h-4 moon-icon block dark:hidden"
                     style="width: 17px !important; height: 17px !important;" fill="none" stroke="currentColor"
                     viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
                 </svg>
-                <!-- Иконка Солнца (видна только в темной теме) -->
                 <svg class="w-4 h-4 sun-icon hidden dark:block text-yellow-400"
                     style="width: 17px !important; height: 17px !important; color: #facc15 !important;" fill="none"
                     stroke="currentColor" viewBox="0 0 24 24">

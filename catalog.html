@@ -50,8 +50,8 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <!-- MUVIO Styles & Dark Theme -->
-    <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="./dark-theme.css">
+    <link rel="stylesheet" href="./style.css?v=3.0">
+    <link rel="stylesheet" href="./dark-theme.css?v=3.0">
 
     <style>
         body {
@@ -61,36 +61,45 @@
         }
 
         /* Light Theme Overrides */
+        body:not(.dark),
         html:not(.dark) body,
         html:not(.theme-dark) body,
         [data-theme="light"] body {
-            background-color: #F9FAFB !important;
-            color: #111827 !important;
+            background-color: #F8FAFC !important;
+            color: #0F172A !important;
         }
 
+        body:not(.dark) .catalog-card h3,
         html:not(.dark) .catalog-card h3,
+        body:not(.dark) .model-title,
         html:not(.dark) .model-title,
         body:not(.dark) .catalog-card-title,
         html:not(.dark) .vehicle-showcase-card h3,
         html:not(.theme-dark) .vehicle-showcase-card h3,
         [data-theme="light"] .vehicle-showcase-card h3 {
-            color: #111827 !important;
+            color: #0F172A !important;
         }
 
+        body:not(.dark) .catalog-card .price-badge,
         html:not(.dark) .catalog-card .price-badge,
+        body:not(.dark) .model-price,
         html:not(.dark) .model-price,
+        body:not(.dark) .vehicle-showcase-card .price-badge,
+        html:not(.dark) .vehicle-showcase-card .price-badge,
+        body:not(.dark) .vehicle-showcase-card span,
         html:not(.dark) .vehicle-showcase-card span,
         html:not(.theme-dark) .vehicle-showcase-card span,
         [data-theme="light"] .vehicle-showcase-card span {
-            color: #374151 !important;
+            color: #1E293B !important;
+            border: 1px solid rgba(15, 23, 42, 0.2) !important;
         }
 
         html:not(.dark) .vehicle-showcase-card span[class*="border"],
         html:not(.theme-dark) .vehicle-showcase-card span[class*="border"],
         [data-theme="light"] .vehicle-showcase-card span[class*="border"] {
-            border-color: rgba(0, 0, 0, 0.15) !important;
+            border-color: rgba(15, 23, 42, 0.2) !important;
             background-color: rgba(0, 0, 0, 0.04) !important;
-            color: #374151 !important;
+            color: #1E293B !important;
         }
 
         html:not(.dark) .site-header-synced,
@@ -308,48 +317,27 @@
         </nav>
 
         <!-- ПРАВИЙ БЛОК УПРАВЛІННЯ -->
-        <div class="header-right header-actions z-10 shrink-0"
-            style="display: flex !important; align-items: center !important; gap: 14px !important; height: 100% !important; margin: 0 !important; padding: 0 !important; flex-shrink: 0 !important;">
-            <!-- 1. Вхід в кабінет -->
-            <a href="cabinet.html"
-                style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important; gap: 6px !important;"
-                class="text-zinc-200 hover:text-[#10B981] transition-colors"
-                title="Особистий кабінет" aria-label="Особистий кабінет">
-                <svg xmlns="http://www.w3.org/2000/svg" style="width: 15px !important; height: 15px !important;"
+        <div class="header-right">
+            <a href="cabinet.html" class="header-user-btn" id="header-user-btn" title="Особистий кабінет" aria-label="Особистий кабінет">
+                <svg xmlns="http://www.w3.org/2000/svg" style="width: 15px !important; height: 15px !important; flex-shrink: 0;"
                     fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
-                <span id="header-user-name" class="header-user-name">
-                    <span class="lang-ua">ВХІД</span>
-                    <span class="lang-en">LOGIN</span>
-                </span>
+                <span id="header-user-name" class="header-user-name">MUVIO</span>
             </a>
-
-            <!-- 2. Перемикач мови UA | EN -->
-            <span style="display: inline-flex !important; align-items: center !important; gap: 4px !important;">
-                <button type="button" id="authLangUa" onclick="setSiteLanguage('ua')"
-                    class="lang-switch-btn active-lang"
-                    style="background: none !important; border: none !important; padding: 0 !important; cursor: pointer !important; font-size: 12px !important; letter-spacing: 0.08em !important; transition: all 0.2s ease !important;">UA</button>
-                <span
-                    style="color: #71717a !important; font-size: 12px !important; font-weight: 400 !important;">|</span>
-                <button type="button" id="authLangEn" onclick="setSiteLanguage('en')"
-                    class="lang-switch-btn"
-                    style="background: none !important; border: none !important; padding: 0 !important; cursor: pointer !important; font-size: 12px !important; letter-spacing: 0.08em !important; transition: all 0.2s ease !important;">EN</button>
-            </span>
-
-            <!-- 3. Перемикач теми: іконка луни (світла) / сонця (темна) -->
-            <button id="theme-toggle" type="button" onclick="toggleAuthTheme()" aria-label="Toggle theme"
-                class="p-1 cursor-pointer transition-colors"
-                style="background: none !important; border: none !important; cursor: pointer !important; padding: 4px !important; display: flex !important; align-items: center !important; justify-content: center !important;">
-                <!-- Иконка Луны (видна только в светлой теме) -->
+            <div class="lang-switch">
+                <button type="button" id="authLangUa" onclick="setSiteLanguage('ua')" class="lang-btn active">UA</button>
+                <span class="lang-divider">|</span>
+                <button type="button" id="authLangEn" onclick="setSiteLanguage('en')" class="lang-btn">EN</button>
+            </div>
+            <button id="theme-toggle" class="theme-toggle-btn" type="button" onclick="toggleAuthTheme()" aria-label="Toggle theme">
                 <svg class="w-4 h-4 moon-icon block dark:hidden"
                     style="width: 17px !important; height: 17px !important;" fill="none" stroke="currentColor"
                     viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
                 </svg>
-                <!-- Иконка Солнца (видна только в темной теме) -->
                 <svg class="w-4 h-4 sun-icon hidden dark:block text-yellow-400"
                     style="width: 17px !important; height: 17px !important; color: #facc15 !important;" fill="none"
                     stroke="currentColor" viewBox="0 0 24 24">
@@ -474,7 +462,7 @@
                 <div class="space-y-4">
                     <div class="footer-brand flex flex-col items-start gap-2.5">
                         <a href="index.html" class="footer-logo inline-flex items-center focus:outline-none group" aria-label="MUVIO">
-                            <img src="images/logo-white.png" alt="MUVIO" class="footer-logo-img" style="height: 36px !important; width: auto !important; display: block !important;">
+                            <img src="images/logo-header-trans.png" alt="MUVIO" class="footer-logo-img" style="height: 36px !important; width: auto !important; display: block !important;">
                         </a>
                         <span class="font-brand text-[9px] tracking-widest text-emerald-300 uppercase pl-0.5">
                             <span class="lang-ua">ТВОЄ ELECTRO CITY</span>
@@ -888,7 +876,7 @@
             filtered.forEach(item => {
                 const card = document.createElement('a');
                 card.href = `catalog.html?model=${item.key}`;
-                card.className = 'vehicle-showcase-card group block text-left cursor-pointer';
+                card.className = 'catalog-card vehicle-showcase-card group block text-left cursor-pointer';
                 card.onclick = (e) => {
                     e.preventDefault();
                     showModelDetail(item.key, true);
@@ -906,12 +894,12 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity"></div>
                     </div>
 
-                    <h3 class="font-brand font-extrabold text-xl sm:text-2xl text-white uppercase tracking-tight mt-5 group-hover:text-[#1AB370] transition-colors">
+                    <h3 class="model-title font-brand font-extrabold text-xl sm:text-2xl text-white uppercase tracking-tight mt-5 group-hover:text-[#1AB370] transition-colors">
                         ${item.name}
                     </h3>
 
                     <div class="mt-3">
-                        <span class="inline-flex items-center px-4 py-1.5 rounded-full border border-white/20 text-zinc-300 text-xs sm:text-sm font-medium tracking-wide group-hover:border-emerald-500/60 group-hover:text-white transition-colors bg-white/[0.02]">
+                        <span class="price-badge inline-flex items-center px-4 py-1.5 rounded-full border border-white/20 text-zinc-300 text-xs sm:text-sm font-medium tracking-wide group-hover:border-emerald-500/60 group-hover:text-white transition-colors bg-white/[0.02]">
                             <span class="lang-ua">від ${item.price_week.toLocaleString('uk-UA')} грн / тижд.</span>
                             <span class="lang-en">from ${item.price_week.toLocaleString('en-US')} UAH / wk</span>
                         </span>
@@ -1345,7 +1333,7 @@
     </script>
 
     <!-- MUVIO Theme & Settings Module -->
-    <script src="./theme-settings.js"></script>
+    <script src="./theme-settings.js?v=3.0"></script>
 </body>
 
 </html>

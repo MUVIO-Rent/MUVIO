@@ -285,19 +285,10 @@ html.theme-dark #hero::after {
 /* ==================== 1. ФИКСАЦИЯ ШАПКИ ПРИ СКРОЛЛЕ (STICKY HEADER) ==================== */
 header,
 .site-header-synced,
-.header,
-.header-container {
-    width: 100% !important;
-    max-width: 100vw !important;
-    box-sizing: border-box !important;
-    padding-left: 24px !important;
-    padding-right: 24px !important;
-    overflow: visible !important;
-}
-
-header,
-.site-header-synced,
 .header {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 0 24px !important;
     height: 46px !important;
     min-height: 46px !important;
     max-height: 46px !important;
@@ -337,9 +328,64 @@ header,
 .header-right {
     display: flex !important;
     align-items: center !important;
-    gap: 14px !important;
+    gap: 16px !important;
     margin-right: 0 !important;
     flex-shrink: 0 !important;
+}
+
+.header-user-btn {
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    flex-shrink: 0 !important;
+    transition: color 0.2s ease !important;
+}
+
+.lang-switch {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    flex-shrink: 0 !important;
+}
+
+.lang-btn {
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    cursor: pointer !important;
+    font-size: 12px !important;
+    letter-spacing: 0.08em !important;
+    transition: all 0.2s ease !important;
+}
+
+.lang-btn.active,
+.lang-btn.active-lang {
+    font-weight: 700 !important;
+    color: #10B981 !important;
+}
+
+.lang-divider {
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    opacity: 0.5 !important;
+    user-select: none !important;
+}
+
+.theme-toggle-btn {
+    background: none !important;
+    border: none !important;
+    cursor: pointer !important;
+    padding: 4px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+    transition: transform 0.2s ease !important;
 }
 
 @media (max-width: 640px) {
@@ -802,6 +848,19 @@ html.theme-dark #page-preloader .preloader-m-logo,
 /* ==========================================================================
    ЛОГОТИП В ПОДВАЛЕ (FOOTER LOGO)
    ========================================================================== */
+.footer-logo-img {
+    height: 36px !important;
+    width: auto !important;
+    display: block !important;
+    filter: brightness(0) invert(1) !important;
+    transition: opacity 0.2s ease !important;
+}
+
+.footer-logo:hover .footer-logo-img,
+.footer-brand:hover .footer-logo-img {
+    opacity: 0.85 !important;
+}
+
 .footer-logo-svg,
 .footer-brand svg {
     height: 36px !important;
@@ -1003,35 +1062,44 @@ img.promo-scooter-img {
    CATALOG LIGHT MODE CONTRAST FIXES
    ========================================================================== */
 html:not(.dark) body,
+body:not(.dark),
 html:not(.theme-dark) body,
 [data-theme="light"] body {
-    background-color: #F9FAFB !important;
-    color: #111827 !important;
+    background-color: #F8FAFC !important;
+    color: #0F172A !important;
 }
 
+body:not(.dark) .catalog-card h3,
 html:not(.dark) .catalog-card h3,
+body:not(.dark) .model-title,
 html:not(.dark) .model-title,
 body:not(.dark) .catalog-card-title,
 html:not(.dark) .vehicle-showcase-card h3,
 html:not(.theme-dark) .vehicle-showcase-card h3,
 [data-theme="light"] .vehicle-showcase-card h3 {
-    color: #111827 !important;
+    color: #0F172A !important;
 }
 
+body:not(.dark) .catalog-card .price-badge,
 html:not(.dark) .catalog-card .price-badge,
+body:not(.dark) .model-price,
 html:not(.dark) .model-price,
+body:not(.dark) .vehicle-showcase-card .price-badge,
+html:not(.dark) .vehicle-showcase-card .price-badge,
+body:not(.dark) .vehicle-showcase-card span,
 html:not(.dark) .vehicle-showcase-card span,
 html:not(.theme-dark) .vehicle-showcase-card span,
 [data-theme="light"] .vehicle-showcase-card span {
-    color: #374151 !important;
+    color: #1E293B !important;
+    border: 1px solid rgba(15, 23, 42, 0.2) !important;
 }
 
 html:not(.dark) .vehicle-showcase-card span[class*="border"],
 html:not(.theme-dark) .vehicle-showcase-card span[class*="border"],
 [data-theme="light"] .vehicle-showcase-card span[class*="border"] {
-    border-color: rgba(0, 0, 0, 0.15) !important;
+    border-color: rgba(15, 23, 42, 0.2) !important;
     background-color: rgba(0, 0, 0, 0.04) !important;
-    color: #374151 !important;
+    color: #1E293B !important;
 }
 
 /* Detail Modal / View in Light Mode */
@@ -1039,8 +1107,8 @@ html:not(.dark) #modelDetailModal,
 html:not(.dark) #catalogDetailView,
 html:not(.theme-dark) #catalogDetailView,
 [data-theme="light"] #catalogDetailView {
-    background-color: #F9FAFB !important;
-    color: #111827 !important;
+    background-color: #F8FAFC !important;
+    color: #0F172A !important;
 }
 
 html:not(.dark) #catalogDetailView h1,
@@ -1049,26 +1117,30 @@ html:not(.dark) #catalogDetailView h3,
 html:not(.dark) #catalogDetailView .text-white,
 html:not(.theme-dark) #catalogDetailView .text-white,
 [data-theme="light"] #catalogDetailView .text-white {
-    color: #111827 !important;
+    color: #0F172A !important;
 }
 
 html:not(.dark) #catalogDetailView .text-zinc-400,
 html:not(.theme-dark) #catalogDetailView .text-zinc-400,
 [data-theme="light"] #catalogDetailView .text-zinc-400 {
-    color: #4B5563 !important;
+    color: #475569 !important;
 }
 
 /* ==========================================================================
    CALCULATOR LIGHT MODE FIXES
    ========================================================================== */
+html:not(.dark) body,
+body:not(.dark),
 html:not(.dark) .calculator-section,
+body:not(.dark) .calculator-section,
 html:not(.dark) #calculator,
+body:not(.dark) #calculator,
 html:not(.theme-dark) .calculator-section,
 html:not(.theme-dark) #calculator,
 [data-theme="light"] .calculator-section,
 [data-theme="light"] #calculator {
-    background-color: #F9FAFB !important;
-    color: #111827 !important;
+    background-color: #F8FAFC !important;
+    color: #0F172A !important;
 }
 
 html:not(.dark) .calc-tesla-container,

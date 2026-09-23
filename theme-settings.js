@@ -437,12 +437,8 @@
             });
             const logoImgsInit = document.querySelectorAll('.header-logo-img, header a[aria-label="MUVIO"] img, .site-header-synced .header-logo-img, .footer-logo-img');
             logoImgsInit.forEach(img => {
-                img.style.removeProperty('filter');
-                img.style.removeProperty('mix-blend-mode');
-                if (img.classList.contains('footer-logo-img')) {
-                    img.src = 'images/logo-white.png';
-                } else {
-                    img.src = (curTheme === 'dark') ? 'images/logo-white.png' : 'images/logo-dark.png';
+                if (!img.src.includes('logo-header-trans.png')) {
+                    img.src = 'images/logo-header-trans.png';
                 }
             });
             updateHeroBg();
@@ -517,15 +513,11 @@
             }
         });
 
-        // Synchronize header logo image across light/dark themes (preserving green M)
+        // Synchronize header and footer logo image
         const logoImgs = document.querySelectorAll('.header-logo-img, header a[aria-label="MUVIO"] img, .site-header-synced .header-logo-img, .footer-logo-img');
         logoImgs.forEach(img => {
-            img.style.removeProperty('filter');
-            img.style.removeProperty('mix-blend-mode');
-            if (img.classList.contains('footer-logo-img')) {
-                img.src = 'images/logo-white.png';
-            } else {
-                img.src = (theme === 'dark') ? 'images/logo-white.png' : 'images/logo-dark.png';
+            if (!img.src.includes('logo-header-trans.png')) {
+                img.src = 'images/logo-header-trans.png';
             }
         });
 
@@ -611,15 +603,19 @@
         document.querySelectorAll('#authLangUa, .auth-lang-ua').forEach(el => {
             if (activeLang === 'ua') {
                 el.classList.add('active-lang');
+                el.classList.add('active');
             } else {
                 el.classList.remove('active-lang');
+                el.classList.remove('active');
             }
         });
         document.querySelectorAll('#authLangEn, .auth-lang-en').forEach(el => {
             if (activeLang === 'en') {
                 el.classList.add('active-lang');
+                el.classList.add('active');
             } else {
                 el.classList.remove('active-lang');
+                el.classList.remove('active');
             }
         });
         window.dispatchEvent(new CustomEvent('muvio:langchange', { detail: { lang: activeLang } }));
