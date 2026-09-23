@@ -1691,46 +1691,159 @@ body.dark-theme .hero-headlight-lens {
 }
 
 /* ==========================================================================
-   HERO LIKE.BIKE BRUISER FULL-SCREEN HERO STAGE (SLIDE 3)
-   Полноразмерное позиционирование по аналогии со слайдом 1
+   HERO LIKE.BIKE BRUISER SLIDE (SLIDE 3: ЧИСТЫЙ БЕЛЫЙ ХОЛСТ И ЧИТАЕМЫЙ ТЕКСТ)
    ========================================================================== */
-.hero-bike-stage {
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    height: 100%;
-    width: 100%;
-    z-index: 2;
-    pointer-events: none;
-    overflow: hidden;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+#heroSlide3,
+.slide-bike-clean {
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
 }
 
-.hero-bike-wrapper {
-    position: relative;
-    height: 100%;
-    width: auto;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+html.dark #heroSlide3,
+html.theme-dark #heroSlide3,
+html.dark-theme #heroSlide3,
+[data-theme="dark"] #heroSlide3,
+body.dark #heroSlide3,
+body.theme-dark #heroSlide3,
+body.dark-theme #heroSlide3 {
+    background: #0d120f !important;
+    background-color: #0d120f !important;
 }
 
-.hero-bike-hero-img {
+/* Текстовая колонка слева: ширина 45%, min-width 480px, max-width 580px, padding-left 64px */
+.hero-bike-content {
+    position: relative !important;
+    z-index: 10 !important;
+    width: 45% !important;
+    min-width: 480px !important;
+    max-width: 580px !important;
+    padding-left: 64px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    pointer-events: auto !important;
+}
+
+/* Верхний бейдж */
+.hero-bike-badge {
+    color: #1AB370 !important;
+    font-size: 13px !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.12em !important;
+    text-transform: uppercase !important;
+    font-family: 'Unbounded', sans-serif !important;
+    margin-bottom: 14px !important;
+    display: inline-block !important;
+}
+
+/* Заголовок H2: ~46-52px, жирный 800, четкий графитовый #0F172A */
+.hero-bike-title {
+    font-family: 'Unbounded', sans-serif !important;
+    font-size: clamp(2.3rem, 3.4vw, 3.1rem) !important;
+    font-weight: 800 !important;
+    line-height: 1.15 !important;
+    letter-spacing: -0.02em !important;
+    color: #0F172A !important;
+    text-shadow: none !important;
+    filter: none !important;
+    margin-bottom: 18px !important;
+}
+
+/* Описание: 16-17px, line-height 1.5, цвет #475569 */
+.hero-bike-desc {
+    font-size: 16.5px !important;
+    line-height: 1.55 !important;
+    color: #475569 !important;
+    text-shadow: none !important;
+    margin-bottom: 0 !important;
+    max-width: 540px !important;
+}
+
+/* Кнопки сразу под описанием с нормальным margin-top: 28px */
+.hero-bike-actions {
+    margin-top: 28px !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    gap: 16px !important;
+}
+
+.hero-bike-btn-primary {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    background-color: #1AB370 !important;
+    color: #FFFFFF !important;
+    padding: 14px 28px !important;
+    border-radius: 12px !important;
+    font-weight: 700 !important;
+    font-size: 15px !important;
+    box-shadow: 0 10px 25px -4px rgba(26, 179, 112, 0.35) !important;
+    transition: all 0.2s ease !important;
+    text-decoration: none !important;
+}
+
+.hero-bike-btn-primary:hover {
+    background-color: #16965d !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 14px 30px -4px rgba(26, 179, 112, 0.45) !important;
+}
+
+.hero-bike-btn-calc {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    background-color: rgba(15, 23, 42, 0.05) !important;
+    color: #0F172A !important;
+    border: 1px solid rgba(15, 23, 42, 0.15) !important;
+    padding: 14px 28px !important;
+    border-radius: 12px !important;
+    font-weight: 600 !important;
+    font-size: 15px !important;
+    backdrop-filter: blur(8px) !important;
+    transition: all 0.2s ease !important;
+    text-decoration: none !important;
+}
+
+.hero-bike-btn-calc:hover {
+    background-color: rgba(15, 23, 42, 0.1) !important;
+    border-color: rgba(15, 23, 42, 0.3) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Позиционирование и масштаб велосипеда: правая часть слайда, height 95%, max-height 820px */
+.slide-bike-wrapper {
+    position: absolute !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    top: 0 !important;
     height: 100% !important;
+    width: auto !important;
+    pointer-events: none !important;
+    z-index: 2 !important;
+    display: flex !important;
+    align-items: flex-end !important;
+    justify-content: flex-end !important;
+}
+
+.slide-bike-img {
+    position: relative !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    height: 95% !important;
+    max-height: 820px !important;
     width: auto !important;
     max-width: none !important;
     object-fit: contain !important;
-    object-position: right center !important;
-    margin-right: -40px;
-    filter: drop-shadow(0 25px 45px rgba(0, 0, 0, 0.85)) !important;
-    user-select: none;
-    -webkit-user-drag: none;
-    mix-blend-mode: normal !important;
+    pointer-events: none !important;
+    user-select: none !important;
+    -webkit-user-drag: none !important;
+    filter: drop-shadow(0 25px 45px rgba(0, 0, 0, 0.15)) !important;
 }
 
+/* Фара велосипеда в темной теме */
 .bike-hero-headlight {
     width: 38px;
     height: 38px;
@@ -1757,61 +1870,102 @@ body.dark-theme .hero-headlight-lens {
     filter: blur(10px);
 }
 
-.hero-bike-text {
-    width: 44% !important;
-    max-width: 480px !important;
-    position: relative !important;
-    z-index: 10 !important;
-    padding-left: 48px !important;
-    pointer-events: auto !important;
+/* Dark mode overrides for Slide 3 */
+html.dark .hero-bike-title,
+html.theme-dark .hero-bike-title,
+html.dark-theme .hero-bike-title,
+[data-theme="dark"] .hero-bike-title,
+body.dark .hero-bike-title,
+body.theme-dark .hero-bike-title,
+body.dark-theme .hero-bike-title {
+    color: #FFFFFF !important;
 }
 
+html.dark .hero-bike-desc,
+html.theme-dark .hero-bike-desc,
+html.dark-theme .hero-bike-desc,
+[data-theme="dark"] .hero-bike-desc,
+body.dark .hero-bike-desc,
+body.theme-dark .hero-bike-desc,
+body.dark-theme .hero-bike-desc {
+    color: #E2E8F0 !important;
+}
+
+html.dark .hero-bike-btn-calc,
+html.theme-dark .hero-bike-btn-calc,
+html.dark-theme .hero-bike-btn-calc,
+[data-theme="dark"] .hero-bike-btn-calc,
+body.dark .hero-bike-btn-calc,
+body.theme-dark .hero-bike-btn-calc,
+body.dark-theme .hero-bike-btn-calc {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    color: #FFFFFF !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+html.dark .slide-bike-img,
+[data-theme="dark"] .slide-bike-img {
+    filter: drop-shadow(0 25px 45px rgba(0, 0, 0, 0.85)) !important;
+}
+
+/* Адаптивность и свободный воздух 50-70px */
 @media (max-width: 1600px) {
-    .hero-bike-hero-img {
-        margin-right: -120px;
+    .slide-bike-wrapper {
+        right: -60px !important;
     }
 }
 
 @media (max-width: 1440px) {
-    .hero-bike-hero-img {
-        margin-right: -200px;
+    .slide-bike-wrapper {
+        right: -160px !important;
+    }
+    .hero-bike-content {
+        min-width: 440px !important;
+        padding-left: 48px !important;
     }
 }
 
 @media (max-width: 1200px) {
-    .hero-bike-hero-img {
-        margin-right: -250px;
+    .slide-bike-wrapper {
+        right: -200px !important;
     }
-    .hero-bike-text {
-        width: 46% !important;
-        padding-left: 36px !important;
+    .hero-bike-content {
+        min-width: 400px !important;
+        padding-left: 40px !important;
     }
 }
 
 @media (max-width: 991px) {
-    .hero-bike-hero-img {
-        margin-right: -260px;
+    .slide-bike-wrapper {
+        right: -180px !important;
         opacity: 0.85;
     }
-    .hero-bike-text {
-        width: 48% !important;
+    .hero-bike-content {
+        min-width: 360px !important;
         padding-left: 32px !important;
     }
 }
 
 @media (max-width: 768px) {
-    .hero-bike-stage {
-        opacity: 0.4;
+    #heroSlide3.slide-bike-clean {
+        flex-direction: column !important;
+        justify-content: center !important;
     }
-    .hero-bike-hero-img {
-        margin-right: -100px;
-        height: 75% !important;
-    }
-    .hero-bike-text {
+    .hero-bike-content {
+        min-width: 100% !important;
         width: 100% !important;
         max-width: 100% !important;
-        padding-left: 20px !important;
-        padding-right: 20px !important;
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+        z-index: 10 !important;
+    }
+    .slide-bike-wrapper {
+        opacity: 0.22 !important;
+        right: -60px !important;
+        z-index: 1 !important;
+    }
+    .slide-bike-img {
+        height: 65% !important;
     }
 }
 
