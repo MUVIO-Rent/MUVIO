@@ -839,7 +839,7 @@
             modelKey: 'crosser-cr-13-1',
             days: 7,
             hasHelmet: false,
-            batteryOption: 'none' // 'none' | '40ah' | '60ah'
+            batteryOption: 'none' // 'none' | 'removable'
         };
 
         function normalizeModelKey(rawKey) {
@@ -1051,7 +1051,7 @@
             }
         }
 
-        // Блок 3: Додаткові опції (Шолом +200 грн чекбокс, АКБ 40Ah +800 / 60Ah +1000 радіо)
+        // Блок 3: Додаткові опції (Шолом +200 грн чекбокс, Другий знімний АКБ +800 грн)
         function renderAddonOptions() {
             const container = document.getElementById('rentalAddonsContainer');
             if (!container) return;
@@ -1071,23 +1071,13 @@
                     }
                 },
                 {
-                    id: 'battery40',
-                    type: 'radio',
-                    title: isEn ? "SECOND BATTERY 40Ah (REMOVABLE)" : "ДРУГИЙ АКБ 40Ah (ЗНІМНИЙ)",
+                    id: 'battery',
+                    type: 'checkbox',
+                    title: isEn ? "SECOND REMOVABLE BATTERY" : "ДРУГИЙ ЗНІМНИЙ АКБ",
                     priceLabel: isEn ? "+800 UAH" : "+800 грн",
-                    isActive: (calcState.batteryOption === '40ah'),
+                    isActive: (calcState.batteryOption === 'removable' || calcState.batteryOption === '40ah'),
                     onToggle: () => {
-                        calcState.batteryOption = (calcState.batteryOption === '40ah') ? 'none' : '40ah';
-                    }
-                },
-                {
-                    id: 'battery60',
-                    type: 'radio',
-                    title: isEn ? "SECOND BATTERY 60Ah (REMOVABLE)" : "ДРУГИЙ АКБ 60Ah (ЗНІМНИЙ)",
-                    priceLabel: isEn ? "+1,000 UAH" : "+1 000 грн",
-                    isActive: (calcState.batteryOption === '60ah'),
-                    onToggle: () => {
-                        calcState.batteryOption = (calcState.batteryOption === '60ah') ? 'none' : '60ah';
+                        calcState.batteryOption = (calcState.batteryOption === 'removable' || calcState.batteryOption === '40ah') ? 'none' : 'removable';
                     }
                 }
             ];
@@ -1188,11 +1178,10 @@
             const baseRentalCost = pricing.baseCost;
             const deposit = pricing.deposit;
 
-            // 2. Додаткові опції: Шлем (+200 грн), АКБ 40Ah (+800 грн) або 60Ah (+1 000 грн)
+            // 2. Додаткові опції: Шлем (+200 грн), Другий знімний АКБ (+800 грн)
             const helmetCost = calcState.hasHelmet ? 200 : 0;
             let batteryCost = 0;
-            if (calcState.batteryOption === '40ah') batteryCost = 800;
-            else if (calcState.batteryOption === '60ah') batteryCost = 1000;
+            if (calcState.batteryOption === 'removable' || calcState.batteryOption === '40ah') batteryCost = 800;
 
             const totalCost = baseRentalCost + helmetCost + batteryCost;
 
@@ -1243,14 +1232,10 @@
                         : `<div class="flex justify-between items-center py-0.5 text-[#1D5D3B]"><span>Шолом + тримач:</span><span class="font-bold">+200 грн</span></div>`;
                 }
 
-                if (calcState.batteryOption === '40ah') {
+                if (calcState.batteryOption === 'removable' || calcState.batteryOption === '40ah') {
                     html += isEn
-                        ? `<div class="flex justify-between items-center py-0.5 text-[#1D5D3B]"><span>Second Battery 40Ah:</span><span class="font-bold">+800 UAH</span></div>`
-                        : `<div class="flex justify-between items-center py-0.5 text-[#1D5D3B]"><span>Другий АКБ 40Ah:</span><span class="font-bold">+800 грн</span></div>`;
-                } else if (calcState.batteryOption === '60ah') {
-                    html += isEn
-                        ? `<div class="flex justify-between items-center py-0.5 text-[#1D5D3B]"><span>Second Battery 60Ah:</span><span class="font-bold">+1,000 UAH</span></div>`
-                        : `<div class="flex justify-between items-center py-0.5 text-[#1D5D3B]"><span>Другий АКБ 60Ah:</span><span class="font-bold">+1 000 грн</span></div>`;
+                        ? `<div class="flex justify-between items-center py-0.5 text-[#1D5D3B]"><span>Second Removable Battery:</span><span class="font-bold">+800 UAH</span></div>`
+                        : `<div class="flex justify-between items-center py-0.5 text-[#1D5D3B]"><span>Другий знімний АКБ:</span><span class="font-bold">+800 грн</span></div>`;
                 }
 
                 breakdownBox.innerHTML = html;
@@ -1297,8 +1282,7 @@
             const pricing = getRentalPricing(calcState.modelKey, calcState.days);
             const helmetCost = calcState.hasHelmet ? 200 : 0;
             let batteryCost = 0;
-            if (calcState.batteryOption === '40ah') batteryCost = 800;
-            else if (calcState.batteryOption === '60ah') batteryCost = 1000;
+            if (calcState.batteryOption === 'removable' || calcState.batteryOption === '40ah') batteryCost = 800;
             const total = pricing.baseCost + helmetCost + batteryCost;
             const url = generateTelegramRentalLink(calcState.modelKey, calcState.days, total);
             window.location.href = url;
