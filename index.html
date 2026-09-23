@@ -227,15 +227,19 @@
             box-shadow: 0 8px 24px -4px rgba(26, 179, 112, 0.4) !important;
         }
 
-        /* Alternating Promo Showcase Sections (McDonald's / Apple Z-Pattern) */
+        /* Alternating Promo Showcase Sections (Apple / McDonald's Z-Pattern) */
         .promo-section {
             background-color: #FFFFFF;
             color: #111827;
+            overflow: hidden;
+            position: relative;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
         .promo-section-alt {
             background-color: #F8FAFC;
             color: #111827;
+            overflow: hidden;
+            position: relative;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
@@ -324,14 +328,113 @@
             box-shadow: 0 6px 20px rgba(26, 179, 112, 0.4);
         }
 
-        /* Scroll Animation (Fade in with translateY) */
-        .promo-fade-in {
+        /* Pure PNG vehicles: No box background, no borders, no box-shadows */
+        .promo-vehicle-wrap,
+        .promo-bike-img,
+        .promo-scooter-img {
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            outline: none !important;
+        }
+
+        .promo-bike-img {
+            max-height: 540px;
+            width: auto;
+            object-fit: contain;
+            margin-left: -8vw;
+            transform: scale(1.3);
+            transform-origin: center left;
+            pointer-events: none;
+            user-select: none;
+            filter: none !important;
+        }
+        @media (min-width: 1400px) {
+            .promo-bike-img {
+                max-height: 580px;
+                margin-left: -6vw;
+                transform: scale(1.35);
+            }
+        }
+        @media (max-width: 1023px) {
+            .promo-bike-img {
+                max-height: 380px;
+                margin-left: -8vw;
+                transform: scale(1.15);
+            }
+        }
+        @media (max-width: 640px) {
+            .promo-bike-img {
+                max-height: 260px;
+                margin-left: -10vw;
+                transform: scale(1.05);
+            }
+        }
+
+        .promo-scooter-img {
+            max-height: 560px;
+            width: auto;
+            object-fit: contain;
+            margin-right: -8vw;
+            transform: scaleX(-1) scale(1.3);
+            transform-origin: center right;
+            pointer-events: none;
+            user-select: none;
+            filter: none !important;
+        }
+        @media (min-width: 1400px) {
+            .promo-scooter-img {
+                max-height: 600px;
+                margin-right: -6vw;
+                transform: scaleX(-1) scale(1.35);
+            }
+        }
+        @media (max-width: 1023px) {
+            .promo-scooter-img {
+                max-height: 400px;
+                margin-right: -8vw;
+                transform: scaleX(-1) scale(1.15);
+            }
+        }
+        @media (max-width: 640px) {
+            .promo-scooter-img {
+                max-height: 280px;
+                margin-right: -10vw;
+                transform: scaleX(-1) scale(1.05);
+            }
+        }
+
+        /* Scroll Entrance Animations */
+        .promo-slide-left {
             opacity: 0;
-            transform: translateY(25px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
+            transform: translateX(-100px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: opacity, transform;
         }
-        .promo-fade-in.is-visible {
+        .promo-slide-left.is-visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .promo-slide-right {
+            opacity: 0;
+            transform: translateX(100px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+        .promo-slide-right.is-visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .promo-fade-text {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transition-delay: 0.15s;
+            will-change: opacity, transform;
+        }
+        .promo-fade-text.is-visible {
             opacity: 1;
             transform: translateY(0);
         }
@@ -1603,13 +1706,23 @@
         </div>
     </section>
 
-    <!-- ==================== ПРОМО-СЕКЦІЯ 1: Like.Bike Bruiser (Z-Pattern) ==================== -->
-    <section class="promo-section py-20 md:py-24 border-b border-zinc-200 dark:border-white/[0.08] relative overflow-hidden">
-        <div class="max-w-[1200px] mx-auto px-6 md:px-8">
-            <div class="promo-fade-in flex flex-col md:flex-row items-center gap-10 lg:gap-16">
-                
-                <!-- Колонка з текстом (~55%) -->
-                <div class="w-full md:w-[55%] flex flex-col items-start justify-center">
+    <!-- ==================== ПРОМО-СЕКЦІЯ 1: Like.Bike Bruiser (Z-Pattern: Велосипед зліва, Текст справа) ==================== -->
+    <section class="promo-section py-16 md:py-24 border-b border-zinc-200 dark:border-white/[0.08] relative overflow-hidden">
+        <div class="w-full flex flex-col lg:flex-row items-center justify-between">
+            
+            <!-- Колонка з велосипедом (~50%) - виглядає з лівого краю екрана -->
+            <div class="w-full lg:w-1/2 flex items-center justify-start overflow-visible order-1">
+                <div class="promo-slide-left promo-vehicle-wrap w-full flex items-center justify-start">
+                    <img src="images/like-bike-bruiser-for-menu.png" 
+                         alt="Like.Bike Bruiser" 
+                         loading="lazy"
+                         class="promo-bike-img">
+                </div>
+            </div>
+
+            <!-- Колонка з текстом (~50%) - акуратно праворуч -->
+            <div class="w-full lg:w-1/2 flex items-center justify-start px-6 sm:px-12 lg:px-16 xl:px-24 py-8 lg:py-0 order-2">
+                <div class="promo-fade-text max-w-xl flex flex-col items-start text-left">
                     <span class="text-xs font-brand font-bold tracking-widest uppercase text-[#1AB370] mb-3 inline-block">
                         <span class="lang-ua">ЕЛЕКТРОВЕЛОСИПЕДИ ДЛЯ МІСТА ТА КУР'ЄРІВ</span>
                         <span class="lang-en">CITY &amp; COURIER E-BIKES</span>
@@ -1618,7 +1731,7 @@
                         <span class="lang-ua">Like.Bike Bruiser — свобода пересування без заторів</span>
                         <span class="lang-en">Like.Bike Bruiser — traffic-free urban freedom</span>
                     </h2>
-                    <p class="promo-desc text-sm sm:text-base leading-relaxed mb-6 max-w-xl">
+                    <p class="promo-desc text-sm sm:text-base leading-relaxed mb-6">
                         <span class="lang-ua">Потужний фетбайк з широкими колесами для будь-якого дорожнього покриття. Ідеальний вибір для кур'єрської доставки та активних поїздок Одесою з мінімальними витратами.</span>
                         <span class="lang-en">A powerful fatbike with wide tires for any road surface. The ideal choice for courier delivery and active city rides in Odesa with minimal costs.</span>
                     </p>
@@ -1629,34 +1742,18 @@
                         <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                     </a>
                 </div>
-
-                <!-- Колонка з картинкою (~45%) -->
-                <div class="w-full md:w-[45%] flex items-center justify-center">
-                    <img src="images/like-bike-bruiser-for-menu.png" 
-                         alt="Like.Bike Bruiser" 
-                         loading="lazy"
-                         class="max-h-[300px] sm:max-h-[360px] lg:max-h-[420px] w-auto max-w-full object-contain drop-shadow-2xl transition-transform duration-500 hover:scale-105 select-none pointer-events-none">
-                </div>
-
             </div>
+
         </div>
     </section>
 
-    <!-- ==================== ПРОМО-СЕКЦІЯ 2: Aima A700 (Z-Pattern Дзеркальна) ==================== -->
-    <section class="promo-section-alt py-20 md:py-24 border-b border-zinc-200 dark:border-white/[0.08] relative overflow-hidden">
-        <div class="max-w-[1200px] mx-auto px-6 md:px-8">
-            <div class="promo-fade-in flex flex-col md:flex-row items-center gap-10 lg:gap-16">
-                
-                <!-- Колонка з картинкою (~45%) - зліва на десктопі, на мобілці після тексту (order-2 md:order-1) -->
-                <div class="w-full md:w-[45%] flex items-center justify-center order-2 md:order-1">
-                    <img src="images/aima-a700-for-menu.png" 
-                         alt="Aima A700" 
-                         loading="lazy"
-                         class="max-h-[300px] sm:max-h-[360px] lg:max-h-[420px] w-auto max-w-full object-contain drop-shadow-2xl transition-transform duration-500 hover:scale-105 select-none pointer-events-none">
-                </div>
-
-                <!-- Колонка з текстом (~55%) - справа на десктопі (order-1 md:order-2) -->
-                <div class="w-full md:w-[55%] flex flex-col items-start justify-center order-1 md:order-2">
+    <!-- ==================== ПРОМО-СЕКЦІЯ 2: Aima A700 (Z-Pattern: Текст зліва, Скутер справа) ==================== -->
+    <section class="promo-section-alt py-16 md:py-24 border-b border-zinc-200 dark:border-white/[0.08] relative overflow-hidden">
+        <div class="w-full flex flex-col lg:flex-row items-center justify-between">
+            
+            <!-- Колонка з текстом (~50%) - зліва на десктопі -->
+            <div class="w-full lg:w-1/2 flex items-center justify-end px-6 sm:px-12 lg:px-16 xl:px-24 py-8 lg:py-0 order-2 lg:order-1">
+                <div class="promo-fade-text max-w-xl w-full flex flex-col items-start text-left">
                     <span class="text-xs font-brand font-bold tracking-widest uppercase text-[#1AB370] mb-3 inline-block">
                         <span class="lang-ua">КОМЕРЦІЙНИЙ ТА МІСЬКИЙ ПРОКАТ</span>
                         <span class="lang-en">COMMERCIAL &amp; URBAN RENTAL</span>
@@ -1665,7 +1762,7 @@
                         <span class="lang-ua">Aima A700 — надійність, комфорт та знімний АКБ</span>
                         <span class="lang-en">Aima A700 — reliability, comfort and removable battery</span>
                     </h2>
-                    <p class="promo-desc text-sm sm:text-base leading-relaxed mb-6 max-w-xl">
+                    <p class="promo-desc text-sm sm:text-base leading-relaxed mb-6">
                         <span class="lang-ua">Сучасний електротранспорт із запасом ходу для повного робочого дня. Жодних витрат на пальне та безкоштовне сервісне обслуговування на весь період оренди.</span>
                         <span class="lang-en">Modern electric vehicle with all-day range. Zero fuel costs and free maintenance service for the entire rental period.</span>
                     </p>
@@ -1676,8 +1773,18 @@
                         <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                     </a>
                 </div>
-
             </div>
+
+            <!-- Колонка зі скутером (~50%) - справа на десктопі, виглядає з правого краю -->
+            <div class="w-full lg:w-1/2 flex items-center justify-end overflow-visible order-1 lg:order-2">
+                <div class="promo-slide-right promo-vehicle-wrap w-full flex items-center justify-end">
+                    <img src="images/aima-a700-for-menu.png" 
+                         alt="Aima A700" 
+                         loading="lazy"
+                         class="promo-scooter-img">
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -3975,6 +4082,9 @@
 
         // Плавна анімація появи промо-секцій при скролі (Z-pattern IntersectionObserver)
         function initPromoScrollReveal() {
+            const targets = document.querySelectorAll('.promo-slide-left, .promo-slide-right, .promo-fade-text');
+            if (!targets.length) return;
+
             if ('IntersectionObserver' in window) {
                 const promoObserver = new IntersectionObserver((entries, observer) => {
                     entries.forEach(entry => {
@@ -3983,15 +4093,11 @@
                             observer.unobserve(entry.target);
                         }
                     });
-                }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+                }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-                document.querySelectorAll('.promo-fade-in').forEach(el => {
-                    promoObserver.observe(el);
-                });
+                targets.forEach(el => promoObserver.observe(el));
             } else {
-                document.querySelectorAll('.promo-fade-in').forEach(el => {
-                    el.classList.add('is-visible');
-                });
+                targets.forEach(el => el.classList.add('is-visible'));
             }
         }
 
