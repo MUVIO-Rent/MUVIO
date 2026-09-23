@@ -1828,6 +1828,17 @@ body.dark-theme #heroSlide3 {
     justify-content: flex-end !important;
 }
 
+/* Полный сброс фильтров и искажений для изображения техники на слайде */
+.slide-bike-img, 
+.hero-slide img {
+    filter: none !important;
+    mix-blend-mode: normal !important;
+    opacity: 1 !important;
+    image-rendering: auto !important;
+    -webkit-backface-visibility: hidden;
+    transform: translateZ(0); /* Аппаратное сглаживание без потери четкости */
+}
+
 .slide-bike-img {
     position: relative !important;
     right: 0 !important;
@@ -1840,7 +1851,6 @@ body.dark-theme #heroSlide3 {
     pointer-events: none !important;
     user-select: none !important;
     -webkit-user-drag: none !important;
-    filter: drop-shadow(0 25px 45px rgba(0, 0, 0, 0.15)) !important;
 }
 
 /* Фара велосипеда в темной теме */
@@ -1905,7 +1915,7 @@ body.dark-theme .hero-bike-btn-calc {
 
 html.dark .slide-bike-img,
 [data-theme="dark"] .slide-bike-img {
-    filter: drop-shadow(0 25px 45px rgba(0, 0, 0, 0.85)) !important;
+    filter: none !important;
 }
 
 /* Адаптивность и свободный воздух 50-70px */
