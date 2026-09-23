@@ -232,7 +232,8 @@
             background-color: #FFFFFF;
             color: #111827;
             position: relative;
-            overflow: hidden;
+            overflow: hidden !important;
+            margin-top: 80px;
             padding: 40px 0;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
@@ -240,8 +241,8 @@
             background-color: #F8FAFC;
             color: #111827;
             position: relative;
-            overflow: hidden;
-            margin-top: 100px;
+            overflow: hidden !important;
+            margin-top: 80px;
             padding: 40px 0;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
@@ -264,21 +265,21 @@
 
         .promo-container {
             display: flex;
-            align-items: center;
+            align-items: center !important;
             justify-content: space-between;
             position: relative;
             width: 100%;
-            overflow: hidden;
+            overflow: hidden !important;
         }
 
         /* Section 1: Bike Left (~50-55%), Text Right (~45%) */
         .promo-col-bike {
             width: 52%;
             display: flex;
-            align-items: center;
+            align-items: center !important;
             justify-content: flex-start;
             position: relative;
-            overflow: hidden;
+            overflow: hidden !important;
         }
         .promo-col-bike-text {
             width: 48%;
@@ -303,10 +304,10 @@
         .promo-col-scooter {
             width: 52%;
             display: flex;
-            align-items: center;
+            align-items: center !important;
             justify-content: flex-end;
             position: relative;
-            overflow: hidden;
+            overflow: hidden !important;
         }
 
         .promo-heading {
@@ -389,23 +390,25 @@
         }
 
         .promo-bike-img {
-            max-height: 480px;
+            max-height: 460px;
             width: auto;
             max-width: 100%;
             object-fit: contain;
             margin-left: -60px;
+            display: block;
             pointer-events: none;
             user-select: none;
             filter: none !important;
         }
 
         .promo-scooter-img {
-            max-height: 480px;
+            max-height: 460px;
             width: auto;
             max-width: 100%;
             object-fit: contain;
             margin-right: -60px;
-            transform: scaleX(-1);
+            transform: scaleX(-1) !important;
+            display: block;
             pointer-events: none;
             user-select: none;
             filter: none !important;
@@ -448,8 +451,13 @@
 
         /* Responsive Breakpoints */
         @media (max-width: 1023px) {
+            .promo-section {
+                margin-top: 60px;
+                padding: 30px 0;
+            }
             .promo-section-alt {
                 margin-top: 60px;
+                padding: 30px 0;
             }
             .promo-container {
                 flex-direction: column;
@@ -478,6 +486,7 @@
             .promo-scooter-img {
                 margin-right: -20px;
                 max-height: 320px;
+                transform: scaleX(-1) !important;
             }
             .promo-col-scooter-text {
                 justify-content: flex-start;
@@ -1826,7 +1835,8 @@
                     <img src="images/aima-a700-for-menu.png" 
                          alt="Aima A700" 
                          loading="lazy"
-                         class="promo-scooter-img">
+                         class="promo-scooter-img"
+                         style="transform: scaleX(-1) !important;">
                 </div>
             </div>
 
