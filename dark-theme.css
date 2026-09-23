@@ -198,11 +198,13 @@ header,
     height: 46px !important;
     min-height: 46px !important;
     max-height: 46px !important;
-    padding: 0 !important;
+    padding: 0 32px !important;
+    padding-left: 32px !important;
+    padding-right: 32px !important;
     margin: 0 !important;
     display: flex !important;
     align-items: center !important;
-    justify-content: center !important;
+    justify-content: space-between !important;
     box-sizing: border-box !important;
 }
 
@@ -1381,15 +1383,23 @@ body.theme-dark .footer-logo-letters,
    PROMO SHOWCASE SECTIONS (DARK THEME)
    ========================================================================== */
 .promo-section {
-    margin-top: 120px !important;
+    margin-top: 100px !important;
+    padding: 100px 0 !important;
+    background: transparent !important;
 }
 
 .promo-section-alt {
-    margin-top: 80px !important;
+    margin-top: 0 !important;
+    padding: 100px 0 !important;
 }
 
 .promo-scooter-img,
 img.promo-scooter-img {
+    height: 740px !important;
+    max-height: 780px !important;
+    width: auto !important;
+    max-width: none !important;
+    margin-right: -120px !important;
     transform: scaleX(-1) !important;
     -webkit-transform: scaleX(-1) !important;
     display: block !important;
