@@ -965,8 +965,8 @@
             width: 100% !important;
             max-width: 100vw !important;
             box-sizing: border-box !important;
-            padding-left: 28px !important;
-            padding-right: 28px !important;
+            padding-left: 24px !important;
+            padding-right: 24px !important;
             overflow: visible !important;
         }
 
@@ -1012,7 +1012,7 @@
         .header-right {
             display: flex !important;
             align-items: center !important;
-            gap: 16px !important;
+            gap: 14px !important;
             margin-right: 0 !important;
             flex-shrink: 0 !important;
         }
@@ -1398,7 +1398,7 @@
 
     <!-- ==================== 1. ХЕДЕР (НАВІГАЦІЯ) ==================== -->
     <header class="site-header-synced header w-full"
-        style="width: 100% !important; max-width: 100vw !important; position: sticky !important; top: 0 !important; left: 0 !important; right: 0 !important; z-index: 100 !important; height: 46px !important; min-height: 46px !important; max-height: 46px !important; padding: 0 28px !important; padding-left: 28px !important; padding-right: 28px !important; margin: 0 !important; display: flex !important; align-items: center !important; justify-content: space-between !important; box-sizing: border-box !important; overflow: visible !important;">
+        style="width: 100% !important; max-width: 100vw !important; position: sticky !important; top: 0 !important; left: 0 !important; right: 0 !important; z-index: 100 !important; height: 46px !important; min-height: 46px !important; max-height: 46px !important; padding: 0 24px !important; padding-left: 24px !important; padding-right: 24px !important; margin: 0 !important; display: flex !important; align-items: center !important; justify-content: space-between !important; box-sizing: border-box !important; overflow: visible !important;">
 
         <div class="header-container"
             style="width: 100% !important; max-width: 100% !important; height: 100% !important; margin: 0 !important; padding: 0 !important; box-sizing: border-box !important; display: flex !important; align-items: center !important; justify-content: space-between !important; position: relative !important;">
@@ -1461,8 +1461,8 @@
             </nav>
 
             <!-- ПРАВИЙ БЛОК УПРАВЛІННЯ -->
-            <div style="display: flex !important; align-items: center !important; gap: 18px !important; height: 100% !important; margin: 0 !important; padding: 0 !important;"
-                class="z-10 shrink-0">
+            <div class="header-right header-actions z-10 shrink-0"
+                style="display: flex !important; align-items: center !important; gap: 14px !important; height: 100% !important; margin: 0 !important; padding: 0 !important; flex-shrink: 0 !important;">
                 <!-- 1. Вхід в кабінет -->
                 <a href="cabinet.html"
                     style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important; gap: 6px !important;"
@@ -3013,19 +3013,8 @@
                 <!-- Колонка 1: Бренд і контакти -->
                 <div class="space-y-4">
                     <div class="footer-brand flex flex-col items-start gap-2.5">
-                        <a href="index.html" class="inline-flex items-center focus:outline-none group" aria-label="MUVIO">
-                            <svg class="footer-logo-svg muvio-logo-svg" viewBox="0 0 222 96" fill="none" xmlns="http://www.w3.org/2000/svg" style="height: 36px !important; width: auto !important; display: block !important;">
-                                <!-- Фірмовий знак M (зелена блискавка) -->
-                                <path class="footer-logo-mark muvio-logo-mark" d="M 28.67,51.38 L 3.54,2.0 L 11.1,36.58 L 0.0,36.66 L 26.14,92.0 L 18.82,52.75 L 28.67,56.37 L 38.52,52.75 L 31.2,92.0 L 57.34,36.66 L 46.24,36.58 L 53.8,2.0 Z" fill="#10B981"/>
-                                <!-- Фірмові літери UVIO -->
-                                <path class="footer-logo-letters muvio-logo-letters" fill-rule="evenodd" clip-rule="evenodd" d="
-                                  M 68,2 L 78,2 L 78,76 L 82,80 L 96,80 L 100,76 L 100,2 L 110,2 L 110,80 L 104,86 L 74,86 L 68,80 Z
-                                  M 114,2 L 124,2 L 137,72 L 150,2 L 160,2 L 143,86 L 131,86 Z
-                                  M 164,2 L 178,2 L 178,86 L 164,86 Z
-                                  M 182,8 L 188,2 L 214,2 L 220,8 L 220,80 L 214,86 L 188,86 L 182,80 Z
-                                  M 192,12 L 210,12 L 210,76 L 192,76 Z
-                                " fill="#FFFFFF"/>
-                            </svg>
+                        <a href="index.html" class="footer-logo inline-flex items-center focus:outline-none group" aria-label="MUVIO">
+                            <img src="images/logo-white.png" alt="MUVIO" class="footer-logo-img" style="height: 36px !important; width: auto !important; display: block !important;">
                         </a>
                         <span class="font-brand text-[9px] tracking-widest text-emerald-300 uppercase pl-0.5">
                             <span class="lang-ua">ТВОЄ ELECTRO CITY</span>

@@ -435,6 +435,16 @@
                     }
                 }
             });
+            const logoImgsInit = document.querySelectorAll('.header-logo-img, header a[aria-label="MUVIO"] img, .site-header-synced .header-logo-img, .footer-logo-img');
+            logoImgsInit.forEach(img => {
+                img.style.removeProperty('filter');
+                img.style.removeProperty('mix-blend-mode');
+                if (img.classList.contains('footer-logo-img')) {
+                    img.src = 'images/logo-white.png';
+                } else {
+                    img.src = (curTheme === 'dark') ? 'images/logo-white.png' : 'images/logo-dark.png';
+                }
+            });
             updateHeroBg();
         });
         document.documentElement.style.fontSize = '';
@@ -507,15 +517,15 @@
             }
         });
 
-        // Synchronize header logo image across light/dark themes
-        const logoImgs = document.querySelectorAll('.header-logo-img, header a[aria-label="MUVIO"] img, .site-header-synced img');
+        // Synchronize header logo image across light/dark themes (preserving green M)
+        const logoImgs = document.querySelectorAll('.header-logo-img, header a[aria-label="MUVIO"] img, .site-header-synced .header-logo-img, .footer-logo-img');
         logoImgs.forEach(img => {
-            if (theme === 'dark') {
-                img.style.setProperty('filter', 'brightness(0) invert(1)', 'important');
-                img.style.setProperty('mix-blend-mode', 'normal', 'important');
+            img.style.removeProperty('filter');
+            img.style.removeProperty('mix-blend-mode');
+            if (img.classList.contains('footer-logo-img')) {
+                img.src = 'images/logo-white.png';
             } else {
-                img.style.removeProperty('filter');
-                img.style.removeProperty('mix-blend-mode');
+                img.src = (theme === 'dark') ? 'images/logo-white.png' : 'images/logo-dark.png';
             }
         });
 

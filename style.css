@@ -63,7 +63,7 @@ html.dark .header .logo img,
 body.dark .header .logo img,
 .dark-theme .header-logo img,
 .dark-theme .header-logo-img {
-    filter: brightness(0) invert(1) !important;
+    filter: none !important;
     mix-blend-mode: normal !important;
     background: transparent !important;
     background-color: transparent !important;
@@ -290,8 +290,8 @@ header,
     width: 100% !important;
     max-width: 100vw !important;
     box-sizing: border-box !important;
-    padding-left: 28px !important;
-    padding-right: 28px !important;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
     overflow: visible !important;
 }
 
@@ -337,7 +337,7 @@ header,
 .header-right {
     display: flex !important;
     align-items: center !important;
-    gap: 16px !important;
+    gap: 14px !important;
     margin-right: 0 !important;
     flex-shrink: 0 !important;
 }
@@ -998,4 +998,196 @@ img.promo-scooter-img {
         justify-content: center !important;
     }
 }
+
+/* ==========================================================================
+   CATALOG LIGHT MODE CONTRAST FIXES
+   ========================================================================== */
+html:not(.dark) body,
+html:not(.theme-dark) body,
+[data-theme="light"] body {
+    background-color: #F9FAFB !important;
+    color: #111827 !important;
+}
+
+html:not(.dark) .catalog-card h3,
+html:not(.dark) .model-title,
+body:not(.dark) .catalog-card-title,
+html:not(.dark) .vehicle-showcase-card h3,
+html:not(.theme-dark) .vehicle-showcase-card h3,
+[data-theme="light"] .vehicle-showcase-card h3 {
+    color: #111827 !important;
+}
+
+html:not(.dark) .catalog-card .price-badge,
+html:not(.dark) .model-price,
+html:not(.dark) .vehicle-showcase-card span,
+html:not(.theme-dark) .vehicle-showcase-card span,
+[data-theme="light"] .vehicle-showcase-card span {
+    color: #374151 !important;
+}
+
+html:not(.dark) .vehicle-showcase-card span[class*="border"],
+html:not(.theme-dark) .vehicle-showcase-card span[class*="border"],
+[data-theme="light"] .vehicle-showcase-card span[class*="border"] {
+    border-color: rgba(0, 0, 0, 0.15) !important;
+    background-color: rgba(0, 0, 0, 0.04) !important;
+    color: #374151 !important;
+}
+
+/* Detail Modal / View in Light Mode */
+html:not(.dark) #modelDetailModal,
+html:not(.dark) #catalogDetailView,
+html:not(.theme-dark) #catalogDetailView,
+[data-theme="light"] #catalogDetailView {
+    background-color: #F9FAFB !important;
+    color: #111827 !important;
+}
+
+html:not(.dark) #catalogDetailView h1,
+html:not(.dark) #catalogDetailView h2,
+html:not(.dark) #catalogDetailView h3,
+html:not(.dark) #catalogDetailView .text-white,
+html:not(.theme-dark) #catalogDetailView .text-white,
+[data-theme="light"] #catalogDetailView .text-white {
+    color: #111827 !important;
+}
+
+html:not(.dark) #catalogDetailView .text-zinc-400,
+html:not(.theme-dark) #catalogDetailView .text-zinc-400,
+[data-theme="light"] #catalogDetailView .text-zinc-400 {
+    color: #4B5563 !important;
+}
+
+/* ==========================================================================
+   CALCULATOR LIGHT MODE FIXES
+   ========================================================================== */
+html:not(.dark) .calculator-section,
+html:not(.dark) #calculator,
+html:not(.theme-dark) .calculator-section,
+html:not(.theme-dark) #calculator,
+[data-theme="light"] .calculator-section,
+[data-theme="light"] #calculator {
+    background-color: #F9FAFB !important;
+    color: #111827 !important;
+}
+
+html:not(.dark) .calc-tesla-container,
+html:not(.theme-dark) .calc-tesla-container,
+[data-theme="light"] .calc-tesla-container {
+    background: #FFFFFF !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
+}
+
+html:not(.dark) .calc-preview-box,
+html:not(.theme-dark) .calc-preview-box,
+[data-theme="light"] .calc-preview-box {
+    background: #F3F4F6 !important;
+    border: 1px solid rgba(0, 0, 0, 0.06) !important;
+}
+
+html:not(.dark) .calc-select-tesla,
+html:not(.theme-dark) .calc-select-tesla,
+[data-theme="light"] .calc-select-tesla {
+    background-color: #FFFFFF !important;
+    border: 1px solid rgba(0, 0, 0, 0.15) !important;
+    color: #111827 !important;
+}
+
+/* Day Duration Cards: White background (#FFFFFF), thin grey border, dark text */
+html:not(.dark) .calc-pill-btn,
+html:not(.theme-dark) .calc-pill-btn,
+[data-theme="light"] .calc-pill-btn {
+    background: #FFFFFF !important;
+    border: 1px solid rgba(0, 0, 0, 0.12) !important;
+    color: #111827 !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+}
+html:not(.dark) .calc-pill-btn:hover,
+html:not(.theme-dark) .calc-pill-btn:hover,
+[data-theme="light"] .calc-pill-btn:hover {
+    border-color: rgba(26, 179, 112, 0.4) !important;
+    background: #F9FAFB !important;
+}
+html:not(.dark) .calc-pill-btn.is-active,
+html:not(.theme-dark) .calc-pill-btn.is-active,
+[data-theme="light"] .calc-pill-btn.is-active {
+    border-color: #1AB370 !important;
+    background: rgba(26, 179, 112, 0.08) !important;
+    color: #1AB370 !important;
+    box-shadow: 0 0 12px rgba(26, 179, 112, 0.15) !important;
+}
+
+/* Addon Option Cards: White background (#FFFFFF), thin grey border, dark text */
+html:not(.dark) .calc-addon-card,
+html:not(.theme-dark) .calc-addon-card,
+[data-theme="light"] .calc-addon-card {
+    background: #FFFFFF !important;
+    border: 1px solid rgba(0, 0, 0, 0.12) !important;
+    color: #111827 !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+}
+html:not(.dark) .calc-addon-card:hover,
+html:not(.theme-dark) .calc-addon-card:hover,
+[data-theme="light"] .calc-addon-card:hover {
+    border-color: rgba(26, 179, 112, 0.4) !important;
+    background: #F9FAFB !important;
+}
+html:not(.dark) .calc-addon-card.is-active,
+html:not(.theme-dark) .calc-addon-card.is-active,
+[data-theme="light"] .calc-addon-card.is-active {
+    border-color: #1AB370 !important;
+    background: rgba(26, 179, 112, 0.08) !important;
+}
+html:not(.dark) .calc-addon-card .text-white,
+html:not(.theme-dark) .calc-addon-card .text-white,
+[data-theme="light"] .calc-addon-card .text-white {
+    color: #111827 !important;
+}
+html:not(.dark) .calc-addon-card .text-zinc-400,
+html:not(.theme-dark) .calc-addon-card .text-zinc-400,
+[data-theme="light"] .calc-addon-card .text-zinc-400 {
+    color: #4B5563 !important;
+}
+
+/* Segmented switch (40Ah | 60Ah) */
+html:not(.dark) .tesla-segmented,
+html:not(.theme-dark) .tesla-segmented,
+[data-theme="light"] .tesla-segmented {
+    background: #F3F4F6 !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+html:not(.dark) .tesla-segmented-btn,
+html:not(.theme-dark) .tesla-segmented-btn,
+[data-theme="light"] .tesla-segmented-btn {
+    color: #4B5563 !important;
+}
+html:not(.dark) .tesla-segmented-btn.is-active,
+html:not(.theme-dark) .tesla-segmented-btn.is-active,
+[data-theme="light"] .tesla-segmented-btn.is-active {
+    background: #FFFFFF !important;
+    color: #111827 !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Calculator text and borders */
+html:not(.dark) #calculator .text-white,
+html:not(.theme-dark) #calculator .text-white,
+[data-theme="light"] #calculator .text-white {
+    color: #111827 !important;
+}
+html:not(.dark) #calculator .text-zinc-400,
+html:not(.theme-dark) #calculator .text-zinc-400,
+[data-theme="light"] #calculator .text-zinc-400 {
+    color: #4B5563 !important;
+}
+html:not(.dark) #calculator .border-white\/10,
+html:not(.dark) #calculator .border-white\/\[0\.08\],
+html:not(.dark) #calculator .border-white\/\[0\.06\] {
+    border-color: rgba(0, 0, 0, 0.1) !important;
+}
+html:not(.dark) #calculator input[type=range].tesla-slider {
+    background: rgba(0, 0, 0, 0.12) !important;
+}
+
 
