@@ -1163,12 +1163,33 @@ html.theme-dark .mobile-nav-link.nav-link-active {
    ========================================================================== */
 html.theme-dark #hero-section,
 html.theme-dark .hero-section,
-html.theme-dark #hero,
+html.dark #hero-section,
+html.dark .hero-section,
 body.dark #hero-section,
 body.dark .hero-section,
-body.dark #hero {
+[data-theme="dark"] #hero-section,
+[data-theme="dark"] .hero-section,
+html.theme-dark .hero-slide,
+html.dark .hero-slide,
+body.dark .hero-slide,
+[data-theme="dark"] .hero-slide,
+html.dark #heroSlide1,
+html.dark #heroSlide2,
+html.dark #heroSlide3,
+body.dark #heroSlide1,
+body.dark #heroSlide2,
+body.dark #heroSlide3,
+html.dark .slide-crosser-clean,
+body.dark .slide-crosser-clean,
+html.dark .slide-bike-clean,
+body.dark .slide-bike-clean,
+html.dark .slide-bruiser,
+body.dark .slide-bruiser,
+html.dark .slide-crosser,
+body.dark .slide-crosser {
+    background-color: #080A0C !important;
+    background: #080A0C !important;
     border-bottom: none !important;
-    color: var(--text-main) !important;
 }
 
 html.theme-dark #catalog,

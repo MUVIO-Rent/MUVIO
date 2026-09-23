@@ -1446,12 +1446,57 @@ html:not(.dark) #calculator input[type=range].tesla-slider {
 }
 
 .hero-slider-nav-btn {
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
-.hero-slider-nav-btn:hover {
-    background-color: rgba(0, 0, 0, 0.75) !important;
+/* Light mode arrows (White slides: 1 and 2) */
+html:not(.dark):not(.theme-dark):not(.dark-theme):not([data-theme="dark"]) .hero-slider-nav-btn {
+    background: rgba(15, 23, 42, 0.08) !important;
+    border: 1px solid rgba(15, 23, 42, 0.15) !important;
+    color: #0F172A !important;
+}
+html:not(.dark):not(.theme-dark):not(.dark-theme):not([data-theme="dark"]) .hero-slider-nav-btn:hover {
+    background: rgba(15, 23, 42, 0.18) !important;
+    border-color: rgba(15, 23, 42, 0.3) !important;
+    color: #0F172A !important;
+    transform: translateY(-50%) scale(1.06) !important;
+}
+/* When slide 1 (day photo) is active in light mode */
+html:not(.dark):not(.theme-dark):not(.dark-theme):not([data-theme="dark"]) #hero-section[data-active-slide="0"] .hero-slider-nav-btn,
+html:not(.dark):not(.theme-dark):not(.dark-theme):not([data-theme="dark"]) #hero-section:has(#heroSlide1.active) .hero-slider-nav-btn {
+    background: rgba(0, 0, 0, 0.4) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: #FFFFFF !important;
+}
+html:not(.dark):not(.theme-dark):not(.dark-theme):not([data-theme="dark"]) #hero-section[data-active-slide="0"] .hero-slider-nav-btn:hover,
+html:not(.dark):not(.theme-dark):not(.dark-theme):not([data-theme="dark"]) #hero-section:has(#heroSlide1.active) .hero-slider-nav-btn:hover {
+    background: rgba(0, 0, 0, 0.65) !important;
     border-color: rgba(255, 255, 255, 0.4) !important;
+    color: #FFFFFF !important;
+}
+
+/* Dark mode arrows - полупрозрачные графитовые с тонким контуром */
+html.dark .hero-slider-nav-btn,
+body.dark .hero-slider-nav-btn,
+[data-theme="dark"] .hero-slider-nav-btn,
+html.theme-dark .hero-slider-nav-btn,
+body.theme-dark .hero-slider-nav-btn,
+.dark .hero-slider-nav-btn {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    color: #FFFFFF !important;
+}
+html.dark .hero-slider-nav-btn:hover,
+body.dark .hero-slider-nav-btn:hover,
+[data-theme="dark"] .hero-slider-nav-btn:hover,
+html.theme-dark .hero-slider-nav-btn:hover,
+body.theme-dark .hero-slider-nav-btn:hover,
+.dark .hero-slider-nav-btn:hover {
+    background: rgba(255, 255, 255, 0.18) !important;
+    border-color: rgba(255, 255, 255, 0.35) !important;
+    color: #FFFFFF !important;
     transform: translateY(-50%) scale(1.06) !important;
 }
 
@@ -1475,6 +1520,20 @@ html:not(.dark) #calculator input[type=range].tesla-slider {
     width: 32px;
     background: #1AB370 !important;
     box-shadow: 0 0 12px rgba(26, 179, 112, 0.7) !important;
+}
+
+/* Dots in light mode on white slides (slide 1 and 2) */
+html:not(.dark):not(.theme-dark):not(.dark-theme):not([data-theme="dark"]) #hero-section[data-active-slide="1"] .hero-slider-dot,
+html:not(.dark):not(.theme-dark):not(.dark-theme):not([data-theme="dark"]) #hero-section[data-active-slide="2"] .hero-slider-dot,
+html:not(.dark):not(.theme-dark):not(.dark-theme):not([data-theme="dark"]) #hero-section:has(#heroSlide2.active) .hero-slider-dot,
+html:not(.dark):not(.theme-dark):not(.dark-theme):not([data-theme="dark"]) #hero-section:has(#heroSlide3.active) .hero-slider-dot {
+    background: rgba(15, 23, 42, 0.25);
+}
+html:not(.dark):not(.theme-dark):not(.dark-theme):not([data-theme="dark"]) #hero-section[data-active-slide="1"] .hero-slider-dot.active,
+html:not(.dark):not(.theme-dark):not(.dark-theme):not([data-theme="dark"]) #hero-section[data-active-slide="2"] .hero-slider-dot.active,
+html:not(.dark):not(.theme-dark):not(.dark-theme):not([data-theme="dark"]) #hero-section:has(#heroSlide2.active) .hero-slider-dot.active,
+html:not(.dark):not(.theme-dark):not(.dark-theme):not([data-theme="dark"]) #hero-section:has(#heroSlide3.active) .hero-slider-dot.active {
+    background: #1AB370 !important;
 }
 
 /* ==========================================================================
@@ -1706,8 +1765,8 @@ html.dark-theme #heroSlide2,
 body.dark #heroSlide2,
 body.theme-dark #heroSlide2,
 body.dark-theme #heroSlide2 {
-    background: #0d120f !important;
-    background-color: #0d120f !important;
+    background: #080A0C !important;
+    background-color: #080A0C !important;
 }
 
 /* Текстовая колонка слева: строго слева, ширина 45%, max-width 560px, z-index: 10 */
@@ -1866,7 +1925,7 @@ html.dark-theme .hero-crosser-desc,
 body.dark .hero-crosser-desc,
 body.theme-dark .hero-crosser-desc,
 body.dark-theme .hero-crosser-desc {
-    color: #E2E8F0 !important;
+    color: #94A3B8 !important; /* Читаемый матовый светло-серый slate */
 }
 
 html.dark .hero-crosser-btn-calc,
@@ -1959,8 +2018,8 @@ html.dark-theme #heroSlide3,
 body.dark #heroSlide3,
 body.theme-dark #heroSlide3,
 body.dark-theme #heroSlide3 {
-    background: #0d120f !important;
-    background-color: #0d120f !important;
+    background: #080A0C !important;
+    background-color: #080A0C !important;
 }
 
 /* Текстовая колонка слева: ширина 45%, min-width 480px, max-width 580px, padding-left 64px */
@@ -2117,6 +2176,7 @@ body.dark-theme #heroSlide3 {
                 0 0 65px 25px rgba(180, 220, 255, 0.7),
                 0 0 120px 45px rgba(26, 179, 112, 0.4);
     filter: drop-shadow(0 0 16px #ffffff);
+    mix-blend-mode: screen !important;
 }
 
 .bike-hero-headlight::before {
@@ -2125,12 +2185,13 @@ body.dark-theme #heroSlide3 {
     top: 50%;
     right: 50%;
     transform: translateY(-50%);
-    width: 480px;
-    height: 220px;
-    background: radial-gradient(ellipse at right center, rgba(255, 255, 255, 0.5) 0%, rgba(200, 240, 255, 0.25) 30%, rgba(26, 179, 112, 0.1) 60%, transparent 80%);
+    width: 520px;
+    height: 230px;
+    background: radial-gradient(ellipse at right center, rgba(255, 255, 255, 0.55) 0%, rgba(200, 240, 255, 0.28) 30%, rgba(26, 179, 112, 0.12) 60%, transparent 80%);
     clip-path: polygon(100% 45%, 0 0%, 0 100%, 100% 55%);
     pointer-events: none;
-    filter: blur(10px);
+    filter: blur(10px) drop-shadow(0 0 20px rgba(255, 255, 255, 0.4));
+    mix-blend-mode: screen !important;
 }
 
 /* Dark mode overrides for Slide 3 */
@@ -2151,7 +2212,7 @@ html.dark-theme .hero-bike-desc,
 body.dark .hero-bike-desc,
 body.theme-dark .hero-bike-desc,
 body.dark-theme .hero-bike-desc {
-    color: #E2E8F0 !important;
+    color: #94A3B8 !important; /* Читаемый матовый светло-серый slate */
 }
 
 html.dark .hero-bike-btn-calc,
@@ -2232,6 +2293,96 @@ html.dark .slide-bike-img,
     }
 }
 
+/* ==========================================================================
+   MUVIO HERO SLIDER DARK THEME STANDARD (#080A0C)
+   ========================================================================== */
+html.dark .hero-section,
+html.dark .hero-slide,
+html.dark .slide-bruiser,
+html.dark .slide-crosser,
+body.dark .hero-section,
+body.dark .hero-slide,
+body.dark .slide-bruiser,
+body.dark .slide-crosser,
+[data-theme="dark"] .hero-section,
+[data-theme="dark"] .hero-slide,
+[data-theme="dark"] .slide-bruiser,
+[data-theme="dark"] .slide-crosser,
+html.theme-dark .hero-section,
+html.theme-dark .hero-slide,
+body.theme-dark .hero-section,
+body.theme-dark .hero-slide,
+.dark .hero-section,
+.dark .hero-slide,
+html.dark #hero-section,
+body.dark #hero-section,
+html.dark #heroSlide1,
+body.dark #heroSlide1,
+html.dark #heroSlide2,
+body.dark #heroSlide2,
+html.dark #heroSlide3,
+body.dark #heroSlide3,
+[data-theme="dark"] #heroSlide2,
+[data-theme="dark"] #heroSlide3,
+html.theme-dark #heroSlide2,
+html.theme-dark #heroSlide3,
+body.theme-dark #heroSlide2,
+body.theme-dark #heroSlide3,
+html.dark .slide-crosser-clean,
+body.dark .slide-crosser-clean,
+html.dark .slide-bike-clean,
+body.dark .slide-bike-clean,
+[data-theme="dark"] .slide-crosser-clean,
+[data-theme="dark"] .slide-bike-clean {
+    background-color: #080A0C !important;
+    background: #080A0C !important;
+}
 
+/* Contrast text in dark mode */
+html.dark .hero-slide h1,
+html.dark .hero-slide h2,
+body.dark .hero-slide h1,
+body.dark .hero-slide h2,
+[data-theme="dark"] .hero-slide h1,
+[data-theme="dark"] .hero-slide h2,
+html.theme-dark .hero-slide h1,
+html.theme-dark .hero-slide h2,
+body.theme-dark .hero-slide h1,
+body.theme-dark .hero-slide h2,
+.dark .hero-slide h1,
+.dark .hero-slide h2,
+html.dark .hero-bike-title,
+body.dark .hero-bike-title,
+html.dark .hero-crosser-title,
+body.dark .hero-crosser-title,
+[data-theme="dark"] .hero-bike-title,
+[data-theme="dark"] .hero-crosser-title {
+    color: #FFFFFF !important;
+}
 
+html.dark .hero-slide p,
+body.dark .hero-slide p,
+[data-theme="dark"] .hero-slide p,
+html.theme-dark .hero-slide p,
+body.theme-dark .hero-slide p,
+.dark .hero-slide p,
+html.dark .hero-bike-desc,
+body.dark .hero-bike-desc,
+html.dark .hero-crosser-desc,
+body.dark .hero-crosser-desc,
+[data-theme="dark"] .hero-bike-desc,
+[data-theme="dark"] .hero-crosser-desc {
+    color: #94A3B8 !important; /* Читаемый матовый светло-серый slate */
+}
 
+/* Emerald badge */
+.hero-bike-badge,
+.hero-crosser-badge,
+html.dark .hero-bike-badge,
+html.dark .hero-crosser-badge,
+body.dark .hero-bike-badge,
+body.dark .hero-crosser-badge,
+[data-theme="dark"] .hero-bike-badge,
+[data-theme="dark"] .hero-crosser-badge {
+    color: #1AB370 !important;
+}
