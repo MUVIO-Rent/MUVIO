@@ -227,6 +227,115 @@
             box-shadow: 0 8px 24px -4px rgba(26, 179, 112, 0.4) !important;
         }
 
+        /* Alternating Promo Showcase Sections (McDonald's / Apple Z-Pattern) */
+        .promo-section {
+            background-color: #FFFFFF;
+            color: #111827;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .promo-section-alt {
+            background-color: #F8FAFC;
+            color: #111827;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        html.dark .promo-section,
+        html[data-theme="dark"] .promo-section,
+        body.dark .promo-section,
+        body[data-theme="dark"] .promo-section {
+            background-color: #0B0E11 !important;
+            color: #FFFFFF !important;
+        }
+
+        html.dark .promo-section-alt,
+        html[data-theme="dark"] .promo-section-alt,
+        body.dark .promo-section-alt,
+        body[data-theme="dark"] .promo-section-alt {
+            background-color: #000000 !important;
+            color: #FFFFFF !important;
+        }
+
+        .promo-heading {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+            color: #111827;
+            transition: color 0.3s ease;
+        }
+        html.dark .promo-heading,
+        html[data-theme="dark"] .promo-heading,
+        body.dark .promo-heading,
+        body[data-theme="dark"] .promo-heading {
+            color: #FFFFFF !important;
+        }
+
+        .promo-desc {
+            color: #4B5563;
+            transition: color 0.3s ease;
+        }
+        html.dark .promo-desc,
+        html[data-theme="dark"] .promo-desc,
+        body.dark .promo-desc,
+        body[data-theme="dark"] .promo-desc {
+            color: #A1A1AA !important;
+        }
+
+        .promo-btn-outline {
+            border: 1px solid rgba(0, 0, 0, 0.15) !important;
+            color: #111827 !important;
+            background: transparent !important;
+            border-radius: 12px !important;
+            clip-path: none !important;
+            transition: all 0.25s ease !important;
+        }
+        .promo-btn-outline:hover {
+            border-color: #1AB370 !important;
+            color: #1AB370 !important;
+            background: rgba(26, 179, 112, 0.06) !important;
+            transform: translateY(-1px);
+        }
+        html.dark .promo-btn-outline,
+        html[data-theme="dark"] .promo-btn-outline,
+        body.dark .promo-btn-outline,
+        body[data-theme="dark"] .promo-btn-outline {
+            border-color: rgba(255, 255, 255, 0.2) !important;
+            color: #FFFFFF !important;
+        }
+        html.dark .promo-btn-outline:hover,
+        html[data-theme="dark"] .promo-btn-outline:hover,
+        body.dark .promo-btn-outline:hover,
+        body[data-theme="dark"] .promo-btn-outline:hover {
+            border-color: #1AB370 !important;
+            color: #1AB370 !important;
+            background: rgba(26, 179, 112, 0.1) !important;
+        }
+
+        .promo-btn-primary {
+            background-color: #1AB370 !important;
+            color: #FFFFFF !important;
+            border: 1px solid #1AB370 !important;
+            border-radius: 12px !important;
+            clip-path: none !important;
+            transition: all 0.25s ease !important;
+            box-shadow: 0 4px 14px rgba(26, 179, 112, 0.25);
+        }
+        .promo-btn-primary:hover {
+            background-color: #15985E !important;
+            border-color: #15985E !important;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(26, 179, 112, 0.4);
+        }
+
+        /* Scroll Animation (Fade in with translateY) */
+        .promo-fade-in {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            will-change: opacity, transform;
+        }
+        .promo-fade-in.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* Preloader Keyframes */
         @keyframes muvioBreathe {
 
@@ -1494,8 +1603,85 @@
         </div>
     </section>
 
+    <!-- ==================== ПРОМО-СЕКЦІЯ 1: Like.Bike Bruiser (Z-Pattern) ==================== -->
+    <section class="promo-section py-20 md:py-24 border-b border-zinc-200 dark:border-white/[0.08] relative overflow-hidden">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-8">
+            <div class="promo-fade-in flex flex-col md:flex-row items-center gap-10 lg:gap-16">
+                
+                <!-- Колонка з текстом (~55%) -->
+                <div class="w-full md:w-[55%] flex flex-col items-start justify-center">
+                    <span class="text-xs font-brand font-bold tracking-widest uppercase text-[#1AB370] mb-3 inline-block">
+                        <span class="lang-ua">ЕЛЕКТРОВЕЛОСИПЕДИ ДЛЯ МІСТА ТА КУР'ЄРІВ</span>
+                        <span class="lang-en">CITY &amp; COURIER E-BIKES</span>
+                    </span>
+                    <h2 class="promo-heading font-brand font-bold text-2xl sm:text-3xl lg:text-4xl tracking-tight leading-[1.2] mb-4">
+                        <span class="lang-ua">Like.Bike Bruiser — свобода пересування без заторів</span>
+                        <span class="lang-en">Like.Bike Bruiser — traffic-free urban freedom</span>
+                    </h2>
+                    <p class="promo-desc text-sm sm:text-base leading-relaxed mb-6 max-w-xl">
+                        <span class="lang-ua">Потужний фетбайк з широкими колесами для будь-якого дорожнього покриття. Ідеальний вибір для кур'єрської доставки та активних поїздок Одесою з мінімальними витратами.</span>
+                        <span class="lang-en">A powerful fatbike with wide tires for any road surface. The ideal choice for courier delivery and active city rides in Odesa with minimal costs.</span>
+                    </p>
+                    <a href="catalog.html?model=like-bike-bruser-1" 
+                       class="promo-btn-outline inline-flex items-center justify-center gap-2.5 px-6 py-3.5 font-brand font-bold text-xs uppercase tracking-wider group">
+                        <span class="lang-ua">Детальніше про оренду</span>
+                        <span class="lang-en">More about rental</span>
+                        <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+
+                <!-- Колонка з картинкою (~45%) -->
+                <div class="w-full md:w-[45%] flex items-center justify-center">
+                    <img src="images/like-bike-bruiser-for-menu.png" 
+                         alt="Like.Bike Bruiser" 
+                         loading="lazy"
+                         class="max-h-[300px] sm:max-h-[360px] lg:max-h-[420px] w-auto max-w-full object-contain drop-shadow-2xl transition-transform duration-500 hover:scale-105 select-none pointer-events-none">
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== ПРОМО-СЕКЦІЯ 2: Aima A700 (Z-Pattern Дзеркальна) ==================== -->
+    <section class="promo-section-alt py-20 md:py-24 border-b border-zinc-200 dark:border-white/[0.08] relative overflow-hidden">
+        <div class="max-w-[1200px] mx-auto px-6 md:px-8">
+            <div class="promo-fade-in flex flex-col md:flex-row items-center gap-10 lg:gap-16">
+                
+                <!-- Колонка з картинкою (~45%) - зліва на десктопі, на мобілці після тексту (order-2 md:order-1) -->
+                <div class="w-full md:w-[45%] flex items-center justify-center order-2 md:order-1">
+                    <img src="images/aima-a700-for-menu.png" 
+                         alt="Aima A700" 
+                         loading="lazy"
+                         class="max-h-[300px] sm:max-h-[360px] lg:max-h-[420px] w-auto max-w-full object-contain drop-shadow-2xl transition-transform duration-500 hover:scale-105 select-none pointer-events-none">
+                </div>
+
+                <!-- Колонка з текстом (~55%) - справа на десктопі (order-1 md:order-2) -->
+                <div class="w-full md:w-[55%] flex flex-col items-start justify-center order-1 md:order-2">
+                    <span class="text-xs font-brand font-bold tracking-widest uppercase text-[#1AB370] mb-3 inline-block">
+                        <span class="lang-ua">КОМЕРЦІЙНИЙ ТА МІСЬКИЙ ПРОКАТ</span>
+                        <span class="lang-en">COMMERCIAL &amp; URBAN RENTAL</span>
+                    </span>
+                    <h2 class="promo-heading font-brand font-bold text-2xl sm:text-3xl lg:text-4xl tracking-tight leading-[1.2] mb-4">
+                        <span class="lang-ua">Aima A700 — надійність, комфорт та знімний АКБ</span>
+                        <span class="lang-en">Aima A700 — reliability, comfort and removable battery</span>
+                    </h2>
+                    <p class="promo-desc text-sm sm:text-base leading-relaxed mb-6 max-w-xl">
+                        <span class="lang-ua">Сучасний електротранспорт із запасом ходу для повного робочого дня. Жодних витрат на пальне та безкоштовне сервісне обслуговування на весь період оренди.</span>
+                        <span class="lang-en">Modern electric vehicle with all-day range. Zero fuel costs and free maintenance service for the entire rental period.</span>
+                    </p>
+                    <a href="catalog.html?model=aima-a700" 
+                       class="promo-btn-primary inline-flex items-center justify-center gap-2.5 px-6 py-3.5 font-brand font-bold text-xs uppercase tracking-wider group">
+                        <span class="lang-ua">Обрати в каталозі</span>
+                        <span class="lang-en">Choose in catalog</span>
+                        <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
     <!-- ==================== 3. КАТАЛОГ СКУТЕРІВ (ТОП МОДЕЛІ СПЕРШУ) ==================== -->
-        <!-- ==================== 3. КАТАЛОГ СКУТЕРІВ (ТОП МОДЕЛІ СПЕРШУ) ==================== -->
     <section id="catalog" class="py-16 md:py-24 bg-[#0A0D0B] text-white border-b border-white/[0.08]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-x border-white/[0.05]">
 
@@ -3787,6 +3973,28 @@
             }
         });
 
+        // Плавна анімація появи промо-секцій при скролі (Z-pattern IntersectionObserver)
+        function initPromoScrollReveal() {
+            if ('IntersectionObserver' in window) {
+                const promoObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+                document.querySelectorAll('.promo-fade-in').forEach(el => {
+                    promoObserver.observe(el);
+                });
+            } else {
+                document.querySelectorAll('.promo-fade-in').forEach(el => {
+                    el.classList.add('is-visible');
+                });
+            }
+        }
+
         function initializeApp() {
             // Заборона автоскролу: скидання позиції на самий верх (Hero)
             if (history.scrollRestoration) {
@@ -3794,6 +4002,13 @@
             }
             if (!window.location.hash || window.location.hash === '#') {
                 window.scrollTo(0, 0);
+            }
+
+            // 0. Анімація промо-секцій
+            try {
+                initPromoScrollReveal();
+            } catch (e) {
+                console.error('Promo reveal error:', e);
             }
 
             // 1. Увімкнення та відображення всіх карток каталогу за замовчуванням
