@@ -33,7 +33,7 @@
                             light: "#F8FAFC",
                             card: "#121614",
                             border: "rgba(255, 255, 255, 0.08)",
-                            accent: "#10B981"
+                            accent: "#1AB370"
                         }
                     },
                     fontFamily: {
@@ -98,6 +98,22 @@
         }
         .vehicle-showcase-card:hover {
             transform: translateY(-4px);
+        }
+
+        /* MUVIO Brand Action Button */
+        .muvio-btn-primary {
+            background-color: #1AB370 !important;
+            color: #FFFFFF !important;
+            box-shadow: 0 10px 25px -5px rgba(26, 179, 112, 0.4);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .muvio-btn-primary:hover {
+            background-color: #15995e !important;
+            box-shadow: 0 14px 30px -3px rgba(26, 179, 112, 0.6), 0 0 24px rgba(26, 179, 112, 0.35);
+            transform: translateY(-2px);
+        }
+        .muvio-btn-primary:active {
+            transform: translateY(0);
         }
 
         /* Custom Scrollbar */
@@ -772,7 +788,7 @@
                             <span class="lang-ua">За обраними фільтрами техніки не знайдено</span>
                             <span class="lang-en">No vehicles found for selected filters</span>
                         </p>
-                        <button onclick="filterCatalog('all')" class="mt-4 px-6 py-2.5 rounded-full bg-[#10B981] text-white font-brand font-bold text-xs uppercase tracking-wider">
+                        <button onclick="filterCatalog('all')" class="mt-4 px-6 py-2.5 rounded-full bg-[#1AB370] text-white font-brand font-bold text-xs uppercase tracking-wider">
                             <span class="lang-ua">Показати весь каталог</span>
                             <span class="lang-en">Show full catalog</span>
                         </button>
@@ -802,7 +818,7 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity"></div>
                     </div>
 
-                    <h3 class="font-brand font-extrabold text-xl sm:text-2xl text-white uppercase tracking-tight mt-5 group-hover:text-[#10B981] transition-colors">
+                    <h3 class="font-brand font-extrabold text-xl sm:text-2xl text-white uppercase tracking-tight mt-5 group-hover:text-[#1AB370] transition-colors">
                         ${item.name}
                     </h3>
 
@@ -854,7 +870,7 @@
             `).join('');
 
             dots.innerHTML = currentSlideImages.map((_, i) => `
-                <button onclick="goToSlide(${i})" class="slider-dot h-2 rounded-full transition-all duration-300 ${i === 0 ? 'w-6 bg-[#10B981]' : 'w-2 bg-white/40 hover:bg-white/70'}" aria-label="Slide ${i + 1}"></button>
+                <button onclick="goToSlide(${i})" class="slider-dot h-2 rounded-full transition-all duration-300 ${i === 0 ? 'w-6 bg-[#1AB370]' : 'w-2 bg-white/40 hover:bg-white/70'}" aria-label="Slide ${i + 1}"></button>
             `).join('');
         }
 
@@ -872,7 +888,7 @@
             });
             dots.forEach((dot, i) => {
                 if (i === currentSlideIndex) {
-                    dot.className = 'slider-dot h-2 rounded-full transition-all duration-300 w-6 bg-[#10B981]';
+                    dot.className = 'slider-dot h-2 rounded-full transition-all duration-300 w-6 bg-[#1AB370]';
                 } else {
                     dot.className = 'slider-dot h-2 rounded-full transition-all duration-300 w-2 bg-white/40 hover:bg-white/70';
                 }
@@ -905,7 +921,7 @@
             return `
                 <!-- Хлібні крихти -->
                 <nav class="flex items-center gap-2 text-xs uppercase tracking-wider text-zinc-400 mb-8 font-mono">
-                    <button onclick="showCatalogList(true)" class="hover:text-[#10B981] transition-colors flex items-center gap-1.5 focus:outline-none">
+                    <button onclick="showCatalogList(true)" class="hover:text-[#1AB370] transition-colors flex items-center gap-1.5 focus:outline-none">
                         <i data-lucide="arrow-left" class="w-4 h-4"></i>
                         <span class="lang-ua">КАТАЛОГ</span>
                         <span class="lang-en">CATALOG</span>
@@ -921,8 +937,8 @@
                     <div class="lg:col-span-6 xl:col-span-5 space-y-7">
                         <div>
                             <h1 class="font-brand font-extrabold text-3xl sm:text-4xl lg:text-[44px] uppercase tracking-tight text-white leading-[1.1]">
-                                <span class="lang-ua">ОРЕНДА <span class="text-[#10B981]">${item.name}</span> В ОДЕСІ</span>
-                                <span class="lang-en">RENT <span class="text-[#10B981]">${item.name}</span> IN ODESA</span>
+                                <span class="lang-ua">ОРЕНДА <span style="color: #1AB370;">${item.name}</span> В ОДЕСІ</span>
+                                <span class="lang-en">RENT <span style="color: #1AB370;">${item.name}</span> IN ODESA</span>
                             </h1>
                             <p class="text-sm text-zinc-400 mt-3 leading-relaxed">
                                 <span class="lang-ua">Офіційний прокат від MUVIO. Повне оснащення: транспорт, знімний акумулятор та зарядний пристрій.</span>
@@ -961,7 +977,7 @@
                         <!-- Акцентна кнопка «ЗАБРОНЮВАТИ СКУТЕР» -->
                         <div class="pt-2">
                             <a href="${tgRentUrl}" target="_blank" rel="noopener noreferrer"
-                                class="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-[#10B981] hover:bg-[#059669] text-white font-brand font-bold text-sm uppercase tracking-wider py-4 px-8 rounded-lg shadow-xl shadow-emerald-950/50 transition-all duration-200 hover:scale-[1.02]">
+                                class="muvio-btn-primary w-full sm:w-auto inline-flex items-center justify-center gap-3 font-brand font-bold text-sm uppercase tracking-wider py-4 px-8 rounded-lg">
                                 <i data-lucide="zap" class="w-4 h-4 fill-current"></i>
                                 <span class="lang-ua">ЗАБРОНЮВАТИ СКУТЕР</span>
                                 <span class="lang-en">BOOK SCOOTER</span>
@@ -977,7 +993,7 @@
 
                             <!-- Бейдж в кутку -->
                             <div class="absolute top-4 left-4 z-20 flex items-center gap-2 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-[11px] font-mono text-zinc-300 uppercase">
-                                <span class="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span>
+                                <span class="w-2 h-2 rounded-full bg-[#1AB370] animate-pulse"></span>
                                 <span class="lang-ua">В НАЯВНОСТІ</span>
                                 <span class="lang-en">IN STOCK</span>
                             </div>
@@ -1002,8 +1018,8 @@
                 <div class="mb-20 pt-10 border-t border-white/[0.08]">
                     <div class="text-center max-w-3xl mx-auto mb-10">
                         <h2 class="font-brand font-extrabold text-2xl sm:text-3xl md:text-4xl uppercase tracking-tight text-white">
-                            <span class="lang-ua">ВАРТІСТЬ ОРЕНДИ <span class="text-[#10B981]">${item.name}</span></span>
-                            <span class="lang-en">RENTAL RATES <span class="text-[#10B981]">${item.name}</span></span>
+                            <span class="lang-ua">ВАРТІСТЬ ОРЕНДИ <span style="color: #1AB370;">${item.name}</span></span>
+                            <span class="lang-en">RENTAL RATES <span style="color: #1AB370;">${item.name}</span></span>
                         </h2>
                         <p class="text-sm text-zinc-400 mt-2">
                             <span class="lang-ua">Прозорі тарифи без прихованих платежів. Застава повертається після завершення оренди.</span>
@@ -1011,84 +1027,60 @@
                         </p>
                     </div>
 
-                    <!-- Таблиця / сітка тарифів у 2 колонки на темному фоні -->
-                    <div class="max-w-4xl mx-auto bg-[#0E1114] border border-white/[0.08] rounded-2xl p-6 sm:p-8 md:p-10 shadow-2xl">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4">
+                    <!-- Чистий 2-колоночний список тарифів прямо на чорному фоні без сірих коробок -->
+                    <div class="max-w-4xl mx-auto">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 lg:gap-x-16">
                             <!-- Ліва колонка -->
-                            <div class="space-y-4">
-                                <div class="py-4 border-b border-white/[0.08] flex items-baseline justify-between">
-                                    <div>
-                                        <span class="font-brand font-bold text-sm tracking-wider uppercase text-zinc-300 block">
-                                            <span class="lang-ua">ЗАСТАВА</span>
-                                            <span class="lang-en">SECURITY DEPOSIT</span>
-                                        </span>
-                                        <span class="text-[11px] text-zinc-500 font-mono">
-                                            <span class="lang-ua">Повертається при поверненні</span>
-                                            <span class="lang-en">Refundable upon return</span>
-                                        </span>
-                                    </div>
-                                    <span class="font-mono font-bold text-lg sm:text-xl text-[#10B981]">
+                            <div>
+                                <div class="py-4 sm:py-5 flex items-center justify-between" style="border-bottom: 1px solid rgba(255, 255, 255, 0.12);">
+                                    <span class="font-brand font-bold text-sm sm:text-base tracking-wider uppercase text-white">
+                                        <span class="lang-ua">ЗАВДАТОК / ЗАСТАВА</span>
+                                        <span class="lang-en">SECURITY DEPOSIT</span>
+                                    </span>
+                                    <span class="font-mono font-bold text-lg sm:text-xl text-white">
                                         ${item.deposit.toLocaleString('uk-UA')} грн
                                     </span>
                                 </div>
 
-                                <div class="py-4 border-b border-white/[0.08] flex items-baseline justify-between">
-                                    <div>
-                                        <span class="font-brand font-bold text-sm tracking-wider uppercase text-zinc-300 block">
-                                            <span class="lang-ua">1 ДОБА</span>
-                                            <span class="lang-en">1 DAY</span>
-                                        </span>
-                                        <span class="text-[11px] text-zinc-500 font-mono">
-                                            <span class="lang-ua">Базовий добовий тариф</span>
-                                            <span class="lang-en">Base daily rate</span>
-                                        </span>
-                                    </div>
+                                <div class="py-4 sm:py-5 flex items-center justify-between" style="border-bottom: 1px solid rgba(255, 255, 255, 0.12);">
+                                    <span class="font-brand font-bold text-sm sm:text-base tracking-wider uppercase text-white">
+                                        <span class="lang-ua">1 ДОБА</span>
+                                        <span class="lang-en">1 DAY</span>
+                                    </span>
                                     <span class="font-mono font-bold text-lg sm:text-xl text-white">
-                                        ${item.price_day.toLocaleString('uk-UA')} грн <span class="text-xs text-zinc-400 font-normal">/ доба</span>
+                                        ${item.price_day.toLocaleString('uk-UA')} грн
                                     </span>
                                 </div>
                             </div>
 
                             <!-- Права колонка -->
-                            <div class="space-y-4">
-                                <div class="py-4 border-b border-white/[0.08] flex items-baseline justify-between">
-                                    <div>
-                                        <span class="font-brand font-bold text-sm tracking-wider uppercase text-zinc-300 block">
-                                            <span class="lang-ua">1 ТИЖДЕНЬ</span>
-                                            <span class="lang-en">1 WEEK</span>
-                                        </span>
-                                        <span class="text-[11px] text-zinc-500 font-mono">
-                                            <span class="lang-ua">Оптимальний план на 7 днів</span>
-                                            <span class="lang-en">Optimal 7-day plan</span>
-                                        </span>
-                                    </div>
+                            <div>
+                                <div class="py-4 sm:py-5 flex items-center justify-between" style="border-bottom: 1px solid rgba(255, 255, 255, 0.12);">
+                                    <span class="font-brand font-bold text-sm sm:text-base tracking-wider uppercase text-white">
+                                        <span class="lang-ua">1 ТИЖДЕНЬ</span>
+                                        <span class="lang-en">1 WEEK</span>
+                                    </span>
                                     <span class="font-mono font-bold text-lg sm:text-xl text-white">
-                                        ${item.price_week.toLocaleString('uk-UA')} грн <span class="text-xs text-zinc-400 font-normal">/ тижд.</span>
+                                        ${item.price_week.toLocaleString('uk-UA')} грн
                                     </span>
                                 </div>
 
-                                <div class="py-4 border-b border-white/[0.08] flex items-baseline justify-between">
-                                    <div>
-                                        <span class="font-brand font-bold text-sm tracking-wider uppercase text-zinc-300 block">
-                                            <span class="lang-ua">1 МІСЯЦЬ</span>
-                                            <span class="lang-en">1 MONTH</span>
-                                        </span>
-                                        <span class="text-[11px] text-zinc-500 font-mono">
-                                            <span class="lang-ua">Максимальна економія на довгострок</span>
-                                            <span class="lang-en">Maximum long-term savings</span>
-                                        </span>
-                                    </div>
+                                <div class="py-4 sm:py-5 flex items-center justify-between" style="border-bottom: 1px solid rgba(255, 255, 255, 0.12);">
+                                    <span class="font-brand font-bold text-sm sm:text-base tracking-wider uppercase text-white">
+                                        <span class="lang-ua">1 МІСЯЦЬ</span>
+                                        <span class="lang-en">1 MONTH</span>
+                                    </span>
                                     <span class="font-mono font-bold text-lg sm:text-xl text-white">
-                                        ${item.price_month.toLocaleString('uk-UA')} грн <span class="text-xs text-zinc-400 font-normal">/ міс.</span>
+                                        ${item.price_month.toLocaleString('uk-UA')} грн
                                     </span>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Кнопка по центру під тарифами -->
-                        <div class="mt-8 pt-6 border-t border-white/[0.06] text-center">
+                        <!-- Фірмова кнопка «ЗАБРОНЮВАТИ СКУТЕР» строго по центру під списком тарифів -->
+                        <div class="mt-12 text-center">
                             <a href="${tgRentUrl}" target="_blank" rel="noopener noreferrer"
-                                class="inline-flex items-center justify-center gap-3 bg-[#10B981] hover:bg-[#059669] text-white font-brand font-bold text-sm uppercase tracking-wider py-4 px-10 rounded-lg shadow-xl shadow-emerald-950/50 transition-all duration-200 hover:scale-[1.02]">
+                                class="muvio-btn-primary inline-flex items-center justify-center gap-3 font-brand font-bold text-sm uppercase tracking-wider py-4 px-10 rounded-lg">
                                 <i data-lucide="send" class="w-4 h-4"></i>
                                 <span class="lang-ua">ЗАБРОНЮВАТИ СКУТЕР</span>
                                 <span class="lang-en">BOOK SCOOTER</span>
@@ -1101,8 +1093,8 @@
                 <div class="mb-14 pt-10 border-t border-white/[0.08]">
                     <div class="text-center max-w-3xl mx-auto mb-10">
                         <h2 class="font-brand font-extrabold text-2xl sm:text-3xl md:text-4xl uppercase tracking-tight text-white">
-                            <span class="lang-ua">УМОВИ ОРЕНДИ <span class="text-[#10B981]">${item.name}</span></span>
-                            <span class="lang-en">RENTAL TERMS <span class="text-[#10B981]">${item.name}</span></span>
+                            <span class="lang-ua">УМОВИ ОРЕНДИ <span style="color: #1AB370;">${item.name}</span></span>
+                            <span class="lang-en">RENTAL TERMS <span style="color: #1AB370;">${item.name}</span></span>
                         </h2>
                         <p class="text-sm text-zinc-400 mt-2">
                             <span class="lang-ua">Офіційний регламент надання послуг прокату легкого електротранспорту MUVIO в Одесі.</span>
@@ -1110,11 +1102,11 @@
                         </p>
                     </div>
 
-                    <!-- Мінімалістична сітка карток 3x2 -->
+                    <!-- Сітка карток 3x2 на ультра-тонкому напівпрозорому фоні -->
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <!-- 01 -->
-                        <div class="bg-[#0E1114] border border-white/[0.07] rounded-xl p-6 hover:border-emerald-500/30 transition-colors">
-                            <div class="font-mono font-extrabold text-2xl text-[#10B981] mb-3">01</div>
+                        <div class="rounded-2xl p-6 sm:p-7 transition-all duration-300 hover:border-white/[0.15]" style="background-color: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.06);">
+                            <div class="font-mono font-extrabold text-2xl mb-3" style="color: #1AB370;">01</div>
                             <h3 class="font-brand font-bold text-sm tracking-wider uppercase text-white mb-2">
                                 <span class="lang-ua">НЕОБХІДНІ ДОКУМЕНТИ</span>
                                 <span class="lang-en">REQUIRED DOCUMENTS</span>
@@ -1126,8 +1118,8 @@
                         </div>
 
                         <!-- 02 -->
-                        <div class="bg-[#0E1114] border border-white/[0.07] rounded-xl p-6 hover:border-emerald-500/30 transition-colors">
-                            <div class="font-mono font-extrabold text-2xl text-[#10B981] mb-3">02</div>
+                        <div class="rounded-2xl p-6 sm:p-7 transition-all duration-300 hover:border-white/[0.15]" style="background-color: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.06);">
+                            <div class="font-mono font-extrabold text-2xl mb-3" style="color: #1AB370;">02</div>
                             <h3 class="font-brand font-bold text-sm tracking-wider uppercase text-white mb-2">
                                 <span class="lang-ua">ВІК КЛІЄНТА</span>
                                 <span class="lang-en">CLIENT AGE</span>
@@ -1139,8 +1131,8 @@
                         </div>
 
                         <!-- 03 -->
-                        <div class="bg-[#0E1114] border border-white/[0.07] rounded-xl p-6 hover:border-emerald-500/30 transition-colors">
-                            <div class="font-mono font-extrabold text-2xl text-[#10B981] mb-3">03</div>
+                        <div class="rounded-2xl p-6 sm:p-7 transition-all duration-300 hover:border-white/[0.15]" style="background-color: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.06);">
+                            <div class="font-mono font-extrabold text-2xl mb-3" style="color: #1AB370;">03</div>
                             <h3 class="font-brand font-bold text-sm tracking-wider uppercase text-white mb-2">
                                 <span class="lang-ua">СТАЖ / ДОСВІД</span>
                                 <span class="lang-en">RIDING EXPERIENCE</span>
@@ -1152,8 +1144,8 @@
                         </div>
 
                         <!-- 04 -->
-                        <div class="bg-[#0E1114] border border-white/[0.07] rounded-xl p-6 hover:border-emerald-500/30 transition-colors">
-                            <div class="font-mono font-extrabold text-2xl text-[#10B981] mb-3">04</div>
+                        <div class="rounded-2xl p-6 sm:p-7 transition-all duration-300 hover:border-white/[0.15]" style="background-color: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.06);">
+                            <div class="font-mono font-extrabold text-2xl mb-3" style="color: #1AB370;">04</div>
                             <h3 class="font-brand font-bold text-sm tracking-wider uppercase text-white mb-2">
                                 <span class="lang-ua">ЗАСТАВА</span>
                                 <span class="lang-en">SECURITY DEPOSIT</span>
@@ -1165,8 +1157,8 @@
                         </div>
 
                         <!-- 05 -->
-                        <div class="bg-[#0E1114] border border-white/[0.07] rounded-xl p-6 hover:border-emerald-500/30 transition-colors">
-                            <div class="font-mono font-extrabold text-2xl text-[#10B981] mb-3">05</div>
+                        <div class="rounded-2xl p-6 sm:p-7 transition-all duration-300 hover:border-white/[0.15]" style="background-color: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.06);">
+                            <div class="font-mono font-extrabold text-2xl mb-3" style="color: #1AB370;">05</div>
                             <h3 class="font-brand font-bold text-sm tracking-wider uppercase text-white mb-2">
                                 <span class="lang-ua">ПРОБІГ ТА ЗОНА</span>
                                 <span class="lang-en">MILEAGE & ZONE</span>
@@ -1178,8 +1170,8 @@
                         </div>
 
                         <!-- 06 -->
-                        <div class="bg-[#0E1114] border border-white/[0.07] rounded-xl p-6 hover:border-emerald-500/30 transition-colors">
-                            <div class="font-mono font-extrabold text-2xl text-[#10B981] mb-3">06</div>
+                        <div class="rounded-2xl p-6 sm:p-7 transition-all duration-300 hover:border-white/[0.15]" style="background-color: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.06);">
+                            <div class="font-mono font-extrabold text-2xl mb-3" style="color: #1AB370;">06</div>
                             <h3 class="font-brand font-bold text-sm tracking-wider uppercase text-white mb-2">
                                 <span class="lang-ua">ТЕРМІН ПРОКАТУ</span>
                                 <span class="lang-en">RENTAL PERIOD</span>
