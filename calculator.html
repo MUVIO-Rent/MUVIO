@@ -70,19 +70,19 @@
         }
 
         .calc-tesla-container {
-            background: #111613;
+            background: #0B0E11;
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 24px;
         }
 
         .calc-preview-box {
-            background: #0A0D0B;
+            background: #000000;
             border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 16px;
         }
 
         .calc-select-tesla {
-            background-color: #161C18 !important;
+            background-color: #12161A !important;
             border: 1px solid rgba(255, 255, 255, 0.12) !important;
             color: #FFFFFF !important;
             border-radius: 12px !important;
@@ -415,7 +415,7 @@
     </header>
 
     <!-- ==================== КАЛЬКУЛЯТОР ОРЕНДИ (TESLA DESIGN STUDIO) ==================== -->
-    <section id="calculator" class="py-16 md:py-24 bg-[#0A0D0B] text-white border-b border-white/[0.08]">
+    <section id="calculator" class="py-16 md:py-24 bg-[#0B0E11] text-white border-b border-white/[0.08]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-x border-white/[0.05]">
 
             <div class="text-center max-w-3xl mx-auto mb-12">
@@ -492,45 +492,6 @@
                             <div class="grid grid-cols-2 sm:grid-cols-5 gap-2" id="durationPillsContainer">
                                 <!-- Опції генеруються JS: [1 ДЕНЬ] [2 ДНІ] [3 ДНІ] [7 ДНІВ] [28 ДНІВ] -->
                             </div>
-
-                            <!-- Слайдер днів (Tesla Ultra-thin 4px Track) -->
-                            <div class="mt-4 p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                                <div class="flex items-center justify-between text-xs font-mono text-zinc-400 mb-2.5">
-                                    <span>
-                                        <span class="lang-ua">Шкала фіксованих тарифів:</span>
-                                        <span class="lang-en">Fixed tariffs scale:</span>
-                                    </span>
-                                    <div class="flex items-center gap-2">
-                                        <span class="font-bold text-[#1AB370] text-sm font-mono">
-                                            <span id="sliderDaysDisplay">7</span> <span class="lang-ua">дн.</span><span class="lang-en">d.</span>
-                                        </span>
-                                        <input type="number" id="manualDaysInput" min="1" max="28" value="7"
-                                            onchange="onManualDaysChange(this.value)"
-                                            onkeyup="if(event.key==='Enter')onManualDaysChange(this.value)"
-                                            class="w-12 px-1.5 py-1 text-xs font-bold text-center border border-white/10 rounded-lg bg-black/40 text-white focus:outline-none focus:border-[#1AB370]"
-                                            title="Введіть кількість днів">
-                                    </div>
-                                </div>
-                                <input type="range" id="calcDaysSlider" min="0" max="4" value="3" step="1"
-                                    oninput="onSliderStepChange(this.value)"
-                                    class="tesla-slider">
-                                <div class="flex justify-between text-[11px] font-mono text-zinc-400 mt-2 px-0.5">
-                                    <span class="cursor-pointer hover:text-white transition-colors" onclick="setCalcDuration(1)">1 <span class="lang-ua">д.</span><span class="lang-en">d.</span></span>
-                                    <span class="cursor-pointer hover:text-white transition-colors" onclick="setCalcDuration(2)">2 <span class="lang-ua">д.</span><span class="lang-en">d.</span></span>
-                                    <span class="cursor-pointer hover:text-white transition-colors" onclick="setCalcDuration(3)">3 <span class="lang-ua">д.</span><span class="lang-en">d.</span></span>
-                                    <span class="cursor-pointer hover:text-white transition-colors" onclick="setCalcDuration(7)">7 <span class="lang-ua">д.</span><span class="lang-en">d.</span></span>
-                                    <span class="cursor-pointer hover:text-white transition-colors" onclick="setCalcDuration(28)">28 <span class="lang-ua">д.</span><span class="lang-en">d.</span></span>
-                                </div>
-
-                                <!-- Попередження про 4-6 днів -->
-                                <div id="forbiddenDaysWarning" class="hidden mt-3 p-2.5 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-300 text-xs font-medium flex items-center gap-2">
-                                    <i data-lucide="alert-circle" class="w-4 h-4 shrink-0 text-amber-400"></i>
-                                    <span>
-                                        <span class="lang-ua">Оренда на 4-6 днів недоступна. Оберіть тариф на 7 днів (тиждень).</span>
-                                        <span class="lang-en">Rental for 4-6 days is not available. Please choose the 7-day rate (week).</span>
-                                    </span>
-                                </div>
-                            </div>
                         </div>
 
                         <!-- 3. Додаткові опції -->
@@ -550,7 +511,7 @@
                     </div>
 
                     <!-- Права колонка: Фінальний розрахунок (Tesla Summary Card) -->
-                    <div class="lg:col-span-5 flex flex-col justify-between rounded-2xl bg-[#0E1210] border border-white/[0.08] p-6 sm:p-7">
+                    <div class="lg:col-span-5 flex flex-col justify-between rounded-2xl bg-[#0E1216] border border-white/[0.08] p-6 sm:p-7">
 
                         <div class="space-y-6">
                             <div class="border-b border-white/[0.08] pb-4">
@@ -597,10 +558,6 @@
                                         2 000 грн
                                     </div>
                                 </div>
-                                <div class="text-[11px] text-zinc-500 font-mono">
-                                    <span class="lang-ua">Або без застави за умови верифікації через Дію</span>
-                                    <span class="lang-en">Or without deposit subject to Diia verification</span>
-                                </div>
 
                                 <!-- Деталізація вартості -->
                                 <div id="resBreakdownBox"
@@ -625,42 +582,6 @@
 
                     </div>
 
-                </div>
-
-                <!-- Нижні блоки (3 колонки на загальному фоні з тонкими роздільниками без колгоспу) -->
-                <div class="mt-10 pt-8 border-t border-white/[0.08] grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 divide-y md:divide-y-0 md:divide-x divide-white/[0.08]">
-                    <div class="pt-4 md:pt-0 md:pr-4">
-                        <div class="font-brand font-bold text-xs uppercase tracking-wider text-[#1AB370] mb-1.5">
-                            <span class="lang-ua">1. ДИНАМІЧНИЙ ТАРИФ</span>
-                            <span class="lang-en">1. DYNAMIC RATES</span>
-                        </div>
-                        <p class="text-xs text-zinc-400 leading-relaxed">
-                            <span class="lang-ua">Що довший термін оренди — то нижча ціна за добу. При оренді від 28 днів щоденний тариф знижується до ~300 грн/доба.</span>
-                            <span class="lang-en">Longer rental periods mean lower daily rates. For 28+ day rentals, daily rates decrease to ~300 UAH/day.</span>
-                        </p>
-                    </div>
-
-                    <div class="pt-4 md:pt-0 md:px-4">
-                        <div class="font-brand font-bold text-xs uppercase tracking-wider text-[#1AB370] mb-1.5">
-                            <span class="lang-ua">2. ТЕХНІЧНИЙ СЕРВІС</span>
-                            <span class="lang-en">2. TECHNICAL SERVICE</span>
-                        </div>
-                        <p class="text-xs text-zinc-400 leading-relaxed">
-                            <span class="lang-ua">Планове ТО, регламентні роботи та заміна зношених розхідників проводяться нашими майстрами безкоштовно.</span>
-                            <span class="lang-en">Scheduled maintenance, regular inspections, and consumable parts replacement are provided free of charge.</span>
-                        </p>
-                    </div>
-
-                    <div class="pt-4 md:pt-0 md:pl-4">
-                        <div class="font-brand font-bold text-xs uppercase tracking-wider text-[#1AB370] mb-1.5">
-                            <span class="lang-ua">3. ОФІЦІЙНИЙ ДОГОВІР</span>
-                            <span class="lang-en">3. OFFICIAL CONTRACT</span>
-                        </div>
-                        <p class="text-xs text-zinc-400 leading-relaxed">
-                            <span class="lang-ua">Прозорий договір оренди та акт прийому-передачі техніки. Повна юридична безпека.</span>
-                            <span class="lang-en">Transparent lease agreement and vehicle transfer acceptance act. Full legal security.</span>
-                        </p>
-                    </div>
                 </div>
 
             </div>
@@ -1144,7 +1065,7 @@
             const isEn = (window.getSiteSettings ? window.getSiteSettings().lang : 'ua') === 'en';
             const groupKey = getVehicleGroup(calcState.modelKey);
             const tier = TARIFF_TIERS[groupKey];
-            const currSign = isEn ? 'UAH' : 'грн';
+            const currSign = isEn ? 'UAH' : '₴';
 
             STANDARD_PERIODS.forEach(p => {
                 const isSelected = (calcState.days === p.days);
