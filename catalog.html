@@ -60,18 +60,32 @@
             color: #FFFFFF;
         }
 
-        /* Day / Night Headlight Crossfade */
+        /* Day / Night Headlight Crossfade (0.15s ultra-fast, GPU composited) */
         .fleet-card .img-night,
-        .img-night {
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.35s ease !important;
+        .img-night,
+        .scooter-img-night {
+            position: absolute !important;
+            inset: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+            transition: opacity 0.15s ease-in-out !important;
+            will-change: opacity;
         }
 
         .fleet-card .img-day,
-        .img-day {
-            opacity: 1;
-            transition: opacity 0.35s ease !important;
+        .img-day,
+        .scooter-img-day {
+            position: absolute !important;
+            inset: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            opacity: 1 !important;
+            transition: opacity 0.15s ease-in-out !important;
+            will-change: opacity;
         }
 
         .dark .img-night,
@@ -79,7 +93,13 @@
         body.dark .img-night,
         html.theme-dark .img-night,
         body.theme-dark .img-night,
-        [data-theme="dark"] .img-night {
+        [data-theme="dark"] .img-night,
+        .dark .scooter-img-night,
+        html.dark .scooter-img-night,
+        body.dark .scooter-img-night,
+        html.theme-dark .scooter-img-night,
+        body.theme-dark .scooter-img-night,
+        [data-theme="dark"] .scooter-img-night {
             opacity: 1 !important;
         }
 
@@ -88,7 +108,13 @@
         body.dark .img-day,
         html.theme-dark .img-day,
         body.theme-dark .img-day,
-        [data-theme="dark"] .img-day {
+        [data-theme="dark"] .img-day,
+        .dark .scooter-img-day,
+        html.dark .scooter-img-day,
+        body.dark .scooter-img-day,
+        html.theme-dark .scooter-img-day,
+        body.theme-dark .scooter-img-day,
+        [data-theme="dark"] .scooter-img-day {
             opacity: 0 !important;
         }
 
@@ -766,8 +792,26 @@
                 "power": "250W",
                 "image": "images/ado-a20f.jpg",
                 "image_night": "images/ado night.jpg"
-            }
         ];
+
+        // Preload day & night photos in memory for instantaneous zero-lag theme toggling
+        function preloadFleetImages() {
+            try {
+                FLEET.forEach(item => {
+                    if (item.image) {
+                        const imgDay = new Image();
+                        imgDay.src = item.image;
+                    }
+                    if (item.image_night) {
+                        const imgNight = new Image();
+                        imgNight.src = item.image_night;
+                    }
+                });
+            } catch (e) {
+                console.warn('Preload fleet images error:', e);
+            }
+        }
+        preloadFleetImages();
 
         // 2. РЕНДЕРИНГ ВИТРИНИ КАТАЛОГА (СТРОГИЙ МИНИМАЛИЗМ KEEPCAR)
         function renderCatalog(filter = 'all', brandFilter = null) {
@@ -813,8 +857,8 @@
                 // ВСЁ ОСТАЛЬНОЕ УБРАНО!
                 card.innerHTML = `
                     <div class="relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-[#121614] border border-white/[0.07] group-hover:border-emerald-500/40 transition-all duration-500">
-                        <img src="${item.image}" class="img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="${item.name}" loading="lazy">
-                        <img src="${item.image_night || item.image}" class="img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="${item.name} Night" loading="lazy">
+                        <img src="${item.image}" class="img-day scooter-img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="${item.name}">
+                        <img src="${item.image_night || item.image}" class="img-night scooter-img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="${item.name} Night">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity"></div>
                     </div>
 
@@ -932,10 +976,10 @@
                     <div class="lg:col-span-6 xl:col-span-7">
                         <div class="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-[#121614] border border-white/[0.08] shadow-2xl group select-none">
                             <!-- Денне фото (світла тема) -->
-                            <img src="${item.image}" alt="${item.name}" class="img-day absolute inset-0 w-full h-full object-cover">
+                            <img src="${item.image}" alt="${item.name}" class="img-day scooter-img-day absolute inset-0 w-full h-full object-cover">
 
                             <!-- Нічне фото з увімкненою фарою (темна тема) -->
-                            <img src="${item.image_night || item.image}" alt="${item.name} Night" class="img-night absolute inset-0 w-full h-full object-cover">
+                            <img src="${item.image_night || item.image}" alt="${item.name} Night" class="img-night scooter-img-night absolute inset-0 w-full h-full object-cover">
 
                             <!-- Делікатний градієнт знизу для глибини -->
                             <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>

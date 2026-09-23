@@ -830,38 +830,46 @@
         .tech-card .img-day,
         .vehicle-card .img-day,
         #catalog .img-day,
-        .img-day {
+        .img-day,
+        .scooter-img-day {
             position: absolute !important;
             inset: 0 !important;
             width: 100% !important;
             height: 100% !important;
             object-fit: cover !important;
             opacity: 1 !important;
-            transition: opacity 700ms ease-in-out !important;
+            transition: opacity 0.15s ease-in-out !important;
+            will-change: opacity;
         }
 
         .fleet-card .img-night,
         .tech-card .img-night,
         .vehicle-card .img-night,
         #catalog .img-night,
-        .img-night {
+        .img-night,
+        .scooter-img-night {
             position: absolute !important;
             inset: 0 !important;
             width: 100% !important;
             height: 100% !important;
             object-fit: cover !important;
             opacity: 0 !important;
-            filter: brightness(0.8) contrast(1.1) !important;
             pointer-events: none !important;
-            transition: all 700ms ease-in-out !important;
+            transition: opacity 0.15s ease-in-out !important;
+            will-change: opacity;
         }
 
         /* Dark Theme: Day photo crossfades out */
         html.dark .img-day,
+        html.dark .scooter-img-day,
         html.theme-dark .img-day,
+        html.theme-dark .scooter-img-day,
         .dark .img-day,
+        .dark .scooter-img-day,
         .theme-dark .img-day,
+        .theme-dark .scooter-img-day,
         [data-theme="dark"] .img-day,
+        [data-theme="dark"] .scooter-img-day,
         html.dark #catalog .img-day,
         html.theme-dark #catalog .img-day,
         .dark #catalog .img-day,
@@ -875,12 +883,17 @@
             opacity: 0 !important;
         }
 
-        /* Dark Theme: Night photo with glowing headlights crossfades in with flare */
+        /* Dark Theme: Night photo with glowing headlights crossfades in */
         html.dark .img-night,
+        html.dark .scooter-img-night,
         html.theme-dark .img-night,
+        html.theme-dark .scooter-img-night,
         .dark .img-night,
+        .dark .scooter-img-night,
         .theme-dark .img-night,
+        .theme-dark .scooter-img-night,
         [data-theme="dark"] .img-night,
+        [data-theme="dark"] .scooter-img-night,
         html.dark #catalog .img-night,
         html.theme-dark #catalog .img-night,
         .dark #catalog .img-night,
@@ -892,7 +905,6 @@
         .theme-dark .fleet-card .img-night,
         [data-theme="dark"] .fleet-card .img-night {
             opacity: 1 !important;
-            filter: brightness(1) contrast(1) !important;
         }
     </style>
 
@@ -1403,8 +1415,8 @@
             <div id="catalogGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
                 <a href="catalog.html?model=crosser_cr13_1" class="vehicle-showcase-card vehicle-card group block text-left cursor-pointer" data-category="scooter">
                     <div class="relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-[#121614] border border-white/[0.07] group-hover:border-emerald-500/40 transition-all duration-500">
-                        <img src="images/crosser.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Crosser CR-13 №1" loading="lazy">
-                        <img src="images/crosser cr-13 night №1.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Crosser CR-13 №1 Night" loading="lazy">
+                        <img src="images/crosser.jpg" class="img-day scooter-img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Crosser CR-13 №1">
+                        <img src="images/crosser cr-13 night №1.jpg" class="img-night scooter-img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Crosser CR-13 №1 Night">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity"></div>
                     </div>
 
@@ -1421,8 +1433,8 @@
                 </a>
                 <a href="catalog.html?model=crosser_cr20" class="vehicle-showcase-card vehicle-card group block text-left cursor-pointer" data-category="scooter">
                     <div class="relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-[#121614] border border-white/[0.07] group-hover:border-emerald-500/40 transition-all duration-500">
-                        <img src="images/crosser-cr-20.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Crosser CR-20" loading="lazy">
-                        <img src="images/crosser cr-20 night.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Crosser CR-20 Night" loading="lazy">
+                        <img src="images/crosser-cr-20.jpg" class="img-day scooter-img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Crosser CR-20">
+                        <img src="images/crosser cr-20 night.jpg" class="img-night scooter-img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Crosser CR-20 Night">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity"></div>
                     </div>
 
@@ -1439,8 +1451,8 @@
                 </a>
                 <a href="catalog.html?model=aima_a700" class="vehicle-showcase-card vehicle-card group block text-left cursor-pointer" data-category="scooter">
                     <div class="relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-[#121614] border border-white/[0.07] group-hover:border-emerald-500/40 transition-all duration-500">
-                        <img src="images/a700.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima A700" loading="lazy">
-                        <img src="images/aima a700 night.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima A700 Night" loading="lazy">
+                        <img src="images/a700.jpg" class="img-day scooter-img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima A700">
+                        <img src="images/aima a700 night.jpg" class="img-night scooter-img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima A700 Night">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity"></div>
                     </div>
 
@@ -1457,8 +1469,8 @@
                 </a>
                 <a href="catalog.html?model=aima_f606_1" class="vehicle-showcase-card vehicle-card group block text-left cursor-pointer" data-category="scooter">
                     <div class="relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-[#121614] border border-white/[0.07] group-hover:border-emerald-500/40 transition-all duration-500">
-                        <img src="images/f606.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima F606 №1" loading="lazy">
-                        <img src="images/aima f606 night №1.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima F606 №1 Night" loading="lazy">
+                        <img src="images/f606.jpg" class="img-day scooter-img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima F606 №1">
+                        <img src="images/aima f606 night №1.jpg" class="img-night scooter-img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima F606 №1 Night">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity"></div>
                     </div>
 
@@ -1475,8 +1487,8 @@
                 </a>
                 <a href="catalog.html?model=aima_a715" class="vehicle-showcase-card vehicle-card group block text-left cursor-pointer" data-category="scooter">
                     <div class="relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-[#121614] border border-white/[0.07] group-hover:border-emerald-500/40 transition-all duration-500">
-                        <img src="images/a715.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima A715" loading="lazy">
-                        <img src="images/aima a715 night.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima A715 Night" loading="lazy">
+                        <img src="images/a715.jpg" class="img-day scooter-img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima A715">
+                        <img src="images/aima a715 night.jpg" class="img-night scooter-img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima A715 Night">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity"></div>
                     </div>
 
@@ -1493,8 +1505,8 @@
                 </a>
                 <a href="catalog.html?model=aima_journey" class="vehicle-showcase-card vehicle-card group block text-left cursor-pointer" data-category="scooter">
                     <div class="relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-[#121614] border border-white/[0.07] group-hover:border-emerald-500/40 transition-all duration-500">
-                        <img src="images/journey.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima Journey" loading="lazy">
-                        <img src="images/aima journey night.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima Journey Night" loading="lazy">
+                        <img src="images/journey.jpg" class="img-day scooter-img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima Journey">
+                        <img src="images/aima journey night.jpg" class="img-night scooter-img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima Journey Night">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity"></div>
                     </div>
 
@@ -1511,8 +1523,8 @@
                 </a>
                 <a href="catalog.html?model=aima_f606_2" class="vehicle-showcase-card vehicle-card group block text-left cursor-pointer" data-category="scooter">
                     <div class="relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-[#121614] border border-white/[0.07] group-hover:border-emerald-500/40 transition-all duration-500">
-                        <img src="images/f606-2.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima F606 №2" loading="lazy">
-                        <img src="images/aima f606 night №2.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima F606 №2 Night" loading="lazy">
+                        <img src="images/f606-2.jpg" class="img-day scooter-img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima F606 №2">
+                        <img src="images/aima f606 night №2.jpg" class="img-night scooter-img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima F606 №2 Night">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity"></div>
                     </div>
 
@@ -1529,8 +1541,8 @@
                 </a>
                 <a href="catalog.html?model=crosser_cr13_2" class="vehicle-showcase-card vehicle-card group block text-left cursor-pointer" data-category="scooter">
                     <div class="relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-[#121614] border border-white/[0.07] group-hover:border-emerald-500/40 transition-all duration-500">
-                        <img src="images/crosser-cr-13-2.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Crosser CR-13 №2" loading="lazy">
-                        <img src="images/crosser cr-13 night №2.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Crosser CR-13 №2 Night" loading="lazy">
+                        <img src="images/crosser-cr-13-2.jpg" class="img-day scooter-img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Crosser CR-13 №2">
+                        <img src="images/crosser cr-13 night №2.jpg" class="img-night scooter-img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Crosser CR-13 №2 Night">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity"></div>
                     </div>
 
@@ -1547,8 +1559,8 @@
                 </a>
                 <a href="catalog.html?model=aima_mine" class="vehicle-showcase-card vehicle-card group block text-left cursor-pointer" data-category="scooter">
                     <div class="relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-[#121614] border border-white/[0.07] group-hover:border-emerald-500/40 transition-all duration-500">
-                        <img src="images/mine.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima Mine" loading="lazy">
-                        <img src="images/aima mine night.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima Mine Night" loading="lazy">
+                        <img src="images/mine.jpg" class="img-day scooter-img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima Mine">
+                        <img src="images/aima mine night.jpg" class="img-night scooter-img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima Mine Night">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity"></div>
                     </div>
 
@@ -1565,8 +1577,8 @@
                 </a>
                 <a href="catalog.html?model=like_bike_n5" class="vehicle-showcase-card vehicle-card group block text-left cursor-pointer" data-category="scooter">
                     <div class="relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-[#121614] border border-white/[0.07] group-hover:border-emerald-500/40 transition-all duration-500">
-                        <img src="images/like-bike-n5.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Like Bike N5" loading="lazy">
-                        <img src="images/like-bike-n5.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Like Bike N5 Night" loading="lazy">
+                        <img src="images/like-bike-n5.jpg" class="img-day scooter-img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Like Bike N5">
+                        <img src="images/like-bike-n5.jpg" class="img-night scooter-img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Like Bike N5 Night">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity"></div>
                     </div>
 
@@ -1583,8 +1595,8 @@
                 </a>
                 <a href="catalog.html?model=aima_mine_plus" class="vehicle-showcase-card vehicle-card group block text-left cursor-pointer" data-category="scooter">
                     <div class="relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-[#121614] border border-white/[0.07] group-hover:border-emerald-500/40 transition-all duration-500">
-                        <img src="images/mine-plus.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima Mine Plus" loading="lazy">
-                        <img src="images/aima mine plus night.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima Mine Plus Night" loading="lazy">
+                        <img src="images/mine-plus.jpg" class="img-day scooter-img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima Mine Plus">
+                        <img src="images/aima mine plus night.jpg" class="img-night scooter-img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima Mine Plus Night">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity"></div>
                     </div>
 
@@ -1601,8 +1613,8 @@
                 </a>
                 <a href="catalog.html?model=aima_leopard" class="vehicle-showcase-card vehicle-card group block text-left cursor-pointer" data-category="scooter">
                     <div class="relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-[#121614] border border-white/[0.07] group-hover:border-emerald-500/40 transition-all duration-500">
-                        <img src="images/leopard.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima Leopard" loading="lazy">
-                        <img src="images/leopard.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima Leopard Night" loading="lazy">
+                        <img src="images/leopard.jpg" class="img-day scooter-img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima Leopard">
+                        <img src="images/leopard.jpg" class="img-night scooter-img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima Leopard Night">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity"></div>
                     </div>
 
@@ -1619,8 +1631,8 @@
                 </a>
                 <a href="catalog.html?model=like_bike_bruser_1" class="vehicle-showcase-card vehicle-card group block text-left cursor-pointer" data-category="bike">
                     <div class="relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-[#121614] border border-white/[0.07] group-hover:border-emerald-500/40 transition-all duration-500">
-                        <img src="images/like-bike-bruiser-1.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Like Bike Bruiser №1" loading="lazy">
-                        <img src="images/like bike night №1.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Like Bike Bruiser №1 Night" loading="lazy">
+                        <img src="images/like-bike-bruiser-1.jpg" class="img-day scooter-img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Like Bike Bruiser №1">
+                        <img src="images/like bike night №1.jpg" class="img-night scooter-img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Like Bike Bruiser №1 Night">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity"></div>
                     </div>
 
@@ -1637,8 +1649,8 @@
                 </a>
                 <a href="catalog.html?model=like_bike_bruser_2" class="vehicle-showcase-card vehicle-card group block text-left cursor-pointer" data-category="bike">
                     <div class="relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-[#121614] border border-white/[0.07] group-hover:border-emerald-500/40 transition-all duration-500">
-                        <img src="images/like-bike-bruiser-2.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Like Bike Bruiser №2" loading="lazy">
-                        <img src="images/like bika night №2.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Like Bike Bruiser №2 Night" loading="lazy">
+                        <img src="images/like-bike-bruiser-2.jpg" class="img-day scooter-img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Like Bike Bruiser №2">
+                        <img src="images/like bika night №2.jpg" class="img-night scooter-img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Like Bike Bruiser №2 Night">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity"></div>
                     </div>
 
@@ -1655,8 +1667,8 @@
                 </a>
                 <a href="catalog.html?model=ado_a20f" class="vehicle-showcase-card vehicle-card group block text-left cursor-pointer" data-category="bike">
                     <div class="relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-[#121614] border border-white/[0.07] group-hover:border-emerald-500/40 transition-all duration-500">
-                        <img src="images/ado-a20f.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="ADO A20F" loading="lazy">
-                        <img src="images/ado night.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="ADO A20F Night" loading="lazy">
+                        <img src="images/ado-a20f.jpg" class="img-day scooter-img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="ADO A20F">
+                        <img src="images/ado night.jpg" class="img-night scooter-img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="ADO A20F Night">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity"></div>
                     </div>
 
@@ -2733,6 +2745,25 @@
         // 1. АВТОПАРК З РЕАЛЬНИМИ ЦІНАМИ В ЗБОРІ
         const FLEET = [{ "key": "crosser_cr13_1", "name": "Crosser CR-13 №1", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 160 км", "speed": "85 км/год", "charging": "10Ач (6 годин)", "battery": "Знімна", "price_day": 1000, "price_week": 2500, "price_month": 8500, "deposit": 4500, "buyout_available": true, "buyout_base_price": 80000, "image": "images/crosser.jpg", "badge": "85 КМ/ГОД", "is_top": true, "power": "2000W", "image_night": "images/crosser cr-13 night №1.jpg" }, { "key": "crosser_cr20", "name": "Crosser CR-20", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 160 км", "speed": "75 км/год", "charging": "10Ач (6 годин)", "battery": "Знімна", "price_day": 1000, "price_week": 2500, "price_month": 8500, "deposit": 4500, "buyout_available": true, "buyout_base_price": 77000, "image": "images/crosser-cr-20.jpg", "badge": "ТОП ПОТУЖНІСТЬ", "is_top": true, "power": "2500W", "image_night": "images/crosser cr-20 night.jpg" }, { "key": "aima_a700", "name": "Aima A700", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 150 км", "speed": "47 км/год", "charging": "10Ач (6 годин)", "battery": "Знімна", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 70000, "image": "images/a700.jpg", "badge": "ПРЕМІУМ КОМФОРТ", "is_top": true, "power": "1200W", "image_night": "images/aima a700 night.jpg" }, { "key": "aima_f606_1", "name": "Aima F606 №1", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 100 км", "speed": "70 км/год", "charging": "10Ач (4 години)", "battery": "Знімна", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 60000, "image": "images/f606.jpg", "badge": "ХІТ ПРОКАТУ", "is_top": true, "power": "1200W", "image_night": "images/aima f606 night №1.jpg" }, { "key": "aima_a715", "name": "Aima A715", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 150 км", "speed": "65 км/год", "charging": "10Ач (4 години)", "battery": "Знімна", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 68000, "image": "images/a715.jpg", "badge": "НАДІЙНИЙ", "is_top": false, "power": "1200W", "image_night": "images/aima a715 night.jpg" }, { "key": "aima_journey", "name": "Aima Journey", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 160 км", "speed": "60 км/год", "charging": "10Ач (6 годин)", "battery": "Знімна", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 68000, "image": "images/journey.jpg", "badge": "ДАЛЕКІ ДИСТАНЦІЇ", "is_top": false, "power": "1200W", "image_night": "images/aima journey night.jpg" }, { "key": "aima_f606_2", "name": "Aima F606 №2", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 130 км", "speed": "70 км/год", "charging": "10Ач (4 години)", "battery": "Знімна", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 60000, "image": "images/f606-2.jpg", "badge": "ЗБІЛЬШЕНИЙ ХІД", "is_top": false, "power": "1200W", "image_night": "images/aima f606 night №2.jpg" }, { "key": "crosser_cr13_2", "name": "Crosser CR-13 №2", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 160 км", "speed": "85 км/год", "charging": "10Ач (6 годин)", "battery": "Знімна", "price_day": 1000, "price_week": 2500, "price_month": 8500, "deposit": 4500, "buyout_available": true, "buyout_base_price": 80000, "image": "images/crosser-cr-13-2.jpg", "badge": "85 КМ/ГОД", "is_top": false, "power": "2000W", "image_night": "images/crosser cr-13 night №2.jpg" }, { "key": "aima_mine", "name": "Aima Mine", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "60V", "range": "до 130 км", "speed": "55 км/год", "charging": "7Ач (6 годин)", "battery": "Знімна", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 60000, "image": "images/mine.jpg", "badge": "КОМПАКТНИЙ", "is_top": false, "power": "800W", "image_night": "images/aima mine night.jpg" }, { "key": "like_bike_n5", "name": "Like Bike N5", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "60V", "range": "до 130 км", "speed": "65 км/год", "charging": "10Ач (6 годин)", "battery": "Знімна", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 57000, "image": "images/like-bike-n5.jpg", "badge": "МАНЕВРЕНИЙ", "is_top": false, "power": "1000W", "image_night": "images/like-bike-n5.jpg" }, { "key": "aima_mine_plus", "name": "Aima Mine Plus", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "60V", "range": "до 130 км", "speed": "60 км/год", "charging": "7Ач (6 годин)", "battery": "Знімна", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 55000, "image": "images/mine-plus.jpg", "badge": "PLUS СЕРІЯ", "is_top": false, "power": "800W", "image_night": "images/aima mine plus night.jpg" }, { "key": "aima_leopard", "name": "Aima Leopard", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 150 км", "speed": "48 км/год", "charging": "10Ач (6 годин)", "battery": "Знімна", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 50000, "image": "images/leopard.jpg", "badge": "КЛАСИКА", "is_top": false, "power": "1200W", "image_night": "images/leopard.jpg" }, { "key": "like_bike_bruser_1", "name": "Like Bike Bruiser №1", "category": "bike", "type": "🚲 Електровелосипед", "voltage": "48V", "range": "до 80 км", "speed": "45 км/год", "charging": "7Ач (4 години)", "battery": "Знімна", "price_day": 800, "price_week": 1800, "price_month": 6000, "deposit": 3000, "buyout_available": true, "buyout_base_price": 28000, "image": "images/like-bike-bruiser-1.jpg", "badge": "РАМА 180 КГ", "is_top": false, "power": "500W", "image_night": "images/like bike night №1.jpg" }, { "key": "like_bike_bruser_2", "name": "Like Bike Bruiser №2", "category": "bike", "type": "🚲 Електровелосипед", "voltage": "48V", "range": "до 80 км", "speed": "45 км/год", "charging": "7Ач (4 години)", "battery": "Знімна", "price_day": 800, "price_week": 1800, "price_month": 6000, "deposit": 3000, "buyout_available": true, "buyout_base_price": 28000, "image": "images/like-bike-bruiser-2.jpg", "badge": "РАМА 180 КГ", "is_top": false, "power": "500W", "image_night": "images/like bika night №2.jpg" }, { "key": "ado_a20f", "name": "ADO A20F", "category": "bike", "type": "🚲 Електровелосипед", "voltage": "48V", "range": "до 150 км", "speed": "40 км/год", "charging": "10Ач (4 години)", "battery": "Знімна", "price_day": 800, "price_week": 1800, "price_month": 6000, "deposit": 3000, "buyout_available": true, "buyout_base_price": 28000, "image": "images/ado-a20f.jpg", "badge": "ФЕТБАЙК", "is_top": false, "power": "250W", "image_night": "images/ado night.jpg" }];
 
+        // Preload day & night photos in memory for instantaneous zero-lag theme toggling
+        function preloadFleetImages() {
+            try {
+                FLEET.forEach(item => {
+                    if (item.image) {
+                        const imgDay = new Image();
+                        imgDay.src = item.image;
+                    }
+                    if (item.image_night) {
+                        const imgNight = new Image();
+                        imgNight.src = item.image_night;
+                    }
+                });
+            } catch (e) {
+                console.warn('Preload fleet images error:', e);
+            }
+        }
+        preloadFleetImages();
+
         // 2. СТУПЕНЧАТА ТАРИФНА СІТКА ПО КАТЕГОРИЯХ (ГРУПИ А, Б, В)
         const TARIFF_TIERS = {
             groupA: { // Crosser (CR-13 №1, CR-13 №2, CR-20)
@@ -2932,8 +2963,8 @@
 
                 card.innerHTML = `
                     <div class="relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-[#121614] border border-white/[0.07] group-hover:border-emerald-500/40 transition-all duration-500">
-                        <img src="${item.image}" class="img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="${item.name}" loading="lazy">
-                        <img src="${item.image_night || item.image}" class="img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="${item.name} Night" loading="lazy">
+                        <img src="${item.image}" class="img-day scooter-img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="${item.name}">
+                        <img src="${item.image_night || item.image}" class="img-night scooter-img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="${item.name} Night">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity"></div>
                     </div>
 

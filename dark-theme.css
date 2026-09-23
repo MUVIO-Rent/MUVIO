@@ -1276,38 +1276,46 @@ body.dark .header .logo img,
 .tech-card .img-day,
 .vehicle-card .img-day,
 #catalog .img-day,
-.img-day {
+.img-day,
+.scooter-img-day {
     position: absolute !important;
     inset: 0 !important;
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
     opacity: 1 !important;
-    transition: opacity 700ms ease-in-out !important;
+    transition: opacity 0.15s ease-in-out !important;
+    will-change: opacity;
 }
 
 .fleet-card .img-night,
 .tech-card .img-night,
 .vehicle-card .img-night,
 #catalog .img-night,
-.img-night {
+.img-night,
+.scooter-img-night {
     position: absolute !important;
     inset: 0 !important;
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
     opacity: 0 !important;
-    filter: brightness(0.8) contrast(1.1) !important;
     pointer-events: none !important;
-    transition: all 700ms ease-in-out !important;
+    transition: opacity 0.15s ease-in-out !important;
+    will-change: opacity;
 }
 
 /* Dark Theme: Day photo crossfades out */
 html.dark .img-day,
+html.dark .scooter-img-day,
 html.theme-dark .img-day,
+html.theme-dark .scooter-img-day,
 .dark .img-day,
+.dark .scooter-img-day,
 .theme-dark .img-day,
+.theme-dark .scooter-img-day,
 [data-theme="dark"] .img-day,
+[data-theme="dark"] .scooter-img-day,
 html.dark #catalog .img-day,
 html.theme-dark #catalog .img-day,
 .dark #catalog .img-day,
@@ -1321,12 +1329,17 @@ html.theme-dark .fleet-card .img-day,
     opacity: 0 !important;
 }
 
-/* Dark Theme: Night photo with glowing headlights crossfades in with flare */
+/* Dark Theme: Night photo with glowing headlights crossfades in */
 html.dark .img-night,
+html.dark .scooter-img-night,
 html.theme-dark .img-night,
+html.theme-dark .scooter-img-night,
 .dark .img-night,
+.dark .scooter-img-night,
 .theme-dark .img-night,
+.theme-dark .scooter-img-night,
 [data-theme="dark"] .img-night,
+[data-theme="dark"] .scooter-img-night,
 html.dark #catalog .img-night,
 html.theme-dark #catalog .img-night,
 .dark #catalog .img-night,
@@ -1338,7 +1351,6 @@ html.theme-dark .fleet-card .img-night,
 .theme-dark .fleet-card .img-night,
 [data-theme="dark"] .fleet-card .img-night {
     opacity: 1 !important;
-    filter: brightness(1) contrast(1) !important;
 }
 
 /* ==========================================================================
