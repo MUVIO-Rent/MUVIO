@@ -9,6 +9,10 @@
     <meta name="description"
         content="Офіційний прокат електроскутерів та велосипедів в Одесі. вул. Приморська, 22. Планове ТО за наш рахунок, фіксовані тарифи.">
 
+        <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Native System Fonts: Apple System / SF Pro Display / Segoe UI -->
     <!-- Google Font: Unbounded (Automotive Tech Display Grotesque) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -808,6 +812,12 @@
         /* ==========================================================================
            CATALOG FLEET CARDS — DAY / NIGHT HEADLIGHT CROSSFADE (CINEMATIC FLARE)
            ========================================================================== */
+                .vehicle-showcase-card {
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .vehicle-showcase-card:hover {
+            transform: translateY(-4px);
+        }
         .fleet-card [class*="overflow-hidden"],
         .tech-card [class*="overflow-hidden"],
         .vehicle-card [class*="overflow-hidden"],
@@ -1345,1541 +1355,328 @@
     </section>
 
     <!-- ==================== 3. КАТАЛОГ СКУТЕРІВ (ТОП МОДЕЛІ СПЕРШУ) ==================== -->
-    <section id="catalog" class="py-16 md:py-24 border-b-2 border-[#1D5D3B]"
-        style="background-color: var(--bg-secondary) !important;">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-x"
-            style="border-color: var(--border-subtle) !important;">
+        <!-- ==================== 3. КАТАЛОГ СКУТЕРІВ (ТОП МОДЕЛІ СПЕРШУ) ==================== -->
+    <section id="catalog" class="py-16 md:py-24 bg-[#0A0D0B] text-white border-b border-white/[0.08]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-x border-white/[0.05]">
 
             <!-- Заголовок секції -->
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 border-b border-white/[0.08] pb-8">
                 <div>
-                    <div
-                        class="inline-flex items-center gap-2 px-3 py-1 bg-[#1D5D3B]/10 border border-[#1D5D3B] chamfer-badge mb-3">
-                        <span class="font-brand font-bold text-xs tracking-wider text-[#1D5D3B] uppercase">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 bg-white/[0.04] border border-white/10 rounded-full mb-4">
+                        <span class="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span>
+                        <span class="font-mono text-[11px] tracking-widest text-zinc-300 uppercase">
                             <span class="lang-ua">ОФІЦІЙНИЙ АВТОПАРК MUVIO</span>
                             <span class="lang-en">OFFICIAL MUVIO FLEET</span>
                         </span>
                     </div>
-                    <h2 class="font-brand font-bold text-2xl sm:text-4xl uppercase tracking-tight"
-                        style="color: var(--text-main) !important;">
+                    <h2 class="font-brand font-extrabold text-3xl sm:text-4xl lg:text-5xl uppercase tracking-tight text-white leading-tight">
                         <span class="lang-ua">КАТАЛОГ ТЕХНІКИ В НАЯВНОСТІ</span>
                         <span class="lang-en">AVAILABLE FLEET CATALOG</span>
                     </h2>
-                    <p class="text-sm sm:text-base mt-1" style="color: var(--text-muted) !important;">
-                        <span class="lang-ua">Всі моделі укомплектовані знімним АКБ та зарядним пристроєм. Реальні
-                            тарифи оренди.</span>
-                        <span class="lang-en">All models equipped with removable battery & charger. Verified rental
-                            rates.</span>
+                    <p class="text-sm sm:text-base text-zinc-400 mt-2 max-w-2xl font-normal leading-relaxed">
+                        <span class="lang-ua">Всі моделі укомплектовані знімним АКБ та зарядним пристроєм. Реальні тарифи оренди.</span>
+                        <span class="lang-en">All models equipped with removable battery & charger. Verified rental rates.</span>
                     </p>
                 </div>
 
                 <!-- Фільтри -->
-                <div class="flex flex-wrap gap-2.5">
+                <div class="flex flex-wrap gap-2 shrink-0">
                     <button onclick="filterCatalog('all')" id="tab-all"
-                        class="chamfer-btn px-5 py-2.5 text-sm sm:text-[15px] font-brand font-bold uppercase tracking-wider border-2 border-[#1D5D3B] bg-[#1D5D3B] text-white transition-all leading-normal">
+                        class="px-5 py-2.5 rounded-full text-xs font-brand font-bold uppercase tracking-wider border border-white/20 bg-white text-black transition-all">
                         <span class="lang-ua">ВСІ МОДЕЛІ</span>
                         <span class="lang-en">ALL MODELS</span>
                     </button>
                     <button onclick="filterCatalog('scooter')" id="tab-scooter"
-                        class="chamfer-btn px-5 py-2.5 text-sm sm:text-[15px] font-brand font-bold uppercase tracking-wider border-2 border-[#1D5D3B] bg-white text-[#111827] hover:bg-[#1D5D3B]/10 transition-all leading-normal">
-                        <span class="lang-ua">🛵 СКУТЕРИ</span>
-                        <span class="lang-en">🛵 SCOOTERS</span>
+                        class="px-5 py-2.5 rounded-full text-xs font-brand font-bold uppercase tracking-wider border border-white/10 bg-white/[0.04] text-zinc-400 hover:text-white hover:border-white/30 transition-all">
+                        <span class="lang-ua">СКУТЕРИ</span>
+                        <span class="lang-en">SCOOTERS</span>
                     </button>
                     <button onclick="filterCatalog('bike')" id="tab-bike"
-                        class="chamfer-btn px-5 py-2.5 text-sm sm:text-[15px] font-brand font-bold uppercase tracking-wider border-2 border-[#1D5D3B] bg-white text-[#111827] hover:bg-[#1D5D3B]/10 transition-all leading-normal">
-                        <span class="lang-ua">🚲 ВЕЛОСИПЕДИ</span>
-                        <span class="lang-en">🚲 E-BIKES</span>
+                        class="px-5 py-2.5 rounded-full text-xs font-brand font-bold uppercase tracking-wider border border-white/10 bg-white/[0.04] text-zinc-400 hover:text-white hover:border-white/30 transition-all">
+                        <span class="lang-ua">ЕЛЕКТРОВЕЛОСИПЕДИ</span>
+                        <span class="lang-en">E-BIKES</span>
                     </button>
                 </div>
             </div>
 
-            <!-- Сітка карток -->
-            <div id="catalogGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="fleet-card tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between"
-                    data-category="scooter" style="display: flex;">
-                    <div>
-                        <!-- Верхня плашка -->
-                        <div class="p-4 pb-0 flex items-center justify-between">
-                            <span
-                                class="font-brand font-bold text-xs px-2.5 py-1 bg-[#1D5D3B] text-white chamfer-badge uppercase">
-                                <span class="lang-ua">🛵 Електроскутер | 72V</span>
-                                <span class="lang-en">🛵 E-Scooter | 72V</span>
-                            </span>
-                            <span
-                                class="text-[10px] font-brand font-bold text-[#1D5D3B] border border-[#1D5D3B] px-2 py-0.5 chamfer-badge uppercase tracking-wider">
-                                2000W
-                            </span>
-                        </div>
-
-                        <!-- Фото транспорту -->
-                        <div class="relative w-full h-48 sm:h-56 overflow-hidden rounded-t-xl bg-zinc-900 group">
-                            <img src="images/crosser.jpg"
-                                class="img-day absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out"
-                                alt="Crosser CR-13 №1" loading="lazy">
-                            <img src="images/crosser cr-13 night №1.jpg"
-                                class="img-night absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out"
-                                alt="Crosser CR-13 №1 Night" loading="lazy">
-                        </div>
-
-                        <!-- Заголовок та характеристики -->
-                        <div class="px-5 pb-4">
-                            <h3 class="font-brand font-bold text-xl uppercase text-[#111827] tracking-wide">Crosser
-                                CR-13 №1</h3>
-
-                            <div
-                                class="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-[#1D5D3B]/20 text-xs font-mono">
-                                <div class="text-[#4B5563]"><span class="lang-ua">Швидкість:</span><span
-                                        class="lang-en">Speed:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">85
-                                        км/год</span><span class="lang-en">85 km/h</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Запас ходу:</span><span
-                                        class="lang-en">Range:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">до 160
-                                        км</span><span class="lang-en">up to 160 km</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Зарядка:</span><span
-                                        class="lang-en">Charging:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">10Ач (6
-                                        годин)</span><span class="lang-en">10Ач (6 hours)</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Акумулятор:</span><span
-                                        class="lang-en">Battery:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">40Ah / 60Ah
-                                        (Знімна)</span><span class="lang-en">40Ah / 60Ah (Removable)</span></div>
-                            </div>
-
-                            <!-- Тарифи -->
-                            <div class="mt-4 p-3.5 bg-[#F8FAFC] border border-[#1D5D3B]/30 chamfer-box">
-                                <div class="flex items-baseline justify-between">
-                                    <span class="text-xs uppercase font-brand font-bold text-[#4B5563]">
-                                        <span class="lang-ua">Оренда:</span><span class="lang-en">Rent:</span>
-                                    </span>
-                                    <span class="font-brand font-bold text-xl text-[#1D5D3B]">
-                                        <span class="lang-ua">2 500 грн <span
-                                                class="text-xs font-normal text-[#4B5563]">/ тижд.</span></span>
-                                        <span class="lang-en">2 500 UAH <span
-                                                class="text-xs font-normal text-[#4B5563]">/ week</span></span>
-                                    </span>
-                                </div>
-                                <div
-                                    class="flex items-center justify-between text-[11px] text-[#4B5563] mt-1 font-mono">
-                                    <span>
-                                        <span class="lang-ua">Місяць: 8 500 грн</span>
-                                        <span class="lang-en">Month: 8 500 UAH</span>
-                                    </span>
-                                    <span>
-                                        <span class="lang-ua">Застава: 4 500 грн</span>
-                                        <span class="lang-en">Deposit: 4 500 UAH</span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+            <!-- Сітка карток: 3 колонки на десктопі, строгий мінімалізм KEEPCAR -->
+            <div id="catalogGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
+                <a href="catalog.html?model=crosser_cr13_1" class="vehicle-showcase-card vehicle-card group block text-left cursor-pointer" data-category="scooter">
+                    <div class="relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-[#121614] border border-white/[0.07] group-hover:border-emerald-500/40 transition-all duration-500">
+                        <img src="images/crosser.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Crosser CR-13 №1" loading="lazy">
+                        <img src="images/crosser cr-13 night №1.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Crosser CR-13 №1 Night" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity"></div>
                     </div>
 
-                    <!-- Кнопки -->
-                    <div class="p-5 pt-0 space-y-2">
-                        <a href="https://t.me/muviobot?start=rent_crosser_cr13_1" target="_blank"
-                            rel="noopener noreferrer"
-                            class="chamfer-btn w-full bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs uppercase tracking-widest py-3 px-3 flex items-center justify-center gap-2 border border-[#1D5D3B]">
-                            <i data-lucide="send" class="w-4 h-4"></i>
-                            <span>
-                                <span class="lang-ua">ЗАМОВИТИ В TELEGRAM</span>
-                                <span class="lang-en">ORDER IN TELEGRAM</span>
-                            </span>
-                        </a>
-                        <button onclick="selectModelInCalc('crosser_cr13_1')"
-                            class="chamfer-btn w-full bg-white hover:bg-slate-50 text-[#1D5D3B] font-brand font-bold text-xs uppercase tracking-widest py-2.5 px-3 border border-[#1D5D3B] flex items-center justify-center gap-1.5">
-                            <span>
-                                <span class="lang-ua">РОЗРАХУВАТИ ОРЕНДУ →</span>
-                                <span class="lang-en">CALCULATE RENT →</span>
-                            </span>
-                        </button>
+                    <h3 class="font-brand font-extrabold text-xl sm:text-2xl text-white uppercase tracking-tight mt-5 group-hover:text-[#10B981] transition-colors">
+                        Crosser CR-13 №1
+                    </h3>
+
+                    <div class="mt-3">
+                        <span class="inline-flex items-center px-4 py-1.5 rounded-full border border-white/20 text-zinc-300 text-xs sm:text-sm font-medium tracking-wide group-hover:border-emerald-500/60 group-hover:text-white transition-colors bg-white/[0.02]">
+                            <span class="lang-ua">від 2 500 грн / тижд.</span>
+                            <span class="lang-en">from 2,500 UAH / wk</span>
+                        </span>
                     </div>
-                </div>
-                <div class="fleet-card tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between"
-                    data-category="scooter" style="display: flex;">
-                    <div>
-                        <!-- Верхня плашка -->
-                        <div class="p-4 pb-0 flex items-center justify-between">
-                            <span
-                                class="font-brand font-bold text-xs px-2.5 py-1 bg-[#1D5D3B] text-white chamfer-badge uppercase">
-                                <span class="lang-ua">🛵 Електроскутер | 72V</span>
-                                <span class="lang-en">🛵 E-Scooter | 72V</span>
-                            </span>
-                            <span
-                                class="text-[10px] font-brand font-bold text-[#1D5D3B] border border-[#1D5D3B] px-2 py-0.5 chamfer-badge uppercase tracking-wider">
-                                2500W
-                            </span>
-                        </div>
-
-                        <!-- Фото транспорту -->
-                        <div class="relative w-full h-48 sm:h-56 overflow-hidden rounded-t-xl bg-zinc-900 group">
-                            <img src="images/crosser-cr-20.jpg"
-                                class="img-day absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out"
-                                alt="Crosser CR-20" loading="lazy">
-                            <img src="images/crosser cr-20 night.jpg"
-                                class="img-night absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out"
-                                alt="Crosser CR-20 Night" loading="lazy">
-                        </div>
-
-                        <!-- Заголовок та характеристики -->
-                        <div class="px-5 pb-4">
-                            <h3 class="font-brand font-bold text-xl uppercase text-[#111827] tracking-wide">Crosser
-                                CR-20</h3>
-
-                            <div
-                                class="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-[#1D5D3B]/20 text-xs font-mono">
-                                <div class="text-[#4B5563]"><span class="lang-ua">Швидкість:</span><span
-                                        class="lang-en">Speed:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">75
-                                        км/год</span><span class="lang-en">75 km/h</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Запас ходу:</span><span
-                                        class="lang-en">Range:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">до 160
-                                        км</span><span class="lang-en">up to 160 km</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Зарядка:</span><span
-                                        class="lang-en">Charging:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">10Ач (6
-                                        годин)</span><span class="lang-en">10Ач (6 hours)</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Акумулятор:</span><span
-                                        class="lang-en">Battery:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">40Ah / 60Ah
-                                        (Знімна)</span><span class="lang-en">40Ah / 60Ah (Removable)</span></div>
-                            </div>
-
-                            <!-- Тарифи -->
-                            <div class="mt-4 p-3.5 bg-[#F8FAFC] border border-[#1D5D3B]/30 chamfer-box">
-                                <div class="flex items-baseline justify-between">
-                                    <span class="text-xs uppercase font-brand font-bold text-[#4B5563]">
-                                        <span class="lang-ua">Оренда:</span><span class="lang-en">Rent:</span>
-                                    </span>
-                                    <span class="font-brand font-bold text-xl text-[#1D5D3B]">
-                                        <span class="lang-ua">2 500 грн <span
-                                                class="text-xs font-normal text-[#4B5563]">/ тижд.</span></span>
-                                        <span class="lang-en">2 500 UAH <span
-                                                class="text-xs font-normal text-[#4B5563]">/ week</span></span>
-                                    </span>
-                                </div>
-                                <div
-                                    class="flex items-center justify-between text-[11px] text-[#4B5563] mt-1 font-mono">
-                                    <span>
-                                        <span class="lang-ua">Місяць: 8 500 грн</span>
-                                        <span class="lang-en">Month: 8 500 UAH</span>
-                                    </span>
-                                    <span>
-                                        <span class="lang-ua">Застава: 4 500 грн</span>
-                                        <span class="lang-en">Deposit: 4 500 UAH</span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+                </a>
+                <a href="catalog.html?model=crosser_cr20" class="vehicle-showcase-card vehicle-card group block text-left cursor-pointer" data-category="scooter">
+                    <div class="relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-[#121614] border border-white/[0.07] group-hover:border-emerald-500/40 transition-all duration-500">
+                        <img src="images/crosser-cr-20.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Crosser CR-20" loading="lazy">
+                        <img src="images/crosser cr-20 night.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Crosser CR-20 Night" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity"></div>
                     </div>
 
-                    <!-- Кнопки -->
-                    <div class="p-5 pt-0 space-y-2">
-                        <a href="https://t.me/muviobot?start=rent_crosser_cr20" target="_blank"
-                            rel="noopener noreferrer"
-                            class="chamfer-btn w-full bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs uppercase tracking-widest py-3 px-3 flex items-center justify-center gap-2 border border-[#1D5D3B]">
-                            <i data-lucide="send" class="w-4 h-4"></i>
-                            <span>
-                                <span class="lang-ua">ЗАМОВИТИ В TELEGRAM</span>
-                                <span class="lang-en">ORDER IN TELEGRAM</span>
-                            </span>
-                        </a>
-                        <button onclick="selectModelInCalc('crosser_cr20')"
-                            class="chamfer-btn w-full bg-white hover:bg-slate-50 text-[#1D5D3B] font-brand font-bold text-xs uppercase tracking-widest py-2.5 px-3 border border-[#1D5D3B] flex items-center justify-center gap-1.5">
-                            <span>
-                                <span class="lang-ua">РОЗРАХУВАТИ ОРЕНДУ →</span>
-                                <span class="lang-en">CALCULATE RENT →</span>
-                            </span>
-                        </button>
+                    <h3 class="font-brand font-extrabold text-xl sm:text-2xl text-white uppercase tracking-tight mt-5 group-hover:text-[#10B981] transition-colors">
+                        Crosser CR-20
+                    </h3>
+
+                    <div class="mt-3">
+                        <span class="inline-flex items-center px-4 py-1.5 rounded-full border border-white/20 text-zinc-300 text-xs sm:text-sm font-medium tracking-wide group-hover:border-emerald-500/60 group-hover:text-white transition-colors bg-white/[0.02]">
+                            <span class="lang-ua">від 2 500 грн / тижд.</span>
+                            <span class="lang-en">from 2,500 UAH / wk</span>
+                        </span>
                     </div>
-                </div>
-                <div class="fleet-card tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between"
-                    data-category="scooter" style="display: flex;">
-                    <div>
-                        <!-- Верхня плашка -->
-                        <div class="p-4 pb-0 flex items-center justify-between">
-                            <span
-                                class="font-brand font-bold text-xs px-2.5 py-1 bg-[#1D5D3B] text-white chamfer-badge uppercase">
-                                <span class="lang-ua">🛵 Електроскутер | 72V</span>
-                                <span class="lang-en">🛵 E-Scooter | 72V</span>
-                            </span>
-                            <span
-                                class="text-[10px] font-brand font-bold text-[#1D5D3B] border border-[#1D5D3B] px-2 py-0.5 chamfer-badge uppercase tracking-wider">
-                                1200W
-                            </span>
-                        </div>
-
-                        <!-- Фото транспорту -->
-                        <div class="relative w-full h-48 sm:h-56 overflow-hidden rounded-t-xl bg-zinc-900 group">
-                            <img src="images/a700.jpg"
-                                class="img-day absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out"
-                                alt="Aima A700" loading="lazy">
-                            <img src="images/aima a700 night.jpg"
-                                class="img-night absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out"
-                                alt="Aima A700 Night" loading="lazy">
-                        </div>
-
-                        <!-- Заголовок та характеристики -->
-                        <div class="px-5 pb-4">
-                            <h3 class="font-brand font-bold text-xl uppercase text-[#111827] tracking-wide">Aima A700
-                            </h3>
-
-                            <div
-                                class="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-[#1D5D3B]/20 text-xs font-mono">
-                                <div class="text-[#4B5563]"><span class="lang-ua">Швидкість:</span><span
-                                        class="lang-en">Speed:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">47
-                                        км/год</span><span class="lang-en">47 km/h</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Запас ходу:</span><span
-                                        class="lang-en">Range:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">до 150
-                                        км</span><span class="lang-en">up to 150 km</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Зарядка:</span><span
-                                        class="lang-en">Charging:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">10Ач (6
-                                        годин)</span><span class="lang-en">10Ач (6 hours)</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Акумулятор:</span><span
-                                        class="lang-en">Battery:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">40Ah / 60Ah
-                                        (Знімна)</span><span class="lang-en">40Ah / 60Ah (Removable)</span></div>
-                            </div>
-
-                            <!-- Тарифи -->
-                            <div class="mt-4 p-3.5 bg-[#F8FAFC] border border-[#1D5D3B]/30 chamfer-box">
-                                <div class="flex items-baseline justify-between">
-                                    <span class="text-xs uppercase font-brand font-bold text-[#4B5563]">
-                                        <span class="lang-ua">Оренда:</span><span class="lang-en">Rent:</span>
-                                    </span>
-                                    <span class="font-brand font-bold text-xl text-[#1D5D3B]">
-                                        <span class="lang-ua">2 200 грн <span
-                                                class="text-xs font-normal text-[#4B5563]">/ тижд.</span></span>
-                                        <span class="lang-en">2 200 UAH <span
-                                                class="text-xs font-normal text-[#4B5563]">/ week</span></span>
-                                    </span>
-                                </div>
-                                <div
-                                    class="flex items-center justify-between text-[11px] text-[#4B5563] mt-1 font-mono">
-                                    <span>
-                                        <span class="lang-ua">Місяць: 8 000 грн</span>
-                                        <span class="lang-en">Month: 8 000 UAH</span>
-                                    </span>
-                                    <span>
-                                        <span class="lang-ua">Застава: 4 000 грн</span>
-                                        <span class="lang-en">Deposit: 4 000 UAH</span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+                </a>
+                <a href="catalog.html?model=aima_a700" class="vehicle-showcase-card vehicle-card group block text-left cursor-pointer" data-category="scooter">
+                    <div class="relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-[#121614] border border-white/[0.07] group-hover:border-emerald-500/40 transition-all duration-500">
+                        <img src="images/a700.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima A700" loading="lazy">
+                        <img src="images/aima a700 night.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima A700 Night" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity"></div>
                     </div>
 
-                    <!-- Кнопки -->
-                    <div class="p-5 pt-0 space-y-2">
-                        <a href="https://t.me/muviobot?start=rent_aima_a700" target="_blank" rel="noopener noreferrer"
-                            class="chamfer-btn w-full bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs uppercase tracking-widest py-3 px-3 flex items-center justify-center gap-2 border border-[#1D5D3B]">
-                            <i data-lucide="send" class="w-4 h-4"></i>
-                            <span>
-                                <span class="lang-ua">ЗАМОВИТИ В TELEGRAM</span>
-                                <span class="lang-en">ORDER IN TELEGRAM</span>
-                            </span>
-                        </a>
-                        <button onclick="selectModelInCalc('aima_a700')"
-                            class="chamfer-btn w-full bg-white hover:bg-slate-50 text-[#1D5D3B] font-brand font-bold text-xs uppercase tracking-widest py-2.5 px-3 border border-[#1D5D3B] flex items-center justify-center gap-1.5">
-                            <span>
-                                <span class="lang-ua">РОЗРАХУВАТИ ОРЕНДУ →</span>
-                                <span class="lang-en">CALCULATE RENT →</span>
-                            </span>
-                        </button>
+                    <h3 class="font-brand font-extrabold text-xl sm:text-2xl text-white uppercase tracking-tight mt-5 group-hover:text-[#10B981] transition-colors">
+                        Aima A700
+                    </h3>
+
+                    <div class="mt-3">
+                        <span class="inline-flex items-center px-4 py-1.5 rounded-full border border-white/20 text-zinc-300 text-xs sm:text-sm font-medium tracking-wide group-hover:border-emerald-500/60 group-hover:text-white transition-colors bg-white/[0.02]">
+                            <span class="lang-ua">від 2 200 грн / тижд.</span>
+                            <span class="lang-en">from 2,200 UAH / wk</span>
+                        </span>
                     </div>
-                </div>
-                <div class="fleet-card tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between"
-                    data-category="scooter" style="display: flex;">
-                    <div>
-                        <!-- Верхня плашка -->
-                        <div class="p-4 pb-0 flex items-center justify-between">
-                            <span
-                                class="font-brand font-bold text-xs px-2.5 py-1 bg-[#1D5D3B] text-white chamfer-badge uppercase">
-                                <span class="lang-ua">🛵 Електроскутер | 72V</span>
-                                <span class="lang-en">🛵 E-Scooter | 72V</span>
-                            </span>
-                            <span
-                                class="text-[10px] font-brand font-bold text-[#1D5D3B] border border-[#1D5D3B] px-2 py-0.5 chamfer-badge uppercase tracking-wider">
-                                1200W
-                            </span>
-                        </div>
-
-                        <!-- Фото транспорту -->
-                        <div class="relative w-full h-48 sm:h-56 overflow-hidden rounded-t-xl bg-zinc-900 group">
-                            <img src="images/f606.jpg"
-                                class="img-day absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out"
-                                alt="Aima F606 №1" loading="lazy">
-                            <img src="images/aima f606 night №1.jpg"
-                                class="img-night absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out"
-                                alt="Aima F606 №1 Night" loading="lazy">
-                        </div>
-
-                        <!-- Заголовок та характеристики -->
-                        <div class="px-5 pb-4">
-                            <h3 class="font-brand font-bold text-xl uppercase text-[#111827] tracking-wide">Aima F606 №1
-                            </h3>
-
-                            <div
-                                class="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-[#1D5D3B]/20 text-xs font-mono">
-                                <div class="text-[#4B5563]"><span class="lang-ua">Швидкість:</span><span
-                                        class="lang-en">Speed:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">70
-                                        км/год</span><span class="lang-en">70 km/h</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Запас ходу:</span><span
-                                        class="lang-en">Range:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">до 100
-                                        км</span><span class="lang-en">up to 100 km</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Зарядка:</span><span
-                                        class="lang-en">Charging:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">10Ач (4
-                                        години)</span><span class="lang-en">10Ач (4 hoursи)</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Акумулятор:</span><span
-                                        class="lang-en">Battery:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">40Ah / 60Ah
-                                        (Знімна)</span><span class="lang-en">40Ah / 60Ah (Removable)</span></div>
-                            </div>
-
-                            <!-- Тарифи -->
-                            <div class="mt-4 p-3.5 bg-[#F8FAFC] border border-[#1D5D3B]/30 chamfer-box">
-                                <div class="flex items-baseline justify-between">
-                                    <span class="text-xs uppercase font-brand font-bold text-[#4B5563]">
-                                        <span class="lang-ua">Оренда:</span><span class="lang-en">Rent:</span>
-                                    </span>
-                                    <span class="font-brand font-bold text-xl text-[#1D5D3B]">
-                                        <span class="lang-ua">2 200 грн <span
-                                                class="text-xs font-normal text-[#4B5563]">/ тижд.</span></span>
-                                        <span class="lang-en">2 200 UAH <span
-                                                class="text-xs font-normal text-[#4B5563]">/ week</span></span>
-                                    </span>
-                                </div>
-                                <div
-                                    class="flex items-center justify-between text-[11px] text-[#4B5563] mt-1 font-mono">
-                                    <span>
-                                        <span class="lang-ua">Місяць: 8 000 грн</span>
-                                        <span class="lang-en">Month: 8 000 UAH</span>
-                                    </span>
-                                    <span>
-                                        <span class="lang-ua">Застава: 4 000 грн</span>
-                                        <span class="lang-en">Deposit: 4 000 UAH</span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+                </a>
+                <a href="catalog.html?model=aima_f606_1" class="vehicle-showcase-card vehicle-card group block text-left cursor-pointer" data-category="scooter">
+                    <div class="relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-[#121614] border border-white/[0.07] group-hover:border-emerald-500/40 transition-all duration-500">
+                        <img src="images/f606.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima F606 №1" loading="lazy">
+                        <img src="images/aima f606 night №1.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima F606 №1 Night" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity"></div>
                     </div>
 
-                    <!-- Кнопки -->
-                    <div class="p-5 pt-0 space-y-2">
-                        <a href="https://t.me/muviobot?start=rent_aima_f606_1" target="_blank" rel="noopener noreferrer"
-                            class="chamfer-btn w-full bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs uppercase tracking-widest py-3 px-3 flex items-center justify-center gap-2 border border-[#1D5D3B]">
-                            <i data-lucide="send" class="w-4 h-4"></i>
-                            <span>
-                                <span class="lang-ua">ЗАМОВИТИ В TELEGRAM</span>
-                                <span class="lang-en">ORDER IN TELEGRAM</span>
-                            </span>
-                        </a>
-                        <button onclick="selectModelInCalc('aima_f606_1')"
-                            class="chamfer-btn w-full bg-white hover:bg-slate-50 text-[#1D5D3B] font-brand font-bold text-xs uppercase tracking-widest py-2.5 px-3 border border-[#1D5D3B] flex items-center justify-center gap-1.5">
-                            <span>
-                                <span class="lang-ua">РОЗРАХУВАТИ ОРЕНДУ →</span>
-                                <span class="lang-en">CALCULATE RENT →</span>
-                            </span>
-                        </button>
+                    <h3 class="font-brand font-extrabold text-xl sm:text-2xl text-white uppercase tracking-tight mt-5 group-hover:text-[#10B981] transition-colors">
+                        Aima F606 №1
+                    </h3>
+
+                    <div class="mt-3">
+                        <span class="inline-flex items-center px-4 py-1.5 rounded-full border border-white/20 text-zinc-300 text-xs sm:text-sm font-medium tracking-wide group-hover:border-emerald-500/60 group-hover:text-white transition-colors bg-white/[0.02]">
+                            <span class="lang-ua">від 2 200 грн / тижд.</span>
+                            <span class="lang-en">from 2,200 UAH / wk</span>
+                        </span>
                     </div>
-                </div>
-                <div class="fleet-card tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between"
-                    data-category="scooter" style="display: flex;">
-                    <div>
-                        <!-- Верхня плашка -->
-                        <div class="p-4 pb-0 flex items-center justify-between">
-                            <span
-                                class="font-brand font-bold text-xs px-2.5 py-1 bg-[#1D5D3B] text-white chamfer-badge uppercase">
-                                <span class="lang-ua">🛵 Електроскутер | 72V</span>
-                                <span class="lang-en">🛵 E-Scooter | 72V</span>
-                            </span>
-                            <span
-                                class="text-[10px] font-brand font-bold text-[#1D5D3B] border border-[#1D5D3B] px-2 py-0.5 chamfer-badge uppercase tracking-wider">
-                                1200W
-                            </span>
-                        </div>
-
-                        <!-- Фото транспорту -->
-                        <div class="relative w-full h-48 sm:h-56 overflow-hidden rounded-t-xl bg-zinc-900 group">
-                            <img src="images/a715.jpg"
-                                class="img-day absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out"
-                                alt="Aima A715" loading="lazy">
-                            <img src="images/aima a715 night.jpg"
-                                class="img-night absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out"
-                                alt="Aima A715 Night" loading="lazy">
-                        </div>
-
-                        <!-- Заголовок та характеристики -->
-                        <div class="px-5 pb-4">
-                            <h3 class="font-brand font-bold text-xl uppercase text-[#111827] tracking-wide">Aima A715
-                            </h3>
-
-                            <div
-                                class="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-[#1D5D3B]/20 text-xs font-mono">
-                                <div class="text-[#4B5563]"><span class="lang-ua">Швидкість:</span><span
-                                        class="lang-en">Speed:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">65
-                                        км/год</span><span class="lang-en">65 km/h</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Запас ходу:</span><span
-                                        class="lang-en">Range:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">до 150
-                                        км</span><span class="lang-en">up to 150 km</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Зарядка:</span><span
-                                        class="lang-en">Charging:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">10Ач (4
-                                        години)</span><span class="lang-en">10Ач (4 hoursи)</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Акумулятор:</span><span
-                                        class="lang-en">Battery:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">40Ah / 60Ah
-                                        (Знімна)</span><span class="lang-en">40Ah / 60Ah (Removable)</span></div>
-                            </div>
-
-                            <!-- Тарифи -->
-                            <div class="mt-4 p-3.5 bg-[#F8FAFC] border border-[#1D5D3B]/30 chamfer-box">
-                                <div class="flex items-baseline justify-between">
-                                    <span class="text-xs uppercase font-brand font-bold text-[#4B5563]">
-                                        <span class="lang-ua">Оренда:</span><span class="lang-en">Rent:</span>
-                                    </span>
-                                    <span class="font-brand font-bold text-xl text-[#1D5D3B]">
-                                        <span class="lang-ua">2 200 грн <span
-                                                class="text-xs font-normal text-[#4B5563]">/ тижд.</span></span>
-                                        <span class="lang-en">2 200 UAH <span
-                                                class="text-xs font-normal text-[#4B5563]">/ week</span></span>
-                                    </span>
-                                </div>
-                                <div
-                                    class="flex items-center justify-between text-[11px] text-[#4B5563] mt-1 font-mono">
-                                    <span>
-                                        <span class="lang-ua">Місяць: 8 000 грн</span>
-                                        <span class="lang-en">Month: 8 000 UAH</span>
-                                    </span>
-                                    <span>
-                                        <span class="lang-ua">Застава: 4 000 грн</span>
-                                        <span class="lang-en">Deposit: 4 000 UAH</span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+                </a>
+                <a href="catalog.html?model=aima_a715" class="vehicle-showcase-card vehicle-card group block text-left cursor-pointer" data-category="scooter">
+                    <div class="relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-[#121614] border border-white/[0.07] group-hover:border-emerald-500/40 transition-all duration-500">
+                        <img src="images/a715.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima A715" loading="lazy">
+                        <img src="images/aima a715 night.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima A715 Night" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity"></div>
                     </div>
 
-                    <!-- Кнопки -->
-                    <div class="p-5 pt-0 space-y-2">
-                        <a href="https://t.me/muviobot?start=rent_aima_a715" target="_blank" rel="noopener noreferrer"
-                            class="chamfer-btn w-full bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs uppercase tracking-widest py-3 px-3 flex items-center justify-center gap-2 border border-[#1D5D3B]">
-                            <i data-lucide="send" class="w-4 h-4"></i>
-                            <span>
-                                <span class="lang-ua">ЗАМОВИТИ В TELEGRAM</span>
-                                <span class="lang-en">ORDER IN TELEGRAM</span>
-                            </span>
-                        </a>
-                        <button onclick="selectModelInCalc('aima_a715')"
-                            class="chamfer-btn w-full bg-white hover:bg-slate-50 text-[#1D5D3B] font-brand font-bold text-xs uppercase tracking-widest py-2.5 px-3 border border-[#1D5D3B] flex items-center justify-center gap-1.5">
-                            <span>
-                                <span class="lang-ua">РОЗРАХУВАТИ ОРЕНДУ →</span>
-                                <span class="lang-en">CALCULATE RENT →</span>
-                            </span>
-                        </button>
+                    <h3 class="font-brand font-extrabold text-xl sm:text-2xl text-white uppercase tracking-tight mt-5 group-hover:text-[#10B981] transition-colors">
+                        Aima A715
+                    </h3>
+
+                    <div class="mt-3">
+                        <span class="inline-flex items-center px-4 py-1.5 rounded-full border border-white/20 text-zinc-300 text-xs sm:text-sm font-medium tracking-wide group-hover:border-emerald-500/60 group-hover:text-white transition-colors bg-white/[0.02]">
+                            <span class="lang-ua">від 2 200 грн / тижд.</span>
+                            <span class="lang-en">from 2,200 UAH / wk</span>
+                        </span>
                     </div>
-                </div>
-                <div class="fleet-card tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between"
-                    data-category="scooter" style="display: flex;">
-                    <div>
-                        <!-- Верхня плашка -->
-                        <div class="p-4 pb-0 flex items-center justify-between">
-                            <span
-                                class="font-brand font-bold text-xs px-2.5 py-1 bg-[#1D5D3B] text-white chamfer-badge uppercase">
-                                <span class="lang-ua">🛵 Електроскутер | 72V</span>
-                                <span class="lang-en">🛵 E-Scooter | 72V</span>
-                            </span>
-                            <span
-                                class="text-[10px] font-brand font-bold text-[#1D5D3B] border border-[#1D5D3B] px-2 py-0.5 chamfer-badge uppercase tracking-wider">
-                                1200W
-                            </span>
-                        </div>
-
-                        <!-- Фото транспорту -->
-                        <div class="relative w-full h-48 sm:h-56 overflow-hidden rounded-t-xl bg-zinc-900 group">
-                            <img src="images/journey.jpg"
-                                class="img-day absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out"
-                                alt="Aima Journey" loading="lazy">
-                            <img src="images/aima journey night.jpg"
-                                class="img-night absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out"
-                                alt="Aima Journey Night" loading="lazy">
-                        </div>
-
-                        <!-- Заголовок та характеристики -->
-                        <div class="px-5 pb-4">
-                            <h3 class="font-brand font-bold text-xl uppercase text-[#111827] tracking-wide">Aima Journey
-                            </h3>
-
-                            <div
-                                class="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-[#1D5D3B]/20 text-xs font-mono">
-                                <div class="text-[#4B5563]"><span class="lang-ua">Швидкість:</span><span
-                                        class="lang-en">Speed:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">60
-                                        км/год</span><span class="lang-en">60 km/h</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Запас ходу:</span><span
-                                        class="lang-en">Range:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">до 160
-                                        км</span><span class="lang-en">up to 160 km</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Зарядка:</span><span
-                                        class="lang-en">Charging:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">10Ач (6
-                                        годин)</span><span class="lang-en">10Ач (6 hours)</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Акумулятор:</span><span
-                                        class="lang-en">Battery:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">40Ah / 60Ah
-                                        (Знімна)</span><span class="lang-en">40Ah / 60Ah (Removable)</span></div>
-                            </div>
-
-                            <!-- Тарифи -->
-                            <div class="mt-4 p-3.5 bg-[#F8FAFC] border border-[#1D5D3B]/30 chamfer-box">
-                                <div class="flex items-baseline justify-between">
-                                    <span class="text-xs uppercase font-brand font-bold text-[#4B5563]">
-                                        <span class="lang-ua">Оренда:</span><span class="lang-en">Rent:</span>
-                                    </span>
-                                    <span class="font-brand font-bold text-xl text-[#1D5D3B]">
-                                        <span class="lang-ua">2 200 грн <span
-                                                class="text-xs font-normal text-[#4B5563]">/ тижд.</span></span>
-                                        <span class="lang-en">2 200 UAH <span
-                                                class="text-xs font-normal text-[#4B5563]">/ week</span></span>
-                                    </span>
-                                </div>
-                                <div
-                                    class="flex items-center justify-between text-[11px] text-[#4B5563] mt-1 font-mono">
-                                    <span>
-                                        <span class="lang-ua">Місяць: 8 000 грн</span>
-                                        <span class="lang-en">Month: 8 000 UAH</span>
-                                    </span>
-                                    <span>
-                                        <span class="lang-ua">Застава: 4 000 грн</span>
-                                        <span class="lang-en">Deposit: 4 000 UAH</span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+                </a>
+                <a href="catalog.html?model=aima_journey" class="vehicle-showcase-card vehicle-card group block text-left cursor-pointer" data-category="scooter">
+                    <div class="relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-[#121614] border border-white/[0.07] group-hover:border-emerald-500/40 transition-all duration-500">
+                        <img src="images/journey.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima Journey" loading="lazy">
+                        <img src="images/aima journey night.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima Journey Night" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity"></div>
                     </div>
 
-                    <!-- Кнопки -->
-                    <div class="p-5 pt-0 space-y-2">
-                        <a href="https://t.me/muviobot?start=rent_aima_journey" target="_blank"
-                            rel="noopener noreferrer"
-                            class="chamfer-btn w-full bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs uppercase tracking-widest py-3 px-3 flex items-center justify-center gap-2 border border-[#1D5D3B]">
-                            <i data-lucide="send" class="w-4 h-4"></i>
-                            <span>
-                                <span class="lang-ua">ЗАМОВИТИ В TELEGRAM</span>
-                                <span class="lang-en">ORDER IN TELEGRAM</span>
-                            </span>
-                        </a>
-                        <button onclick="selectModelInCalc('aima_journey')"
-                            class="chamfer-btn w-full bg-white hover:bg-slate-50 text-[#1D5D3B] font-brand font-bold text-xs uppercase tracking-widest py-2.5 px-3 border border-[#1D5D3B] flex items-center justify-center gap-1.5">
-                            <span>
-                                <span class="lang-ua">РОЗРАХУВАТИ ОРЕНДУ →</span>
-                                <span class="lang-en">CALCULATE RENT →</span>
-                            </span>
-                        </button>
+                    <h3 class="font-brand font-extrabold text-xl sm:text-2xl text-white uppercase tracking-tight mt-5 group-hover:text-[#10B981] transition-colors">
+                        Aima Journey
+                    </h3>
+
+                    <div class="mt-3">
+                        <span class="inline-flex items-center px-4 py-1.5 rounded-full border border-white/20 text-zinc-300 text-xs sm:text-sm font-medium tracking-wide group-hover:border-emerald-500/60 group-hover:text-white transition-colors bg-white/[0.02]">
+                            <span class="lang-ua">від 2 200 грн / тижд.</span>
+                            <span class="lang-en">from 2,200 UAH / wk</span>
+                        </span>
                     </div>
-                </div>
-                <div class="fleet-card tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between"
-                    data-category="scooter" style="display: flex;">
-                    <div>
-                        <!-- Верхня плашка -->
-                        <div class="p-4 pb-0 flex items-center justify-between">
-                            <span
-                                class="font-brand font-bold text-xs px-2.5 py-1 bg-[#1D5D3B] text-white chamfer-badge uppercase">
-                                <span class="lang-ua">🛵 Електроскутер | 72V</span>
-                                <span class="lang-en">🛵 E-Scooter | 72V</span>
-                            </span>
-                            <span
-                                class="text-[10px] font-brand font-bold text-[#1D5D3B] border border-[#1D5D3B] px-2 py-0.5 chamfer-badge uppercase tracking-wider">
-                                1200W
-                            </span>
-                        </div>
-
-                        <!-- Фото транспорту -->
-                        <div class="relative w-full h-48 sm:h-56 overflow-hidden rounded-t-xl bg-zinc-900 group">
-                            <img src="images/f606-2.jpg"
-                                class="img-day absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out"
-                                alt="Aima F606 №2" loading="lazy">
-                            <img src="images/aima f606 night №2.jpg"
-                                class="img-night absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out"
-                                alt="Aima F606 №2 Night" loading="lazy">
-                        </div>
-
-                        <!-- Заголовок та характеристики -->
-                        <div class="px-5 pb-4">
-                            <h3 class="font-brand font-bold text-xl uppercase text-[#111827] tracking-wide">Aima F606 №2
-                            </h3>
-
-                            <div
-                                class="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-[#1D5D3B]/20 text-xs font-mono">
-                                <div class="text-[#4B5563]"><span class="lang-ua">Швидкість:</span><span
-                                        class="lang-en">Speed:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">70
-                                        км/год</span><span class="lang-en">70 km/h</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Запас ходу:</span><span
-                                        class="lang-en">Range:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">до 130
-                                        км</span><span class="lang-en">up to 130 km</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Зарядка:</span><span
-                                        class="lang-en">Charging:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">10Ач (4
-                                        години)</span><span class="lang-en">10Ач (4 hoursи)</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Акумулятор:</span><span
-                                        class="lang-en">Battery:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">40Ah / 60Ah
-                                        (Знімна)</span><span class="lang-en">40Ah / 60Ah (Removable)</span></div>
-                            </div>
-
-                            <!-- Тарифи -->
-                            <div class="mt-4 p-3.5 bg-[#F8FAFC] border border-[#1D5D3B]/30 chamfer-box">
-                                <div class="flex items-baseline justify-between">
-                                    <span class="text-xs uppercase font-brand font-bold text-[#4B5563]">
-                                        <span class="lang-ua">Оренда:</span><span class="lang-en">Rent:</span>
-                                    </span>
-                                    <span class="font-brand font-bold text-xl text-[#1D5D3B]">
-                                        <span class="lang-ua">2 200 грн <span
-                                                class="text-xs font-normal text-[#4B5563]">/ тижд.</span></span>
-                                        <span class="lang-en">2 200 UAH <span
-                                                class="text-xs font-normal text-[#4B5563]">/ week</span></span>
-                                    </span>
-                                </div>
-                                <div
-                                    class="flex items-center justify-between text-[11px] text-[#4B5563] mt-1 font-mono">
-                                    <span>
-                                        <span class="lang-ua">Місяць: 8 000 грн</span>
-                                        <span class="lang-en">Month: 8 000 UAH</span>
-                                    </span>
-                                    <span>
-                                        <span class="lang-ua">Застава: 4 000 грн</span>
-                                        <span class="lang-en">Deposit: 4 000 UAH</span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+                </a>
+                <a href="catalog.html?model=aima_f606_2" class="vehicle-showcase-card vehicle-card group block text-left cursor-pointer" data-category="scooter">
+                    <div class="relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-[#121614] border border-white/[0.07] group-hover:border-emerald-500/40 transition-all duration-500">
+                        <img src="images/f606-2.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima F606 №2" loading="lazy">
+                        <img src="images/aima f606 night №2.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima F606 №2 Night" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity"></div>
                     </div>
 
-                    <!-- Кнопки -->
-                    <div class="p-5 pt-0 space-y-2">
-                        <a href="https://t.me/muviobot?start=rent_aima_f606_2" target="_blank" rel="noopener noreferrer"
-                            class="chamfer-btn w-full bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs uppercase tracking-widest py-3 px-3 flex items-center justify-center gap-2 border border-[#1D5D3B]">
-                            <i data-lucide="send" class="w-4 h-4"></i>
-                            <span>
-                                <span class="lang-ua">ЗАМОВИТИ В TELEGRAM</span>
-                                <span class="lang-en">ORDER IN TELEGRAM</span>
-                            </span>
-                        </a>
-                        <button onclick="selectModelInCalc('aima_f606_2')"
-                            class="chamfer-btn w-full bg-white hover:bg-slate-50 text-[#1D5D3B] font-brand font-bold text-xs uppercase tracking-widest py-2.5 px-3 border border-[#1D5D3B] flex items-center justify-center gap-1.5">
-                            <span>
-                                <span class="lang-ua">РОЗРАХУВАТИ ОРЕНДУ →</span>
-                                <span class="lang-en">CALCULATE RENT →</span>
-                            </span>
-                        </button>
+                    <h3 class="font-brand font-extrabold text-xl sm:text-2xl text-white uppercase tracking-tight mt-5 group-hover:text-[#10B981] transition-colors">
+                        Aima F606 №2
+                    </h3>
+
+                    <div class="mt-3">
+                        <span class="inline-flex items-center px-4 py-1.5 rounded-full border border-white/20 text-zinc-300 text-xs sm:text-sm font-medium tracking-wide group-hover:border-emerald-500/60 group-hover:text-white transition-colors bg-white/[0.02]">
+                            <span class="lang-ua">від 2 200 грн / тижд.</span>
+                            <span class="lang-en">from 2,200 UAH / wk</span>
+                        </span>
                     </div>
-                </div>
-                <div class="fleet-card tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between"
-                    data-category="scooter" style="display: flex;">
-                    <div>
-                        <!-- Верхня плашка -->
-                        <div class="p-4 pb-0 flex items-center justify-between">
-                            <span
-                                class="font-brand font-bold text-xs px-2.5 py-1 bg-[#1D5D3B] text-white chamfer-badge uppercase">
-                                <span class="lang-ua">🛵 Електроскутер | 72V</span>
-                                <span class="lang-en">🛵 E-Scooter | 72V</span>
-                            </span>
-                            <span
-                                class="text-[10px] font-brand font-bold text-[#1D5D3B] border border-[#1D5D3B] px-2 py-0.5 chamfer-badge uppercase tracking-wider">
-                                2000W
-                            </span>
-                        </div>
-
-                        <!-- Фото транспорту -->
-                        <div class="relative w-full h-48 sm:h-56 overflow-hidden rounded-t-xl bg-zinc-900 group">
-                            <img src="images/crosser-cr-13-2.jpg"
-                                class="img-day absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out"
-                                alt="Crosser CR-13 №2" loading="lazy">
-                            <img src="images/crosser cr-13 night №2.jpg"
-                                class="img-night absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out"
-                                alt="Crosser CR-13 №2 Night" loading="lazy">
-                        </div>
-
-                        <!-- Заголовок та характеристики -->
-                        <div class="px-5 pb-4">
-                            <h3 class="font-brand font-bold text-xl uppercase text-[#111827] tracking-wide">Crosser
-                                CR-13 №2</h3>
-
-                            <div
-                                class="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-[#1D5D3B]/20 text-xs font-mono">
-                                <div class="text-[#4B5563]"><span class="lang-ua">Швидкість:</span><span
-                                        class="lang-en">Speed:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">85
-                                        км/год</span><span class="lang-en">85 km/h</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Запас ходу:</span><span
-                                        class="lang-en">Range:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">до 160
-                                        км</span><span class="lang-en">up to 160 km</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Зарядка:</span><span
-                                        class="lang-en">Charging:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">10Ач (6
-                                        годин)</span><span class="lang-en">10Ач (6 hours)</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Акумулятор:</span><span
-                                        class="lang-en">Battery:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">40Ah / 60Ah
-                                        (Знімна)</span><span class="lang-en">40Ah / 60Ah (Removable)</span></div>
-                            </div>
-
-                            <!-- Тарифи -->
-                            <div class="mt-4 p-3.5 bg-[#F8FAFC] border border-[#1D5D3B]/30 chamfer-box">
-                                <div class="flex items-baseline justify-between">
-                                    <span class="text-xs uppercase font-brand font-bold text-[#4B5563]">
-                                        <span class="lang-ua">Оренда:</span><span class="lang-en">Rent:</span>
-                                    </span>
-                                    <span class="font-brand font-bold text-xl text-[#1D5D3B]">
-                                        <span class="lang-ua">2 500 грн <span
-                                                class="text-xs font-normal text-[#4B5563]">/ тижд.</span></span>
-                                        <span class="lang-en">2 500 UAH <span
-                                                class="text-xs font-normal text-[#4B5563]">/ week</span></span>
-                                    </span>
-                                </div>
-                                <div
-                                    class="flex items-center justify-between text-[11px] text-[#4B5563] mt-1 font-mono">
-                                    <span>
-                                        <span class="lang-ua">Місяць: 8 500 грн</span>
-                                        <span class="lang-en">Month: 8 500 UAH</span>
-                                    </span>
-                                    <span>
-                                        <span class="lang-ua">Застава: 4 500 грн</span>
-                                        <span class="lang-en">Deposit: 4 500 UAH</span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+                </a>
+                <a href="catalog.html?model=crosser_cr13_2" class="vehicle-showcase-card vehicle-card group block text-left cursor-pointer" data-category="scooter">
+                    <div class="relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-[#121614] border border-white/[0.07] group-hover:border-emerald-500/40 transition-all duration-500">
+                        <img src="images/crosser-cr-13-2.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Crosser CR-13 №2" loading="lazy">
+                        <img src="images/crosser cr-13 night №2.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Crosser CR-13 №2 Night" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity"></div>
                     </div>
 
-                    <!-- Кнопки -->
-                    <div class="p-5 pt-0 space-y-2">
-                        <a href="https://t.me/muviobot?start=rent_crosser_cr13_2" target="_blank"
-                            rel="noopener noreferrer"
-                            class="chamfer-btn w-full bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs uppercase tracking-widest py-3 px-3 flex items-center justify-center gap-2 border border-[#1D5D3B]">
-                            <i data-lucide="send" class="w-4 h-4"></i>
-                            <span>
-                                <span class="lang-ua">ЗАМОВИТИ В TELEGRAM</span>
-                                <span class="lang-en">ORDER IN TELEGRAM</span>
-                            </span>
-                        </a>
-                        <button onclick="selectModelInCalc('crosser_cr13_2')"
-                            class="chamfer-btn w-full bg-white hover:bg-slate-50 text-[#1D5D3B] font-brand font-bold text-xs uppercase tracking-widest py-2.5 px-3 border border-[#1D5D3B] flex items-center justify-center gap-1.5">
-                            <span>
-                                <span class="lang-ua">РОЗРАХУВАТИ ОРЕНДУ →</span>
-                                <span class="lang-en">CALCULATE RENT →</span>
-                            </span>
-                        </button>
+                    <h3 class="font-brand font-extrabold text-xl sm:text-2xl text-white uppercase tracking-tight mt-5 group-hover:text-[#10B981] transition-colors">
+                        Crosser CR-13 №2
+                    </h3>
+
+                    <div class="mt-3">
+                        <span class="inline-flex items-center px-4 py-1.5 rounded-full border border-white/20 text-zinc-300 text-xs sm:text-sm font-medium tracking-wide group-hover:border-emerald-500/60 group-hover:text-white transition-colors bg-white/[0.02]">
+                            <span class="lang-ua">від 2 500 грн / тижд.</span>
+                            <span class="lang-en">from 2,500 UAH / wk</span>
+                        </span>
                     </div>
-                </div>
-                <div class="fleet-card tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between"
-                    data-category="scooter" style="display: flex;">
-                    <div>
-                        <!-- Верхня плашка -->
-                        <div class="p-4 pb-0 flex items-center justify-between">
-                            <span
-                                class="font-brand font-bold text-xs px-2.5 py-1 bg-[#1D5D3B] text-white chamfer-badge uppercase">
-                                <span class="lang-ua">🛵 Електроскутер | 60V</span>
-                                <span class="lang-en">🛵 E-Scooter | 60V</span>
-                            </span>
-                            <span
-                                class="text-[10px] font-brand font-bold text-[#1D5D3B] border border-[#1D5D3B] px-2 py-0.5 chamfer-badge uppercase tracking-wider">
-                                800W
-                            </span>
-                        </div>
-
-                        <!-- Фото транспорту -->
-                        <div class="relative w-full h-48 sm:h-56 overflow-hidden rounded-t-xl bg-zinc-900 group">
-                            <img src="images/mine.jpg"
-                                class="img-day absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out"
-                                alt="Aima Mine" loading="lazy">
-                            <img src="images/aima mine night.jpg"
-                                class="img-night absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out"
-                                alt="Aima Mine Night" loading="lazy">
-                        </div>
-
-                        <!-- Заголовок та характеристики -->
-                        <div class="px-5 pb-4">
-                            <h3 class="font-brand font-bold text-xl uppercase text-[#111827] tracking-wide">Aima Mine
-                            </h3>
-
-                            <div
-                                class="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-[#1D5D3B]/20 text-xs font-mono">
-                                <div class="text-[#4B5563]"><span class="lang-ua">Швидкість:</span><span
-                                        class="lang-en">Speed:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">55
-                                        км/год</span><span class="lang-en">55 km/h</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Запас ходу:</span><span
-                                        class="lang-en">Range:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">до 130
-                                        км</span><span class="lang-en">up to 130 km</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Зарядка:</span><span
-                                        class="lang-en">Charging:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">7Ач (6
-                                        годин)</span><span class="lang-en">7Ач (6 hours)</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Акумулятор:</span><span
-                                        class="lang-en">Battery:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">40Ah / 60Ah
-                                        (Знімна)</span><span class="lang-en">40Ah / 60Ah (Removable)</span></div>
-                            </div>
-
-                            <!-- Тарифи -->
-                            <div class="mt-4 p-3.5 bg-[#F8FAFC] border border-[#1D5D3B]/30 chamfer-box">
-                                <div class="flex items-baseline justify-between">
-                                    <span class="text-xs uppercase font-brand font-bold text-[#4B5563]">
-                                        <span class="lang-ua">Оренда:</span><span class="lang-en">Rent:</span>
-                                    </span>
-                                    <span class="font-brand font-bold text-xl text-[#1D5D3B]">
-                                        <span class="lang-ua">2 200 грн <span
-                                                class="text-xs font-normal text-[#4B5563]">/ тижд.</span></span>
-                                        <span class="lang-en">2 200 UAH <span
-                                                class="text-xs font-normal text-[#4B5563]">/ week</span></span>
-                                    </span>
-                                </div>
-                                <div
-                                    class="flex items-center justify-between text-[11px] text-[#4B5563] mt-1 font-mono">
-                                    <span>
-                                        <span class="lang-ua">Місяць: 8 000 грн</span>
-                                        <span class="lang-en">Month: 8 000 UAH</span>
-                                    </span>
-                                    <span>
-                                        <span class="lang-ua">Застава: 4 000 грн</span>
-                                        <span class="lang-en">Deposit: 4 000 UAH</span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+                </a>
+                <a href="catalog.html?model=aima_mine" class="vehicle-showcase-card vehicle-card group block text-left cursor-pointer" data-category="scooter">
+                    <div class="relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-[#121614] border border-white/[0.07] group-hover:border-emerald-500/40 transition-all duration-500">
+                        <img src="images/mine.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima Mine" loading="lazy">
+                        <img src="images/aima mine night.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima Mine Night" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity"></div>
                     </div>
 
-                    <!-- Кнопки -->
-                    <div class="p-5 pt-0 space-y-2">
-                        <a href="https://t.me/muviobot?start=rent_aima_mine" target="_blank" rel="noopener noreferrer"
-                            class="chamfer-btn w-full bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs uppercase tracking-widest py-3 px-3 flex items-center justify-center gap-2 border border-[#1D5D3B]">
-                            <i data-lucide="send" class="w-4 h-4"></i>
-                            <span>
-                                <span class="lang-ua">ЗАМОВИТИ В TELEGRAM</span>
-                                <span class="lang-en">ORDER IN TELEGRAM</span>
-                            </span>
-                        </a>
-                        <button onclick="selectModelInCalc('aima_mine')"
-                            class="chamfer-btn w-full bg-white hover:bg-slate-50 text-[#1D5D3B] font-brand font-bold text-xs uppercase tracking-widest py-2.5 px-3 border border-[#1D5D3B] flex items-center justify-center gap-1.5">
-                            <span>
-                                <span class="lang-ua">РОЗРАХУВАТИ ОРЕНДУ →</span>
-                                <span class="lang-en">CALCULATE RENT →</span>
-                            </span>
-                        </button>
+                    <h3 class="font-brand font-extrabold text-xl sm:text-2xl text-white uppercase tracking-tight mt-5 group-hover:text-[#10B981] transition-colors">
+                        Aima Mine
+                    </h3>
+
+                    <div class="mt-3">
+                        <span class="inline-flex items-center px-4 py-1.5 rounded-full border border-white/20 text-zinc-300 text-xs sm:text-sm font-medium tracking-wide group-hover:border-emerald-500/60 group-hover:text-white transition-colors bg-white/[0.02]">
+                            <span class="lang-ua">від 2 200 грн / тижд.</span>
+                            <span class="lang-en">from 2,200 UAH / wk</span>
+                        </span>
                     </div>
-                </div>
-                <div class="fleet-card tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between"
-                    data-category="scooter" style="display: flex;">
-                    <div>
-                        <!-- Верхня плашка -->
-                        <div class="p-4 pb-0 flex items-center justify-between">
-                            <span
-                                class="font-brand font-bold text-xs px-2.5 py-1 bg-[#1D5D3B] text-white chamfer-badge uppercase">
-                                <span class="lang-ua">🛵 Електроскутер | 60V</span>
-                                <span class="lang-en">🛵 E-Scooter | 60V</span>
-                            </span>
-                            <span
-                                class="text-[10px] font-brand font-bold text-[#1D5D3B] border border-[#1D5D3B] px-2 py-0.5 chamfer-badge uppercase tracking-wider">
-                                1000W
-                            </span>
-                        </div>
-
-                        <!-- Фото транспорту -->
-                        <div class="relative w-full h-48 sm:h-56 overflow-hidden rounded-t-xl bg-zinc-900 group">
-                            <img src="images/like-bike-n5.jpg"
-                                class="img-day absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out"
-                                alt="Like Bike N5" loading="lazy">
-                            <img src="images/like-bike-n5.jpg"
-                                class="img-night absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out"
-                                alt="Like Bike N5 Night" loading="lazy">
-                        </div>
-
-                        <!-- Заголовок та характеристики -->
-                        <div class="px-5 pb-4">
-                            <h3 class="font-brand font-bold text-xl uppercase text-[#111827] tracking-wide">Like Bike N5
-                            </h3>
-
-                            <div
-                                class="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-[#1D5D3B]/20 text-xs font-mono">
-                                <div class="text-[#4B5563]"><span class="lang-ua">Швидкість:</span><span
-                                        class="lang-en">Speed:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">65
-                                        км/год</span><span class="lang-en">65 km/h</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Запас ходу:</span><span
-                                        class="lang-en">Range:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">до 130
-                                        км</span><span class="lang-en">up to 130 km</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Зарядка:</span><span
-                                        class="lang-en">Charging:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">10Ач (6
-                                        годин)</span><span class="lang-en">10Ач (6 hours)</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Акумулятор:</span><span
-                                        class="lang-en">Battery:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">40Ah / 60Ah
-                                        (Знімна)</span><span class="lang-en">40Ah / 60Ah (Removable)</span></div>
-                            </div>
-
-                            <!-- Тарифи -->
-                            <div class="mt-4 p-3.5 bg-[#F8FAFC] border border-[#1D5D3B]/30 chamfer-box">
-                                <div class="flex items-baseline justify-between">
-                                    <span class="text-xs uppercase font-brand font-bold text-[#4B5563]">
-                                        <span class="lang-ua">Оренда:</span><span class="lang-en">Rent:</span>
-                                    </span>
-                                    <span class="font-brand font-bold text-xl text-[#1D5D3B]">
-                                        <span class="lang-ua">2 200 грн <span
-                                                class="text-xs font-normal text-[#4B5563]">/ тижд.</span></span>
-                                        <span class="lang-en">2 200 UAH <span
-                                                class="text-xs font-normal text-[#4B5563]">/ week</span></span>
-                                    </span>
-                                </div>
-                                <div
-                                    class="flex items-center justify-between text-[11px] text-[#4B5563] mt-1 font-mono">
-                                    <span>
-                                        <span class="lang-ua">Місяць: 8 000 грн</span>
-                                        <span class="lang-en">Month: 8 000 UAH</span>
-                                    </span>
-                                    <span>
-                                        <span class="lang-ua">Застава: 4 000 грн</span>
-                                        <span class="lang-en">Deposit: 4 000 UAH</span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+                </a>
+                <a href="catalog.html?model=like_bike_n5" class="vehicle-showcase-card vehicle-card group block text-left cursor-pointer" data-category="scooter">
+                    <div class="relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-[#121614] border border-white/[0.07] group-hover:border-emerald-500/40 transition-all duration-500">
+                        <img src="images/like-bike-n5.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Like Bike N5" loading="lazy">
+                        <img src="images/like-bike-n5.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Like Bike N5 Night" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity"></div>
                     </div>
 
-                    <!-- Кнопки -->
-                    <div class="p-5 pt-0 space-y-2">
-                        <a href="https://t.me/muviobot?start=rent_like_bike_n5" target="_blank"
-                            rel="noopener noreferrer"
-                            class="chamfer-btn w-full bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs uppercase tracking-widest py-3 px-3 flex items-center justify-center gap-2 border border-[#1D5D3B]">
-                            <i data-lucide="send" class="w-4 h-4"></i>
-                            <span>
-                                <span class="lang-ua">ЗАМОВИТИ В TELEGRAM</span>
-                                <span class="lang-en">ORDER IN TELEGRAM</span>
-                            </span>
-                        </a>
-                        <button onclick="selectModelInCalc('like_bike_n5')"
-                            class="chamfer-btn w-full bg-white hover:bg-slate-50 text-[#1D5D3B] font-brand font-bold text-xs uppercase tracking-widest py-2.5 px-3 border border-[#1D5D3B] flex items-center justify-center gap-1.5">
-                            <span>
-                                <span class="lang-ua">РОЗРАХУВАТИ ОРЕНДУ →</span>
-                                <span class="lang-en">CALCULATE RENT →</span>
-                            </span>
-                        </button>
+                    <h3 class="font-brand font-extrabold text-xl sm:text-2xl text-white uppercase tracking-tight mt-5 group-hover:text-[#10B981] transition-colors">
+                        Like Bike N5
+                    </h3>
+
+                    <div class="mt-3">
+                        <span class="inline-flex items-center px-4 py-1.5 rounded-full border border-white/20 text-zinc-300 text-xs sm:text-sm font-medium tracking-wide group-hover:border-emerald-500/60 group-hover:text-white transition-colors bg-white/[0.02]">
+                            <span class="lang-ua">від 2 200 грн / тижд.</span>
+                            <span class="lang-en">from 2,200 UAH / wk</span>
+                        </span>
                     </div>
-                </div>
-                <div class="fleet-card tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between"
-                    data-category="scooter" style="display: flex;">
-                    <div>
-                        <!-- Верхня плашка -->
-                        <div class="p-4 pb-0 flex items-center justify-between">
-                            <span
-                                class="font-brand font-bold text-xs px-2.5 py-1 bg-[#1D5D3B] text-white chamfer-badge uppercase">
-                                <span class="lang-ua">🛵 Електроскутер | 60V</span>
-                                <span class="lang-en">🛵 E-Scooter | 60V</span>
-                            </span>
-                            <span
-                                class="text-[10px] font-brand font-bold text-[#1D5D3B] border border-[#1D5D3B] px-2 py-0.5 chamfer-badge uppercase tracking-wider">
-                                800W
-                            </span>
-                        </div>
-
-                        <!-- Фото транспорту -->
-                        <div class="relative w-full h-48 sm:h-56 overflow-hidden rounded-t-xl bg-zinc-900 group">
-                            <img src="images/mine-plus.jpg"
-                                class="img-day absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out"
-                                alt="Aima Mine Plus" loading="lazy">
-                            <img src="images/aima mine plus night.jpg"
-                                class="img-night absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out"
-                                alt="Aima Mine Plus Night" loading="lazy">
-                        </div>
-
-                        <!-- Заголовок та характеристики -->
-                        <div class="px-5 pb-4">
-                            <h3 class="font-brand font-bold text-xl uppercase text-[#111827] tracking-wide">Aima Mine
-                                Plus</h3>
-
-                            <div
-                                class="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-[#1D5D3B]/20 text-xs font-mono">
-                                <div class="text-[#4B5563]"><span class="lang-ua">Швидкість:</span><span
-                                        class="lang-en">Speed:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">60
-                                        км/год</span><span class="lang-en">60 km/h</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Запас ходу:</span><span
-                                        class="lang-en">Range:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">до 130
-                                        км</span><span class="lang-en">up to 130 km</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Зарядка:</span><span
-                                        class="lang-en">Charging:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">7Ач (6
-                                        годин)</span><span class="lang-en">7Ач (6 hours)</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Акумулятор:</span><span
-                                        class="lang-en">Battery:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">40Ah / 60Ah
-                                        (Знімна)</span><span class="lang-en">40Ah / 60Ah (Removable)</span></div>
-                            </div>
-
-                            <!-- Тарифи -->
-                            <div class="mt-4 p-3.5 bg-[#F8FAFC] border border-[#1D5D3B]/30 chamfer-box">
-                                <div class="flex items-baseline justify-between">
-                                    <span class="text-xs uppercase font-brand font-bold text-[#4B5563]">
-                                        <span class="lang-ua">Оренда:</span><span class="lang-en">Rent:</span>
-                                    </span>
-                                    <span class="font-brand font-bold text-xl text-[#1D5D3B]">
-                                        <span class="lang-ua">2 200 грн <span
-                                                class="text-xs font-normal text-[#4B5563]">/ тижд.</span></span>
-                                        <span class="lang-en">2 200 UAH <span
-                                                class="text-xs font-normal text-[#4B5563]">/ week</span></span>
-                                    </span>
-                                </div>
-                                <div
-                                    class="flex items-center justify-between text-[11px] text-[#4B5563] mt-1 font-mono">
-                                    <span>
-                                        <span class="lang-ua">Місяць: 8 000 грн</span>
-                                        <span class="lang-en">Month: 8 000 UAH</span>
-                                    </span>
-                                    <span>
-                                        <span class="lang-ua">Застава: 4 000 грн</span>
-                                        <span class="lang-en">Deposit: 4 000 UAH</span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+                </a>
+                <a href="catalog.html?model=aima_mine_plus" class="vehicle-showcase-card vehicle-card group block text-left cursor-pointer" data-category="scooter">
+                    <div class="relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-[#121614] border border-white/[0.07] group-hover:border-emerald-500/40 transition-all duration-500">
+                        <img src="images/mine-plus.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima Mine Plus" loading="lazy">
+                        <img src="images/aima mine plus night.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima Mine Plus Night" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity"></div>
                     </div>
 
-                    <!-- Кнопки -->
-                    <div class="p-5 pt-0 space-y-2">
-                        <a href="https://t.me/muviobot?start=rent_aima_mine_plus" target="_blank"
-                            rel="noopener noreferrer"
-                            class="chamfer-btn w-full bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs uppercase tracking-widest py-3 px-3 flex items-center justify-center gap-2 border border-[#1D5D3B]">
-                            <i data-lucide="send" class="w-4 h-4"></i>
-                            <span>
-                                <span class="lang-ua">ЗАМОВИТИ В TELEGRAM</span>
-                                <span class="lang-en">ORDER IN TELEGRAM</span>
-                            </span>
-                        </a>
-                        <button onclick="selectModelInCalc('aima_mine_plus')"
-                            class="chamfer-btn w-full bg-white hover:bg-slate-50 text-[#1D5D3B] font-brand font-bold text-xs uppercase tracking-widest py-2.5 px-3 border border-[#1D5D3B] flex items-center justify-center gap-1.5">
-                            <span>
-                                <span class="lang-ua">РОЗРАХУВАТИ ОРЕНДУ →</span>
-                                <span class="lang-en">CALCULATE RENT →</span>
-                            </span>
-                        </button>
+                    <h3 class="font-brand font-extrabold text-xl sm:text-2xl text-white uppercase tracking-tight mt-5 group-hover:text-[#10B981] transition-colors">
+                        Aima Mine Plus
+                    </h3>
+
+                    <div class="mt-3">
+                        <span class="inline-flex items-center px-4 py-1.5 rounded-full border border-white/20 text-zinc-300 text-xs sm:text-sm font-medium tracking-wide group-hover:border-emerald-500/60 group-hover:text-white transition-colors bg-white/[0.02]">
+                            <span class="lang-ua">від 2 200 грн / тижд.</span>
+                            <span class="lang-en">from 2,200 UAH / wk</span>
+                        </span>
                     </div>
-                </div>
-                <div class="fleet-card tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between"
-                    data-category="scooter" style="display: flex;">
-                    <div>
-                        <!-- Верхня плашка -->
-                        <div class="p-4 pb-0 flex items-center justify-between">
-                            <span
-                                class="font-brand font-bold text-xs px-2.5 py-1 bg-[#1D5D3B] text-white chamfer-badge uppercase">
-                                <span class="lang-ua">🛵 Електроскутер | 72V</span>
-                                <span class="lang-en">🛵 E-Scooter | 72V</span>
-                            </span>
-                            <span
-                                class="text-[10px] font-brand font-bold text-[#1D5D3B] border border-[#1D5D3B] px-2 py-0.5 chamfer-badge uppercase tracking-wider">
-                                1200W
-                            </span>
-                        </div>
-
-                        <!-- Фото транспорту -->
-                        <div class="relative w-full h-48 sm:h-56 overflow-hidden rounded-t-xl bg-zinc-900 group">
-                            <img src="images/leopard.jpg"
-                                class="img-day absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out"
-                                alt="Aima Leopard" loading="lazy">
-                            <img src="images/leopard.jpg"
-                                class="img-night absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out"
-                                alt="Aima Leopard Night" loading="lazy">
-                        </div>
-
-                        <!-- Заголовок та характеристики -->
-                        <div class="px-5 pb-4">
-                            <h3 class="font-brand font-bold text-xl uppercase text-[#111827] tracking-wide">Aima Leopard
-                            </h3>
-
-                            <div
-                                class="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-[#1D5D3B]/20 text-xs font-mono">
-                                <div class="text-[#4B5563]"><span class="lang-ua">Швидкість:</span><span
-                                        class="lang-en">Speed:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">48
-                                        км/год</span><span class="lang-en">48 km/h</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Запас ходу:</span><span
-                                        class="lang-en">Range:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">до 150
-                                        км</span><span class="lang-en">up to 150 km</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Зарядка:</span><span
-                                        class="lang-en">Charging:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">10Ач (6
-                                        годин)</span><span class="lang-en">10Ач (6 hours)</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Акумулятор:</span><span
-                                        class="lang-en">Battery:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">40Ah / 60Ah
-                                        (Знімна)</span><span class="lang-en">40Ah / 60Ah (Removable)</span></div>
-                            </div>
-
-                            <!-- Тарифи -->
-                            <div class="mt-4 p-3.5 bg-[#F8FAFC] border border-[#1D5D3B]/30 chamfer-box">
-                                <div class="flex items-baseline justify-between">
-                                    <span class="text-xs uppercase font-brand font-bold text-[#4B5563]">
-                                        <span class="lang-ua">Оренда:</span><span class="lang-en">Rent:</span>
-                                    </span>
-                                    <span class="font-brand font-bold text-xl text-[#1D5D3B]">
-                                        <span class="lang-ua">2 200 грн <span
-                                                class="text-xs font-normal text-[#4B5563]">/ тижд.</span></span>
-                                        <span class="lang-en">2 200 UAH <span
-                                                class="text-xs font-normal text-[#4B5563]">/ week</span></span>
-                                    </span>
-                                </div>
-                                <div
-                                    class="flex items-center justify-between text-[11px] text-[#4B5563] mt-1 font-mono">
-                                    <span>
-                                        <span class="lang-ua">Місяць: 8 000 грн</span>
-                                        <span class="lang-en">Month: 8 000 UAH</span>
-                                    </span>
-                                    <span>
-                                        <span class="lang-ua">Застава: 4 000 грн</span>
-                                        <span class="lang-en">Deposit: 4 000 UAH</span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+                </a>
+                <a href="catalog.html?model=aima_leopard" class="vehicle-showcase-card vehicle-card group block text-left cursor-pointer" data-category="scooter">
+                    <div class="relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-[#121614] border border-white/[0.07] group-hover:border-emerald-500/40 transition-all duration-500">
+                        <img src="images/leopard.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima Leopard" loading="lazy">
+                        <img src="images/leopard.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Aima Leopard Night" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity"></div>
                     </div>
 
-                    <!-- Кнопки -->
-                    <div class="p-5 pt-0 space-y-2">
-                        <a href="https://t.me/muviobot?start=rent_aima_leopard" target="_blank"
-                            rel="noopener noreferrer"
-                            class="chamfer-btn w-full bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs uppercase tracking-widest py-3 px-3 flex items-center justify-center gap-2 border border-[#1D5D3B]">
-                            <i data-lucide="send" class="w-4 h-4"></i>
-                            <span>
-                                <span class="lang-ua">ЗАМОВИТИ В TELEGRAM</span>
-                                <span class="lang-en">ORDER IN TELEGRAM</span>
-                            </span>
-                        </a>
-                        <button onclick="selectModelInCalc('aima_leopard')"
-                            class="chamfer-btn w-full bg-white hover:bg-slate-50 text-[#1D5D3B] font-brand font-bold text-xs uppercase tracking-widest py-2.5 px-3 border border-[#1D5D3B] flex items-center justify-center gap-1.5">
-                            <span>
-                                <span class="lang-ua">РОЗРАХУВАТИ ОРЕНДУ →</span>
-                                <span class="lang-en">CALCULATE RENT →</span>
-                            </span>
-                        </button>
+                    <h3 class="font-brand font-extrabold text-xl sm:text-2xl text-white uppercase tracking-tight mt-5 group-hover:text-[#10B981] transition-colors">
+                        Aima Leopard
+                    </h3>
+
+                    <div class="mt-3">
+                        <span class="inline-flex items-center px-4 py-1.5 rounded-full border border-white/20 text-zinc-300 text-xs sm:text-sm font-medium tracking-wide group-hover:border-emerald-500/60 group-hover:text-white transition-colors bg-white/[0.02]">
+                            <span class="lang-ua">від 2 200 грн / тижд.</span>
+                            <span class="lang-en">from 2,200 UAH / wk</span>
+                        </span>
                     </div>
-                </div>
-                <div class="fleet-card tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between"
-                    data-category="bike" style="display: flex;">
-                    <div>
-                        <!-- Верхня плашка -->
-                        <div class="p-4 pb-0 flex items-center justify-between">
-                            <span
-                                class="font-brand font-bold text-xs px-2.5 py-1 bg-[#1D5D3B] text-white chamfer-badge uppercase">
-                                <span class="lang-ua">🚲 Електровелосипед | 48V</span>
-                                <span class="lang-en">🚲 E-Bike | 48V</span>
-                            </span>
-                            <span
-                                class="text-[10px] font-brand font-bold text-[#1D5D3B] border border-[#1D5D3B] px-2 py-0.5 chamfer-badge uppercase tracking-wider">
-                                500W
-                            </span>
-                        </div>
-
-                        <!-- Фото транспорту -->
-                        <div class="relative w-full h-48 sm:h-56 overflow-hidden rounded-t-xl bg-zinc-900 group">
-                            <img src="images/like-bike-bruiser-1.jpg"
-                                class="img-day absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out"
-                                alt="Like Bike Bruiser №1" loading="lazy">
-                            <img src="images/like bike night №1.jpg"
-                                class="img-night absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out"
-                                alt="Like Bike Bruiser №1 Night" loading="lazy">
-                        </div>
-
-                        <!-- Заголовок та характеристики -->
-                        <div class="px-5 pb-4">
-                            <h3 class="font-brand font-bold text-xl uppercase text-[#111827] tracking-wide">Like Bike
-                                Bruiser №1</h3>
-
-                            <div
-                                class="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-[#1D5D3B]/20 text-xs font-mono">
-                                <div class="text-[#4B5563]"><span class="lang-ua">Швидкість:</span><span
-                                        class="lang-en">Speed:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">45
-                                        км/год</span><span class="lang-en">45 km/h</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Запас ходу:</span><span
-                                        class="lang-en">Range:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">до 80
-                                        км</span><span class="lang-en">up to 80 km</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Зарядка:</span><span
-                                        class="lang-en">Charging:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">7Ач (4
-                                        години)</span><span class="lang-en">7Ач (4 hoursи)</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Акумулятор:</span><span
-                                        class="lang-en">Battery:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">10Ah-40Ah
-                                        (Знімна)</span><span class="lang-en">10Ah-40Ah (Removable)</span></div>
-                            </div>
-
-                            <!-- Тарифи -->
-                            <div class="mt-4 p-3.5 bg-[#F8FAFC] border border-[#1D5D3B]/30 chamfer-box">
-                                <div class="flex items-baseline justify-between">
-                                    <span class="text-xs uppercase font-brand font-bold text-[#4B5563]">
-                                        <span class="lang-ua">Оренда:</span><span class="lang-en">Rent:</span>
-                                    </span>
-                                    <span class="font-brand font-bold text-xl text-[#1D5D3B]">
-                                        <span class="lang-ua">1 800 грн <span
-                                                class="text-xs font-normal text-[#4B5563]">/ тижд.</span></span>
-                                        <span class="lang-en">1 800 UAH <span
-                                                class="text-xs font-normal text-[#4B5563]">/ week</span></span>
-                                    </span>
-                                </div>
-                                <div
-                                    class="flex items-center justify-between text-[11px] text-[#4B5563] mt-1 font-mono">
-                                    <span>
-                                        <span class="lang-ua">Місяць: 6 000 грн</span>
-                                        <span class="lang-en">Month: 6 000 UAH</span>
-                                    </span>
-                                    <span>
-                                        <span class="lang-ua">Застава: 3 000 грн</span>
-                                        <span class="lang-en">Deposit: 3 000 UAH</span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+                </a>
+                <a href="catalog.html?model=like_bike_bruser_1" class="vehicle-showcase-card vehicle-card group block text-left cursor-pointer" data-category="bike">
+                    <div class="relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-[#121614] border border-white/[0.07] group-hover:border-emerald-500/40 transition-all duration-500">
+                        <img src="images/like-bike-bruiser-1.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Like Bike Bruiser №1" loading="lazy">
+                        <img src="images/like bike night №1.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Like Bike Bruiser №1 Night" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity"></div>
                     </div>
 
-                    <!-- Кнопки -->
-                    <div class="p-5 pt-0 space-y-2">
-                        <a href="https://t.me/muviobot?start=rent_like_bike_bruser_1" target="_blank"
-                            rel="noopener noreferrer"
-                            class="chamfer-btn w-full bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs uppercase tracking-widest py-3 px-3 flex items-center justify-center gap-2 border border-[#1D5D3B]">
-                            <i data-lucide="send" class="w-4 h-4"></i>
-                            <span>
-                                <span class="lang-ua">ЗАМОВИТИ В TELEGRAM</span>
-                                <span class="lang-en">ORDER IN TELEGRAM</span>
-                            </span>
-                        </a>
-                        <button onclick="selectModelInCalc('like_bike_bruser_1')"
-                            class="chamfer-btn w-full bg-white hover:bg-slate-50 text-[#1D5D3B] font-brand font-bold text-xs uppercase tracking-widest py-2.5 px-3 border border-[#1D5D3B] flex items-center justify-center gap-1.5">
-                            <span>
-                                <span class="lang-ua">РОЗРАХУВАТИ ОРЕНДУ →</span>
-                                <span class="lang-en">CALCULATE RENT →</span>
-                            </span>
-                        </button>
+                    <h3 class="font-brand font-extrabold text-xl sm:text-2xl text-white uppercase tracking-tight mt-5 group-hover:text-[#10B981] transition-colors">
+                        Like Bike Bruiser №1
+                    </h3>
+
+                    <div class="mt-3">
+                        <span class="inline-flex items-center px-4 py-1.5 rounded-full border border-white/20 text-zinc-300 text-xs sm:text-sm font-medium tracking-wide group-hover:border-emerald-500/60 group-hover:text-white transition-colors bg-white/[0.02]">
+                            <span class="lang-ua">від 1 800 грн / тижд.</span>
+                            <span class="lang-en">from 1,800 UAH / wk</span>
+                        </span>
                     </div>
-                </div>
-                <div class="fleet-card tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between"
-                    data-category="bike" style="display: flex;">
-                    <div>
-                        <!-- Верхня плашка -->
-                        <div class="p-4 pb-0 flex items-center justify-between">
-                            <span
-                                class="font-brand font-bold text-xs px-2.5 py-1 bg-[#1D5D3B] text-white chamfer-badge uppercase">
-                                <span class="lang-ua">🚲 Електровелосипед | 48V</span>
-                                <span class="lang-en">🚲 E-Bike | 48V</span>
-                            </span>
-                            <span
-                                class="text-[10px] font-brand font-bold text-[#1D5D3B] border border-[#1D5D3B] px-2 py-0.5 chamfer-badge uppercase tracking-wider">
-                                500W
-                            </span>
-                        </div>
-
-                        <!-- Фото транспорту -->
-                        <div class="relative w-full h-48 sm:h-56 overflow-hidden rounded-t-xl bg-zinc-900 group">
-                            <img src="images/like-bike-bruiser-2.jpg"
-                                class="img-day absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out"
-                                alt="Like Bike Bruiser №2" loading="lazy">
-                            <img src="images/like bika night №2.jpg"
-                                class="img-night absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out"
-                                alt="Like Bike Bruiser №2 Night" loading="lazy">
-                        </div>
-
-                        <!-- Заголовок та характеристики -->
-                        <div class="px-5 pb-4">
-                            <h3 class="font-brand font-bold text-xl uppercase text-[#111827] tracking-wide">Like Bike
-                                Bruiser №2</h3>
-
-                            <div
-                                class="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-[#1D5D3B]/20 text-xs font-mono">
-                                <div class="text-[#4B5563]"><span class="lang-ua">Швидкість:</span><span
-                                        class="lang-en">Speed:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">45
-                                        км/год</span><span class="lang-en">45 km/h</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Запас ходу:</span><span
-                                        class="lang-en">Range:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">до 80
-                                        км</span><span class="lang-en">up to 80 km</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Зарядка:</span><span
-                                        class="lang-en">Charging:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">7Ач (4
-                                        години)</span><span class="lang-en">7Ач (4 hoursи)</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Акумулятор:</span><span
-                                        class="lang-en">Battery:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">10Ah-40Ah
-                                        (Знімна)</span><span class="lang-en">10Ah-40Ah (Removable)</span></div>
-                            </div>
-
-                            <!-- Тарифи -->
-                            <div class="mt-4 p-3.5 bg-[#F8FAFC] border border-[#1D5D3B]/30 chamfer-box">
-                                <div class="flex items-baseline justify-between">
-                                    <span class="text-xs uppercase font-brand font-bold text-[#4B5563]">
-                                        <span class="lang-ua">Оренда:</span><span class="lang-en">Rent:</span>
-                                    </span>
-                                    <span class="font-brand font-bold text-xl text-[#1D5D3B]">
-                                        <span class="lang-ua">1 800 грн <span
-                                                class="text-xs font-normal text-[#4B5563]">/ тижд.</span></span>
-                                        <span class="lang-en">1 800 UAH <span
-                                                class="text-xs font-normal text-[#4B5563]">/ week</span></span>
-                                    </span>
-                                </div>
-                                <div
-                                    class="flex items-center justify-between text-[11px] text-[#4B5563] mt-1 font-mono">
-                                    <span>
-                                        <span class="lang-ua">Місяць: 6 000 грн</span>
-                                        <span class="lang-en">Month: 6 000 UAH</span>
-                                    </span>
-                                    <span>
-                                        <span class="lang-ua">Застава: 3 000 грн</span>
-                                        <span class="lang-en">Deposit: 3 000 UAH</span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+                </a>
+                <a href="catalog.html?model=like_bike_bruser_2" class="vehicle-showcase-card vehicle-card group block text-left cursor-pointer" data-category="bike">
+                    <div class="relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-[#121614] border border-white/[0.07] group-hover:border-emerald-500/40 transition-all duration-500">
+                        <img src="images/like-bike-bruiser-2.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Like Bike Bruiser №2" loading="lazy">
+                        <img src="images/like bika night №2.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="Like Bike Bruiser №2 Night" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity"></div>
                     </div>
 
-                    <!-- Кнопки -->
-                    <div class="p-5 pt-0 space-y-2">
-                        <a href="https://t.me/muviobot?start=rent_like_bike_bruser_2" target="_blank"
-                            rel="noopener noreferrer"
-                            class="chamfer-btn w-full bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs uppercase tracking-widest py-3 px-3 flex items-center justify-center gap-2 border border-[#1D5D3B]">
-                            <i data-lucide="send" class="w-4 h-4"></i>
-                            <span>
-                                <span class="lang-ua">ЗАМОВИТИ В TELEGRAM</span>
-                                <span class="lang-en">ORDER IN TELEGRAM</span>
-                            </span>
-                        </a>
-                        <button onclick="selectModelInCalc('like_bike_bruser_2')"
-                            class="chamfer-btn w-full bg-white hover:bg-slate-50 text-[#1D5D3B] font-brand font-bold text-xs uppercase tracking-widest py-2.5 px-3 border border-[#1D5D3B] flex items-center justify-center gap-1.5">
-                            <span>
-                                <span class="lang-ua">РОЗРАХУВАТИ ОРЕНДУ →</span>
-                                <span class="lang-en">CALCULATE RENT →</span>
-                            </span>
-                        </button>
+                    <h3 class="font-brand font-extrabold text-xl sm:text-2xl text-white uppercase tracking-tight mt-5 group-hover:text-[#10B981] transition-colors">
+                        Like Bike Bruiser №2
+                    </h3>
+
+                    <div class="mt-3">
+                        <span class="inline-flex items-center px-4 py-1.5 rounded-full border border-white/20 text-zinc-300 text-xs sm:text-sm font-medium tracking-wide group-hover:border-emerald-500/60 group-hover:text-white transition-colors bg-white/[0.02]">
+                            <span class="lang-ua">від 1 800 грн / тижд.</span>
+                            <span class="lang-en">from 1,800 UAH / wk</span>
+                        </span>
                     </div>
-                </div>
-                <div class="fleet-card tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between"
-                    data-category="bike" style="display: flex;">
-                    <div>
-                        <!-- Верхня плашка -->
-                        <div class="p-4 pb-0 flex items-center justify-between">
-                            <span
-                                class="font-brand font-bold text-xs px-2.5 py-1 bg-[#1D5D3B] text-white chamfer-badge uppercase">
-                                <span class="lang-ua">🚲 Електровелосипед | 48V</span>
-                                <span class="lang-en">🚲 E-Bike | 48V</span>
-                            </span>
-                            <span
-                                class="text-[10px] font-brand font-bold text-[#1D5D3B] border border-[#1D5D3B] px-2 py-0.5 chamfer-badge uppercase tracking-wider">
-                                250W
-                            </span>
-                        </div>
-
-                        <!-- Фото транспорту -->
-                        <div class="relative w-full h-48 sm:h-56 overflow-hidden rounded-t-xl bg-zinc-900 group">
-                            <img src="images/ado-a20f.jpg"
-                                class="img-day absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out"
-                                alt="ADO A20F" loading="lazy">
-                            <img src="images/ado night.jpg"
-                                class="img-night absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out"
-                                alt="ADO A20F Night" loading="lazy">
-                        </div>
-
-                        <!-- Заголовок та характеристики -->
-                        <div class="px-5 pb-4">
-                            <h3 class="font-brand font-bold text-xl uppercase text-[#111827] tracking-wide">ADO A20F
-                            </h3>
-
-                            <div
-                                class="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-[#1D5D3B]/20 text-xs font-mono">
-                                <div class="text-[#4B5563]"><span class="lang-ua">Швидкість:</span><span
-                                        class="lang-en">Speed:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">40
-                                        км/год</span><span class="lang-en">40 km/h</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Запас ходу:</span><span
-                                        class="lang-en">Range:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">до 150
-                                        км</span><span class="lang-en">up to 150 km</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Зарядка:</span><span
-                                        class="lang-en">Charging:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">10Ач (4
-                                        години)</span><span class="lang-en">10Ач (4 hoursи)</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Акумулятор:</span><span
-                                        class="lang-en">Battery:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">10Ah-40Ah
-                                        (Знімна)</span><span class="lang-en">10Ah-40Ah (Removable)</span></div>
-                            </div>
-
-                            <!-- Тарифи -->
-                            <div class="mt-4 p-3.5 bg-[#F8FAFC] border border-[#1D5D3B]/30 chamfer-box">
-                                <div class="flex items-baseline justify-between">
-                                    <span class="text-xs uppercase font-brand font-bold text-[#4B5563]">
-                                        <span class="lang-ua">Оренда:</span><span class="lang-en">Rent:</span>
-                                    </span>
-                                    <span class="font-brand font-bold text-xl text-[#1D5D3B]">
-                                        <span class="lang-ua">1 800 грн <span
-                                                class="text-xs font-normal text-[#4B5563]">/ тижд.</span></span>
-                                        <span class="lang-en">1 800 UAH <span
-                                                class="text-xs font-normal text-[#4B5563]">/ week</span></span>
-                                    </span>
-                                </div>
-                                <div
-                                    class="flex items-center justify-between text-[11px] text-[#4B5563] mt-1 font-mono">
-                                    <span>
-                                        <span class="lang-ua">Місяць: 6 000 грн</span>
-                                        <span class="lang-en">Month: 6 000 UAH</span>
-                                    </span>
-                                    <span>
-                                        <span class="lang-ua">Застава: 3 000 грн</span>
-                                        <span class="lang-en">Deposit: 3 000 UAH</span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+                </a>
+                <a href="catalog.html?model=ado_a20f" class="vehicle-showcase-card vehicle-card group block text-left cursor-pointer" data-category="bike">
+                    <div class="relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-[#121614] border border-white/[0.07] group-hover:border-emerald-500/40 transition-all duration-500">
+                        <img src="images/ado-a20f.jpg" class="img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="ADO A20F" loading="lazy">
+                        <img src="images/ado night.jpg" class="img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="ADO A20F Night" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity"></div>
                     </div>
 
-                    <!-- Кнопки -->
-                    <div class="p-5 pt-0 space-y-2">
-                        <a href="https://t.me/muviobot?start=rent_ado_a20f" target="_blank" rel="noopener noreferrer"
-                            class="chamfer-btn w-full bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs uppercase tracking-widest py-3 px-3 flex items-center justify-center gap-2 border border-[#1D5D3B]">
-                            <i data-lucide="send" class="w-4 h-4"></i>
-                            <span>
-                                <span class="lang-ua">ЗАМОВИТИ В TELEGRAM</span>
-                                <span class="lang-en">ORDER IN TELEGRAM</span>
-                            </span>
-                        </a>
-                        <button onclick="selectModelInCalc('ado_a20f')"
-                            class="chamfer-btn w-full bg-white hover:bg-slate-50 text-[#1D5D3B] font-brand font-bold text-xs uppercase tracking-widest py-2.5 px-3 border border-[#1D5D3B] flex items-center justify-center gap-1.5">
-                            <span>
-                                <span class="lang-ua">РОЗРАХУВАТИ ОРЕНДУ →</span>
-                                <span class="lang-en">CALCULATE RENT →</span>
-                            </span>
-                        </button>
+                    <h3 class="font-brand font-extrabold text-xl sm:text-2xl text-white uppercase tracking-tight mt-5 group-hover:text-[#10B981] transition-colors">
+                        ADO A20F
+                    </h3>
+
+                    <div class="mt-3">
+                        <span class="inline-flex items-center px-4 py-1.5 rounded-full border border-white/20 text-zinc-300 text-xs sm:text-sm font-medium tracking-wide group-hover:border-emerald-500/60 group-hover:text-white transition-colors bg-white/[0.02]">
+                            <span class="lang-ua">від 1 800 грн / тижд.</span>
+                            <span class="lang-en">from 1,800 UAH / wk</span>
+                        </span>
                     </div>
-                </div>
+                </a>
             </div>
 
         </div>
     </section>
 
-    <!-- ==================== 4. КАЛЬКУЛЯТОР ОРЕНДИ ==================== -->
+<!-- ==================== 4. КАЛЬКУЛЯТОР ОРЕНДИ ==================== -->
     <section id="calculator" class="py-16 md:py-24 bg-[#123824] text-white border-b-2 border-[#1D5D3B]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-x border-slate-200/60">
 
@@ -4115,6 +2912,7 @@
         let currentCatalogFilter = 'all';
 
         // Рендеринг каталогу
+        // Рендеринг каталогу (Keepcar мінімалізм)
         function renderCatalog(filter = currentCatalogFilter) {
             currentCatalogFilter = filter;
             const grid = document.getElementById('catalogGrid');
@@ -4122,118 +2920,32 @@
             grid.innerHTML = '';
 
             const filtered = FLEET.filter(item => {
-                if (filter === 'all') return true;
+                if (filter === 'all' || !filter) return true;
                 return item.category === filter;
             });
 
             filtered.forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'fleet-card tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between';
-
-                const tgRentUrl = `https://t.me/muviobot?start=rent_${item.key}`;
-
-                const typeUa = item.type;
-                const typeEn = item.category === 'bike' ? '🚲 E-Bike' : '🛵 E-Scooter';
-
-                const dispSpeedUa = item.speed;
-                const dispSpeedEn = item.speed.replace('км/год', 'km/h');
-
-                const dispRangeUa = item.range;
-                const dispRangeEn = item.range.replace('до', 'up to').replace('км', 'km');
-
-                const dispChargingUa = item.charging;
-                const dispChargingEn = item.charging.replace('годин', 'hours').replace('години', 'hours');
-
-                const dispBatteryUa = item.battery;
-                const dispBatteryEn = item.battery.replace('(Знімна)', '(Removable)');
+                const card = document.createElement('a');
+                card.href = `catalog.html?model=${item.key}`;
+                card.className = 'vehicle-showcase-card vehicle-card group block text-left cursor-pointer';
+                card.setAttribute('data-category', item.category);
 
                 card.innerHTML = `
-                    <div>
-                        <!-- Верхня плашка -->
-                        <div class="p-4 pb-0 flex items-center justify-between">
-                            <span class="font-brand font-bold text-xs px-2.5 py-1 bg-[#1D5D3B] text-white chamfer-badge uppercase">
-                                <span class="lang-ua">${typeUa} | ${item.voltage}</span>
-                                <span class="lang-en">${typeEn} | ${item.voltage}</span>
-                            </span>
-                            <span class="text-[10px] font-brand font-bold text-[#1D5D3B] border border-[#1D5D3B] px-2 py-0.5 chamfer-badge uppercase tracking-wider">
-                                ${item.power}
-                            </span>
-                        </div>
-
-                        <!-- Фото транспорту (Кроссфейд День / Ніч) -->
-                        <div class="relative w-full h-48 sm:h-56 overflow-hidden rounded-t-xl bg-zinc-900 group">
-                            <img src="${item.image}" class="img-day absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out" alt="${item.name}" loading="lazy">
-                            <img src="${item.image_night || item.image}" class="img-night absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out" alt="${item.name} Night" loading="lazy">
-                        </div>
-
-                        <!-- Заголовок та характеристики -->
-                        <div class="px-5 pb-4">
-                            <h3 class="font-brand font-bold text-xl uppercase text-[#111827] tracking-wide">${item.name}</h3>
-                            
-                            <div class="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-[#1D5D3B]/20 text-xs font-mono">
-                                <div class="text-[#4B5563]"><span class="lang-ua">Швидкість:</span><span class="lang-en">Speed:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">${dispSpeedUa}</span><span class="lang-en">${dispSpeedEn}</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Запас ходу:</span><span class="lang-en">Range:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">${dispRangeUa}</span><span class="lang-en">${dispRangeEn}</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Зарядка:</span><span class="lang-en">Charging:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">${dispChargingUa}</span><span class="lang-en">${dispChargingEn}</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Акумулятор:</span><span class="lang-en">Battery:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">${dispBatteryUa}</span><span class="lang-en">${dispBatteryEn}</span></div>
-                            </div>
-
-                            <!-- Тарифи та вартість викупу в зборі -->
-                            <div class="mt-4 p-3.5 bg-[#F8FAFC] border border-[#1D5D3B]/30 chamfer-box">
-                                <div class="flex items-baseline justify-between">
-                                    <span class="text-xs uppercase font-brand font-bold text-[#4B5563]">
-                                        <span class="lang-ua">Оренда:</span><span class="lang-en">Rent:</span>
-                                    </span>
-                                    <span class="font-brand font-bold text-xl text-[#1D5D3B]">
-                                        <span class="lang-ua">${item.price_week.toLocaleString('uk-UA')} грн <span class="text-xs font-normal text-[#4B5563]">/ тижд.</span></span>
-                                        <span class="lang-en">${item.price_week.toLocaleString('en-US')} UAH <span class="text-xs font-normal text-[#4B5563]">/ week</span></span>
-                                    </span>
-                                </div>
-                                <div class="flex items-center justify-between text-[11px] text-[#4B5563] mt-1 font-mono">
-                                    <span>
-                                        <span class="lang-ua">Місяць: ${item.price_month.toLocaleString('uk-UA')} грн</span>
-                                        <span class="lang-en">Month: ${item.price_month.toLocaleString('en-US')} UAH</span>
-                                    </span>
-                                    <span>
-                                        <span class="lang-ua">Застава: ${item.deposit.toLocaleString('uk-UA')} грн</span>
-                                        <span class="lang-en">Deposit: ${item.deposit.toLocaleString('en-US')} UAH</span>
-                                    </span>
-                                </div>
-                                <!-- HIDDEN BUYOUT ROW. TO RESTORE REMOVE 'hidden' -->
-                                <div class="hidden text-[11px] text-[#111827] font-mono font-bold mt-2 pt-2 border-t border-[#1D5D3B]/20 justify-between">
-                                    <span>
-                                        <span class="lang-ua">Викуп у зборі з АКБ:</span>
-                                        <span class="lang-en">Buyout with battery:</span>
-                                    </span>
-                                    <span class="text-[#1D5D3B]">
-                                        <span class="lang-ua">${item.buyout_base_price.toLocaleString('uk-UA')} грн</span>
-                                        <span class="lang-en">${item.buyout_base_price.toLocaleString('en-US')} UAH</span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-[#121614] border border-white/[0.07] group-hover:border-emerald-500/40 transition-all duration-500">
+                        <img src="${item.image}" class="img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="${item.name}" loading="lazy">
+                        <img src="${item.image_night || item.image}" class="img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="${item.name} Night" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity"></div>
                     </div>
 
-                    <!-- Кнопки -->
-                    <div class="p-5 pt-0 space-y-2">
-                        <a href="${tgRentUrl}" target="_blank" rel="noopener noreferrer" 
-                           class="chamfer-btn w-full bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs uppercase tracking-widest py-3 px-3 flex items-center justify-center gap-2 border border-[#1D5D3B]">
-                            <i data-lucide="send" class="w-4 h-4"></i>
-                            <span>
-                                <span class="lang-ua">ЗАМОВИТИ В TELEGRAM</span>
-                                <span class="lang-en">ORDER IN TELEGRAM</span>
-                            </span>
-                        </a>
-                        <button onclick="selectModelInCalc('${item.key}')" 
-                                class="chamfer-btn w-full bg-white hover:bg-slate-50 text-[#1D5D3B] font-brand font-bold text-xs uppercase tracking-widest py-2.5 px-3 border border-[#1D5D3B] flex items-center justify-center gap-1.5">
-                            <span>
-                                <span class="lang-ua">РОЗРАХУВАТИ ОРЕНДУ →</span>
-                                <span class="lang-en">CALCULATE RENT →</span>
-                            </span>
-                        </button>
+                    <h3 class="font-brand font-extrabold text-xl sm:text-2xl text-white uppercase tracking-tight mt-5 group-hover:text-[#10B981] transition-colors">
+                        ${item.name}
+                    </h3>
+
+                    <div class="mt-3">
+                        <span class="inline-flex items-center px-4 py-1.5 rounded-full border border-white/20 text-zinc-300 text-xs sm:text-sm font-medium tracking-wide group-hover:border-emerald-500/60 group-hover:text-white transition-colors bg-white/[0.02]">
+                            <span class="lang-ua">від ${item.price_week.toLocaleString('uk-UA')} грн / тижд.</span>
+                            <span class="lang-en">from ${item.price_week.toLocaleString('en-US')} UAH / wk</span>
+                        </span>
                     </div>
                 `;
 
@@ -4241,7 +2953,7 @@
             });
 
             if (window.lucide) {
-                window.lucide.createIcons();
+                try { window.lucide.createIcons(); } catch (e) { }
             }
         }
 
@@ -4252,27 +2964,20 @@
                 const btn = document.getElementById(`tab-${cat}`);
                 if (!btn) return;
                 if (cat === category) {
-                    btn.classList.add('bg-[#1D5D3B]', 'text-white');
-                    btn.classList.remove('bg-white', 'text-[#111827]');
+                    btn.className = 'px-5 py-2.5 rounded-full text-xs font-brand font-bold uppercase tracking-wider border border-white/20 bg-white text-black transition-all';
                 } else {
-                    btn.classList.remove('bg-[#1D5D3B]', 'text-white');
-                    btn.classList.add('bg-white', 'text-[#111827]');
+                    btn.className = 'px-5 py-2.5 rounded-full text-xs font-brand font-bold uppercase tracking-wider border border-white/10 bg-white/[0.04] text-zinc-400 hover:text-white hover:border-white/30 transition-all';
                 }
             });
             const grid = document.getElementById('catalogGrid');
             if (grid) {
-                const cards = grid.querySelectorAll('.vehicle-card, .tech-card, [data-category]');
+                const cards = grid.querySelectorAll('.vehicle-showcase-card, .vehicle-card, [data-category]');
                 if (cards.length > 0) {
-                    let visibleIdx = 0;
                     cards.forEach(card => {
                         const cardCat = card.getAttribute('data-category');
                         if (category === 'all' || cardCat === category) {
-                            card.style.display = 'flex';
+                            card.style.display = 'block';
                             card.classList.remove('hidden');
-                            if (card.classList.contains('is-visible')) {
-                                card.style.transitionDelay = `${(visibleIdx % 3) * 0.1}s`;
-                            }
-                            visibleIdx++;
                         } else {
                             card.style.display = 'none';
                             card.classList.add('hidden');
@@ -4289,7 +2994,6 @@
             }
         }
 
-        // Scroll-reveal для карток техніки в каталозі
         function initCatalogScrollReveal() {
             const grid = document.getElementById('catalogGrid');
             if (!grid) return;
