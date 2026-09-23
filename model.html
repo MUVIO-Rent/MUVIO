@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MUVIO — Оренда транспорту</title>
+    <script>
+        (function() {
+            var params = new URLSearchParams(window.location.search);
+            var model = params.get('model') || params.get('id') || '';
+            if (model) {
+                window.location.replace('catalog.html?model=' + encodeURIComponent(model));
+            } else {
+                window.location.replace('catalog.html');
+            }
+        })();
+    </script>
+</head>
+<body style="background-color: #0A0D0B; color: #FFFFFF; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0;">
+    <p>Перенаправлення до каталогу MUVIO...</p>
+</body>
+</html>

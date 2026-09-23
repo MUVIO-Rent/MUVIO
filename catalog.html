@@ -4,37 +4,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0F1411">
+    <meta name="theme-color" content="#0A0D0B">
     <title>MUVIO — Каталог техніки в наявності | Оренда електротранспорту в Одесі</title>
     <meta name="description"
-        content="Офіційний автопарк MUVIO: електроскутери та велосипеди у зборі з АКБ та зарядним пристроєм. Реальні тарифи оренди.">
+        content="Офіційний автопарк MUVIO: електроскутери та велосипеди у зборі з АКБ та зарядним пристроєм. Реальні тарифи оренди в Одесі.">
 
-    <!-- Native System Fonts: Apple System / SF Pro Display / Segoe UI -->
+    <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
+            darkMode: "class",
             theme: {
                 extend: {
                     colors: {
-                        primary: '#1D5D3B',
+                        primary: "#1D5D3B",
                         muvio: {
-                            green: '#1D5D3B',
-                            hover: '#24754A',
-                            forest: '#123824',
-                            dark: '#111827',
-                            graphite: '#1F2937',
-                            slate: '#4B5563',
-                            light: '#F8FAFC',
-                            card: '#FFFFFF',
-                            border: '#1D5D3B',
-                            accent: '#10B981'
+                            green: "#1D5D3B",
+                            hover: "#24754A",
+                            forest: "#123824",
+                            dark: "#0A0D0B",
+                            graphite: "#121614",
+                            slate: "#71717A",
+                            light: "#F8FAFC",
+                            card: "#121614",
+                            border: "rgba(255, 255, 255, 0.08)",
+                            accent: "#10B981"
                         }
                     },
                     fontFamily: {
-                        brand: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'sans-serif'],
-                        sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'sans-serif']
+                        brand: ["'Plus Jakarta Sans'", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
+                        sans: ["'Plus Jakarta Sans'", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
+                        mono: ["'JetBrains Mono'", "monospace"]
                     }
                 }
             }
@@ -49,140 +54,96 @@
     <link rel="stylesheet" href="./dark-theme.css">
 
     <style>
-        .text-primary {
-            color: #1D5D3B;
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #0A0D0B;
+            color: #FFFFFF;
         }
 
-        /* MUVIO High-Tech Geometric Styles */
-        .chamfer-box {
-            clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
-        }
-
-        .chamfer-btn {
-            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-            transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-        }
-
-        .chamfer-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px -4px rgba(29, 93, 59, 0.35);
-        }
-
-        .chamfer-badge {
-            clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
-        }
-
-        .tech-card {
-            border: 2px solid #1D5D3B;
-            transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
-        }
-
-        .tech-card:hover {
-            border-color: #24754A;
-            transform: translateY(-4px);
-            box-shadow: 0 16px 32px -8px rgba(29, 93, 59, 0.22);
-        }
-
-        /* Catalog Cards Day / Night Headlight Crossfade */
+        /* Day / Night Headlight Crossfade */
         .fleet-card .img-night,
-        .tech-card .img-night,
-        .vehicle-card .img-night,
-        #catalog .img-night {
+        .img-night {
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
         }
 
         .fleet-card .img-day,
-        .tech-card .img-day,
-        .vehicle-card .img-day,
-        #catalog .img-day {
+        .img-day {
             opacity: 1;
-            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
         }
 
-        .dark .fleet-card .img-night,
-        html.dark .fleet-card .img-night,
-        body.dark .fleet-card .img-night,
-        html.theme-dark .fleet-card .img-night,
-        body.theme-dark .fleet-card .img-night,
-        [data-theme="dark"] .fleet-card .img-night,
-        .dark .tech-card .img-night,
-        html.dark .tech-card .img-night,
-        body.dark .tech-card .img-night,
-        html.theme-dark .tech-card .img-night,
-        body.theme-dark .tech-card .img-night,
-        [data-theme="dark"] .tech-card .img-night,
-        .dark .vehicle-card .img-night,
-        html.dark .vehicle-card .img-night,
-        body.dark .vehicle-card .img-night,
-        html.theme-dark .vehicle-card .img-night,
-        body.theme-dark .vehicle-card .img-night,
-        [data-theme="dark"] .vehicle-card .img-night,
-        .dark #catalog .img-night,
-        html.dark #catalog .img-night,
-        body.dark #catalog .img-night,
-        html.theme-dark #catalog .img-night,
-        body.theme-dark #catalog .img-night,
-        [data-theme="dark"] #catalog .img-night {
+        .dark .img-night,
+        html.dark .img-night,
+        body.dark .img-night,
+        html.theme-dark .img-night,
+        body.theme-dark .img-night,
+        [data-theme="dark"] .img-night {
             opacity: 1 !important;
         }
 
-        .dark .fleet-card .img-day,
-        html.dark .fleet-card .img-day,
-        body.dark .fleet-card .img-day,
-        html.theme-dark .fleet-card .img-day,
-        body.theme-dark .fleet-card .img-day,
-        [data-theme="dark"] .fleet-card .img-day,
-        .dark .tech-card .img-day,
-        html.dark .tech-card .img-day,
-        body.dark .tech-card .img-day,
-        html.theme-dark .tech-card .img-day,
-        body.theme-dark .tech-card .img-day,
-        [data-theme="dark"] .tech-card .img-day,
-        .dark .vehicle-card .img-day,
-        html.dark .vehicle-card .img-day,
-        body.dark .vehicle-card .img-day,
-        html.theme-dark .vehicle-card .img-day,
-        body.theme-dark .vehicle-card .img-day,
-        [data-theme="dark"] .vehicle-card .img-day,
-        .dark #catalog .img-day,
-        html.dark #catalog .img-day,
-        body.dark #catalog .img-day,
-        html.theme-dark #catalog .img-day,
-        body.theme-dark #catalog .img-day,
-        [data-theme="dark"] #catalog .img-day {
+        .dark .img-day,
+        html.dark .img-day,
+        body.dark .img-day,
+        html.theme-dark .img-day,
+        body.theme-dark .img-day,
+        [data-theme="dark"] .img-day {
             opacity: 0 !important;
         }
+
+        /* Keepcar Automotive Styling */
+        .vehicle-showcase-card {
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .vehicle-showcase-card:hover {
+            transform: translateY(-4px);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0A0D0B;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #27272A;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3F3F46;
+        }
     </style>
+
     <!-- Anti-flicker Settings Loader -->
     <script>
         (function () {
             try {
-                var p = (new URLSearchParams(window.location.search)).get('theme');
-                var s = localStorage.getItem('muvio_site_settings');
-                var t = (p === 'dark' || p === 'light') ? p : (s ? JSON.parse(s).theme : (localStorage.getItem('muvio_theme') || 'light'));
-                if (t === 'dark') {
-                    document.documentElement.classList.add('dark', 'theme-dark', 'dark-theme');
-                    document.documentElement.setAttribute('data-theme', 'dark');
+                var p = (new URLSearchParams(window.location.search)).get("theme");
+                var s = localStorage.getItem("muvio_site_settings");
+                var t = (p === "dark" || p === "light") ? p : (s ? JSON.parse(s).theme : (localStorage.getItem("muvio_theme") || "dark"));
+                if (t === "dark") {
+                    document.documentElement.classList.add("dark", "theme-dark", "dark-theme");
+                    document.documentElement.setAttribute("data-theme", "dark");
                 } else {
-                    document.documentElement.classList.remove('dark', 'theme-dark', 'dark-theme');
-                    document.documentElement.setAttribute('data-theme', 'light');
+                    document.documentElement.classList.remove("dark", "theme-dark", "dark-theme");
+                    document.documentElement.setAttribute("data-theme", "light");
                 }
             } catch (e) { }
         })();
     </script>
 </head>
 
-<body
-    class="bg-[#F9FAFB] text-[#111827] font-sans antialiased selection:bg-[#1D5D3B] selection:text-white relative min-h-screen">
+<body class="bg-[#0A0D0B] text-white font-sans antialiased selection:bg-[#10B981] selection:text-white relative min-h-screen">
 
     <!-- ==================== ПРЕЛОАДЕР MUVIO ==================== -->
     <div id="page-preloader"
-        class="fixed inset-0 z-[9999] flex items-center justify-center transition-opacity duration-300">
+        class="fixed inset-0 z-[9999] flex items-center justify-center bg-[#0A0D0B] transition-opacity duration-300">
         <div class="preloader-logo-wrap animate-pulse">
             <!-- Точный фирменный знак "М" бренда MUVIO -->
-            <svg class="preloader-m-logo w-16 h-16 sm:w-20 sm:h-20" viewBox="0 0 100 100" fill="currentColor">
+            <svg class="preloader-m-logo w-16 h-16 sm:w-20 sm:h-20 text-[#10B981]" viewBox="0 0 100 100" fill="currentColor">
                 <path
                     d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z" />
             </svg>
@@ -193,11 +154,11 @@
     <header class="site-header-synced w-full"
         style="width: 100% !important; position: sticky !important; top: 0 !important; left: 0 !important; z-index: 100 !important; height: 46px !important; min-height: 46px !important; max-height: 46px !important; padding: 0 36px !important; padding-top: 0 !important; padding-bottom: 0 !important; display: flex !important; align-items: center !important; justify-content: space-between !important; box-sizing: border-box !important;">
 
-        <!-- ЛІВА ЧАСТИНА: Бургер (для мобільних) + Чистий прозорий SVG-логотип MUVIO -->
+        <!-- ЛІВА ЧАСТИНА: Бургер (для мобільних) + Чистий SVG-логотип MUVIO -->
         <div class="flex items-center gap-3 shrink-0 z-10" style="margin: 0 !important; padding: 0 !important; height: 100% !important;">
             <!-- Кнопка-бургер (#burger-btn) для мобільних екранів -->
             <button id="burger-btn" data-burger="true" type="button" aria-label="Меню"
-                class="header-action-btn md:hidden flex items-center justify-center w-8 h-8 p-1 text-[#1D5D3B] hover:text-[#16472d] dark:text-[#2E8B57] dark:hover:text-emerald-400 transition-colors focus:outline-none"
+                class="header-action-btn md:hidden flex items-center justify-center w-8 h-8 p-1 text-zinc-300 hover:text-white dark:text-zinc-300 dark:hover:text-white transition-colors focus:outline-none"
                 style="background: transparent !important; border: none !important;">
                 <svg class="w-5 h-5 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round">
@@ -207,7 +168,7 @@
                 </svg>
             </button>
 
-            <!-- Логотип MUVIO (растровый PNG, крайнее левое положение) -->
+            <!-- Логотип MUVIO -->
             <a href="index.html"
                 style="display: inline-flex !important; align-items: center !important; text-decoration: none !important; background: transparent !important;"
                 class="group focus:outline-none" aria-label="MUVIO">
@@ -221,31 +182,31 @@
         <nav class="hidden md:flex items-center gap-7 lg:gap-8 absolute left-1/2 -translate-x-1/2" style="display: flex; align-items: center; margin: 0 !important; padding: 0 !important; top: 0 !important; bottom: 0 !important; height: 100% !important;">
             <a href="catalog.html"
                 style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important;"
-                class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2">
+                class="header-nav-link text-white hover:text-[#10B981] transition-colors py-1 px-2 font-semibold">
                 <span class="lang-ua">КАТАЛОГ</span>
                 <span class="lang-en">CATALOG</span>
             </a>
             <a href="calculator.html"
                 style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important;"
-                class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2">
+                class="header-nav-link text-zinc-300 hover:text-white transition-colors py-1 px-2">
                 <span class="lang-ua">КАЛЬКУЛЯТОР</span>
                 <span class="lang-en">CALCULATOR</span>
             </a>
             <a href="service.html"
                 style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important;"
-                class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2">
+                class="header-nav-link text-zinc-300 hover:text-white transition-colors py-1 px-2">
                 <span class="lang-ua">СЕРВІС</span>
                 <span class="lang-en">SERVICE</span>
             </a>
             <a href="terms.html"
                 style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important;"
-                class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2">
+                class="header-nav-link text-zinc-300 hover:text-white transition-colors py-1 px-2">
                 <span class="lang-ua">УМОВИ ОРЕНДИ</span>
                 <span class="lang-en">TERMS</span>
             </a>
             <a href="faq.html"
                 style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important;"
-                class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2">
+                class="header-nav-link text-zinc-300 hover:text-white transition-colors py-1 px-2">
                 <span>FAQ</span>
             </a>
         </nav>
@@ -256,7 +217,7 @@
             <!-- 1. Вхід в кабінет -->
             <a href="cabinet.html"
                 style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important; gap: 6px !important;"
-                class="text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors"
+                class="text-zinc-200 hover:text-[#10B981] transition-colors"
                 title="Особистий кабінет" aria-label="Особистий кабінет">
                 <svg xmlns="http://www.w3.org/2000/svg" style="width: 15px !important; height: 15px !important;"
                     fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
@@ -275,7 +236,7 @@
                     class="lang-switch-btn active-lang"
                     style="background: none !important; border: none !important; padding: 0 !important; cursor: pointer !important; font-size: 12px !important; letter-spacing: 0.08em !important; transition: all 0.2s ease !important;">UA</button>
                 <span
-                    style="color: #a1a1aa !important; font-size: 12px !important; font-weight: 400 !important;">|</span>
+                    style="color: #71717a !important; font-size: 12px !important; font-weight: 400 !important;">|</span>
                 <button type="button" id="authLangEn" onclick="setSiteLanguage('en')"
                     class="lang-switch-btn"
                     style="background: none !important; border: none !important; padding: 0 !important; cursor: pointer !important; font-size: 12px !important; letter-spacing: 0.08em !important; transition: all 0.2s ease !important;">EN</button>
@@ -304,14 +265,14 @@
 
         <!-- Mobile Drawer -->
         <div id="mobile-menu" data-mobile-menu="true"
-            class="hidden md:hidden absolute top-full left-0 w-full border-t-2 border-[#1D5D3B] bg-white dark:bg-[#0B0E0C] px-6 py-4 space-y-2 shadow-2xl transition-all duration-200 z-50">
-            <div class="flex items-center justify-between pb-2 mb-1 border-b border-slate-100 dark:border-[#1F2E26]">
-                <span class="font-brand font-bold text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">
+            class="hidden md:hidden absolute top-full left-0 w-full border-t border-zinc-800 bg-[#0B0E0C] px-6 py-4 space-y-2 shadow-2xl transition-all duration-200 z-50">
+            <div class="flex items-center justify-between pb-2 mb-1 border-b border-zinc-800">
+                <span class="font-mono text-xs uppercase tracking-wider text-zinc-400">
                     <span class="lang-ua">МЕНЮ НАВІГАЦІЇ</span>
                     <span class="lang-en">NAVIGATION MENU</span>
                 </span>
                 <button type="button" id="mobile-menu-close"
-                    class="p-1 text-slate-400 hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors"
+                    class="p-1 text-zinc-400 hover:text-white transition-colors"
                     aria-label="Закрити меню">
                     <svg class="w-5 h-5 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round">
@@ -321,88 +282,97 @@
                 </button>
             </div>
             <a href="catalog.html"
-                class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-[#111827] dark:text-zinc-200 hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] py-2 px-2 transition-colors rounded">
+                class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-white hover:text-[#10B981] py-2 px-2 transition-colors rounded">
                 <span class="lang-ua">КАТАЛОГ</span>
                 <span class="lang-en">CATALOG</span>
             </a>
             <a href="calculator.html"
-                class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-[#111827] dark:text-zinc-200 hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] py-2 px-2 transition-colors rounded">
+                class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-zinc-300 hover:text-[#10B981] py-2 px-2 transition-colors rounded">
                 <span class="lang-ua">КАЛЬКУЛЯТОР</span>
                 <span class="lang-en">CALCULATOR</span>
             </a>
             <a href="service.html"
-                class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-[#111827] dark:text-zinc-200 hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] py-2 px-2 transition-colors rounded">
+                class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-zinc-300 hover:text-[#10B981] py-2 px-2 transition-colors rounded">
                 <span class="lang-ua">СЕРВІС</span>
                 <span class="lang-en">SERVICE</span>
             </a>
             <a href="terms.html"
-                class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-[#111827] dark:text-zinc-200 hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] py-2 px-2 transition-colors rounded">
+                class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-zinc-300 hover:text-[#10B981] py-2 px-2 transition-colors rounded">
                 <span class="lang-ua">УМОВИ ОРЕНДИ</span>
                 <span class="lang-en">TERMS</span>
             </a>
             <a href="faq.html"
-                class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-[#111827] dark:text-zinc-200 hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] py-2 px-2 transition-colors rounded font-bold">
+                class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-zinc-300 hover:text-[#10B981] py-2 px-2 transition-colors rounded">
                 <span>FAQ</span>
             </a>
         </div>
     </header>
 
-    <!-- ==================== 3. КАТАЛОГ СКУТЕРІВ (ТОП МОДЕЛІ СПЕРШУ) ==================== -->
-    <section id="catalog" class="py-16 md:py-24 bg-[#F8FAFC] border-b-2 border-[#1D5D3B]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-x border-slate-200/60">
+    <!-- ==================== 2. КАТАЛОГ ТРАНСПОРТУ (KEEPCAR.OD.UA РЕФЕРЕНС) ==================== -->
+    <main id="catalog" class="py-10 md:py-16 bg-[#0A0D0B] text-white min-h-[85vh]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-            <!-- Заголовок секції -->
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
-                <div>
-                    <div
-                        class="inline-flex items-center gap-2 px-3 py-1 bg-[#1D5D3B]/10 border border-[#1D5D3B] chamfer-badge mb-3">
-                        <span class="font-brand font-bold text-xs tracking-wider text-[#1D5D3B] uppercase">
-                            <span class="lang-ua">ОФІЦІЙНИЙ АВТОПАРК MUVIO</span>
-                            <span class="lang-en">OFFICIAL MUVIO FLEET</span>
-                        </span>
+            <!-- ==================== 1. СТИЛЬ ОСНОВНОГО КАТАЛОГА (СТРАНИЦА ВИТРИНЫ) ==================== -->
+            <div id="catalogShowcaseView">
+                
+                <!-- Заголовок витрины -->
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 border-b border-white/[0.08] pb-8">
+                    <div>
+                        <div class="inline-flex items-center gap-2 px-3 py-1 bg-white/[0.04] border border-white/10 rounded-full mb-4">
+                            <span class="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span>
+                            <span class="font-mono text-[11px] tracking-widest text-zinc-300 uppercase">
+                                <span class="lang-ua">ОФІЦІЙНИЙ АВТОПАРК MUVIO</span>
+                                <span class="lang-en">OFFICIAL MUVIO FLEET</span>
+                            </span>
+                        </div>
+                        <h1 class="font-brand font-extrabold text-3xl sm:text-4xl lg:text-5xl uppercase tracking-tight text-white leading-tight">
+                            <span class="lang-ua">КАТАЛОГ ТЕХНІКИ В НАЯВНОСТІ</span>
+                            <span class="lang-en">AVAILABLE FLEET CATALOG</span>
+                        </h1>
+                        <p class="text-sm sm:text-base text-zinc-400 mt-2 max-w-2xl font-normal leading-relaxed">
+                            <span class="lang-ua">Електроскутери та велосипеди у зборі з АКБ та зарядним пристроєм. Оберіть модель для перегляду характеристик і тарифів.</span>
+                            <span class="lang-en">Electric scooters and e-bikes turnkey with battery & charger. Select a model to view specs and rates.</span>
+                        </p>
                     </div>
-                    <h2 class="font-brand font-bold text-2xl sm:text-4xl uppercase tracking-tight text-[#111827]">
-                        <span class="lang-ua">КАТАЛОГ ТЕХНІКИ В НАЯВНОСТІ</span>
-                        <span class="lang-en">AVAILABLE FLEET CATALOG</span>
-                    </h2>
-                    <p class="text-sm sm:text-base text-[#4B5563] mt-1">
-                        <span class="lang-ua">Всі моделі укомплектовані знімним АКБ та зарядним пристроєм. Реальні тарифи оренди.</span>
-                        <span class="lang-en">All models equipped with removable battery & charger. Verified rental rates.</span>
-                    </p>
+
+                    <!-- Фильтры категорий: строгий стиль без эмодзи -->
+                    <div class="flex flex-wrap gap-2 shrink-0">
+                        <button onclick="filterCatalog('all')" id="tab-all"
+                            class="px-5 py-2.5 rounded-full text-xs font-brand font-bold uppercase tracking-wider border border-white/20 bg-white text-black transition-all">
+                            <span class="lang-ua">ВСІ МОДЕЛІ</span>
+                            <span class="lang-en">ALL MODELS</span>
+                        </button>
+                        <button onclick="filterCatalog('scooter')" id="tab-scooter"
+                            class="px-5 py-2.5 rounded-full text-xs font-brand font-bold uppercase tracking-wider border border-white/10 bg-white/[0.04] text-zinc-400 hover:text-white hover:border-white/30 transition-all">
+                            <span class="lang-ua">СКУТЕРИ</span>
+                            <span class="lang-en">SCOOTERS</span>
+                        </button>
+                        <button onclick="filterCatalog('bike')" id="tab-bike"
+                            class="px-5 py-2.5 rounded-full text-xs font-brand font-bold uppercase tracking-wider border border-white/10 bg-white/[0.04] text-zinc-400 hover:text-white hover:border-white/30 transition-all">
+                            <span class="lang-ua">ЕЛЕКТРОВЕЛОСИПЕДИ</span>
+                            <span class="lang-en">E-BIKES</span>
+                        </button>
+                    </div>
                 </div>
 
-                <!-- Фільтри -->
-                <div class="flex flex-wrap gap-2">
-                    <button onclick="filterCatalog('all')" id="tab-all"
-                        class="chamfer-btn px-4 py-2 text-xs sm:text-sm font-brand font-bold uppercase tracking-wider border-2 border-[#1D5D3B] bg-[#1D5D3B] text-white transition-all">
-                        <span class="lang-ua">ВСІ МОДЕЛІ</span>
-                        <span class="lang-en">ALL MODELS</span>
-                    </button>
-                    <button onclick="filterCatalog('scooter')" id="tab-scooter"
-                        class="chamfer-btn px-4 py-2 text-xs sm:text-sm font-brand font-bold uppercase tracking-wider border-2 border-[#1D5D3B] bg-white text-[#111827] hover:bg-[#1D5D3B]/10 transition-all">
-                        <span class="lang-ua">🛵 СКУТЕРИ</span>
-                        <span class="lang-en">🛵 SCOOTERS</span>
-                    </button>
-                    <button onclick="filterCatalog('bike')" id="tab-bike"
-                        class="chamfer-btn px-4 py-2 text-xs sm:text-sm font-brand font-bold uppercase tracking-wider border-2 border-[#1D5D3B] bg-white text-[#111827] hover:bg-[#1D5D3B]/10 transition-all">
-                        <span class="lang-ua">🚲 ВЕЛОСИПЕДИ</span>
-                        <span class="lang-en">🚲 E-BIKES</span>
-                    </button>
+                <!-- Сетка карточек: 3 колонки на десктопе, строгий минимализм -->
+                <div id="catalogGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
+                    <!-- Карточки рендерятся через JS -->
                 </div>
             </div>
 
-            <!-- Сітка карток -->
-            <div id="catalogGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Карточки рендеряться через JS -->
+            <!-- ==================== 2. ДЕТАЛЬНАЯ СТРАНИЦА МОДЕЛИ (KEEPCAR СТРУКТУРА) ==================== -->
+            <div id="modelDetailView" class="hidden">
+                <!-- Контент детальной страницы рендерится через renderModelDetail() -->
             </div>
 
         </div>
-    </section>
+    </main>
 
-    <!-- ==================== 7. ПІДВАЛ (FOOTER) ==================== -->
-    <footer id="contacts" class="bg-[#123824] text-white border-t-2 border-[#1D5D3B] pt-16 pb-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-x border-slate-200/60">
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 pb-12 border-b border-emerald-800/60">
+    <!-- ==================== 3. ПІДВАЛ (FOOTER) ==================== -->
+    <footer id="contacts" class="bg-[#0B150F] text-white border-t border-white/[0.08] pt-16 pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-x border-white/[0.05]">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 pb-12 border-b border-white/[0.08]">
 
                 <!-- Колонка 1: Бренд і контакти -->
                 <div class="space-y-4">
@@ -426,17 +396,17 @@
                             <span class="lang-en">YOUR ELECTRO CITY</span>
                         </span>
                     </div>
-                    <div class="space-y-2 text-xs text-emerald-100 font-sans pt-1">
+                    <div class="space-y-2 text-xs text-zinc-300 font-sans pt-1">
                         <p class="flex items-center gap-2">
-                            <i data-lucide="mail" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                            <i data-lucide="mail" class="w-4 h-4 text-[#10B981] shrink-0"></i>
                             <a href="mailto:muviorent@gmail.com" class="hover:text-white transition-colors">muviorent@gmail.com</a>
                         </p>
                         <p class="flex items-center gap-2">
-                            <i data-lucide="phone" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                            <i data-lucide="phone" class="w-4 h-4 text-[#10B981] shrink-0"></i>
                             <a href="tel:+380638316361" class="hover:text-white transition-colors font-semibold">+38 (063) 831-63-61</a>
                         </p>
                         <p class="flex items-start gap-2">
-                            <i data-lucide="map-pin" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+                            <i data-lucide="map-pin" class="w-4 h-4 text-[#10B981] shrink-0 mt-0.5"></i>
                             <span>
                                 <span class="lang-ua">м. Одеса, вул. Приморська, 22</span>
                                 <span class="lang-en">Odesa, Prymorska St, 22</span>
@@ -447,56 +417,56 @@
 
                 <!-- Колонка 2: Меню -->
                 <div>
-                    <div class="font-brand font-bold text-sm uppercase tracking-wider text-emerald-200 mb-4">
-                        <span class="lang-ua">МЕНЮ</span>
-                        <span class="lang-en">MENU</span>
+                    <div class="font-brand font-bold text-sm uppercase tracking-wider text-zinc-200 mb-4">
+                        <span class="lang-ua">Навігація</span>
+                        <span class="lang-en">Navigation</span>
                     </div>
-                    <ul class="space-y-2 text-base font-medium font-brand tracking-wide">
-                        <li><a href="catalog.html?cat=scooter" class="hover:text-emerald-300 transition-colors"><span class="lang-ua">Каталог скутерів</span><span class="lang-en">Scooter Catalog</span></a></li>
-                        <li><a href="catalog.html?cat=bike" class="hover:text-emerald-300 transition-colors"><span class="lang-ua">Каталог електровелосипедів</span><span class="lang-en">E-Bike Catalog</span></a></li>
-                        <li><a href="terms.html" class="hover:text-emerald-300 transition-colors"><span class="lang-ua">Умови оренди</span><span class="lang-en">Rental Terms</span></a></li>
-                        <li><a href="index.html#faq" class="hover:text-emerald-300 transition-colors">FAQ</a></li>
+                    <ul class="space-y-2 text-xs text-zinc-400">
+                        <li><a href="catalog.html" class="hover:text-white transition-colors"><span class="lang-ua">Каталог транспорту</span><span class="lang-en">Fleet Catalog</span></a></li>
+                        <li><a href="calculator.html" class="hover:text-white transition-colors"><span class="lang-ua">Калькулятор оренди</span><span class="lang-en">Rent Calculator</span></a></li>
+                        <li><a href="service.html" class="hover:text-white transition-colors"><span class="lang-ua">Сервіс та ремонт</span><span class="lang-en">Service & Repair</span></a></li>
+                        <li><a href="terms.html" class="hover:text-white transition-colors"><span class="lang-ua">Умови та регламент</span><span class="lang-en">Terms & Regulations</span></a></li>
+                        <li><a href="faq.html" class="hover:text-white transition-colors">FAQ</a></li>
                     </ul>
                 </div>
 
-                <!-- Колонка 3: Класи скутерів -->
+                <!-- Колонка 3: Популярні моделі -->
                 <div>
-                    <div class="font-brand font-bold text-sm uppercase tracking-wider text-emerald-200 mb-4">
-                        <span class="lang-ua">КЛАСИ СКУТЕРІВ</span>
-                        <span class="lang-en">SCOOTER CLASSES</span>
+                    <div class="font-brand font-bold text-sm uppercase tracking-wider text-zinc-200 mb-4">
+                        <span class="lang-ua">Популярні моделі</span>
+                        <span class="lang-en">Top Models</span>
                     </div>
-                    <ul class="space-y-2 text-base font-medium font-brand tracking-wide text-emerald-100">
-                        <li><a href="catalog.html?brand=Aima" class="hover:text-emerald-300 transition-colors">Aima</a></li>
-                        <li><a href="catalog.html?brand=Crosser" class="hover:text-emerald-300 transition-colors">Crosser</a></li>
-                        <li><a href="catalog.html?brand=Like%20Bike" class="hover:text-emerald-300 transition-colors">Like Bike</a></li>
+                    <ul class="space-y-2 text-xs text-zinc-400">
+                        <li><a href="catalog.html?model=crosser_cr13_1" class="hover:text-white transition-colors">Crosser CR-13</a></li>
+                        <li><a href="catalog.html?model=crosser_cr20" class="hover:text-white transition-colors">Crosser CR-20</a></li>
+                        <li><a href="catalog.html?model=aima_a700" class="hover:text-white transition-colors">Aima A700</a></li>
+                        <li><a href="catalog.html?model=aima_f606_1" class="hover:text-white transition-colors">Aima F606</a></li>
+                        <li><a href="catalog.html?model=like_bike_bruser_1" class="hover:text-white transition-colors">Like Bike Bruiser</a></li>
                     </ul>
                 </div>
 
-                <!-- Колонка 4: Ще напрямки -->
+                <!-- Колонка 4: Соцмережі та графік -->
                 <div>
-                    <div class="font-brand font-bold text-sm uppercase tracking-wider text-emerald-200 mb-4">
-                        <span class="lang-ua">ЩЕ НАПРЯМКИ</span>
-                        <span class="lang-en">EXPLORE</span>
+                    <div class="font-brand font-bold text-sm uppercase tracking-wider text-zinc-200 mb-4">
+                        <span class="lang-ua">Графік роботи</span>
+                        <span class="lang-en">Working Hours</span>
                     </div>
-                    <ul class="space-y-2 text-base font-medium font-brand tracking-wide">
-                        <li><a href="calculator.html" class="hover:text-emerald-300 transition-colors"><span class="lang-ua">Калькулятор оренди</span><span class="lang-en">Rental Calculator</span></a></li>
-                        <li><a href="service.html" class="hover:text-emerald-300 transition-colors"><span class="lang-ua">Ремонт скутера</span><span class="lang-en">Scooter Repair</span></a></li>
-                        <li><a href="franchise.html" class="hover:underline"><span class="lang-ua">Франшиза</span><span class="lang-en">Franchise</span></a></li>
-                    </ul>
-                    <div class="pt-4">
-                        <a href="https://t.me/muviobot" target="_blank" rel="noopener noreferrer"
-                            class="chamfer-btn inline-flex items-center gap-2 bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs uppercase px-4 py-2 border border-emerald-500">
-                            <i data-lucide="send" class="w-3.5 h-3.5"></i>
-                            <span>TELEGRAM BOT →</span>
-                        </a>
-                    </div>
+                    <p class="text-xs text-zinc-400 leading-relaxed mb-4">
+                        <span class="lang-ua">Пн–Сб: 09:00 – 19:00<br>Нд: за домовленістю<br>Підтримка в Telegram: 24/7</span>
+                        <span class="lang-en">Mon–Sat: 09:00 – 19:00<br>Sun: by appointment<br>Telegram support: 24/7</span>
+                    </p>
+                    <a href="https://t.me/muviobot" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#10B981] hover:bg-[#059669] text-white text-xs font-bold uppercase tracking-wider transition-all">
+                        <i data-lucide="send" class="w-3.5 h-3.5"></i>
+                        <span>Telegram Bot</span>
+                    </a>
                 </div>
-
             </div>
 
-            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-emerald-200 gap-4 font-mono">
+            <!-- Копірайт -->
+            <div class="pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-zinc-500 gap-4">
                 <div>
-                    <span class="lang-ua">© 2026 MUVIO Rent. Одеса, вул. Приморська, 22.</span>
+                    <span class="lang-ua">© 2026 MUVIO Rent. м. Одеса, вул. Приморська, 22</span>
                     <span class="lang-en">© 2026 MUVIO Rent. Odesa, 22 Prymorska Str.</span>
                 </div>
                 <div class="text-[11px]">
@@ -507,12 +477,283 @@
         </div>
     </footer>
 
-    <!-- ==================== JAVASCRIPT ==================== -->
+    <!-- ==================== JAVASCRIPT: ДАНІ ТА ЛОГІКА ==================== -->
     <script>
         // 1. АВТОПАРК З РЕАЛЬНИМИ ЦІНАМИ В ЗБОРІ
-        const FLEET = [{"key": "crosser_cr13_1", "name": "Crosser CR-13 №1", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 160 км", "speed": "85 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 1000, "price_week": 2500, "price_month": 8500, "deposit": 4500, "buyout_available": true, "buyout_base_price": 80000, "image": "images/crosser.jpg", "badge": "85 КМ/ГОД", "is_top": true, "power": "2000W", "image_night": "images/crosser cr-13 night №1.jpg"}, {"key": "crosser_cr20", "name": "Crosser CR-20", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 160 км", "speed": "75 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 1000, "price_week": 2500, "price_month": 8500, "deposit": 4500, "buyout_available": true, "buyout_base_price": 77000, "image": "images/crosser-cr-20.jpg", "badge": "ТОП ПОТУЖНІСТЬ", "is_top": true, "power": "2500W", "image_night": "images/crosser cr-20 night.jpg"}, {"key": "aima_a700", "name": "Aima A700", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 150 км", "speed": "47 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 70000, "image": "images/a700.jpg", "badge": "ПРЕМІУМ КОМФОРТ", "is_top": true, "power": "1200W", "image_night": "images/aima a700 night.jpg"}, {"key": "aima_f606_1", "name": "Aima F606 №1", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 100 км", "speed": "70 км/год", "charging": "10Ач (4 години)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 60000, "image": "images/f606.jpg", "badge": "ХІТ ПРОКАТУ", "is_top": true, "power": "1200W", "image_night": "images/aima f606 night №1.jpg"}, {"key": "aima_a715", "name": "Aima A715", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 150 км", "speed": "65 км/год", "charging": "10Ач (4 години)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 68000, "image": "images/a715.jpg", "badge": "НАДІЙНИЙ", "is_top": false, "power": "1200W", "image_night": "images/aima a715 night.jpg"}, {"key": "aima_journey", "name": "Aima Journey", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 160 км", "speed": "60 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 68000, "image": "images/journey.jpg", "badge": "ДАЛЕКІ ДИСТАНЦІЇ", "is_top": false, "power": "1200W", "image_night": "images/aima journey night.jpg"}, {"key": "aima_f606_2", "name": "Aima F606 №2", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 130 км", "speed": "70 км/год", "charging": "10Ач (4 години)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 60000, "image": "images/f606-2.jpg", "badge": "ЗБІЛЬШЕНИЙ ХІД", "is_top": false, "power": "1200W", "image_night": "images/aima f606 night №2.jpg"}, {"key": "crosser_cr13_2", "name": "Crosser CR-13 №2", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 160 км", "speed": "85 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 1000, "price_week": 2500, "price_month": 8500, "deposit": 4500, "buyout_available": true, "buyout_base_price": 80000, "image": "images/crosser-cr-13-2.jpg", "badge": "85 КМ/ГОД", "is_top": false, "power": "2000W", "image_night": "images/crosser cr-13 night №2.jpg"}, {"key": "aima_mine", "name": "Aima Mine", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "60V", "range": "до 130 км", "speed": "55 км/год", "charging": "7Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 60000, "image": "images/mine.jpg", "badge": "КОМПАКТНИЙ", "is_top": false, "power": "800W", "image_night": "images/aima mine night.jpg"}, {"key": "like_bike_n5", "name": "Like Bike N5", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "60V", "range": "до 130 км", "speed": "65 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 57000, "image": "images/like-bike-n5.jpg", "badge": "МАНЕВРЕНИЙ", "is_top": false, "power": "1000W", "image_night": "images/like-bike-n5.jpg"}, {"key": "aima_mine_plus", "name": "Aima Mine Plus", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "60V", "range": "до 130 км", "speed": "60 км/год", "charging": "7Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 55000, "image": "images/mine-plus.jpg", "badge": "PLUS СЕРІЯ", "is_top": false, "power": "800W", "image_night": "images/aima mine plus night.jpg"}, {"key": "aima_leopard", "name": "Aima Leopard", "category": "scooter", "type": "🛵 Електроскутер", "voltage": "72V", "range": "до 150 км", "speed": "48 км/год", "charging": "10Ач (6 годин)", "battery": "40Ah / 60Ah (Знімна)", "price_day": 900, "price_week": 2200, "price_month": 8000, "deposit": 4000, "buyout_available": true, "buyout_base_price": 50000, "image": "images/leopard.jpg", "badge": "КЛАСИКА", "is_top": false, "power": "1200W", "image_night": "images/leopard.jpg"}, {"key": "like_bike_bruser_1", "name": "Like Bike Bruiser №1", "category": "bike", "type": "🚲 Електровелосипед", "voltage": "48V", "range": "до 80 км", "speed": "45 км/год", "charging": "7Ач (4 години)", "battery": "10Ah-40Ah (Знімна)", "price_day": 800, "price_week": 1800, "price_month": 6000, "deposit": 3000, "buyout_available": true, "buyout_base_price": 28000, "image": "images/like-bike-bruiser-1.jpg", "badge": "РАМА 180 КГ", "is_top": false, "power": "500W", "image_night": "images/like bike night №1.jpg"}, {"key": "like_bike_bruser_2", "name": "Like Bike Bruiser №2", "category": "bike", "type": "🚲 Електровелосипед", "voltage": "48V", "range": "до 80 км", "speed": "45 км/год", "charging": "7Ач (4 години)", "battery": "10Ah-40Ah (Знімна)", "price_day": 800, "price_week": 1800, "price_month": 6000, "deposit": 3000, "buyout_available": true, "buyout_base_price": 28000, "image": "images/like-bike-bruiser-2.jpg", "badge": "РАМА 180 КГ", "is_top": false, "power": "500W", "image_night": "images/like bika night №2.jpg"}, {"key": "ado_a20f", "name": "ADO A20F", "category": "bike", "type": "🚲 Електровелосипед", "voltage": "48V", "range": "до 150 км", "speed": "40 км/год", "charging": "10Ач (4 години)", "battery": "10Ah-40Ah (Знімна)", "price_day": 800, "price_week": 1800, "price_month": 6000, "deposit": 3000, "buyout_available": true, "buyout_base_price": 28000, "image": "images/ado-a20f.jpg", "badge": "ФЕТБАЙК", "is_top": false, "power": "250W", "image_night": "images/ado night.jpg"}];
+        const FLEET = [
+            {
+                "key": "crosser_cr13_1",
+                "name": "Crosser CR-13 №1",
+                "category": "scooter",
+                "type": "Електроскутер",
+                "voltage": "72V",
+                "range": "до 160 км",
+                "speed": "85 км/год",
+                "charging": "10Ач (6 годин)",
+                "battery": "40Ah / 60Ah (Знімна)",
+                "price_day": 1000,
+                "price_week": 2500,
+                "price_month": 8500,
+                "deposit": 4500,
+                "power": "2000W",
+                "image": "images/crosser.jpg",
+                "image_night": "images/crosser cr-13 night №1.jpg"
+            },
+            {
+                "key": "crosser_cr20",
+                "name": "Crosser CR-20",
+                "category": "scooter",
+                "type": "Електроскутер",
+                "voltage": "72V",
+                "range": "до 160 км",
+                "speed": "75 км/год",
+                "charging": "10Ач (6 годин)",
+                "battery": "40Ah / 60Ah (Знімна)",
+                "price_day": 1000,
+                "price_week": 2500,
+                "price_month": 8500,
+                "deposit": 4500,
+                "power": "2500W",
+                "image": "images/crosser-cr-20.jpg",
+                "image_night": "images/crosser cr-20 night.jpg"
+            },
+            {
+                "key": "aima_a700",
+                "name": "Aima A700",
+                "category": "scooter",
+                "type": "Електроскутер",
+                "voltage": "72V",
+                "range": "до 150 км",
+                "speed": "47 км/год",
+                "charging": "10Ач (6 годин)",
+                "battery": "40Ah / 60Ah (Знімна)",
+                "price_day": 900,
+                "price_week": 2200,
+                "price_month": 8000,
+                "deposit": 4000,
+                "power": "1200W",
+                "image": "images/a700.jpg",
+                "image_night": "images/aima a700 night.jpg"
+            },
+            {
+                "key": "aima_f606_1",
+                "name": "Aima F606 №1",
+                "category": "scooter",
+                "type": "Електроскутер",
+                "voltage": "72V",
+                "range": "до 100 км",
+                "speed": "70 км/год",
+                "charging": "10Ач (4 години)",
+                "battery": "40Ah / 60Ah (Знімна)",
+                "price_day": 900,
+                "price_week": 2200,
+                "price_month": 8000,
+                "deposit": 4000,
+                "power": "1200W",
+                "image": "images/f606.jpg",
+                "image_night": "images/aima f606 night №1.jpg"
+            },
+            {
+                "key": "aima_a715",
+                "name": "Aima A715",
+                "category": "scooter",
+                "type": "Електроскутер",
+                "voltage": "72V",
+                "range": "до 150 км",
+                "speed": "65 км/год",
+                "charging": "10Ач (4 години)",
+                "battery": "40Ah / 60Ah (Знімна)",
+                "price_day": 900,
+                "price_week": 2200,
+                "price_month": 8000,
+                "deposit": 4000,
+                "power": "1200W",
+                "image": "images/a715.jpg",
+                "image_night": "images/aima a715 night.jpg"
+            },
+            {
+                "key": "aima_journey",
+                "name": "Aima Journey",
+                "category": "scooter",
+                "type": "Електроскутер",
+                "voltage": "72V",
+                "range": "до 160 км",
+                "speed": "60 км/год",
+                "charging": "10Ач (6 годин)",
+                "battery": "40Ah / 60Ah (Знімна)",
+                "price_day": 900,
+                "price_week": 2200,
+                "price_month": 8000,
+                "deposit": 4000,
+                "power": "1200W",
+                "image": "images/journey.jpg",
+                "image_night": "images/aima journey night.jpg"
+            },
+            {
+                "key": "aima_f606_2",
+                "name": "Aima F606 №2",
+                "category": "scooter",
+                "type": "Електроскутер",
+                "voltage": "72V",
+                "range": "до 130 км",
+                "speed": "70 км/год",
+                "charging": "10Ач (4 години)",
+                "battery": "40Ah / 60Ah (Знімна)",
+                "price_day": 900,
+                "price_week": 2200,
+                "price_month": 8000,
+                "deposit": 4000,
+                "power": "1200W",
+                "image": "images/f606-2.jpg",
+                "image_night": "images/aima f606 night №2.jpg"
+            },
+            {
+                "key": "crosser_cr13_2",
+                "name": "Crosser CR-13 №2",
+                "category": "scooter",
+                "type": "Електроскутер",
+                "voltage": "72V",
+                "range": "до 160 км",
+                "speed": "85 км/год",
+                "charging": "10Ач (6 годин)",
+                "battery": "40Ah / 60Ah (Знімна)",
+                "price_day": 1000,
+                "price_week": 2500,
+                "price_month": 8500,
+                "deposit": 4500,
+                "power": "2000W",
+                "image": "images/crosser-cr-13-2.jpg",
+                "image_night": "images/crosser cr-13 night №2.jpg"
+            },
+            {
+                "key": "aima_mine",
+                "name": "Aima Mine",
+                "category": "scooter",
+                "type": "Електроскутер",
+                "voltage": "60V",
+                "range": "до 130 км",
+                "speed": "55 км/год",
+                "charging": "7Ач (6 годин)",
+                "battery": "40Ah / 60Ah (Знімна)",
+                "price_day": 900,
+                "price_week": 2200,
+                "price_month": 8000,
+                "deposit": 4000,
+                "power": "800W",
+                "image": "images/mine.jpg",
+                "image_night": "images/aima mine night.jpg"
+            },
+            {
+                "key": "like_bike_n5",
+                "name": "Like Bike N5",
+                "category": "scooter",
+                "type": "Електроскутер",
+                "voltage": "60V",
+                "range": "до 130 км",
+                "speed": "65 км/год",
+                "charging": "10Ач (6 годин)",
+                "battery": "40Ah / 60Ah (Знімна)",
+                "price_day": 900,
+                "price_week": 2200,
+                "price_month": 8000,
+                "deposit": 4000,
+                "power": "1000W",
+                "image": "images/like-bike-n5.jpg",
+                "image_night": "images/like-bike-n5.jpg"
+            },
+            {
+                "key": "aima_mine_plus",
+                "name": "Aima Mine Plus",
+                "category": "scooter",
+                "type": "Електроскутер",
+                "voltage": "60V",
+                "range": "до 130 км",
+                "speed": "60 км/год",
+                "charging": "7Ач (6 годин)",
+                "battery": "40Ah / 60Ah (Знімна)",
+                "price_day": 900,
+                "price_week": 2200,
+                "price_month": 8000,
+                "deposit": 4000,
+                "power": "800W",
+                "image": "images/mine-plus.jpg",
+                "image_night": "images/aima mine plus night.jpg"
+            },
+            {
+                "key": "aima_leopard",
+                "name": "Aima Leopard",
+                "category": "scooter",
+                "type": "Електроскутер",
+                "voltage": "72V",
+                "range": "до 150 км",
+                "speed": "48 км/год",
+                "charging": "10Ач (6 годин)",
+                "battery": "40Ah / 60Ah (Знімна)",
+                "price_day": 900,
+                "price_week": 2200,
+                "price_month": 8000,
+                "deposit": 4000,
+                "power": "1200W",
+                "image": "images/leopard.jpg",
+                "image_night": "images/leopard.jpg"
+            },
+            {
+                "key": "like_bike_bruser_1",
+                "name": "Like Bike Bruiser №1",
+                "category": "bike",
+                "type": "Електровелосипед",
+                "voltage": "48V",
+                "range": "до 80 км",
+                "speed": "45 км/год",
+                "charging": "7Ач (4 години)",
+                "battery": "10Ah-40Ah (Знімна)",
+                "price_day": 800,
+                "price_week": 1800,
+                "price_month": 6000,
+                "deposit": 3000,
+                "power": "500W",
+                "image": "images/like-bike-bruiser-1.jpg",
+                "image_night": "images/like bike night №1.jpg"
+            },
+            {
+                "key": "like_bike_bruser_2",
+                "name": "Like Bike Bruiser №2",
+                "category": "bike",
+                "type": "Електровелосипед",
+                "voltage": "48V",
+                "range": "до 80 км",
+                "speed": "45 км/год",
+                "charging": "7Ач (4 години)",
+                "battery": "10Ah-40Ah (Знімна)",
+                "price_day": 800,
+                "price_week": 1800,
+                "price_month": 6000,
+                "deposit": 3000,
+                "power": "500W",
+                "image": "images/like-bike-bruiser-2.jpg",
+                "image_night": "images/like bika night №2.jpg"
+            },
+            {
+                "key": "ado_a20f",
+                "name": "ADO A20F",
+                "category": "bike",
+                "type": "Електровелосипед",
+                "voltage": "48V",
+                "range": "до 150 км",
+                "speed": "40 км/год",
+                "charging": "10Ач (4 години)",
+                "battery": "10Ah-40Ah (Знімна)",
+                "price_day": 800,
+                "price_week": 1800,
+                "price_month": 6000,
+                "deposit": 3000,
+                "power": "250W",
+                "image": "images/ado-a20f.jpg",
+                "image_night": "images/ado night.jpg"
+            }
+        ];
 
-        // Рендеринг каталогу з можливістю фільтрації за категорією та брендом
+        // 2. РЕНДЕРИНГ ВИТРИНИ КАТАЛОГА (СТРОГИЙ МИНИМАЛИЗМ KEEPCAR)
         function renderCatalog(filter = 'all', brandFilter = null) {
             const grid = document.getElementById('catalogGrid');
             if (!grid) return;
@@ -526,12 +767,12 @@
 
             if (filtered.length === 0) {
                 grid.innerHTML = `
-                    <div class="col-span-full py-12 text-center">
-                        <p class="font-brand font-bold text-lg text-slate-500">
+                    <div class="col-span-full py-16 text-center">
+                        <p class="font-brand font-bold text-lg text-zinc-400">
                             <span class="lang-ua">За обраними фільтрами техніки не знайдено</span>
                             <span class="lang-en">No vehicles found for selected filters</span>
                         </p>
-                        <button onclick="filterCatalog('all')" class="chamfer-btn mt-4 bg-[#1D5D3B] text-white px-5 py-2 font-brand text-xs uppercase">
+                        <button onclick="filterCatalog('all')" class="mt-4 px-6 py-2.5 rounded-full bg-[#10B981] text-white font-brand font-bold text-xs uppercase tracking-wider">
                             <span class="lang-ua">Показати весь каталог</span>
                             <span class="lang-en">Show full catalog</span>
                         </button>
@@ -541,114 +782,35 @@
             }
 
             filtered.forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'fleet-card tech-card vehicle-card bg-white chamfer-box flex flex-col justify-between';
+                const card = document.createElement('a');
+                card.href = `catalog.html?model=${item.key}`;
+                card.className = 'vehicle-showcase-card group block text-left cursor-pointer';
+                card.onclick = (e) => {
+                    e.preventDefault();
+                    showModelDetail(item.key, true);
+                };
 
-                const tgRentUrl = `https://t.me/muviobot?start=rent_${item.key}`;
-                const calcUrl = `calculator.html?model=${item.key}`;
-
-                const typeUa = item.type;
-                const typeEn = item.category === 'bike' ? '🚲 E-Bike' : '🛵 E-Scooter';
-
-                const dispSpeedUa = item.speed;
-                const dispSpeedEn = item.speed.replace('км/год', 'km/h');
-
-                const dispRangeUa = item.range;
-                const dispRangeEn = item.range.replace('до', 'up to').replace('км', 'km');
-
-                const dispChargingUa = item.charging;
-                const dispChargingEn = item.charging.replace('годин', 'hours').replace('години', 'hours');
-
-                const dispBatteryUa = item.battery;
-                const dispBatteryEn = item.battery.replace('(Знімна)', '(Removable)');
-
+                // ВИТРИНА КАТАЛОГА:
+                // 1) Большое качественное горизонтальное фото скутера (пропорции ~16:10 / 16:9, border-radius 16px, без лишних рамок)
+                // 2) Под фото — только название модели: крупный жирный шрифт H3, чисто белый цвет, uppercase
+                // 3) Под названием — только аккуратный бейдж/пилюля с ценой: тонкая овальная рамка (border-radius: 999px)
+                // ВСЁ ОСТАЛЬНОЕ УБРАНО!
                 card.innerHTML = `
-                    <div>
-                        <!-- Верхня плашка -->
-                        <div class="p-4 pb-0 flex items-center justify-between">
-                            <span class="font-brand font-bold text-xs px-2.5 py-1 bg-[#1D5D3B] text-white chamfer-badge uppercase">
-                                <span class="lang-ua">${typeUa} | ${item.voltage}</span>
-                                <span class="lang-en">${typeEn} | ${item.voltage}</span>
-                            </span>
-                            <span class="text-[10px] font-brand font-bold text-[#1D5D3B] border border-[#1D5D3B] px-2 py-0.5 chamfer-badge uppercase tracking-wider">
-                                ${item.power}
-                            </span>
-                        </div>
-
-                        <!-- Фото транспорту (Кроссфейд День / Ніч) -->
-                        <div class="relative w-full h-48 sm:h-56 overflow-hidden rounded-t-xl bg-zinc-900 group">
-                            <img src="${item.image}" class="img-day absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out" alt="${item.name}" loading="lazy">
-                            <img src="${item.image_night || item.image}" class="img-night absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out" alt="${item.name} Night" loading="lazy">
-                        </div>
-
-                        <!-- Заголовок та характеристики -->
-                        <div class="px-5 pb-4">
-                            <h3 class="font-brand font-bold text-xl uppercase text-[#111827] tracking-wide">${item.name}</h3>
-                            
-                            <div class="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-[#1D5D3B]/20 text-xs font-mono">
-                                <div class="text-[#4B5563]"><span class="lang-ua">Швидкість:</span><span class="lang-en">Speed:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">${dispSpeedUa}</span><span class="lang-en">${dispSpeedEn}</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Запас ходу:</span><span class="lang-en">Range:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">${dispRangeUa}</span><span class="lang-en">${dispRangeEn}</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Зарядка:</span><span class="lang-en">Charging:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">${dispChargingUa}</span><span class="lang-en">${dispChargingEn}</span></div>
-                                <div class="text-[#4B5563]"><span class="lang-ua">Акумулятор:</span><span class="lang-en">Battery:</span></div>
-                                <div class="font-bold text-right text-[#111827]"><span class="lang-ua">${dispBatteryUa}</span><span class="lang-en">${dispBatteryEn}</span></div>
-                            </div>
-
-                            <!-- Тарифи та вартість викупу в зборі -->
-                            <div class="mt-4 p-3.5 bg-[#F8FAFC] border border-[#1D5D3B]/30 chamfer-box">
-                                <div class="flex items-baseline justify-between">
-                                    <span class="text-xs uppercase font-brand font-bold text-[#4B5563]">
-                                        <span class="lang-ua">Оренда:</span><span class="lang-en">Rent:</span>
-                                    </span>
-                                    <span class="font-brand font-bold text-xl text-[#1D5D3B]">
-                                        <span class="lang-ua">${item.price_week.toLocaleString('uk-UA')} грн <span class="text-xs font-normal text-[#4B5563]">/ тижд.</span></span>
-                                        <span class="lang-en">${item.price_week.toLocaleString('en-US')} UAH <span class="text-xs font-normal text-[#4B5563]">/ week</span></span>
-                                    </span>
-                                </div>
-                                <div class="flex items-center justify-between text-[11px] text-[#4B5563] mt-1 font-mono">
-                                    <span>
-                                        <span class="lang-ua">Місяць: ${item.price_month.toLocaleString('uk-UA')} грн</span>
-                                        <span class="lang-en">Month: ${item.price_month.toLocaleString('en-US')} UAH</span>
-                                    </span>
-                                    <span>
-                                        <span class="lang-ua">Застава: ${item.deposit.toLocaleString('uk-UA')} грн</span>
-                                        <span class="lang-en">Deposit: ${item.deposit.toLocaleString('en-US')} UAH</span>
-                                    </span>
-                                </div>
-                                <!-- HIDDEN BUYOUT ROW. TO RESTORE REMOVE 'hidden' -->
-                                <div class="hidden text-[11px] text-[#111827] font-mono font-bold mt-2 pt-2 border-t border-[#1D5D3B]/20 justify-between">
-                                    <span>
-                                        <span class="lang-ua">Викуп у зборі з АКБ:</span>
-                                        <span class="lang-en">Buyout with battery:</span>
-                                    </span>
-                                    <span class="text-[#1D5D3B]">
-                                        <span class="lang-ua">${item.buyout_base_price.toLocaleString('uk-UA')} грн</span>
-                                        <span class="lang-en">${item.buyout_base_price.toLocaleString('en-US')} UAH</span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="relative w-full aspect-[16/10] overflow-hidden rounded-2xl bg-[#121614] border border-white/[0.07] group-hover:border-emerald-500/40 transition-all duration-500">
+                        <img src="${item.image}" class="img-day absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="${item.name}" loading="lazy">
+                        <img src="${item.image_night || item.image}" class="img-night absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="${item.name} Night" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity"></div>
                     </div>
 
-                    <!-- Кнопки -->
-                    <div class="p-5 pt-0 space-y-2">
-                        <a href="${tgRentUrl}" target="_blank" rel="noopener noreferrer" 
-                           class="chamfer-btn w-full bg-[#1D5D3B] hover:bg-[#24754A] text-white font-brand font-bold text-xs uppercase tracking-widest py-3 px-3 flex items-center justify-center gap-2 border border-[#1D5D3B]">
-                            <i data-lucide="send" class="w-4 h-4"></i>
-                            <span>
-                                <span class="lang-ua">ЗАМОВИТИ В TELEGRAM</span>
-                                <span class="lang-en">ORDER IN TELEGRAM</span>
-                            </span>
-                        </a>
-                        <a href="${calcUrl}" 
-                           class="chamfer-btn w-full bg-white hover:bg-slate-50 text-[#1D5D3B] font-brand font-bold text-xs uppercase tracking-widest py-2.5 px-3 border border-[#1D5D3B] flex items-center justify-center gap-1.5">
-                            <span>
-                                <span class="lang-ua">РОЗРАХУВАТИ ОРЕНДУ →</span>
-                                <span class="lang-en">CALCULATE RENT →</span>
-                            </span>
-                        </a>
+                    <h3 class="font-brand font-extrabold text-xl sm:text-2xl text-white uppercase tracking-tight mt-5 group-hover:text-[#10B981] transition-colors">
+                        ${item.name}
+                    </h3>
+
+                    <div class="mt-3">
+                        <span class="inline-flex items-center px-4 py-1.5 rounded-full border border-white/20 text-zinc-300 text-xs sm:text-sm font-medium tracking-wide group-hover:border-emerald-500/60 group-hover:text-white transition-colors bg-white/[0.02]">
+                            <span class="lang-ua">від ${item.price_week.toLocaleString('uk-UA')} грн / тижд.</span>
+                            <span class="lang-en">from ${item.price_week.toLocaleString('en-US')} UAH / wk</span>
+                        </span>
                     </div>
                 `;
 
@@ -660,30 +822,458 @@
             }
         }
 
-        // Фільтрація каталогу
+        // 3. ФІЛЬТРАЦІЯ ВИТРИНИ
         function filterCatalog(category, brandFilter = null) {
             ['all', 'scooter', 'bike'].forEach(cat => {
                 const btn = document.getElementById(`tab-${cat}`);
                 if (!btn) return;
                 if (cat === category) {
-                    btn.classList.add('bg-[#1D5D3B]', 'text-white');
-                    btn.classList.remove('bg-white', 'text-[#111827]');
+                    btn.className = 'px-5 py-2.5 rounded-full text-xs font-brand font-bold uppercase tracking-wider border border-white/20 bg-white text-black transition-all';
                 } else {
-                    btn.classList.remove('bg-[#1D5D3B]', 'text-white');
-                    btn.classList.add('bg-white', 'text-[#111827]');
+                    btn.className = 'px-5 py-2.5 rounded-full text-xs font-brand font-bold uppercase tracking-wider border border-white/10 bg-white/[0.04] text-zinc-400 hover:text-white hover:border-white/30 transition-all';
                 }
             });
             renderCatalog(category, brandFilter);
         }
 
-        // Мобільне меню
-        const burgerBtn = document.getElementById('burger-btn') || document.querySelector('[data-burger]') || document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobile-menu') || document.getElementById('mobileMenu');
+        // 4. СЛАЙДЕР ДЕТАЛЬНОЇ СТОРІНКИ
+        let currentSlideIndex = 0;
+        let currentSlideImages = [];
+
+        function setupSlider(images) {
+            currentSlideImages = images;
+            currentSlideIndex = 0;
+            const track = document.getElementById('sliderTrack');
+            const dots = document.getElementById('sliderDots');
+            if (!track || !dots) return;
+
+            track.innerHTML = currentSlideImages.map((src, i) => `
+                <div class="slider-slide absolute inset-0 w-full h-full transition-opacity duration-500 ease-in-out ${i === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'}" data-slide-index="${i}">
+                    <img src="${src}" class="w-full h-full object-cover" alt="Photo ${i + 1}" loading="lazy">
+                </div>
+            `).join('');
+
+            dots.innerHTML = currentSlideImages.map((_, i) => `
+                <button onclick="goToSlide(${i})" class="slider-dot h-2 rounded-full transition-all duration-300 ${i === 0 ? 'w-6 bg-[#10B981]' : 'w-2 bg-white/40 hover:bg-white/70'}" aria-label="Slide ${i + 1}"></button>
+            `).join('');
+        }
+
+        function updateSlider() {
+            const slides = document.querySelectorAll('.slider-slide');
+            const dots = document.querySelectorAll('.slider-dot');
+            slides.forEach((slide, i) => {
+                if (i === currentSlideIndex) {
+                    slide.classList.remove('opacity-0', 'pointer-events-none', 'z-0');
+                    slide.classList.add('opacity-100', 'z-10');
+                } else {
+                    slide.classList.remove('opacity-100', 'z-10');
+                    slide.classList.add('opacity-0', 'pointer-events-none', 'z-0');
+                }
+            });
+            dots.forEach((dot, i) => {
+                if (i === currentSlideIndex) {
+                    dot.className = 'slider-dot h-2 rounded-full transition-all duration-300 w-6 bg-[#10B981]';
+                } else {
+                    dot.className = 'slider-dot h-2 rounded-full transition-all duration-300 w-2 bg-white/40 hover:bg-white/70';
+                }
+            });
+        }
+
+        function nextSlide() {
+            if (!currentSlideImages.length) return;
+            currentSlideIndex = (currentSlideIndex + 1) % currentSlideImages.length;
+            updateSlider();
+        }
+
+        function prevSlide() {
+            if (!currentSlideImages.length) return;
+            currentSlideIndex = (currentSlideIndex - 1 + currentSlideImages.length) % currentSlideImages.length;
+            updateSlider();
+        }
+
+        function goToSlide(i) {
+            currentSlideIndex = i;
+            updateSlider();
+        }
+
+        // 5. ДЕТАЛЬНИЙ ПЕРЕГЛЯД МОДЕЛІ (KEEPCAR СТРУКТУРА)
+        function getModelDetailHTML(item) {
+            const classUa = item.category === 'bike' ? 'Електровелосипед' : 'Електроскутер';
+            const classEn = item.category === 'bike' ? 'Electric Bike' : 'Electric Scooter';
+            const tgRentUrl = `https://t.me/muviobot?start=rent_${item.key}`;
+
+            return `
+                <!-- Хлібні крихти -->
+                <nav class="flex items-center gap-2 text-xs uppercase tracking-wider text-zinc-400 mb-8 font-mono">
+                    <button onclick="showCatalogList(true)" class="hover:text-[#10B981] transition-colors flex items-center gap-1.5 focus:outline-none">
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                        <span class="lang-ua">КАТАЛОГ</span>
+                        <span class="lang-en">CATALOG</span>
+                    </button>
+                    <span class="text-zinc-600">/</span>
+                    <span class="text-white font-bold tracking-wider">${item.name}</span>
+                </nav>
+
+                <!-- ==================== БЛОК 1: HERO-ЕКРАН СКУТЕРА ==================== -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start mb-20">
+                    
+                    <!-- Зліва: Заголовок, характеристики, кнопка -->
+                    <div class="lg:col-span-6 xl:col-span-5 space-y-7">
+                        <div>
+                            <h1 class="font-brand font-extrabold text-3xl sm:text-4xl lg:text-[44px] uppercase tracking-tight text-white leading-[1.1]">
+                                <span class="lang-ua">ОРЕНДА <span class="text-[#10B981]">${item.name}</span> В ОДЕСІ</span>
+                                <span class="lang-en">RENT <span class="text-[#10B981]">${item.name}</span> IN ODESA</span>
+                            </h1>
+                            <p class="text-sm text-zinc-400 mt-3 leading-relaxed">
+                                <span class="lang-ua">Офіційний прокат від MUVIO. Повне оснащення: транспорт, знімний акумулятор та зарядний пристрій.</span>
+                                <span class="lang-en">Official rental by MUVIO. Full turnkey package: vehicle, removable battery, and high-speed charger.</span>
+                            </p>
+                        </div>
+
+                        <!-- Компактний список характеристик: в 1 строчку, мітка сірим, значення білим -->
+                        <div class="border-y border-white/[0.08] divide-y divide-white/[0.06] text-sm">
+                            <div class="py-3.5 flex items-center justify-between">
+                                <span class="text-zinc-400"><span class="lang-ua">Клас:</span><span class="lang-en">Class:</span></span>
+                                <span class="text-white font-semibold font-mono"><span class="lang-ua">${classUa}</span><span class="lang-en">${classEn}</span></span>
+                            </div>
+                            <div class="py-3.5 flex items-center justify-between">
+                                <span class="text-zinc-400"><span class="lang-ua">Максимальна швидкість:</span><span class="lang-en">Top Speed:</span></span>
+                                <span class="text-white font-semibold font-mono">${item.speed}</span>
+                            </div>
+                            <div class="py-3.5 flex items-center justify-between">
+                                <span class="text-zinc-400"><span class="lang-ua">Запас ходу:</span><span class="lang-en">Range:</span></span>
+                                <span class="text-white font-semibold font-mono">${item.range}</span>
+                            </div>
+                            <div class="py-3.5 flex items-center justify-between">
+                                <span class="text-zinc-400"><span class="lang-ua">Потужність двигуна:</span><span class="lang-en">Motor Power:</span></span>
+                                <span class="text-white font-semibold font-mono">${item.power || '1200W'}</span>
+                            </div>
+                            <div class="py-3.5 flex items-center justify-between">
+                                <span class="text-zinc-400"><span class="lang-ua">Тип батареї:</span><span class="lang-en">Battery Type:</span></span>
+                                <span class="text-white font-semibold font-mono">${item.voltage} (${item.battery})</span>
+                            </div>
+                            <div class="py-3.5 flex items-center justify-between">
+                                <span class="text-zinc-400"><span class="lang-ua">Швидкість зарядки:</span><span class="lang-en">Charging Time:</span></span>
+                                <span class="text-white font-semibold font-mono">${item.charging}</span>
+                            </div>
+                        </div>
+
+                        <!-- Акцентна кнопка «ЗАБРОНЮВАТИ СКУТЕР» -->
+                        <div class="pt-2">
+                            <a href="${tgRentUrl}" target="_blank" rel="noopener noreferrer"
+                                class="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-[#10B981] hover:bg-[#059669] text-white font-brand font-bold text-sm uppercase tracking-wider py-4 px-8 rounded-lg shadow-xl shadow-emerald-950/50 transition-all duration-200 hover:scale-[1.02]">
+                                <i data-lucide="zap" class="w-4 h-4 fill-current"></i>
+                                <span class="lang-ua">ЗАБРОНЮВАТИ СКУТЕР</span>
+                                <span class="lang-en">BOOK SCOOTER</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Справа: Велика галерея / слайдер фото -->
+                    <div class="lg:col-span-6 xl:col-span-7">
+                        <div class="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-[#0E1114] border border-white/[0.08] shadow-2xl group select-none">
+                            <!-- Зображення слайдера -->
+                            <div id="sliderTrack" class="w-full h-full relative"></div>
+
+                            <!-- Бейдж в кутку -->
+                            <div class="absolute top-4 left-4 z-20 flex items-center gap-2 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-[11px] font-mono text-zinc-300 uppercase">
+                                <span class="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span>
+                                <span class="lang-ua">В НАЯВНОСТІ</span>
+                                <span class="lang-en">IN STOCK</span>
+                            </div>
+
+                            <!-- Стрілки навігації слайдера -->
+                            <button onclick="prevSlide()" aria-label="Попереднє фото"
+                                class="absolute left-3.5 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-black/60 hover:bg-black/90 backdrop-blur-md border border-white/15 text-white flex items-center justify-center transition-all opacity-80 hover:opacity-100 focus:outline-none">
+                                <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                            </button>
+                            <button onclick="nextSlide()" aria-label="Наступне фото"
+                                class="absolute right-3.5 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-black/60 hover:bg-black/90 backdrop-blur-md border border-white/15 text-white flex items-center justify-center transition-all opacity-80 hover:opacity-100 focus:outline-none">
+                                <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                            </button>
+
+                            <!-- Точки пагінації внизу -->
+                            <div id="sliderDots" class="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/50 backdrop-blur-md border border-white/10"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==================== БЛОК 2: ВАРТІСТЬ ОРЕНДИ ==================== -->
+                <div class="mb-20 pt-10 border-t border-white/[0.08]">
+                    <div class="text-center max-w-3xl mx-auto mb-10">
+                        <h2 class="font-brand font-extrabold text-2xl sm:text-3xl md:text-4xl uppercase tracking-tight text-white">
+                            <span class="lang-ua">ВАРТІСТЬ ОРЕНДИ <span class="text-[#10B981]">${item.name}</span></span>
+                            <span class="lang-en">RENTAL RATES <span class="text-[#10B981]">${item.name}</span></span>
+                        </h2>
+                        <p class="text-sm text-zinc-400 mt-2">
+                            <span class="lang-ua">Прозорі тарифи без прихованих платежів. Застава повертається після завершення оренди.</span>
+                            <span class="lang-en">Transparent rates with zero hidden fees. Security deposit refunded upon return.</span>
+                        </p>
+                    </div>
+
+                    <!-- Таблиця / сітка тарифів у 2 колонки на темному фоні -->
+                    <div class="max-w-4xl mx-auto bg-[#0E1114] border border-white/[0.08] rounded-2xl p-6 sm:p-8 md:p-10 shadow-2xl">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4">
+                            <!-- Ліва колонка -->
+                            <div class="space-y-4">
+                                <div class="py-4 border-b border-white/[0.08] flex items-baseline justify-between">
+                                    <div>
+                                        <span class="font-brand font-bold text-sm tracking-wider uppercase text-zinc-300 block">
+                                            <span class="lang-ua">ЗАСТАВА</span>
+                                            <span class="lang-en">SECURITY DEPOSIT</span>
+                                        </span>
+                                        <span class="text-[11px] text-zinc-500 font-mono">
+                                            <span class="lang-ua">Повертається при поверненні</span>
+                                            <span class="lang-en">Refundable upon return</span>
+                                        </span>
+                                    </div>
+                                    <span class="font-mono font-bold text-lg sm:text-xl text-[#10B981]">
+                                        ${item.deposit.toLocaleString('uk-UA')} грн
+                                    </span>
+                                </div>
+
+                                <div class="py-4 border-b border-white/[0.08] flex items-baseline justify-between">
+                                    <div>
+                                        <span class="font-brand font-bold text-sm tracking-wider uppercase text-zinc-300 block">
+                                            <span class="lang-ua">1 ДОБА</span>
+                                            <span class="lang-en">1 DAY</span>
+                                        </span>
+                                        <span class="text-[11px] text-zinc-500 font-mono">
+                                            <span class="lang-ua">Базовий добовий тариф</span>
+                                            <span class="lang-en">Base daily rate</span>
+                                        </span>
+                                    </div>
+                                    <span class="font-mono font-bold text-lg sm:text-xl text-white">
+                                        ${item.price_day.toLocaleString('uk-UA')} грн <span class="text-xs text-zinc-400 font-normal">/ доба</span>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Права колонка -->
+                            <div class="space-y-4">
+                                <div class="py-4 border-b border-white/[0.08] flex items-baseline justify-between">
+                                    <div>
+                                        <span class="font-brand font-bold text-sm tracking-wider uppercase text-zinc-300 block">
+                                            <span class="lang-ua">1 ТИЖДЕНЬ</span>
+                                            <span class="lang-en">1 WEEK</span>
+                                        </span>
+                                        <span class="text-[11px] text-zinc-500 font-mono">
+                                            <span class="lang-ua">Оптимальний план на 7 днів</span>
+                                            <span class="lang-en">Optimal 7-day plan</span>
+                                        </span>
+                                    </div>
+                                    <span class="font-mono font-bold text-lg sm:text-xl text-white">
+                                        ${item.price_week.toLocaleString('uk-UA')} грн <span class="text-xs text-zinc-400 font-normal">/ тижд.</span>
+                                    </span>
+                                </div>
+
+                                <div class="py-4 border-b border-white/[0.08] flex items-baseline justify-between">
+                                    <div>
+                                        <span class="font-brand font-bold text-sm tracking-wider uppercase text-zinc-300 block">
+                                            <span class="lang-ua">1 МІСЯЦЬ</span>
+                                            <span class="lang-en">1 MONTH</span>
+                                        </span>
+                                        <span class="text-[11px] text-zinc-500 font-mono">
+                                            <span class="lang-ua">Максимальна економія на довгострок</span>
+                                            <span class="lang-en">Maximum long-term savings</span>
+                                        </span>
+                                    </div>
+                                    <span class="font-mono font-bold text-lg sm:text-xl text-white">
+                                        ${item.price_month.toLocaleString('uk-UA')} грн <span class="text-xs text-zinc-400 font-normal">/ міс.</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Кнопка по центру під тарифами -->
+                        <div class="mt-8 pt-6 border-t border-white/[0.06] text-center">
+                            <a href="${tgRentUrl}" target="_blank" rel="noopener noreferrer"
+                                class="inline-flex items-center justify-center gap-3 bg-[#10B981] hover:bg-[#059669] text-white font-brand font-bold text-sm uppercase tracking-wider py-4 px-10 rounded-lg shadow-xl shadow-emerald-950/50 transition-all duration-200 hover:scale-[1.02]">
+                                <i data-lucide="send" class="w-4 h-4"></i>
+                                <span class="lang-ua">ЗАБРОНЮВАТИ СКУТЕР</span>
+                                <span class="lang-en">BOOK SCOOTER</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==================== БЛОК 3: УМОВИ ОРЕНДИ ==================== -->
+                <div class="mb-14 pt-10 border-t border-white/[0.08]">
+                    <div class="text-center max-w-3xl mx-auto mb-10">
+                        <h2 class="font-brand font-extrabold text-2xl sm:text-3xl md:text-4xl uppercase tracking-tight text-white">
+                            <span class="lang-ua">УМОВИ ОРЕНДИ <span class="text-[#10B981]">${item.name}</span></span>
+                            <span class="lang-en">RENTAL TERMS <span class="text-[#10B981]">${item.name}</span></span>
+                        </h2>
+                        <p class="text-sm text-zinc-400 mt-2">
+                            <span class="lang-ua">Офіційний регламент надання послуг прокату легкого електротранспорту MUVIO в Одесі.</span>
+                            <span class="lang-en">Official terms and regulations for MUVIO light electric vehicle rentals in Odesa.</span>
+                        </p>
+                    </div>
+
+                    <!-- Мінімалістична сітка карток 3x2 -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- 01 -->
+                        <div class="bg-[#0E1114] border border-white/[0.07] rounded-xl p-6 hover:border-emerald-500/30 transition-colors">
+                            <div class="font-mono font-extrabold text-2xl text-[#10B981] mb-3">01</div>
+                            <h3 class="font-brand font-bold text-sm tracking-wider uppercase text-white mb-2">
+                                <span class="lang-ua">НЕОБХІДНІ ДОКУМЕНТИ</span>
+                                <span class="lang-en">REQUIRED DOCUMENTS</span>
+                            </h3>
+                            <p class="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+                                <span class="lang-ua">Паспорт, посвідчення водія (за наявності), ідентифікаційний код (для громадян України).</span>
+                                <span class="lang-en">Passport, driver's license (if applicable), tax ID (for Ukrainian citizens).</span>
+                            </p>
+                        </div>
+
+                        <!-- 02 -->
+                        <div class="bg-[#0E1114] border border-white/[0.07] rounded-xl p-6 hover:border-emerald-500/30 transition-colors">
+                            <div class="font-mono font-extrabold text-2xl text-[#10B981] mb-3">02</div>
+                            <h3 class="font-brand font-bold text-sm tracking-wider uppercase text-white mb-2">
+                                <span class="lang-ua">ВІК КЛІЄНТА</span>
+                                <span class="lang-en">CLIENT AGE</span>
+                            </h3>
+                            <p class="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+                                <span class="lang-ua">Від 18 років для приватного та комерційного використання кур'єрами.</span>
+                                <span class="lang-en">From 18 years of age for private riders and commercial delivery couriers.</span>
+                            </p>
+                        </div>
+
+                        <!-- 03 -->
+                        <div class="bg-[#0E1114] border border-white/[0.07] rounded-xl p-6 hover:border-emerald-500/30 transition-colors">
+                            <div class="font-mono font-extrabold text-2xl text-[#10B981] mb-3">03</div>
+                            <h3 class="font-brand font-bold text-sm tracking-wider uppercase text-white mb-2">
+                                <span class="lang-ua">СТАЖ / ДОСВІД</span>
+                                <span class="lang-en">RIDING EXPERIENCE</span>
+                            </h3>
+                            <p class="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+                                <span class="lang-ua">Базовий досвід керування двоколісним транспортом, обов'язковий інструктаж перед видачею ключа.</span>
+                                <span class="lang-en">Basic two-wheeled riding skills, mandatory safety briefing prior to vehicle handover.</span>
+                            </p>
+                        </div>
+
+                        <!-- 04 -->
+                        <div class="bg-[#0E1114] border border-white/[0.07] rounded-xl p-6 hover:border-emerald-500/30 transition-colors">
+                            <div class="font-mono font-extrabold text-2xl text-[#10B981] mb-3">04</div>
+                            <h3 class="font-brand font-bold text-sm tracking-wider uppercase text-white mb-2">
+                                <span class="lang-ua">ЗАСТАВА</span>
+                                <span class="lang-en">SECURITY DEPOSIT</span>
+                            </h3>
+                            <p class="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+                                <span class="lang-ua">Вноситься перед отриманням транспорту. Повертається в повному обсязі після здачі техніки згідно з регламентом.</span>
+                                <span class="lang-en">Paid prior to pickup. Fully refunded upon return according to service regulations.</span>
+                            </p>
+                        </div>
+
+                        <!-- 05 -->
+                        <div class="bg-[#0E1114] border border-white/[0.07] rounded-xl p-6 hover:border-emerald-500/30 transition-colors">
+                            <div class="font-mono font-extrabold text-2xl text-[#10B981] mb-3">05</div>
+                            <h3 class="font-brand font-bold text-sm tracking-wider uppercase text-white mb-2">
+                                <span class="lang-ua">ПРОБІГ ТА ЗОНА</span>
+                                <span class="lang-en">MILEAGE & ZONE</span>
+                            </h3>
+                            <p class="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+                                <span class="lang-ua">Безлімітний пробіг у межах Одеси. Виїзд за межі міста або в область узгоджується з менеджером.</span>
+                                <span class="lang-en">Unlimited daily mileage within Odesa. Out-of-town trips require manager approval.</span>
+                            </p>
+                        </div>
+
+                        <!-- 06 -->
+                        <div class="bg-[#0E1114] border border-white/[0.07] rounded-xl p-6 hover:border-emerald-500/30 transition-colors">
+                            <div class="font-mono font-extrabold text-2xl text-[#10B981] mb-3">06</div>
+                            <h3 class="font-brand font-bold text-sm tracking-wider uppercase text-white mb-2">
+                                <span class="lang-ua">ТЕРМІН ПРОКАТУ</span>
+                                <span class="lang-en">RENTAL PERIOD</span>
+                            </h3>
+                            <p class="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+                                <span class="lang-ua">Мінімальний термін оренди — 1 доба (24 години). Початком оренди вважається підписання електронного договору.</span>
+                                <span class="lang-en">Minimum rental period is 1 day (24 hours). Rental starts upon digital agreement signing.</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Кнопка повернення до каталогу -->
+                    <div class="mt-12 text-center">
+                        <button onclick="showCatalogList(true)"
+                            class="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/20 text-zinc-300 hover:text-white hover:border-white/50 text-xs font-brand font-bold uppercase tracking-wider transition-all">
+                            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                            <span class="lang-ua">Повернутися до всього каталогу</span>
+                            <span class="lang-en">Back to Full Catalog</span>
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // 6. НАВІГАЦІЯ ТА ПЕРЕМИКАННЯ ВИДІВ
+        function showModelDetail(modelKey, push = true) {
+            const item = FLEET.find(f => f.key === modelKey);
+            if (!item) {
+                showCatalogList(push);
+                return;
+            }
+            const showcase = document.getElementById('catalogShowcaseView');
+            const detail = document.getElementById('modelDetailView');
+            if (!showcase || !detail) return;
+
+            detail.innerHTML = getModelDetailHTML(item);
+            showcase.classList.add('hidden');
+            detail.classList.remove('hidden');
+
+            // Настройка слайдера фото
+            const images = [item.image];
+            if (item.image_night && item.image_night !== item.image) {
+                images.push(item.image_night);
+            }
+            images.push('images/scooter_headlight.jpg');
+            setupSlider(images);
+
+            if (push) {
+                window.history.pushState({ model: modelKey }, '', `catalog.html?model=${modelKey}`);
+            }
+            if (window.lucide) window.lucide.createIcons();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showCatalogList(push = true) {
+            const showcase = document.getElementById('catalogShowcaseView');
+            const detail = document.getElementById('modelDetailView');
+            if (!showcase || !detail) return;
+
+            detail.classList.add('hidden');
+            showcase.classList.remove('hidden');
+
+            if (push) {
+                window.history.pushState({}, '', 'catalog.html');
+            }
+            if (window.lucide) window.lucide.createIcons();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.addEventListener('popstate', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const model = urlParams.get('model');
+            if (model) {
+                showModelDetail(model, false);
+            } else {
+                showCatalogList(false);
+            }
+        });
+
+        // 7. МЕНЮ ТА ШАПКА
+        const burgerBtn = document.getElementById('burger-btn') || document.querySelector('[data-burger]');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+
         if (burgerBtn && mobileMenu) {
             burgerBtn.onclick = (e) => {
                 e.stopPropagation();
                 mobileMenu.classList.toggle('hidden');
             };
+            if (mobileMenuClose) {
+                mobileMenuClose.onclick = () => {
+                    mobileMenu.classList.add('hidden');
+                };
+            }
             mobileMenu.querySelectorAll('.mobile-nav-link, a, button').forEach(link => {
                 link.addEventListener('click', () => {
                     mobileMenu.classList.add('hidden');
@@ -691,7 +1281,6 @@
             });
         }
 
-        // Єдина синхронізація імені користувача в шапці (muvio_active_user)
         function updateHeaderUserName() {
             let activeName = null;
             try {
@@ -721,18 +1310,22 @@
         }
         window.addEventListener('storage', updateHeaderUserName);
 
+        // 8. ІНІЦІАЛІЗАЦІЯ СТОРІНКИ
         document.addEventListener('DOMContentLoaded', () => {
             updateHeaderUserName();
             const urlParams = new URLSearchParams(window.location.search);
+            const modelParam = urlParams.get('model');
             const cat = urlParams.get('cat');
             const brand = urlParams.get('brand');
 
-            if (cat && ['scooter', 'bike', 'all'].includes(cat)) {
+            if (modelParam) {
+                showModelDetail(modelParam, false);
+            } else if (cat && ['scooter', 'bike', 'all'].includes(cat)) {
                 filterCatalog(cat, brand);
             } else if (brand) {
                 renderCatalog('all', brand);
             } else {
-                try { renderCatalog('all'); } catch (e) { console.error('Catalog render error:', e); }
+                renderCatalog('all');
             }
 
             try {
@@ -742,6 +1335,7 @@
             } catch (e) { console.error('Lucide error:', e); }
         });
     </script>
+
     <!-- MUVIO Theme & Settings Module -->
     <script src="./theme-settings.js"></script>
 </body>
