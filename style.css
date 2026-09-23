@@ -2006,7 +2006,9 @@ body.dark-theme .hero-crosser-btn-calc {
    HERO LIKE.BIKE BRUISER SLIDE (SLIDE 3: ЧИСТЫЙ БЕЛЫЙ ХОЛСТ И ЧИТАЕМЫЙ ТЕКСТ)
    ========================================================================== */
 #heroSlide3,
-.slide-bike-clean {
+.slide-bike-clean,
+.slide-bruiser,
+.hero-slide-bruiser {
     background: #FFFFFF !important;
     background-color: #FFFFFF !important;
 }
@@ -2017,7 +2019,16 @@ html.dark-theme #heroSlide3,
 [data-theme="dark"] #heroSlide3,
 body.dark #heroSlide3,
 body.theme-dark #heroSlide3,
-body.dark-theme #heroSlide3 {
+body.dark-theme #heroSlide3,
+html.dark .slide-bike-clean,
+html.dark .slide-bruiser,
+html.dark .hero-slide-bruiser,
+body.dark .slide-bike-clean,
+body.dark .slide-bruiser,
+body.dark .hero-slide-bruiser,
+[data-theme="dark"] .slide-bike-clean,
+[data-theme="dark"] .slide-bruiser,
+[data-theme="dark"] .hero-slide-bruiser {
     background: #080A0C !important;
     background-color: #080A0C !important;
 }
@@ -2140,19 +2151,25 @@ body.dark-theme #heroSlide3 {
     justify-content: flex-end !important;
 }
 
-/* Полный сброс фильтров и искажений для изображения техники на слайде */
+/* Полный сброс всех деструктивных CSS-свойств для <img> велосипеда */
+.slide-bruiser img,
+.hero-slide-bruiser img,
 .slide-bike-img, 
 .hero-slide img {
     filter: none !important;
     mix-blend-mode: normal !important;
+    -webkit-mask: none !important;
+    mask: none !important;
     opacity: 1 !important;
     image-rendering: auto !important;
+    background: transparent !important;
     -webkit-backface-visibility: hidden;
     transform: translateZ(0); /* Аппаратное сглаживание без потери четкости */
 }
 
 .slide-bike-img {
     position: relative !important;
+    z-index: 2 !important;
     right: 0 !important;
     bottom: 0 !important;
     height: 95% !important;
@@ -2165,8 +2182,11 @@ body.dark-theme #heroSlide3 {
     -webkit-user-drag: none !important;
 }
 
-/* Фара велосипеда в темной теме */
+/* Фара велосипеда в темной теме - строго отдельный слой позади тела велосипеда (z-index: 1) */
 .bike-hero-headlight {
+    position: absolute !important;
+    z-index: 1 !important;
+    pointer-events: none !important;
     width: 38px;
     height: 38px;
     left: 52.6%;
