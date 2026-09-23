@@ -57,8 +57,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tektur:wght@700;800;900&display=swap" rel="stylesheet">
     <!-- MUVIO Styles & Dark Theme -->
-    <link rel="stylesheet" href="./style.css?v=2.3">
-    <link rel="stylesheet" href="./dark-theme.css?v=2.3">
+    <link rel="stylesheet" href="./style.css?v=2.4">
+    <link rel="stylesheet" href="./dark-theme.css?v=2.4">
 
     <style>
         .text-primary {
@@ -849,7 +849,7 @@
             width: 100% !important;
             height: 100% !important;
             background-size: cover !important;
-            background-position: right -100px center !important;
+            background-position: right -150px center !important;
             background-repeat: no-repeat !important;
             transform: none !important;
             transition: opacity 0.6s ease-in-out !important;
@@ -947,6 +947,12 @@
             max-width: 460px !important;
         }
 
+        html,
+        body {
+            max-width: 100% !important;
+            overflow-x: hidden !important;
+        }
+
         /* ==================== 1. УЛЬТРАТОНКАЯ ШАПКА В СТИЛЕ TESLA ==================== */
         header,
         .site-header-synced {
@@ -955,18 +961,40 @@
             left: 0 !important;
             width: 100% !important;
             z-index: 100 !important;
-            min-height: 46px !important; min-height: 46px !important; max-height: 46px !important; padding-top: 0 !important; padding-bottom: 0 !important;
-            height: 46px !important; min-height: 46px !important; max-height: 46px !important; padding-top: 0 !important; padding-bottom: 0 !important;
-            padding: 0 36px !important;
+            min-height: 46px !important;
+            height: 46px !important;
+            max-height: 46px !important;
+            padding: 0 !important;
             display: flex !important;
             align-items: center !important;
-            justify-content: space-between !important;
+            justify-content: center !important;
             background: rgba(255, 255, 255, 0.92) !important;
             background-color: rgba(255, 255, 255, 0.92) !important;
             backdrop-filter: blur(12px) !important;
             -webkit-backdrop-filter: blur(12px) !important;
             border-bottom: 1px solid rgba(228, 228, 231, 0.8) !important;
             box-sizing: border-box !important;
+        }
+
+        .header-container {
+            max-width: 1440px !important;
+            width: 100% !important;
+            height: 100% !important;
+            margin: 0 auto !important;
+            box-sizing: border-box !important;
+            padding-left: 32px !important;
+            padding-right: 32px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            position: relative !important;
+        }
+
+        @media (max-width: 640px) {
+            .header-container {
+                padding-left: 16px !important;
+                padding-right: 16px !important;
+            }
         }
 
         .header-logo-img,
@@ -1340,115 +1368,120 @@
 
     <!-- ==================== 1. ХЕДЕР (НАВІГАЦІЯ) ==================== -->
     <header class="site-header-synced w-full"
-        style="width: 100% !important; position: sticky !important; top: 0 !important; left: 0 !important; z-index: 100 !important; height: 46px !important; min-height: 46px !important; max-height: 46px !important; padding: 0 36px !important; padding-top: 0 !important; padding-bottom: 0 !important; display: flex !important; align-items: center !important; justify-content: space-between !important; box-sizing: border-box !important;">
+        style="width: 100% !important; position: sticky !important; top: 0 !important; left: 0 !important; z-index: 100 !important; height: 46px !important; min-height: 46px !important; max-height: 46px !important; padding: 0 !important; margin: 0 !important; display: flex !important; align-items: center !important; justify-content: center !important; box-sizing: border-box !important;">
 
-        <!-- ЛІВА ЧАСТИНА: Бургер (для мобільних) + Чистий прозорий SVG-логотип MUVIO -->
-        <div class="flex items-center gap-3 shrink-0 z-10" style="margin: 0 !important; padding: 0 !important; height: 100% !important;">
-            <!-- Кнопка-бургер (#burger-btn) для мобільних екранів -->
-            <button id="burger-btn" data-burger="true" type="button" aria-label="Меню"
-                class="header-action-btn md:hidden flex items-center justify-center w-8 h-8 p-1 text-[#1D5D3B] hover:text-[#16472d] dark:text-[#2E8B57] dark:hover:text-emerald-400 transition-colors focus:outline-none"
-                style="background: transparent !important; border: none !important;">
-                <svg class="w-5 h-5 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                    <line x1="3" y1="12" x2="21" y2="12"></line>
-                    <line x1="3" y1="18" x2="21" y2="18"></line>
-                </svg>
-            </button>
+        <div class="header-container"
+            style="max-width: 1440px !important; width: 100% !important; height: 100% !important; margin: 0 auto !important; box-sizing: border-box !important; padding-left: 32px !important; padding-right: 32px !important; display: flex !important; align-items: center !important; justify-content: space-between !important; position: relative !important;">
 
-            <!-- Логотип MUVIO (растровый PNG, крайнее левое положение) -->
-            <a href="index.html"
-                style="display: inline-flex !important; align-items: center !important; text-decoration: none !important; background: transparent !important;"
-                class="group focus:outline-none" aria-label="MUVIO">
-                <img src="images/logo-header-trans.png" alt="MUVIO"
-                    style="height: 28px !important; width: auto !important; display: block !important; transition: opacity 0.2s; background: transparent !important;"
-                    class="header-logo-img group-hover:opacity-90" />
-            </a>
-        </div>
+            <!-- ЛІВА ЧАСТИНА: Бургер (для мобільних) + Чистий прозорий SVG-логотип MUVIO -->
+            <div class="flex items-center gap-3 shrink-0 z-10" style="margin: 0 !important; padding: 0 !important; height: 100% !important;">
+                <!-- Кнопка-бургер (#burger-btn) для мобільних екранів -->
+                <button id="burger-btn" data-burger="true" type="button" aria-label="Меню"
+                    class="header-action-btn md:hidden flex items-center justify-center w-8 h-8 p-1 text-[#1D5D3B] hover:text-[#16472d] dark:text-[#2E8B57] dark:hover:text-emerald-400 transition-colors focus:outline-none"
+                    style="background: transparent !important; border: none !important;">
+                    <svg class="w-5 h-5 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
 
-        <!-- ЦЕНТРАЛЬНЕ МЕНЮ: Строго по центру шапки -->
-        <nav class="hidden md:flex items-center gap-7 lg:gap-8 absolute left-1/2 -translate-x-1/2" style="display: flex; align-items: center; margin: 0 !important; padding: 0 !important; top: 0 !important; bottom: 0 !important; height: 100% !important;">
-            <a href="catalog.html"
-                style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important;"
-                class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2">
-                <span class="lang-ua">КАТАЛОГ</span>
-                <span class="lang-en">CATALOG</span>
-            </a>
-            <a href="calculator.html"
-                style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important;"
-                class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2">
-                <span class="lang-ua">КАЛЬКУЛЯТОР</span>
-                <span class="lang-en">CALCULATOR</span>
-            </a>
-            <a href="service.html"
-                style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important;"
-                class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2">
-                <span class="lang-ua">СЕРВІС</span>
-                <span class="lang-en">SERVICE</span>
-            </a>
-            <a href="terms.html"
-                style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important;"
-                class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2">
-                <span class="lang-ua">УМОВИ ОРЕНДИ</span>
-                <span class="lang-en">TERMS</span>
-            </a>
-            <a href="faq.html"
-                style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important;"
-                class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2">
-                <span>FAQ</span>
-            </a>
-        </nav>
+                <!-- Логотип MUVIO (растровый PNG, крайнее левое положение) -->
+                <a href="index.html"
+                    style="display: inline-flex !important; align-items: center !important; text-decoration: none !important; background: transparent !important;"
+                    class="group focus:outline-none" aria-label="MUVIO">
+                    <img src="images/logo-header-trans.png" alt="MUVIO"
+                        style="height: 28px !important; width: auto !important; display: block !important; transition: opacity 0.2s; background: transparent !important;"
+                        class="header-logo-img group-hover:opacity-90" />
+                </a>
+            </div>
 
-        <!-- ПРАВИЙ БЛОК УПРАВЛІННЯ -->
-        <div style="display: flex !important; align-items: center !important; gap: 20px !important; height: 100% !important; margin: 0 !important; padding: 0 !important;"
-            class="z-10 shrink-0">
-            <!-- 1. Вхід в кабінет -->
-            <a href="cabinet.html"
-                style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important; gap: 6px !important;"
-                class="text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors"
-                title="Особистий кабінет" aria-label="Особистий кабінет">
-                <svg xmlns="http://www.w3.org/2000/svg" style="width: 15px !important; height: 15px !important;"
-                    fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
-                <span id="header-user-name" class="header-user-name">
-                    <span class="lang-ua">ВХІД</span>
-                    <span class="lang-en">LOGIN</span>
+            <!-- ЦЕНТРАЛЬНЕ МЕНЮ: Строго по центру шапки -->
+            <nav class="hidden md:flex items-center gap-7 lg:gap-8 absolute left-1/2 -translate-x-1/2" style="display: flex; align-items: center; margin: 0 !important; padding: 0 !important; top: 0 !important; bottom: 0 !important; height: 100% !important;">
+                <a href="catalog.html"
+                    style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important;"
+                    class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2">
+                    <span class="lang-ua">КАТАЛОГ</span>
+                    <span class="lang-en">CATALOG</span>
+                </a>
+                <a href="calculator.html"
+                    style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important;"
+                    class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2">
+                    <span class="lang-ua">КАЛЬКУЛЯТОР</span>
+                    <span class="lang-en">CALCULATOR</span>
+                </a>
+                <a href="service.html"
+                    style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important;"
+                    class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2">
+                    <span class="lang-ua">СЕРВІС</span>
+                    <span class="lang-en">SERVICE</span>
+                </a>
+                <a href="terms.html"
+                    style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important;"
+                    class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2">
+                    <span class="lang-ua">УМОВИ ОРЕНДИ</span>
+                    <span class="lang-en">TERMS</span>
+                </a>
+                <a href="faq.html"
+                    style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important;"
+                    class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2">
+                    <span>FAQ</span>
+                </a>
+            </nav>
+
+            <!-- ПРАВИЙ БЛОК УПРАВЛІННЯ -->
+            <div style="display: flex !important; align-items: center !important; gap: 18px !important; height: 100% !important; margin: 0 !important; padding: 0 !important;"
+                class="z-10 shrink-0">
+                <!-- 1. Вхід в кабінет -->
+                <a href="cabinet.html"
+                    style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important; gap: 6px !important;"
+                    class="text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors"
+                    title="Особистий кабінет" aria-label="Особистий кабінет">
+                    <svg xmlns="http://www.w3.org/2000/svg" style="width: 15px !important; height: 15px !important; flex-shrink: 0;"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                    <span id="header-user-name" class="header-user-name" style="max-width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: inline-block; vertical-align: middle;">
+                        <span class="lang-ua">ВХІД</span>
+                        <span class="lang-en">LOGIN</span>
+                    </span>
+                </a>
+
+                <!-- 2. Перемикач мови UA | EN -->
+                <span style="display: inline-flex !important; align-items: center !important; gap: 4px !important; flex-shrink: 0;">
+                    <button type="button" id="authLangUa" onclick="setSiteLanguage('ua')"
+                        class="lang-switch-btn active-lang"
+                        style="background: none !important; border: none !important; padding: 0 !important; cursor: pointer !important; font-size: 12px !important; letter-spacing: 0.08em !important; transition: all 0.2s ease !important;">UA</button>
+                    <span
+                        style="color: #a1a1aa !important; font-size: 12px !important; font-weight: 400 !important;">|</span>
+                    <button type="button" id="authLangEn" onclick="setSiteLanguage('en')"
+                        class="lang-switch-btn"
+                        style="background: none !important; border: none !important; padding: 0 !important; cursor: pointer !important; font-size: 12px !important; letter-spacing: 0.08em !important; transition: all 0.2s ease !important;">EN</button>
                 </span>
-            </a>
 
-            <!-- 2. Перемикач мови UA | EN -->
-            <span style="display: inline-flex !important; align-items: center !important; gap: 4px !important;">
-                <button type="button" id="authLangUa" onclick="setSiteLanguage('ua')"
-                    class="lang-switch-btn active-lang"
-                    style="background: none !important; border: none !important; padding: 0 !important; cursor: pointer !important; font-size: 12px !important; letter-spacing: 0.08em !important; transition: all 0.2s ease !important;">UA</button>
-                <span
-                    style="color: #a1a1aa !important; font-size: 12px !important; font-weight: 400 !important;">|</span>
-                <button type="button" id="authLangEn" onclick="setSiteLanguage('en')"
-                    class="lang-switch-btn"
-                    style="background: none !important; border: none !important; padding: 0 !important; cursor: pointer !important; font-size: 12px !important; letter-spacing: 0.08em !important; transition: all 0.2s ease !important;">EN</button>
-            </span>
+                <!-- 3. Перемикач теми: іконка луни (світла) / сонця (темна) -->
+                <button id="theme-toggle" type="button" onclick="toggleAuthTheme()" aria-label="Toggle theme"
+                    class="p-1 cursor-pointer transition-colors"
+                    style="background: none !important; border: none !important; cursor: pointer !important; padding: 4px !important; display: flex !important; align-items: center !important; justify-content: center !important; flex-shrink: 0;">
+                    <!-- Иконка Луны (видна только в светлой теме) -->
+                    <svg class="w-4 h-4 moon-icon block dark:hidden"
+                        style="width: 17px !important; height: 17px !important;" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                    <!-- Иконка Солнца (видна только в темной теме) -->
+                    <svg class="w-4 h-4 sun-icon hidden dark:block text-yellow-400"
+                        style="width: 17px !important; height: 17px !important; color: #facc15 !important;" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                </button>
+            </div>
 
-            <!-- 3. Перемикач теми: іконка луни (світла) / сонця (темна) -->
-            <button id="theme-toggle" type="button" onclick="toggleAuthTheme()" aria-label="Toggle theme"
-                class="p-1 cursor-pointer transition-colors"
-                style="background: none !important; border: none !important; cursor: pointer !important; padding: 4px !important; display: flex !important; align-items: center !important; justify-content: center !important;">
-                <!-- Иконка Луны (видна только в светлой теме) -->
-                <svg class="w-4 h-4 moon-icon block dark:hidden"
-                    style="width: 17px !important; height: 17px !important;" fill="none" stroke="currentColor"
-                    viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                </svg>
-                <!-- Иконка Солнца (видна только в темной теме) -->
-                <svg class="w-4 h-4 sun-icon hidden dark:block text-yellow-400"
-                    style="width: 17px !important; height: 17px !important; color: #facc15 !important;" fill="none"
-                    stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
-            </button>
         </div>
 
         <!-- Mobile Drawer -->
@@ -1588,10 +1621,10 @@
     <section id="hero-section" class="hero hero-section relative overflow-hidden transition-colors duration-300"
         style="position: relative !important; width: 100% !important; height: calc(100vh - 46px) !important; min-height: calc(100vh - 46px) !important; overflow: hidden !important; margin: 0 0 80px 0 !important; margin-bottom: 80px !important; padding: 0 !important; background-color: #0d120f !important;">
         <div id="hero-bg-day"
-            style="position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; background-image: url('images/hero_day.jpg'); background-size: cover !important; background-position: right -100px center !important; background-repeat: no-repeat !important; transition: opacity 0.6s ease-in-out; z-index: 1;">
+            style="position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; background-image: url('images/hero_day.jpg'); background-size: cover !important; background-position: right -150px center !important; background-repeat: no-repeat !important; transition: opacity 0.6s ease-in-out; z-index: 1;">
         </div>
         <div id="hero-bg-night"
-            style="position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; background-image: url('images/hero_night.jpg'); background-size: cover !important; background-position: right -100px center !important; background-repeat: no-repeat !important; transition: opacity 0.6s ease-in-out; z-index: 2; opacity: 0;">
+            style="position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; background-image: url('images/hero_night.jpg'); background-size: cover !important; background-position: right -150px center !important; background-repeat: no-repeat !important; transition: opacity 0.6s ease-in-out; z-index: 2; opacity: 0;">
         </div>
 
         <div class="hero-container relative z-10 w-full"

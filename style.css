@@ -192,7 +192,7 @@ body.dark-theme {
     width: 100% !important;
     height: 100% !important;
     background-size: cover !important;
-    background-position: right -100px center !important;
+    background-position: right -150px center !important;
     background-repeat: no-repeat !important;
     transform: none !important;
     transition: opacity 0.6s ease-in-out !important;
@@ -289,10 +289,11 @@ header,
     height: 46px !important;
     min-height: 46px !important;
     max-height: 46px !important;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
     display: flex !important;
     align-items: center !important;
+    justify-content: center !important;
     box-sizing: border-box !important;
     position: sticky !important;
     top: 0 !important;
@@ -305,6 +306,27 @@ header,
     -webkit-backdrop-filter: blur(12px) !important;
     border-bottom: 1px solid rgba(228, 228, 231, 0.8) !important;
     box-sizing: border-box !important;
+}
+
+.header-container {
+    max-width: 1440px !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+    padding-left: 32px !important;
+    padding-right: 32px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    position: relative !important;
+}
+
+@media (max-width: 640px) {
+    .header-container {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+    }
 }
 
 /* ==================== НАВИГАЦИОННОЕ МЕНЮ (СТРОГО ПО ЦЕНТРУ ШАПКИ) ==================== */

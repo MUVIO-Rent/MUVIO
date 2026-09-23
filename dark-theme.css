@@ -198,10 +198,11 @@ header,
     height: 46px !important;
     min-height: 46px !important;
     max-height: 46px !important;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
     display: flex !important;
     align-items: center !important;
+    justify-content: center !important;
     box-sizing: border-box !important;
 }
 
