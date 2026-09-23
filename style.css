@@ -1187,13 +1187,52 @@ html:not(.theme-dark) .calc-tesla-container,
     box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02) !important;
 }
 
-/* Vehicle Preview Box */
+/* Calculator Top Header Clearance */
+#calculator,
+.calculator-section {
+    padding-top: 100px !important;
+}
+
+/* Vehicle Preview Box (Full-width Banner) */
+.calc-preview,
+.calculator-image-box,
+.calc-preview-box {
+    width: 100% !important;
+    height: 270px !important;
+    border-radius: 16px !important;
+    overflow: hidden !important;
+    position: relative !important;
+    padding: 0 !important;
+    margin-bottom: 0.75rem !important;
+    background: #000000 !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+}
+
+.calc-preview img,
+.calculator-image-box img,
+.calc-preview-box img,
+#calcVehicleImg {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center 35% !important;
+    display: block !important;
+    max-width: none !important;
+    max-height: none !important;
+}
+
+html:not(.dark) .calc-preview,
+html:not(.dark) .calculator-image-box,
 html:not(.dark) .calc-preview-box,
+html:not(.theme-dark) .calc-preview,
+html:not(.theme-dark) .calculator-image-box,
 html:not(.theme-dark) .calc-preview-box,
+[data-theme="light"] .calc-preview,
+[data-theme="light"] .calculator-image-box,
 [data-theme="light"] .calc-preview-box {
-    background: #F8FAFC !important;
-    border: 1px solid #E2E8F0 !important;
-    border-radius: 14px !important;
+    background: #000000 !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
 }
 
 /* Select Dropdown */

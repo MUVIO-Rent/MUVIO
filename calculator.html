@@ -84,11 +84,17 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
         }
 
+        html:not(.dark) .calc-preview,
+        html:not(.dark) .calculator-image-box,
         html:not(.dark) .calc-preview-box,
+        html:not(.theme-dark) .calc-preview,
+        html:not(.theme-dark) .calculator-image-box,
         html:not(.theme-dark) .calc-preview-box,
+        [data-theme="light"] .calc-preview,
+        [data-theme="light"] .calculator-image-box,
         [data-theme="light"] .calc-preview-box {
-            background: #F3F4F6 !important;
-            border: 1px solid rgba(0, 0, 0, 0.06) !important;
+            background: #000000 !important;
+            border: 1px solid rgba(0, 0, 0, 0.08) !important;
         }
 
         html:not(.dark) .calc-select-tesla,
@@ -221,9 +227,11 @@
         }
 
         /* Tesla / Apple Configurator Style */
-        #calculator {
+        #calculator,
+        .calculator-section {
             background-color: #0A0D0B !important;
             color: #FFFFFF !important;
+            padding-top: 100px !important;
         }
 
         .calc-tesla-container {
@@ -232,10 +240,33 @@
             border-radius: 24px;
         }
 
+        /* 1. ПОЛНОРАЗМЕРНЫЙ ВИД БАННЕРА ТРАНСПОРТА (ШАГ 1) */
+        .calc-preview,
+        .calculator-image-box,
         .calc-preview-box {
-            background: #000000;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 16px;
+            width: 100% !important;
+            height: 270px !important;
+            border-radius: 16px !important;
+            overflow: hidden !important;
+            position: relative !important;
+            padding: 0 !important;
+            margin-bottom: 0.75rem !important;
+            background: #000000 !important;
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+        }
+
+        .calc-preview img,
+        .calculator-image-box img,
+        .calc-preview-box img,
+        #calcVehicleImg {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important; /* Картинка полностью заливает ширину карточки */
+            object-position: center 35% !important; /* Фокус на фаре, руле и корпусе */
+            display: block !important;
+            max-width: none !important;
+            max-height: none !important;
         }
 
         .calc-select-tesla {
@@ -551,7 +582,7 @@
     </header>
 
     <!-- ==================== КАЛЬКУЛЯТОР ОРЕНДИ (TESLA DESIGN STUDIO) ==================== -->
-    <section id="calculator" class="py-16 md:py-24 bg-[#0B0E11] text-white border-b border-white/[0.08]">
+    <section id="calculator" class="calculator-section pt-[100px] pb-16 md:pb-24 bg-[#0B0E11] text-white border-b border-white/[0.08]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-x border-white/[0.05]">
 
             <div class="text-center max-w-3xl mx-auto mb-12">
@@ -594,10 +625,10 @@
                                 </div>
                             </div>
 
-                            <!-- PHOTO PREVIEW (Tesla Style Minimal - чисте фото без плашок) -->
-                            <div class="calc-preview-box relative p-4 mb-3 flex items-center justify-center min-h-[180px] sm:min-h-[220px] group select-none">
+                            <!-- PHOTO PREVIEW (Full-width banner) -->
+                            <div class="calc-preview calculator-image-box calc-preview-box relative mb-3 group select-none">
                                 <img id="calcVehicleImg" src="images/crosser.jpg" alt="Обраний транспорт"
-                                    class="relative z-0 h-36 sm:h-48 w-auto object-contain transition-transform duration-500 group-hover:scale-105 pointer-events-none drop-shadow-2xl">
+                                    class="pointer-events-none transition-transform duration-500 group-hover:scale-105">
                             </div>
 
                             <div class="relative">
@@ -639,8 +670,8 @@
                                 </label>
                                 <span id="optionsCountBadge" class="text-xs font-mono text-zinc-500">0 опцій обрано</span>
                             </div>
-                            <div id="rentalAddonsContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                <!-- Опції генеруються JS: Шолом + АКБ 40Ah / 60Ah -->
+                            <div id="rentalAddonsContainer" class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                <!-- Опції генеруються JS: Шолом + АКБ 40Ah + АКБ 60Ah -->
                             </div>
                         </div>
 
@@ -1003,7 +1034,7 @@
             modelKey: 'crosser-cr-13-1',
             days: 7,
             hasHelmet: false,
-            batteryOption: 'none', // 'none' | 'removable'
+            batteryOption: 'none', // 'none' | '40ah' | '60ah' | 'removable'
             batteryCapacity: '40ah' // '40ah' | '60ah'
         };
 
@@ -1012,7 +1043,7 @@
                 event.stopPropagation();
             }
             calcState.batteryCapacity = cap;
-            calcState.batteryOption = 'removable';
+            calcState.batteryOption = cap;
             renderAddonOptions();
             updateCalc();
         }
@@ -1227,24 +1258,21 @@
             }
         }
 
-        // Блок 3: Додаткові опції (Шолом +200 грн, Другий знімний АКБ: 40Ah +800 / 60Ah +1200)
+        // Блок 3: Додаткові опції (Шолом +200 грн, Знімний АКБ 40Ah +800 грн, Знімний АКБ 60Ah +1 200 грн)
         function renderAddonOptions() {
             const container = document.getElementById('rentalAddonsContainer');
             if (!container) return;
             container.innerHTML = '';
 
             const isEn = (window.getSiteSettings ? window.getSiteSettings().lang : 'ua') === 'en';
-            const currSign = isEn ? 'UAH' : 'грн';
 
-            const isBatteryActive = (calcState.batteryOption !== 'none');
-            const batteryPriceText = calcState.batteryCapacity === '60ah' 
-                ? (isEn ? '+1,200 UAH' : '+1 200 грн')
-                : (isEn ? '+800 UAH' : '+800 грн');
+            const is40Active = (calcState.batteryOption === '40ah' || (calcState.batteryOption === 'removable' && calcState.batteryCapacity === '40ah'));
+            const is60Active = (calcState.batteryOption === '60ah' || (calcState.batteryOption === 'removable' && calcState.batteryCapacity === '60ah'));
 
             const options = [
                 {
                     id: 'helmet',
-                    title: isEn ? "HELMET + PHONE MOUNT" : "ШОЛОМ + ТРИМАЧ ДЛЯ ТЕЛЕФОНУ",
+                    title: isEn ? "HELMET + PHONE MOUNT" : "ШОЛОМ + ТРИМАЧ",
                     priceLabel: isEn ? "+200 UAH" : "+200 грн",
                     isActive: calcState.hasHelmet,
                     onToggle: () => {
@@ -1252,16 +1280,30 @@
                     }
                 },
                 {
-                    id: 'battery',
-                    title: isEn ? "SECOND REMOVABLE BATTERY" : "ДРУГИЙ ЗНІМНИЙ АКБ",
-                    priceLabel: isBatteryActive ? batteryPriceText : (isEn ? "40Ah / 60Ah" : "40Ah / 60Ah"),
-                    isActive: isBatteryActive,
+                    id: 'battery-40',
+                    title: isEn ? "REMOVABLE BATTERY 40Ah" : "ЗНІМНИЙ АКБ 40Ah",
+                    priceLabel: isEn ? "+800 UAH" : "+800 грн",
+                    isActive: is40Active,
                     onToggle: () => {
-                        if (calcState.batteryOption !== 'none') {
+                        if (is40Active) {
                             calcState.batteryOption = 'none';
                         } else {
-                            calcState.batteryOption = 'removable';
-                            if (!calcState.batteryCapacity) calcState.batteryCapacity = '40ah';
+                            calcState.batteryOption = '40ah';
+                            calcState.batteryCapacity = '40ah';
+                        }
+                    }
+                },
+                {
+                    id: 'battery-60',
+                    title: isEn ? "REMOVABLE BATTERY 60Ah" : "ЗНІМНИЙ АКБ 60Ah",
+                    priceLabel: isEn ? "+1,200 UAH" : "+1 200 грн",
+                    isActive: is60Active,
+                    onToggle: () => {
+                        if (is60Active) {
+                            calcState.batteryOption = 'none';
+                        } else {
+                            calcState.batteryOption = '60ah';
+                            calcState.batteryCapacity = '60ah';
                         }
                     }
                 }
@@ -1269,7 +1311,7 @@
 
             options.forEach(opt => {
                 const card = document.createElement('div');
-                card.className = `calc-addon-card p-3.5 sm:p-4 border rounded-xl cursor-pointer transition-all flex flex-col justify-between ${
+                card.className = `calc-addon-card p-3.5 sm:p-4 border rounded-xl cursor-pointer transition-all flex flex-col justify-between select-none ${
                     opt.isActive 
                         ? 'is-active border-[#1AB370] bg-[#1AB370]/[0.08] ring-1 ring-[#1AB370]' 
                         : 'border-white/10 bg-white/[0.03] hover:border-white/20 hover:bg-white/[0.05]'
@@ -1280,11 +1322,11 @@
                     updateCalc();
                 };
 
-                const topRow = `
-                    <div class="flex items-center justify-between gap-3">
+                const cardContent = `
+                    <div class="flex items-center justify-between gap-2.5">
                         <div class="min-w-0">
-                            <div class="text-xs font-brand uppercase text-white font-bold tracking-wide">${opt.title}</div>
-                            <div class="text-xs font-mono font-bold text-[#1AB370] mt-0.5">${opt.priceLabel}</div>
+                            <div class="text-xs font-brand uppercase text-white font-bold tracking-tight leading-snug">${opt.title}</div>
+                            <div class="text-xs font-mono font-bold text-[#1AB370] mt-1">${opt.priceLabel}</div>
                         </div>
                         <div class="w-5 h-5 rounded-md border flex items-center justify-center shrink-0 transition-colors ${
                             opt.isActive 
@@ -1296,36 +1338,7 @@
                     </div>
                 `;
 
-                let segmentedControl = '';
-                if (opt.id === 'battery' && opt.isActive) {
-                    segmentedControl = `
-                        <div class="tesla-segmented mt-3 pt-3 border-t border-white/[0.08] flex items-center gap-2" onclick="event.stopPropagation()">
-                            <span class="text-[11px] font-mono uppercase tracking-wider text-zinc-400 shrink-0">${isEn ? 'Capacity:' : 'Ємність:'}</span>
-                            <div class="grid grid-cols-2 gap-1.5 flex-1">
-                                <button type="button" 
-                                    onclick="setBatteryCapacity('40ah', event)" 
-                                    class="px-2.5 py-1.5 rounded-lg text-xs font-mono font-bold transition-all text-center border ${
-                                        calcState.batteryCapacity === '40ah' 
-                                            ? 'border-[#1AB370] bg-[#1AB370] text-black shadow-sm font-black' 
-                                            : 'border-white/10 bg-white/[0.04] text-zinc-300 hover:border-white/20 hover:text-white'
-                                    }">
-                                    40Ah (+800 ${currSign})
-                                </button>
-                                <button type="button" 
-                                    onclick="setBatteryCapacity('60ah', event)" 
-                                    class="px-2.5 py-1.5 rounded-lg text-xs font-mono font-bold transition-all text-center border ${
-                                        calcState.batteryCapacity === '60ah' 
-                                            ? 'border-[#1AB370] bg-[#1AB370] text-black shadow-sm font-black' 
-                                            : 'border-white/10 bg-white/[0.04] text-zinc-300 hover:border-white/20 hover:text-white'
-                                    }">
-                                    60Ah (+1 200 ${currSign})
-                                </button>
-                            </div>
-                        </div>
-                    `;
-                }
-
-                card.innerHTML = topRow + segmentedControl;
+                card.innerHTML = cardContent;
                 container.appendChild(card);
             });
 
@@ -1387,11 +1400,13 @@
             const baseRentalCost = pricing.baseCost;
             const deposit = pricing.deposit;
 
-            // 2. Додаткові опції: Шолом (+200 грн), Другий знімний АКБ (40Ah: +800 грн, 60Ah: +1200 грн)
+            // 2. Додаткові опції: Шолом (+200 грн), Знімний АКБ 40Ah (+800 грн) / 60Ah (+1 200 грн)
             const helmetCost = calcState.hasHelmet ? 200 : 0;
             let batteryCost = 0;
-            if (calcState.batteryOption !== 'none') {
-                batteryCost = (calcState.batteryCapacity === '60ah') ? 1200 : 800;
+            if (calcState.batteryOption === '60ah' || (calcState.batteryOption === 'removable' && calcState.batteryCapacity === '60ah')) {
+                batteryCost = 1200;
+            } else if (calcState.batteryOption === '40ah' || (calcState.batteryOption === 'removable' && calcState.batteryCapacity === '40ah')) {
+                batteryCost = 800;
             }
 
             const totalCost = baseRentalCost + helmetCost + batteryCost;
@@ -1443,13 +1458,14 @@
                         : `<div class="flex justify-between items-center py-1 text-zinc-300"><span class="text-zinc-400">Шолом + тримач:</span><span class="font-bold text-[#1AB370] font-mono">+200 грн</span></div>`;
                 }
 
-                if (calcState.batteryOption !== 'none') {
-                    const capLabel = (calcState.batteryCapacity === '60ah') ? '60Ah' : '40Ah';
-                    const capCostStr = (calcState.batteryCapacity === '60ah') ? '1 200' : '800';
-                    const capCostStrEn = (calcState.batteryCapacity === '60ah') ? '1,200' : '800';
+                if (batteryCost > 0) {
+                    const is60 = (calcState.batteryOption === '60ah' || (calcState.batteryOption === 'removable' && calcState.batteryCapacity === '60ah'));
+                    const capLabel = is60 ? '60Ah' : '40Ah';
+                    const capCostStr = is60 ? '1 200' : '800';
+                    const capCostStrEn = is60 ? '1,200' : '800';
                     html += isEn
-                        ? `<div class="flex justify-between items-center py-1 text-zinc-300"><span class="text-zinc-400">2nd Battery (${capLabel}):</span><span class="font-bold text-[#1AB370] font-mono">+${capCostStrEn} UAH</span></div>`
-                        : `<div class="flex justify-between items-center py-1 text-zinc-300"><span class="text-zinc-400">Другий АКБ (${capLabel}):</span><span class="font-bold text-[#1AB370] font-mono">+${capCostStr} грн</span></div>`;
+                        ? `<div class="flex justify-between items-center py-1 text-zinc-300"><span class="text-zinc-400">Removable Battery (${capLabel}):</span><span class="font-bold text-[#1AB370] font-mono">+${capCostStrEn} UAH</span></div>`
+                        : `<div class="flex justify-between items-center py-1 text-zinc-300"><span class="text-zinc-400">Знімний АКБ (${capLabel}):</span><span class="font-bold text-[#1AB370] font-mono">+${capCostStr} грн</span></div>`;
                 }
 
                 breakdownBox.innerHTML = html;
@@ -1496,8 +1512,10 @@
             const pricing = getRentalPricing(calcState.modelKey, calcState.days);
             const helmetCost = calcState.hasHelmet ? 200 : 0;
             let batteryCost = 0;
-            if (calcState.batteryOption !== 'none') {
-                batteryCost = (calcState.batteryCapacity === '60ah') ? 1200 : 800;
+            if (calcState.batteryOption === '60ah' || (calcState.batteryOption === 'removable' && calcState.batteryCapacity === '60ah')) {
+                batteryCost = 1200;
+            } else if (calcState.batteryOption === '40ah' || (calcState.batteryOption === 'removable' && calcState.batteryCapacity === '40ah')) {
+                batteryCost = 800;
             }
             const total = pricing.baseCost + helmetCost + batteryCost;
             const url = generateTelegramRentalLink(calcState.modelKey, calcState.days, total);
