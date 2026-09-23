@@ -1477,5 +1477,203 @@ html:not(.dark) #calculator input[type=range].tesla-slider {
     box-shadow: 0 0 12px rgba(26, 179, 112, 0.7) !important;
 }
 
+/* ==========================================================================
+   HERO MACRO VEHICLE STAGE & GLOWING HEADLIGHTS (SLIDES 2 & 3)
+   ========================================================================== */
+.hero-vehicle-stage {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    pointer-events: none;
+    z-index: 2;
+    overflow: visible;
+}
+
+.hero-vehicle-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 820px;
+    width: auto;
+}
+
+.hero-vehicle-img {
+    height: 820px !important;
+    width: auto !important;
+    max-width: none !important;
+    object-fit: contain !important;
+    transform: scaleX(-1);
+    mix-blend-mode: normal !important;
+    display: block;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.hero-img-bike {
+    filter: drop-shadow(0 30px 45px rgba(0, 0, 0, 0.9));
+}
+
+.hero-stage-bike {
+    right: -140px;
+}
+
+.hero-img-scooter {
+    filter: drop-shadow(0 30px 45px rgba(0, 0, 0, 0.9));
+}
+
+.hero-stage-scooter {
+    right: -60px;
+}
+
+/* Headlight Lens and Glow Flare in Dark Theme */
+.hero-headlight-lens {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    mix-blend-mode: screen;
+    z-index: 25;
+}
+
+html.dark .hero-headlight-lens,
+html.theme-dark .hero-headlight-lens,
+html.dark-theme .hero-headlight-lens,
+[data-theme="dark"] .hero-headlight-lens,
+body.dark .hero-headlight-lens,
+body.theme-dark .hero-headlight-lens,
+body.dark-theme .hero-headlight-lens {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Like.Bike Bruiser Headlight */
+.bike-headlight {
+    width: 28px;
+    height: 28px;
+    left: 28.3%;
+    top: 31.1%;
+    background: radial-gradient(circle, #ffffff 0%, rgba(255, 255, 255, 0.95) 25%, rgba(180, 230, 255, 0.6) 55%, transparent 75%);
+    box-shadow: 0 0 20px 6px rgba(255, 255, 255, 0.95),
+                0 0 50px 18px rgba(180, 220, 255, 0.65),
+                0 0 90px 35px rgba(26, 179, 112, 0.35);
+    filter: drop-shadow(0 0 12px #ffffff);
+}
+
+.bike-headlight::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translateY(-50%);
+    width: 320px;
+    height: 140px;
+    background: radial-gradient(ellipse at right center, rgba(255, 255, 255, 0.45) 0%, rgba(200, 240, 255, 0.22) 30%, rgba(26, 179, 112, 0.08) 60%, transparent 80%);
+    clip-path: polygon(100% 45%, 0 0%, 0 100%, 100% 55%);
+    pointer-events: none;
+    filter: blur(8px);
+}
+
+/* Aima A700 Headlight */
+.scooter-headlight {
+    width: 34px;
+    height: 34px;
+    left: 24.5%;
+    top: 40.5%;
+    background: radial-gradient(circle, #ffffff 0%, rgba(255, 255, 255, 0.95) 25%, rgba(200, 255, 235, 0.65) 55%, transparent 75%);
+    box-shadow: 0 0 24px 8px rgba(255, 255, 255, 0.95),
+                0 0 55px 22px rgba(200, 255, 235, 0.7),
+                0 0 100px 40px rgba(26, 179, 112, 0.4);
+    filter: drop-shadow(0 0 14px #ffffff);
+}
+
+.scooter-headlight::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translateY(-50%);
+    width: 380px;
+    height: 160px;
+    background: radial-gradient(ellipse at right center, rgba(255, 255, 255, 0.45) 0%, rgba(210, 255, 240, 0.22) 30%, rgba(26, 179, 112, 0.08) 60%, transparent 80%);
+    clip-path: polygon(100% 45%, 0 0%, 0 100%, 100% 55%);
+    pointer-events: none;
+    filter: blur(10px);
+}
+
+/* Responsive Scaling for Smooth Bleed & Proportions */
+@media (max-width: 1400px) {
+    .hero-vehicle-wrapper {
+        height: 760px;
+    }
+    .hero-vehicle-img {
+        height: 760px !important;
+    }
+    .hero-stage-bike {
+        right: -160px;
+    }
+    .hero-stage-scooter {
+        right: -70px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .hero-vehicle-wrapper {
+        height: 680px;
+    }
+    .hero-vehicle-img {
+        height: 680px !important;
+    }
+    .hero-stage-bike {
+        right: -220px;
+    }
+    .hero-stage-scooter {
+        right: -100px;
+    }
+}
+
+@media (max-width: 991px) {
+    .hero-vehicle-wrapper {
+        height: 560px;
+    }
+    .hero-vehicle-img {
+        height: 560px !important;
+    }
+    .hero-stage-bike {
+        right: -200px;
+    }
+    .hero-stage-scooter {
+        right: -90px;
+    }
+}
+
+@media (max-width: 767px) {
+    .hero-vehicle-stage {
+        right: -100px;
+        opacity: 0.55;
+    }
+    .hero-vehicle-wrapper {
+        height: 420px;
+    }
+    .hero-vehicle-img {
+        height: 420px !important;
+    }
+    .hero-stage-bike {
+        right: -140px;
+    }
+    .hero-stage-scooter {
+        right: -70px;
+    }
+}
+
+
 
 

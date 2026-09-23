@@ -57,7 +57,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tektur:wght@700;800;900&display=swap" rel="stylesheet">
     <!-- MUVIO Styles & Dark Theme -->
-    <link rel="stylesheet" href="./style.css?v=3.1">
+    <link rel="stylesheet" href="./style.css?v=3.2">
     <link rel="stylesheet" href="./dark-theme.css?v=3.0">
 
     <style>
@@ -1716,18 +1716,27 @@
 
         <!-- СЛАЙД 2 (AIMA A700) -->
         <div class="hero-slide" id="heroSlide2" data-index="1"
-            style="position: absolute; inset: 0; width: 100%; height: 100%; display: flex; align-items: center;">
+            style="position: absolute; inset: 0; width: 100%; height: 100%; display: flex; align-items: center; overflow: hidden;">
             <div class="hero-slide-bg"
                 style="position: absolute; inset: 0; width: 100%; height: 100%; background: radial-gradient(circle at 75% 50%, rgba(26, 179, 112, 0.16) 0%, rgba(13, 18, 15, 0.95) 55%, #0d120f 100%); z-index: 1;">
             </div>
 
+            <!-- Vehicle Stage (Macro Close-Up Plan) -->
+            <div class="hero-vehicle-stage hero-stage-scooter">
+                <div class="hero-vehicle-wrapper">
+                    <img src="images/aima-a700-clean.png" alt="Aima A700" class="hero-vehicle-img hero-img-scooter">
+                    <!-- Headlight glow for dark theme -->
+                    <div class="hero-headlight-lens scooter-headlight"></div>
+                </div>
+            </div>
+
             <div class="hero-container relative z-10 w-full"
-                style="position: relative; z-index: 10; padding: 0 !important;">
+                style="position: relative; z-index: 10; padding: 0 !important; pointer-events: none;">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
 
                     <!-- Левая колонка (текст) -->
                     <div class="hero-text-content lg:col-span-6 text-left"
-                        style="position: relative !important; z-index: 10 !important; padding-left: 48px !important; max-width: 480px !important;">
+                        style="position: relative !important; z-index: 10 !important; padding-left: 48px !important; max-width: 480px !important; pointer-events: auto;">
                         <span class="text-xs font-brand font-bold tracking-widest uppercase text-[#1AB370] mb-3 inline-block">
                             <span class="lang-ua">КОМЕРЦІЙНИЙ ТА МІСЬКИЙ ПРОКАТ</span>
                             <span class="lang-en">COMMERCIAL &amp; URBAN RENTAL</span>
@@ -1757,31 +1766,33 @@
                         </div>
                     </div>
 
-                    <!-- Правая колонка: крупное фото Aima A700 -->
-                    <div class="lg:col-span-6 flex items-center justify-center lg:justify-end py-4 relative z-10">
-                        <img src="images/aima-a700-for-menu.png" alt="Aima A700"
-                            class="hero-slide-vehicle-img"
-                            style="max-height: min(620px, calc(100vh - 120px)) !important; width: auto !important; max-width: 100% !important; object-fit: contain !important; transform: scaleX(-1) !important; filter: drop-shadow(0 25px 35px rgba(0,0,0,0.85)) !important; pointer-events: none !important;">
-                    </div>
-
                 </div>
             </div>
         </div>
 
         <!-- СЛАЙД 3 (LIKE.BIKE BRUISER) -->
         <div class="hero-slide" id="heroSlide3" data-index="2"
-            style="position: absolute; inset: 0; width: 100%; height: 100%; display: flex; align-items: center;">
+            style="position: absolute; inset: 0; width: 100%; height: 100%; display: flex; align-items: center; overflow: hidden;">
             <div class="hero-slide-bg"
                 style="position: absolute; inset: 0; width: 100%; height: 100%; background: radial-gradient(circle at 75% 50%, rgba(26, 179, 112, 0.16) 0%, rgba(13, 18, 15, 0.95) 55%, #0d120f 100%); z-index: 1;">
             </div>
 
+            <!-- Vehicle Stage (Macro Close-Up Plan) -->
+            <div class="hero-vehicle-stage hero-stage-bike">
+                <div class="hero-vehicle-wrapper">
+                    <img src="images/like-bike-bruiser-clean.png" alt="Like.Bike Bruiser" class="hero-vehicle-img hero-img-bike">
+                    <!-- Headlight glow for dark theme -->
+                    <div class="hero-headlight-lens bike-headlight"></div>
+                </div>
+            </div>
+
             <div class="hero-container relative z-10 w-full"
-                style="position: relative; z-index: 10; padding: 0 !important;">
+                style="position: relative; z-index: 10; padding: 0 !important; pointer-events: none;">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
 
                     <!-- Левая колонка (текст) -->
                     <div class="hero-text-content lg:col-span-6 text-left"
-                        style="position: relative !important; z-index: 10 !important; padding-left: 48px !important; max-width: 480px !important;">
+                        style="position: relative !important; z-index: 10 !important; padding-left: 48px !important; max-width: 480px !important; pointer-events: auto;">
                         <span class="text-xs font-brand font-bold tracking-widest uppercase text-[#1AB370] mb-3 inline-block">
                             <span class="lang-ua">ЕЛЕКТРОВЕЛОСИПЕДИ ДЛЯ МІСТА ТА КУР'ЄРІВ</span>
                             <span class="lang-en">CITY &amp; COURIER E-BIKES</span>
@@ -1809,13 +1820,6 @@
                                 <span class="lang-en">Rental Calculator</span>
                             </a>
                         </div>
-                    </div>
-
-                    <!-- Правая колонка: крупное фото Like.Bike Bruiser -->
-                    <div class="lg:col-span-6 flex items-center justify-center lg:justify-end py-4 relative z-10">
-                        <img src="images/like-bike-bruiser-for-menu.png" alt="Like.Bike Bruiser"
-                            class="hero-slide-vehicle-img"
-                            style="max-height: min(620px, calc(100vh - 120px)) !important; width: auto !important; max-width: 100% !important; object-fit: contain !important; filter: drop-shadow(0 25px 35px rgba(0,0,0,0.85)) !important; pointer-events: none !important;">
                     </div>
 
                 </div>
