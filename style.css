@@ -167,7 +167,8 @@ body.dark-theme {
     height: calc(100vh - 46px) !important;
     min-height: calc(100vh - 46px) !important;
     background-color: #0d120f !important;
-    margin: 0 !important;
+    margin: 0 0 80px 0 !important;
+    margin-bottom: 80px !important;
     padding-bottom: 0 !important;
     border-bottom: none !important;
     box-shadow: none !important;
@@ -776,5 +777,29 @@ html.theme-dark #page-preloader .preloader-m-logo,
 .footer-logo-letters {
     fill: #FFFFFF !important;
     transition: fill 0.2s ease;
+}
+
+/* ==========================================================================
+   PROMO SHOWCASE SECTIONS (Z-PATTERN) & VEHICLE ORIENTATION
+   ========================================================================== */
+.promo-section {
+    margin-top: 120px !important;
+    padding: 40px 0 !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.promo-section-alt {
+    margin-top: 80px !important;
+    padding: 40px 0 !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.promo-scooter-img,
+img.promo-scooter-img {
+    transform: scaleX(-1) !important;
+    -webkit-transform: scaleX(-1) !important;
+    display: block !important;
 }
 

@@ -1375,3 +1375,21 @@ body.theme-dark .footer-logo-letters,
 [data-theme="dark"] .footer-logo-letters {
     fill: #FFFFFF !important;
 }
+
+/* ==========================================================================
+   PROMO SHOWCASE SECTIONS (DARK THEME)
+   ========================================================================== */
+.promo-section {
+    margin-top: 120px !important;
+}
+
+.promo-section-alt {
+    margin-top: 80px !important;
+}
+
+.promo-scooter-img,
+img.promo-scooter-img {
+    transform: scaleX(-1) !important;
+    -webkit-transform: scaleX(-1) !important;
+    display: block !important;
+}

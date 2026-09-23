@@ -57,8 +57,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tektur:wght@700;800;900&display=swap" rel="stylesheet">
     <!-- MUVIO Styles & Dark Theme -->
-    <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="./dark-theme.css">
+    <link rel="stylesheet" href="./style.css?v=2.3">
+    <link rel="stylesheet" href="./dark-theme.css?v=2.3">
 
     <style>
         .text-primary {
@@ -233,7 +233,7 @@
             color: #111827;
             position: relative;
             overflow: hidden !important;
-            margin-top: 80px;
+            margin-top: 120px !important;
             padding: 40px 0;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
@@ -401,14 +401,16 @@
             filter: none !important;
         }
 
-        .promo-scooter-img {
+        .promo-scooter-img,
+        img.promo-scooter-img {
             max-height: 460px;
             width: auto;
             max-width: 100%;
             object-fit: contain;
             margin-right: -60px;
             transform: scaleX(-1) !important;
-            display: block;
+            -webkit-transform: scaleX(-1) !important;
+            display: block !important;
             pointer-events: none;
             user-select: none;
             filter: none !important;
@@ -1584,7 +1586,7 @@
 
     <!-- ==================== 2. HERO СЕКЦІЯ ==================== -->
     <section id="hero-section" class="hero hero-section relative overflow-hidden transition-colors duration-300"
-        style="position: relative !important; width: 100% !important; height: calc(100vh - 46px) !important; min-height: calc(100vh - 46px) !important; overflow: hidden !important; margin: 0 !important; padding: 0 !important; background-color: #0d120f !important;">
+        style="position: relative !important; width: 100% !important; height: calc(100vh - 46px) !important; min-height: calc(100vh - 46px) !important; overflow: hidden !important; margin: 0 0 80px 0 !important; margin-bottom: 80px !important; padding: 0 !important; background-color: #0d120f !important;">
         <div id="hero-bg-day"
             style="position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; background-image: url('images/hero_day.jpg'); background-size: cover !important; background-position: right -100px center !important; background-repeat: no-repeat !important; transition: opacity 0.6s ease-in-out; z-index: 1;">
         </div>
@@ -1761,7 +1763,8 @@
     </section>
 
     <!-- ==================== ПРОМО-СЕКЦІЯ 1: Like.Bike Bruiser (Велосипед зліва, Текст справа) ==================== -->
-    <section class="promo-section border-b border-zinc-200 dark:border-white/[0.08]">
+    <section class="promo-section border-b border-zinc-200 dark:border-white/[0.08]"
+        style="margin-top: 120px !important; padding: 40px 0 !important; position: relative !important; overflow: hidden !important;">
         <div class="promo-container">
             
             <!-- Колонка з велосипедом (СЛЕВА: ~50-55%) -->
@@ -1802,7 +1805,8 @@
     </section>
 
     <!-- ==================== ПРОМО-СЕКЦІЯ 2: Aima A700 (Текст зліва, Скутер справа) ==================== -->
-    <section class="promo-section-alt border-b border-zinc-200 dark:border-white/[0.08]">
+    <section class="promo-section-alt border-b border-zinc-200 dark:border-white/[0.08]"
+        style="margin-top: 80px !important; padding: 40px 0 !important; position: relative !important; overflow: hidden !important;">
         <div class="promo-container">
             
             <!-- Колонка з текстом (СЛЕВА: ~45%, padding-right: 40px, z-index: 2) -->
@@ -1836,7 +1840,7 @@
                          alt="Aima A700" 
                          loading="lazy"
                          class="promo-scooter-img"
-                         style="transform: scaleX(-1) !important;">
+                         style="transform: scaleX(-1) !important; -webkit-transform: scaleX(-1) !important; display: block !important;">
                 </div>
             </div>
 
