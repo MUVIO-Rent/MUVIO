@@ -18,11 +18,11 @@ header .muvio-logo-svg,
     display: block !important;
 }
 .muvio-logo-mark {
-    fill: #1D5D3B;
+    fill: #1AB370 !important;
     transition: fill 0.2s ease;
 }
 .muvio-logo-letters {
-    fill: #1D5D3B;
+    fill: #111827 !important;
     transition: fill 0.2s ease;
 }
 html.dark .muvio-logo-mark,
@@ -30,7 +30,7 @@ html.theme-dark .muvio-logo-mark,
 .dark .muvio-logo-mark,
 .theme-dark .muvio-logo-mark,
 [data-theme="dark"] .muvio-logo-mark {
-    fill: #2E8B57 !important;
+    fill: #10B981 !important;
 }
 html.dark .muvio-logo-letters,
 html.theme-dark .muvio-logo-letters,
@@ -1137,79 +1137,120 @@ html:not(.dark) #calculator,
 body:not(.dark) #calculator,
 html:not(.theme-dark) .calculator-section,
 html:not(.theme-dark) #calculator,
-[data-theme="light"] .calculator-section,
-[data-theme="light"] #calculator {
+/* ==========================================================================
+   RENTAL CALCULATOR (TESLA STUDIO STYLE) — LIGHT & DARK THEME ENGINE
+   ========================================================================== */
+
+/* Calculator Section Canvas */
+html:not(.dark) #calculator,
+html:not(.theme-dark) #calculator,
+[data-theme="light"] #calculator,
+body:not(.dark) #calculator,
+body:not(.theme-dark) #calculator {
     background-color: #F8FAFC !important;
-    color: #0F172A !important;
+    color: #111827 !important;
+    border-bottom: 1px solid #E2E8F0 !important;
 }
 
+html:not(.dark) #calculator .border-x,
+html:not(.theme-dark) #calculator .border-x,
+[data-theme="light"] #calculator .border-x {
+    border-color: rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Step Headers: Crisp Graphite color #111827 !important */
+html:not(.dark) #calculator label,
+html:not(.dark) .calc-step-label,
+html:not(.theme-dark) #calculator label,
+html:not(.theme-dark) .calc-step-label,
+[data-theme="light"] #calculator label,
+[data-theme="light"] .calc-step-label,
+body:not(.dark) #calculator label,
+body:not(.dark) .calc-step-label {
+    color: #111827 !important;
+    font-weight: 700 !important;
+}
+
+html:not(.dark) #calculator .text-zinc-300,
+html:not(.theme-dark) #calculator .text-zinc-300,
+[data-theme="light"] #calculator .text-zinc-300,
+body:not(.dark) #calculator .text-zinc-300 {
+    color: #111827 !important;
+}
+
+/* Tesla Container (Outer Box) */
 html:not(.dark) .calc-tesla-container,
 html:not(.theme-dark) .calc-tesla-container,
 [data-theme="light"] .calc-tesla-container {
     background: #FFFFFF !important;
     border: 1px solid rgba(0, 0, 0, 0.08) !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02) !important;
 }
 
+/* Vehicle Preview Box */
 html:not(.dark) .calc-preview-box,
 html:not(.theme-dark) .calc-preview-box,
 [data-theme="light"] .calc-preview-box {
-    background: #F3F4F6 !important;
-    border: 1px solid rgba(0, 0, 0, 0.06) !important;
+    background: #F8FAFC !important;
+    border: 1px solid #E2E8F0 !important;
+    border-radius: 14px !important;
 }
 
+/* Select Dropdown */
 html:not(.dark) .calc-select-tesla,
 html:not(.theme-dark) .calc-select-tesla,
 [data-theme="light"] .calc-select-tesla {
     background-color: #FFFFFF !important;
-    border: 1px solid rgba(0, 0, 0, 0.15) !important;
+    border: 1px solid #D1D5DB !important;
     color: #111827 !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
 }
 
-/* Day Duration Cards: White background (#FFFFFF), thin grey border, dark text */
+/* Duration Pills */
 html:not(.dark) .calc-pill-btn,
 html:not(.theme-dark) .calc-pill-btn,
 [data-theme="light"] .calc-pill-btn {
     background: #FFFFFF !important;
-    border: 1px solid rgba(0, 0, 0, 0.12) !important;
+    border: 1px solid #E5E7EB !important;
     color: #111827 !important;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
 }
 html:not(.dark) .calc-pill-btn:hover,
 html:not(.theme-dark) .calc-pill-btn:hover,
 [data-theme="light"] .calc-pill-btn:hover {
-    border-color: rgba(26, 179, 112, 0.4) !important;
-    background: #F9FAFB !important;
+    border-color: #1AB370 !important;
+    background: #F0FDF4 !important;
 }
 html:not(.dark) .calc-pill-btn.is-active,
 html:not(.theme-dark) .calc-pill-btn.is-active,
 [data-theme="light"] .calc-pill-btn.is-active {
     border-color: #1AB370 !important;
-    background: rgba(26, 179, 112, 0.08) !important;
-    color: #1AB370 !important;
-    box-shadow: 0 0 12px rgba(26, 179, 112, 0.15) !important;
+    background: #ECFDF5 !important;
+    color: #047857 !important;
+    box-shadow: 0 0 0 1px #1AB370, 0 2px 4px rgba(26, 179, 112, 0.12) !important;
 }
 
-/* Addon Option Cards: White background (#FFFFFF), thin grey border, dark text */
+/* Addon Option Cards */
 html:not(.dark) .calc-addon-card,
 html:not(.theme-dark) .calc-addon-card,
 [data-theme="light"] .calc-addon-card {
     background: #FFFFFF !important;
-    border: 1px solid rgba(0, 0, 0, 0.12) !important;
+    border: 1px solid #E5E7EB !important;
     color: #111827 !important;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
 }
 html:not(.dark) .calc-addon-card:hover,
 html:not(.theme-dark) .calc-addon-card:hover,
 [data-theme="light"] .calc-addon-card:hover {
-    border-color: rgba(26, 179, 112, 0.4) !important;
-    background: #F9FAFB !important;
+    border-color: #1AB370 !important;
+    background: #F0FDF4 !important;
 }
 html:not(.dark) .calc-addon-card.is-active,
 html:not(.theme-dark) .calc-addon-card.is-active,
 [data-theme="light"] .calc-addon-card.is-active {
     border-color: #1AB370 !important;
-    background: rgba(26, 179, 112, 0.08) !important;
+    background: #ECFDF5 !important;
+    box-shadow: 0 0 0 1px #1AB370, 0 2px 4px rgba(26, 179, 112, 0.12) !important;
 }
 html:not(.dark) .calc-addon-card .text-white,
 html:not(.theme-dark) .calc-addon-card .text-white,
@@ -1222,12 +1263,12 @@ html:not(.theme-dark) .calc-addon-card .text-zinc-400,
     color: #4B5563 !important;
 }
 
-/* Segmented switch (40Ah | 60Ah) */
+/* Segmented battery switch (40Ah | 60Ah) */
 html:not(.dark) .tesla-segmented,
 html:not(.theme-dark) .tesla-segmented,
 [data-theme="light"] .tesla-segmented {
     background: #F3F4F6 !important;
-    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    border: 1px solid #E5E7EB !important;
 }
 html:not(.dark) .tesla-segmented-btn,
 html:not(.theme-dark) .tesla-segmented-btn,
@@ -1242,10 +1283,111 @@ html:not(.theme-dark) .tesla-segmented-btn.is-active,
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
 }
 
-/* Calculator text and borders */
-html:not(.dark) #calculator .text-white,
-html:not(.theme-dark) #calculator .text-white,
-[data-theme="light"] #calculator .text-white {
+/* Right Summary Card (Tesla Summary Card) in Light Mode */
+html:not(.dark) .calc-summary-card,
+html:not(.theme-dark) .calc-summary-card,
+[data-theme="light"] .calc-summary-card,
+body:not(.dark) .calc-summary-card,
+body:not(.theme-dark) .calc-summary-card {
+    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+    border: 1px solid #E5E7EB !important;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02) !important;
+}
+html:not(.dark) .calc-summary-card .border-b,
+html:not(.dark) .calc-summary-card .border-t,
+html:not(.theme-dark) .calc-summary-card .border-b,
+html:not(.theme-dark) .calc-summary-card .border-t,
+[data-theme="light"] .calc-summary-card .border-b,
+[data-theme="light"] .calc-summary-card .border-t {
+    border-color: #E5E7EB !important;
+}
+html:not(.dark) .calc-summary-card .w-14.h-14,
+html:not(.theme-dark) .calc-summary-card .w-14.h-14,
+[data-theme="light"] .calc-summary-card .w-14.h-14 {
+    background: #F9FAFB !important;
+    border-color: #E5E7EB !important;
+}
+html:not(.dark) .calc-summary-card #resModelTitle,
+html:not(.theme-dark) .calc-summary-card #resModelTitle,
+[data-theme="light"] .calc-summary-card #resModelTitle {
+    color: #111827 !important;
+}
+html:not(.dark) .calc-summary-card #resConfigSummary,
+html:not(.theme-dark) .calc-summary-card #resConfigSummary,
+[data-theme="light"] .calc-summary-card #resConfigSummary {
+    color: #6B7280 !important;
+}
+html:not(.dark) .calc-summary-card #resTotalPrice,
+html:not(.theme-dark) .calc-summary-card #resTotalPrice,
+[data-theme="light"] .calc-summary-card #resTotalPrice,
+body:not(.dark) .calc-summary-card #resTotalPrice {
+    color: #111827 !important;
+    font-weight: 800 !important;
+}
+html:not(.dark) .calc-summary-card #resDeposit,
+html:not(.theme-dark) .calc-summary-card #resDeposit,
+[data-theme="light"] .calc-summary-card #resDeposit,
+body:not(.dark) .calc-summary-card #resDeposit {
+    color: #111827 !important;
+    font-weight: 700 !important;
+}
+html:not(.dark) .calc-summary-card .text-zinc-400,
+html:not(.dark) .calc-summary-card .text-zinc-500,
+html:not(.theme-dark) .calc-summary-card .text-zinc-400,
+html:not(.theme-dark) .calc-summary-card .text-zinc-500,
+[data-theme="light"] .calc-summary-card .text-zinc-400,
+[data-theme="light"] .calc-summary-card .text-zinc-500 {
+    color: #4B5563 !important;
+}
+html:not(.dark) .calc-summary-card #resBreakdownBox .text-zinc-300,
+html:not(.theme-dark) .calc-summary-card #resBreakdownBox .text-zinc-300,
+[data-theme="light"] .calc-summary-card #resBreakdownBox .text-zinc-300 {
+    color: #374151 !important;
+}
+html:not(.dark) .calc-summary-card #resBreakdownBox .text-zinc-400,
+html:not(.theme-dark) .calc-summary-card #resBreakdownBox .text-zinc-400,
+[data-theme="light"] .calc-summary-card #resBreakdownBox .text-zinc-400 {
+    color: #6B7280 !important;
+}
+html:not(.dark) .calc-summary-card #resBreakdownBox .text-white,
+html:not(.theme-dark) .calc-summary-card #resBreakdownBox .text-white,
+[data-theme="light"] .calc-summary-card #resBreakdownBox .text-white {
+    color: #111827 !important;
+}
+
+/* Dark Mode explicit overrides for Calculator Summary Card */
+html.dark .calc-summary-card,
+html.theme-dark .calc-summary-card,
+[data-theme="dark"] .calc-summary-card {
+    background-color: #0E1216 !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+}
+html.dark .calc-summary-card #resTotalPrice,
+html.theme-dark .calc-summary-card #resTotalPrice,
+[data-theme="dark"] .calc-summary-card #resTotalPrice {
+    color: #FFFFFF !important;
+}
+html.dark .calc-summary-card #resModelTitle,
+html.theme-dark .calc-summary-card #resModelTitle,
+[data-theme="dark"] .calc-summary-card #resModelTitle {
+    color: #FFFFFF !important;
+}
+html.dark .calc-summary-card #resDeposit,
+html.theme-dark .calc-summary-card #resDeposit,
+[data-theme="dark"] .calc-summary-card #resDeposit {
+    color: #E4E4E7 !important;
+}
+html.dark .calc-summary-card #resBreakdownBox .text-white,
+html.theme-dark .calc-summary-card #resBreakdownBox .text-white,
+[data-theme="dark"] .calc-summary-card #resBreakdownBox .text-white {
+    color: #FFFFFF !important;
+}
+
+/* Calculator general text and borders */
+html:not(.dark) #calculator .text-white:not(.calc-cta-btn *):not(.calc-cta-btn),
+html:not(.theme-dark) #calculator .text-white:not(.calc-cta-btn *):not(.calc-cta-btn),
+[data-theme="light"] #calculator .text-white:not(.calc-cta-btn *):not(.calc-cta-btn) {
     color: #111827 !important;
 }
 html:not(.dark) #calculator .text-zinc-400,
@@ -1261,5 +1403,79 @@ html:not(.dark) #calculator .border-white\/\[0\.06\] {
 html:not(.dark) #calculator input[type=range].tesla-slider {
     background: rgba(0, 0, 0, 0.12) !important;
 }
+
+/* ==========================================================================
+   HERO INTERACTIVE 3-SLIDE CAROUSEL
+   ========================================================================== */
+.hero-slide {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(24px);
+    transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.hero-slide.is-active,
+.hero-slide.active {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateX(0) !important;
+    pointer-events: auto !important;
+    z-index: 10 !important;
+}
+
+.hero-slide.is-prev {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translateX(-24px) !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
+}
+
+/* Ensure Slide 1 (AIMA ONE benchmark) does not shift or transform when active */
+#heroSlide1.is-active,
+#heroSlide1.active {
+    transform: none !important;
+}
+
+.hero-slider-nav-btn {
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.hero-slider-nav-btn:hover {
+    background-color: rgba(0, 0, 0, 0.75) !important;
+    border-color: rgba(255, 255, 255, 0.4) !important;
+    transform: translateY(-50%) scale(1.06) !important;
+}
+
+.hero-slider-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.35);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-slider-dot:hover {
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.hero-slider-dot.is-active,
+.hero-slider-dot.active {
+    width: 32px;
+    background: #1AB370 !important;
+    box-shadow: 0 0 12px rgba(26, 179, 112, 0.7) !important;
+}
+
 
 

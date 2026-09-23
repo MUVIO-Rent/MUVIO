@@ -57,7 +57,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tektur:wght@700;800;900&display=swap" rel="stylesheet">
     <!-- MUVIO Styles & Dark Theme -->
-    <link rel="stylesheet" href="./style.css?v=3.0">
+    <link rel="stylesheet" href="./style.css?v=3.1">
     <link rel="stylesheet" href="./dark-theme.css?v=3.0">
 
     <style>
@@ -662,12 +662,12 @@
         }
 
         .muvio-logo-mark {
-            fill: #1D5D3B;
+            fill: #1AB370 !important;
             transition: fill 0.2s ease;
         }
 
         .muvio-logo-letters {
-            fill: #1D5D3B;
+            fill: #111827 !important;
             transition: fill 0.2s ease;
         }
 
@@ -676,7 +676,7 @@
         .dark .muvio-logo-mark,
         .theme-dark .muvio-logo-mark,
         [data-theme="dark"] .muvio-logo-mark {
-            fill: #2E8B57 !important;
+            fill: #10B981 !important;
         }
 
         html.dark .muvio-logo-letters,
@@ -1626,269 +1626,331 @@
         }
     </script>
 
-    <!-- ==================== 2. HERO СЕКЦІЯ ==================== -->
+    <!-- ==================== 2. HERO СЕКЦІЯ (3-СЛАЙДОВИЙ СЛАЙДЕР) ==================== -->
     <section id="hero-section" class="hero hero-section relative overflow-hidden transition-colors duration-300"
         style="position: relative !important; width: 100% !important; height: calc(100vh - 46px) !important; min-height: calc(100vh - 46px) !important; overflow: hidden !important; margin: 0 0 80px 0 !important; margin-bottom: 80px !important; padding: 0 !important; background-color: #0d120f !important;">
-        <div id="hero-bg-day"
-            style="position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; background-image: url('images/hero_day.jpg'); background-size: cover !important; background-position: right -150px center !important; background-repeat: no-repeat !important; transition: opacity 0.6s ease-in-out; z-index: 1;">
-        </div>
-        <div id="hero-bg-night"
-            style="position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; background-image: url('images/hero_night.jpg'); background-size: cover !important; background-position: right -150px center !important; background-repeat: no-repeat !important; transition: opacity 0.6s ease-in-out; z-index: 2; opacity: 0;">
-        </div>
 
-        <div class="hero-container relative z-10 w-full"
-            style="position: relative; z-index: 10; padding: 0 !important;">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <!-- СЛАЙД 1 (ЭТАЛОН: AIMA ONE - КООРДИНАТИ, ПОЛОЖЕННЯ ТА ВЕРСТКА НЕ ЗМІНЕНІ) -->
+        <div class="hero-slide is-active active" id="heroSlide1" data-index="0"
+            style="position: absolute; inset: 0; width: 100%; height: 100%; display: flex; align-items: center; z-index: 2;">
+            <div id="hero-bg-day"
+                style="position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; background-image: url('images/hero_day.jpg'); background-size: cover !important; background-position: right -150px center !important; background-repeat: no-repeat !important; transition: opacity 0.6s ease-in-out; z-index: 1;">
+            </div>
+            <div id="hero-bg-night"
+                style="position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; background-image: url('images/hero_night.jpg'); background-size: cover !important; background-position: right -150px center !important; background-repeat: no-repeat !important; transition: opacity 0.6s ease-in-out; z-index: 2; opacity: 0;">
+            </div>
 
-                <!-- Левая колонка (текст) -->
-                <div class="hero-text-content lg:col-span-7 text-left"
-                    style="position: relative !important; z-index: 10 !important; padding-left: 48px !important; max-width: 460px !important;">
-                    <h1
-                        style="font-family: 'Unbounded', sans-serif !important; font-weight: 800 !important; font-size: clamp(1.85rem, 3.8vw, 3rem) !important; line-height: 1.18 !important; letter-spacing: -0.02em !important; margin-bottom: 20px !important; color: #FFFFFF !important; text-shadow: 0 4px 16px rgba(0,0,0,0.8) !important; filter: drop-shadow(0 4px 16px rgba(0,0,0,0.8)) !important;">
-                        <span class="lang-ua">Оренда<br>електротранспорту<br><span
-                                style="white-space: nowrap;">в&nbsp;Одесі</span></span>
-                        <span class="lang-en">Electric vehicle<br>rental<br><span
-                                style="white-space: nowrap;">in&nbsp;Odesa</span></span>
-                    </h1>
-                    <p class="hero-subtitle text-base sm:text-lg mb-8 max-w-xl leading-relaxed"
-                        style="color: #E4E4E7 !important; text-shadow: 0 2px 10px rgba(0,0,0,0.8) !important;">
-                        <span class="lang-ua">Для кур'єрів та туризму • Всі моделі з АКБ та зарядкою • Безкоштовне
-                            сервісне обслуговування</span>
-                        <span class="lang-en">For couriers and tourism • All models with battery & charger • Free
-                            maintenance</span>
-                    </p>
-                    <div class="flex items-center gap-4 flex-wrap">
-                        <a href="#catalog"
-                            class="inline-flex items-center justify-center gap-2 bg-[#1D5D3B] hover:bg-[#237248] text-white px-7 py-3.5 rounded-xl font-bold transition-all shadow-lg shadow-[#1D5D3B]/20">
-                            <span class="lang-ua">Обрати транспорт ↓</span>
-                            <span class="lang-en">Choose Vehicle ↓</span>
-                        </a>
-                        <a href="#calculator"
-                            class="hero-calc-btn inline-flex items-center justify-center gap-2.5 bg-black/40 hover:bg-black/60 border border-white/20 hover:border-white/40 text-white px-7 py-3.5 rounded-xl font-semibold backdrop-blur-md transition-all shadow-lg">
-                            <i data-lucide="calculator" class="w-4 h-4"></i>
-                            <span class="lang-ua">Калькулятор оренди</span>
-                            <span class="lang-en">Rental Calculator</span>
-                        </a>
-                    </div>
-                </div>
+            <div class="hero-container relative z-10 w-full"
+                style="position: relative; z-index: 10; padding: 0 !important;">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
 
-                <!-- Правая колонка: интерактивная кинематографичная композиция с телеметрическими выносками (скрыта, код сохранён) -->
-                <div class="lg:col-span-5 flex items-center justify-center py-4 relative"
-                    style="display: none !important;">
-                    <div
-                        class="hero-brand-stage relative w-full h-[460px] lg:h-[520px] flex items-center justify-center select-none">
-
-                        <!-- Шлейф движения (Слои-эхо, схлопывающиеся при приземлении) -->
-                        <div class="echo-layer echo-far absolute inset-0 flex items-center justify-center pointer-events-none z-0"
-                            style="opacity: 0.15;">
-                            <svg class="h-[320px] lg:h-[380px] w-auto fill-[#1D5D3B]" viewBox="0 0 100 100"
-                                style="fill: #1D5D3B !important;">
-                                <path
-                                    d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z"
-                                    fill="#1D5D3B" />
-                            </svg>
-                        </div>
-                        <div class="echo-layer echo-near absolute inset-0 flex items-center justify-center pointer-events-none z-0"
-                            style="opacity: 0.30;">
-                            <svg class="h-[320px] lg:h-[380px] w-auto fill-[#1D5D3B]" viewBox="0 0 100 100"
-                                style="fill: #1D5D3B !important;">
-                                <path
-                                    d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z"
-                                    fill="#1D5D3B" />
-                            </svg>
-                        </div>
-
-                        <!-- Основной фронтальный знак M (белое свечение для читаемости на хроме) -->
-                        <div class="main-emblem relative z-10 flex items-center justify-center pointer-events-none">
-                            <svg class="h-[320px] lg:h-[380px] w-auto" viewBox="0 0 100 100"
-                                style="fill: #1D5D3B !important; filter: drop-shadow(0 0 25px rgba(255,255,255,0.45)) drop-shadow(0 4px 15px rgba(0,0,0,0.7)) drop-shadow(0 0 60px rgba(255,255,255,0.15)) !important;">
-                                <path
-                                    d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z"
-                                    fill="#1D5D3B" />
-                            </svg>
-                        </div>
-
-                        <!-- ВЫНОСКА 1: Сверху-слева от М (Тарифы) -->
-                        <div
-                            class="telemetry-callout absolute top-4 sm:top-6 -left-2 sm:-left-4 lg:-left-12 z-30 flex items-center">
-                            <div class="telemetry-card callout-text-left callout-delay-1 px-3.5 py-2 rounded-lg flex items-center select-none"
-                                style="animation-delay: 1.3s !important; animation-duration: 0.7s !important; background-color: rgba(0, 0, 0, 0.85) !important; backdrop-filter: blur(12px) !important; -webkit-backdrop-filter: blur(12px) !important; border: 1px solid rgba(63, 63, 70, 0.8) !important; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;">
-                                <span
-                                    class="telemetry-text font-mono font-semibold text-[11px] sm:text-xs tracking-wider uppercase whitespace-nowrap"
-                                    style="color: #ffffff !important;">
-                                    <span class="lang-ua">ТАРИФИ: ВІД 800 ₴/ДОБА • 1 800 ₴/ТИЖД</span>
-                                    <span class="lang-en">RATES: FROM 800 ₴/DAY • 1,800 ₴/WEEK</span>
-                                </span>
-                            </div>
-                            <div class="callout-line-left callout-delay-1 hidden sm:flex items-center shrink-0"
-                                style="animation-delay: 1.3s !important; animation-duration: 0.7s !important;">
-                                <div class="h-[1px] w-6 lg:w-10 bg-[#1D5D3B]"
-                                    style="background-color: #1D5D3B !important;"></div>
-                                <div class="w-1.5 h-1.5 rounded-full bg-[#2E8B57] shrink-0"
-                                    style="background-color: #2E8B57 !important; box-shadow: 0 0 8px #2E8B57 !important;">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- ВЫНОСКА 2: Сверху-справа от М (Запас хода) -->
-                        <div
-                            class="telemetry-callout absolute top-10 sm:top-12 -right-2 sm:-right-4 lg:-right-12 z-30 flex items-center">
-                            <div class="callout-line-right callout-delay-2 hidden sm:flex items-center shrink-0"
-                                style="animation-delay: 1.5s !important; animation-duration: 0.7s !important;">
-                                <div class="w-1.5 h-1.5 rounded-full bg-[#2E8B57] shrink-0"
-                                    style="background-color: #2E8B57 !important; box-shadow: 0 0 8px #2E8B57 !important;">
-                                </div>
-                                <div class="h-[1px] w-6 lg:w-10 bg-[#1D5D3B]"
-                                    style="background-color: #1D5D3B !important;"></div>
-                            </div>
-                            <div class="telemetry-card callout-text-right callout-delay-2 px-3.5 py-2 rounded-lg flex items-center select-none"
-                                style="animation-delay: 1.5s !important; animation-duration: 0.7s !important; background-color: rgba(0, 0, 0, 0.85) !important; backdrop-filter: blur(12px) !important; -webkit-backdrop-filter: blur(12px) !important; border: 1px solid rgba(63, 63, 70, 0.8) !important; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;">
-                                <span
-                                    class="telemetry-text font-mono font-semibold text-[11px] sm:text-xs tracking-wider uppercase whitespace-nowrap"
-                                    style="color: #ffffff !important;">
-                                    <span class="lang-ua">ЗАПАС ХОДУ: ДО 160 КМ НА ЗАРЯДІ</span>
-                                    <span class="lang-en">RANGE: UP TO 160 KM PER CHARGE</span>
-                                </span>
-                            </div>
-                        </div>
-
-                        <!-- ВЫНОСКА 3: Снизу-слева от М (Сервис) -->
-                        <div
-                            class="telemetry-callout absolute bottom-12 sm:bottom-14 -left-2 sm:-left-4 lg:-left-12 z-30 flex items-center">
-                            <div class="telemetry-card callout-text-left callout-delay-3 px-3.5 py-2 rounded-lg flex items-center select-none"
-                                style="animation-delay: 1.7s !important; animation-duration: 0.7s !important; background-color: rgba(0, 0, 0, 0.85) !important; backdrop-filter: blur(12px) !important; -webkit-backdrop-filter: blur(12px) !important; border: 1px solid rgba(63, 63, 70, 0.8) !important; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;">
-                                <span
-                                    class="telemetry-text font-mono font-semibold text-[11px] sm:text-xs tracking-wider uppercase whitespace-nowrap"
-                                    style="color: #ffffff !important;">
-                                    <span class="lang-ua">СЕРВІС: ОДЕСА, ВУЛ. ПРИМОРСЬКА, 22</span>
-                                    <span class="lang-en">SERVICE: ODESA, 22 PRYMORSKA STR.</span>
-                                </span>
-                            </div>
-                            <div class="callout-line-left callout-delay-3 hidden sm:flex items-center shrink-0"
-                                style="animation-delay: 1.7s !important; animation-duration: 0.7s !important;">
-                                <div class="h-[1px] w-6 lg:w-10 bg-[#1D5D3B]"
-                                    style="background-color: #1D5D3B !important;"></div>
-                                <div class="w-1.5 h-1.5 rounded-full bg-[#2E8B57] shrink-0"
-                                    style="background-color: #2E8B57 !important; box-shadow: 0 0 8px #2E8B57 !important;">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- ВЫНОСКА 4: Снизу-справа от М (Поддержка / Бот) -->
-                        <div
-                            class="telemetry-callout absolute bottom-4 sm:bottom-6 -right-2 sm:-right-4 lg:-right-12 z-30 flex items-center">
-                            <div class="callout-line-right callout-delay-4 hidden sm:flex items-center shrink-0"
-                                style="animation-delay: 1.9s !important; animation-duration: 0.7s !important;">
-                                <div class="w-1.5 h-1.5 rounded-full bg-[#2E8B57] shrink-0"
-                                    style="background-color: #2E8B57 !important; box-shadow: 0 0 8px #2E8B57 !important;">
-                                </div>
-                                <div class="h-[1px] w-6 lg:w-10 bg-[#1D5D3B]"
-                                    style="background-color: #1D5D3B !important;"></div>
-                            </div>
-                            <a href="https://t.me/muviobot" target="_blank" rel="noopener noreferrer"
-                                class="telemetry-card callout-text-right callout-delay-4 px-3.5 py-2 rounded-lg flex items-center transition-colors group select-none"
-                                style="animation-delay: 1.9s !important; animation-duration: 0.7s !important; background-color: rgba(0, 0, 0, 0.85) !important; backdrop-filter: blur(12px) !important; -webkit-backdrop-filter: blur(12px) !important; border: 1px solid rgba(63, 63, 70, 0.8) !important; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;">
-                                <span
-                                    class="telemetry-text font-mono font-semibold text-[11px] sm:text-xs tracking-wider uppercase whitespace-nowrap transition-colors"
-                                    style="color: #ffffff !important;">
-                                    <span class="lang-ua">ПІДТРИМКА: ОНЛАЙН-БОТ 24/7 ↗</span>
-                                    <span class="lang-en">SUPPORT: 24/7 BOT ↗</span>
-                                </span>
+                    <!-- Левая колонка (текст) -->
+                    <div class="hero-text-content lg:col-span-7 text-left"
+                        style="position: relative !important; z-index: 10 !important; padding-left: 48px !important; max-width: 460px !important;">
+                        <h1
+                            style="font-family: 'Unbounded', sans-serif !important; font-weight: 800 !important; font-size: clamp(1.85rem, 3.8vw, 3rem) !important; line-height: 1.18 !important; letter-spacing: -0.02em !important; margin-bottom: 20px !important; color: #FFFFFF !important; text-shadow: 0 4px 16px rgba(0,0,0,0.8) !important; filter: drop-shadow(0 4px 16px rgba(0,0,0,0.8)) !important;">
+                            <span class="lang-ua">Оренда<br>електротранспорту<br><span
+                                    style="white-space: nowrap;">в&nbsp;Одесі</span></span>
+                            <span class="lang-en">Electric vehicle<br>rental<br><span
+                                    style="white-space: nowrap;">in&nbsp;Odesa</span></span>
+                        </h1>
+                        <p class="hero-subtitle text-base sm:text-lg mb-8 max-w-xl leading-relaxed"
+                            style="color: #E4E4E7 !important; text-shadow: 0 2px 10px rgba(0,0,0,0.8) !important;">
+                            <span class="lang-ua">Для кур'єрів та туризму • Всі моделі з АКБ та зарядкою • Безкоштовне
+                                сервісне обслуговування</span>
+                            <span class="lang-en">For couriers and tourism • All models with battery & charger • Free
+                                maintenance</span>
+                        </p>
+                        <div class="flex items-center gap-4 flex-wrap">
+                            <a href="#catalog"
+                                class="inline-flex items-center justify-center gap-2 bg-[#1D5D3B] hover:bg-[#237248] text-white px-7 py-3.5 rounded-xl font-bold transition-all shadow-lg shadow-[#1D5D3B]/20">
+                                <span class="lang-ua">Обрати транспорт ↓</span>
+                                <span class="lang-en">Choose Vehicle ↓</span>
+                            </a>
+                            <a href="#calculator"
+                                class="hero-calc-btn inline-flex items-center justify-center gap-2.5 bg-black/40 hover:bg-black/60 border border-white/20 hover:border-white/40 text-white px-7 py-3.5 rounded-xl font-semibold backdrop-blur-md transition-all shadow-lg">
+                                <i data-lucide="calculator" class="w-4 h-4"></i>
+                                <span class="lang-ua">Калькулятор оренди</span>
+                                <span class="lang-en">Rental Calculator</span>
                             </a>
                         </div>
-
                     </div>
-                </div>
 
+                    <!-- Правая колонка: интерактивная кинематографичная композиция с телеметрическими выносками (скрыта, код сохранён) -->
+                    <div class="lg:col-span-5 flex items-center justify-center py-4 relative"
+                        style="display: none !important;">
+                        <div
+                            class="hero-brand-stage relative w-full h-[460px] lg:h-[520px] flex items-center justify-center select-none">
+                            <div class="echo-layer echo-far absolute inset-0 flex items-center justify-center pointer-events-none z-0"
+                                style="opacity: 0.15;">
+                                <svg class="h-[320px] lg:h-[380px] w-auto fill-[#1D5D3B]" viewBox="0 0 100 100"
+                                    style="fill: #1D5D3B !important;">
+                                    <path
+                                        d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z"
+                                        fill="#1D5D3B" />
+                                </svg>
+                            </div>
+                            <div class="echo-layer echo-near absolute inset-0 flex items-center justify-center pointer-events-none z-0"
+                                style="opacity: 0.30;">
+                                <svg class="h-[320px] lg:h-[380px] w-auto fill-[#1D5D3B]" viewBox="0 0 100 100"
+                                    style="fill: #1D5D3B !important;">
+                                    <path
+                                        d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z"
+                                        fill="#1D5D3B" />
+                                </svg>
+                            </div>
+                            <div class="main-emblem relative z-10 flex items-center justify-center pointer-events-none">
+                                <svg class="h-[320px] lg:h-[380px] w-auto" viewBox="0 0 100 100"
+                                    style="fill: #1D5D3B !important; filter: drop-shadow(0 0 25px rgba(255,255,255,0.45)) drop-shadow(0 4px 15px rgba(0,0,0,0.7)) drop-shadow(0 0 60px rgba(255,255,255,0.15)) !important;">
+                                    <path
+                                        d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z"
+                                        fill="#1D5D3B" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
-    </section>
 
-    <!-- ==================== ПРОМО-СЕКЦІЯ 1: Like.Bike Bruiser (Велосипед зліва, Текст справа) ==================== -->
-    <section class="promo-section border-b border-zinc-200 dark:border-white/[0.08]"
-        style="margin-top: 100px !important; padding: 100px 0 !important; background: transparent !important; position: relative !important; overflow: hidden !important; contain: paint !important; width: 100% !important;">
-        <div class="promo-container" style="max-width: 1400px !important; margin: 0 auto !important; padding: 0 40px !important; display: flex !important; align-items: center !important; justify-content: space-between !important; position: relative !important; overflow: visible !important; box-sizing: border-box !important; min-height: 580px;">
-            
-            <!-- Колонка з велосипедом (СЛЕВА: ~55%) -->
-            <div class="promo-col-bike order-1" style="flex: 1 1 auto !important; display: flex !important; align-items: center !important; justify-content: flex-start !important; position: relative !important; overflow: visible !important;">
-                <div class="promo-slide-left promo-vehicle-wrap w-full flex items-center justify-start">
-                    <img src="images/like-bike-bruiser-for-menu.png" 
-                         alt="Like.Bike Bruiser" 
-                         loading="lazy"
-                         class="promo-bike-img"
-                         style="height: 680px !important; max-height: 720px !important; width: auto !important; max-width: none !important; object-fit: contain !important; margin-left: -180px !important; display: block !important; flex-shrink: 0 !important;">
-                </div>
+        <!-- СЛАЙД 2 (AIMA A700) -->
+        <div class="hero-slide" id="heroSlide2" data-index="1"
+            style="position: absolute; inset: 0; width: 100%; height: 100%; display: flex; align-items: center;">
+            <div class="hero-slide-bg"
+                style="position: absolute; inset: 0; width: 100%; height: 100%; background: radial-gradient(circle at 75% 50%, rgba(26, 179, 112, 0.16) 0%, rgba(13, 18, 15, 0.95) 55%, #0d120f 100%); z-index: 1;">
             </div>
 
-            <!-- Колонка з текстом (СПРАВА: ~45%, padding-left: 32px, z-index: 2) -->
-            <div class="promo-col-bike-text order-2" style="flex: 0 0 500px !important; max-width: 500px !important; padding-left: 32px !important; padding-right: 20px !important; position: relative !important; z-index: 2 !important; box-sizing: border-box !important;">
-                <div class="promo-fade-text flex flex-col items-start text-left">
-                    <span class="text-xs font-brand font-bold tracking-widest uppercase text-[#1AB370] mb-3 inline-block">
-                        <span class="lang-ua">ЕЛЕКТРОВЕЛОСИПЕДИ ДЛЯ МІСТА ТА КУР'ЄРІВ</span>
-                        <span class="lang-en">CITY &amp; COURIER E-BIKES</span>
-                    </span>
-                    <h2 class="promo-heading font-brand font-bold text-2xl sm:text-3xl lg:text-4xl tracking-tight leading-[1.2] mb-4">
-                        <span class="lang-ua">Like.Bike Bruiser — свобода пересування без заторів</span>
-                        <span class="lang-en">Like.Bike Bruiser — traffic-free urban freedom</span>
-                    </h2>
-                    <p class="promo-desc text-sm sm:text-base leading-relaxed mb-6">
-                        <span class="lang-ua">Потужний фетбайк з широкими колесами для будь-якого дорожнього покриття. Ідеальний вибір для кур'єрської доставки та активних поїздок Одесою з мінімальними витратами.</span>
-                        <span class="lang-en">A powerful fatbike with wide tires for any road surface. The ideal choice for courier delivery and active city rides in Odesa with minimal costs.</span>
-                    </p>
-                    <a href="catalog.html?model=like-bike-bruser-1" 
-                       class="promo-btn-outline inline-flex items-center justify-center gap-2.5 px-6 py-3.5 font-brand font-bold text-xs uppercase tracking-wider group">
-                        <span class="lang-ua">Детальніше про оренду</span>
-                        <span class="lang-en">More about rental</span>
-                        <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                    </a>
+            <div class="hero-container relative z-10 w-full"
+                style="position: relative; z-index: 10; padding: 0 !important;">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+
+                    <!-- Левая колонка (текст) -->
+                    <div class="hero-text-content lg:col-span-6 text-left"
+                        style="position: relative !important; z-index: 10 !important; padding-left: 48px !important; max-width: 480px !important;">
+                        <span class="text-xs font-brand font-bold tracking-widest uppercase text-[#1AB370] mb-3 inline-block">
+                            <span class="lang-ua">КОМЕРЦІЙНИЙ ТА МІСЬКИЙ ПРОКАТ</span>
+                            <span class="lang-en">COMMERCIAL &amp; URBAN RENTAL</span>
+                        </span>
+                        <h2
+                            style="font-family: 'Unbounded', sans-serif !important; font-weight: 800 !important; font-size: clamp(1.85rem, 3.8vw, 3rem) !important; line-height: 1.18 !important; letter-spacing: -0.02em !important; margin-bottom: 20px !important; color: #FFFFFF !important; text-shadow: 0 4px 16px rgba(0,0,0,0.8) !important; filter: drop-shadow(0 4px 16px rgba(0,0,0,0.8)) !important;">
+                            <span class="lang-ua">Aima A700 — надійність, комфорт та знімний АКБ</span>
+                            <span class="lang-en">Aima A700 — reliability, comfort and removable battery</span>
+                        </h2>
+                        <p class="hero-subtitle text-base sm:text-lg mb-8 max-w-xl leading-relaxed"
+                            style="color: #E4E4E7 !important; text-shadow: 0 2px 10px rgba(0,0,0,0.8) !important;">
+                            <span class="lang-ua">Сучасний електротранспорт із великим запасом ходу на повний робочий день. Жодних витрат на пальне та безкоштовне сервісне обслуговування на весь період оренди.</span>
+                            <span class="lang-en">Modern electric vehicle with all-day range. Zero fuel costs and free maintenance service for the entire rental period.</span>
+                        </p>
+                        <div class="flex items-center gap-4 flex-wrap">
+                            <a href="catalog.html?model=aima-a700"
+                                class="inline-flex items-center justify-center gap-2 bg-[#1AB370] hover:bg-[#16965d] text-white px-7 py-3.5 rounded-xl font-bold transition-all shadow-lg shadow-[#1AB370]/25">
+                                <span class="lang-ua">Обрати в каталозі →</span>
+                                <span class="lang-en">Choose in catalog →</span>
+                            </a>
+                            <a href="calculator.html"
+                                class="hero-calc-btn inline-flex items-center justify-center gap-2.5 bg-black/40 hover:bg-black/60 border border-white/20 hover:border-white/40 text-white px-7 py-3.5 rounded-xl font-semibold backdrop-blur-md transition-all shadow-lg">
+                                <i data-lucide="calculator" class="w-4 h-4"></i>
+                                <span class="lang-ua">Калькулятор оренди</span>
+                                <span class="lang-en">Rental Calculator</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Правая колонка: крупное фото Aima A700 -->
+                    <div class="lg:col-span-6 flex items-center justify-center lg:justify-end py-4 relative z-10">
+                        <img src="images/aima-a700-for-menu.png" alt="Aima A700"
+                            class="hero-slide-vehicle-img"
+                            style="max-height: min(620px, calc(100vh - 120px)) !important; width: auto !important; max-width: 100% !important; object-fit: contain !important; transform: scaleX(-1) !important; filter: drop-shadow(0 25px 35px rgba(0,0,0,0.85)) !important; pointer-events: none !important;">
+                    </div>
+
                 </div>
             </div>
-
         </div>
-    </section>
 
-    <!-- ==================== ПРОМО-СЕКЦІЯ 2: Aima A700 (Текст зліва, Скутер справа) ==================== -->
-    <section class="promo-section-alt border-b border-zinc-200 dark:border-white/[0.08]"
-        style="margin-top: 0 !important; padding: 100px 0 !important; position: relative !important; overflow: hidden !important; contain: paint !important; width: 100% !important;">
-        <div class="promo-container" style="max-width: 1400px !important; margin: 0 auto !important; padding: 0 40px !important; display: flex !important; align-items: center !important; justify-content: space-between !important; position: relative !important; overflow: visible !important; box-sizing: border-box !important; min-height: 580px;">
-            
-            <!-- Колонка з текстом (СЛЕВА: ~45%, padding-right: 32px, z-index: 2) -->
-            <div class="promo-col-scooter-text order-2 lg:order-1" style="flex: 0 0 500px !important; max-width: 500px !important; padding-left: 20px !important; padding-right: 32px !important; position: relative !important; z-index: 2 !important; box-sizing: border-box !important;">
-                <div class="promo-fade-text flex flex-col items-start text-left w-full">
-                    <span class="text-xs font-brand font-bold tracking-widest uppercase text-[#1AB370] mb-3 inline-block">
-                        <span class="lang-ua">КОМЕРЦІЙНИЙ ТА МІСЬКИЙ ПРОКАТ</span>
-                        <span class="lang-en">COMMERCIAL &amp; URBAN RENTAL</span>
-                    </span>
-                    <h2 class="promo-heading font-brand font-bold text-2xl sm:text-3xl lg:text-4xl tracking-tight leading-[1.2] mb-4">
-                        <span class="lang-ua">Aima A700 — надійність, комфорт та знімний АКБ</span>
-                        <span class="lang-en">Aima A700 — reliability, comfort and removable battery</span>
-                    </h2>
-                    <p class="promo-desc text-sm sm:text-base leading-relaxed mb-6">
-                        <span class="lang-ua">Сучасний електротранспорт із запасом ходу для повного робочого дня. Жодних витрат на пальне та безкоштовне сервісне обслуговування на весь період оренди.</span>
-                        <span class="lang-en">Modern electric vehicle with all-day range. Zero fuel costs and free maintenance service for the entire rental period.</span>
-                    </p>
-                    <a href="catalog.html?model=aima-a700" 
-                       class="promo-btn-primary inline-flex items-center justify-center gap-2.5 px-6 py-3.5 font-brand font-bold text-xs uppercase tracking-wider group">
-                        <span class="lang-ua">Обрати в каталозі</span>
-                        <span class="lang-en">Choose in catalog</span>
-                        <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                    </a>
-                </div>
+        <!-- СЛАЙД 3 (LIKE.BIKE BRUISER) -->
+        <div class="hero-slide" id="heroSlide3" data-index="2"
+            style="position: absolute; inset: 0; width: 100%; height: 100%; display: flex; align-items: center;">
+            <div class="hero-slide-bg"
+                style="position: absolute; inset: 0; width: 100%; height: 100%; background: radial-gradient(circle at 75% 50%, rgba(26, 179, 112, 0.16) 0%, rgba(13, 18, 15, 0.95) 55%, #0d120f 100%); z-index: 1;">
             </div>
 
-            <!-- Колонка зі скутером (СПРАВА: ~55%) -->
-            <div class="promo-col-scooter order-1 lg:order-2" style="flex: 1 1 auto !important; display: flex !important; align-items: center !important; justify-content: flex-end !important; position: relative !important; overflow: visible !important;">
-                <div class="promo-slide-right promo-vehicle-wrap w-full flex items-center justify-end" style="position: relative !important; overflow: visible !important;">
-                    <img src="images/aima-a700-for-menu.png" 
-                         alt="Aima A700" 
-                         loading="lazy"
-                         class="promo-scooter-img"
-                         style="height: 720px !important; max-height: 760px !important; width: auto !important; max-width: none !important; object-fit: contain !important; margin-right: -160px !important; transform: scaleX(-1) !important; -webkit-transform: scaleX(-1) !important; display: block !important; flex-shrink: 0 !important;">
+            <div class="hero-container relative z-10 w-full"
+                style="position: relative; z-index: 10; padding: 0 !important;">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+
+                    <!-- Левая колонка (текст) -->
+                    <div class="hero-text-content lg:col-span-6 text-left"
+                        style="position: relative !important; z-index: 10 !important; padding-left: 48px !important; max-width: 480px !important;">
+                        <span class="text-xs font-brand font-bold tracking-widest uppercase text-[#1AB370] mb-3 inline-block">
+                            <span class="lang-ua">ЕЛЕКТРОВЕЛОСИПЕДИ ДЛЯ МІСТА ТА КУР'ЄРІВ</span>
+                            <span class="lang-en">CITY &amp; COURIER E-BIKES</span>
+                        </span>
+                        <h2
+                            style="font-family: 'Unbounded', sans-serif !important; font-weight: 800 !important; font-size: clamp(1.85rem, 3.8vw, 3rem) !important; line-height: 1.18 !important; letter-spacing: -0.02em !important; margin-bottom: 20px !important; color: #FFFFFF !important; text-shadow: 0 4px 16px rgba(0,0,0,0.8) !important; filter: drop-shadow(0 4px 16px rgba(0,0,0,0.8)) !important;">
+                            <span class="lang-ua">Like.Bike Bruiser — свобода пересування без заторів</span>
+                            <span class="lang-en">Like.Bike Bruiser — traffic-free urban freedom</span>
+                        </h2>
+                        <p class="hero-subtitle text-base sm:text-lg mb-8 max-w-xl leading-relaxed"
+                            style="color: #E4E4E7 !important; text-shadow: 0 2px 10px rgba(0,0,0,0.8) !important;">
+                            <span class="lang-ua">Потужний фетбайк з широкими колесами для будь-якого дорожнього покриття. Ідеальний вибір для кур'єрської доставки та активних поїздок Одесою з мінімальними витратами.</span>
+                            <span class="lang-en">A powerful fatbike with wide tires for any road surface. The ideal choice for courier delivery and active city rides in Odesa with minimal costs.</span>
+                        </p>
+                        <div class="flex items-center gap-4 flex-wrap">
+                            <a href="catalog.html?model=like-bike-bruser-1"
+                                class="inline-flex items-center justify-center gap-2 bg-[#1AB370] hover:bg-[#16965d] text-white px-7 py-3.5 rounded-xl font-bold transition-all shadow-lg shadow-[#1AB370]/25">
+                                <span class="lang-ua">Детальніше →</span>
+                                <span class="lang-en">Learn more →</span>
+                            </a>
+                            <a href="calculator.html"
+                                class="hero-calc-btn inline-flex items-center justify-center gap-2.5 bg-black/40 hover:bg-black/60 border border-white/20 hover:border-white/40 text-white px-7 py-3.5 rounded-xl font-semibold backdrop-blur-md transition-all shadow-lg">
+                                <i data-lucide="calculator" class="w-4 h-4"></i>
+                                <span class="lang-ua">Калькулятор оренди</span>
+                                <span class="lang-en">Rental Calculator</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Правая колонка: крупное фото Like.Bike Bruiser -->
+                    <div class="lg:col-span-6 flex items-center justify-center lg:justify-end py-4 relative z-10">
+                        <img src="images/like-bike-bruiser-for-menu.png" alt="Like.Bike Bruiser"
+                            class="hero-slide-vehicle-img"
+                            style="max-height: min(620px, calc(100vh - 120px)) !important; width: auto !important; max-width: 100% !important; object-fit: contain !important; filter: drop-shadow(0 25px 35px rgba(0,0,0,0.85)) !important; pointer-events: none !important;">
+                    </div>
+
                 </div>
             </div>
-
         </div>
+
+        <!-- Стрелки навигации слайдера -->
+        <button id="heroPrevBtn" type="button" aria-label="Попередній слайд"
+            class="hero-slider-nav-btn absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-black/40 hover:bg-black/70 border border-white/15 hover:border-white/40 text-white flex items-center justify-center backdrop-blur-md transition-all cursor-pointer shadow-lg hover:scale-105 active:scale-95">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="2.5">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        </button>
+        <button id="heroNextBtn" type="button" aria-label="Наступний слайд"
+            class="hero-slider-nav-btn absolute right-4 sm:right-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-black/40 hover:bg-black/70 border border-white/15 hover:border-white/40 text-white flex items-center justify-center backdrop-blur-md transition-all cursor-pointer shadow-lg hover:scale-105 active:scale-95">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="2.5">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        </button>
+
+        <!-- Индикаторы слайдов (точки/пилюли) -->
+        <div class="hero-slider-dots absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2.5">
+            <button type="button" class="hero-slider-dot active" data-index="0" aria-label="Слайд 1"></button>
+            <button type="button" class="hero-slider-dot" data-index="1" aria-label="Слайд 2"></button>
+            <button type="button" class="hero-slider-dot" data-index="2" aria-label="Слайд 3"></button>
+        </div>
+
     </section>
+
+    <!-- Инициализация интерактивного слайдера Hero -->
+    <script>
+        (function initHeroSlider() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('#hero-section .hero-slide');
+            const dots = document.querySelectorAll('#hero-section .hero-slider-dot');
+            const prevBtn = document.getElementById('heroPrevBtn');
+            const nextBtn = document.getElementById('heroNextBtn');
+            const heroSection = document.getElementById('hero-section');
+            if (!slides || slides.length === 0) return;
+
+            let autoTimer = null;
+
+            function goToSlide(index) {
+                if (index < 0) index = slides.length - 1;
+                if (index >= slides.length) index = 0;
+
+                slides.forEach((slide, i) => {
+                    slide.classList.remove('is-active', 'active', 'is-prev');
+                    if (i === index) {
+                        slide.classList.add('is-active', 'active');
+                    } else if (i < index) {
+                        slide.classList.add('is-prev');
+                    }
+                });
+
+                dots.forEach((dot, i) => {
+                    if (i === index) {
+                        dot.classList.add('is-active', 'active');
+                    } else {
+                        dot.classList.remove('is-active', 'active');
+                    }
+                });
+
+                currentSlide = index;
+            }
+
+            function nextSlide() {
+                goToSlide(currentSlide + 1);
+            }
+
+            function prevSlide() {
+                goToSlide(currentSlide - 1);
+            }
+
+            function startAutoTimer() {
+                stopAutoTimer();
+                autoTimer = setInterval(nextSlide, 7000);
+            }
+
+            function stopAutoTimer() {
+                if (autoTimer) {
+                    clearInterval(autoTimer);
+                    autoTimer = null;
+                }
+            }
+
+            if (nextBtn) {
+                nextBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    nextSlide();
+                    startAutoTimer();
+                });
+            }
+
+            if (prevBtn) {
+                prevBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    prevSlide();
+                    startAutoTimer();
+                });
+            }
+
+            dots.forEach((dot, idx) => {
+                dot.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    goToSlide(idx);
+                    startAutoTimer();
+                });
+            });
+
+            if (heroSection) {
+                heroSection.addEventListener('mouseenter', stopAutoTimer);
+                heroSection.addEventListener('mouseleave', startAutoTimer);
+
+                // Touch swipe support for mobile
+                let startX = 0;
+                heroSection.addEventListener('touchstart', function (e) {
+                    startX = e.touches[0].clientX;
+                    stopAutoTimer();
+                }, { passive: true });
+
+                heroSection.addEventListener('touchend', function (e) {
+                    const endX = e.changedTouches[0].clientX;
+                    const diffX = endX - startX;
+                    if (Math.abs(diffX) > 50) {
+                        if (diffX < 0) nextSlide();
+                        else prevSlide();
+                    }
+                    startAutoTimer();
+                }, { passive: true });
+            }
+
+            startAutoTimer();
+        })();
+    </script>
 
     <!-- ==================== 3. КАТАЛОГ СКУТЕРІВ (ТОП МОДЕЛІ СПЕРШУ) ==================== -->
     <section id="catalog" class="py-16 md:py-24 bg-[#0A0D0B] text-white border-b border-white/[0.08]">
@@ -2242,7 +2304,7 @@
                         <!-- 1. Модель транспорту -->
                         <div>
                             <div class="flex items-center justify-between mb-3">
-                                <label for="calcModelSelect" class="font-brand font-bold text-xs uppercase tracking-wider text-zinc-300">
+                                <label for="calcModelSelect" class="calc-step-label font-brand font-bold text-xs uppercase tracking-wider text-zinc-300">
                                     <span class="lang-ua">1. ОБЕРІТЬ МОДЕЛЬ ТРАНСПОРТУ:</span>
                                     <span class="lang-en">1. SELECT VEHICLE MODEL:</span>
                                 </label>
@@ -2277,7 +2339,7 @@
                         <!-- 2. Термін оренди -->
                         <div>
                             <div class="flex items-center justify-between mb-3">
-                                <label class="font-brand font-bold text-xs uppercase tracking-wider text-zinc-300">
+                                <label class="calc-step-label font-brand font-bold text-xs uppercase tracking-wider text-zinc-300">
                                     <span class="lang-ua">2. ОБЕРІТЬ ТЕРМІН ОРЕНДИ:</span>
                                     <span class="lang-en">2. SELECT RENTAL PERIOD:</span>
                                 </label>
@@ -2294,7 +2356,7 @@
                         <!-- 3. Додаткові опції -->
                         <div>
                             <div class="flex items-center justify-between mb-3">
-                                <label class="font-brand font-bold text-xs uppercase tracking-wider text-zinc-300">
+                                <label class="calc-step-label font-brand font-bold text-xs uppercase tracking-wider text-zinc-300">
                                     <span class="lang-ua">3. ДОДАТКОВІ ОПЦІЇ ТА ОБЛАДНАННЯ:</span>
                                     <span class="lang-en">3. ADDITIONAL OPTIONS & GEAR:</span>
                                 </label>
@@ -2308,7 +2370,7 @@
                     </div>
 
                     <!-- Права колонка: Фінальний розрахунок (Tesla Summary Card) -->
-                    <div class="lg:col-span-5 flex flex-col justify-between rounded-2xl bg-[#0E1216] border border-white/[0.08] p-6 sm:p-7">
+                    <div class="calc-summary-card lg:col-span-5 flex flex-col justify-between rounded-2xl bg-[#0E1216] border border-white/[0.08] p-6 sm:p-7">
 
                         <div class="space-y-6">
                             <div class="border-b border-white/[0.08] pb-4">
