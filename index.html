@@ -231,15 +231,18 @@
         .promo-section {
             background-color: #FFFFFF;
             color: #111827;
-            overflow: hidden;
             position: relative;
+            overflow: hidden;
+            padding: 40px 0;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
         .promo-section-alt {
             background-color: #F8FAFC;
             color: #111827;
-            overflow: hidden;
             position: relative;
+            overflow: hidden;
+            margin-top: 100px;
+            padding: 40px 0;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
@@ -257,6 +260,53 @@
         body[data-theme="dark"] .promo-section-alt {
             background-color: #000000 !important;
             color: #FFFFFF !important;
+        }
+
+        .promo-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        /* Section 1: Bike Left (~50-55%), Text Right (~45%) */
+        .promo-col-bike {
+            width: 52%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            position: relative;
+            overflow: hidden;
+        }
+        .promo-col-bike-text {
+            width: 48%;
+            max-width: 580px;
+            position: relative;
+            z-index: 2;
+            padding-left: 40px;
+            padding-right: 24px;
+        }
+
+        /* Section 2: Text Left (~45%), Scooter Right (~50-55%) */
+        .promo-col-scooter-text {
+            width: 48%;
+            max-width: 580px;
+            position: relative;
+            z-index: 2;
+            padding-left: 24px;
+            padding-right: 40px;
+            display: flex;
+            justify-content: flex-end;
+        }
+        .promo-col-scooter {
+            width: 52%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            position: relative;
+            overflow: hidden;
         }
 
         .promo-heading {
@@ -339,76 +389,33 @@
         }
 
         .promo-bike-img {
-            max-height: 540px;
+            max-height: 480px;
             width: auto;
+            max-width: 100%;
             object-fit: contain;
-            margin-left: -8vw;
-            transform: scale(1.3);
-            transform-origin: center left;
+            margin-left: -60px;
             pointer-events: none;
             user-select: none;
             filter: none !important;
-        }
-        @media (min-width: 1400px) {
-            .promo-bike-img {
-                max-height: 580px;
-                margin-left: -6vw;
-                transform: scale(1.35);
-            }
-        }
-        @media (max-width: 1023px) {
-            .promo-bike-img {
-                max-height: 380px;
-                margin-left: -8vw;
-                transform: scale(1.15);
-            }
-        }
-        @media (max-width: 640px) {
-            .promo-bike-img {
-                max-height: 260px;
-                margin-left: -10vw;
-                transform: scale(1.05);
-            }
         }
 
         .promo-scooter-img {
-            max-height: 560px;
+            max-height: 480px;
             width: auto;
+            max-width: 100%;
             object-fit: contain;
-            margin-right: -8vw;
-            transform: scaleX(-1) scale(1.3);
-            transform-origin: center right;
+            margin-right: -60px;
+            transform: scaleX(-1);
             pointer-events: none;
             user-select: none;
             filter: none !important;
-        }
-        @media (min-width: 1400px) {
-            .promo-scooter-img {
-                max-height: 600px;
-                margin-right: -6vw;
-                transform: scaleX(-1) scale(1.35);
-            }
-        }
-        @media (max-width: 1023px) {
-            .promo-scooter-img {
-                max-height: 400px;
-                margin-right: -8vw;
-                transform: scaleX(-1) scale(1.15);
-            }
-        }
-        @media (max-width: 640px) {
-            .promo-scooter-img {
-                max-height: 280px;
-                margin-right: -10vw;
-                transform: scaleX(-1) scale(1.05);
-            }
         }
 
         /* Scroll Entrance Animations */
         .promo-slide-left {
             opacity: 0;
-            transform: translateX(-100px);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateX(-40px);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: opacity, transform;
         }
         .promo-slide-left.is-visible {
@@ -418,8 +425,8 @@
 
         .promo-slide-right {
             opacity: 0;
-            transform: translateX(100px);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateX(40px);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: opacity, transform;
         }
         .promo-slide-right.is-visible {
@@ -429,14 +436,52 @@
 
         .promo-fade-text {
             opacity: 0;
-            transform: translateY(28px);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            transition-delay: 0.15s;
+            transform: translateY(20px);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            transition-delay: 0.1s;
             will-change: opacity, transform;
         }
         .promo-fade-text.is-visible {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 1023px) {
+            .promo-section-alt {
+                margin-top: 60px;
+            }
+            .promo-container {
+                flex-direction: column;
+            }
+            .promo-col-bike,
+            .promo-col-bike-text,
+            .promo-col-scooter-text,
+            .promo-col-scooter {
+                width: 100%;
+                max-width: 600px;
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            .promo-col-bike {
+                justify-content: center;
+                margin-bottom: 24px;
+            }
+            .promo-col-scooter {
+                justify-content: center;
+                margin-bottom: 24px;
+            }
+            .promo-bike-img {
+                margin-left: -20px;
+                max-height: 320px;
+            }
+            .promo-scooter-img {
+                margin-right: -20px;
+                max-height: 320px;
+            }
+            .promo-col-scooter-text {
+                justify-content: flex-start;
+            }
         }
 
         /* Preloader Keyframes */
@@ -1706,12 +1751,12 @@
         </div>
     </section>
 
-    <!-- ==================== ПРОМО-СЕКЦІЯ 1: Like.Bike Bruiser (Z-Pattern: Велосипед зліва, Текст справа) ==================== -->
-    <section class="promo-section py-16 md:py-24 border-b border-zinc-200 dark:border-white/[0.08] relative overflow-hidden">
-        <div class="w-full flex flex-col lg:flex-row items-center justify-between">
+    <!-- ==================== ПРОМО-СЕКЦІЯ 1: Like.Bike Bruiser (Велосипед зліва, Текст справа) ==================== -->
+    <section class="promo-section border-b border-zinc-200 dark:border-white/[0.08]">
+        <div class="promo-container">
             
-            <!-- Колонка з велосипедом (~50%) - виглядає з лівого краю екрана -->
-            <div class="w-full lg:w-1/2 flex items-center justify-start overflow-visible order-1">
+            <!-- Колонка з велосипедом (СЛЕВА: ~50-55%) -->
+            <div class="promo-col-bike order-1">
                 <div class="promo-slide-left promo-vehicle-wrap w-full flex items-center justify-start">
                     <img src="images/like-bike-bruiser-for-menu.png" 
                          alt="Like.Bike Bruiser" 
@@ -1720,9 +1765,9 @@
                 </div>
             </div>
 
-            <!-- Колонка з текстом (~50%) - акуратно праворуч -->
-            <div class="w-full lg:w-1/2 flex items-center justify-start px-6 sm:px-12 lg:px-16 xl:px-24 py-8 lg:py-0 order-2">
-                <div class="promo-fade-text max-w-xl flex flex-col items-start text-left">
+            <!-- Колонка з текстом (СПРАВА: ~45%, padding-left: 40px, z-index: 2) -->
+            <div class="promo-col-bike-text order-2">
+                <div class="promo-fade-text flex flex-col items-start text-left">
                     <span class="text-xs font-brand font-bold tracking-widest uppercase text-[#1AB370] mb-3 inline-block">
                         <span class="lang-ua">ЕЛЕКТРОВЕЛОСИПЕДИ ДЛЯ МІСТА ТА КУР'ЄРІВ</span>
                         <span class="lang-en">CITY &amp; COURIER E-BIKES</span>
@@ -1747,13 +1792,13 @@
         </div>
     </section>
 
-    <!-- ==================== ПРОМО-СЕКЦІЯ 2: Aima A700 (Z-Pattern: Текст зліва, Скутер справа) ==================== -->
-    <section class="promo-section-alt py-16 md:py-24 border-b border-zinc-200 dark:border-white/[0.08] relative overflow-hidden">
-        <div class="w-full flex flex-col lg:flex-row items-center justify-between">
+    <!-- ==================== ПРОМО-СЕКЦІЯ 2: Aima A700 (Текст зліва, Скутер справа) ==================== -->
+    <section class="promo-section-alt border-b border-zinc-200 dark:border-white/[0.08]">
+        <div class="promo-container">
             
-            <!-- Колонка з текстом (~50%) - зліва на десктопі -->
-            <div class="w-full lg:w-1/2 flex items-center justify-end px-6 sm:px-12 lg:px-16 xl:px-24 py-8 lg:py-0 order-2 lg:order-1">
-                <div class="promo-fade-text max-w-xl w-full flex flex-col items-start text-left">
+            <!-- Колонка з текстом (СЛЕВА: ~45%, padding-right: 40px, z-index: 2) -->
+            <div class="promo-col-scooter-text order-2 lg:order-1">
+                <div class="promo-fade-text flex flex-col items-start text-left w-full">
                     <span class="text-xs font-brand font-bold tracking-widest uppercase text-[#1AB370] mb-3 inline-block">
                         <span class="lang-ua">КОМЕРЦІЙНИЙ ТА МІСЬКИЙ ПРОКАТ</span>
                         <span class="lang-en">COMMERCIAL &amp; URBAN RENTAL</span>
@@ -1775,8 +1820,8 @@
                 </div>
             </div>
 
-            <!-- Колонка зі скутером (~50%) - справа на десктопі, виглядає з правого краю -->
-            <div class="w-full lg:w-1/2 flex items-center justify-end overflow-visible order-1 lg:order-2">
+            <!-- Колонка зі скутером (СПРАВА: ~50-55%) -->
+            <div class="promo-col-scooter order-1 lg:order-2">
                 <div class="promo-slide-right promo-vehicle-wrap w-full flex items-center justify-end">
                     <img src="images/aima-a700-for-menu.png" 
                          alt="Aima A700" 
@@ -4085,19 +4130,28 @@
             const targets = document.querySelectorAll('.promo-slide-left, .promo-slide-right, .promo-fade-text');
             if (!targets.length) return;
 
+            const makeVisible = (el) => el.classList.add('is-visible');
+
             if ('IntersectionObserver' in window) {
                 const promoObserver = new IntersectionObserver((entries, observer) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
-                            entry.target.classList.add('is-visible');
+                            makeVisible(entry.target);
                             observer.unobserve(entry.target);
                         }
                     });
-                }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+                }, { threshold: 0.05, rootMargin: '80px 0px 80px 0px' });
 
-                targets.forEach(el => promoObserver.observe(el));
+                targets.forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top < window.innerHeight + 100 && rect.bottom > -100) {
+                        makeVisible(el);
+                    } else {
+                        promoObserver.observe(el);
+                    }
+                });
             } else {
-                targets.forEach(el => el.classList.add('is-visible'));
+                targets.forEach(makeVisible);
             }
         }
 
