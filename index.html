@@ -57,8 +57,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tektur:wght@700;800;900&display=swap" rel="stylesheet">
     <!-- MUVIO Styles & Dark Theme -->
-    <link rel="stylesheet" href="./style.css?v=2.5">
-    <link rel="stylesheet" href="./dark-theme.css?v=2.5">
+    <link rel="stylesheet" href="./style.css?v=2.6">
+    <link rel="stylesheet" href="./dark-theme.css?v=2.6">
 
     <style>
         .text-primary {
@@ -393,31 +393,34 @@
         }
 
         .promo-bike-img {
-            max-height: 520px;
-            width: auto;
-            max-width: 100%;
-            object-fit: contain;
-            margin-left: -40px;
-            display: block;
+            height: 680px !important;
+            max-height: 720px !important;
+            width: auto !important;
+            max-width: none !important;
+            object-fit: contain !important;
+            margin-left: -180px !important;
+            display: block !important;
             pointer-events: none;
             user-select: none;
             filter: none !important;
+            flex-shrink: 0 !important;
         }
 
         .promo-scooter-img,
         img.promo-scooter-img {
-            height: 740px !important;
-            max-height: 780px !important;
+            height: 720px !important;
+            max-height: 760px !important;
             width: auto !important;
             max-width: none !important;
-            object-fit: contain;
-            margin-right: -120px !important;
+            object-fit: contain !important;
+            margin-right: -160px !important;
             transform: scaleX(-1) !important;
             -webkit-transform: scaleX(-1) !important;
             display: block !important;
             pointer-events: none;
             user-select: none;
             filter: none !important;
+            flex-shrink: 0 !important;
         }
 
         /* Scroll Entrance Animations */
@@ -957,20 +960,29 @@
         /* ==================== 1. УЛЬТРАТОНКАЯ ШАПКА В СТИЛЕ TESLA ==================== */
         header,
         .site-header-synced,
+        .header,
+        .header-container {
+            width: 100% !important;
+            max-width: 100vw !important;
+            box-sizing: border-box !important;
+            padding-left: 28px !important;
+            padding-right: 28px !important;
+            overflow: visible !important;
+        }
+
+        header,
+        .site-header-synced,
         .header {
             position: sticky !important;
             top: 0 !important;
             left: 0 !important;
             right: 0 !important;
-            width: 100% !important;
-            max-width: 100% !important;
             z-index: 100 !important;
             min-height: 46px !important;
             height: 46px !important;
             max-height: 46px !important;
-            padding: 0 32px !important;
-            padding-left: 32px !important;
-            padding-right: 32px !important;
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
             margin: 0 !important;
             display: flex !important;
             align-items: center !important;
@@ -996,10 +1008,20 @@
             position: relative !important;
         }
 
+        .header-actions,
+        .header-right {
+            display: flex !important;
+            align-items: center !important;
+            gap: 16px !important;
+            margin-right: 0 !important;
+            flex-shrink: 0 !important;
+        }
+
         @media (max-width: 640px) {
             header,
             .site-header-synced,
-            .header {
+            .header,
+            .header-container {
                 padding-left: 16px !important;
                 padding-right: 16px !important;
             }
@@ -1376,7 +1398,7 @@
 
     <!-- ==================== 1. ХЕДЕР (НАВІГАЦІЯ) ==================== -->
     <header class="site-header-synced header w-full"
-        style="width: 100% !important; max-width: 100% !important; position: sticky !important; top: 0 !important; left: 0 !important; right: 0 !important; z-index: 100 !important; height: 46px !important; min-height: 46px !important; max-height: 46px !important; padding: 0 32px !important; padding-left: 32px !important; padding-right: 32px !important; margin: 0 !important; display: flex !important; align-items: center !important; justify-content: space-between !important; box-sizing: border-box !important;">
+        style="width: 100% !important; max-width: 100vw !important; position: sticky !important; top: 0 !important; left: 0 !important; right: 0 !important; z-index: 100 !important; height: 46px !important; min-height: 46px !important; max-height: 46px !important; padding: 0 28px !important; padding-left: 28px !important; padding-right: 28px !important; margin: 0 !important; display: flex !important; align-items: center !important; justify-content: space-between !important; box-sizing: border-box !important; overflow: visible !important;">
 
         <div class="header-container"
             style="width: 100% !important; max-width: 100% !important; height: 100% !important; margin: 0 !important; padding: 0 !important; box-sizing: border-box !important; display: flex !important; align-items: center !important; justify-content: space-between !important; position: relative !important;">
@@ -1805,22 +1827,22 @@
 
     <!-- ==================== ПРОМО-СЕКЦІЯ 1: Like.Bike Bruiser (Велосипед зліва, Текст справа) ==================== -->
     <section class="promo-section border-b border-zinc-200 dark:border-white/[0.08]"
-        style="margin-top: 100px !important; padding: 100px 0 !important; background: transparent !important; position: relative !important; overflow: hidden !important; contain: paint !important;">
-        <div class="promo-container" style="max-width: 1360px !important; margin: 0 auto !important; padding: 0 40px !important; display: flex !important; align-items: center !important; justify-content: space-between !important; position: relative !important; overflow: hidden !important; box-sizing: border-box !important;">
+        style="margin-top: 100px !important; padding: 100px 0 !important; background: transparent !important; position: relative !important; overflow: hidden !important; contain: paint !important; width: 100% !important;">
+        <div class="promo-container" style="max-width: 1400px !important; margin: 0 auto !important; padding: 0 40px !important; display: flex !important; align-items: center !important; justify-content: space-between !important; position: relative !important; overflow: visible !important; box-sizing: border-box !important; min-height: 580px;">
             
-            <!-- Колонка з велосипедом (СЛЕВА: ~50%) -->
-            <div class="promo-col-bike order-1" style="width: 50% !important; display: flex !important; align-items: center !important; justify-content: flex-start !important; position: relative !important;">
+            <!-- Колонка з велосипедом (СЛЕВА: ~55%) -->
+            <div class="promo-col-bike order-1" style="flex: 1 1 auto !important; display: flex !important; align-items: center !important; justify-content: flex-start !important; position: relative !important; overflow: visible !important;">
                 <div class="promo-slide-left promo-vehicle-wrap w-full flex items-center justify-start">
                     <img src="images/like-bike-bruiser-for-menu.png" 
                          alt="Like.Bike Bruiser" 
                          loading="lazy"
                          class="promo-bike-img"
-                         style="max-height: 520px !important; width: auto !important; max-width: 100% !important; object-fit: contain !important; margin-left: -30px !important; display: block !important;">
+                         style="height: 680px !important; max-height: 720px !important; width: auto !important; max-width: none !important; object-fit: contain !important; margin-left: -180px !important; display: block !important; flex-shrink: 0 !important;">
                 </div>
             </div>
 
-            <!-- Колонка з текстом (СПРАВА: ~50%, padding-left: 48px, z-index: 2) -->
-            <div class="promo-col-bike-text order-2" style="width: 50% !important; max-width: 560px !important; padding-left: 48px !important; padding-right: 20px !important; position: relative !important; z-index: 2 !important; box-sizing: border-box !important;">
+            <!-- Колонка з текстом (СПРАВА: ~45%, padding-left: 32px, z-index: 2) -->
+            <div class="promo-col-bike-text order-2" style="flex: 0 0 500px !important; max-width: 500px !important; padding-left: 32px !important; padding-right: 20px !important; position: relative !important; z-index: 2 !important; box-sizing: border-box !important;">
                 <div class="promo-fade-text flex flex-col items-start text-left">
                     <span class="text-xs font-brand font-bold tracking-widest uppercase text-[#1AB370] mb-3 inline-block">
                         <span class="lang-ua">ЕЛЕКТРОВЕЛОСИПЕДИ ДЛЯ МІСТА ТА КУР'ЄРІВ</span>
@@ -1848,11 +1870,11 @@
 
     <!-- ==================== ПРОМО-СЕКЦІЯ 2: Aima A700 (Текст зліва, Скутер справа) ==================== -->
     <section class="promo-section-alt border-b border-zinc-200 dark:border-white/[0.08]"
-        style="margin-top: 0 !important; padding: 100px 0 !important; position: relative !important; overflow: hidden !important; contain: paint !important;">
-        <div class="promo-container" style="max-width: 1360px !important; margin: 0 auto !important; padding: 0 40px !important; display: flex !important; align-items: center !important; justify-content: space-between !important; position: relative !important; overflow: hidden !important; box-sizing: border-box !important;">
+        style="margin-top: 0 !important; padding: 100px 0 !important; position: relative !important; overflow: hidden !important; contain: paint !important; width: 100% !important;">
+        <div class="promo-container" style="max-width: 1400px !important; margin: 0 auto !important; padding: 0 40px !important; display: flex !important; align-items: center !important; justify-content: space-between !important; position: relative !important; overflow: visible !important; box-sizing: border-box !important; min-height: 580px;">
             
-            <!-- Колонка з текстом (СЛЕВА: ~44%, padding-right: 40px, z-index: 2) -->
-            <div class="promo-col-scooter-text order-2 lg:order-1" style="width: 44% !important; max-width: 520px !important; padding-left: 20px !important; padding-right: 40px !important; position: relative !important; z-index: 2 !important; box-sizing: border-box !important;">
+            <!-- Колонка з текстом (СЛЕВА: ~45%, padding-right: 32px, z-index: 2) -->
+            <div class="promo-col-scooter-text order-2 lg:order-1" style="flex: 0 0 500px !important; max-width: 500px !important; padding-left: 20px !important; padding-right: 32px !important; position: relative !important; z-index: 2 !important; box-sizing: border-box !important;">
                 <div class="promo-fade-text flex flex-col items-start text-left w-full">
                     <span class="text-xs font-brand font-bold tracking-widest uppercase text-[#1AB370] mb-3 inline-block">
                         <span class="lang-ua">КОМЕРЦІЙНИЙ ТА МІСЬКИЙ ПРОКАТ</span>
@@ -1875,14 +1897,14 @@
                 </div>
             </div>
 
-            <!-- Колонка зі скутером (СПРАВА: ~56%) -->
-            <div class="promo-col-scooter order-1 lg:order-2" style="width: 56% !important; display: flex !important; align-items: center !important; justify-content: flex-end !important; position: relative !important;">
-                <div class="promo-slide-right promo-vehicle-wrap w-full flex items-center justify-end" style="position: relative !important;">
+            <!-- Колонка зі скутером (СПРАВА: ~55%) -->
+            <div class="promo-col-scooter order-1 lg:order-2" style="flex: 1 1 auto !important; display: flex !important; align-items: center !important; justify-content: flex-end !important; position: relative !important; overflow: visible !important;">
+                <div class="promo-slide-right promo-vehicle-wrap w-full flex items-center justify-end" style="position: relative !important; overflow: visible !important;">
                     <img src="images/aima-a700-for-menu.png" 
                          alt="Aima A700" 
                          loading="lazy"
                          class="promo-scooter-img"
-                         style="height: 740px !important; max-height: 780px !important; width: auto !important; max-width: none !important; object-fit: contain !important; margin-right: -120px !important; transform: scaleX(-1) !important; -webkit-transform: scaleX(-1) !important; display: block !important;">
+                         style="height: 720px !important; max-height: 760px !important; width: auto !important; max-width: none !important; object-fit: contain !important; margin-right: -160px !important; transform: scaleX(-1) !important; -webkit-transform: scaleX(-1) !important; display: block !important; flex-shrink: 0 !important;">
                 </div>
             </div>
 
