@@ -974,8 +974,8 @@ img.promo-scooter-img {
     max-width: none !important;
     object-fit: contain !important;
     margin-right: -160px !important;
-    transform: scaleX(-1) !important;
-    -webkit-transform: scaleX(-1) !important;
+    transform: none !important;
+    -webkit-transform: none !important;
     display: block !important;
     flex-shrink: 0 !important;
     pointer-events: none;
@@ -1050,7 +1050,7 @@ img.promo-scooter-img {
         max-width: 500px !important;
         margin-right: 0 !important;
         margin: 0 auto !important;
-        transform: scaleX(-1) !important;
+        transform: none !important;
     }
     .promo-slide-left,
     .promo-slide-right {
@@ -1597,51 +1597,11 @@ html:not(.dark):not(.theme-dark):not(.dark-theme):not([data-theme="dark"]) #hero
     pointer-events: none;
 }
 
-/* СЛАЙД LIKE.BIKE BRUISER (ВЕЛОСИПЕД):
-   В кадре ТОЛЬКО: руль, фара, верх вилки, верхняя половина переднего колеса.
-   Низ кадра обрезается ровно по оси колеса.
-   Правый край обрезает раму сразу за рулевой колонкой. */
-.slide-bruiser {
-    position: absolute;
-    left: -8vw;
-    top: -10%;
-    height: 165% !important;
-    width: auto;
-}
-
-.slide-bruiser img {
-    height: 100% !important;
-    width: auto !important;
-    max-width: none !important;
-    transform: scaleX(-1) !important;
-    mix-blend-mode: normal !important;
-    display: block;
-    filter: drop-shadow(0 30px 45px rgba(0, 0, 0, 0.9));
-    user-select: none;
-    -webkit-user-drag: none;
-}
-
-/* СЛАЙД AIMA A700 (СКУТЕР):
-   Огромный масштаб, перед, фара, руль, верх колеса.
-   Задняя часть скутера наглухо уходит за правый край. */
-.slide-aima {
-    position: absolute;
-    left: -2vw;
-    top: -12%;
-    height: 145% !important;
-    width: auto;
-}
-
-.slide-aima img {
-    height: 100% !important;
-    width: auto !important;
-    max-width: none !important;
-    transform: scaleX(-1) !important;
-    mix-blend-mode: normal !important;
-    display: block;
-    filter: drop-shadow(0 30px 45px rgba(0, 0, 0, 0.9));
-    user-select: none;
-    -webkit-user-drag: none;
+/* PROMO VEHICLE STYLES (NO MIRRORING) */
+.promo-vehicle-img,
+.promo-section .img-col img {
+    transform: none !important;
+    -webkit-transform: none !important;
 }
 
 /* ТЕКСТ И КНОПКИ СЛЕВА: фиксированы width: 42%; z-index: 10 */

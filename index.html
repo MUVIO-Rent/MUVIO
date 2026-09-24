@@ -255,280 +255,136 @@
             box-shadow: 0 8px 24px -4px rgba(26, 179, 112, 0.4) !important;
         }
 
-        /* Alternating Promo Showcase Sections (Apple / McDonald's Z-Pattern) */
+        /* ==================== PROMO SHOWCASE SECTIONS (BELOW HERO) ==================== */
         .promo-section {
-            background-color: #FFFFFF;
-            background: transparent !important;
-            color: #111827;
-            position: relative;
+            background-color: #0A0D0B !important;
+            color: #FFFFFF !important;
+            position: relative !important;
             overflow: hidden !important;
-            contain: paint !important;
-            margin-top: 100px !important;
-            padding: 100px 0 !important;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-        .promo-section-alt {
-            background-color: #F8FAFC;
-            color: #111827;
-            position: relative;
-            overflow: hidden !important;
-            contain: paint !important;
-            margin-top: 0 !important;
-            padding: 100px 0 !important;
+            width: 100% !important;
+            min-height: 640px !important;
+            height: auto !important;
+            margin: 0 !important;
+            padding: 80px 0 !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+            display: flex !important;
+            align-items: center !important;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        html.dark .promo-section,
-        html[data-theme="dark"] .promo-section,
-        body.dark .promo-section,
-        body[data-theme="dark"] .promo-section {
-            background-color: #0B0E11 !important;
-            color: #FFFFFF !important;
+        html:not(.dark) .promo-section,
+        html:not(.theme-dark) .promo-section,
+        [data-theme="light"] .promo-section {
+            background-color: #F8FAFC !important;
+            color: #0F172A !important;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
         }
 
-        html.dark .promo-section-alt,
-        html[data-theme="dark"] .promo-section-alt,
-        body.dark .promo-section-alt,
-        body[data-theme="dark"] .promo-section-alt {
-            background-color: #000000 !important;
-            color: #FFFFFF !important;
-        }
-
-        .promo-container {
-            display: flex;
+        .promo-section .promo-container {
+            width: 100% !important;
+            max-width: 1400px !important;
+            margin: 0 auto !important;
+            padding: 0 48px !important;
+            position: relative !important;
+            z-index: 10 !important;
+            display: flex !important;
             align-items: center !important;
-            justify-content: space-between;
-            position: relative;
-            width: 100%;
-            overflow: hidden !important;
+            justify-content: space-between !important;
+            box-sizing: border-box !important;
         }
 
-        /* Section 1: Bike Left (~50-55%), Text Right (~45%) */
-        .promo-col-bike {
-            width: 52%;
-            display: flex;
-            align-items: center !important;
-            justify-content: flex-start;
-            position: relative;
-            overflow: hidden !important;
-        }
-        .promo-col-bike-text {
-            width: 48%;
-            max-width: 580px;
-            position: relative;
-            z-index: 2;
-            padding-left: 40px;
-            padding-right: 24px;
+        .promo-section .text-col {
+            width: 45% !important;
+            max-width: 540px !important;
+            padding-left: 60px !important;
+            position: relative !important;
+            z-index: 10 !important;
+            box-sizing: border-box !important;
         }
 
-        /* Section 2: Text Left (~45%), Scooter Right (~50-55%) */
-        .promo-col-scooter-text {
-            width: 48%;
-            max-width: 580px;
-            position: relative;
-            z-index: 2;
-            padding-left: 24px;
-            padding-right: 40px;
-            display: flex;
-            justify-content: flex-end;
-        }
-        .promo-col-scooter {
-            width: 52%;
-            display: flex;
-            align-items: center !important;
-            justify-content: flex-end;
-            position: relative;
-            overflow: hidden !important;
+        .promo-section .img-col {
+            position: absolute !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            top: 0 !important;
+            width: 55% !important;
+            display: flex !important;
+            align-items: flex-end !important;
+            justify-content: flex-end !important;
+            pointer-events: none !important;
+            overflow: visible !important;
         }
 
-        .promo-heading {
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
-            color: #111827;
-            transition: color 0.3s ease;
-        }
-        html.dark .promo-heading,
-        html[data-theme="dark"] .promo-heading,
-        body.dark .promo-heading,
-        body[data-theme="dark"] .promo-heading {
-            color: #FFFFFF !important;
-        }
-
-        .promo-desc {
-            color: #4B5563;
-            transition: color 0.3s ease;
-        }
-        html.dark .promo-desc,
-        html[data-theme="dark"] .promo-desc,
-        body.dark .promo-desc,
-        body[data-theme="dark"] .promo-desc {
-            color: #A1A1AA !important;
-        }
-
-        .promo-btn-outline {
-            border: 1px solid rgba(0, 0, 0, 0.15) !important;
-            color: #111827 !important;
-            background: transparent !important;
-            border-radius: 12px !important;
-            clip-path: none !important;
-            transition: all 0.25s ease !important;
-        }
-        .promo-btn-outline:hover {
-            border-color: #1AB370 !important;
-            color: #1AB370 !important;
-            background: rgba(26, 179, 112, 0.06) !important;
-            transform: translateY(-1px);
-        }
-        html.dark .promo-btn-outline,
-        html[data-theme="dark"] .promo-btn-outline,
-        body.dark .promo-btn-outline,
-        body[data-theme="dark"] .promo-btn-outline {
-            border-color: rgba(255, 255, 255, 0.2) !important;
-            color: #FFFFFF !important;
-        }
-        html.dark .promo-btn-outline:hover,
-        html[data-theme="dark"] .promo-btn-outline:hover,
-        body.dark .promo-btn-outline:hover,
-        body[data-theme="dark"] .promo-btn-outline:hover {
-            border-color: #1AB370 !important;
-            color: #1AB370 !important;
-            background: rgba(26, 179, 112, 0.1) !important;
-        }
-
-        .promo-btn-primary {
-            background-color: #1AB370 !important;
-            color: #FFFFFF !important;
-            border: 1px solid #1AB370 !important;
-            border-radius: 12px !important;
-            clip-path: none !important;
-            transition: all 0.25s ease !important;
-            box-shadow: 0 4px 14px rgba(26, 179, 112, 0.25);
-        }
-        .promo-btn-primary:hover {
-            background-color: #15985E !important;
-            border-color: #15985E !important;
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(26, 179, 112, 0.4);
-        }
-
-        /* Pure PNG vehicles: No box background, no borders, no box-shadows */
-        .promo-vehicle-wrap,
-        .promo-bike-img,
-        .promo-scooter-img {
-            background: transparent !important;
-            border: none !important;
-            box-shadow: none !important;
-            outline: none !important;
-        }
-
-        .promo-bike-img {
-            height: 680px !important;
-            max-height: 720px !important;
+        .promo-section .img-col img {
+            position: absolute !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            height: 90% !important;
+            max-height: 750px !important;
             width: auto !important;
-            max-width: none !important;
             object-fit: contain !important;
-            margin-left: -180px !important;
+            transform: none !important;
+            -webkit-transform: none !important;
+            filter: drop-shadow(0 20px 35px rgba(0, 0, 0, 0.45)) !important;
             display: block !important;
-            pointer-events: none;
-            user-select: none;
-            filter: none !important;
-            flex-shrink: 0 !important;
+            user-select: none !important;
+            pointer-events: none !important;
         }
 
-        .promo-scooter-img,
-        img.promo-scooter-img {
-            height: 720px !important;
-            max-height: 760px !important;
-            width: auto !important;
-            max-width: none !important;
-            object-fit: contain !important;
-            margin-right: -160px !important;
-            transform: scaleX(-1) !important;
-            -webkit-transform: scaleX(-1) !important;
-            display: block !important;
-            pointer-events: none;
-            user-select: none;
-            filter: none !important;
-            flex-shrink: 0 !important;
+        /* Light Mode Overrides for Promo Titles & Descriptions */
+        html:not(.dark) .promo-section .promo-title,
+        html:not(.theme-dark) .promo-section .promo-title,
+        [data-theme="light"] .promo-section .promo-title {
+            color: #0F172A !important;
         }
 
-        /* Scroll Entrance Animations */
-        .promo-slide-left {
-            opacity: 0;
-            transform: translateX(-60px);
-            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: opacity, transform;
-        }
-        .promo-slide-left.is-visible {
-            opacity: 1;
-            transform: translateX(0);
+        html:not(.dark) .promo-section .promo-desc,
+        html:not(.theme-dark) .promo-section .promo-desc,
+        [data-theme="light"] .promo-section .promo-desc {
+            color: #475569 !important;
         }
 
-        .promo-slide-right {
-            opacity: 0;
-            transform: translateX(60px);
-            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: opacity, transform;
-        }
-        .promo-slide-right.is-visible {
-            opacity: 1;
-            transform: translateX(0);
+        html:not(.dark) .promo-section .promo-btn-secondary,
+        html:not(.theme-dark) .promo-section .promo-btn-secondary,
+        [data-theme="light"] .promo-section .promo-btn-secondary {
+            background: rgba(0, 0, 0, 0.04) !important;
+            border-color: rgba(0, 0, 0, 0.15) !important;
+            color: #0F172A !important;
         }
 
-        .promo-fade-text {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-            transition-delay: 0.1s;
-            will-change: opacity, transform;
-        }
-        .promo-fade-text.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Responsive Breakpoints */
-        @media (max-width: 1023px) {
-            .promo-section,
-            .promo-section-alt {
-                margin-top: 40px !important;
-                padding: 60px 0 !important;
+        @media (max-width: 1024px) {
+            .promo-section {
+                min-height: auto !important;
+                padding: 50px 0 !important;
             }
-            .promo-container {
-                flex-direction: column;
-                padding: 0 20px !important;
+            .promo-section .promo-container {
+                flex-direction: column !important;
+                padding: 0 24px !important;
+                align-items: flex-start !important;
             }
-            .promo-col-bike,
-            .promo-col-bike-text,
-            .promo-col-scooter-text,
-            .promo-col-scooter {
-                width: 100%;
-                max-width: 600px;
-                padding-left: 0;
-                padding-right: 0;
-            }
-            .promo-col-bike {
-                justify-content: center;
-                margin-bottom: 24px;
-            }
-            .promo-col-scooter {
-                justify-content: center;
-                margin-bottom: 24px;
-            }
-            .promo-bike-img {
-                margin-left: 0;
-                max-height: 340px;
-            }
-            .promo-scooter-img,
-            img.promo-scooter-img {
-                height: auto !important;
-                max-height: 380px !important;
+            .promo-section .text-col {
+                width: 100% !important;
                 max-width: 100% !important;
-                margin-right: 0 !important;
-                transform: scaleX(-1) !important;
-                -webkit-transform: scaleX(-1) !important;
+                padding-left: 0 !important;
+                margin-bottom: 28px !important;
             }
-            .promo-col-scooter-text {
-                justify-content: flex-start;
+            .promo-section .img-col {
+                position: relative !important;
+                width: 100% !important;
+                height: 340px !important;
+                right: auto !important;
+                bottom: auto !important;
+                top: auto !important;
+                justify-content: center !important;
+                align-items: center !important;
+            }
+            .promo-section .img-col img {
+                position: relative !important;
+                height: 100% !important;
+                max-height: 340px !important;
+                right: auto !important;
+                bottom: auto !important;
+                margin: 0 auto !important;
             }
         }
 
@@ -1654,304 +1510,131 @@
         }
     </script>
 
-    <!-- ==================== 2. HERO СЕКЦІЯ (3-СЛАЙДОВИЙ СЛАЙДЕР) ==================== -->
-    <section id="hero-section" class="hero hero-section relative overflow-hidden transition-colors duration-300"
-        data-active-slide="0"
-        style="position: relative !important; width: 100% !important; height: calc(100vh - 46px) !important; min-height: calc(100vh - 46px) !important; overflow: hidden !important; margin: 0 0 80px 0 !important; margin-bottom: 80px !important; padding: 0 !important;">
+    <!-- ==================== 2. HERO СЕКЦІЯ (СТАТИЧНА, ЕТАЛОН AIMA ONE) ==================== -->
+    <section id="hero-section" class="hero hero-section relative overflow-hidden"
+        style="position: relative !important; width: 100% !important; height: calc(100vh - 46px) !important; min-height: calc(100vh - 46px) !important; overflow: hidden !important; margin: 0 !important; padding: 0 !important; display: flex !important; align-items: center !important;">
 
-        <!-- СЛАЙД 1 (ЭТАЛОН: AIMA ONE - КООРДИНАТИ, ПОЛОЖЕННЯ ТА ВЕРСТКА НЕ ЗМІНЕНІ) -->
-        <div class="hero-slide is-active active" id="heroSlide1" data-index="0"
-            style="position: absolute; inset: 0; width: 100%; height: 100%; display: flex; align-items: center; z-index: 2;">
-            <div id="hero-bg-day"
-                style="position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; background-image: url('images/hero_day.jpg'); background-size: cover !important; background-position: right -150px center !important; background-repeat: no-repeat !important; transition: opacity 0.6s ease-in-out; z-index: 1;">
-            </div>
-            <div id="hero-bg-night"
-                style="position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; background-image: url('images/hero_night.jpg'); background-size: cover !important; background-position: right -150px center !important; background-repeat: no-repeat !important; transition: opacity 0.6s ease-in-out; z-index: 2; opacity: 0;">
-            </div>
-
-            <div class="hero-container relative z-10 w-full"
-                style="position: relative; z-index: 10; padding: 0 !important;">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-
-                    <!-- Левая колонка (текст) -->
-                    <div class="hero-text-content lg:col-span-7 text-left"
-                        style="position: relative !important; z-index: 10 !important; padding-left: 48px !important; max-width: 460px !important;">
-                        <h1
-                            style="font-family: 'Unbounded', sans-serif !important; font-weight: 800 !important; font-size: clamp(1.85rem, 3.8vw, 3rem) !important; line-height: 1.18 !important; letter-spacing: -0.02em !important; margin-bottom: 20px !important; color: #FFFFFF !important; text-shadow: 0 4px 16px rgba(0,0,0,0.8) !important; filter: drop-shadow(0 4px 16px rgba(0,0,0,0.8)) !important;">
-                            <span class="lang-ua">Оренда<br>електротранспорту<br><span
-                                    style="white-space: nowrap;">в&nbsp;Одесі</span></span>
-                            <span class="lang-en">Electric vehicle<br>rental<br><span
-                                    style="white-space: nowrap;">in&nbsp;Odesa</span></span>
-                        </h1>
-                        <p class="hero-subtitle text-base sm:text-lg mb-8 max-w-xl leading-relaxed"
-                            style="color: #E4E4E7 !important; text-shadow: 0 2px 10px rgba(0,0,0,0.8) !important;">
-                            <span class="lang-ua">Для кур'єрів та туризму • Всі моделі з АКБ та зарядкою • Безкоштовне
-                                сервісне обслуговування</span>
-                            <span class="lang-en">For couriers and tourism • All models with battery & charger • Free
-                                maintenance</span>
-                        </p>
-                        <div class="flex items-center gap-4 flex-wrap">
-                            <a href="#catalog"
-                                class="inline-flex items-center justify-center gap-2 bg-[#1D5D3B] hover:bg-[#237248] text-white px-7 py-3.5 rounded-xl font-bold transition-all shadow-lg shadow-[#1D5D3B]/20">
-                                <span class="lang-ua">Обрати транспорт ↓</span>
-                                <span class="lang-en">Choose Vehicle ↓</span>
-                            </a>
-                            <a href="#calculator"
-                                class="hero-calc-btn inline-flex items-center justify-center gap-2.5 bg-black/40 hover:bg-black/60 border border-white/20 hover:border-white/40 text-white px-7 py-3.5 rounded-xl font-semibold backdrop-blur-md transition-all shadow-lg">
-                                <i data-lucide="calculator" class="w-4 h-4"></i>
-                                <span class="lang-ua">Калькулятор оренди</span>
-                                <span class="lang-en">Rental Calculator</span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Правая колонка: интерактивная кинематографичная композиция с телеметрическими выносками (скрыта, код сохранён) -->
-                    <div class="lg:col-span-5 flex items-center justify-center py-4 relative"
-                        style="display: none !important;">
-                        <div
-                            class="hero-brand-stage relative w-full h-[460px] lg:h-[520px] flex items-center justify-center select-none">
-                            <div class="echo-layer echo-far absolute inset-0 flex items-center justify-center pointer-events-none z-0"
-                                style="opacity: 0.15;">
-                                <svg class="h-[320px] lg:h-[380px] w-auto fill-[#1D5D3B]" viewBox="0 0 100 100"
-                                    style="fill: #1D5D3B !important;">
-                                    <path
-                                        d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z"
-                                        fill="#1D5D3B" />
-                                </svg>
-                            </div>
-                            <div class="echo-layer echo-near absolute inset-0 flex items-center justify-center pointer-events-none z-0"
-                                style="opacity: 0.30;">
-                                <svg class="h-[320px] lg:h-[380px] w-auto fill-[#1D5D3B]" viewBox="0 0 100 100"
-                                    style="fill: #1D5D3B !important;">
-                                    <path
-                                        d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z"
-                                        fill="#1D5D3B" />
-                                </svg>
-                            </div>
-                            <div class="main-emblem relative z-10 flex items-center justify-center pointer-events-none">
-                                <svg class="h-[320px] lg:h-[380px] w-auto" viewBox="0 0 100 100"
-                                    style="fill: #1D5D3B !important; filter: drop-shadow(0 0 25px rgba(255,255,255,0.45)) drop-shadow(0 4px 15px rgba(0,0,0,0.7)) drop-shadow(0 0 60px rgba(255,255,255,0.15)) !important;">
-                                    <path
-                                        d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z"
-                                        fill="#1D5D3B" />
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
+        <!-- Эталонный фотофон AIMA ONE: переключение день/ночь -->
+        <div id="hero-bg-day"
+            style="position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; background-image: url('images/hero_day.jpg'); background-size: cover !important; background-position: right -150px center !important; background-repeat: no-repeat !important; transition: opacity 0.6s ease-in-out; z-index: 1;">
+        </div>
+        <div id="hero-bg-night"
+            style="position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; background-image: url('images/hero_night.jpg'); background-size: cover !important; background-position: right -150px center !important; background-repeat: no-repeat !important; transition: opacity 0.6s ease-in-out; z-index: 2; opacity: 0;">
         </div>
 
-        <!-- СЛАЙД 2 (CROSSER CR-20: ФЛАГМАНСЬКИЙ МАКСІСКУТЕР) -->
-        <div class="hero-slide slide-crosser-clean" id="heroSlide2" data-index="1"
-            style="position: absolute; inset: 0; width: 100%; height: 100%; display: flex; align-items: center; overflow: hidden;">
+        <div class="hero-container relative z-10 w-full"
+            style="position: relative; z-index: 10; padding: 0 !important;">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
 
-            <!-- Текстовая колонка слева: ширина 45% (max-width: 560px), z-index: 10 -->
-            <div class="slide-content hero-slide-text hero-crosser-content">
-                <span class="hero-crosser-badge">
-                    <span class="lang-ua">ФЛАГМАНСЬКИЙ МАКСІСКУТЕР</span>
-                    <span class="lang-en">FLAGSHIP MAXISCOOTER</span>
-                </span>
-                <h2 class="hero-crosser-title">
+                <!-- Левая колонка (текст) -->
+                <div class="hero-text-content lg:col-span-7 text-left"
+                    style="position: relative !important; z-index: 10 !important; padding-left: 48px !important; max-width: 460px !important;">
+                    <h1
+                        style="font-family: 'Unbounded', sans-serif !important; font-weight: 800 !important; font-size: clamp(1.85rem, 3.8vw, 3rem) !important; line-height: 1.18 !important; letter-spacing: -0.02em !important; margin-bottom: 20px !important; color: #FFFFFF !important; text-shadow: 0 4px 16px rgba(0,0,0,0.8) !important; filter: drop-shadow(0 4px 16px rgba(0,0,0,0.8)) !important;">
+                        <span class="lang-ua">Оренда<br>електротранспорту<br><span
+                                style="white-space: nowrap;">в&nbsp;Одесі</span></span>
+                        <span class="lang-en">Electric vehicle<br>rental<br><span
+                                style="white-space: nowrap;">in&nbsp;Odesa</span></span>
+                    </h1>
+                    <p class="hero-subtitle text-base sm:text-lg mb-8 max-w-xl leading-relaxed"
+                        style="color: #E4E4E7 !important; text-shadow: 0 2px 10px rgba(0,0,0,0.8) !important;">
+                        <span class="lang-ua">Для кур'єрів та туризму • Всі моделі з АКБ та зарядкою • Безкоштовне
+                            сервісне обслуговування</span>
+                        <span class="lang-en">For couriers and tourism • All models with battery & charger • Free
+                            maintenance</span>
+                    </p>
+                    <div class="flex items-center gap-4 flex-wrap">
+                        <a href="#catalog"
+                            class="inline-flex items-center justify-center gap-2 bg-[#1D5D3B] hover:bg-[#237248] text-white px-7 py-3.5 rounded-xl font-bold transition-all shadow-lg shadow-[#1D5D3B]/20">
+                            <span class="lang-ua">Обрати транспорт ↓</span>
+                            <span class="lang-en">Choose Vehicle ↓</span>
+                        </a>
+                        <a href="#calculator"
+                            class="hero-calc-btn inline-flex items-center justify-center gap-2.5 bg-black/40 hover:bg-black/60 border border-white/20 hover:border-white/40 text-white px-7 py-3.5 rounded-xl font-semibold backdrop-blur-md transition-all shadow-lg">
+                            <i data-lucide="calculator" class="w-4 h-4"></i>
+                            <span class="lang-ua">Калькулятор оренди</span>
+                            <span class="lang-en">Rental Calculator</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== СЕКЦІЯ 1 (СКУТЕР CROSSER CR-20) ==================== -->
+    <section class="promo-section scooter-promo">
+        <div class="promo-container">
+            <div class="text-col">
+                <div class="inline-flex items-center gap-2 px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full mb-4">
+                    <span class="w-2 h-2 rounded-full bg-[#10B981]"></span>
+                    <span class="font-mono text-[11px] tracking-widest text-emerald-400 uppercase font-semibold">
+                        <span class="lang-ua">ФЛАГМАНСЬКИЙ МАКСІСКУТЕР</span>
+                        <span class="lang-en">FLAGSHIP MAXISCOOTER</span>
+                    </span>
+                </div>
+                <h2 class="promo-title font-brand font-extrabold text-3xl sm:text-4xl lg:text-5xl uppercase tracking-tight leading-tight text-white mb-4">
                     <span class="lang-ua">Crosser CR-20 — максимальний комфорт та динаміка</span>
                     <span class="lang-en">Crosser CR-20 — maximum comfort &amp; dynamics</span>
                 </h2>
-                <p class="hero-crosser-desc">
+                <p class="promo-desc text-base sm:text-lg text-zinc-400 mb-8 leading-relaxed">
                     <span class="lang-ua">Потужний міський електроскутер з комфортною посадкою, подвійним амортизатором та великим запасом ходу для комфортного пересування містом без втоми.</span>
                     <span class="lang-en">A powerful city electric scooter with comfortable seating, dual shock absorbers, and an extended range for effortless urban travel.</span>
                 </p>
-                <div class="hero-crosser-actions">
-                    <a href="catalog.html?model=crosser-cr-20" class="hero-crosser-btn-primary">
+                <div class="flex items-center gap-4 flex-wrap">
+                    <a href="catalog.html?model=crosser-cr-20" class="inline-flex items-center justify-center gap-2 bg-[#1D5D3B] hover:bg-[#237248] text-white px-7 py-3.5 rounded-xl font-bold transition-all shadow-lg shadow-[#1D5D3B]/20">
                         <span class="lang-ua">Обрати в каталозі →</span>
                         <span class="lang-en">Choose in catalog →</span>
                     </a>
-                    <a href="calculator.html" class="hero-crosser-btn-calc">
+                    <a href="calculator.html" class="promo-btn-secondary inline-flex items-center justify-center gap-2.5 bg-white/[0.06] hover:bg-white/[0.1] border border-white/20 hover:border-white/40 text-white px-7 py-3.5 rounded-xl font-semibold backdrop-blur-md transition-all shadow-lg">
                         <i data-lucide="calculator" class="w-4 h-4"></i>
                         <span class="lang-ua">Калькулятор оренди</span>
                         <span class="lang-en">Rental Calculator</span>
                     </a>
                 </div>
             </div>
-
-            <!-- Изображение скутера в правой части слайда -->
-            <div class="slide-crosser-wrapper">
-                <img src="images/crosser-cr20.png" alt="Crosser CR-20" class="slide-crosser-img">
+            <div class="img-col">
+                <img src="images/crosser-cr20.png" alt="Crosser CR-20" class="promo-vehicle-img scooter-img">
             </div>
         </div>
+    </section>
 
-        <!-- СЛАЙД 3 (LIKE.BIKE BRUISER: БЕЛЫЙ МИНИМАЛИСТИЧНЫЙ ФОН И ЧИТАЕМЫЙ ТЕКСТ) -->
-        <div class="hero-slide slide-bike-clean slide-bruiser hero-slide-bruiser" id="heroSlide3" data-index="2"
-            style="position: absolute; inset: 0; width: 100%; height: 100%; display: flex; align-items: center; overflow: hidden;">
-
-            <!-- Текстовая колонка слева: жесткая ширина 45%, отступ 64px, без сжатия -->
-            <div class="slide-content hero-slide-text hero-bike-content">
-                <span class="hero-bike-badge">
-                    <span class="lang-ua">ЕЛЕКТРОВЕЛОСИПЕДИ ДЛЯ МІСТА ТА КУР'ЄРІВ</span>
-                    <span class="lang-en">CITY &amp; COURIER E-BIKES</span>
-                </span>
-                <h2 class="hero-bike-title">
+    <!-- ==================== СЕКЦІЯ 2 (ВЕЛОСИПЕД LIKE.BIKE BRUISER) ==================== -->
+    <section class="promo-section bike-promo">
+        <div class="promo-container">
+            <div class="text-col">
+                <div class="inline-flex items-center gap-2 px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full mb-4">
+                    <span class="w-2 h-2 rounded-full bg-[#10B981]"></span>
+                    <span class="font-mono text-[11px] tracking-widest text-emerald-400 uppercase font-semibold">
+                        <span class="lang-ua">ЕЛЕКТРОВЕЛОСИПЕДИ ДЛЯ МІСТА ТА КУР'ЄРІВ</span>
+                        <span class="lang-en">CITY &amp; COURIER E-BIKES</span>
+                    </span>
+                </div>
+                <h2 class="promo-title font-brand font-extrabold text-3xl sm:text-4xl lg:text-5xl uppercase tracking-tight leading-tight text-white mb-4">
                     <span class="lang-ua">Like.Bike Bruiser — свобода пересування без заторів</span>
                     <span class="lang-en">Like.Bike Bruiser — traffic-free urban freedom</span>
                 </h2>
-                <p class="hero-bike-desc">
+                <p class="promo-desc text-base sm:text-lg text-zinc-400 mb-8 leading-relaxed">
                     <span class="lang-ua">Потужний фетбайк з широкими колесами для будь-якого дорожнього покриття. Ідеальний вибір для кур'єрської доставки та активних поїздок Одесою з мінімальними витратами.</span>
                     <span class="lang-en">A powerful fatbike with wide tires for any road surface. The ideal choice for courier delivery and active city rides in Odesa with minimal costs.</span>
                 </p>
-                <div class="hero-bike-actions">
-                    <a href="catalog.html?model=like-bike-bruser-1" class="hero-bike-btn-primary">
+                <div class="flex items-center gap-4 flex-wrap">
+                    <a href="catalog.html?model=like-bike-bruser-1" class="inline-flex items-center justify-center gap-2 bg-[#1D5D3B] hover:bg-[#237248] text-white px-7 py-3.5 rounded-xl font-bold transition-all shadow-lg shadow-[#1D5D3B]/20">
                         <span class="lang-ua">Детальніше про оренду →</span>
                         <span class="lang-en">Rental details →</span>
                     </a>
-                    <a href="calculator.html" class="hero-bike-btn-calc">
+                    <a href="calculator.html" class="promo-btn-secondary inline-flex items-center justify-center gap-2.5 bg-white/[0.06] hover:bg-white/[0.1] border border-white/20 hover:border-white/40 text-white px-7 py-3.5 rounded-xl font-semibold backdrop-blur-md transition-all shadow-lg">
                         <i data-lucide="calculator" class="w-4 h-4"></i>
                         <span class="lang-ua">Калькулятор</span>
                         <span class="lang-en">Calculator</span>
                     </a>
                 </div>
             </div>
-
-            <!-- Велосипед в правой части слайда: масштаб 95%, зазор от текста -->
-            <div class="slide-bike-wrapper">
-                <!-- Фонарик: луч света реализовывать ТОЛЬКО отдельным мягким градиентным слоем позади фары, не затрагивая само тело велосипеда -->
-                <div class="hero-headlight-lens bike-hero-headlight"></div>
-                <img src="images/like-bike-bruiser-hq.png" alt="Like.Bike Bruiser" class="slide-bike-img">
+            <div class="img-col">
+                <img src="images/like-bike-bruiser-hq.png" alt="Like.Bike Bruiser" class="promo-vehicle-img bike-img">
             </div>
         </div>
-
-        <!-- Стрелки навигации слайдера -->
-        <button id="heroPrevBtn" type="button" aria-label="Попередній слайд"
-            class="hero-slider-nav-btn absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center backdrop-blur-md transition-all cursor-pointer shadow-lg hover:scale-105 active:scale-95">
-            <svg class="w-5 h-5 sm:w-6 sm:h-6 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="2.5">
-                <polyline points="15 18 9 12 15 6"></polyline>
-            </svg>
-        </button>
-        <button id="heroNextBtn" type="button" aria-label="Наступний слайд"
-            class="hero-slider-nav-btn absolute right-4 sm:right-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center backdrop-blur-md transition-all cursor-pointer shadow-lg hover:scale-105 active:scale-95">
-            <svg class="w-5 h-5 sm:w-6 sm:h-6 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="2.5">
-                <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-        </button>
-
-        <!-- Индикаторы слайдов (точки/пилюли) -->
-        <div class="hero-slider-dots absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2.5">
-            <button type="button" class="hero-slider-dot active" data-index="0" aria-label="Слайд 1"></button>
-            <button type="button" class="hero-slider-dot" data-index="1" aria-label="Слайд 2"></button>
-            <button type="button" class="hero-slider-dot" data-index="2" aria-label="Слайд 3"></button>
-        </div>
-
     </section>
-
-    <!-- Инициализация интерактивного слайдера Hero -->
-    <script>
-        (function initHeroSlider() {
-            let currentSlide = 0;
-            const slides = document.querySelectorAll('#hero-section .hero-slide');
-            const dots = document.querySelectorAll('#hero-section .hero-slider-dot');
-            const prevBtn = document.getElementById('heroPrevBtn');
-            const nextBtn = document.getElementById('heroNextBtn');
-            const heroSection = document.getElementById('hero-section');
-            if (!slides || slides.length === 0) return;
-
-            let autoTimer = null;
-
-            function goToSlide(index) {
-                if (index < 0) index = slides.length - 1;
-                if (index >= slides.length) index = 0;
-
-                if (heroSection) {
-                    heroSection.setAttribute('data-active-slide', index);
-                }
-
-                slides.forEach((slide, i) => {
-                    slide.classList.remove('is-active', 'active', 'is-prev');
-                    if (i === index) {
-                        slide.classList.add('is-active', 'active');
-                    } else if (i < index) {
-                        slide.classList.add('is-prev');
-                    }
-                });
-
-                dots.forEach((dot, i) => {
-                    if (i === index) {
-                        dot.classList.add('is-active', 'active');
-                    } else {
-                        dot.classList.remove('is-active', 'active');
-                    }
-                });
-
-                currentSlide = index;
-            }
-
-            function nextSlide() {
-                goToSlide(currentSlide + 1);
-            }
-
-            function prevSlide() {
-                goToSlide(currentSlide - 1);
-            }
-
-            function startAutoTimer() {
-                stopAutoTimer();
-                autoTimer = setInterval(nextSlide, 7000);
-            }
-
-            function stopAutoTimer() {
-                if (autoTimer) {
-                    clearInterval(autoTimer);
-                    autoTimer = null;
-                }
-            }
-
-            if (nextBtn) {
-                nextBtn.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    nextSlide();
-                    startAutoTimer();
-                });
-            }
-
-            if (prevBtn) {
-                prevBtn.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    prevSlide();
-                    startAutoTimer();
-                });
-            }
-
-            dots.forEach((dot, idx) => {
-                dot.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    goToSlide(idx);
-                    startAutoTimer();
-                });
-            });
-
-            if (heroSection) {
-                heroSection.addEventListener('mouseenter', stopAutoTimer);
-                heroSection.addEventListener('mouseleave', startAutoTimer);
-
-                // Touch swipe support for mobile
-                let startX = 0;
-                heroSection.addEventListener('touchstart', function (e) {
-                    startX = e.touches[0].clientX;
-                    stopAutoTimer();
-                }, { passive: true });
-
-                heroSection.addEventListener('touchend', function (e) {
-                    const endX = e.changedTouches[0].clientX;
-                    const diffX = endX - startX;
-                    if (Math.abs(diffX) > 50) {
-                        if (diffX < 0) nextSlide();
-                        else prevSlide();
-                    }
-                    startAutoTimer();
-                }, { passive: true });
-            }
-
-            startAutoTimer();
-        })();
-    </script>
 
     <!-- ==================== 3. КАТАЛОГ СКУТЕРІВ (ТОП МОДЕЛІ СПЕРШУ) ==================== -->
     <section id="catalog" class="py-16 md:py-24 bg-[#0A0D0B] text-white border-b border-white/[0.08]">

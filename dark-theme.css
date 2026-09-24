@@ -1513,8 +1513,8 @@ img.promo-scooter-img {
     max-width: none !important;
     object-fit: contain !important;
     margin-right: -160px !important;
-    transform: scaleX(-1) !important;
-    -webkit-transform: scaleX(-1) !important;
+    transform: none !important;
+    -webkit-transform: none !important;
     display: block !important;
     flex-shrink: 0 !important;
     pointer-events: none;
@@ -1559,6 +1559,6 @@ img.promo-scooter-img {
         max-width: 500px !important;
         margin-right: 0 !important;
         margin: 0 auto !important;
-        transform: scaleX(-1) !important;
+        transform: none !important;
     }
 }
