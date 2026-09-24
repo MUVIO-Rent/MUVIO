@@ -954,30 +954,19 @@ html.theme-dark #page-preloader .preloader-m-logo,
     overflow: visible !important;
 }
 
-.promo-bike-img {
-    height: 680px !important;
-    max-height: 720px !important;
-    width: auto !important;
-    max-width: none !important;
-    object-fit: contain !important;
-    margin-left: -180px !important;
-    display: block !important;
-    flex-shrink: 0 !important;
-    pointer-events: none;
-}
-
+.promo-bike-img,
+.bike-promo img,
+.promo-bike-section img,
 .promo-scooter-img,
-img.promo-scooter-img {
-    height: 720px !important;
-    max-height: 760px !important;
-    width: auto !important;
-    max-width: none !important;
-    object-fit: contain !important;
-    margin-right: -160px !important;
-    transform: none !important;
-    -webkit-transform: none !important;
-    display: block !important;
-    flex-shrink: 0 !important;
+img.promo-scooter-img,
+.scooter-promo img,
+.promo-scooter-section img {
+    filter: none !important;
+    -webkit-filter: none !important;
+    box-shadow: none !important;
+    drop-shadow: none !important;
+    background: transparent !important;
+    margin: 0 !important;
     pointer-events: none;
 }
 

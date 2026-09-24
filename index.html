@@ -265,6 +265,7 @@
             min-height: 640px !important;
             height: auto !important;
             margin: 0 !important;
+            margin-bottom: 0 !important;
             padding: 80px 0 !important;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
             display: flex !important;
@@ -296,39 +297,110 @@
         .promo-section .text-col {
             width: 45% !important;
             max-width: 540px !important;
-            padding-left: 60px !important;
+            padding-left: 64px !important;
             position: relative !important;
             z-index: 10 !important;
             box-sizing: border-box !important;
         }
 
-        .promo-section .img-col {
+        /* SCOOTER PROMO (CROSSER CR-20): OVERFLOW HIDDEN & STRICT NO-BLEED */
+        .promo-scooter-section,
+        .scooter-promo {
+            position: relative !important;
+            overflow: hidden !important;
+            min-height: 640px !important;
+            margin: 0 !important;
+            margin-bottom: 0 !important;
+        }
+
+        .promo-scooter-section .img-wrapper,
+        .scooter-promo .img-wrapper,
+        .scooter-promo .img-col {
             position: absolute !important;
             right: 0 !important;
             bottom: 0 !important;
             top: 0 !important;
-            width: 55% !important;
+            width: 55vw !important;
             display: flex !important;
             align-items: flex-end !important;
             justify-content: flex-end !important;
             pointer-events: none !important;
-            overflow: visible !important;
+            overflow: hidden !important;
         }
 
-        .promo-section .img-col img {
+        .promo-scooter-section img,
+        .scooter-promo img {
             position: absolute !important;
             right: 0 !important;
             bottom: 0 !important;
             height: 90% !important;
-            max-height: 750px !important;
+            max-height: 720px !important;
             width: auto !important;
             object-fit: contain !important;
             transform: none !important;
             -webkit-transform: none !important;
-            filter: drop-shadow(0 20px 35px rgba(0, 0, 0, 0.45)) !important;
+            filter: none !important;
+            -webkit-filter: none !important;
+            box-shadow: none !important;
+            drop-shadow: none !important;
+            background: transparent !important;
             display: block !important;
             user-select: none !important;
             pointer-events: none !important;
+        }
+
+        /* BIKE PROMO (LIKE.BIKE BRUISER): МАСШТАБ 125%, right: 0, translateX(18%), ZERO FILTER/SHADOW */
+        .promo-bike-section,
+        .bike-promo {
+            position: relative !important;
+            overflow: hidden !important;
+            min-height: 680px !important;
+            margin: 0 !important;
+            margin-bottom: 0 !important;
+        }
+
+        .promo-bike-section .img-wrapper,
+        .bike-promo .img-wrapper,
+        .bike-promo .img-col {
+            position: absolute !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            top: 0 !important;
+            width: 55vw !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: flex-end !important;
+            pointer-events: none !important;
+            overflow: hidden !important;
+        }
+
+        .promo-bike-section img,
+        .bike-promo img {
+            height: 125% !important;
+            max-height: 850px !important;
+            width: auto !important;
+            max-width: none !important;
+            object-fit: contain !important;
+            transform: translateX(18%) !important;
+            -webkit-transform: translateX(18%) !important;
+            filter: none !important;
+            -webkit-filter: none !important;
+            box-shadow: none !important;
+            drop-shadow: none !important;
+            background: transparent !important;
+            display: block !important;
+            user-select: none !important;
+            pointer-events: none !important;
+        }
+
+        .promo-bike-section .text-col,
+        .bike-promo .text-col {
+            width: 45% !important;
+            max-width: 540px !important;
+            padding-left: 64px !important;
+            position: relative !important;
+            z-index: 10 !important;
+            box-sizing: border-box !important;
         }
 
         /* Light Mode Overrides for Promo Titles & Descriptions */
@@ -353,21 +425,31 @@
         }
 
         @media (max-width: 1024px) {
-            .promo-section {
+            .promo-section,
+            .promo-scooter-section,
+            .promo-bike-section {
                 min-height: auto !important;
                 padding: 50px 0 !important;
+                overflow: hidden !important;
+                margin-bottom: 0 !important;
             }
             .promo-section .promo-container {
                 flex-direction: column !important;
                 padding: 0 24px !important;
                 align-items: flex-start !important;
             }
-            .promo-section .text-col {
+            .promo-section .text-col,
+            .promo-bike-section .text-col,
+            .bike-promo .text-col {
                 width: 100% !important;
                 max-width: 100% !important;
                 padding-left: 0 !important;
                 margin-bottom: 28px !important;
             }
+            .promo-scooter-section .img-wrapper,
+            .scooter-promo .img-wrapper,
+            .promo-bike-section .img-wrapper,
+            .bike-promo .img-wrapper,
             .promo-section .img-col {
                 position: relative !important;
                 width: 100% !important;
@@ -377,14 +459,29 @@
                 top: auto !important;
                 justify-content: center !important;
                 align-items: center !important;
+                overflow: hidden !important;
             }
-            .promo-section .img-col img {
+            .promo-bike-section img,
+            .bike-promo img {
                 position: relative !important;
                 height: 100% !important;
                 max-height: 340px !important;
                 right: auto !important;
                 bottom: auto !important;
                 margin: 0 auto !important;
+                transform: translateX(10%) !important;
+                -webkit-transform: translateX(10%) !important;
+            }
+            .promo-scooter-section img,
+            .scooter-promo img {
+                position: relative !important;
+                height: 100% !important;
+                max-height: 340px !important;
+                right: auto !important;
+                bottom: auto !important;
+                margin: 0 auto !important;
+                transform: none !important;
+                -webkit-transform: none !important;
             }
         }
 
@@ -1563,7 +1660,7 @@
     </section>
 
     <!-- ==================== СЕКЦІЯ 1 (СКУТЕР CROSSER CR-20) ==================== -->
-    <section class="promo-section scooter-promo">
+    <section class="promo-section promo-scooter-section scooter-promo" style="position: relative !important; overflow: hidden !important; margin: 0 !important; margin-bottom: 0 !important;">
         <div class="promo-container">
             <div class="text-col">
                 <div class="inline-flex items-center gap-2 px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full mb-4">
@@ -1593,14 +1690,14 @@
                     </a>
                 </div>
             </div>
-            <div class="img-col">
-                <img src="images/crosser-cr20.png" alt="Crosser CR-20" class="promo-vehicle-img scooter-img">
-            </div>
+        </div>
+        <div class="img-wrapper">
+            <img src="images/crosser-cr20.png" alt="Crosser CR-20" class="promo-vehicle-img scooter-img">
         </div>
     </section>
 
     <!-- ==================== СЕКЦІЯ 2 (ВЕЛОСИПЕД LIKE.BIKE BRUISER) ==================== -->
-    <section class="promo-section bike-promo">
+    <section class="promo-section promo-bike-section bike-promo" style="position: relative !important; overflow: hidden !important; min-height: 680px !important; margin: 0 !important; margin-bottom: 0 !important;">
         <div class="promo-container">
             <div class="text-col">
                 <div class="inline-flex items-center gap-2 px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full mb-4">
@@ -1630,9 +1727,9 @@
                     </a>
                 </div>
             </div>
-            <div class="img-col">
-                <img src="images/like-bike-bruiser-hq.png" alt="Like.Bike Bruiser" class="promo-vehicle-img bike-img">
-            </div>
+        </div>
+        <div class="img-wrapper">
+            <img src="images/like-bike-bruiser-hq.png" alt="Like.Bike Bruiser" class="promo-vehicle-img bike-img">
         </div>
     </section>
 
