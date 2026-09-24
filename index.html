@@ -356,13 +356,13 @@
             pointer-events: none !important;
         }
 
-        /* BIKE PROMO (LIKE.BIKE BRUISER): МАСШТАБ 125%, right: 0, translateX(18%), ZERO FILTER/SHADOW/MASK/BLEED */
+        /* BIKE PROMO (LIKE.BIKE BRUISER): МАСШТАБ 110%, right: 0, translateX(12%), ZERO FILTER/SHADOW/MASK/BLEED */
         .promo-bike-section,
         .bike-promo {
             position: relative !important;
             overflow: hidden !important;
             contain: paint !important;
-            min-height: 680px !important;
+            min-height: 720px !important;
             margin: 0 !important;
             margin-bottom: 0 !important;
         }
@@ -374,24 +374,24 @@
             right: 0 !important;
             bottom: 0 !important;
             top: 0 !important;
-            width: 55vw !important;
+            width: 58vw !important;
             display: flex !important;
-            align-items: center !important;
+            align-items: flex-end !important;
             justify-content: flex-end !important;
             pointer-events: none !important;
-            overflow: hidden !important;
-            contain: paint !important;
+            overflow: visible !important;
         }
 
         .promo-bike-section img,
         .bike-promo img {
-            height: 125% !important;
-            max-height: 850px !important;
+            height: 110% !important;
+            max-height: 760px !important;
             width: auto !important;
             max-width: none !important;
             object-fit: contain !important;
-            transform: translateX(18%) !important;
-            -webkit-transform: translateX(18%) !important;
+            object-position: bottom right !important;
+            transform: translateX(12%) !important;
+            -webkit-transform: translateX(12%) !important;
             filter: none !important;
             -webkit-filter: none !important;
             mix-blend-mode: normal !important;
@@ -409,9 +409,9 @@
 
         .promo-bike-section .text-col,
         .bike-promo .text-col {
-            width: 45% !important;
-            max-width: 540px !important;
-            padding-left: 64px !important;
+            width: 42% !important;
+            max-width: 520px !important;
+            padding-left: 0 !important;
             position: relative !important;
             z-index: 10 !important;
             box-sizing: border-box !important;
@@ -1712,7 +1712,7 @@
     </section>
 
     <!-- ==================== СЕКЦІЯ 2 (ВЕЛОСИПЕД LIKE.BIKE BRUISER) ==================== -->
-    <section class="promo-section promo-bike-section bike-promo" style="position: relative !important; overflow: hidden !important; contain: paint !important; min-height: 680px !important; margin: 0 !important; margin-bottom: 0 !important;">
+    <section class="promo-section promo-bike-section bike-promo" style="position: relative !important; overflow: hidden !important; contain: paint !important; min-height: 720px !important; margin: 0 !important; margin-bottom: 0 !important;">
         <div class="promo-container">
             <div class="text-col">
                 <div class="inline-flex items-center gap-2 px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full mb-4">
@@ -1743,7 +1743,7 @@
                 </div>
             </div>
         </div>
-        <div class="img-wrapper" style="overflow: hidden !important; contain: paint !important;">
+        <div class="img-wrapper">
             <img src="images/like-bike-bruiser-hq.png" alt="Like.Bike Bruiser" class="promo-vehicle-img bike-img">
         </div>
     </section>
