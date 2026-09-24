@@ -308,6 +308,7 @@
         .scooter-promo {
             position: relative !important;
             overflow: hidden !important;
+            contain: paint !important;
             min-height: 640px !important;
             margin: 0 !important;
             margin-bottom: 0 !important;
@@ -326,6 +327,7 @@
             justify-content: flex-end !important;
             pointer-events: none !important;
             overflow: hidden !important;
+            contain: paint !important;
         }
 
         .promo-scooter-section img,
@@ -341,19 +343,25 @@
             -webkit-transform: none !important;
             filter: none !important;
             -webkit-filter: none !important;
+            mix-blend-mode: normal !important;
+            mask: none !important;
+            -webkit-mask: none !important;
             box-shadow: none !important;
             drop-shadow: none !important;
             background: transparent !important;
+            border: none !important;
+            outline: none !important;
             display: block !important;
             user-select: none !important;
             pointer-events: none !important;
         }
 
-        /* BIKE PROMO (LIKE.BIKE BRUISER): МАСШТАБ 125%, right: 0, translateX(18%), ZERO FILTER/SHADOW */
+        /* BIKE PROMO (LIKE.BIKE BRUISER): МАСШТАБ 125%, right: 0, translateX(18%), ZERO FILTER/SHADOW/MASK/BLEED */
         .promo-bike-section,
         .bike-promo {
             position: relative !important;
             overflow: hidden !important;
+            contain: paint !important;
             min-height: 680px !important;
             margin: 0 !important;
             margin-bottom: 0 !important;
@@ -372,6 +380,7 @@
             justify-content: flex-end !important;
             pointer-events: none !important;
             overflow: hidden !important;
+            contain: paint !important;
         }
 
         .promo-bike-section img,
@@ -385,9 +394,14 @@
             -webkit-transform: translateX(18%) !important;
             filter: none !important;
             -webkit-filter: none !important;
+            mix-blend-mode: normal !important;
+            mask: none !important;
+            -webkit-mask: none !important;
             box-shadow: none !important;
             drop-shadow: none !important;
             background: transparent !important;
+            border: none !important;
+            outline: none !important;
             display: block !important;
             user-select: none !important;
             pointer-events: none !important;
@@ -1660,8 +1674,9 @@
     </section>
 
     <!-- ==================== СЕКЦІЯ 1 (СКУТЕР CROSSER CR-20) ==================== -->
-    <section class="promo-section promo-scooter-section scooter-promo" style="position: relative !important; overflow: hidden !important; margin: 0 !important; margin-bottom: 0 !important;">
-        <div class="promo-container">
+    <!-- ==================== СЕКЦІЯ 1 (СКУТЕР CROSSER CR-20) ==================== -->
+    <section class="promo-section promo-scooter-section scooter-promo" style="position: relative !important; overflow: hidden !important; contain: paint !important; margin: 0 !important; margin-bottom: 0 !important;">
+        <div class="promo-container" style="overflow: hidden !important;">
             <div class="text-col">
                 <div class="inline-flex items-center gap-2 px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full mb-4">
                     <span class="w-2 h-2 rounded-full bg-[#10B981]"></span>
@@ -1691,13 +1706,13 @@
                 </div>
             </div>
         </div>
-        <div class="img-wrapper">
+        <div class="img-wrapper" style="overflow: hidden !important; contain: paint !important;">
             <img src="images/crosser-cr20.png" alt="Crosser CR-20" class="promo-vehicle-img scooter-img">
         </div>
     </section>
 
     <!-- ==================== СЕКЦІЯ 2 (ВЕЛОСИПЕД LIKE.BIKE BRUISER) ==================== -->
-    <section class="promo-section promo-bike-section bike-promo" style="position: relative !important; overflow: hidden !important; min-height: 680px !important; margin: 0 !important; margin-bottom: 0 !important;">
+    <section class="promo-section promo-bike-section bike-promo" style="position: relative !important; overflow: hidden !important; contain: paint !important; min-height: 680px !important; margin: 0 !important; margin-bottom: 0 !important;">
         <div class="promo-container">
             <div class="text-col">
                 <div class="inline-flex items-center gap-2 px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full mb-4">
@@ -1728,7 +1743,7 @@
                 </div>
             </div>
         </div>
-        <div class="img-wrapper">
+        <div class="img-wrapper" style="overflow: hidden !important; contain: paint !important;">
             <img src="images/like-bike-bruiser-hq.png" alt="Like.Bike Bruiser" class="promo-vehicle-img bike-img">
         </div>
     </section>

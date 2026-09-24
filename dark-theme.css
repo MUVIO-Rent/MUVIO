@@ -1452,7 +1452,7 @@ body.theme-dark .footer-logo-letters,
     align-items: center !important;
     justify-content: space-between !important;
     position: relative !important;
-    overflow: visible !important;
+    overflow: hidden !important;
     box-sizing: border-box !important;
     min-height: 580px;
 }
@@ -1463,7 +1463,7 @@ body.theme-dark .footer-logo-letters,
     align-items: center !important;
     justify-content: flex-start !important;
     position: relative !important;
-    overflow: visible !important;
+    overflow: hidden !important;
 }
 
 .promo-col-bike-text {
@@ -1490,7 +1490,7 @@ body.theme-dark .footer-logo-letters,
     align-items: center !important;
     justify-content: flex-end !important;
     position: relative !important;
-    overflow: visible !important;
+    overflow: hidden !important;
 }
 
 .promo-bike-img,
@@ -1502,9 +1502,14 @@ img.promo-scooter-img,
 .promo-scooter-section img {
     filter: none !important;
     -webkit-filter: none !important;
+    mix-blend-mode: normal !important;
+    mask: none !important;
+    -webkit-mask: none !important;
     box-shadow: none !important;
     drop-shadow: none !important;
     background: transparent !important;
+    border: none !important;
+    outline: none !important;
     margin: 0 !important;
     pointer-events: none;
 }
