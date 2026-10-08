@@ -126,9 +126,9 @@
 
         /* 3. Avatar */
         .cabinet-avatar {
-            background: linear-gradient(135deg, #10B981 0%, #064E3B 100%);
-            box-shadow: 0 0 20px rgba(16, 185, 129, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.35);
-            border: 1px solid rgba(16, 185, 129, 0.4);
+            background: linear-gradient(135deg, #1D5D3B 0%, #0F2D1D 100%);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(29, 93, 59, 0.35);
             border-radius: 18px;
         }
 
@@ -138,9 +138,9 @@
         [data-status="paid"],
         #rentalStatusBadge,
         #userStatusBadge[data-status="active"] {
-            background: rgba(16, 185, 129, 0.12) !important;
-            border: 1px solid rgba(16, 185, 129, 0.25) !important;
-            color: #059669 !important;
+            background: rgba(29, 93, 59, 0.1) !important;
+            border: 1px solid rgba(29, 93, 59, 0.25) !important;
+            color: #1D5D3B !important;
             border-radius: 9999px !important;
             clip-path: none !important;
             padding: 4px 12px !important;
@@ -155,10 +155,10 @@
         html.dark [data-status="paid"],
         html.theme-dark #rentalStatusBadge,
         html.theme-dark #userStatusBadge[data-status="active"] {
-            background: rgba(16, 185, 129, 0.15) !important;
-            border: 1px solid rgba(16, 185, 129, 0.3) !important;
-            color: #10B981 !important;
-            box-shadow: 0 0 14px rgba(16, 185, 129, 0.15) !important;
+            background: rgba(29, 93, 59, 0.2) !important;
+            border: 1px solid rgba(36, 117, 74, 0.35) !important;
+            color: #34D399 !important;
+            box-shadow: none !important;
         }
 
         .cabinet-pill-badge-inactive {
@@ -178,8 +178,8 @@
 
         /* Pulse animation */
         @keyframes pulse-emerald-glow {
-            0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 8px #10B981; }
-            50% { opacity: 0.5; transform: scale(0.85); box-shadow: 0 0 2px #10B981; }
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(0.9); }
         }
         .animate-pulse-emerald {
             animation: pulse-emerald-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
@@ -246,7 +246,7 @@
         .cabinet-progress-track {
             height: 7px;
             border-radius: 9999px;
-            background: #E2E8F0;
+            background: rgba(0, 0, 0, 0.08);
             overflow: hidden;
             position: relative;
         }
@@ -258,9 +258,14 @@
         .cabinet-progress-fill {
             height: 100%;
             border-radius: 9999px;
-            background: linear-gradient(90deg, #059669 0%, #10B981 60%, #34D399 100%);
-            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+            background: linear-gradient(90deg, #123824 0%, #1D5D3B 70%, #24754A 100%);
+            box-shadow: none;
             transition: width 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        html.theme-dark .cabinet-progress-fill,
+        html.dark .cabinet-progress-fill {
+            background: linear-gradient(90deg, #1D5D3B 0%, #2E8B57 100%);
+            box-shadow: none;
         }
 
         /* 9. Action Buttons */
@@ -271,15 +276,15 @@
             font-weight: 600 !important;
             font-size: 14px !important;
             letter-spacing: 0.04em !important;
-            background: linear-gradient(135deg, #10B981 0%, #059669 100%) !important;
+            background: #1D5D3B !important;
             color: #FFFFFF !important;
-            border: 1px solid rgba(16, 185, 129, 0.4) !important;
-            box-shadow: 0 10px 24px -6px rgba(16, 185, 129, 0.35) !important;
+            border: 1px solid #1D5D3B !important;
+            box-shadow: 0 4px 14px -2px rgba(29, 93, 59, 0.3) !important;
             display: inline-flex !important;
             align-items: center !important;
             justify-content: center !important;
             gap: 8px !important;
-            transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease !important;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease !important;
             cursor: pointer !important;
             text-transform: uppercase !important;
             width: 100% !important;
@@ -288,13 +293,14 @@
         .cabinet-action-btn-pay:hover,
         #cabinet-btn-pay:hover {
             transform: translateY(-2px) !important;
-            box-shadow: 0 14px 28px -6px rgba(16, 185, 129, 0.45) !important;
-            filter: brightness(1.06) !important;
+            background: #24754A !important;
+            border-color: #24754A !important;
+            box-shadow: 0 8px 20px -4px rgba(36, 117, 74, 0.35) !important;
         }
         .cabinet-action-btn-pay:active,
         #cabinet-btn-pay:active {
             transform: translateY(0) !important;
-            box-shadow: 0 6px 14px -4px rgba(16, 185, 129, 0.35) !important;
+            box-shadow: 0 3px 8px -2px rgba(29, 93, 59, 0.3) !important;
         }
 
         .cabinet-action-btn-breakdown,
@@ -304,14 +310,14 @@
             font-weight: 600 !important;
             font-size: 14px !important;
             letter-spacing: 0.04em !important;
-            background: rgba(239, 68, 68, 0.05) !important;
-            color: #DC2626 !important;
-            border: 1px solid rgba(239, 68, 68, 0.22) !important;
+            background: transparent !important;
+            color: #B91C1C !important;
+            border: 1px solid rgba(185, 28, 28, 0.3) !important;
             display: inline-flex !important;
             align-items: center !important;
             justify-content: center !important;
             gap: 8px !important;
-            transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease !important;
+            transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease !important;
             cursor: pointer !important;
             text-transform: uppercase !important;
             width: 100% !important;
@@ -319,26 +325,26 @@
         }
         .cabinet-action-btn-breakdown:hover,
         #cabinet-btn-breakdown:hover {
-            background: rgba(239, 68, 68, 0.1) !important;
-            border-color: rgba(239, 68, 68, 0.35) !important;
+            background: rgba(185, 28, 28, 0.05) !important;
+            border-color: rgba(185, 28, 28, 0.5) !important;
             transform: translateY(-1px) !important;
-            color: #B91C1C !important;
+            color: #991B1B !important;
         }
         html.theme-dark .cabinet-action-btn-breakdown,
         html.dark .cabinet-action-btn-breakdown,
         html.theme-dark #cabinet-btn-breakdown,
         html.dark #cabinet-btn-breakdown {
-            background: rgba(239, 68, 68, 0.08) !important;
-            color: #F87171 !important;
-            border: 1px solid rgba(239, 68, 68, 0.25) !important;
+            background: transparent !important;
+            color: #EF4444 !important;
+            border: 1px solid rgba(239, 68, 68, 0.35) !important;
         }
         html.theme-dark .cabinet-action-btn-breakdown:hover,
         html.dark .cabinet-action-btn-breakdown:hover,
         html.theme-dark #cabinet-btn-breakdown:hover,
         html.dark #cabinet-btn-breakdown:hover {
-            background: rgba(239, 68, 68, 0.15) !important;
-            border-color: rgba(239, 68, 68, 0.45) !important;
-            color: #FCA5A5 !important;
+            background: rgba(239, 68, 68, 0.08) !important;
+            border-color: rgba(239, 68, 68, 0.6) !important;
+            color: #F87171 !important;
         }
 
         /* Secondary / Buyout button */
@@ -349,25 +355,41 @@
             font-weight: 600 !important;
             font-size: 14px !important;
             letter-spacing: 0.04em !important;
-            background: rgba(16, 185, 129, 0.08) !important;
-            color: #059669 !important;
-            border: 1px solid rgba(16, 185, 129, 0.25) !important;
+            background: transparent !important;
+            color: #374151 !important;
+            border: 1px solid #D1D5DB !important;
             display: inline-flex !important;
             align-items: center !important;
             justify-content: center !important;
             gap: 8px !important;
-            transition: transform 0.2s ease, background-color 0.2s ease !important;
+            transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease !important;
             cursor: pointer !important;
             text-transform: uppercase !important;
             width: 100% !important;
             clip-path: none !important;
         }
+        .cabinet-action-btn-secondary:hover,
+        #cabinet-btn-buyout:hover {
+            background: rgba(0, 0, 0, 0.04) !important;
+            border-color: #9CA3AF !important;
+            color: #111827 !important;
+            transform: translateY(-1px) !important;
+        }
         html.theme-dark .cabinet-action-btn-secondary,
         html.dark .cabinet-action-btn-secondary,
-        html.theme-dark #cabinet-btn-buyout {
-            background: rgba(16, 185, 129, 0.12) !important;
-            color: #10B981 !important;
-            border-color: rgba(16, 185, 129, 0.3) !important;
+        html.theme-dark #cabinet-btn-buyout,
+        html.dark #cabinet-btn-buyout {
+            background: transparent !important;
+            color: #E5E7EB !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        }
+        html.theme-dark .cabinet-action-btn-secondary:hover,
+        html.dark .cabinet-action-btn-secondary:hover,
+        html.theme-dark #cabinet-btn-buyout:hover,
+        html.dark #cabinet-btn-buyout:hover {
+            background: rgba(255, 255, 255, 0.06) !important;
+            border-color: rgba(255, 255, 255, 0.35) !important;
+            color: #FFFFFF !important;
         }
 
         /* 10. Modern Tabs */
@@ -390,10 +412,10 @@
             color: #0F172A;
         }
         .cabinet-tab-btn.active {
-            background: linear-gradient(135deg, #10B981 0%, #059669 100%) !important;
+            background: #1D5D3B !important;
             color: #FFFFFF !important;
-            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3) !important;
-            border-color: rgba(16, 185, 129, 0.4) !important;
+            box-shadow: 0 4px 12px rgba(29, 93, 59, 0.25) !important;
+            border-color: #1D5D3B !important;
         }
         html.theme-dark .cabinet-tab-btn,
         html.dark .cabinet-tab-btn {
@@ -408,10 +430,10 @@
         }
         html.theme-dark .cabinet-tab-btn.active,
         html.dark .cabinet-tab-btn.active {
-            background: linear-gradient(135deg, #10B981 0%, #059669 100%) !important;
+            background: #1D5D3B !important;
             color: #FFFFFF !important;
-            border-color: rgba(16, 185, 129, 0.4) !important;
-            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3) !important;
+            border-color: #24754A !important;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3) !important;
         }
 
         /* 11. Table row & cell contrast in dark mode */
@@ -1178,7 +1200,7 @@
                             <h2 id="userNameDisplay" class="cabinet-heading text-xl sm:text-2xl text-zinc-900 dark:text-white uppercase">
                                 Клієнт MUVIO
                             </h2>
-                            <span id="userVerifiedBadge" class="text-emerald-500 flex items-center"><i data-lucide="check-circle-2" class="w-5 h-5"></i></span>
+                            <span id="userVerifiedBadge" class="text-[#1D5D3B] dark:text-[#34D399] flex items-center"><i data-lucide="check-circle-2" class="w-5 h-5"></i></span>
                         </div>
                         <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-zinc-500 dark:text-zinc-400 font-mono">
                             <span id="userUsernameDisplay" class="text-zinc-700 dark:text-zinc-300 font-medium">@username</span>
@@ -1189,7 +1211,7 @@
                         </div>
                         <div id="userStatusBadgeWrap" class="pt-0.5">
                             <span id="userStatusBadge" class="cabinet-pill-badge inline-flex items-center gap-2 px-3 py-1 text-xs font-semibold uppercase tracking-wider">
-                                <span id="userStatusDot" class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse-emerald"></span>
+                                <span id="userStatusDot" class="w-2 h-2 bg-[#1D5D3B] dark:bg-emerald-500 rounded-full animate-pulse-emerald"></span>
                                 <span id="userStatusText">Немає активної техніки в оренді</span>
                             </span>
                         </div>
@@ -1203,7 +1225,7 @@
                             <span class="lang-ua">БОНУСНИЙ РАХУНОК</span>
                             <span class="lang-en">BONUS BALANCE</span>
                         </div>
-                        <div id="userBonusDisplay" class="cabinet-value text-lg sm:text-xl text-emerald-600 dark:text-emerald-400">0.00 ₴</div>
+                        <div id="userBonusDisplay" class="cabinet-value text-lg sm:text-xl text-[#1D5D3B] dark:text-[#34D399]">0.00 ₴</div>
                     </div>
 
                     <!-- Кнопка виходу (ghost-btn) -->
@@ -1272,7 +1294,7 @@
                                 </h3>
                                 <span id="rentalStatusBadge"
                                     class="badge-status-active cabinet-pill-badge inline-flex items-center gap-2 px-3 py-1 text-xs font-semibold uppercase tracking-wider" data-status="active">
-                                    <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse-emerald"></span>
+                                    <span class="w-2 h-2 bg-[#1D5D3B] dark:bg-emerald-500 rounded-full animate-pulse-emerald"></span>
                                     <span id="rentalStatusText">
                                         <span class="lang-ua">АКТИВНА ОРЕНДА</span>
                                         <span class="lang-en">ACTIVE RENTAL</span>
@@ -1312,7 +1334,7 @@
                                         <span class="lang-ua">Тариф / До сплати:</span>
                                         <span class="lang-en">Rate / To pay:</span>
                                     </span>
-                                    <span id="rentalRate" class="cabinet-value text-sm sm:text-[15px] text-emerald-600 dark:text-emerald-400 block font-bold">
+                                    <span id="rentalRate" class="cabinet-value text-sm sm:text-[15px] text-[#1D5D3B] dark:text-[#34D399] block font-bold">
                                         <span class="lang-ua">2 200.00 грн / тиждень</span>
                                         <span class="lang-en">2,200.00 UAH / week</span>
                                     </span>
@@ -1322,7 +1344,7 @@
                                         <span class="lang-ua">Бонусний баланс:</span>
                                         <span class="lang-en">Bonus balance:</span>
                                     </span>
-                                    <span id="rentalBonusBalance" class="cabinet-value text-sm sm:text-[15px] text-emerald-600 dark:text-emerald-400 block font-bold">
+                                    <span id="rentalBonusBalance" class="cabinet-value text-sm sm:text-[15px] text-[#1D5D3B] dark:text-[#34D399] block font-bold">
                                         <span class="lang-ua">0.00 грн</span>
                                         <span class="lang-en">0.00 UAH</span>
                                     </span>
@@ -1346,11 +1368,11 @@
                     <div class="w-full mt-7 pt-6 border-t border-zinc-200/60 dark:border-white/5 space-y-2.5">
                         <div class="flex flex-wrap justify-between items-center gap-2">
                             <span class="cabinet-label flex items-center gap-1.5 text-zinc-600 dark:text-zinc-300 font-bold">
-                                <i data-lucide="clock" class="w-3.5 h-3.5 text-emerald-500"></i>
+                                <i data-lucide="clock" class="w-3.5 h-3.5 text-[#1D5D3B] dark:text-zinc-400"></i>
                                 <span class="lang-ua">ШКАЛА РОЗРАХУНКОВОГО ПЕРІОДУ</span>
                                 <span class="lang-en">BILLING CYCLE TIMELINE</span>
                             </span>
-                            <span id="rentalPeriodScaleText" class="text-emerald-600 dark:text-emerald-400 font-bold font-mono text-xs sm:text-sm tracking-tight">
+                            <span id="rentalPeriodScaleText" class="text-zinc-700 dark:text-zinc-300 font-semibold font-mono text-xs sm:text-sm tracking-tight">
                                 <span class="lang-ua">ОПЛАЧЕНО ДО 2026-09-20 (ЗАЛИШИЛОСЬ: 6 ДН. 21 ГОД.)</span>
                                 <span class="lang-en">PAID UNTIL 2026-09-20 (REMAINING: 6 D. 21 H.)</span>
                             </span>
@@ -1370,7 +1392,7 @@
                                 <span class="lang-ua">Екватор тижня</span>
                                 <span class="lang-en">Midweek</span>
                             </span>
-                            <span class="text-emerald-500 font-semibold">
+                            <span class="text-[#1D5D3B] dark:text-zinc-300 font-medium">
                                 <span class="lang-ua">Оплачено</span>
                                 <span class="lang-en">Paid</span>
                             </span>
@@ -3032,14 +3054,14 @@
                 statusBadge.className = 'badge-status-active cabinet-pill-badge inline-flex items-center gap-2 px-3 py-1 font-brand font-semibold text-xs uppercase tracking-wider';
                 statusBadge.setAttribute('data-status', 'active');
                 if (dotEl) {
-                    dotEl.className = 'w-2 h-2 bg-emerald-500 rounded-full animate-pulse-emerald';
+                    dotEl.className = 'w-2 h-2 bg-[#1D5D3B] dark:bg-emerald-500 rounded-full animate-pulse-emerald';
                 }
                 statusText.textContent = isEn ? 'ACTIVE RENTAL' : 'АКТИВНА ОРЕНДА';
             } else if (hasBuyout) {
                 statusBadge.className = 'badge-status-active cabinet-pill-badge inline-flex items-center gap-2 px-3 py-1 font-brand font-semibold text-xs uppercase tracking-wider';
                 statusBadge.setAttribute('data-status', 'active');
                 if (dotEl) {
-                    dotEl.className = 'w-2 h-2 bg-emerald-500 rounded-full animate-pulse-emerald';
+                    dotEl.className = 'w-2 h-2 bg-[#1D5D3B] dark:bg-emerald-500 rounded-full animate-pulse-emerald';
                 }
                 statusText.textContent = isEn ? 'ACTIVE BUYOUT' : 'АКТИВНИЙ ВИКУП';
             } else {

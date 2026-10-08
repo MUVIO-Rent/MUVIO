@@ -10,6 +10,8 @@ import time
 import traceback
 import copy
 import html
+import hashlib
+import hmac
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 
@@ -6795,6 +6797,195 @@ CORS_HEADERS = {
 async def handle_options(request):
     return web.Response(headers=CORS_HEADERS)
 
+
+def check_telegram_auth_signature(data: dict, bot_token: str) -> bool:
+    received_hash = data.get("hash")
+    if not received_hash:
+        return False
+    auth_date = data.get("auth_date")
+    if not auth_date:
+        return False
+    try:
+        if time.time() - int(auth_date) > 86400:
+            return False
+    except (ValueError, TypeError):
+        return False
+
+    check_keys = sorted([k for k in data.keys() if k != "hash"])
+    data_check_string = "\n".join([f"{k}={data[k]}" for k in check_keys if data[k] is not None])
+    secret_key = hashlib.sha256(bot_token.encode("utf-8")).digest()
+    calc_hash = hmac.new(secret_key, data_check_string.encode("utf-8"), hashlib.sha256).hexdigest()
+    return hmac.compare_digest(calc_hash, received_hash)
+
+
+async def api_auth_telegram(request):
+    try:
+        data = await request.json()
+    except Exception:
+        return web.json_response({"error": "Некоректні дані"}, status=400, headers=CORS_HEADERS)
+
+    if not check_telegram_auth_signature(data, BOT_TOKEN):
+        return web.json_response({"error": "Недійсний підпис авторизації Telegram"}, status=401, headers=CORS_HEADERS)
+
+    raw_id = data.get("id")
+    if not raw_id:
+        return web.json_response({"error": "Відсутній telegram_id"}, status=400, headers=CORS_HEADERS)
+
+    try:
+        tg_id_int = int(raw_id)
+    except (ValueError, TypeError):
+        return web.json_response({"error": "Некоректний telegram_id"}, status=400, headers=CORS_HEADERS)
+
+    first_name = data.get("first_name", "")
+    last_name = data.get("last_name", "")
+    full_name = f"{first_name} {last_name}".strip() or "Клієнт"
+    username = data.get("username", "")
+    photo_url = data.get("photo_url", "")
+
+    async with aiosqlite.connect(DB_PATH) as db:
+        db.row_factory = aiosqlite.Row
+        async with db.execute("SELECT * FROM users WHERE telegram_id = ?", (tg_id_int,)) as cur:
+            u_row = await cur.fetchone()
+
+        if u_row:
+            u_dict = dict(u_row)
+            phone = u_dict.get("phone_number") or ""
+            need_phone = not bool(phone and len(re.sub(r"\D", "", phone)) >= 9)
+            user_payload = {
+                "id": tg_id_int,
+                "login": u_dict.get("username") or username or f"id{tg_id_int}",
+                "name": u_dict.get("full_name") or full_name,
+                "first_name": u_dict.get("first_name") or first_name or "Клієнт",
+                "username": u_dict.get("username") or username,
+                "phone": phone,
+                "photo_url": photo_url,
+                "bonus_balance": u_dict.get("bonus_balance", 0)
+            }
+        else:
+            now_str = get_kyiv_now().strftime("%Y-%m-%d %H:%M:%S")
+            await db.execute(
+                "INSERT INTO users (telegram_id, username, full_name, first_name, date_registered, bonus_balance) VALUES (?, ?, ?, ?, ?, 0.0)",
+                (tg_id_int, username, full_name, first_name, now_str)
+            )
+            await db.commit()
+            need_phone = True
+            user_payload = {
+                "id": tg_id_int,
+                "login": username or f"id{tg_id_int}",
+                "name": full_name,
+                "first_name": first_name or "Клієнт",
+                "username": username,
+                "phone": "",
+                "photo_url": photo_url,
+                "bonus_balance": 0.0
+            }
+
+    return web.json_response({
+        "status": "ok",
+        "user": user_payload,
+        "need_phone": need_phone
+    }, headers=CORS_HEADERS)
+
+
+async def api_link_phone(request):
+    try:
+        data = await request.json()
+    except Exception:
+        return web.json_response({"error": "Некоректні дані"}, status=400, headers=CORS_HEADERS)
+
+    telegram_id = data.get("telegram_id")
+    login = data.get("login")
+    phone = str(data.get("phone", "")).strip()
+    clean_digits = re.sub(r"\D", "", phone)
+
+    if len(clean_digits) < 9:
+        return web.json_response({"error": "Вкажіть коректний номер телефону (щонайменше 9 цифр)"}, status=400, headers=CORS_HEADERS)
+
+    async with aiosqlite.connect(DB_PATH) as db:
+        if telegram_id:
+            try:
+                tg_id_int = int(telegram_id)
+                await db.execute("UPDATE users SET phone_number = ? WHERE telegram_id = ?", (phone, tg_id_int))
+                await db.commit()
+            except (ValueError, TypeError):
+                pass
+        elif login:
+            await db.execute("UPDATE users SET phone_number = ? WHERE username = ?", (phone, str(login)))
+            await db.commit()
+
+    await export_rentals_json()
+    return web.json_response({"status": "ok", "phone": phone}, headers=CORS_HEADERS)
+
+
+async def api_auth_google(request):
+    try:
+        data = await request.json()
+    except Exception:
+        return web.json_response({"error": "Некоректні дані"}, status=400, headers=CORS_HEADERS)
+
+    id_token_str = data.get("id_token") or data.get("credential")
+    if not id_token_str:
+        return web.json_response({"error": "Відсутній Google токен"}, status=400, headers=CORS_HEADERS)
+
+    email = ""
+    name = "Клієнт"
+    first_name = "Клієнт"
+    sub = ""
+
+    try:
+        from google.oauth2 import id_token
+        from google.auth.transport import requests as google_requests
+        idinfo = id_token.verify_oauth2_token(id_token_str, google_requests.Request())
+        email = idinfo.get("email", "")
+        name = idinfo.get("name") or idinfo.get("given_name", "Клієнт")
+        first_name = idinfo.get("given_name", name)
+        sub = idinfo.get("sub", "")
+    except Exception:
+        try:
+            async with aiohttp.ClientSession() as session:
+                async with session.get(f"https://oauth2.googleapis.com/tokeninfo?id_token={id_token_str}") as resp:
+                    if resp.status == 200:
+                        idinfo = await resp.json()
+                        email = idinfo.get("email", "")
+                        name = idinfo.get("name", "Клієнт")
+                        first_name = idinfo.get("given_name", name)
+                        sub = idinfo.get("sub", "")
+                    else:
+                        return web.json_response({"error": "Недійсний Google токен"}, status=401, headers=CORS_HEADERS)
+        except Exception:
+            return web.json_response({"error": "Помилка перевірки Google токена"}, status=401, headers=CORS_HEADERS)
+
+    phone = ""
+    bonus_balance = 0.0
+    async with aiosqlite.connect(DB_PATH) as db:
+        db.row_factory = aiosqlite.Row
+        username_candidate = email.split("@")[0] if email else f"g_{sub}"
+        async with db.execute("SELECT * FROM users WHERE username = ?", (username_candidate,)) as cur:
+            u_row = await cur.fetchone()
+        if u_row:
+            u_dict = dict(u_row)
+            phone = u_dict.get("phone_number") or ""
+            bonus_balance = u_dict.get("bonus_balance", 0.0)
+
+    need_phone = not bool(phone and len(re.sub(r"\D", "", phone)) >= 9)
+    user_payload = {
+        "id": email or sub,
+        "login": email.split("@")[0] if email else "GoogleUser",
+        "name": name,
+        "first_name": first_name,
+        "email": email,
+        "phone": phone,
+        "bonus_balance": bonus_balance,
+        "auth_provider": "google"
+    }
+
+    return web.json_response({
+        "status": "ok",
+        "user": user_payload,
+        "need_phone": need_phone
+    }, headers=CORS_HEADERS)
+
+
 async def api_franchise_lead(request):
     try:
         data = await request.json()
@@ -7019,6 +7210,9 @@ async def api_user_profile(request):
 async def start_web_server():
     app = web.Application()
     app.router.add_route("OPTIONS", "/{tail:.*}", handle_options)
+    app.router.add_post("/api/auth/telegram", api_auth_telegram)
+    app.router.add_post("/api/auth/google", api_auth_google)
+    app.router.add_post("/api/auth/link-phone", api_link_phone)
     app.router.add_post("/api/franchise/lead", api_franchise_lead)
     app.router.add_get("/api/user/profile", api_user_profile)
 
