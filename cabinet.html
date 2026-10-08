@@ -9,6 +9,19 @@
     <meta name="description"
         content="Особистий кабінет клієнта сервісу прокату електротранспорту MUVIO. Перевірка активної оренди, історії оплат та ремонтів.">
 
+    <!-- Якщо користувач не увійшов — негайне перенаправлення на auth.html -->
+    <script>
+        (function () {
+            try {
+                var active = localStorage.getItem('muvio_active_user');
+                var saved = localStorage.getItem('muvio_user');
+                if (!active && !saved) {
+                    window.location.replace('auth.html');
+                }
+            } catch (e) {}
+        })();
+    </script>
+
     <!-- Native System Fonts: Apple System / SF Pro Display / Segoe UI -->
 
     <!-- Tailwind CSS CDN -->
@@ -939,7 +952,7 @@
 
         <!-- ПРАВИЙ БЛОК УПРАВЛІННЯ -->
         <div class="header-right">
-            <a href="cabinet.html" class="header-user-btn" id="header-user-btn" title="Особистий кабінет" aria-label="Особистий кабінет">
+            <a href="auth.html" class="header-user-btn" id="header-user-btn" title="Особистий кабінет" aria-label="Особистий кабінет">
                 <svg xmlns="http://www.w3.org/2000/svg" style="width: 15px !important; height: 15px !important; flex-shrink: 0;"
                     fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -1014,7 +1027,7 @@
     </header>
 
     <!-- ==================== СТАН А: ЕКРАН АВТОРИЗАЦІЇ (TESLA AUTH) ==================== -->
-    <div id="authSection" class="min-h-[calc(100vh-46px)] flex flex-col bg-white dark:bg-[#0B0E0C] text-zinc-900 dark:text-white transition-colors duration-200 relative justify-between">
+    <div id="authSection" class="hidden min-h-[calc(100vh-46px)] flex flex-col bg-white dark:bg-[#0B0E0C] text-zinc-900 dark:text-white transition-colors duration-200 relative justify-between">
 
         <!-- 2. Центральний контейнер форми (mx-auto w-full max-w-[360px] px-4 pt-4 sm:pt-6 pb-6 my-auto) -->
         <main class="mx-auto w-full max-w-[360px] px-4 pt-4 sm:pt-6 pb-6 my-auto">
@@ -2452,27 +2465,22 @@
 
         // Керування станом відображення: Авторизація (Tesla Auth) vs Особистий кабінет
         function setCabinetViewState(isAuth) {
+            if (isAuth) {
+                window.location.replace('auth.html');
+                return;
+            }
             const authSection = document.getElementById('authSection');
             const profileSection = document.getElementById('profileSection');
             const mainHeader = document.getElementById('mainSiteHeader');
             const cabinetContainer = document.getElementById('cabinetMainContainer');
             const mainFooter = document.getElementById('mainSiteFooter');
 
-            if (isAuth) {
-                if (authSection) authSection.classList.remove('hidden');
-                if (profileSection) profileSection.classList.add('hidden');
-                if (mainHeader) mainHeader.classList.add('hidden');
-                if (cabinetContainer) cabinetContainer.classList.add('hidden');
-                if (mainFooter) mainFooter.classList.add('hidden');
-                document.body.classList.add('auth-mode');
-            } else {
-                if (authSection) authSection.classList.add('hidden');
-                if (profileSection) profileSection.classList.remove('hidden');
-                if (mainHeader) mainHeader.classList.remove('hidden');
-                if (cabinetContainer) cabinetContainer.classList.remove('hidden');
-                if (mainFooter) mainFooter.classList.remove('hidden');
-                document.body.classList.remove('auth-mode');
-            }
+            if (authSection) authSection.classList.add('hidden');
+            if (profileSection) profileSection.classList.remove('hidden');
+            if (mainHeader) mainHeader.classList.remove('hidden');
+            if (cabinetContainer) cabinetContainer.classList.remove('hidden');
+            if (mainFooter) mainFooter.classList.remove('hidden');
+            document.body.classList.remove('auth-mode');
             updateAuthLangUI();
         }
 
@@ -3238,9 +3246,7 @@
             localStorage.removeItem('muvio_user');
             currentUser = null;
             currentProfileData = null;
-            setCabinetViewState(true);
-            switchAuthTab('login');
-            if (window.lucide) window.lucide.createIcons();
+            window.location.href = 'auth.html';
         }
 
         // 6. Перемикання вкладок історії
@@ -3495,8 +3501,8 @@
                     logoutUser();
                 }
             } else {
-                setCabinetViewState(true);
-                switchAuthTab('login');
+                window.location.replace('auth.html');
+                return;
             }
 
             // Мобільне меню

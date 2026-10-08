@@ -714,27 +714,39 @@
         const settings = getSiteSettings();
         const defaultLoginText = (settings.lang === 'en') ? 'LOGIN' : 'ВХІД';
         let displayName = defaultLoginText;
-        if (nameOverride && typeof nameOverride === 'string') {
+        let isLoggedIn = false;
+        if (nameOverride && typeof nameOverride === 'string' && nameOverride.trim()) {
             displayName = nameOverride.trim().toUpperCase() || defaultLoginText;
+            isLoggedIn = true;
         } else {
             try {
                 const activeSaved = localStorage.getItem('muvio_active_user');
                 if (activeSaved) {
                     const active = JSON.parse(activeSaved);
                     const login = (active.login || '').trim();
-                    if (login) displayName = login.toUpperCase();
+                    if (login) {
+                        displayName = login.toUpperCase();
+                        isLoggedIn = true;
+                    }
                 } else {
                     const saved = localStorage.getItem('muvio_user');
                     if (saved) {
                         const u = JSON.parse(saved);
                         const n = (u.login || u.name || u.first_name || u.username || '').trim();
-                        if (n) displayName = n.toUpperCase();
+                        if (n) {
+                            displayName = n.toUpperCase();
+                            isLoggedIn = true;
+                        }
                     }
                 }
             } catch (e) {}
         }
         els.forEach(el => {
             el.textContent = displayName;
+        });
+        const btns = document.querySelectorAll('.header-user-btn, #header-user-btn');
+        btns.forEach(btn => {
+            btn.setAttribute('href', isLoggedIn ? 'cabinet.html' : 'auth.html');
         });
     }
 

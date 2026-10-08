@@ -318,7 +318,7 @@
 
         <!-- ПРАВИЙ БЛОК УПРАВЛІННЯ -->
         <div class="header-right">
-            <a href="cabinet.html" class="header-user-btn" id="header-user-btn" title="Особистий кабінет" aria-label="Особистий кабінет">
+            <a href="auth.html" class="header-user-btn" id="header-user-btn" title="Особистий кабінет" aria-label="Особистий кабінет">
                 <svg xmlns="http://www.w3.org/2000/svg" style="width: 15px !important; height: 15px !important; flex-shrink: 0;"
                     fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -1302,6 +1302,10 @@
                 } else {
                     el.innerHTML = '<span class="lang-ua">ВХІД</span><span class="lang-en">LOGIN</span>';
                 }
+            });
+            const btns = document.querySelectorAll('.header-user-btn, #header-user-btn');
+            btns.forEach(btn => {
+                btn.setAttribute('href', activeName ? 'cabinet.html' : 'auth.html');
             });
         }
         window.addEventListener('storage', updateHeaderUserName);
