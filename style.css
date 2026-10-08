@@ -1187,20 +1187,21 @@ html:not(.theme-dark) .calc-tesla-container,
     padding-top: 100px !important;
 }
 
-/* Vehicle Preview Box (Full-width Banner) */
+/* Vehicle Preview Box (Vertical Portrait 3:4) */
 .calc-preview,
 .calculator-image-box,
 .calc-preview-box {
-    width: 100% !important;
-    height: 270px !important;
-    border-radius: 16px !important;
+    width: 210px !important;
+    height: 290px !important;
+    border-radius: 14px !important;
     overflow: hidden !important;
     position: relative !important;
     padding: 0 !important;
-    margin-bottom: 0.75rem !important;
+    margin: 0 !important;
     background: #000000 !important;
     border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35) !important;
+    flex-shrink: 0 !important;
 }
 
 .calc-preview img,
@@ -1210,10 +1211,20 @@ html:not(.theme-dark) .calc-tesla-container,
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
-    object-position: center 35% !important;
+    object-position: center !important;
     display: block !important;
     max-width: none !important;
     max-height: none !important;
+}
+
+@media (max-width: 640px) {
+    .calc-preview,
+    .calculator-image-box,
+    .calc-preview-box {
+        width: 210px !important;
+        height: 280px !important;
+        margin: 0 auto !important;
+    }
 }
 
 html:not(.dark) .calc-preview,
