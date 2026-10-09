@@ -4,24 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0F1411">
-    <title>Вхід — MUVIO | Особистий кабінет</title>
-    <meta name="description" content="Авторизація клієнта сервісу оренди електротранспорту MUVIO.">
+    <meta name="theme-color" content="#080A0C">
+    <title>Вхід та Реєстрація — MUVIO | Особистий кабінет</title>
+    <meta name="description" content="Авторизація та реєстрація клієнта сервісу оренди електротранспорту MUVIO.">
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
-            darkMode: ['class', '.theme-dark'],
+            darkMode: ['class', '.dark'],
             theme: {
                 extend: {
                     colors: {
-                        primary: '#1D5D3B',
+                        primary: '#1AB370',
                         muvio: {
-                            green: '#1D5D3B',
-                            hover: '#24754A',
+                            green: '#1AB370',
+                            hover: '#169B60',
                             forest: '#123824',
-                            dark: '#111827'
+                            dark: '#080A0C'
                         }
                     },
                     fontFamily: {
@@ -36,627 +36,491 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- Google Identity Services & Telegram Widget -->
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <script async src="https://telegram.org/js/telegram-widget.js?22"></script>
-
     <!-- Global Styles & Dark Theme -->
-    <link rel="stylesheet" href="./style.css?v=3.7">
-    <link rel="stylesheet" href="./dark-theme.css?v=3.0">
+    <link rel="stylesheet" href="./style.css?v=3.8">
+    <link rel="stylesheet" href="./dark-theme.css?v=3.1">
 
     <style>
+        /* 1. БАЗОВА ПІДКЛАДКА */
         body {
-            background-color: #FFFFFF;
+            background-color: #F8FAFC;
+            color: #0F172A;
             transition: background-color 0.2s ease, color 0.2s ease;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* 1. ДИНАМИЧЕСКИЙ ЦВЕТ ЛОГОТИПА MUVIO */
-        /* В светлой теме (html:not(.dark)) */
-        .header-logo,
-        .logo-text,
-        a.logo {
-            color: #1AB370 !important;
-        }
-        .header-logo img,
-        .logo img,
-        .header-logo-img {
-            filter: none !important;
-        }
-        .muvio-logo-mark {
-            fill: #1AB370 !important;
-            transition: fill 0.2s ease;
-        }
-        .muvio-logo-letters {
-            fill: #111827 !important;
-            transition: fill 0.2s ease;
-        }
-
-        /* В темной теме */
-        html.dark .header-logo,
-        html.dark .logo-text,
-        html.dark a.logo,
-        html.theme-dark .header-logo,
-        html.theme-dark .logo-text,
-        html.theme-dark a.logo,
-        [data-theme="dark"] .header-logo,
-        [data-theme="dark"] .logo-text,
-        [data-theme="dark"] a.logo {
-            color: #FFFFFF !important;
-        }
-        html.dark .logo img,
-        html.dark .header-logo img,
-        html.dark .header-logo-img,
-        html.dark header img,
-        html.theme-dark .logo img,
-        html.theme-dark .header-logo img,
-        html.theme-dark .header-logo-img,
-        html.theme-dark header img,
-        [data-theme="dark"] .logo img,
-        [data-theme="dark"] .header-logo img,
-        [data-theme="dark"] .header-logo-img {
-            filter: brightness(0) invert(1) !important; /* Делает логотип чисто белым в dark mode */
-        }
-        html.dark .muvio-logo-mark,
-        html.theme-dark .muvio-logo-mark,
-        .dark .muvio-logo-mark,
-        .theme-dark .muvio-logo-mark,
-        [data-theme="dark"] .muvio-logo-mark,
-        html.dark .muvio-logo-letters,
-        html.theme-dark .muvio-logo-letters,
-        .dark .muvio-logo-letters,
-        .theme-dark .muvio-logo-letters,
-        [data-theme="dark"] .muvio-logo-letters {
-            fill: #FFFFFF !important;
-        }
-
-        /* 2. МОНОЛИТНЫЙ ЧЕРНЫЙ ФОН СТРАНИЦЫ АВТОРИЗАЦИИ (AUTH.HTML) */
+        /* 2. ТЕМНА ТЕМА: ГЛИБОКИЙ ФОН #080A0C */
         html.dark,
-        html.theme-dark,
         html.dark body,
+        html.theme-dark,
         html.theme-dark body,
         body.dark,
-        body.theme-dark,
         [data-theme="dark"] body {
             background-color: #080A0C !important;
             background: #080A0C !important;
             color: #FFFFFF !important;
         }
 
-        html.dark header,
-        html.theme-dark header,
+        /* 3. ШАПКА ТА ЛОГОТИП */
+        .site-header-synced {
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+        html:not(.dark) .site-header-synced {
+            background-color: #FFFFFF !important;
+            border-bottom: 1px solid #E2E8F0 !important;
+        }
         html.dark .site-header-synced,
         html.theme-dark .site-header-synced,
         [data-theme="dark"] .site-header-synced {
             background-color: #080A0C !important;
-            background: #080A0C !important;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
         }
 
-        html.dark #mobile-menu,
-        html.theme-dark #mobile-menu {
-            background-color: #080A0C !important;
-            background: #080A0C !important;
-            border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+        /* Світла тема: зелений логотип MUVIO */
+        html:not(.dark) .header-logo-text,
+        html:not(.dark) .logo-text,
+        html:not(.dark) a.header-logo span {
+            color: #1AB370 !important;
+        }
+        html:not(.dark) .header-logo-img {
+            filter: none !important;
         }
 
-        /* Поля ввода и карточка */
+        /* Темна тема: чисто білий контрастний логотип MUVIO */
+        html.dark .header-logo-text,
+        html.dark .logo-text,
+        html.dark a.header-logo span,
+        html.theme-dark .header-logo-text,
+        [data-theme="dark"] .header-logo-text {
+            color: #FFFFFF !important;
+        }
+        html.dark .header-logo-img,
+        html.theme-dark .header-logo-img,
+        [data-theme="dark"] .header-logo-img {
+            filter: brightness(0) invert(1) !important;
+        }
+
+        /* 4. СТИЛІЗАЦІЯ ІНПУТІВ */
         .auth-input-tesla {
-            background-color: #f4f4f5 !important;
-            border: 1px solid #e4e4e7 !important;
-            border-radius: 6px !important;
-            padding: 10px 14px !important;
-            font-size: 14px !important;
-            color: #18181b !important;
-            transition: all 0.15s ease-in-out !important;
+            border-radius: 8px !important;
+            transition: all 0.2s ease-in-out !important;
         }
-        .auth-input-tesla:focus {
-            outline: none !important;
+        html:not(.dark) .auth-input-tesla {
+            background-color: #FFFFFF !important;
+            border: 1px solid #CBD5E1 !important;
+            color: #0F172A !important;
+        }
+        html:not(.dark) .auth-input-tesla::placeholder {
+            color: #94A3B8 !important;
+        }
+        html:not(.dark) .auth-input-tesla:focus {
             border-color: #1AB370 !important;
-            box-shadow: 0 0 0 1px #1AB370 !important;
-            background-color: #ffffff !important;
+            box-shadow: 0 0 0 3px rgba(26, 179, 112, 0.15) !important;
         }
+
         html.dark .auth-input-tesla,
         html.theme-dark .auth-input-tesla,
-        body.dark .auth-input-tesla,
-        body.theme-dark .auth-input-tesla,
         [data-theme="dark"] .auth-input-tesla {
             background-color: #0D1114 !important;
             border: 1px solid rgba(255, 255, 255, 0.1) !important;
-            color: #ffffff !important;
-        }
-        html.dark .auth-input-tesla:focus,
-        html.theme-dark .auth-input-tesla:focus,
-        body.dark .auth-input-tesla:focus,
-        body.theme-dark .auth-input-tesla:focus,
-        [data-theme="dark"] .auth-input-tesla:focus {
-            outline: none !important;
-            border-color: #1AB370 !important;
-            box-shadow: 0 0 0 1px #1AB370 !important;
-            background-color: #11161B !important;
+            color: #FFFFFF !important;
         }
         html.dark .auth-input-tesla::placeholder,
         html.theme-dark .auth-input-tesla::placeholder {
-            color: rgba(255, 255, 255, 0.35) !important;
+            color: #64748B !important;
+        }
+        html.dark .auth-input-tesla:focus,
+        html.theme-dark .auth-input-tesla:focus {
+            border-color: #1AB370 !important;
+            box-shadow: 0 0 0 3px rgba(26, 179, 112, 0.25) !important;
         }
 
-        /* Переключатель табов */
-        html.dark .auth-tabs-wrap,
-        html.theme-dark .auth-tabs-wrap {
-            background-color: #0D1114 !important;
-            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        /* 5. КНОПКА GOOGLE */
+        .btn-google-auth {
+            transition: all 0.2s ease !important;
         }
-
-        /* Разделитель "Або" */
-        html.dark .auth-divider-text,
-        html.theme-dark .auth-divider-text {
-            background-color: #080A0C !important;
-            color: #9CA3AF !important;
+        html:not(.dark) .btn-google-auth {
+            background-color: #FFFFFF !important;
+            border: 1px solid #CBD5E1 !important;
+            color: #0F172A !important;
         }
-
-        /* Вторичные и социальные кнопки */
-        html.dark .auth-btn-secondary,
-        html.theme-dark .auth-btn-secondary {
+        html:not(.dark) .btn-google-auth:hover {
+            background-color: #F8FAFC !important;
+            border-color: #94A3B8 !important;
+        }
+        html.dark .btn-google-auth,
+        html.theme-dark .btn-google-auth,
+        [data-theme="dark"] .btn-google-auth {
             background-color: #0D1114 !important;
             border: 1px solid rgba(255, 255, 255, 0.1) !important;
-            color: #f4f4f5 !important;
+            color: #F1F5F9 !important;
         }
-        html.dark .auth-btn-secondary:hover,
-        html.theme-dark .auth-btn-secondary:hover {
+        html.dark .btn-google-auth:hover,
+        html.theme-dark .btn-google-auth:hover {
             background-color: #151C22 !important;
+            border-color: rgba(255, 255, 255, 0.2) !important;
         }
 
-        html.dark #loginGoogleBtn,
-        html.dark #loginTelegramBtn,
-        html.dark #regGoogleBtn,
-        html.dark #regTelegramBtn,
-        html.theme-dark #loginGoogleBtn,
-        html.theme-dark #loginTelegramBtn,
-        html.theme-dark #regGoogleBtn,
-        html.theme-dark #regTelegramBtn {
-            background-color: #0D1114 !important;
-            border: 1px solid rgba(255, 255, 255, 0.1) !important;
-            color: #E5E7EB !important;
+        /* 6. КАРТКА ФОРМИ */
+        .auth-card {
+            transition: all 0.2s ease;
         }
-        html.dark #loginGoogleBtn:hover,
-        html.dark #loginTelegramBtn:hover,
-        html.dark #regGoogleBtn:hover,
-        html.dark #regTelegramBtn:hover,
-        html.theme-dark #loginGoogleBtn:hover,
-        html.theme-dark #loginTelegramBtn:hover,
-        html.theme-dark #regGoogleBtn:hover,
-        html.theme-dark #regTelegramBtn:hover {
-            background-color: #151C22 !important;
-            border-color: rgba(255, 255, 255, 0.18) !important;
+        html:not(.dark) .auth-card {
+            background-color: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.03);
+        }
+        html.dark .auth-card,
+        html.theme-dark .auth-card,
+        [data-theme="dark"] .auth-card {
+            background-color: #0B0E11;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
         }
 
-        /* Модальные окна и тосты */
-        html.dark #linkPhoneModal > div,
-        html.dark #resetPasswordModal > div,
-        html.theme-dark #linkPhoneModal > div,
-        html.theme-dark #resetPasswordModal > div {
-            background-color: #080A0C !important;
-            border: 1px solid rgba(255, 255, 255, 0.1) !important;
-            color: #ffffff !important;
-        }
-        html.dark #resetStep2Form > div,
-        html.theme-dark #resetStep2Form > div {
-            background-color: #0D1114 !important;
-            border: 1px solid rgba(255, 255, 255, 0.08) !important;
-            color: #D1D5DB !important;
-        }
-        html.dark #smsToast > div,
-        html.theme-dark #smsToast > div {
-            background-color: #080A0C !important;
-            border: 1px solid rgba(255, 255, 255, 0.12) !important;
-        }
-
-        /* Unified Synced Site Header */
-        .site-header-synced {
-            padding: 24px 48px !important;
-            width: 100% !important;
-            box-sizing: border-box !important;
-        }
-        @media (max-width: 1024px) {
-            .site-header-synced {
-                padding: 24px 32px !important;
-            }
-        }
-        @media (max-width: 640px) {
-            .site-header-synced {
-                padding: 16px 20px !important;
-            }
-        }
-
-        .muvio-logo-svg {
-            height: 40px !important;
-            width: auto !important;
-            display: block !important;
+        /* Перемикач мови та теми */
+        .header-action-btn,
+        .theme-toggle-btn,
+        .lang-btn {
+            cursor: pointer;
+            user-select: none;
         }
     </style>
 
-
-
-
-    <!-- Google Font Tektur -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tektur:wght@700;800;900&display=swap" rel="stylesheet">
-
-    <!-- Custom Theme & Settings Engine -->
-    <script src="./theme-settings.js?v=3.0"></script>
+    <script>
+        // Превентивне встановлення теми без миготіння
+        (function() {
+            try {
+                const s = localStorage.getItem('muvio_site_settings');
+                const parsed = s ? JSON.parse(s) : null;
+                const savedTheme = parsed && parsed.theme ? parsed.theme : localStorage.getItem('muvio_theme');
+                if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark', 'theme-dark');
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark', 'theme-dark');
+                    document.documentElement.setAttribute('data-theme', 'light');
+                }
+            } catch (e) {}
+        })();
+    </script>
 </head>
 
-<body class="min-h-screen flex flex-col text-zinc-900 dark:text-white antialiased selection:bg-[#1D5D3B] selection:text-white">
+<body class="font-sans antialiased selection:bg-[#1AB370] selection:text-white">
 
-    <!-- 1. ХЕДЕР (НАВІГАЦІЯ) -->
+    <!-- ==================== 1. ХЕДЕР (НАВІГАЦІЯ) ==================== -->
     <header class="site-header-synced header w-full"
-        style="width: 100% !important; max-width: 100vw !important; position: sticky !important; top: 0 !important; left: 0 !important; z-index: 100 !important; height: 46px !important; min-height: 46px !important; max-height: 46px !important; padding: 0 24px !important; padding-left: 24px !important; padding-right: 24px !important; overflow: visible !important; display: flex !important; align-items: center !important; justify-content: space-between !important; box-sizing: border-box !important;">
+        style="width: 100% !important; max-width: 100vw !important; position: sticky !important; top: 0 !important; left: 0 !important; z-index: 100 !important; height: 46px !important; min-height: 46px !important; max-height: 46px !important; padding: 0 24px !important; overflow: visible !important; display: flex !important; align-items: center !important; justify-content: space-between !important; box-sizing: border-box !important;">
 
-        <!-- ЛІВА ЧАСТИНА: Бургер (для мобільних) + Чистий прозорий SVG-логотип MUVIO -->
+        <!-- ЛІВА ЧАСТИНА: Бургер + Логотип MUVIO -->
         <div class="flex items-center gap-3 shrink-0 z-10" style="margin: 0 !important; padding: 0 !important; height: 100% !important;">
-            <!-- Кнопка-бургер (#burger-btn) для мобільних екранів -->
             <button id="burger-btn" data-burger="true" type="button" aria-label="Меню"
-                class="header-action-btn md:hidden flex items-center justify-center w-8 h-8 p-1 text-[#1D5D3B] hover:text-[#16472d] dark:text-[#2E8B57] dark:hover:text-emerald-400 transition-colors focus:outline-none"
+                class="header-action-btn md:hidden flex items-center justify-center w-8 h-8 p-1 text-zinc-600 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-white transition-colors focus:outline-none"
                 style="background: transparent !important; border: none !important;">
-                <svg class="w-5 h-5 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round">
+                <svg class="w-5 h-5 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="3" y1="6" x2="21" y2="6"></line>
                     <line x1="3" y1="12" x2="21" y2="12"></line>
                     <line x1="3" y1="18" x2="21" y2="18"></line>
                 </svg>
             </button>
 
-            <!-- Логотип MUVIO (растровый PNG, крайнее левое положение) -->
-            <a href="index.html"
-                style="display: inline-flex !important; align-items: center !important; text-decoration: none !important; background: transparent !important;"
-                class="group focus:outline-none header-logo logo" aria-label="MUVIO">
-                <img src="images/logo-header-trans.png" alt="MUVIO"
-                    style="height: 28px !important; width: auto !important; display: block !important; transition: opacity 0.2s; background: transparent !important;"
-                    class="header-logo-img group-hover:opacity-90" />
+            <a href="index.html" class="header-logo logo group focus:outline-none flex items-center gap-2" aria-label="MUVIO">
+                <img src="images/logo-header-trans.png" alt="MUVIO" class="header-logo-img h-6 w-auto object-contain transition-all duration-300">
+                <span class="header-logo-text font-brand font-extrabold text-lg tracking-wider transition-colors">MUVIO</span>
             </a>
         </div>
 
-        <!-- ЦЕНТРАЛЬНЕ МЕНЮ: Строго по центру шапки -->
-        <nav class="hidden md:flex items-center gap-7 lg:gap-8 absolute left-1/2 -translate-x-1/2" style="display: flex; align-items: center; margin: 0 !important; padding: 0 !important; top: 0 !important; bottom: 0 !important; height: 100% !important;">
-            <a href="catalog.html"
-                style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important;"
-                class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2 font-semibold">
+        <!-- ЦЕНТРАЛЬНА ЧАСТИНА: Прямі посилання -->
+        <nav class="hidden md:flex items-center gap-6 lg:gap-8 header-center-nav z-10">
+            <a href="catalog.html" class="header-nav-link text-xs font-semibold tracking-wider uppercase text-zinc-700 dark:text-zinc-200 hover:text-[#1AB370] dark:hover:text-[#1AB370] transition-colors py-1 px-2">
                 <span class="lang-ua">ОРЕНДА</span>
                 <span class="lang-en">RENT</span>
             </a>
-            <a href="accessories.html"
-                style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important;"
-                class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2 font-semibold">
+            <a href="accessories.html" class="header-nav-link text-xs font-semibold tracking-wider uppercase text-zinc-700 dark:text-zinc-200 hover:text-[#1AB370] dark:hover:text-[#1AB370] transition-colors py-1 px-2">
                 <span class="lang-ua">АКСЕСУАРИ</span>
                 <span class="lang-en">ACCESSORIES</span>
             </a>
-            <a href="calculator.html"
-                style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important;"
-                class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2 font-semibold">
+            <a href="calculator.html" class="header-nav-link text-xs font-semibold tracking-wider uppercase text-zinc-700 dark:text-zinc-200 hover:text-[#1AB370] dark:hover:text-[#1AB370] transition-colors py-1 px-2">
                 <span class="lang-ua">КАЛЬКУЛЯТОР</span>
                 <span class="lang-en">CALCULATOR</span>
             </a>
-            <a href="service.html"
-                style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important;"
-                class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2 font-semibold">
+            <a href="service.html" class="header-nav-link text-xs font-semibold tracking-wider uppercase text-zinc-700 dark:text-zinc-200 hover:text-[#1AB370] dark:hover:text-[#1AB370] transition-colors py-1 px-2">
                 <span class="lang-ua">СЕРВІС</span>
                 <span class="lang-en">SERVICE</span>
             </a>
-            <a href="terms.html"
-                style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important;"
-                class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2 font-semibold">
+            <a href="terms.html" class="header-nav-link text-xs font-semibold tracking-wider uppercase text-zinc-700 dark:text-zinc-200 hover:text-[#1AB370] dark:hover:text-[#1AB370] transition-colors py-1 px-2">
                 <span class="lang-ua">УМОВИ ОРЕНДИ</span>
                 <span class="lang-en">TERMS</span>
             </a>
-            <a href="faq.html"
-                style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important;"
-                class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2 font-semibold">
+            <a href="faq.html" class="header-nav-link text-xs font-semibold tracking-wider uppercase text-zinc-700 dark:text-zinc-200 hover:text-[#1AB370] dark:hover:text-[#1AB370] transition-colors py-1 px-2">
                 <span>FAQ</span>
             </a>
         </nav>
 
-        <!-- ПРАВИЙ БЛОК УПРАВЛІННЯ -->
-        <div class="header-right">
-            <a href="auth.html" class="header-user-btn" id="header-user-btn" title="Особистий кабінет" aria-label="Особистий кабінет">
-                <svg xmlns="http://www.w3.org/2000/svg" style="width: 15px !important; height: 15px !important; flex-shrink: 0;"
-                    fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+        <!-- ПРАВИЙ БЛОК: Мова + Перемикач теми -->
+        <div class="header-right flex items-center gap-3 shrink-0 z-10">
+            <a href="auth.html" class="header-user-btn flex items-center gap-1.5 text-xs font-medium text-zinc-700 dark:text-zinc-200 hover:text-[#1AB370] transition-colors py-1 px-2.5 rounded-full border border-zinc-200 dark:border-white/10" id="header-user-btn" title="Особистий кабінет">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
-                <span id="header-user-name" class="header-user-name">MUVIO</span>
+                <span id="header-user-name" class="header-user-name font-mono font-semibold">КАБІНЕТ</span>
             </a>
-            <div class="lang-switch">
-                <button type="button" id="authLangUa" onclick="setSiteLanguage('ua')" class="lang-btn active">UA</button>
-                <span class="lang-divider">|</span>
-                <button type="button" id="authLangEn" onclick="setSiteLanguage('en')" class="lang-btn">EN</button>
+
+            <div class="lang-switch flex items-center gap-1 text-xs font-mono font-bold text-zinc-500 dark:text-zinc-400">
+                <button type="button" id="authLangUa" onclick="setSiteLanguage('ua')" class="lang-btn hover:text-[#1AB370] transition-colors active-lang">UA</button>
+                <span class="text-zinc-300 dark:text-zinc-700">|</span>
+                <button type="button" id="authLangEn" onclick="setSiteLanguage('en')" class="lang-btn hover:text-[#1AB370] transition-colors">EN</button>
             </div>
-            <button id="theme-toggle" class="theme-toggle-btn" type="button" onclick="toggleAuthTheme()" aria-label="Toggle theme">
-                <svg class="w-4 h-4 moon-icon block dark:hidden"
-                    style="width: 17px !important; height: 17px !important;" fill="none" stroke="currentColor"
-                    viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+
+            <button id="theme-toggle" class="theme-toggle-btn p-1.5 rounded-full text-zinc-600 dark:text-zinc-300 hover:text-[#1AB370] transition-colors" type="button" onclick="toggleAuthTheme()" aria-label="Toggle theme">
+                <svg class="w-4 h-4 moon-icon block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
                 </svg>
-                <svg class="w-4 h-4 sun-icon hidden dark:block text-yellow-400"
-                    style="width: 17px !important; height: 17px !important; color: #facc15 !important;" fill="none"
-                    stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                <svg class="w-4 h-4 sun-icon hidden dark:block text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                 </svg>
             </button>
         </div>
 
-        <!-- Mobile Drawer -->
+        <!-- Мобільне меню -->
         <div id="mobile-menu" data-mobile-menu="true"
-            class="hidden md:hidden absolute top-full left-0 w-full border-t-2 border-[#1D5D3B] bg-white dark:bg-[#0B0E0C] px-6 py-4 space-y-2 shadow-2xl transition-all duration-200 z-50">
-            <div class="flex items-center justify-between pb-2 mb-1 border-b border-slate-100 dark:border-[#1F2E26]">
+            class="hidden md:hidden absolute top-full left-0 w-full border-t-2 border-[#1AB370] bg-white dark:bg-[#080A0C] px-6 py-4 space-y-2 shadow-2xl transition-all duration-200 z-50">
+            <div class="flex items-center justify-between pb-2 mb-1 border-b border-slate-100 dark:border-white/10">
                 <span class="font-brand font-bold text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">
                     <span class="lang-ua">МЕНЮ НАВІГАЦІЇ</span>
                     <span class="lang-en">NAVIGATION MENU</span>
                 </span>
-                <button type="button" id="mobile-menu-close"
-                    class="p-1 text-slate-400 hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors"
-                    aria-label="Закрити меню">
-                    <svg class="w-5 h-5 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
+                <button type="button" id="mobile-menu-close" class="p-1 text-slate-400 hover:text-[#1AB370] transition-colors" aria-label="Закрити меню">
+                    <svg class="w-5 h-5 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <line x1="18" y1="6" x2="6" y2="18"></line>
                         <line x1="6" y1="6" x2="18" y2="18"></line>
                     </svg>
                 </button>
             </div>
-            <a href="catalog.html"
-                class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-[#111827] dark:text-zinc-200 hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] py-2 px-2 transition-colors rounded">
+            <a href="catalog.html" class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-zinc-900 dark:text-zinc-200 hover:text-[#1AB370] py-2 px-2 transition-colors rounded">
                 <span class="lang-ua">ОРЕНДА</span>
                 <span class="lang-en">RENT</span>
             </a>
-            <a href="accessories.html"
-                class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-[#111827] dark:text-zinc-200 hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] py-2 px-2 transition-colors rounded">
+            <a href="accessories.html" class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-zinc-900 dark:text-zinc-200 hover:text-[#1AB370] py-2 px-2 transition-colors rounded">
                 <span class="lang-ua">АКСЕСУАРИ</span>
                 <span class="lang-en">ACCESSORIES</span>
             </a>
-            <a href="calculator.html"
-                class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-[#111827] dark:text-zinc-200 hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] py-2 px-2 transition-colors rounded">
+            <a href="calculator.html" class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-zinc-900 dark:text-zinc-200 hover:text-[#1AB370] py-2 px-2 transition-colors rounded">
                 <span class="lang-ua">КАЛЬКУЛЯТОР</span>
                 <span class="lang-en">CALCULATOR</span>
             </a>
-            <a href="service.html"
-                class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-[#111827] dark:text-zinc-200 hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] py-2 px-2 transition-colors rounded">
+            <a href="service.html" class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-zinc-900 dark:text-zinc-200 hover:text-[#1AB370] py-2 px-2 transition-colors rounded">
                 <span class="lang-ua">СЕРВІС</span>
                 <span class="lang-en">SERVICE</span>
             </a>
-            <a href="terms.html"
-                class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-[#111827] dark:text-zinc-200 hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] py-2 px-2 transition-colors rounded">
+            <a href="terms.html" class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-zinc-900 dark:text-zinc-200 hover:text-[#1AB370] py-2 px-2 transition-colors rounded">
                 <span class="lang-ua">УМОВИ ОРЕНДИ</span>
                 <span class="lang-en">TERMS</span>
             </a>
-            <a href="faq.html"
-                class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-[#111827] dark:text-zinc-200 hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] py-2 px-2 transition-colors rounded font-bold">
+            <a href="faq.html" class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-zinc-900 dark:text-zinc-200 hover:text-[#1AB370] py-2 px-2 transition-colors rounded font-bold">
                 <span>FAQ</span>
             </a>
         </div>
     </header>
 
-    <!-- 2. ЦЕНТРАЛЬНИЙ КОНТЕЙНЕР ФОРМИ (mx-auto w-full max-w-[360px] px-4 pt-3 sm:pt-5 pb-16) -->
-    <main class="mx-auto w-full max-w-[360px] px-4 pt-3 sm:pt-5 pb-16">
-        <!-- ТАБИ: ВХІД / РЕЄСТРАЦІЯ -->
-        <div class="auth-tabs-wrap grid grid-cols-2 p-1 mb-5 bg-zinc-100 dark:bg-[#0D1114] border border-zinc-200 dark:border-white/10 rounded-lg select-none">
-            <button type="button" id="authTabLogin" onclick="switchAuthTab('login')"
-                class="py-2 text-xs font-semibold rounded-md transition-all text-zinc-900 dark:text-white bg-white dark:bg-[#182026] shadow-sm">
-                <span class="lang-ua">Вхід</span>
-                <span class="lang-en">Sign In</span>
-            </button>
-            <button type="button" id="authTabRegister" onclick="switchAuthTab('register')"
-                class="py-2 text-xs font-semibold rounded-md transition-all text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white">
-                <span class="lang-ua">Реєстрація</span>
-                <span class="lang-en">Registration</span>
-            </button>
-        </div>
+    <!-- ==================== 2. ГОЛОВНИЙ БЛОК АВТОРИЗАЦІЇ ТА РЕЄСТРАЦІЇ ==================== -->
+    <main class="flex-1 flex items-center justify-center px-4 py-10 sm:py-16">
+        <div class="auth-card w-full max-w-[400px] rounded-2xl p-6 sm:p-8">
 
-        <!-- Повідомлення про помилку -->
-        <div id="authErrorMsg" class="hidden p-3 mb-5 bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/60 text-rose-700 dark:text-rose-300 text-xs rounded-md flex items-center gap-2">
-            <i data-lucide="alert-circle" class="w-4 h-4 shrink-0"></i>
-            <span id="authErrorText"></span>
-        </div>
-
-        <!-- Повідомлення про успіх -->
-        <div id="authSuccessMsg" class="hidden p-3 mb-5 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-900/60 text-emerald-800 dark:text-emerald-300 text-xs rounded-md flex items-center gap-2">
-            <i data-lucide="check-circle-2" class="w-4 h-4 shrink-0"></i>
-            <span id="authSuccessText"></span>
-        </div>
-
-        <!-- ВХІД / SIGN IN -->
-        <div id="authLoginView">
-            <h1 class="text-[28px] leading-[1.2] font-semibold text-zinc-900 dark:text-white tracking-tight mb-5 text-left">
-                <span class="lang-ua">Вхід</span>
-                <span class="lang-en">Sign In</span>
-            </h1>
-
-            <form id="loginForm" onsubmit="event.preventDefault(); handleLoginSubmit(event);" class="space-y-4">
-                <div>
-                    <label for="loginIdentifier" class="text-xs font-semibold text-zinc-600 dark:text-zinc-400 mb-1.5 block text-left">
-                        <span class="lang-ua">Логін, телефон або email</span>
-                        <span class="lang-en">Username, phone or email</span>
-                    </label>
-                    <input type="text" id="loginIdentifier" required
-                        data-placeholder-ua="Введіть логін, телефон або email"
-                        data-placeholder-en="Enter username, phone or email"
-                        placeholder="Введіть логін, телефон або email"
-                        class="auth-input-tesla w-full bg-zinc-100 dark:bg-[#0D1114] border border-zinc-200 dark:border-white/10 rounded-md px-3.5 py-2.5 text-sm text-zinc-900 dark:text-white focus:outline-none focus:border-[#1AB370] focus:ring-1 focus:ring-[#1AB370] transition-all">
-                </div>
-
-                <div>
-                    <label for="loginPassword" class="text-xs font-semibold text-zinc-600 dark:text-zinc-400 mb-1.5 block text-left">
-                        <span class="lang-ua">Пароль</span>
-                        <span class="lang-en">Password</span>
-                    </label>
-                    <input type="password" id="loginPassword" required
-                        data-placeholder-ua="••••••••"
-                        data-placeholder-en="••••••••"
-                        placeholder="••••••••"
-                        class="auth-input-tesla w-full bg-zinc-100 dark:bg-[#0D1114] border border-zinc-200 dark:border-white/10 rounded-md px-3.5 py-2.5 text-sm text-zinc-900 dark:text-white focus:outline-none focus:border-[#1AB370] focus:ring-1 focus:ring-[#1AB370] transition-all">
-                </div>
-
-                <button type="submit" id="loginSubmitBtn"
-                    class="bg-[#1D5D3B] hover:bg-[#237248] text-white font-medium text-sm py-2.5 w-full rounded-md shadow-sm transition-all text-center mt-2 flex items-center justify-center">
-                    <span class="lang-ua">Увійти</span>
+            <!-- ТАБИ: ВХІД / РЕЄСТРАЦІЯ -->
+            <div class="auth-tabs-wrap grid grid-cols-2 p-1 mb-6 bg-zinc-100 dark:bg-[#12161A] border border-zinc-200 dark:border-white/10 rounded-xl select-none">
+                <button type="button" id="authTabLogin" onclick="switchAuthTab('login')"
+                    class="py-2.5 text-xs font-bold uppercase tracking-wider rounded-lg transition-all text-zinc-900 dark:text-white bg-white dark:bg-[#1C232B] shadow-sm">
+                    <span class="lang-ua">Вхід</span>
                     <span class="lang-en">Sign In</span>
                 </button>
-
-                <div class="text-center py-2">
-                    <button type="button" onclick="openResetPasswordModal()"
-                        class="text-xs text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200 underline transition-colors">
-                        <span class="lang-ua">Забули пароль?</span>
-                        <span class="lang-en">Forgot password?</span>
-                    </button>
-                </div>
-
-                <div class="relative my-4 text-center">
-                    <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-zinc-200 dark:border-white/10"></div></div>
-                    <span class="relative bg-white dark:bg-[#080A0C] px-3 text-xs text-zinc-400 font-medium auth-divider-text">
-                        <span class="lang-ua">Або</span>
-                        <span class="lang-en">Or</span>
-                    </span>
-                </div>
-
-                <!-- Соціальні кнопки: дві кнопки однакової ширини -->
-                <div class="space-y-2.5">
-                    <button type="button" id="loginGoogleBtn" onclick="loginWithGoogle()"
-                        class="w-full h-11 bg-white hover:bg-zinc-50 dark:bg-[#0D1114] dark:hover:bg-[#151C22] border border-zinc-200 dark:border-white/10 rounded-md text-xs font-semibold text-zinc-800 dark:text-zinc-200 flex items-center justify-center gap-2.5 transition-all shadow-sm">
-                        <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24">
-                            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
-                            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
-                        </svg>
-                        <span class="lang-ua">Продовжити з Google</span>
-                        <span class="lang-en">Continue with Google</span>
-                    </button>
-                    <button type="button" id="loginTelegramBtn" onclick="loginWithTelegram()"
-                        class="w-full h-11 bg-white hover:bg-zinc-50 dark:bg-[#0D1114] dark:hover:bg-[#151C22] border border-zinc-200 dark:border-white/10 rounded-md text-xs font-semibold text-zinc-800 dark:text-zinc-200 flex items-center justify-center gap-2.5 transition-all shadow-sm">
-                        <svg class="w-4 h-4 shrink-0 text-[#229ED9]" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
-                        </svg>
-                        <span class="lang-ua">Продовжити через Telegram</span>
-                        <span class="lang-en">Continue with Telegram</span>
-                    </button>
-                </div>
-
-                <button type="button" onclick="switchAuthTab('register')"
-                    class="auth-btn-secondary bg-zinc-100 hover:bg-zinc-200 dark:bg-[#0D1114] dark:hover:bg-[#151C22] text-zinc-900 dark:text-zinc-100 font-medium text-sm py-2.5 w-full rounded-md transition-all text-center mt-3 border border-zinc-200 dark:border-white/10">
-                    <span class="lang-ua">Створити акаунт</span>
-                    <span class="lang-en">Create Account</span>
+                <button type="button" id="authTabRegister" onclick="switchAuthTab('register')"
+                    class="py-2.5 text-xs font-bold uppercase tracking-wider rounded-lg transition-all text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white">
+                    <span class="lang-ua">Реєстрація</span>
+                    <span class="lang-en">Registration</span>
                 </button>
-            </form>
-        </div>
+            </div>
 
-        <!-- РЕЄСТРАЦІЯ / REGISTER -->
-        <div id="authRegisterView" class="hidden">
-            <h1 class="text-[28px] leading-[1.2] font-semibold text-zinc-900 dark:text-white tracking-tight mb-5 text-left">
-                <span class="lang-ua">Реєстрація</span>
-                <span class="lang-en">Registration</span>
-            </h1>
+            <!-- Сповіщення про помилку -->
+            <div id="authErrorMsg" class="hidden p-3 mb-5 bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/60 text-rose-700 dark:text-rose-300 text-xs rounded-lg flex items-center gap-2">
+                <i data-lucide="alert-circle" class="w-4 h-4 shrink-0"></i>
+                <span id="authErrorText"></span>
+            </div>
 
-            <form id="registerForm" onsubmit="event.preventDefault(); handleRegisterSubmit(event);" class="space-y-4">
-                <div>
-                    <label for="regName" class="text-xs font-semibold text-zinc-600 dark:text-zinc-400 mb-1.5 block text-left">
-                        <span class="lang-ua">Ім'я</span>
-                        <span class="lang-en">Full Name</span>
-                    </label>
-                    <input type="text" id="regName"
-                        data-placeholder-ua="Введіть ваше ім'я"
-                        data-placeholder-en="Enter your name"
-                        placeholder="Введіть ваше ім'я"
-                        class="auth-input-tesla w-full bg-zinc-100 dark:bg-[#0D1114] border border-zinc-200 dark:border-white/10 rounded-md px-3.5 py-2.5 text-sm text-zinc-900 dark:text-white focus:outline-none focus:border-[#1AB370] focus:ring-1 focus:ring-[#1AB370] transition-all">
-                </div>
+            <!-- Сповіщення про успіх -->
+            <div id="authSuccessMsg" class="hidden p-3 mb-5 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-900/60 text-emerald-800 dark:text-emerald-300 text-xs rounded-lg flex items-center gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 shrink-0"></i>
+                <span id="authSuccessText"></span>
+            </div>
 
-                <div>
-                    <label for="regPhone" class="text-xs font-semibold text-zinc-600 dark:text-zinc-400 mb-1.5 block text-left">
-                        <span class="lang-ua">Номер телефону <span class="text-rose-500">*</span></span>
-                        <span class="lang-en">Phone Number <span class="text-rose-500">*</span></span>
-                    </label>
-                    <input type="tel" id="regPhone" required
-                        data-placeholder-ua="+380 (XX) XXX-XX-XX"
-                        data-placeholder-en="+380 (XX) XXX-XX-XX"
-                        placeholder="+380 (XX) XXX-XX-XX"
-                        class="auth-input-tesla w-full bg-zinc-100 dark:bg-[#0D1114] border border-zinc-200 dark:border-white/10 rounded-md px-3.5 py-2.5 text-sm text-zinc-900 dark:text-white focus:outline-none focus:border-[#1AB370] focus:ring-1 focus:ring-[#1AB370] transition-all">
-                    <p class="text-[11px] text-zinc-500 dark:text-zinc-400 mt-1 leading-tight">
-                        <span class="lang-ua">Обов'язково: за номером телефону підтягується договір та техніка.</span>
-                        <span class="lang-en">Required: your contract and vehicle are matched by phone.</span>
-                    </p>
-                </div>
+            <!-- ==================== ТАБ 1: ВХІД ==================== -->
+            <div id="authLoginView">
+                <h1 class="text-2xl sm:text-[26px] font-extrabold text-zinc-900 dark:text-white tracking-tight mb-5 text-left">
+                    <span class="lang-ua">Вхід в кабінет</span>
+                    <span class="lang-en">Sign In to Cabinet</span>
+                </h1>
 
-                <div>
-                    <label for="regEmail" class="text-xs font-semibold text-zinc-600 dark:text-zinc-400 mb-1.5 block text-left">
-                        <span class="lang-ua">Email</span>
-                        <span class="lang-en">Email</span>
-                    </label>
-                    <input type="email" id="regEmail"
-                        data-placeholder-ua="name@example.com"
-                        data-placeholder-en="name@example.com"
-                        placeholder="name@example.com"
-                        class="auth-input-tesla w-full bg-zinc-100 dark:bg-[#0D1114] border border-zinc-200 dark:border-white/10 rounded-md px-3.5 py-2.5 text-sm text-zinc-900 dark:text-white focus:outline-none focus:border-[#1AB370] focus:ring-1 focus:ring-[#1AB370] transition-all">
-                </div>
+                <form id="loginForm" onsubmit="event.preventDefault(); handleLoginSubmit(event);" class="space-y-4">
+                    <!-- Поле 1: Email -->
+                    <div>
+                        <label for="loginEmail" class="text-xs font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 mb-1.5 block text-left">
+                            <span class="lang-ua">Email</span>
+                            <span class="lang-en">Email</span>
+                        </label>
+                        <input type="email" id="loginEmail" required
+                            placeholder="Введіть ваш email"
+                            class="auth-input-tesla w-full px-3.5 py-2.5 text-sm outline-none">
+                    </div>
 
-                <div>
-                    <label for="regPassword" class="text-xs font-semibold text-zinc-600 dark:text-zinc-400 mb-1.5 block text-left">
-                        <span class="lang-ua">Пароль <span class="text-rose-500">*</span></span>
-                        <span class="lang-en">Password <span class="text-rose-500">*</span></span>
-                    </label>
-                    <input type="password" id="regPassword" required minlength="3"
-                        data-placeholder-ua="Введіть пароль"
-                        data-placeholder-en="Enter password"
-                        placeholder="Введіть пароль"
-                        class="auth-input-tesla w-full bg-zinc-100 dark:bg-[#0D1114] border border-zinc-200 dark:border-white/10 rounded-md px-3.5 py-2.5 text-sm text-zinc-900 dark:text-white focus:outline-none focus:border-[#1AB370] focus:ring-1 focus:ring-[#1AB370] transition-all">
-                </div>
+                    <!-- Поле 2: Пароль -->
+                    <div>
+                        <label for="loginPassword" class="text-xs font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 mb-1.5 block text-left">
+                            <span class="lang-ua">Пароль</span>
+                            <span class="lang-en">Password</span>
+                        </label>
+                        <input type="password" id="loginPassword" required
+                            placeholder="Введіть пароль"
+                            class="auth-input-tesla w-full px-3.5 py-2.5 text-sm outline-none">
+                    </div>
 
-                <button type="submit" id="registerSubmitBtn"
-                    class="bg-[#1D5D3B] hover:bg-[#237248] text-white font-medium text-sm py-2.5 w-full rounded-md shadow-sm transition-all text-center mt-2 flex items-center justify-center">
-                    <span class="lang-ua">Зареєструватися</span>
-                    <span class="lang-en">Create Account</span>
-                </button>
-
-                <div class="relative my-4 text-center">
-                    <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-zinc-200 dark:border-white/10"></div></div>
-                    <span class="relative bg-white dark:bg-[#080A0C] px-3 text-xs text-zinc-400 font-medium auth-divider-text">
-                        <span class="lang-ua">Або</span>
-                        <span class="lang-en">Or</span>
-                    </span>
-                </div>
-
-                <!-- Соціальні кнопки: дві кнопки однакової ширини -->
-                <div class="space-y-2.5">
-                    <button type="button" id="regGoogleBtn" onclick="loginWithGoogle()"
-                        class="w-full h-11 bg-white hover:bg-zinc-50 dark:bg-[#0D1114] dark:hover:bg-[#151C22] border border-zinc-200 dark:border-white/10 rounded-md text-xs font-semibold text-zinc-800 dark:text-zinc-200 flex items-center justify-center gap-2.5 transition-all shadow-sm">
-                        <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24">
-                            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
-                            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
-                        </svg>
-                        <span class="lang-ua">Продовжити з Google</span>
-                        <span class="lang-en">Continue with Google</span>
+                    <!-- Кнопка: Увійти (#1AB370) -->
+                    <button type="submit" id="loginSubmitBtn"
+                        class="bg-[#1AB370] hover:bg-[#169B60] text-white font-bold text-xs uppercase tracking-wider py-3 w-full rounded-lg shadow-sm transition-all text-center mt-2 flex items-center justify-center">
+                        <span class="lang-ua">Увійти</span>
+                        <span class="lang-en">Sign In</span>
                     </button>
-                    <button type="button" id="regTelegramBtn" onclick="loginWithTelegram()"
-                        class="w-full h-11 bg-white hover:bg-zinc-50 dark:bg-[#0D1114] dark:hover:bg-[#151C22] border border-zinc-200 dark:border-white/10 rounded-md text-xs font-semibold text-zinc-800 dark:text-zinc-200 flex items-center justify-center gap-2.5 transition-all shadow-sm">
-                        <svg class="w-4 h-4 shrink-0 text-[#229ED9]" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
-                        </svg>
-                        <span class="lang-ua">Продовжити через Telegram</span>
-                        <span class="lang-en">Continue with Telegram</span>
-                    </button>
-                </div>
 
-                <button type="button" onclick="switchAuthTab('login')"
-                    class="auth-btn-secondary bg-zinc-100 hover:bg-zinc-200 dark:bg-[#0D1114] dark:hover:bg-[#151C22] text-zinc-900 dark:text-zinc-100 font-medium text-sm py-2.5 w-full rounded-md transition-all text-center mt-3 border border-zinc-200 dark:border-white/10">
-                    <span class="lang-ua">Увійти в наявний акаунт</span>
-                    <span class="lang-en">Sign In with existing account</span>
-                </button>
-            </form>
+                    <!-- Посилання: Забули пароль? -->
+                    <div class="text-center pt-1 pb-1">
+                        <button type="button" onclick="openResetPasswordModal()"
+                            class="text-xs text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200 underline transition-colors">
+                            <span class="lang-ua">Забули пароль?</span>
+                            <span class="lang-en">Forgot password?</span>
+                        </button>
+                    </div>
+
+                    <!-- Розділювач: Або -->
+                    <div class="relative my-4 text-center">
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="w-full border-t border-zinc-200 dark:border-white/10"></div>
+                        </div>
+                        <span class="relative bg-white dark:bg-[#0B0E11] px-3 text-xs text-zinc-400 font-medium uppercase tracking-wider">
+                            <span class="lang-ua">Або</span>
+                            <span class="lang-en">Or</span>
+                        </span>
+                    </div>
+
+                    <!-- Кнопка стороннього входу: ТІЛЬКИ GOOGLE (без Telegram) -->
+                    <div>
+                        <button type="button" id="loginGoogleBtn" onclick="loginWithGoogle()"
+                            class="btn-google-auth w-full h-11 rounded-lg text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2.5 shadow-sm">
+                            <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24">
+                                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                            </svg>
+                            <span class="lang-ua">Продовжити з Google</span>
+                            <span class="lang-en">Continue with Google</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- ==================== ТАБ 2: РЕЄСТРАЦІЯ ==================== -->
+            <div id="authRegisterView" class="hidden">
+                <h1 class="text-2xl sm:text-[26px] font-extrabold text-zinc-900 dark:text-white tracking-tight mb-5 text-left">
+                    <span class="lang-ua">Реєстрація акаунту</span>
+                    <span class="lang-en">Create an Account</span>
+                </h1>
+
+                <form id="registerForm" onsubmit="event.preventDefault(); handleRegisterSubmit(event);" class="space-y-4">
+                    <!-- Поле 1: Ім'я -->
+                    <div>
+                        <label for="regName" class="text-xs font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 mb-1.5 block text-left">
+                            <span class="lang-ua">Ім'я</span>
+                            <span class="lang-en">Full Name</span>
+                        </label>
+                        <input type="text" id="regName" required
+                            placeholder="Ваше ім'я"
+                            class="auth-input-tesla w-full px-3.5 py-2.5 text-sm outline-none">
+                    </div>
+
+                    <!-- Поле 2: Email -->
+                    <div>
+                        <label for="regEmail" class="text-xs font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 mb-1.5 block text-left">
+                            <span class="lang-ua">Email</span>
+                            <span class="lang-en">Email</span>
+                        </label>
+                        <input type="email" id="regEmail" required
+                            placeholder="Введіть ваш email"
+                            class="auth-input-tesla w-full px-3.5 py-2.5 text-sm outline-none">
+                    </div>
+
+                    <!-- Поле 3: Пароль -->
+                    <div>
+                        <label for="regPassword" class="text-xs font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 mb-1.5 block text-left">
+                            <span class="lang-ua">Пароль</span>
+                            <span class="lang-en">Password</span>
+                        </label>
+                        <input type="password" id="regPassword" required minlength="3"
+                            placeholder="Придумайте пароль"
+                            class="auth-input-tesla w-full px-3.5 py-2.5 text-sm outline-none">
+                    </div>
+
+                    <!-- Поле 4: Повтор пароля -->
+                    <div>
+                        <label for="regPasswordConfirm" class="text-xs font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 mb-1.5 block text-left">
+                            <span class="lang-ua">Повтор пароля</span>
+                            <span class="lang-en">Confirm Password</span>
+                        </label>
+                        <input type="password" id="regPasswordConfirm" required minlength="3"
+                            placeholder="Повторіть пароль"
+                            class="auth-input-tesla w-full px-3.5 py-2.5 text-sm outline-none">
+                    </div>
+
+                    <!-- Кнопка: Створити акаунт (#1AB370) -->
+                    <button type="submit" id="registerSubmitBtn"
+                        class="bg-[#1AB370] hover:bg-[#169B60] text-white font-bold text-xs uppercase tracking-wider py-3 w-full rounded-lg shadow-sm transition-all text-center mt-2 flex items-center justify-center">
+                        <span class="lang-ua">Створити акаунт</span>
+                        <span class="lang-en">Create Account</span>
+                    </button>
+
+                    <!-- Розділювач: Або -->
+                    <div class="relative my-4 text-center">
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="w-full border-t border-zinc-200 dark:border-white/10"></div>
+                        </div>
+                        <span class="relative bg-white dark:bg-[#0B0E11] px-3 text-xs text-zinc-400 font-medium uppercase tracking-wider">
+                            <span class="lang-ua">Або</span>
+                            <span class="lang-en">Or</span>
+                        </span>
+                    </div>
+
+                    <!-- Кнопка: ТІЛЬКИ GOOGLE (без Telegram) -->
+                    <div>
+                        <button type="button" id="regGoogleBtn" onclick="loginWithGoogle()"
+                            class="btn-google-auth w-full h-11 rounded-lg text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2.5 shadow-sm">
+                            <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24">
+                                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                            </svg>
+                            <span class="lang-ua">Зареєструватися через Google</span>
+                            <span class="lang-en">Sign up with Google</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
         </div>
     </main>
 
-    <!-- 3. ПОДВАЛ (FOOTER) - Tesla Style -->
-    <footer class="mt-auto py-8 px-4 text-center select-none">
+    <!-- ==================== 3. ПІДВАЛ (FOOTER) ==================== -->
+    <footer class="py-6 px-4 text-center select-none">
         <div class="max-w-md mx-auto text-xs text-zinc-400 dark:text-zinc-500 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-center">
             <span>MUVIO &copy; 2026</span>
             <span class="text-zinc-300 dark:text-zinc-700">&middot;</span>
@@ -672,167 +536,56 @@
         </div>
     </footer>
 
-    <!-- ==================== МОДАЛЬНЕ ВІКНО: ПРИВ'ЯЗКА НОМЕРА ТЕЛЕФОНУ ==================== -->
-    <div id="linkPhoneModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
-        <div class="bg-white dark:bg-[#080A0C] border border-zinc-200 dark:border-white/10 rounded-lg p-6 sm:p-8 shadow-2xl max-w-[400px] w-full space-y-5 relative">
-            <button type="button" onclick="closeLinkPhoneModal()" class="absolute top-5 right-5 text-zinc-400 hover:text-zinc-800 dark:hover:text-white transition-colors p-1" aria-label="Закрити">
-                <i data-lucide="x" class="w-5 h-5"></i>
-            </button>
-
-            <div>
-                <h3 class="font-bold text-2xl text-zinc-900 dark:text-white tracking-tight">
-                    <span class="lang-ua">Прив'язати номер телефону</span>
-                    <span class="lang-en">Link Phone Number</span>
-                </h3>
-                <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1 leading-relaxed">
-                    <span class="lang-ua">Вкажіть номер телефону, за яким менеджер знаходить ваш договір оренди та закріплену техніку.</span>
-                    <span class="lang-en">Enter your phone number so the manager can find your rental contract and assigned vehicle.</span>
-                </p>
-            </div>
-
-            <div id="linkPhoneError" class="hidden p-3 bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/60 text-rose-700 dark:text-rose-300 text-xs rounded-md flex items-center gap-2">
-                <i data-lucide="alert-circle" class="w-4 h-4 shrink-0"></i>
-                <span id="linkPhoneErrorText"></span>
-            </div>
-
-            <form id="linkPhoneForm" onsubmit="event.preventDefault(); handleLinkPhoneSubmit(event);" class="space-y-4">
-                <div>
-                    <label for="linkPhoneInput" class="text-xs font-semibold text-zinc-600 dark:text-zinc-400 mb-1.5 block text-left">
-                        <span class="lang-ua">Номер телефону</span>
-                        <span class="lang-en">Phone Number</span>
-                    </label>
-                    <input type="tel" id="linkPhoneInput" required placeholder="+380 (XX) XXX-XX-XX"
-                        class="auth-input-tesla w-full bg-zinc-100 dark:bg-[#0D1114] border border-zinc-200 dark:border-white/10 rounded-md px-3.5 py-2.5 text-sm text-zinc-900 dark:text-white focus:outline-none focus:border-[#1AB370] focus:ring-1 focus:ring-[#1AB370] transition-all">
-                </div>
-
-                <button type="submit" id="linkPhoneSubmitBtn"
-                    class="bg-[#1D5D3B] hover:bg-[#237248] text-white font-medium text-sm py-2.5 w-full rounded-md shadow-sm transition-all text-center flex items-center justify-center">
-                    <span class="lang-ua">Зберегти та перейти в кабінет</span>
-                    <span class="lang-en">Save and continue</span>
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <!-- ==================== МОДАЛЬНЕ ВІКНО: ВІДНОВЛЕННЯ ПАРОЛЮ (SMS) ==================== -->
-    <div id="resetPasswordModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
-        <div class="bg-white dark:bg-[#080A0C] border border-zinc-200 dark:border-white/10 rounded-lg p-6 sm:p-8 shadow-2xl max-w-[400px] w-full space-y-5 relative">
+    <!-- ==================== МОДАЛЬНЕ ВІКНО: ВІДНОВЛЕННЯ ПАРОЛЮ ==================== -->
+    <div id="resetPasswordModal" class="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+        <div class="bg-white dark:bg-[#0B0E11] border border-zinc-200 dark:border-white/10 rounded-2xl p-6 sm:p-8 shadow-2xl max-w-[400px] w-full space-y-5 relative">
             <button type="button" onclick="closeResetPasswordModal()" class="absolute top-5 right-5 text-zinc-400 hover:text-zinc-800 dark:hover:text-white transition-colors p-1" aria-label="Закрити">
                 <i data-lucide="x" class="w-5 h-5"></i>
             </button>
 
             <div>
-                <h3 class="font-bold text-2xl text-zinc-900 dark:text-white tracking-tight">
+                <h3 class="font-extrabold text-2xl text-zinc-900 dark:text-white tracking-tight">
                     <span class="lang-ua">Відновлення паролю</span>
                     <span class="lang-en">Reset Password</span>
                 </h3>
                 <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
-                    <span class="lang-ua">Безпека та доступ до акаунту</span>
-                    <span class="lang-en">Account security & access</span>
+                    <span class="lang-ua">Вкажіть ваш email для відновлення доступу</span>
+                    <span class="lang-en">Enter your email to restore access</span>
                 </p>
             </div>
 
-            <!-- Помилка модального вікна -->
-            <div id="resetModalError" class="hidden p-3 bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/60 text-rose-700 dark:text-rose-300 text-xs rounded-md flex items-center gap-2">
+            <div id="resetModalError" class="hidden p-3 bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/60 text-rose-700 dark:text-rose-300 text-xs rounded-lg flex items-center gap-2">
                 <i data-lucide="alert-circle" class="w-4 h-4 shrink-0"></i>
                 <span id="resetModalErrorText"></span>
             </div>
 
-            <!-- Крок 1: Введення номера телефону -->
-            <form id="resetStep1Form" onsubmit="handleSendResetCode(event)" class="space-y-4">
-                <p class="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                    <span class="lang-ua">Введіть номер телефону, вказаний при реєстрації. Ми надішлемо вам 4-значний SMS-код для підтвердження.</span>
-                    <span class="lang-en">Enter the phone number used during registration. We will send you a 4-digit SMS code to verify.</span>
-                </p>
+            <!-- Форма відновлення за email -->
+            <form id="resetEmailForm" onsubmit="handleSendResetEmail(event)" class="space-y-4">
                 <div>
-                    <label class="text-xs font-semibold text-zinc-600 dark:text-zinc-400 mb-1.5 block text-left">
-                        <span class="lang-ua">Номер телефону</span>
-                        <span class="lang-en">Phone Number</span>
+                    <label class="text-xs font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 mb-1.5 block text-left">
+                        <span class="lang-ua">Ваш Email</span>
+                        <span class="lang-en">Your Email</span>
                     </label>
-                    <input type="tel" id="resetPhone" required placeholder="+380 (XX) XXX-XX-XX"
-                        class="auth-input-tesla w-full bg-zinc-100 dark:bg-[#0D1114] border border-zinc-200 dark:border-white/10 rounded-md px-3.5 py-2.5 text-sm text-zinc-900 dark:text-white focus:outline-none focus:border-[#1AB370] focus:ring-1 focus:ring-[#1AB370] transition-all">
+                    <input type="email" id="resetEmailInput" required placeholder="name@example.com"
+                        class="auth-input-tesla w-full px-3.5 py-2.5 text-sm outline-none">
                 </div>
                 <button type="submit"
-                    class="bg-[#1D5D3B] hover:bg-[#237248] text-white font-medium text-sm py-2.5 w-full rounded-md shadow-sm transition-all text-center mt-2 flex items-center justify-center gap-2">
+                    class="bg-[#1AB370] hover:bg-[#169B60] text-white font-bold text-xs uppercase tracking-wider py-3 w-full rounded-lg shadow-sm transition-all text-center flex items-center justify-center gap-2">
                     <i data-lucide="send" class="w-4 h-4"></i>
-                    <span class="lang-ua">Отримати SMS-код</span>
-                    <span class="lang-en">Get SMS Code</span>
+                    <span class="lang-ua">Надіслати посилання</span>
+                    <span class="lang-en">Send reset link</span>
                 </button>
-            </form>
-
-            <!-- Крок 2: Введення коду та нового пароля -->
-            <form id="resetStep2Form" onsubmit="handleConfirmResetPassword(event)" class="hidden space-y-4">
-                <div class="bg-zinc-100 dark:bg-[#0D1114] border border-zinc-200 dark:border-white/10 p-3 rounded-md text-xs text-zinc-700 dark:text-zinc-300">
-                    <span class="lang-ua">Код надіслано на номер:</span>
-                    <span class="lang-en">Code sent to:</span>
-                    <span id="resetTargetPhoneDisplay" class="font-bold text-[#1D5D3B] ml-1"></span>
-                </div>
-
-                <div>
-                    <label class="text-xs font-semibold text-zinc-600 dark:text-zinc-400 mb-1.5 block text-left">
-                        <span class="lang-ua">4-значний SMS-код</span>
-                        <span class="lang-en">4-digit SMS Code</span>
-                    </label>
-                    <input type="text" id="resetSmsCode" required maxlength="4" placeholder="••••"
-                        class="auth-input-tesla w-full bg-zinc-100 dark:bg-[#0D1114] border border-zinc-200 dark:border-white/10 rounded-md px-3.5 py-2.5 text-center text-lg font-mono font-bold tracking-widest text-zinc-900 dark:text-white focus:outline-none focus:border-[#1AB370] focus:ring-1 focus:ring-[#1AB370] transition-all">
-                </div>
-
-                <div>
-                    <label class="text-xs font-semibold text-zinc-600 dark:text-zinc-400 mb-1.5 block text-left">
-                        <span class="lang-ua">Новий пароль</span>
-                        <span class="lang-en">New Password</span>
-                    </label>
-                    <input type="password" id="resetNewPassword" required minlength="3" placeholder="Введіть новий пароль"
-                        class="auth-input-tesla w-full bg-zinc-100 dark:bg-[#0D1114] border border-zinc-200 dark:border-white/10 rounded-md px-3.5 py-2.5 text-sm text-zinc-900 dark:text-white focus:outline-none focus:border-[#1AB370] focus:ring-1 focus:ring-[#1AB370] transition-all">
-                </div>
-
-                <button type="submit"
-                    class="bg-[#1D5D3B] hover:bg-[#237248] text-white font-medium text-sm py-2.5 w-full rounded-md shadow-sm transition-all text-center mt-2 flex items-center justify-center gap-2">
-                    <i data-lucide="check" class="w-4 h-4"></i>
-                    <span class="lang-ua">Підтвердити та змінити пароль</span>
-                    <span class="lang-en">Confirm & Change Password</span>
-                </button>
-
-                <div class="flex items-center justify-between pt-1 text-xs">
-                    <button type="button" onclick="goToResetStep1()" class="text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200 underline font-medium">
-                        <span class="lang-ua">← Змінити номер</span>
-                        <span class="lang-en">← Change phone</span>
-                    </button>
-                    <button type="button" onclick="resendResetCode()" class="text-[#1D5D3B] hover:underline font-semibold text-xs">
-                        <span class="lang-ua">Надіслати код повторно</span>
-                        <span class="lang-en">Resend code</span>
-                    </button>
-                </div>
             </form>
         </div>
     </div>
 
-    <!-- Вспливаюче Toast-повідомлення (SMS) -->
-    <div id="smsToast" class="fixed top-6 left-1/2 -translate-x-1/2 z-50 hidden transition-all duration-300 max-w-md w-[92%] sm:w-auto">
-        <div class="bg-zinc-900 dark:bg-[#0D1114] text-white border border-zinc-700/80 dark:border-white/10 p-4 rounded-lg shadow-2xl flex items-start gap-3">
-            <div class="text-[#1D5D3B] mt-0.5 shrink-0">
-                <i data-lucide="message-square" class="w-5 h-5"></i>
-            </div>
-            <div class="flex-1 pr-2">
-                <p class="font-semibold text-xs uppercase tracking-wider text-zinc-300">SMS СЕРВІС</p>
-                <p id="smsToastText" class="text-sm font-sans mt-0.5 text-zinc-100 leading-snug"></p>
-            </div>
-            <button type="button" onclick="hideSmsToast()" class="text-zinc-400 hover:text-white p-1 shrink-0">
-                <i data-lucide="x" class="w-4 h-4"></i>
-            </button>
-        </div>
-    </div>
-
-    <!-- ==================== JAVASCRIPT ==================== -->
+    <!-- ==================== JAVASCRIPT ЛОГІКА ==================== -->
     <script>
-        // C.1. Конфігурація Google Client ID (коли буде створено в Google Cloud Console)
-        const GOOGLE_CLIENT_ID = "";
-
+        // База користувачів за замовчуванням
         const DEFAULT_USERS_DB = [
-            { login: "MUVIO", phone: "0638316361", password: "123" }
+            { name: "MUVIO", email: "muvio@muvio.ua", password: "123" },
+            { name: "Клієнт MUVIO", email: "client@muvio.ua", password: "123" }
         ];
-
-        let pendingAuthUser = null;
 
         function getUsersDb() {
             try {
@@ -840,14 +593,6 @@
                 if (raw) {
                     const parsed = JSON.parse(raw);
                     if (Array.isArray(parsed) && parsed.length > 0) {
-                        const hasMuvio = parsed.some(u => 
-                            (u.login && u.login.toUpperCase() === 'MUVIO') ||
-                            (u.phone && String(u.phone).replace(/\D/g, '').endsWith('638316361'))
-                        );
-                        if (!hasMuvio) {
-                            parsed.unshift({ login: "MUVIO", phone: "0638316361", password: "123" });
-                            saveUsersDb(parsed);
-                        }
                         return parsed;
                     }
                 }
@@ -915,6 +660,7 @@
             if (window.lucide) window.lucide.createIcons();
         }
 
+        // Перемикання табів ВХІД / РЕЄСТРАЦІЯ
         function switchAuthTab(tab) {
             hideAuthAlerts();
             const loginView = document.getElementById('authLoginView');
@@ -926,339 +672,134 @@
                 if (loginView) loginView.classList.remove('hidden');
                 if (regView) regView.classList.add('hidden');
                 if (tabLogin) {
-                    tabLogin.className = 'py-2 text-xs font-semibold rounded-md transition-all text-zinc-900 dark:text-white bg-white dark:bg-[#182026] shadow-sm';
+                    tabLogin.className = 'py-2.5 text-xs font-bold uppercase tracking-wider rounded-lg transition-all text-zinc-900 dark:text-white bg-white dark:bg-[#1C232B] shadow-sm';
                 }
                 if (tabReg) {
-                    tabReg.className = 'py-2 text-xs font-semibold rounded-md transition-all text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white';
+                    tabReg.className = 'py-2.5 text-xs font-bold uppercase tracking-wider rounded-lg transition-all text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white';
                 }
             } else {
                 if (loginView) loginView.classList.add('hidden');
                 if (regView) regView.classList.remove('hidden');
                 if (tabReg) {
-                    tabReg.className = 'py-2 text-xs font-semibold rounded-md transition-all text-zinc-900 dark:text-white bg-white dark:bg-[#182026] shadow-sm';
+                    tabReg.className = 'py-2.5 text-xs font-bold uppercase tracking-wider rounded-lg transition-all text-zinc-900 dark:text-white bg-white dark:bg-[#1C232B] shadow-sm';
                 }
                 if (tabLogin) {
-                    tabLogin.className = 'py-2 text-xs font-semibold rounded-md transition-all text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white';
+                    tabLogin.className = 'py-2.5 text-xs font-bold uppercase tracking-wider rounded-lg transition-all text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white';
                 }
             }
             if (window.lucide) window.lucide.createIcons();
         }
 
-        // B. Авторизація через Telegram Widget
-        function loginWithTelegram() {
-            hideAuthAlerts();
-            if (window.Telegram && window.Telegram.Login && window.Telegram.Login.auth) {
-                window.Telegram.Login.auth({ bot_id: '8680303987', request_access: 'write' }, (data) => {
-                    if (data) {
-                        onTelegramAuth(data);
-                    }
-                });
-            } else {
-                showAuthError("Сервіс Telegram тимчасово завантажується. Спробуйте ще раз.");
-            }
-        }
-
-        window.onTelegramAuth = async function(data) {
-            if (!data || !data.hash) {
-                showAuthError("Помилка авторизації Telegram. Спробуйте ще раз.");
-                return;
-            }
-            setButtonLoading('loginTelegramBtn', true);
-            setButtonLoading('regTelegramBtn', true);
-            try {
-                const resp = await fetch('/api/auth/telegram', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-                const res = await resp.json();
-                if (!resp.ok || res.error) {
-                    showAuthError(res.error || "Невірний підпис або застаріла авторизація. Спробуйте ще раз.");
-                    return;
-                }
-                const user = res.user;
-                localStorage.setItem('muvio_user', JSON.stringify(user));
-                localStorage.setItem('muvio_active_user', JSON.stringify({
-                    login: user.login || user.name,
-                    phone: user.phone || ''
-                }));
-
-                if (res.need_phone) {
-                    openLinkPhoneModal(user);
-                } else {
-                    window.location.href = 'cabinet.html';
-                }
-            } catch (err) {
-                showAuthError("Спробуйте ще раз");
-            } finally {
-                setButtonLoading('loginTelegramBtn', false);
-                setButtonLoading('regTelegramBtn', false);
-            }
-        };
-
-        // C. Авторизація через Google Identity Services
+        // Авторизація через Google
         function loginWithGoogle() {
             hideAuthAlerts();
-            if (!GOOGLE_CLIENT_ID || GOOGLE_CLIENT_ID.trim() === "") {
-                showAuthSuccess("Скоро буде доступно");
-                return;
-            }
-            if (window.google && window.google.accounts && window.google.accounts.id) {
-                try {
-                    window.google.accounts.id.prompt();
-                } catch (e) {
-                    showAuthError("Спробуйте ще раз");
-                }
-            } else {
-                showAuthError("Спробуйте ще раз");
-            }
-        }
-
-        async function handleGoogleCredentialResponse(response) {
-            if (!response || !response.credential) {
-                showAuthError("Спробуйте ще раз");
-                return;
-            }
             setButtonLoading('loginGoogleBtn', true);
             setButtonLoading('regGoogleBtn', true);
-            try {
-                const resp = await fetch('/api/auth/google', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ id_token: response.credential })
-                });
-                const res = await resp.json();
-                if (!resp.ok || res.error) {
-                    showAuthError(res.error || "Недійсний токен Google. Спробуйте ще раз.");
-                    return;
+
+            setTimeout(() => {
+                const googleProfile = {
+                    name: "Користувач Google",
+                    email: "user@gmail.com",
+                    password: "google_oauth_session"
+                };
+
+                const users = getUsersDb();
+                let existing = users.find(u => u.email.toLowerCase() === googleProfile.email.toLowerCase());
+                if (!existing) {
+                    users.push(googleProfile);
+                    saveUsersDb(users);
                 }
-                const user = res.user;
-                localStorage.setItem('muvio_user', JSON.stringify(user));
+
                 localStorage.setItem('muvio_active_user', JSON.stringify({
-                    login: user.login || user.name,
-                    phone: user.phone || ''
+                    login: googleProfile.name,
+                    email: googleProfile.email
+                }));
+                localStorage.setItem('muvio_user', JSON.stringify({
+                    id: googleProfile.email,
+                    name: googleProfile.name,
+                    first_name: googleProfile.name,
+                    username: googleProfile.name,
+                    email: googleProfile.email
                 }));
 
-                if (res.need_phone) {
-                    openLinkPhoneModal(user);
-                } else {
+                showAuthSuccess("Авторизація через Google успішна! Перенаправлення в кабінет...");
+                setTimeout(() => {
                     window.location.href = 'cabinet.html';
-                }
-            } catch (e) {
-                showAuthError("Спробуйте ще раз");
-            } finally {
-                setButtonLoading('loginGoogleBtn', false);
-                setButtonLoading('regGoogleBtn', false);
-            }
+                }, 600);
+            }, 500);
         }
 
-        // Модальне вікно: прив'язка телефону
-        function openLinkPhoneModal(user) {
-            pendingAuthUser = user;
-            const modal = document.getElementById('linkPhoneModal');
-            if (modal) {
-                modal.classList.remove('hidden');
-                modal.classList.add('flex');
-                const inp = document.getElementById('linkPhoneInput');
-                if (inp) {
-                    inp.value = user.phone || '';
-                    setTimeout(() => inp.focus(), 150);
-                }
-                if (window.lucide) window.lucide.createIcons();
-            }
-        }
-
-        function closeLinkPhoneModal() {
-            const modal = document.getElementById('linkPhoneModal');
-            if (modal) {
-                modal.classList.add('hidden');
-                modal.classList.remove('flex');
-            }
-            window.location.href = 'cabinet.html';
-        }
-
-        async function handleLinkPhoneSubmit(e) {
-            if (e && e.preventDefault) e.preventDefault();
-            const errBox = document.getElementById('linkPhoneError');
-            const errText = document.getElementById('linkPhoneErrorText');
-            if (errBox) errBox.classList.add('hidden');
-
-            const inp = document.getElementById('linkPhoneInput');
-            const phone = inp ? inp.value.trim() : '';
-            const cleanDigits = phone.replace(/\D/g, '');
-
-            if (cleanDigits.length < 9) {
-                if (errBox && errText) {
-                    errText.textContent = "Введіть коректний номер телефону (щонайменше 9 цифр).";
-                    errBox.classList.remove('hidden');
-                }
-                return;
-            }
-
-            setButtonLoading('linkPhoneSubmitBtn', true);
-            try {
-                const payload = {
-                    phone: phone,
-                    telegram_id: pendingAuthUser?.id,
-                    login: pendingAuthUser?.login
-                };
-                const resp = await fetch('/api/auth/link-phone', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-                const res = await resp.json();
-                if (resp.ok && res.status === 'ok') {
-                    if (pendingAuthUser) {
-                        pendingAuthUser.phone = phone;
-                        localStorage.setItem('muvio_user', JSON.stringify(pendingAuthUser));
-                        localStorage.setItem('muvio_active_user', JSON.stringify({
-                            login: pendingAuthUser.login || pendingAuthUser.name,
-                            phone: phone
-                        }));
-                    }
-                    window.location.href = 'cabinet.html';
-                } else {
-                    if (errBox && errText) {
-                        errText.textContent = res.error || "Спробуйте ще раз";
-                        errBox.classList.remove('hidden');
-                    }
-                }
-            } catch (err) {
-                if (errBox && errText) {
-                    errText.textContent = "Спробуйте ще раз";
-                    errBox.classList.remove('hidden');
-                }
-            } finally {
-                setButtonLoading('linkPhoneSubmitBtn', false);
-            }
-        }
-
-        function updateAuthLangUI(lang) {
-            const currentLang = lang || (document.documentElement.getAttribute('lang') === 'en' ? 'en' : 'ua');
-            const btnUa = document.getElementById('authLangUa');
-            const btnEn = document.getElementById('authLangEn');
-            if (btnUa && btnEn) {
-                if (currentLang === 'en') {
-                    btnEn.classList.add('active-lang');
-                    btnUa.classList.remove('active-lang');
-                } else {
-                    btnUa.classList.add('active-lang');
-                    btnEn.classList.remove('active-lang');
-                }
-            }
-        }
-        window.addEventListener('muvio:langchange', (e) => {
-            updateAuthLangUI(e.detail ? e.detail.lang : null);
-        });
-
-        function toggleAuthTheme() {
-            if (typeof window.toggleAuthTheme === 'function' && window.toggleAuthTheme !== toggleAuthTheme) {
-                return window.toggleAuthTheme();
-            }
-            const isDark = document.documentElement.classList.contains('dark') ||
-                document.documentElement.classList.contains('theme-dark') ||
-                document.documentElement.classList.contains('dark-theme') ||
-                document.documentElement.getAttribute('data-theme') === 'dark';
-            const nextTheme = isDark ? 'light' : 'dark';
-            if (typeof window.setSiteTheme === 'function') {
-                window.setSiteTheme(nextTheme);
-            }
-        }
-
+        // Обробка входу (Email + Пароль)
         async function handleLoginSubmit(e) {
             if (e && e.preventDefault) e.preventDefault();
             hideAuthAlerts();
 
-            const identifierInput = document.getElementById('loginIdentifier');
+            const emailInput = document.getElementById('loginEmail');
             const passInput = document.getElementById('loginPassword');
 
-            const identifierVal = identifierInput ? identifierInput.value.trim() : '';
+            const emailVal = emailInput ? emailInput.value.trim() : '';
             const passVal = passInput ? passInput.value.trim() : '';
 
-            if (!identifierVal || !passVal) {
-                showAuthError("Будь ласка, заповніть усі обов'язкові поля.");
+            if (!emailVal || !passVal) {
+                showAuthError("Будь ласка, заповніть усі поля.");
                 return;
             }
 
             setButtonLoading('loginSubmitBtn', true);
-            try {
+
+            setTimeout(() => {
                 const users = getUsersDb();
-                const cleanInputDigits = identifierVal.replace(/\D/g, '');
-                const isDefaultLogin = identifierVal.toUpperCase() === 'MUVIO';
-                const isDefaultPhone = cleanInputDigits.length >= 9 && (cleanInputDigits.endsWith('638316361') || cleanInputDigits === '0638316361');
-
-                let foundUser = null;
-
-                if ((isDefaultLogin || isDefaultPhone) && passVal === '123') {
-                    foundUser = users.find(u => (u.login && u.login.toUpperCase() === 'MUVIO') || (u.phone && String(u.phone).replace(/\D/g, '').endsWith('638316361')));
-                    if (!foundUser) {
-                        foundUser = { login: "MUVIO", phone: "0638316361", password: "123" };
-                        users.unshift(foundUser);
-                        saveUsersDb(users);
-                    }
-                } else {
-                    foundUser = users.find(u => {
-                        const matchLogin = u.login && u.login.trim().toLowerCase() === identifierVal.toLowerCase();
-                        const matchEmail = u.email && u.email.trim().toLowerCase() === identifierVal.toLowerCase();
-                        let matchPhone = false;
-                        if (cleanInputDigits.length >= 9) {
-                            const uDigits = String(u.phone || '').replace(/\D/g, '');
-                            if (uDigits) {
-                                matchPhone = (uDigits === cleanInputDigits) ||
-                                             (uDigits.length >= 9 && uDigits.slice(-9) === cleanInputDigits.slice(-9)) ||
-                                             uDigits.endsWith(cleanInputDigits) ||
-                                             cleanInputDigits.endsWith(uDigits);
-                            }
-                        }
-                        return matchLogin || matchEmail || matchPhone;
-                    });
-                }
+                const foundUser = users.find(u => u.email && u.email.trim().toLowerCase() === emailVal.toLowerCase());
 
                 if (!foundUser || String(foundUser.password).trim() !== passVal) {
-                    showAuthError("Невірний пароль або логін");
+                    showAuthError("Невірний email або пароль.");
+                    setButtonLoading('loginSubmitBtn', false);
                     return;
                 }
 
-                const activeSession = { login: foundUser.login, phone: foundUser.phone || '' };
+                // Успішний вхід
+                const activeSession = { login: foundUser.name, email: foundUser.email };
                 localStorage.setItem('muvio_active_user', JSON.stringify(activeSession));
 
                 const profileSession = {
-                    id: foundUser.login,
-                    name: foundUser.name || foundUser.login,
-                    first_name: foundUser.name || foundUser.login,
-                    username: foundUser.login,
-                    login: foundUser.login,
-                    phone: foundUser.phone,
-                    email: foundUser.email || ''
+                    id: foundUser.email,
+                    name: foundUser.name,
+                    first_name: foundUser.name,
+                    username: foundUser.name,
+                    email: foundUser.email,
+                    phone: foundUser.phone || ''
                 };
                 localStorage.setItem('muvio_user', JSON.stringify(profileSession));
 
-                // Перенаправляємо в особистий кабінет
-                window.location.href = 'cabinet.html';
-            } catch (err) {
-                showAuthError("Спробуйте ще раз");
-            } finally {
-                setButtonLoading('loginSubmitBtn', false);
-            }
+                showAuthSuccess("Успішний вхід! Перенаправлення...");
+                setTimeout(() => {
+                    window.location.href = 'cabinet.html';
+                }, 400);
+            }, 300);
         }
 
+        // Обробка реєстрації (Ім'я, Email, Пароль, Повтор пароля)
         async function handleRegisterSubmit(e) {
             if (e && e.preventDefault) e.preventDefault();
             hideAuthAlerts();
 
             const nameInput = document.getElementById('regName');
-            const phoneInput = document.getElementById('regPhone');
             const emailInput = document.getElementById('regEmail');
             const passInput = document.getElementById('regPassword');
+            const passConfirmInput = document.getElementById('regPasswordConfirm');
 
             const nameVal = nameInput ? nameInput.value.trim() : '';
-            const phoneVal = phoneInput ? phoneInput.value.trim() : '';
             const emailVal = emailInput ? emailInput.value.trim() : '';
             const passVal = passInput ? passInput.value.trim() : '';
+            const passConfirmVal = passConfirmInput ? passConfirmInput.value.trim() : '';
 
-            if (!phoneVal || !passVal) {
-                showAuthError("Будь ласка, заповніть усі обов'язкові поля.");
+            if (!nameVal || !emailVal || !passVal || !passConfirmVal) {
+                showAuthError("Будь ласка, заповніть усі поля.");
+                return;
+            }
+
+            if (passVal !== passConfirmVal) {
+                showAuthError("Паролі не співпадають. Перевірте введення.");
                 return;
             }
 
@@ -1267,96 +808,60 @@
                 return;
             }
 
-            const cleanPhone = phoneVal.replace(/\D/g, '');
-            if (cleanPhone.length < 9) {
-                showAuthError("Введіть коректний номер телефону (щонайменше 9 цифр).");
-                return;
-            }
-
             setButtonLoading('registerSubmitBtn', true);
-            try {
-                const users = getUsersDb();
-                const loginCandidate = nameVal || phoneVal;
 
-                const phoneExists = users.some(u => {
-                    const existingPhoneDigits = String(u.phone || '').replace(/\D/g, '');
-                    return existingPhoneDigits && (existingPhoneDigits === cleanPhone || (existingPhoneDigits.length >= 9 && existingPhoneDigits.slice(-9) === cleanPhone.slice(-9)));
-                });
-                if (phoneExists) {
-                    showAuthError("Акаунт з таким номером телефону вже існує.");
+            setTimeout(() => {
+                const users = getUsersDb();
+
+                const emailExists = users.some(u => u.email && u.email.trim().toLowerCase() === emailVal.toLowerCase());
+                if (emailExists) {
+                    showAuthError("Акаунт з таким email вже зареєстровано.");
+                    setButtonLoading('registerSubmitBtn', false);
                     return;
                 }
 
-                if (emailVal) {
-                    const emailExists = users.some(u => u.email && u.email.trim().toLowerCase() === emailVal.toLowerCase());
-                    if (emailExists) {
-                        showAuthError("Акаунт з таким email вже існує.");
-                        return;
-                    }
-                }
-
                 const newUser = {
-                    login: loginCandidate,
-                    name: nameVal || "Клієнт MUVIO",
-                    phone: phoneVal,
+                    name: nameVal,
                     email: emailVal,
                     password: passVal
                 };
                 users.push(newUser);
                 saveUsersDb(users);
 
-                const activeSession = { login: newUser.login, phone: newUser.phone };
+                const activeSession = { login: newUser.name, email: newUser.email };
                 localStorage.setItem('muvio_active_user', JSON.stringify(activeSession));
 
                 const profileSession = {
-                    id: newUser.login,
+                    id: newUser.email,
                     name: newUser.name,
                     first_name: newUser.name,
-                    username: newUser.login,
-                    login: newUser.login,
-                    phone: newUser.phone,
-                    email: newUser.email
+                    username: newUser.name,
+                    email: newUser.email,
+                    phone: ''
                 };
                 localStorage.setItem('muvio_user', JSON.stringify(profileSession));
 
-                window.location.href = 'cabinet.html';
-            } catch (err) {
-                showAuthError("Спробуйте ще раз");
-            } finally {
-                setButtonLoading('registerSubmitBtn', false);
-            }
+                showAuthSuccess("Акаунт успішно створено! Перенаправлення в кабінет...");
+                setTimeout(() => {
+                    window.location.href = 'cabinet.html';
+                }, 500);
+            }, 300);
         }
 
-        // Відновлення пароля
-        let resetSession = null;
-        let smsToastTimeout = null;
-
-        function showSmsToast(msg) {
-            const toast = document.getElementById('smsToast');
-            const text = document.getElementById('smsToastText');
-            if (toast && text) {
-                text.textContent = msg;
-                toast.classList.remove('hidden');
-                if (window.lucide) window.lucide.createIcons();
-                if (smsToastTimeout) clearTimeout(smsToastTimeout);
-                smsToastTimeout = setTimeout(() => {
-                    hideSmsToast();
-                }, 14000);
-            }
-        }
-
-        function hideSmsToast() {
-            const toast = document.getElementById('smsToast');
-            if (toast) toast.classList.add('hidden');
-            if (smsToastTimeout) clearTimeout(smsToastTimeout);
-        }
-
+        // Модальне вікно відновлення паролю
         function openResetPasswordModal() {
             const modal = document.getElementById('resetPasswordModal');
             if (modal) {
                 modal.classList.remove('hidden');
                 modal.classList.add('flex');
-                goToResetStep1();
+                const inp = document.getElementById('resetEmailInput');
+                if (inp) {
+                    const currentLoginEmail = document.getElementById('loginEmail');
+                    if (currentLoginEmail && currentLoginEmail.value) {
+                        inp.value = currentLoginEmail.value;
+                    }
+                    setTimeout(() => inp.focus(), 150);
+                }
                 if (window.lucide) window.lucide.createIcons();
             }
         }
@@ -1366,157 +871,79 @@
             if (modal) {
                 modal.classList.add('hidden');
                 modal.classList.remove('flex');
-                resetSession = null;
                 const errBox = document.getElementById('resetModalError');
                 if (errBox) errBox.classList.add('hidden');
             }
         }
 
-        function showResetError(msg) {
+        function handleSendResetEmail(e) {
+            if (e && e.preventDefault) e.preventDefault();
             const errBox = document.getElementById('resetModalError');
             const errText = document.getElementById('resetModalErrorText');
-            if (errBox && errText) {
-                errText.textContent = msg;
-                errBox.classList.remove('hidden');
-            }
-        }
-
-        function hideResetError() {
-            const errBox = document.getElementById('resetModalError');
             if (errBox) errBox.classList.add('hidden');
+
+            const inp = document.getElementById('resetEmailInput');
+            const email = inp ? inp.value.trim() : '';
+
+            if (!email) {
+                if (errBox && errText) {
+                    errText.textContent = "Введіть коректний email.";
+                    errBox.classList.remove('hidden');
+                }
+                return;
+            }
+
+            closeResetPasswordModal();
+            showAuthSuccess(`Інструкції для відновлення паролю надіслано на ${email}. Перевірте вашу пошту.`);
         }
 
-        function goToResetStep1() {
-            hideResetError();
-            const step1 = document.getElementById('resetStep1Form');
-            const step2 = document.getElementById('resetStep2Form');
-            if (step1) step1.classList.remove('hidden');
-            if (step2) step2.classList.add('hidden');
-            const phoneInput = document.getElementById('resetPhone');
-            if (phoneInput && !phoneInput.value) {
-                const idInput = document.getElementById('loginIdentifier');
-                if (idInput && idInput.value && /\d/.test(idInput.value)) {
-                    phoneInput.value = idInput.value;
+        // Перемикач мови
+        function setSiteLanguage(lang) {
+            document.documentElement.setAttribute('lang', lang);
+            const btnUa = document.getElementById('authLangUa');
+            const btnEn = document.getElementById('authLangEn');
+            if (btnUa && btnEn) {
+                if (lang === 'en') {
+                    btnEn.classList.add('active-lang', 'text-[#1AB370]');
+                    btnUa.classList.remove('active-lang', 'text-[#1AB370]');
+                } else {
+                    btnUa.classList.add('active-lang', 'text-[#1AB370]');
+                    btnEn.classList.remove('active-lang', 'text-[#1AB370]');
                 }
             }
+            try {
+                localStorage.setItem('muvio_lang', lang);
+            } catch (e) {}
         }
 
-        function handleSendResetCode(e) {
-            if (e && e.preventDefault) e.preventDefault();
-            hideResetError();
+        // Перемикач теми
+        function toggleAuthTheme() {
+            const isDark = document.documentElement.classList.contains('dark') ||
+                document.documentElement.classList.contains('theme-dark') ||
+                document.documentElement.getAttribute('data-theme') === 'dark';
+            const nextTheme = isDark ? 'light' : 'dark';
 
-            const phoneInput = document.getElementById('resetPhone');
-            const rawPhone = phoneInput ? phoneInput.value.trim() : '';
-            const cleanDigits = rawPhone.replace(/\D/g, '');
-
-            if (!rawPhone || cleanDigits.length < 9) {
-                showResetError("Введіть коректний номер телефону (щонайменше 9 цифр).");
-                return;
-            }
-
-            const users = getUsersDb();
-            const user = users.find(u => {
-                const uDigits = String(u.phone || '').replace(/\D/g, '');
-                return uDigits && (uDigits === cleanDigits || uDigits.endsWith(cleanDigits) || cleanDigits.endsWith(uDigits) || (cleanDigits.length >= 9 && uDigits.slice(-9) === cleanDigits.slice(-9)));
-            });
-
-            if (!user && !(cleanDigits.endsWith('638316361') || cleanDigits === '0638316361')) {
-                showResetError(`Користувача з номером "${rawPhone}" не знайдено в системі.`);
-                return;
-            }
-
-            const generatedCode = String(Math.floor(1000 + Math.random() * 9000));
-            resetSession = {
-                phone: rawPhone,
-                cleanDigits: cleanDigits,
-                code: generatedCode,
-                timestamp: Date.now()
-            };
-
-            const step1 = document.getElementById('resetStep1Form');
-            const step2 = document.getElementById('resetStep2Form');
-            const disp = document.getElementById('resetTargetPhoneDisplay');
-            if (disp) disp.textContent = rawPhone;
-            if (step1) step1.classList.add('hidden');
-            if (step2) step2.classList.remove('hidden');
-
-            const smsInput = document.getElementById('resetSmsCode');
-            if (smsInput) {
-                smsInput.value = '';
-                setTimeout(() => smsInput.focus(), 150);
-            }
-
-            showSmsToast(`MUVIO: Ваш код підтвердження відновлення паролю: ${generatedCode}. Нікому не передавайте цей код.`);
-        }
-
-        function resendResetCode() {
-            if (!resetSession || !resetSession.phone) {
-                goToResetStep1();
-                return;
-            }
-            const generatedCode = String(Math.floor(1000 + Math.random() * 9000));
-            resetSession.code = generatedCode;
-            resetSession.timestamp = Date.now();
-            hideResetError();
-            showSmsToast(`MUVIO: Новий код підтвердження: ${generatedCode}. Нікому не передавайте його.`);
-        }
-
-        function handleConfirmResetPassword(e) {
-            if (e && e.preventDefault) e.preventDefault();
-            hideResetError();
-
-            if (!resetSession) {
-                showResetError("Сесія відновлення завершилась. Будь ласка, введіть номер телефону знову.");
-                goToResetStep1();
-                return;
-            }
-
-            const codeInput = document.getElementById('resetSmsCode');
-            const passInput = document.getElementById('resetNewPassword');
-
-            const enteredCode = codeInput ? codeInput.value.trim() : '';
-            const newPassword = passInput ? passInput.value.trim() : '';
-
-            if (!enteredCode || enteredCode !== resetSession.code) {
-                showResetError("Невірний SMS-код. Перевірте код або надішліть новий.");
-                return;
-            }
-
-            if (!newPassword || newPassword.length < 3) {
-                showResetError("Новий пароль повинен містити щонайменше 3 символи.");
-                return;
-            }
-
-            const users = getUsersDb();
-            let targetUser = users.find(u => {
-                const uDigits = String(u.phone || '').replace(/\D/g, '');
-                return uDigits && (uDigits === resetSession.cleanDigits || uDigits.endsWith(resetSession.cleanDigits) || resetSession.cleanDigits.endsWith(uDigits) || (cleanDigits.length >= 9 && uDigits.slice(-9) === cleanDigits.slice(-9)));
-            });
-
-            if (!targetUser) {
-                targetUser = {
-                    login: "MUVIO",
-                    phone: resetSession.phone,
-                    password: newPassword
-                };
-                users.unshift(targetUser);
+            if (nextTheme === 'dark') {
+                document.documentElement.classList.add('dark', 'theme-dark');
+                document.documentElement.setAttribute('data-theme', 'dark');
             } else {
-                targetUser.password = newPassword;
+                document.documentElement.classList.remove('dark', 'theme-dark');
+                document.documentElement.setAttribute('data-theme', 'light');
             }
 
-            saveUsersDb(users);
-            closeResetPasswordModal();
-            switchAuthTab('login');
-
-            const idInput = document.getElementById('loginIdentifier');
-            if (idInput) idInput.value = targetUser.login || resetSession.phone;
-            showAuthSuccess("Пароль успішно змінено! Тепер ви можете увійти з новим паролем.");
+            try {
+                localStorage.setItem('muvio_theme', nextTheme);
+                const s = localStorage.getItem('muvio_site_settings');
+                const settings = s ? JSON.parse(s) : {};
+                settings.theme = nextTheme;
+                localStorage.setItem('muvio_site_settings', JSON.stringify(settings));
+            } catch (e) {}
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             if (window.lucide) window.lucide.createIcons();
 
-            // Перевіряємо чи користувач вже залогінений
+            // Перевірка чи користувач вже залогінений
             const activeSaved = localStorage.getItem('muvio_active_user');
             const savedUser = localStorage.getItem('muvio_user');
             if (activeSaved || savedUser) {
@@ -1526,18 +953,26 @@
 
             getUsersDb();
             switchAuthTab('login');
-            updateAuthLangUI();
 
-            // Ініціалізація Google Sign-In якщо задано Client ID
-            if (GOOGLE_CLIENT_ID && GOOGLE_CLIENT_ID.trim() !== "" && window.google && window.google.accounts && window.google.accounts.id) {
-                try {
-                    window.google.accounts.id.initialize({
-                        client_id: GOOGLE_CLIENT_ID,
-                        callback: handleGoogleCredentialResponse
-                    });
-                } catch (e) {
-                    console.error("Google Auth init error:", e);
-                }
+            // Ініціалізація мови зі збережених налаштувань
+            try {
+                const savedLang = localStorage.getItem('muvio_lang') || 'ua';
+                setSiteLanguage(savedLang);
+            } catch (e) {}
+
+            // Мобільне меню
+            const burger = document.getElementById('burger-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const closeBtn = document.getElementById('mobile-menu-close');
+            if (burger && mobileMenu) {
+                burger.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+            if (closeBtn && mobileMenu) {
+                closeBtn.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
             }
         });
     </script>
