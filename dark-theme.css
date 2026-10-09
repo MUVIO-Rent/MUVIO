@@ -278,6 +278,71 @@ html.dark .site-header-synced .header-nav-link:hover {
     color: #2E8B57 !important;
 }
 
+/* ==================== ВЫПАДАЮЩЕЕ МЕГА-МЕНЮ «КАТАЛОГ» В ТЕМНОЙ ТЕМЕ ==================== */
+html.dark .catalog-mega-menu-inner,
+html.theme-dark .catalog-mega-menu-inner,
+[data-theme="dark"] .catalog-mega-menu-inner {
+    background: #080A0C !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 20px 44px -10px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 255, 255, 0.04) !important;
+    color: #FFFFFF !important;
+}
+
+html.dark .catalog-cat-header,
+html.theme-dark .catalog-cat-header,
+[data-theme="dark"] .catalog-cat-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+html.dark .catalog-cat-title,
+html.theme-dark .catalog-cat-title,
+[data-theme="dark"] .catalog-cat-title {
+    color: #FFFFFF !important;
+}
+
+html.dark .catalog-cat-all-link,
+html.theme-dark .catalog-cat-all-link,
+[data-theme="dark"] .catalog-cat-all-link {
+    color: #94A3B8 !important;
+}
+
+html.dark .catalog-menu-item:hover,
+html.theme-dark .catalog-menu-item:hover,
+[data-theme="dark"] .catalog-menu-item:hover {
+    background: rgba(255, 255, 255, 0.06) !important;
+}
+
+html.dark .catalog-menu-item-title,
+html.theme-dark .catalog-menu-item-title,
+[data-theme="dark"] .catalog-menu-item-title {
+    color: #FFFFFF !important;
+}
+
+html.dark .catalog-menu-item:hover .catalog-menu-item-title,
+html.theme-dark .catalog-menu-item:hover .catalog-menu-item-title,
+[data-theme="dark"] .catalog-menu-item:hover .catalog-menu-item-title {
+    color: #1AB370 !important;
+}
+
+html.dark .catalog-menu-item-spec,
+html.theme-dark .catalog-menu-item-spec,
+[data-theme="dark"] .catalog-menu-item-spec {
+    color: #94A3B8 !important;
+}
+
+html.dark .catalog-menu-item-arrow,
+html.theme-dark .catalog-menu-item-arrow,
+[data-theme="dark"] .catalog-menu-item-arrow {
+    color: #94A3B8 !important;
+}
+
+html.dark .catalog-menu-item:hover .catalog-menu-item-arrow,
+html.theme-dark .catalog-menu-item:hover .catalog-menu-item-arrow,
+[data-theme="dark"] .catalog-menu-item:hover .catalog-menu-item-arrow {
+    color: #1AB370 !important;
+}
+
+
 html.theme-dark .site-header-synced a,
 html.dark .site-header-synced a,
 html.theme-dark .site-header-synced button,

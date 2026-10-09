@@ -318,12 +318,105 @@
 
         <!-- ЦЕНТРАЛЬНЕ МЕНЮ: Строго по центру шапки -->
         <nav class="hidden md:flex items-center gap-7 lg:gap-8 absolute left-1/2 -translate-x-1/2" style="display: flex; align-items: center; margin: 0 !important; padding: 0 !important; top: 0 !important; bottom: 0 !important; height: 100% !important;">
-            <a href="catalog.html"
-                style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important;"
-                class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2">
-                <span class="lang-ua">КАТАЛОГ</span>
-                <span class="lang-en">CATALOG</span>
-            </a>
+            <!-- МЕГА-МЕНЮ КАТАЛОГУ -->
+            <div class="relative group/catalog catalog-dropdown-wrap h-full flex items-center">
+                <a href="catalog.html"
+                    style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important;"
+                    class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2 flex items-center gap-1">
+                    <span class="lang-ua">КАТАЛОГ</span>
+                    <span class="lang-en">CATALOG</span>
+                    <svg class="w-3 h-3 transition-transform duration-200 group-hover/catalog:rotate-180 opacity-60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </a>
+                <div class="catalog-mega-menu">
+                    <div class="catalog-mega-menu-inner">
+                        <div class="grid grid-cols-2 gap-4">
+                            <!-- 1) Електроскутери -->
+                            <div>
+                                <a href="catalog.html?cat=scooter" class="catalog-cat-header group/cat">
+                                    <div class="flex items-center gap-1.5 catalog-cat-title group-hover/cat:text-[#1AB370]">
+                                        <span>🛵</span>
+                                        <span class="lang-ua">Електроскутери</span>
+                                        <span class="lang-en">Electric Scooters</span>
+                                    </div>
+                                    <span class="catalog-cat-all-link">
+                                        <span class="lang-ua">Всі →</span>
+                                        <span class="lang-en">All →</span>
+                                    </span>
+                                </a>
+                                <div class="space-y-1 mt-2">
+                                    <a href="catalog.html?model=crosser_cr20" class="catalog-menu-item group/item">
+                                        <div class="min-w-0">
+                                            <div class="catalog-menu-item-title group-hover/item:text-[#1AB370]">Crosser CR-20</div>
+                                            <div class="catalog-menu-item-spec">72V • 75 км/год • 2500W</div>
+                                        </div>
+                                        <svg class="catalog-menu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                    </a>
+                                    <a href="catalog.html?model=crosser_cr13_1" class="catalog-menu-item group/item">
+                                        <div class="min-w-0">
+                                            <div class="catalog-menu-item-title group-hover/item:text-[#1AB370]">Crosser CR-13</div>
+                                            <div class="catalog-menu-item-spec">72V • 85 км/год • 2000W</div>
+                                        </div>
+                                        <svg class="catalog-menu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                    </a>
+                                    <a href="catalog.html?brand=Aima" class="catalog-menu-item group/item">
+                                        <div class="min-w-0">
+                                            <div class="catalog-menu-item-title group-hover/item:text-[#1AB370]">AIMA ONE</div>
+                                            <div class="catalog-menu-item-spec">72V • Серія Aima • Топ</div>
+                                        </div>
+                                        <svg class="catalog-menu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- 2) Електровелосипеди -->
+                            <div>
+                                <a href="catalog.html?cat=bike" class="catalog-cat-header group/cat">
+                                    <div class="flex items-center gap-1.5 catalog-cat-title group-hover/cat:text-[#1AB370]">
+                                        <span>🚲</span>
+                                        <span class="lang-ua">Електровелосипеди</span>
+                                        <span class="lang-en">Electric Bikes</span>
+                                    </div>
+                                    <span class="catalog-cat-all-link">
+                                        <span class="lang-ua">Всі →</span>
+                                        <span class="lang-en">All →</span>
+                                    </span>
+                                </a>
+                                <div class="space-y-1 mt-2">
+                                    <a href="catalog.html?model=like_bike_bruser_1" class="catalog-menu-item group/item">
+                                        <div class="min-w-0">
+                                            <div class="catalog-menu-item-title group-hover/item:text-[#1AB370]">Like.Bike Bruiser</div>
+                                            <div class="catalog-menu-item-spec">48V • 45 км/год • Рама 180 кг</div>
+                                        </div>
+                                        <svg class="catalog-menu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                    </a>
+                                    <a href="catalog.html?cat=bike" class="catalog-menu-item group/item">
+                                        <div class="min-w-0">
+                                            <div class="catalog-menu-item-title group-hover/item:text-[#1AB370]">
+                                                <span class="lang-ua">Всі велосипеди</span>
+                                                <span class="lang-en">All e-bikes</span>
+                                            </div>
+                                            <div class="catalog-menu-item-spec">Like.Bike, ADO A20F</div>
+                                        </div>
+                                        <svg class="catalog-menu-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Нижня плашка -->
+                        <div class="mt-3 pt-2.5 border-t border-zinc-100 dark:border-white/10 flex items-center justify-between">
+                            <span class="text-[11px] text-zinc-500 dark:text-zinc-400">
+                                <span class="lang-ua">15+ моделей у наявності</span>
+                                <span class="lang-en">15+ models available</span>
+                            </span>
+                            <a href="catalog.html" class="catalog-menu-bottom-link">
+                                <span class="lang-ua">Переглянути весь каталог →</span>
+                                <span class="lang-en">View full catalog →</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <a href="calculator.html"
                 style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important;"
                 class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2">

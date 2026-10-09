@@ -249,10 +249,10 @@
                 30: { label: "28 ДНІВ (МІСЯЦЬ)" }
             },
             addons: {
-                helmet: { title: "ШОЛОМ + ТРИМАЧ ДЛЯ ТЕЛЕФОНУ", desc: "+200 грн", badge: "+200 грн", price: 200 },
-                battery: { title: "ДРУГИЙ ЗНІМНИЙ АКБ", desc: "+800 грн", badge: "+800 грн", price: 800 },
-                battery40: { title: "ДРУГИЙ ЗНІМНИЙ АКБ (40Ah)", desc: "+800 грн", badge: "+800 грн", price: 800 },
-                battery60: { title: "ДРУГИЙ ЗНІМНИЙ АКБ (60Ah)", desc: "+1 200 грн", badge: "+1 200 грн", price: 1200 }
+                phone_holder: { title: "ТРИМАЧ ДЛЯ ТЕЛЕФОНУ", desc: "+100 грн", badge: "+100 грн", price: 100 },
+                helmet: { title: "ШОЛОМ", desc: "+100 грн", badge: "+100 грн", price: 100 },
+                battery40: { title: "ЗНІМНИЙ АКБ 40Ah", desc: "+800 грн", badge: "+800 грн", price: 800 },
+                battery60: { title: "ЗНІМНИЙ АКБ 60Ah", desc: "+1 200 грн", badge: "+1 200 грн", price: 1200 }
             },
             tg_btn: "НАДІСЛАТИ ЗАЯВКУ В TELEGRAM ({price} ГРН)",
             tg_btn_base: "НАДІСЛАТИ ЗАЯВКУ В TELEGRAM",
@@ -277,10 +277,10 @@
                 30: { label: "28 DAYS (MONTH)" }
             },
             addons: {
-                helmet: { title: "HELMET + PHONE MOUNT", desc: "+200 UAH", badge: "+200 UAH", price: 200 },
-                battery: { title: "SECOND REMOVABLE BATTERY", desc: "+800 UAH", badge: "+800 UAH", price: 800 },
-                battery40: { title: "SECOND REMOVABLE BATTERY (40Ah)", desc: "+800 UAH", badge: "+800 UAH", price: 800 },
-                battery60: { title: "SECOND REMOVABLE BATTERY (60Ah)", desc: "+1,200 UAH", badge: "+1,200 UAH", price: 1200 }
+                phone_holder: { title: "PHONE MOUNT", desc: "+100 UAH", badge: "+100 UAH", price: 100 },
+                helmet: { title: "HELMET", desc: "+100 UAH", badge: "+100 UAH", price: 100 },
+                battery40: { title: "REMOVABLE BATTERY 40Ah", desc: "+800 UAH", badge: "+800 UAH", price: 800 },
+                battery60: { title: "REMOVABLE BATTERY 60Ah", desc: "+1,200 UAH", badge: "+1,200 UAH", price: 1200 }
             },
             tg_btn: "SEND APPLICATION TO TELEGRAM ({price} UAH)",
             tg_btn_base: "SEND APPLICATION TO TELEGRAM",
