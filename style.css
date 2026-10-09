@@ -30,7 +30,7 @@ html.theme-dark .muvio-logo-mark,
 .dark .muvio-logo-mark,
 .theme-dark .muvio-logo-mark,
 [data-theme="dark"] .muvio-logo-mark {
-    fill: #10B981 !important;
+    fill: #FFFFFF !important;
 }
 html.dark .muvio-logo-letters,
 html.theme-dark .muvio-logo-letters,
@@ -63,10 +63,43 @@ html.dark .header .logo img,
 body.dark .header .logo img,
 .dark-theme .header-logo img,
 .dark-theme .header-logo-img {
-    filter: none !important;
+    filter: brightness(0) invert(1) !important;
     mix-blend-mode: normal !important;
     background: transparent !important;
     background-color: transparent !important;
+}
+
+/* 1. Dynamic Header Logo */
+html.dark .header-logo,
+html.dark .logo-text,
+html.dark a.logo,
+html.theme-dark .header-logo,
+html.theme-dark .logo-text,
+html.theme-dark a.logo {
+  color: #FFFFFF !important;
+}
+html.dark .logo img,
+html.dark .header-logo img,
+html.theme-dark .logo img,
+html.theme-dark .header-logo img {
+  filter: brightness(0) invert(1) !important;
+}
+
+/* В светлой теме (html:not(.dark)) */
+html:not(.dark):not(.theme-dark) .header-logo,
+html:not(.dark):not(.theme-dark) .logo-text,
+html:not(.dark):not(.theme-dark) a.logo,
+.header-logo,
+.logo-text,
+a.logo {
+  color: #1AB370 !important;
+}
+html:not(.dark):not(.theme-dark) .header-logo img,
+html:not(.dark):not(.theme-dark) .header-logo-img,
+html:not(.dark):not(.theme-dark) .logo img,
+.header-logo img,
+.logo img {
+  filter: none !important;
 }
 
 

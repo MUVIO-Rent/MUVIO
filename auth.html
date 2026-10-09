@@ -49,10 +49,97 @@
             background-color: #FFFFFF;
             transition: background-color 0.2s ease, color 0.2s ease;
         }
-        html.theme-dark body {
-            background-color: #0B0E0C !important;
+
+        /* 1. ДИНАМИЧЕСКИЙ ЦВЕТ ЛОГОТИПА MUVIO */
+        /* В светлой теме (html:not(.dark)) */
+        .header-logo,
+        .logo-text,
+        a.logo {
+            color: #1AB370 !important;
+        }
+        .header-logo img,
+        .logo img,
+        .header-logo-img {
+            filter: none !important;
+        }
+        .muvio-logo-mark {
+            fill: #1AB370 !important;
+            transition: fill 0.2s ease;
+        }
+        .muvio-logo-letters {
+            fill: #111827 !important;
+            transition: fill 0.2s ease;
+        }
+
+        /* В темной теме */
+        html.dark .header-logo,
+        html.dark .logo-text,
+        html.dark a.logo,
+        html.theme-dark .header-logo,
+        html.theme-dark .logo-text,
+        html.theme-dark a.logo,
+        [data-theme="dark"] .header-logo,
+        [data-theme="dark"] .logo-text,
+        [data-theme="dark"] a.logo {
             color: #FFFFFF !important;
         }
+        html.dark .logo img,
+        html.dark .header-logo img,
+        html.dark .header-logo-img,
+        html.dark header img,
+        html.theme-dark .logo img,
+        html.theme-dark .header-logo img,
+        html.theme-dark .header-logo-img,
+        html.theme-dark header img,
+        [data-theme="dark"] .logo img,
+        [data-theme="dark"] .header-logo img,
+        [data-theme="dark"] .header-logo-img {
+            filter: brightness(0) invert(1) !important; /* Делает логотип чисто белым в dark mode */
+        }
+        html.dark .muvio-logo-mark,
+        html.theme-dark .muvio-logo-mark,
+        .dark .muvio-logo-mark,
+        .theme-dark .muvio-logo-mark,
+        [data-theme="dark"] .muvio-logo-mark,
+        html.dark .muvio-logo-letters,
+        html.theme-dark .muvio-logo-letters,
+        .dark .muvio-logo-letters,
+        .theme-dark .muvio-logo-letters,
+        [data-theme="dark"] .muvio-logo-letters {
+            fill: #FFFFFF !important;
+        }
+
+        /* 2. МОНОЛИТНЫЙ ЧЕРНЫЙ ФОН СТРАНИЦЫ АВТОРИЗАЦИИ (AUTH.HTML) */
+        html.dark,
+        html.theme-dark,
+        html.dark body,
+        html.theme-dark body,
+        body.dark,
+        body.theme-dark,
+        [data-theme="dark"] body {
+            background-color: #080A0C !important;
+            background: #080A0C !important;
+            color: #FFFFFF !important;
+        }
+
+        html.dark header,
+        html.theme-dark header,
+        html.dark .site-header-synced,
+        html.theme-dark .site-header-synced,
+        [data-theme="dark"] .site-header-synced {
+            background-color: #080A0C !important;
+            background: #080A0C !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+        }
+
+        html.dark #mobile-menu,
+        html.theme-dark #mobile-menu {
+            background-color: #080A0C !important;
+            background: #080A0C !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+        }
+
+        /* Поля ввода и карточка */
         .auth-input-tesla {
             background-color: #f4f4f5 !important;
             border: 1px solid #e4e4e7 !important;
@@ -64,34 +151,103 @@
         }
         .auth-input-tesla:focus {
             outline: none !important;
-            border-color: #1D5D3B !important;
-            box-shadow: 0 0 0 1px #1D5D3B !important;
+            border-color: #1AB370 !important;
+            box-shadow: 0 0 0 1px #1AB370 !important;
             background-color: #ffffff !important;
         }
-        html.theme-dark .auth-input-tesla {
-            background-color: rgba(24, 24, 27, 0.6) !important;
-            border: 1px solid #27272a !important;
+        html.dark .auth-input-tesla,
+        html.theme-dark .auth-input-tesla,
+        body.dark .auth-input-tesla,
+        body.theme-dark .auth-input-tesla,
+        [data-theme="dark"] .auth-input-tesla {
+            background-color: #0D1114 !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
             color: #ffffff !important;
         }
-        html.theme-dark .auth-input-tesla:focus {
-            border-color: #1D5D3B !important;
-            box-shadow: 0 0 0 1px #1D5D3B !important;
-            background-color: rgba(24, 24, 27, 0.9) !important;
+        html.dark .auth-input-tesla:focus,
+        html.theme-dark .auth-input-tesla:focus,
+        body.dark .auth-input-tesla:focus,
+        body.theme-dark .auth-input-tesla:focus,
+        [data-theme="dark"] .auth-input-tesla:focus {
+            outline: none !important;
+            border-color: #1AB370 !important;
+            box-shadow: 0 0 0 1px #1AB370 !important;
+            background-color: #11161B !important;
         }
+        html.dark .auth-input-tesla::placeholder,
+        html.theme-dark .auth-input-tesla::placeholder {
+            color: rgba(255, 255, 255, 0.35) !important;
+        }
+
+        /* Переключатель табов */
+        html.dark .auth-tabs-wrap,
+        html.theme-dark .auth-tabs-wrap {
+            background-color: #0D1114 !important;
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        }
+
+        /* Разделитель "Або" */
+        html.dark .auth-divider-text,
         html.theme-dark .auth-divider-text {
-            background-color: #0B0E0C !important;
+            background-color: #080A0C !important;
+            color: #9CA3AF !important;
         }
+
+        /* Вторичные и социальные кнопки */
+        html.dark .auth-btn-secondary,
         html.theme-dark .auth-btn-secondary {
-            background-color: #27272a !important;
+            background-color: #0D1114 !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
             color: #f4f4f5 !important;
         }
+        html.dark .auth-btn-secondary:hover,
         html.theme-dark .auth-btn-secondary:hover {
-            background-color: #3f3f46 !important;
+            background-color: #151C22 !important;
         }
+
+        html.dark #loginGoogleBtn,
+        html.dark #loginTelegramBtn,
+        html.dark #regGoogleBtn,
+        html.dark #regTelegramBtn,
+        html.theme-dark #loginGoogleBtn,
+        html.theme-dark #loginTelegramBtn,
+        html.theme-dark #regGoogleBtn,
+        html.theme-dark #regTelegramBtn {
+            background-color: #0D1114 !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            color: #E5E7EB !important;
+        }
+        html.dark #loginGoogleBtn:hover,
+        html.dark #loginTelegramBtn:hover,
+        html.dark #regGoogleBtn:hover,
+        html.dark #regTelegramBtn:hover,
+        html.theme-dark #loginGoogleBtn:hover,
+        html.theme-dark #loginTelegramBtn:hover,
+        html.theme-dark #regGoogleBtn:hover,
+        html.theme-dark #regTelegramBtn:hover {
+            background-color: #151C22 !important;
+            border-color: rgba(255, 255, 255, 0.18) !important;
+        }
+
+        /* Модальные окна и тосты */
+        html.dark #linkPhoneModal > div,
+        html.dark #resetPasswordModal > div,
+        html.theme-dark #linkPhoneModal > div,
         html.theme-dark #resetPasswordModal > div {
-            background-color: #0B0E0C !important;
-            border-color: #27272a !important;
+            background-color: #080A0C !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
             color: #ffffff !important;
+        }
+        html.dark #resetStep2Form > div,
+        html.theme-dark #resetStep2Form > div {
+            background-color: #0D1114 !important;
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            color: #D1D5DB !important;
+        }
+        html.dark #smsToast > div,
+        html.theme-dark #smsToast > div {
+            background-color: #080A0C !important;
+            border: 1px solid rgba(255, 255, 255, 0.12) !important;
         }
 
         /* Unified Synced Site Header */
@@ -111,33 +267,10 @@
             }
         }
 
-        /* Pure Transparent Vector Logo */
         .muvio-logo-svg {
             height: 40px !important;
             width: auto !important;
             display: block !important;
-        }
-        .muvio-logo-mark {
-            fill: #1AB370 !important;
-            transition: fill 0.2s ease;
-        }
-        .muvio-logo-letters {
-            fill: #111827 !important;
-            transition: fill 0.2s ease;
-        }
-        html.dark .muvio-logo-mark,
-        html.theme-dark .muvio-logo-mark,
-        .dark .muvio-logo-mark,
-        .theme-dark .muvio-logo-mark,
-        [data-theme="dark"] .muvio-logo-mark {
-            fill: #10B981 !important;
-        }
-        html.dark .muvio-logo-letters,
-        html.theme-dark .muvio-logo-letters,
-        .dark .muvio-logo-letters,
-        .theme-dark .muvio-logo-letters,
-        [data-theme="dark"] .muvio-logo-letters {
-            fill: #FFFFFF !important;
         }
     </style>
 
@@ -176,7 +309,7 @@
             <!-- Логотип MUVIO (растровый PNG, крайнее левое положение) -->
             <a href="index.html"
                 style="display: inline-flex !important; align-items: center !important; text-decoration: none !important; background: transparent !important;"
-                class="group focus:outline-none" aria-label="MUVIO">
+                class="group focus:outline-none header-logo logo" aria-label="MUVIO">
                 <img src="images/logo-header-trans.png" alt="MUVIO"
                     style="height: 28px !important; width: auto !important; display: block !important; transition: opacity 0.2s; background: transparent !important;"
                     class="header-logo-img group-hover:opacity-90" />
@@ -295,9 +428,9 @@
     <!-- 2. ЦЕНТРАЛЬНИЙ КОНТЕЙНЕР ФОРМИ (mx-auto w-full max-w-[360px] px-4 pt-3 sm:pt-5 pb-16) -->
     <main class="mx-auto w-full max-w-[360px] px-4 pt-3 sm:pt-5 pb-16">
         <!-- ТАБИ: ВХІД / РЕЄСТРАЦІЯ -->
-        <div class="grid grid-cols-2 p-1 mb-5 bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg select-none">
+        <div class="auth-tabs-wrap grid grid-cols-2 p-1 mb-5 bg-zinc-100 dark:bg-[#0D1114] border border-zinc-200 dark:border-white/10 rounded-lg select-none">
             <button type="button" id="authTabLogin" onclick="switchAuthTab('login')"
-                class="py-2 text-xs font-semibold rounded-md transition-all text-zinc-900 dark:text-white bg-white dark:bg-zinc-800 shadow-sm">
+                class="py-2 text-xs font-semibold rounded-md transition-all text-zinc-900 dark:text-white bg-white dark:bg-[#182026] shadow-sm">
                 <span class="lang-ua">Вхід</span>
                 <span class="lang-en">Sign In</span>
             </button>
@@ -337,7 +470,7 @@
                         data-placeholder-ua="Введіть логін, телефон або email"
                         data-placeholder-en="Enter username, phone or email"
                         placeholder="Введіть логін, телефон або email"
-                        class="auth-input-tesla w-full bg-zinc-100 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 rounded-md px-3.5 py-2.5 text-sm text-zinc-900 dark:text-white focus:outline-none focus:border-[#1D5D3B] focus:ring-1 focus:ring-[#1D5D3B] transition-all">
+                        class="auth-input-tesla w-full bg-zinc-100 dark:bg-[#0D1114] border border-zinc-200 dark:border-white/10 rounded-md px-3.5 py-2.5 text-sm text-zinc-900 dark:text-white focus:outline-none focus:border-[#1AB370] focus:ring-1 focus:ring-[#1AB370] transition-all">
                 </div>
 
                 <div>
@@ -349,7 +482,7 @@
                         data-placeholder-ua="••••••••"
                         data-placeholder-en="••••••••"
                         placeholder="••••••••"
-                        class="auth-input-tesla w-full bg-zinc-100 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 rounded-md px-3.5 py-2.5 text-sm text-zinc-900 dark:text-white focus:outline-none focus:border-[#1D5D3B] focus:ring-1 focus:ring-[#1D5D3B] transition-all">
+                        class="auth-input-tesla w-full bg-zinc-100 dark:bg-[#0D1114] border border-zinc-200 dark:border-white/10 rounded-md px-3.5 py-2.5 text-sm text-zinc-900 dark:text-white focus:outline-none focus:border-[#1AB370] focus:ring-1 focus:ring-[#1AB370] transition-all">
                 </div>
 
                 <button type="submit" id="loginSubmitBtn"
@@ -367,8 +500,8 @@
                 </div>
 
                 <div class="relative my-4 text-center">
-                    <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-zinc-200 dark:border-zinc-800"></div></div>
-                    <span class="relative bg-white dark:bg-[#0B0E0C] px-3 text-xs text-zinc-400 font-medium auth-divider-text">
+                    <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-zinc-200 dark:border-white/10"></div></div>
+                    <span class="relative bg-white dark:bg-[#080A0C] px-3 text-xs text-zinc-400 font-medium auth-divider-text">
                         <span class="lang-ua">Або</span>
                         <span class="lang-en">Or</span>
                     </span>
@@ -377,7 +510,7 @@
                 <!-- Соціальні кнопки: дві кнопки однакової ширини -->
                 <div class="space-y-2.5">
                     <button type="button" id="loginGoogleBtn" onclick="loginWithGoogle()"
-                        class="w-full h-11 bg-white hover:bg-zinc-50 dark:bg-zinc-900 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-md text-xs font-semibold text-zinc-800 dark:text-zinc-200 flex items-center justify-center gap-2.5 transition-all shadow-sm">
+                        class="w-full h-11 bg-white hover:bg-zinc-50 dark:bg-[#0D1114] dark:hover:bg-[#151C22] border border-zinc-200 dark:border-white/10 rounded-md text-xs font-semibold text-zinc-800 dark:text-zinc-200 flex items-center justify-center gap-2.5 transition-all shadow-sm">
                         <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24">
                             <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
                             <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
@@ -388,7 +521,7 @@
                         <span class="lang-en">Continue with Google</span>
                     </button>
                     <button type="button" id="loginTelegramBtn" onclick="loginWithTelegram()"
-                        class="w-full h-11 bg-white hover:bg-zinc-50 dark:bg-zinc-900 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-md text-xs font-semibold text-zinc-800 dark:text-zinc-200 flex items-center justify-center gap-2.5 transition-all shadow-sm">
+                        class="w-full h-11 bg-white hover:bg-zinc-50 dark:bg-[#0D1114] dark:hover:bg-[#151C22] border border-zinc-200 dark:border-white/10 rounded-md text-xs font-semibold text-zinc-800 dark:text-zinc-200 flex items-center justify-center gap-2.5 transition-all shadow-sm">
                         <svg class="w-4 h-4 shrink-0 text-[#229ED9]" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
                         </svg>
@@ -398,7 +531,7 @@
                 </div>
 
                 <button type="button" onclick="switchAuthTab('register')"
-                    class="auth-btn-secondary bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100 font-medium text-sm py-2.5 w-full rounded-md transition-all text-center mt-3">
+                    class="auth-btn-secondary bg-zinc-100 hover:bg-zinc-200 dark:bg-[#0D1114] dark:hover:bg-[#151C22] text-zinc-900 dark:text-zinc-100 font-medium text-sm py-2.5 w-full rounded-md transition-all text-center mt-3 border border-zinc-200 dark:border-white/10">
                     <span class="lang-ua">Створити акаунт</span>
                     <span class="lang-en">Create Account</span>
                 </button>
@@ -422,7 +555,7 @@
                         data-placeholder-ua="Введіть ваше ім'я"
                         data-placeholder-en="Enter your name"
                         placeholder="Введіть ваше ім'я"
-                        class="auth-input-tesla w-full bg-zinc-100 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 rounded-md px-3.5 py-2.5 text-sm text-zinc-900 dark:text-white focus:outline-none focus:border-[#1D5D3B] focus:ring-1 focus:ring-[#1D5D3B] transition-all">
+                        class="auth-input-tesla w-full bg-zinc-100 dark:bg-[#0D1114] border border-zinc-200 dark:border-white/10 rounded-md px-3.5 py-2.5 text-sm text-zinc-900 dark:text-white focus:outline-none focus:border-[#1AB370] focus:ring-1 focus:ring-[#1AB370] transition-all">
                 </div>
 
                 <div>
@@ -434,7 +567,7 @@
                         data-placeholder-ua="+380 (XX) XXX-XX-XX"
                         data-placeholder-en="+380 (XX) XXX-XX-XX"
                         placeholder="+380 (XX) XXX-XX-XX"
-                        class="auth-input-tesla w-full bg-zinc-100 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 rounded-md px-3.5 py-2.5 text-sm text-zinc-900 dark:text-white focus:outline-none focus:border-[#1D5D3B] focus:ring-1 focus:ring-[#1D5D3B] transition-all">
+                        class="auth-input-tesla w-full bg-zinc-100 dark:bg-[#0D1114] border border-zinc-200 dark:border-white/10 rounded-md px-3.5 py-2.5 text-sm text-zinc-900 dark:text-white focus:outline-none focus:border-[#1AB370] focus:ring-1 focus:ring-[#1AB370] transition-all">
                     <p class="text-[11px] text-zinc-500 dark:text-zinc-400 mt-1 leading-tight">
                         <span class="lang-ua">Обов'язково: за номером телефону підтягується договір та техніка.</span>
                         <span class="lang-en">Required: your contract and vehicle are matched by phone.</span>
@@ -450,7 +583,7 @@
                         data-placeholder-ua="name@example.com"
                         data-placeholder-en="name@example.com"
                         placeholder="name@example.com"
-                        class="auth-input-tesla w-full bg-zinc-100 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 rounded-md px-3.5 py-2.5 text-sm text-zinc-900 dark:text-white focus:outline-none focus:border-[#1D5D3B] focus:ring-1 focus:ring-[#1D5D3B] transition-all">
+                        class="auth-input-tesla w-full bg-zinc-100 dark:bg-[#0D1114] border border-zinc-200 dark:border-white/10 rounded-md px-3.5 py-2.5 text-sm text-zinc-900 dark:text-white focus:outline-none focus:border-[#1AB370] focus:ring-1 focus:ring-[#1AB370] transition-all">
                 </div>
 
                 <div>
@@ -462,7 +595,7 @@
                         data-placeholder-ua="Введіть пароль"
                         data-placeholder-en="Enter password"
                         placeholder="Введіть пароль"
-                        class="auth-input-tesla w-full bg-zinc-100 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 rounded-md px-3.5 py-2.5 text-sm text-zinc-900 dark:text-white focus:outline-none focus:border-[#1D5D3B] focus:ring-1 focus:ring-[#1D5D3B] transition-all">
+                        class="auth-input-tesla w-full bg-zinc-100 dark:bg-[#0D1114] border border-zinc-200 dark:border-white/10 rounded-md px-3.5 py-2.5 text-sm text-zinc-900 dark:text-white focus:outline-none focus:border-[#1AB370] focus:ring-1 focus:ring-[#1AB370] transition-all">
                 </div>
 
                 <button type="submit" id="registerSubmitBtn"
@@ -472,8 +605,8 @@
                 </button>
 
                 <div class="relative my-4 text-center">
-                    <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-zinc-200 dark:border-zinc-800"></div></div>
-                    <span class="relative bg-white dark:bg-[#0B0E0C] px-3 text-xs text-zinc-400 font-medium auth-divider-text">
+                    <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-zinc-200 dark:border-white/10"></div></div>
+                    <span class="relative bg-white dark:bg-[#080A0C] px-3 text-xs text-zinc-400 font-medium auth-divider-text">
                         <span class="lang-ua">Або</span>
                         <span class="lang-en">Or</span>
                     </span>
@@ -482,7 +615,7 @@
                 <!-- Соціальні кнопки: дві кнопки однакової ширини -->
                 <div class="space-y-2.5">
                     <button type="button" id="regGoogleBtn" onclick="loginWithGoogle()"
-                        class="w-full h-11 bg-white hover:bg-zinc-50 dark:bg-zinc-900 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-md text-xs font-semibold text-zinc-800 dark:text-zinc-200 flex items-center justify-center gap-2.5 transition-all shadow-sm">
+                        class="w-full h-11 bg-white hover:bg-zinc-50 dark:bg-[#0D1114] dark:hover:bg-[#151C22] border border-zinc-200 dark:border-white/10 rounded-md text-xs font-semibold text-zinc-800 dark:text-zinc-200 flex items-center justify-center gap-2.5 transition-all shadow-sm">
                         <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24">
                             <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
                             <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
@@ -493,7 +626,7 @@
                         <span class="lang-en">Continue with Google</span>
                     </button>
                     <button type="button" id="regTelegramBtn" onclick="loginWithTelegram()"
-                        class="w-full h-11 bg-white hover:bg-zinc-50 dark:bg-zinc-900 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-md text-xs font-semibold text-zinc-800 dark:text-zinc-200 flex items-center justify-center gap-2.5 transition-all shadow-sm">
+                        class="w-full h-11 bg-white hover:bg-zinc-50 dark:bg-[#0D1114] dark:hover:bg-[#151C22] border border-zinc-200 dark:border-white/10 rounded-md text-xs font-semibold text-zinc-800 dark:text-zinc-200 flex items-center justify-center gap-2.5 transition-all shadow-sm">
                         <svg class="w-4 h-4 shrink-0 text-[#229ED9]" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
                         </svg>
@@ -503,7 +636,7 @@
                 </div>
 
                 <button type="button" onclick="switchAuthTab('login')"
-                    class="auth-btn-secondary bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100 font-medium text-sm py-2.5 w-full rounded-md transition-all text-center mt-3">
+                    class="auth-btn-secondary bg-zinc-100 hover:bg-zinc-200 dark:bg-[#0D1114] dark:hover:bg-[#151C22] text-zinc-900 dark:text-zinc-100 font-medium text-sm py-2.5 w-full rounded-md transition-all text-center mt-3 border border-zinc-200 dark:border-white/10">
                     <span class="lang-ua">Увійти в наявний акаунт</span>
                     <span class="lang-en">Sign In with existing account</span>
                 </button>
@@ -529,8 +662,8 @@
     </footer>
 
     <!-- ==================== МОДАЛЬНЕ ВІКНО: ПРИВ'ЯЗКА НОМЕРА ТЕЛЕФОНУ ==================== -->
-    <div id="linkPhoneModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
-        <div class="bg-white dark:bg-[#0B0E0C] border border-zinc-200 dark:border-zinc-800 rounded-lg p-6 sm:p-8 shadow-2xl max-w-[400px] w-full space-y-5 relative">
+    <div id="linkPhoneModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+        <div class="bg-white dark:bg-[#080A0C] border border-zinc-200 dark:border-white/10 rounded-lg p-6 sm:p-8 shadow-2xl max-w-[400px] w-full space-y-5 relative">
             <button type="button" onclick="closeLinkPhoneModal()" class="absolute top-5 right-5 text-zinc-400 hover:text-zinc-800 dark:hover:text-white transition-colors p-1" aria-label="Закрити">
                 <i data-lucide="x" class="w-5 h-5"></i>
             </button>
@@ -558,7 +691,7 @@
                         <span class="lang-en">Phone Number</span>
                     </label>
                     <input type="tel" id="linkPhoneInput" required placeholder="+380 (XX) XXX-XX-XX"
-                        class="auth-input-tesla w-full bg-zinc-100 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 rounded-md px-3.5 py-2.5 text-sm text-zinc-900 dark:text-white focus:outline-none focus:border-[#1D5D3B] focus:ring-1 focus:ring-[#1D5D3B] transition-all">
+                        class="auth-input-tesla w-full bg-zinc-100 dark:bg-[#0D1114] border border-zinc-200 dark:border-white/10 rounded-md px-3.5 py-2.5 text-sm text-zinc-900 dark:text-white focus:outline-none focus:border-[#1AB370] focus:ring-1 focus:ring-[#1AB370] transition-all">
                 </div>
 
                 <button type="submit" id="linkPhoneSubmitBtn"
@@ -571,8 +704,8 @@
     </div>
 
     <!-- ==================== МОДАЛЬНЕ ВІКНО: ВІДНОВЛЕННЯ ПАРОЛЮ (SMS) ==================== -->
-    <div id="resetPasswordModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
-        <div class="bg-white dark:bg-[#0B0E0C] border border-zinc-200 dark:border-zinc-800 rounded-lg p-6 sm:p-8 shadow-2xl max-w-[400px] w-full space-y-5 relative">
+    <div id="resetPasswordModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+        <div class="bg-white dark:bg-[#080A0C] border border-zinc-200 dark:border-white/10 rounded-lg p-6 sm:p-8 shadow-2xl max-w-[400px] w-full space-y-5 relative">
             <button type="button" onclick="closeResetPasswordModal()" class="absolute top-5 right-5 text-zinc-400 hover:text-zinc-800 dark:hover:text-white transition-colors p-1" aria-label="Закрити">
                 <i data-lucide="x" class="w-5 h-5"></i>
             </button>
@@ -606,7 +739,7 @@
                         <span class="lang-en">Phone Number</span>
                     </label>
                     <input type="tel" id="resetPhone" required placeholder="+380 (XX) XXX-XX-XX"
-                        class="auth-input-tesla w-full bg-zinc-100 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 rounded-md px-3.5 py-2.5 text-sm text-zinc-900 dark:text-white focus:outline-none focus:border-[#1D5D3B] focus:ring-1 focus:ring-[#1D5D3B] transition-all">
+                        class="auth-input-tesla w-full bg-zinc-100 dark:bg-[#0D1114] border border-zinc-200 dark:border-white/10 rounded-md px-3.5 py-2.5 text-sm text-zinc-900 dark:text-white focus:outline-none focus:border-[#1AB370] focus:ring-1 focus:ring-[#1AB370] transition-all">
                 </div>
                 <button type="submit"
                     class="bg-[#1D5D3B] hover:bg-[#237248] text-white font-medium text-sm py-2.5 w-full rounded-md shadow-sm transition-all text-center mt-2 flex items-center justify-center gap-2">
@@ -618,7 +751,7 @@
 
             <!-- Крок 2: Введення коду та нового пароля -->
             <form id="resetStep2Form" onsubmit="handleConfirmResetPassword(event)" class="hidden space-y-4">
-                <div class="bg-zinc-100 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 p-3 rounded-md text-xs text-zinc-700 dark:text-zinc-300">
+                <div class="bg-zinc-100 dark:bg-[#0D1114] border border-zinc-200 dark:border-white/10 p-3 rounded-md text-xs text-zinc-700 dark:text-zinc-300">
                     <span class="lang-ua">Код надіслано на номер:</span>
                     <span class="lang-en">Code sent to:</span>
                     <span id="resetTargetPhoneDisplay" class="font-bold text-[#1D5D3B] ml-1"></span>
@@ -630,7 +763,7 @@
                         <span class="lang-en">4-digit SMS Code</span>
                     </label>
                     <input type="text" id="resetSmsCode" required maxlength="4" placeholder="••••"
-                        class="auth-input-tesla w-full bg-zinc-100 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 rounded-md px-3.5 py-2.5 text-center text-lg font-mono font-bold tracking-widest text-zinc-900 dark:text-white focus:outline-none focus:border-[#1D5D3B] focus:ring-1 focus:ring-[#1D5D3B] transition-all">
+                        class="auth-input-tesla w-full bg-zinc-100 dark:bg-[#0D1114] border border-zinc-200 dark:border-white/10 rounded-md px-3.5 py-2.5 text-center text-lg font-mono font-bold tracking-widest text-zinc-900 dark:text-white focus:outline-none focus:border-[#1AB370] focus:ring-1 focus:ring-[#1AB370] transition-all">
                 </div>
 
                 <div>
@@ -639,7 +772,7 @@
                         <span class="lang-en">New Password</span>
                     </label>
                     <input type="password" id="resetNewPassword" required minlength="3" placeholder="Введіть новий пароль"
-                        class="auth-input-tesla w-full bg-zinc-100 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 rounded-md px-3.5 py-2.5 text-sm text-zinc-900 dark:text-white focus:outline-none focus:border-[#1D5D3B] focus:ring-1 focus:ring-[#1D5D3B] transition-all">
+                        class="auth-input-tesla w-full bg-zinc-100 dark:bg-[#0D1114] border border-zinc-200 dark:border-white/10 rounded-md px-3.5 py-2.5 text-sm text-zinc-900 dark:text-white focus:outline-none focus:border-[#1AB370] focus:ring-1 focus:ring-[#1AB370] transition-all">
                 </div>
 
                 <button type="submit"
@@ -665,7 +798,7 @@
 
     <!-- Вспливаюче Toast-повідомлення (SMS) -->
     <div id="smsToast" class="fixed top-6 left-1/2 -translate-x-1/2 z-50 hidden transition-all duration-300 max-w-md w-[92%] sm:w-auto">
-        <div class="bg-zinc-900 text-white border border-zinc-700/80 p-4 rounded-lg shadow-2xl flex items-start gap-3">
+        <div class="bg-zinc-900 dark:bg-[#0D1114] text-white border border-zinc-700/80 dark:border-white/10 p-4 rounded-lg shadow-2xl flex items-start gap-3">
             <div class="text-[#1D5D3B] mt-0.5 shrink-0">
                 <i data-lucide="message-square" class="w-5 h-5"></i>
             </div>
@@ -782,7 +915,7 @@
                 if (loginView) loginView.classList.remove('hidden');
                 if (regView) regView.classList.add('hidden');
                 if (tabLogin) {
-                    tabLogin.className = 'py-2 text-xs font-semibold rounded-md transition-all text-zinc-900 dark:text-white bg-white dark:bg-zinc-800 shadow-sm';
+                    tabLogin.className = 'py-2 text-xs font-semibold rounded-md transition-all text-zinc-900 dark:text-white bg-white dark:bg-[#182026] shadow-sm';
                 }
                 if (tabReg) {
                     tabReg.className = 'py-2 text-xs font-semibold rounded-md transition-all text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white';
@@ -791,7 +924,7 @@
                 if (loginView) loginView.classList.add('hidden');
                 if (regView) regView.classList.remove('hidden');
                 if (tabReg) {
-                    tabReg.className = 'py-2 text-xs font-semibold rounded-md transition-all text-zinc-900 dark:text-white bg-white dark:bg-zinc-800 shadow-sm';
+                    tabReg.className = 'py-2 text-xs font-semibold rounded-md transition-all text-zinc-900 dark:text-white bg-white dark:bg-[#182026] shadow-sm';
                 }
                 if (tabLogin) {
                     tabLogin.className = 'py-2 text-xs font-semibold rounded-md transition-all text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white';

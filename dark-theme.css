@@ -346,23 +346,41 @@ html.dark .header .logo img,
 body.dark .header .logo img,
 .dark-theme .header-logo img,
 .dark-theme .header-logo-img {
-    filter: none !important;
+    filter: brightness(0) invert(1) !important;
     mix-blend-mode: normal !important;
     background: transparent !important;
     background-color: transparent !important;
 }
 
-.header-logo-wrap svg {
-    color: #1D5D3B !important;
-    fill: #1D5D3B !important;
-    stroke: #1D5D3B !important;
-    transition: color 0.25s ease, filter 0.25s ease;
+html.dark .header-logo,
+html.dark .logo-text,
+html.dark a.logo,
+html.theme-dark .header-logo,
+html.theme-dark .logo-text,
+html.theme-dark a.logo,
+[data-theme="dark"] .header-logo,
+[data-theme="dark"] .logo-text,
+[data-theme="dark"] a.logo {
+    color: #FFFFFF !important;
 }
 
+html.dark .logo img,
+html.dark .header-logo img,
+html.theme-dark .logo img,
+html.theme-dark .header-logo img,
+[data-theme="dark"] .logo img,
+[data-theme="dark"] .header-logo img {
+    filter: brightness(0) invert(1) !important;
+}
+
+html.dark .header-logo-wrap svg,
+html.dark .header-logo-wrap svg path,
 html.theme-dark .header-logo-wrap svg,
-html.theme-dark .header-logo-wrap svg path {
-    color: #1D5D3B !important;
-    fill: #1D5D3B !important;
+html.theme-dark .header-logo-wrap svg path,
+[data-theme="dark"] .header-logo-wrap svg,
+[data-theme="dark"] .header-logo-wrap svg path {
+    color: #FFFFFF !important;
+    fill: #FFFFFF !important;
     stroke: none !important;
     filter: none !important;
     opacity: 1 !important;
@@ -1301,7 +1319,7 @@ html.dark .header .logo img,
 body.dark .header .logo img,
 .dark-theme .header-logo img,
 .dark-theme .header-logo-img {
-    filter: none !important;
+    filter: brightness(0) invert(1) !important;
     mix-blend-mode: normal !important;
     background: transparent !important;
     background-color: transparent !important;
