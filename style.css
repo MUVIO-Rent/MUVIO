@@ -627,23 +627,26 @@ header nav,
     align-items: center !important;
 }
 
+/* 1. Плавное выпадение и мягкий сдвиг меню */
 .catalog-mega-menu {
     position: absolute !important;
     top: 100% !important;
     left: 50% !important;
-    transform: translateX(-50%) translateY(6px) !important;
+    transform: translateX(-50%) translateY(-8px) !important;
     padding-top: 10px !important;
     opacity: 0 !important;
     visibility: hidden !important;
     pointer-events: none !important;
-    transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.22s !important;
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease !important;
     z-index: 1000 !important;
-    width: 500px !important;
+    width: 470px !important;
     box-sizing: border-box !important;
 }
 
 .catalog-dropdown-wrap:hover .catalog-mega-menu,
 .group\/catalog:hover .catalog-mega-menu,
+.catalog-mega-menu.open,
+.catalog-dropdown-wrap.open .catalog-mega-menu,
 .catalog-mega-menu:hover {
     opacity: 1 !important;
     visibility: visible !important;
@@ -651,11 +654,11 @@ header nav,
     transform: translateX(-50%) translateY(0) !important;
 }
 
-/* Светлая тема */
+/* Светлая тема: чистый белый фон (#FFFFFF), тонкая рамка 1px solid rgba(0,0,0,0.06), мягкая глубокая тень */
 .catalog-mega-menu-inner {
     background: #FFFFFF !important;
     border-radius: 16px !important;
-    border: 1px solid rgba(15, 23, 42, 0.08) !important;
+    border: 1px solid rgba(0, 0, 0, 0.06) !important;
     box-shadow: 0 16px 36px -6px rgba(15, 23, 42, 0.12), 0 4px 14px -2px rgba(15, 23, 42, 0.06) !important;
     padding: 16px 18px 14px !important;
     color: #0F172A !important;
@@ -663,7 +666,7 @@ header nav,
     box-sizing: border-box !important;
 }
 
-/* Темная тема (глубокий графит #080A0C / #111418, граница 1px solid rgba(255, 255, 255, 0.1), белый текст #FFFFFF) */
+/* Тёмная тема: глубокий графит (#080A0C / #111418), рамка 1px solid rgba(255,255,255,0.1), текст чисто белый (#FFFFFF) */
 html.dark .catalog-mega-menu-inner,
 html.theme-dark .catalog-mega-menu-inner,
 body.dark .catalog-mega-menu-inner,
@@ -683,150 +686,244 @@ header nav .catalog-mega-menu a,
     text-decoration: none !important;
 }
 
-header nav .catalog-cat-header,
-.site-header-synced nav .catalog-cat-header,
-.catalog-cat-header {
+/* Второстепенные заголовки блоков («ЕЛЕКТРОТРАНСПОРТ», «МАГАЗИН АКСЕСУАРІВ») — неяркий приглушенный сланцевый (#94A3B8) уменьшенным капсом */
+.catalog-section-title {
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.12em !important;
+    text-transform: uppercase !important;
+    color: #94A3B8 !important;
+    margin-bottom: 8px !important;
     display: flex !important;
     align-items: center !important;
-    justify-content: space-between !important;
-    padding-bottom: 8px !important;
-    border-bottom: 1px solid rgba(15, 23, 42, 0.07) !important;
-    text-decoration: none !important;
+    gap: 6px !important;
 }
 
-html.dark header nav .catalog-cat-header,
-html.dark .site-header-synced nav .catalog-cat-header,
-html.dark .catalog-cat-header,
-html.theme-dark .catalog-cat-header,
-[data-theme="dark"] .catalog-cat-header {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+html.dark .catalog-section-title,
+html.theme-dark .catalog-section-title,
+[data-theme="dark"] .catalog-section-title {
+    color: #94A3B8 !important;
 }
 
-header nav .catalog-cat-title,
-.site-header-synced nav .catalog-cat-title,
-.catalog-cat-title {
-    color: #0F172A !important;
+/* Заголовки категорий: Електроскутери, Електровелосипеди */
+.catalog-category-label {
     font-size: 11px !important;
     font-weight: 700 !important;
     text-transform: uppercase !important;
-    letter-spacing: 0.06em !important;
-    transition: color 0.15s ease !important;
+    letter-spacing: 0.05em !important;
+    color: #0F172A !important;
+    margin-bottom: 6px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
 }
 
-html.dark header nav .catalog-cat-title,
-html.dark .catalog-cat-title,
-html.theme-dark .catalog-cat-title,
-[data-theme="dark"] .catalog-cat-title {
+html.dark .catalog-category-label,
+html.theme-dark .catalog-category-label,
+[data-theme="dark"] .catalog-category-label {
     color: #FFFFFF !important;
 }
 
-header nav .catalog-cat-all-link,
-.site-header-synced nav .catalog-cat-all-link,
-.catalog-cat-all-link {
-    font-size: 10px !important;
-    color: #94A3B8 !important;
-    font-weight: 600 !important;
-    transition: color 0.15s ease !important;
-}
-
-.catalog-cat-header:hover .catalog-cat-title,
-.catalog-cat-header:hover .catalog-cat-all-link {
-    color: #1AB370 !important;
-}
-
-header nav .catalog-menu-item,
-.site-header-synced nav .catalog-menu-item,
-.catalog-menu-item {
+/* Ссылки брендов транспорта (Crosser, Aima, Ado, Like.Bike) */
+.catalog-link-card {
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
-    padding: 7px 9px !important;
-    border-radius: 10px !important;
+    padding: 7px 10px !important;
+    border-radius: 8px !important;
     text-decoration: none !important;
-    background: transparent !important;
-    transition: background-color 0.15s ease, transform 0.15s ease !important;
+    background: rgba(15, 23, 42, 0.02) !important;
+    border: 1px solid rgba(15, 23, 42, 0.05) !important;
+    margin-bottom: 4px !important;
+    transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.15s ease !important;
 }
 
-.catalog-menu-item:hover {
-    background: rgba(15, 23, 42, 0.04) !important;
+.catalog-link-card:hover {
+    background: rgba(26, 179, 112, 0.08) !important;
+    border-color: rgba(26, 179, 112, 0.3) !important;
 }
 
-html.dark header nav .catalog-menu-item:hover,
-html.dark .catalog-menu-item:hover,
-html.theme-dark .catalog-menu-item:hover,
-[data-theme="dark"] .catalog-menu-item:hover {
-    background: rgba(255, 255, 255, 0.06) !important;
+html.dark .catalog-link-card,
+html.theme-dark .catalog-link-card,
+[data-theme="dark"] .catalog-link-card {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border-color: rgba(255, 255, 255, 0.06) !important;
 }
 
-header nav .catalog-menu-item-title,
-.site-header-synced nav .catalog-menu-item-title,
-.catalog-menu-item-title {
+html.dark .catalog-link-card:hover,
+html.theme-dark .catalog-link-card:hover,
+[data-theme="dark"] .catalog-link-card:hover {
+    background: rgba(26, 179, 112, 0.15) !important;
+    border-color: rgba(26, 179, 112, 0.4) !important;
+}
+
+.catalog-link-name {
     font-size: 13px !important;
     font-weight: 600 !important;
-    line-height: 1.25 !important;
     color: #0F172A !important;
     transition: color 0.15s ease !important;
 }
 
-html.dark header nav .catalog-menu-item-title,
-html.dark .catalog-menu-item-title,
-html.theme-dark .catalog-menu-item-title,
-[data-theme="dark"] .catalog-menu-item-title {
+html.dark .catalog-link-name,
+html.theme-dark .catalog-link-name,
+[data-theme="dark"] .catalog-link-name {
     color: #FFFFFF !important;
 }
 
-.catalog-menu-item:hover .catalog-menu-item-title {
+.catalog-link-card:hover .catalog-link-name {
     color: #1AB370 !important;
 }
 
-header nav .catalog-menu-item-spec,
-.site-header-synced nav .catalog-menu-item-spec,
-.catalog-menu-item-spec {
-    font-size: 11px !important;
-    color: #64748B !important;
-    margin-top: 2px !important;
-    line-height: 1.2 !important;
-    font-weight: 400 !important;
-}
-
-html.dark header nav .catalog-menu-item-spec,
-html.dark .catalog-menu-item-spec,
-html.theme-dark .catalog-menu-item-spec,
-[data-theme="dark"] .catalog-menu-item-spec {
-    color: #94A3B8 !important;
-}
-
-header nav .catalog-menu-item-arrow,
-.site-header-synced nav .catalog-menu-item-arrow,
-.catalog-menu-item-arrow {
+.catalog-link-arrow {
     width: 14px !important;
     height: 14px !important;
     color: #94A3B8 !important;
-    flex-shrink: 0 !important;
     transition: transform 0.15s ease, color 0.15s ease !important;
 }
 
-.catalog-menu-item:hover .catalog-menu-item-arrow {
+.catalog-link-card:hover .catalog-link-arrow {
     transform: translateX(3px) !important;
     color: #1AB370 !important;
 }
 
-header nav .catalog-menu-bottom-link,
-.site-header-synced nav .catalog-menu-bottom-link,
-.catalog-menu-bottom-link {
-    display: inline-flex !important;
+/* Карточки аксессуаров (Шолом, Тримач для телефону, Колодки, Знімний АКБ) */
+.catalog-accessory-card {
+    display: flex !important;
     align-items: center !important;
-    gap: 6px !important;
-    font-size: 12px !important;
-    font-weight: 700 !important;
-    color: #1AB370 !important;
+    gap: 8px !important;
+    padding: 7px 10px !important;
+    border-radius: 8px !important;
     text-decoration: none !important;
-    transition: opacity 0.15s ease !important;
+    background: rgba(15, 23, 42, 0.02) !important;
+    border: 1px solid rgba(15, 23, 42, 0.05) !important;
+    transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.15s ease !important;
 }
 
-.catalog-menu-bottom-link:hover {
-    opacity: 0.8 !important;
+.catalog-accessory-card:hover {
+    background: rgba(26, 179, 112, 0.08) !important;
+    border-color: rgba(26, 179, 112, 0.3) !important;
 }
+
+html.dark .catalog-accessory-card,
+html.theme-dark .catalog-accessory-card,
+[data-theme="dark"] .catalog-accessory-card {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+html.dark .catalog-accessory-card:hover,
+html.theme-dark .catalog-accessory-card:hover,
+[data-theme="dark"] .catalog-accessory-card:hover {
+    background: rgba(26, 179, 112, 0.15) !important;
+    border-color: rgba(26, 179, 112, 0.4) !important;
+}
+
+.catalog-accessory-name {
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    color: #0F172A !important;
+    transition: color 0.15s ease !important;
+}
+
+html.dark .catalog-accessory-name,
+html.theme-dark .catalog-accessory-name,
+[data-theme="dark"] .catalog-accessory-name {
+    color: #FFFFFF !important;
+}
+
+.catalog-accessory-card:hover .catalog-accessory-name {
+    color: #1AB370 !important;
+}
+
+/* ==================== 2. СТУПЕНЧАТАЯ АНИМАЦИЯ (STAGGER REVEAL) ==================== */
+.catalog-mega-menu .menu-item {
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease !important;
+}
+
+.catalog-dropdown-wrap:hover .catalog-mega-menu .menu-item,
+.group\/catalog:hover .catalog-mega-menu .menu-item,
+.catalog-mega-menu.open .menu-item,
+.catalog-dropdown-wrap.open .catalog-mega-menu .menu-item,
+.catalog-mega-menu:hover .menu-item {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+/* Ступенчатые задержки по классам и по очереди */
+.catalog-dropdown-wrap:hover .menu-item-1,
+.group\/catalog:hover .menu-item-1,
+.catalog-mega-menu.open .menu-item-1 { transition-delay: 0.03s !important; }
+
+.catalog-dropdown-wrap:hover .menu-item-2,
+.group\/catalog:hover .menu-item-2,
+.catalog-mega-menu.open .menu-item-2 { transition-delay: 0.06s !important; }
+
+.catalog-dropdown-wrap:hover .menu-item-3,
+.group\/catalog:hover .menu-item-3,
+.catalog-mega-menu.open .menu-item-3 { transition-delay: 0.09s !important; }
+
+.catalog-dropdown-wrap:hover .menu-item-4,
+.group\/catalog:hover .menu-item-4,
+.catalog-mega-menu.open .menu-item-4 { transition-delay: 0.12s !important; }
+
+.catalog-dropdown-wrap:hover .menu-item-5,
+.group\/catalog:hover .menu-item-5,
+.catalog-mega-menu.open .menu-item-5 { transition-delay: 0.15s !important; }
+
+.catalog-dropdown-wrap:hover .menu-item-6,
+.group\/catalog:hover .menu-item-6,
+.catalog-mega-menu.open .menu-item-6 { transition-delay: 0.18s !important; }
+
+.catalog-dropdown-wrap:hover .menu-item-7,
+.group\/catalog:hover .menu-item-7,
+.catalog-mega-menu.open .menu-item-7 { transition-delay: 0.21s !important; }
+
+.catalog-dropdown-wrap:hover .menu-item-8,
+.group\/catalog:hover .menu-item-8,
+.catalog-mega-menu.open .menu-item-8 { transition-delay: 0.24s !important; }
+
+.catalog-dropdown-wrap:hover .menu-item-9,
+.group\/catalog:hover .menu-item-9,
+.catalog-mega-menu.open .menu-item-9 { transition-delay: 0.27s !important; }
+
+.catalog-dropdown-wrap:hover .menu-item-10,
+.group\/catalog:hover .menu-item-10,
+.catalog-mega-menu.open .menu-item-10 { transition-delay: 0.30s !important; }
+
+.catalog-dropdown-wrap:hover .menu-item-11,
+.group\/catalog:hover .menu-item-11,
+.catalog-mega-menu.open .menu-item-11 { transition-delay: 0.33s !important; }
+
+.catalog-dropdown-wrap:hover .menu-item-12,
+.group\/catalog:hover .menu-item-12,
+.catalog-mega-menu.open .menu-item-12 { transition-delay: 0.36s !important; }
+
+.catalog-dropdown-wrap:hover .menu-item-13,
+.group\/catalog:hover .menu-item-13,
+.catalog-mega-menu.open .menu-item-13 { transition-delay: 0.39s !important; }
+
+/* Поддержка :nth-child селекторов для каскада */
+.catalog-dropdown-wrap:hover .catalog-mega-menu-inner .menu-item:nth-child(1),
+.group\/catalog:hover .catalog-mega-menu-inner .menu-item:nth-child(1),
+.catalog-menu.open .menu-item:nth-child(1),
+.catalog-mega-menu.open .menu-item:nth-child(1) { transition-delay: 0.04s !important; }
+
+.catalog-dropdown-wrap:hover .catalog-mega-menu-inner .menu-item:nth-child(2),
+.group\/catalog:hover .catalog-mega-menu-inner .menu-item:nth-child(2),
+.catalog-menu.open .menu-item:nth-child(2),
+.catalog-mega-menu.open .menu-item:nth-child(2) { transition-delay: 0.08s !important; }
+
+.catalog-dropdown-wrap:hover .catalog-mega-menu-inner .menu-item:nth-child(3),
+.group\/catalog:hover .catalog-mega-menu-inner .menu-item:nth-child(3),
+.catalog-menu.open .menu-item:nth-child(3),
+.catalog-mega-menu.open .menu-item:nth-child(3) { transition-delay: 0.12s !important; }
+
+.catalog-dropdown-wrap:hover .catalog-mega-menu-inner .menu-item:nth-child(4),
+.group\/catalog:hover .catalog-mega-menu-inner .menu-item:nth-child(4),
+.catalog-menu.open .menu-item:nth-child(4),
+.catalog-mega-menu.open .menu-item:nth-child(4) { transition-delay: 0.16s !important; }
 
 /* ==================== 3. ИКОНКА СМЕНЫ ТЕМЫ (ЛУНА / СОЛНЦЕ) ==================== */
 .moon-icon {
