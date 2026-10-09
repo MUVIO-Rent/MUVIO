@@ -1304,9 +1304,28 @@ body.dark #catalog {
     background-image: none !important;
 }
 
+html.theme-dark #catalog h1,
 html.theme-dark #catalog h2,
-body.dark #catalog h2 {
-    color: var(--text-main) !important;
+html.theme-dark #catalog h3,
+html.theme-dark #catalog .catalog-title,
+html.dark #catalog h1,
+html.dark #catalog h2,
+html.dark #catalog h3,
+html.dark #catalog .catalog-title,
+body.dark #catalog h1,
+body.dark #catalog h2,
+body.dark #catalog h3,
+body.dark #catalog .catalog-title {
+    color: #FFFFFF !important;
+}
+
+html.theme-dark #catalog p,
+html.theme-dark #catalog .catalog-subtitle,
+html.dark #catalog p,
+html.dark #catalog .catalog-subtitle,
+body.dark #catalog p,
+body.dark #catalog .catalog-subtitle {
+    color: #94A3B8 !important;
 }
 
 html.theme-dark #hero-section::before,
@@ -1661,4 +1680,85 @@ img.promo-scooter-img,
         margin: 0 auto !important;
         transform: none !important;
     }
+}
+
+/* ==========================================================================
+   STRICT LIGHT & DARK THEME TEXT CONTRAST ENGINE
+   ========================================================================== */
+html:not(.dark) h1,
+html:not(.dark) h2,
+html:not(.dark) h3,
+html:not(.dark) .catalog-title,
+html:not(.dark) .section-title,
+body:not(.dark) h1,
+body:not(.dark) h2,
+body:not(.dark) h3,
+body:not(.dark) .catalog-title,
+body:not(.dark) .section-title {
+    color: #0F172A !important; /* Глубокий темный цвет */
+}
+
+html:not(.dark) .catalog-subtitle,
+html:not(.dark) p,
+html:not(.dark) .section-desc,
+body:not(.dark) .catalog-subtitle,
+body:not(.dark) p,
+body:not(.dark) .section-desc {
+    color: #475569 !important; /* Четкий темно-серый читаемый цвет */
+}
+
+html:not(.dark) .section-badge,
+html:not(.dark) .catalog-badge,
+body:not(.dark) .section-badge,
+body:not(.dark) .catalog-badge {
+    color: #047857 !important; /* Читаемый насыщенный зеленый для бейджа */
+}
+
+/* Белый цвет текста исключительно под html.dark */
+html.dark h1,
+html.dark h2,
+html.dark h3,
+html.dark .catalog-title,
+html.theme-dark h1,
+html.theme-dark h2,
+html.theme-dark h3,
+html.theme-dark .catalog-title {
+    color: #FFFFFF !important;
+}
+
+html.dark .catalog-subtitle,
+html.dark p,
+html.theme-dark .catalog-subtitle,
+html.theme-dark p {
+    color: #94A3B8 !important;
+}
+
+/* Hero section and primary action buttons retention */
+#hero-section h1,
+#hero-section p,
+#hero-section .hero-subtitle,
+.hero-text-content h1,
+.hero-text-content p,
+.hero h1,
+.hero p {
+    color: #FFFFFF !important;
+}
+
+.bg-\[\#1D5D3B\] p,
+.bg-\[\#1D5D3B\] h3,
+.bg-\[\#1D5D3B\] span,
+.muvio-btn-primary,
+.muvio-btn-primary span,
+.muvio-btn-primary i,
+.chamfer-btn.bg-\[\#1D5D3B\],
+[class*="bg-[#1D5D3B]"] p,
+[class*="bg-[#1D5D3B]"] h3,
+[class*="bg-[#1D5D3B]"] span,
+a.bg-\[\#1D5D3B\],
+a.bg-\[\#1D5D3B\] span,
+a.bg-\[\#10B981\],
+a.bg-\[\#10B981\] span,
+button.bg-\[\#10B981\],
+button.bg-\[\#10B981\] span {
+    color: #FFFFFF !important;
 }

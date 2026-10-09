@@ -1834,18 +1834,18 @@
             <!-- Заголовок секції -->
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 border-b border-white/[0.08] pb-8">
                 <div>
-                    <div class="inline-flex items-center gap-2 px-3 py-1 bg-white/[0.04] border border-white/10 rounded-full mb-4">
+                    <div class="section-badge catalog-badge inline-flex items-center gap-2 px-3 py-1 bg-white/[0.04] border border-white/10 rounded-full mb-4">
                         <span class="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span>
                         <span class="font-mono text-[11px] tracking-widest text-zinc-300 uppercase">
                             <span class="lang-ua">ОФІЦІЙНИЙ АВТОПАРК MUVIO</span>
                             <span class="lang-en">OFFICIAL MUVIO FLEET</span>
                         </span>
                     </div>
-                    <h2 class="font-brand font-extrabold text-3xl sm:text-4xl lg:text-5xl uppercase tracking-tight text-white leading-tight">
+                    <h2 class="catalog-title section-title font-brand font-extrabold text-3xl sm:text-4xl lg:text-5xl uppercase tracking-tight text-white leading-tight">
                         <span class="lang-ua">КАТАЛОГ ТЕХНІКИ В НАЯВНОСТІ</span>
                         <span class="lang-en">AVAILABLE FLEET CATALOG</span>
                     </h2>
-                    <p class="text-sm sm:text-base text-zinc-400 mt-2 max-w-2xl font-normal leading-relaxed">
+                    <p class="catalog-subtitle section-desc text-sm sm:text-base text-zinc-400 mt-2 max-w-2xl font-normal leading-relaxed">
                         <span class="lang-ua">Всі моделі укомплектовані знімним АКБ та зарядним пристроєм. Реальні тарифи оренди.</span>
                         <span class="lang-en">All models equipped with removable battery & charger. Verified rental rates.</span>
                     </p>
@@ -1854,17 +1854,17 @@
                 <!-- Фільтри -->
                 <div class="flex flex-wrap gap-2 shrink-0">
                     <button onclick="filterCatalog('all')" id="tab-all"
-                        class="px-5 py-2.5 rounded-full text-xs font-brand font-bold uppercase tracking-wider border border-white/20 bg-white text-black transition-all">
+                        class="catalog-tab active px-5 py-2.5 rounded-full text-xs font-brand font-bold uppercase tracking-wider border border-white/20 bg-white text-black transition-all">
                         <span class="lang-ua">ВСІ МОДЕЛІ</span>
                         <span class="lang-en">ALL MODELS</span>
                     </button>
                     <button onclick="filterCatalog('scooter')" id="tab-scooter"
-                        class="px-5 py-2.5 rounded-full text-xs font-brand font-bold uppercase tracking-wider border border-white/10 bg-white/[0.04] text-zinc-400 hover:text-white hover:border-white/30 transition-all">
+                        class="catalog-tab px-5 py-2.5 rounded-full text-xs font-brand font-bold uppercase tracking-wider border border-white/10 bg-white/[0.04] text-zinc-400 hover:text-white hover:border-white/30 transition-all">
                         <span class="lang-ua">СКУТЕРИ</span>
                         <span class="lang-en">SCOOTERS</span>
                     </button>
                     <button onclick="filterCatalog('bike')" id="tab-bike"
-                        class="px-5 py-2.5 rounded-full text-xs font-brand font-bold uppercase tracking-wider border border-white/10 bg-white/[0.04] text-zinc-400 hover:text-white hover:border-white/30 transition-all">
+                        class="catalog-tab px-5 py-2.5 rounded-full text-xs font-brand font-bold uppercase tracking-wider border border-white/10 bg-white/[0.04] text-zinc-400 hover:text-white hover:border-white/30 transition-all">
                         <span class="lang-ua">ЕЛЕКТРОВЕЛОСИПЕДИ</span>
                         <span class="lang-en">E-BIKES</span>
                     </button>
@@ -3375,9 +3375,9 @@
                 const btn = document.getElementById(`tab-${cat}`);
                 if (!btn) return;
                 if (cat === category) {
-                    btn.className = 'px-5 py-2.5 rounded-full text-xs font-brand font-bold uppercase tracking-wider border border-white/20 bg-white text-black transition-all';
+                    btn.classList.add('active');
                 } else {
-                    btn.className = 'px-5 py-2.5 rounded-full text-xs font-brand font-bold uppercase tracking-wider border border-white/10 bg-white/[0.04] text-zinc-400 hover:text-white hover:border-white/30 transition-all';
+                    btn.classList.remove('active');
                 }
             });
             const grid = document.getElementById('catalogGrid');

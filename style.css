@@ -991,7 +991,9 @@ html.theme-dark .sun-icon,
     background-image: none !important;
 }
 
-#catalog h2 {
+#catalog h1,
+#catalog h2,
+#catalog h3 {
     color: var(--text-main) !important;
 }
 
@@ -1401,7 +1403,123 @@ img.promo-scooter-img,
 }
 
 /* ==========================================================================
-   CATALOG LIGHT MODE CONTRAST FIXES
+   1. STRICT LIGHT MODE HIGH CONTRAST TYPOGRAPHY & CATALOG ENGINE
+   ========================================================================== */
+html:not(.dark) h1,
+html:not(.dark) h2,
+html:not(.dark) h3,
+html:not(.dark) .catalog-title,
+html:not(.dark) .section-title,
+body:not(.dark) h1,
+body:not(.dark) h2,
+body:not(.dark) h3,
+body:not(.dark) .catalog-title,
+body:not(.dark) .section-title,
+html:not(.theme-dark) h1,
+html:not(.theme-dark) h2,
+html:not(.theme-dark) h3,
+html:not(.theme-dark) .catalog-title,
+html:not(.theme-dark) .section-title,
+[data-theme="light"] h1,
+[data-theme="light"] h2,
+[data-theme="light"] h3,
+[data-theme="light"] .catalog-title,
+[data-theme="light"] .section-title {
+    color: #0F172A !important; /* Глубокий темный цвет */
+}
+
+html:not(.dark) .catalog-subtitle,
+html:not(.dark) p,
+html:not(.dark) .section-desc,
+body:not(.dark) .catalog-subtitle,
+body:not(.dark) p,
+body:not(.dark) .section-desc,
+html:not(.theme-dark) .catalog-subtitle,
+html:not(.theme-dark) p,
+html:not(.theme-dark) .section-desc,
+[data-theme="light"] .catalog-subtitle,
+[data-theme="light"] p,
+[data-theme="light"] .section-desc {
+    color: #475569 !important; /* Четкий темно-серый читаемый цвет */
+}
+
+html:not(.dark) .section-badge,
+html:not(.dark) .catalog-badge,
+body:not(.dark) .section-badge,
+body:not(.dark) .catalog-badge,
+html:not(.theme-dark) .section-badge,
+html:not(.theme-dark) .catalog-badge,
+[data-theme="light"] .section-badge,
+[data-theme="light"] .catalog-badge {
+    color: #047857 !important; /* Читаемый насыщенный зеленый для бейджа */
+    background-color: #ECFDF5 !important;
+    border-color: #A7F3D0 !important;
+}
+
+html:not(.dark) .section-badge span,
+html:not(.dark) .catalog-badge span,
+body:not(.dark) .section-badge span,
+body:not(.dark) .catalog-badge span {
+    color: #047857 !important;
+}
+
+/* ==========================================================================
+   2. STRICT DARK MODE TYPOGRAPHY SEPARATION
+   ========================================================================== */
+html.dark h1,
+html.dark h2,
+html.dark h3,
+html.dark .catalog-title,
+html.theme-dark h1,
+html.theme-dark h2,
+html.theme-dark h3,
+html.theme-dark .catalog-title,
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] .catalog-title,
+body.dark h1,
+body.dark h2,
+body.dark h3,
+body.dark .catalog-title {
+    color: #FFFFFF !important;
+}
+
+html.dark .catalog-subtitle,
+html.dark p,
+html.dark .section-desc,
+html.theme-dark .catalog-subtitle,
+html.theme-dark p,
+html.theme-dark .section-desc,
+[data-theme="dark"] .catalog-subtitle,
+[data-theme="dark"] p,
+[data-theme="dark"] .section-desc,
+body.dark .catalog-subtitle,
+body.dark p,
+body.dark .section-desc {
+    color: #94A3B8 !important;
+}
+
+html.dark .section-badge,
+html.dark .catalog-badge,
+html.theme-dark .section-badge,
+html.theme-dark .catalog-badge,
+[data-theme="dark"] .section-badge,
+[data-theme="dark"] .catalog-badge {
+    color: #10B981 !important;
+    background-color: rgba(255, 255, 255, 0.04) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+html.dark .section-badge span,
+html.dark .catalog-badge span,
+html.theme-dark .section-badge span,
+html.theme-dark .catalog-badge span {
+    color: #D4D4D8 !important;
+}
+
+/* ==========================================================================
+   3. CATALOG SECTION, SHOWCASE & CARDS IN LIGHT MODE
    ========================================================================== */
 html:not(.dark) body,
 body:not(.dark),
@@ -1411,61 +1529,243 @@ html:not(.theme-dark) body,
     color: #0F172A !important;
 }
 
-body:not(.dark) .catalog-card h3,
-html:not(.dark) .catalog-card h3,
-body:not(.dark) .model-title,
-html:not(.dark) .model-title,
-body:not(.dark) .catalog-card-title,
-html:not(.dark) .vehicle-showcase-card h3,
-html:not(.theme-dark) .vehicle-showcase-card h3,
-[data-theme="light"] .vehicle-showcase-card h3 {
-    color: #0F172A !important;
-}
-
-body:not(.dark) .catalog-card .price-badge,
-html:not(.dark) .catalog-card .price-badge,
-body:not(.dark) .model-price,
-html:not(.dark) .model-price,
-body:not(.dark) .vehicle-showcase-card .price-badge,
-html:not(.dark) .vehicle-showcase-card .price-badge,
-body:not(.dark) .vehicle-showcase-card span,
-html:not(.dark) .vehicle-showcase-card span,
-html:not(.theme-dark) .vehicle-showcase-card span,
-[data-theme="light"] .vehicle-showcase-card span {
-    color: #1E293B !important;
-    border: 1px solid rgba(15, 23, 42, 0.2) !important;
-}
-
-html:not(.dark) .vehicle-showcase-card span[class*="border"],
-html:not(.theme-dark) .vehicle-showcase-card span[class*="border"],
-[data-theme="light"] .vehicle-showcase-card span[class*="border"] {
-    border-color: rgba(15, 23, 42, 0.2) !important;
-    background-color: rgba(0, 0, 0, 0.04) !important;
-    color: #1E293B !important;
-}
-
-/* Detail Modal / View in Light Mode */
-html:not(.dark) #modelDetailModal,
+html:not(.dark) #catalog,
+body:not(.dark) #catalog,
+html:not(.dark) main#catalog,
+body:not(.dark) main#catalog,
+html:not(.dark) #catalogShowcaseView,
+html:not(.dark) #modelDetailView,
 html:not(.dark) #catalogDetailView,
-html:not(.theme-dark) #catalogDetailView,
-[data-theme="light"] #catalogDetailView {
+html:not(.dark) #modelDetailModal {
     background-color: #F8FAFC !important;
     color: #0F172A !important;
+    border-color: #E2E8F0 !important;
 }
 
-html:not(.dark) #catalogDetailView h1,
-html:not(.dark) #catalogDetailView h2,
-html:not(.dark) #catalogDetailView h3,
-html:not(.dark) #catalogDetailView .text-white,
-html:not(.theme-dark) #catalogDetailView .text-white,
-[data-theme="light"] #catalogDetailView .text-white {
+html:not(.dark) #catalog .border-x,
+html:not(.dark) #catalog .border-b,
+html:not(.dark) #catalog .border-t,
+html:not(.dark) #catalog [class*="border-white"],
+html:not(.dark) #catalogShowcaseView [class*="border-white"],
+html:not(.dark) #modelDetailView [class*="border-white"],
+html:not(.dark) #modelDetailView [class*="divide-white"] {
+    border-color: #E2E8F0 !important;
+}
+
+html:not(.dark) #catalog .text-white,
+html:not(.dark) #catalogShowcaseView .text-white,
+html:not(.dark) #modelDetailView .text-white,
+html:not(.dark) #catalogDetailView .text-white {
     color: #0F172A !important;
 }
 
-html:not(.dark) #catalogDetailView .text-zinc-400,
-html:not(.theme-dark) #catalogDetailView .text-zinc-400,
-[data-theme="light"] #catalogDetailView .text-zinc-400 {
+html:not(.dark) #catalog .text-zinc-400,
+html:not(.dark) #catalog .text-zinc-300,
+html:not(.dark) #catalogShowcaseView .text-zinc-400,
+html:not(.dark) #catalogShowcaseView .text-zinc-300,
+html:not(.dark) #modelDetailView .text-zinc-400,
+html:not(.dark) #modelDetailView .text-zinc-300 {
     color: #475569 !important;
+}
+
+/* Model cards and showcase cards in Light Mode */
+html:not(.dark) .catalog-card h3,
+html:not(.dark) .model-title,
+html:not(.dark) .catalog-card-title,
+html:not(.dark) .vehicle-showcase-card h3,
+html:not(.dark) #catalogGrid h3,
+html:not(.dark) .vehicle-card h3,
+body:not(.dark) .catalog-card h3,
+body:not(.dark) .model-title,
+body:not(.dark) .catalog-card-title,
+body:not(.dark) .vehicle-showcase-card h3,
+body:not(.dark) #catalogGrid h3,
+body:not(.dark) .vehicle-card h3 {
+    color: #0F172A !important;
+}
+
+html:not(.dark) .catalog-card .price-badge,
+html:not(.dark) .model-price,
+html:not(.dark) .vehicle-showcase-card .price-badge,
+html:not(.dark) .vehicle-card span[class*="rounded-full"],
+html:not(.dark) #catalogGrid span[class*="rounded-full"],
+body:not(.dark) .catalog-card .price-badge,
+body:not(.dark) .model-price,
+body:not(.dark) .vehicle-showcase-card .price-badge,
+body:not(.dark) .vehicle-card span[class*="rounded-full"],
+body:not(.dark) #catalogGrid span[class*="rounded-full"],
+html:not(.dark) .vehicle-showcase-card span[class*="border"] {
+    color: #0F172A !important;
+    background-color: #FFFFFF !important;
+    border: 1px solid #CBD5E1 !important;
+}
+
+html:not(.dark) .catalog-card .price-badge span,
+html:not(.dark) .vehicle-showcase-card .price-badge span,
+html:not(.dark) .vehicle-card span[class*="rounded-full"] span,
+html:not(.dark) #catalogGrid span[class*="rounded-full"] span {
+    color: #0F172A !important;
+}
+
+/* ==========================================================================
+   4. FILTER TABS (LIGHT & DARK THEMES)
+   ========================================================================== */
+/* Inactive Tabs in Light Mode */
+html:not(.dark) #tab-all:not(.active),
+html:not(.dark) #tab-scooter:not(.active),
+html:not(.dark) #tab-bike:not(.active),
+body:not(.dark) #tab-all:not(.active),
+body:not(.dark) #tab-scooter:not(.active),
+body:not(.dark) #tab-bike:not(.active),
+html:not(.dark) .catalog-tab:not(.active),
+body:not(.dark) .catalog-tab:not(.active) {
+    color: #0F172A !important;
+    background-color: #FFFFFF !important;
+    border: 1px solid #CBD5E1 !important;
+}
+
+html:not(.dark) #tab-all:not(.active) span,
+html:not(.dark) #tab-scooter:not(.active) span,
+html:not(.dark) #tab-bike:not(.active) span,
+body:not(.dark) #tab-all:not(.active) span,
+body:not(.dark) #tab-scooter:not(.active) span,
+body:not(.dark) #tab-bike:not(.active) span,
+html:not(.dark) .catalog-tab:not(.active) span,
+body:not(.dark) .catalog-tab:not(.active) span {
+    color: #0F172A !important;
+}
+
+html:not(.dark) #tab-all:not(.active):hover,
+html:not(.dark) #tab-scooter:not(.active):hover,
+html:not(.dark) #tab-bike:not(.active):hover,
+html:not(.dark) .catalog-tab:not(.active):hover {
+    color: #0F172A !important;
+    background-color: #F1F5F9 !important;
+    border-color: #94A3B8 !important;
+}
+
+/* Active Tab in Light Mode */
+html:not(.dark) #tab-all.active,
+html:not(.dark) #tab-scooter.active,
+html:not(.dark) #tab-bike.active,
+body:not(.dark) #tab-all.active,
+body:not(.dark) #tab-scooter.active,
+body:not(.dark) #tab-bike.active,
+html:not(.dark) .catalog-tab.active,
+body:not(.dark) .catalog-tab.active {
+    color: #FFFFFF !important;
+    background-color: #0F172A !important;
+    border: 1px solid #0F172A !important;
+}
+
+html:not(.dark) #tab-all.active span,
+html:not(.dark) #tab-scooter.active span,
+html:not(.dark) #tab-bike.active span,
+body:not(.dark) #tab-all.active span,
+body:not(.dark) #tab-scooter.active span,
+body:not(.dark) #tab-bike.active span,
+html:not(.dark) .catalog-tab.active span,
+body:not(.dark) .catalog-tab.active span {
+    color: #FFFFFF !important;
+}
+
+/* Inactive Tabs in Dark Mode */
+html.dark #tab-all:not(.active),
+html.dark #tab-scooter:not(.active),
+html.dark #tab-bike:not(.active),
+html.theme-dark #tab-all:not(.active),
+html.theme-dark #tab-scooter:not(.active),
+html.theme-dark #tab-bike:not(.active),
+[data-theme="dark"] #tab-all:not(.active),
+[data-theme="dark"] #tab-scooter:not(.active),
+[data-theme="dark"] #tab-bike:not(.active),
+html.dark .catalog-tab:not(.active) {
+    color: #94A3B8 !important;
+    background-color: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+html.dark #tab-all:not(.active) span,
+html.dark #tab-scooter:not(.active) span,
+html.dark #tab-bike:not(.active) span,
+html.theme-dark #tab-all:not(.active) span,
+html.theme-dark #tab-scooter:not(.active) span,
+html.theme-dark #tab-bike:not(.active) span,
+html.dark .catalog-tab:not(.active) span {
+    color: #94A3B8 !important;
+}
+
+html.dark #tab-all:not(.active):hover,
+html.dark #tab-scooter:not(.active):hover,
+html.dark #tab-bike:not(.active):hover,
+html.dark .catalog-tab:not(.active):hover {
+    color: #FFFFFF !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+html.dark #tab-all:not(.active):hover span,
+html.dark #tab-scooter:not(.active):hover span,
+html.dark #tab-bike:not(.active):hover span,
+html.dark .catalog-tab:not(.active):hover span {
+    color: #FFFFFF !important;
+}
+
+/* Active Tab in Dark Mode */
+html.dark #tab-all.active,
+html.dark #tab-scooter.active,
+html.dark #tab-bike.active,
+html.theme-dark #tab-all.active,
+html.theme-dark #tab-scooter.active,
+html.theme-dark #tab-bike.active,
+[data-theme="dark"] #tab-all.active,
+[data-theme="dark"] #tab-scooter.active,
+[data-theme="dark"] #tab-bike.active,
+html.dark .catalog-tab.active {
+    color: #000000 !important;
+    background-color: #FFFFFF !important;
+    border: 1px solid #FFFFFF !important;
+}
+
+html.dark #tab-all.active span,
+html.dark #tab-scooter.active span,
+html.dark #tab-bike.active span,
+html.theme-dark #tab-all.active span,
+html.theme-dark #tab-scooter.active span,
+html.theme-dark #tab-bike.active span,
+html.dark .catalog-tab.active span {
+    color: #000000 !important;
+}
+
+/* ==========================================================================
+   5. HERO PHOTO TEXT & BRAND GREEN ACTION BUTTON RETENTION
+   ========================================================================== */
+#hero-section h1,
+#hero-section p,
+#hero-section .hero-subtitle,
+.hero-text-content h1,
+.hero-text-content p,
+.hero h1,
+.hero p {
+    color: #FFFFFF !important;
+}
+
+.bg-\[\#1D5D3B\] p,
+.bg-\[\#1D5D3B\] h3,
+.bg-\[\#1D5D3B\] span,
+.muvio-btn-primary,
+.muvio-btn-primary span,
+.muvio-btn-primary i,
+.chamfer-btn.bg-\[\#1D5D3B\],
+[class*="bg-[#1D5D3B]"] p,
+[class*="bg-[#1D5D3B]"] h3,
+[class*="bg-[#1D5D3B]"] span,
+a.bg-\[\#1D5D3B\],
+a.bg-\[\#1D5D3B\] span,
+a.bg-\[\#10B981\],
+a.bg-\[\#10B981\] span,
+button.bg-\[\#10B981\],
+button.bg-\[\#10B981\] span {
+    color: #FFFFFF !important;
 }
 
 /* ==========================================================================
