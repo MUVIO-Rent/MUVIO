@@ -2758,3 +2758,17 @@ body.dark .hero-crosser-badge,
 [data-theme="dark"] .hero-crosser-badge {
     color: #1AB370 !important;
 }
+
+/* ==================== SERVICE HUB GOOGLE MAPS ==================== */
+.service-map-card {
+    overflow: hidden !important;
+    border-radius: 20px !important;
+    position: relative !important;
+}
+
+.service-map-card iframe,
+.service-hub-map {
+    border: 0 !important;
+    display: block !important;
+    filter: none !important;
+}

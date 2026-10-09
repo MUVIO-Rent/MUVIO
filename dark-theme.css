@@ -816,21 +816,22 @@ html.theme-dark #durationDaysBadge {
     box-shadow: none !important;
 }
 
-/* 11. Service Hub Map (OpenStreetMap Embed Iframe) */
-html:not(.theme-dark) .service-hub-map {
+/* 11. Service Hub Map (Google Maps Embed) */
+.service-map-card {
+    overflow: hidden !important;
+    border-radius: 20px !important;
+    position: relative !important;
+}
+
+html:not(.theme-dark) .service-hub-map,
+html:not(.theme-dark) .service-map-card iframe,
+html.theme-dark .service-hub-map,
+html.theme-dark .service-map-card iframe,
+html.dark .service-hub-map,
+html.dark .service-map-card iframe,
+.service-map-card iframe,
+.service-hub-map {
     filter: none !important;
-}
-
-html.theme-dark .service-hub-map {
-    filter: invert(90%) hue-rotate(180deg) brightness(95%) contrast(90%) !important;
-}
-
-html.theme-dark .leaflet-tile-pane {
-    filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7);
-}
-
-html.theme-dark .leaflet-container {
-    background: #000000 !important;
 }
 
 html.theme-dark .leaflet-popup-content-wrapper {
