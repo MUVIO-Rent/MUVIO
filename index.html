@@ -358,6 +358,17 @@
             pointer-events: none !important;
             overflow: hidden !important;
             contain: paint !important;
+            transform: translateX(-80px);
+            opacity: 0;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
+            will-change: transform, opacity;
+        }
+
+        .promo-scooter-section .img-wrapper.visible,
+        .scooter-promo .img-wrapper.visible,
+        .scooter-promo .img-col.visible {
+            transform: translateX(0) !important;
+            opacity: 1 !important;
         }
 
         .promo-scooter-section img,
@@ -387,7 +398,7 @@
             user-select: none !important;
         }
 
-        /* BIKE PROMO (LIKE.BIKE BRUISER): МАСШТАБ 110%, right: 0, translateX(12%), ZERO FILTER/SHADOW/MASK/BLEED */
+        /* BIKE PROMO: Z-PATTERN (TEXT LEFT, BIKE RIGHT) */
         .promo-bike-section,
         .bike-promo {
             position: relative !important;
@@ -411,6 +422,17 @@
             justify-content: flex-end !important;
             pointer-events: none !important;
             overflow: visible !important;
+            transform: translateX(80px);
+            opacity: 0;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
+            will-change: transform, opacity;
+        }
+
+        .promo-bike-section .img-wrapper.visible,
+        .bike-promo .img-wrapper.visible,
+        .bike-promo .img-col.visible {
+            transform: translateX(0) !important;
+            opacity: 1 !important;
         }
 
         .promo-bike-section img,
@@ -1731,27 +1753,27 @@
         </div>
     </section>
 
-    <!-- ==================== СЕКЦІЯ 1 (СКУТЕР CROSSER CR-20) ==================== -->
+    <!-- ==================== СЕКЦІЯ 1 (СКУТЕРИ) ==================== -->
     <section class="promo-section promo-scooter-section scooter-promo" style="position: relative !important; overflow: hidden !important; contain: paint !important; margin: 0 !important; margin-bottom: 0 !important;">
         <div class="promo-container" style="overflow: hidden !important; justify-content: flex-end !important;">
             <div class="text-col" style="margin-left: auto !important; padding-left: 0 !important;">
                 <div class="inline-flex items-center gap-2 px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full mb-4">
                     <span class="w-2 h-2 rounded-full bg-[#10B981]"></span>
                     <span class="font-mono text-[11px] tracking-widest text-emerald-400 uppercase font-semibold">
-                        <span class="lang-ua">ФЛАГМАНСЬКИЙ МАКСІСКУТЕР</span>
-                        <span class="lang-en">FLAGSHIP MAXISCOOTER</span>
+                        <span class="lang-ua">ЕЛЕКТРОСКУТЕРИ ДЛЯ МІСТА ТА РОБОТИ</span>
+                        <span class="lang-en">ELECTRIC SCOOTERS FOR CITY & WORK</span>
                     </span>
                 </div>
                 <h2 class="promo-title font-brand font-extrabold text-3xl sm:text-4xl lg:text-5xl uppercase tracking-tight leading-tight text-white mb-4">
-                    <span class="lang-ua">Crosser CR-20 — максимальний комфорт та динаміка</span>
-                    <span class="lang-en">Crosser CR-20 — maximum comfort &amp; dynamics</span>
+                    <span class="lang-ua">ОРЕНДА ЕЛЕКТРОСКУТЕРІВ — МАКСИМАЛЬНИЙ КОМФОРТ ТА ЕКОНОМІЯ</span>
+                    <span class="lang-en">ELECTRIC SCOOTER RENTAL — MAXIMUM COMFORT & SAVINGS</span>
                 </h2>
                 <p class="promo-desc text-base sm:text-lg text-zinc-400 mb-8 leading-relaxed">
-                    <span class="lang-ua">Потужний міський електроскутер з комфортною посадкою, подвійним амортизатором та великим запасом ходу для комфортного пересування містом без втоми.</span>
-                    <span class="lang-en">A powerful city electric scooter with comfortable seating, dual shock absorbers, and an extended range for effortless urban travel.</span>
+                    <span class="lang-ua">Потужні та надійні електроскутери з великим запасом ходу, комфортною посадкою та м'якою підвіскою. Ідеальне рішення для швидкого пересування містом без заторів та витрат на пальне.</span>
+                    <span class="lang-en">Powerful and reliable electric scooters with long range, ergonomic seating, and soft suspension. The perfect solution for fast city transit without traffic jams or fuel costs.</span>
                 </p>
                 <div class="flex items-center gap-4 flex-wrap">
-                    <a href="catalog.html?model=crosser-cr-20" class="inline-flex items-center justify-center gap-2 bg-[#1D5D3B] hover:bg-[#237248] text-white px-7 py-3.5 rounded-xl font-bold transition-all shadow-lg shadow-[#1D5D3B]/20">
+                    <a href="catalog.html?type=scooter" class="inline-flex items-center justify-center gap-2 bg-[#1D5D3B] hover:bg-[#237248] text-white px-7 py-3.5 rounded-xl font-bold transition-all shadow-lg shadow-[#1D5D3B]/20">
                         <span class="lang-ua">Обрати в каталозі →</span>
                         <span class="lang-en">Choose in catalog →</span>
                     </a>
@@ -1764,31 +1786,31 @@
             </div>
         </div>
         <div class="img-wrapper" style="overflow: hidden !important; contain: paint !important; left: 0 !important; right: auto !important; justify-content: flex-start !important;">
-            <img src="images/crosser-cr20.png" alt="Crosser CR-20" class="promo-vehicle-img scooter-img" style="position: absolute !important; left: -4vw !important; right: auto !important; bottom: 0 !important; height: 95% !important; max-height: 800px !important; width: auto !important; object-fit: contain !important; pointer-events: none !important; transform: scaleX(-1) !important;">
+            <img src="images/crosser-cr20.png" alt="Електроскутери MUVIO" class="promo-vehicle-img scooter-img" style="position: absolute !important; left: -4vw !important; right: auto !important; bottom: 0 !important; height: 95% !important; max-height: 800px !important; width: auto !important; object-fit: contain !important; pointer-events: none !important; transform: scaleX(-1) !important;">
         </div>
     </section>
 
-    <!-- ==================== СЕКЦІЯ 2 (ВЕЛОСИПЕД LIKE.BIKE BRUISER) ==================== -->
+    <!-- ==================== СЕКЦІЯ 2 (ВЕЛОСИПЕДИ ТА ФЕТБАЙКИ) ==================== -->
     <section class="promo-section promo-bike-section bike-promo" style="position: relative !important; overflow: hidden !important; contain: paint !important; min-height: 720px !important; margin: 0 !important; margin-bottom: 0 !important;">
         <div class="promo-container">
             <div class="text-col">
                 <div class="inline-flex items-center gap-2 px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full mb-4">
                     <span class="w-2 h-2 rounded-full bg-[#10B981]"></span>
                     <span class="font-mono text-[11px] tracking-widest text-emerald-400 uppercase font-semibold">
-                        <span class="lang-ua">ЕЛЕКТРОВЕЛОСИПЕДИ ДЛЯ МІСТА ТА КУР'ЄРІВ</span>
-                        <span class="lang-en">CITY &amp; COURIER E-BIKES</span>
+                        <span class="lang-ua">ЕЛЕКТРОВЕЛОСИПЕДИ ТА ФЕТБАЙКИ</span>
+                        <span class="lang-en">ELECTRIC BIKES & FATBIKES</span>
                     </span>
                 </div>
                 <h2 class="promo-title font-brand font-extrabold text-3xl sm:text-4xl lg:text-5xl uppercase tracking-tight leading-tight text-white mb-4">
-                    <span class="lang-ua">Like.Bike Bruiser — свобода пересування без заторів</span>
-                    <span class="lang-en">Like.Bike Bruiser — traffic-free urban freedom</span>
+                    <span class="lang-ua">ОРЕНДА ЕЛЕКТРОВЕЛОСИПЕДІВ — СВОБОДА РУХУ НА БУДЬ-ЯКІЙ ДОРОЗІ</span>
+                    <span class="lang-en">ELECTRIC BIKE RENTAL — FREEDOM OF MOVEMENT ON ANY ROAD</span>
                 </h2>
                 <p class="promo-desc text-base sm:text-lg text-zinc-400 mb-8 leading-relaxed">
-                    <span class="lang-ua">Потужний фетбайк з широкими колесами для будь-якого дорожнього покриття. Ідеальний вибір для кур'єрської доставки та активних поїздок Одесою з мінімальними витратами.</span>
-                    <span class="lang-en">A powerful fatbike with wide tires for any road surface. The ideal choice for courier delivery and active city rides in Odesa with minimal costs.</span>
+                    <span class="lang-ua">Надійні електровелосипеди з широкими колесами для кур'єрської доставки та активних поїздок містом. Легкість у керуванні, знімний акумулятор та мінімальні експлуатаційні витрати.</span>
+                    <span class="lang-en">Durable electric bikes with wide tires for courier delivery and active city commuting. Easy handling, removable battery, and minimal running costs.</span>
                 </p>
                 <div class="flex items-center gap-4 flex-wrap">
-                    <a href="catalog.html?model=like-bike-bruser-1" class="inline-flex items-center justify-center gap-2 bg-[#1D5D3B] hover:bg-[#237248] text-white px-7 py-3.5 rounded-xl font-bold transition-all shadow-lg shadow-[#1D5D3B]/20">
+                    <a href="catalog.html?type=bike" class="inline-flex items-center justify-center gap-2 bg-[#1D5D3B] hover:bg-[#237248] text-white px-7 py-3.5 rounded-xl font-bold transition-all shadow-lg shadow-[#1D5D3B]/20">
                         <span class="lang-ua">Детальніше про оренду →</span>
                         <span class="lang-en">Rental details →</span>
                     </a>
@@ -1801,7 +1823,7 @@
             </div>
         </div>
         <div class="img-wrapper">
-            <img src="images/like-bike-bruiser-hq.png" alt="Like.Bike Bruiser" class="promo-vehicle-img bike-img">
+            <img src="images/like-bike-bruiser-hq.png" alt="Електровелосипеди MUVIO" class="promo-vehicle-img bike-img">
         </div>
     </section>
 
@@ -4146,33 +4168,29 @@
             }
         });
 
-        // Плавна анімація появи промо-секцій при скролі (Z-pattern IntersectionObserver)
+        // Плавна анімація виїзду по скролу (Scroll Reveal для скутера та велосипеда)
         function initPromoScrollReveal() {
-            const targets = document.querySelectorAll('.promo-slide-left, .promo-slide-right, .promo-fade-text');
+            const scooterImgWrap = document.querySelector('.promo-scooter-section .img-wrapper, .scooter-promo .img-wrapper');
+            const bikeImgWrap = document.querySelector('.promo-bike-section .img-wrapper, .bike-promo .img-wrapper');
+            const targets = [scooterImgWrap, bikeImgWrap].filter(Boolean);
             if (!targets.length) return;
 
-            const makeVisible = (el) => el.classList.add('is-visible');
-
             if ('IntersectionObserver' in window) {
-                const promoObserver = new IntersectionObserver((entries, observer) => {
+                const observer = new IntersectionObserver((entries, obs) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
-                            makeVisible(entry.target);
-                            observer.unobserve(entry.target);
+                            entry.target.classList.add('visible');
+                            obs.unobserve(entry.target);
                         }
                     });
-                }, { threshold: 0.05, rootMargin: '80px 0px 80px 0px' });
-
-                targets.forEach(el => {
-                    const rect = el.getBoundingClientRect();
-                    if (rect.top < window.innerHeight + 100 && rect.bottom > -100) {
-                        makeVisible(el);
-                    } else {
-                        promoObserver.observe(el);
-                    }
+                }, {
+                    threshold: 0.15,
+                    rootMargin: '0px 0px -40px 0px'
                 });
+
+                targets.forEach(target => observer.observe(target));
             } else {
-                targets.forEach(makeVisible);
+                targets.forEach(target => target.classList.add('visible'));
             }
         }
 
