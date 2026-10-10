@@ -592,10 +592,10 @@
     <div class="store-top-bar">
         <div class="store-top-bar-container">
             <!-- ЛЕВАЯ ЧАСТЬ: ТОЛЬКО ПРОФИЛЬ -->
-            <a href="cabinet.html" class="user-profile-compact" title="Особистий кабінет">
+            <div class="user-profile-compact" onclick="window.location.href='cabinet.html'" style="cursor: pointer;" title="Особистий кабінет">
                 <div class="user-avatar-badge" id="headerUserAvatar">M</div>
                 <span class="user-display-name" id="headerUserNameText">Максим</span>
-            </a>
+            </div>
 
             <!-- ЦЕНТР: СТРОКА ПОИСКА -->
             <form class="store-search-form" onsubmit="event.preventDefault(); handleSearchSubmit();">
