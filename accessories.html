@@ -408,26 +408,31 @@
         .product-image-box {
             width: 100%;
             height: 180px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
             background: #FFFFFF;
             border-bottom: 1px solid #E2E8F0;
             overflow: hidden;
             padding: 12px;
             box-sizing: border-box;
             position: relative;
+            margin: 0 auto !important;
+            float: none !important;
         }
 
         html.dark .product-image-box {
-            background: #000000 !important;
+            background: #0d0d0d !important;
             border-bottom-color: rgba(255, 255, 255, 0.08) !important;
         }
 
         .product-card-img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
+            max-width: 100% !important;
+            max-height: 100% !important;
+            object-fit: contain !important;
+            margin: 0 auto !important;
+            display: block !important;
+            float: none !important;
             transition: transform 0.2s ease;
         }
 
@@ -669,7 +674,7 @@
                 <button type="button" onclick="saveTabTarget('wishlist'); window.location.href='cabinet.html';" class="action-icon-btn" title="Обране" aria-label="Обране">
                     ♡ <span class="badge-count" id="headerWishlistCount">3</span>
                 </button>
-                <button type="button" onclick="saveTabTarget('cart'); window.location.href='cabinet.html';" class="action-icon-btn" title="Кошик" aria-label="Кошик">
+                <button type="button" onclick="openCartModal()" class="action-icon-btn" title="Кошик" aria-label="Кошик">
                     🛒 <span class="badge-count badge-cart" id="headerCartCount">0</span>
                 </button>
             </div>
@@ -888,6 +893,53 @@
             </div>
         </div>
     </footer>
+
+    <!-- ==================== ROZETKA-STYLE QUICK CART MODAL ==================== -->
+    <div id="cartModalBackdrop" class="cart-modal-backdrop hidden" onclick="handleCartBackdropClick(event)">
+        <div class="cart-modal-window" role="dialog" aria-modal="true" aria-labelledby="cartModalTitle">
+            <!-- Header -->
+            <div class="cart-modal-header">
+                <div class="cart-modal-title-wrap">
+                    <h3 class="cart-modal-title" id="cartModalTitle">Кошик</h3>
+                    <label class="cart-select-all-label">
+                        <input type="checkbox" id="cartSelectAllCheckbox" onchange="toggleCartSelectAll(this.checked)">
+                        <span id="cartSelectAllText">Вибрано 0 з 0</span>
+                    </label>
+                </div>
+                <div class="cart-header-actions">
+                    <button type="button" class="cart-delete-selected-btn" onclick="deleteSelectedCartItems()" title="Видалити вибрані товари" id="cartDeleteSelectedBtn">
+                        <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                        <span>Видалити вибрані</span>
+                    </button>
+                    <button type="button" class="cart-modal-close-btn" onclick="closeCartModal()" title="Закрити кошик" aria-label="Закрити">
+                        &times;
+                    </button>
+                </div>
+            </div>
+
+            <!-- Body (List of Items) -->
+            <div class="cart-modal-body" id="cartModalBody">
+                <!-- Динамический список товаров -->
+            </div>
+
+            <!-- Footer -->
+            <div class="cart-modal-footer">
+                <button type="button" class="cart-continue-btn" onclick="closeCartModal()">
+                    &larr; Продовжити покупки
+                </button>
+                <div class="cart-footer-right">
+                    <div class="cart-total-block">
+                        <div class="cart-total-label">Всього до сплати:</div>
+                        <div class="cart-total-amount" id="cartModalTotalAmount">0 ₴</div>
+                    </div>
+                    <a href="cabinet.html" class="cart-checkout-btn" id="cartCheckoutBtn">
+                        <span>Оформити замовлення</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Тост-сповіщення про додавання товару -->
     <div id="ecomToast">
@@ -1219,40 +1271,226 @@
             if (!prod) return;
 
             let cart = getCart();
-            const existingIndex = cart.findIndex(item => item.name === prod.name);
+            const existingIndex = cart.findIndex(item => (item.id === prod.id || item.name === prod.name));
             const btn = document.getElementById(`addToCartBtn-${prodId}`);
 
             if (existingIndex > -1) {
-                cart.splice(existingIndex, 1);
+                cart[existingIndex].qty = (cart[existingIndex].qty || 1) + 1;
+                cart[existingIndex].selected = true;
                 saveCart(cart);
-                showToast(`«${prod.name}» прибрано з кошика`);
-
-                if (btn) {
-                    btn.classList.remove('in-cart');
-                    btn.innerHTML = `<i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i> <span>Додати в кошик</span>`;
-                }
             } else {
                 cart.push({
+                    id: prod.id,
                     name: prod.name,
                     price: prod.price,
+                    oldPrice: prod.oldPrice || 0,
                     qty: 1,
                     image: prod.image,
-                    icon: 'package'
+                    icon: 'package',
+                    selected: true
                 });
                 saveCart(cart);
                 showToast(`«${prod.name}» додано в кошик!`);
+            }
 
-                if (btn) {
-                    btn.classList.add('in-cart');
-                    btn.innerHTML = `<i data-lucide="trash-2" class="w-3.5 h-3.5"></i> <span>Прибрати з кошика</span>`;
-                }
+            if (btn) {
+                btn.classList.add('in-cart');
+                btn.innerHTML = `<i data-lucide="check" class="w-3.5 h-3.5"></i> <span>В кошику</span>`;
             }
 
             if (window.lucide) window.lucide.createIcons();
+            openCartModal();
         }
 
         function addToCart(prodId) {
             toggleCart(prodId);
+        }
+
+        function syncProductCardButtons() {
+            const cart = getCart();
+            PRODUCTS_DB.forEach(prod => {
+                const btn = document.getElementById(`addToCartBtn-${prod.id}`);
+                if (!btn) return;
+                const isInCart = cart.some(item => (item.id === prod.id || item.name === prod.name));
+                if (isInCart) {
+                    btn.classList.add('in-cart');
+                    btn.innerHTML = `<i data-lucide="check" class="w-3.5 h-3.5"></i> <span>В кошику</span>`;
+                } else {
+                    btn.classList.remove('in-cart');
+                    btn.innerHTML = `<i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i> <span>Купити</span>`;
+                }
+            });
+            if (window.lucide) window.lucide.createIcons();
+        }
+
+        /* ==================== ROZETKA-STYLE QUICK CART CONTROLLER ==================== */
+        function openCartModal() {
+            renderCartModal();
+            const modal = document.getElementById('cartModalBackdrop');
+            if (modal) modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            if (window.lucide) window.lucide.createIcons();
+        }
+
+        function closeCartModal() {
+            const modal = document.getElementById('cartModalBackdrop');
+            if (modal) modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        function handleCartBackdropClick(e) {
+            if (e.target.id === 'cartModalBackdrop') {
+                closeCartModal();
+            }
+        }
+
+        function renderCartModal() {
+            const body = document.getElementById('cartModalBody');
+            const totalEl = document.getElementById('cartModalTotalAmount');
+            const selectAllCheck = document.getElementById('cartSelectAllCheckbox');
+            const selectAllText = document.getElementById('cartSelectAllText');
+            const deleteSelectedBtn = document.getElementById('cartDeleteSelectedBtn');
+            const checkoutBtn = document.getElementById('cartCheckoutBtn');
+            if (!body) return;
+
+            const cart = getCart();
+
+            if (cart.length === 0) {
+                body.innerHTML = `
+                    <div class="cart-empty-state">
+                        <div class="w-16 h-16 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center mx-auto mb-4 text-zinc-500">
+                            <i data-lucide="shopping-bag" class="w-8 h-8"></i>
+                        </div>
+                        <h4 class="text-base font-bold text-white mb-1">Кошик порожній</h4>
+                        <p class="text-xs text-zinc-400 mb-5">Але це ніколи не пізно виправити :)</p>
+                        <button type="button" onclick="closeCartModal();" class="px-5 py-2.5 bg-[#1AB370] text-black font-bold text-xs rounded uppercase tracking-wider hover:bg-[#169B60] transition-colors">
+                            Продовжити покупки
+                        </button>
+                    </div>
+                `;
+                if (totalEl) totalEl.textContent = '0 ₴';
+                if (selectAllText) selectAllText.textContent = 'Вибрано 0 з 0';
+                if (selectAllCheck) {
+                    selectAllCheck.checked = false;
+                    selectAllCheck.disabled = true;
+                }
+                if (deleteSelectedBtn) deleteSelectedBtn.style.display = 'none';
+                if (checkoutBtn) checkoutBtn.classList.add('opacity-50', 'pointer-events-none');
+                if (window.lucide) window.lucide.createIcons();
+                syncProductCardButtons();
+                return;
+            }
+
+            if (checkoutBtn) checkoutBtn.classList.remove('opacity-50', 'pointer-events-none');
+            if (deleteSelectedBtn) deleteSelectedBtn.style.display = 'inline-flex';
+
+            let selectedCount = 0;
+            let totalPrice = 0;
+
+            const itemsHtml = cart.map((item, idx) => {
+                const isSelected = item.selected !== false;
+                if (isSelected) {
+                    selectedCount++;
+                    totalPrice += (item.price || 0) * (item.qty || 1);
+                }
+
+                const itemSubtotal = (item.price || 0) * (item.qty || 1);
+                const hasDiscount = item.oldPrice && item.oldPrice > item.price;
+                const oldSubtotal = hasDiscount ? item.oldPrice * (item.qty || 1) : 0;
+                const prodId = item.id || (PRODUCTS_DB ? (PRODUCTS_DB.find(p => p.name === item.name) || {}).id : 1) || 1;
+
+                return `
+                    <div class="cart-item-card">
+                        <input type="checkbox" class="cart-item-check" ${isSelected ? 'checked' : ''} onchange="toggleCartItemSelection(${idx}, this.checked)">
+                        
+                        <a href="product.html?id=${prodId}" class="cart-item-thumb-box" title="${item.name}">
+                            <img src="${item.image || 'images/kolodkiaima.jpg'}" alt="${item.name}" class="cart-item-thumb">
+                        </a>
+
+                        <div class="cart-item-info">
+                            <a href="product.html?id=${prodId}" class="cart-item-title">${item.name}</a>
+                            <div class="cart-item-unit-price">${(item.price || 0).toLocaleString()} ₴ / шт.</div>
+                        </div>
+
+                        <div class="cart-item-stepper">
+                            <button type="button" class="cart-step-btn" onclick="updateCartItemQty(${idx}, -1)" title="Зменшити">&minus;</button>
+                            <input type="number" class="cart-step-input" value="${item.qty || 1}" min="1" max="99" onchange="setCartItemQty(${idx}, this.value)">
+                            <button type="button" class="cart-step-btn" onclick="updateCartItemQty(${idx}, 1)" title="Збільшити">&plus;</button>
+                        </div>
+
+                        <div class="cart-item-price-block">
+                            ${hasDiscount ? `<div class="cart-item-old-price">${oldSubtotal.toLocaleString()} ₴</div>` : ''}
+                            <div class="cart-item-subtotal">${itemSubtotal.toLocaleString()} ₴</div>
+                        </div>
+
+                        <button type="button" class="cart-item-del-btn" onclick="removeCartItem(${idx})" title="Видалити товар">
+                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                `;
+            }).join('');
+
+            body.innerHTML = itemsHtml;
+            if (totalEl) totalEl.textContent = `${totalPrice.toLocaleString()} ₴`;
+            if (selectAllText) selectAllText.textContent = `Вибрано ${selectedCount} з ${cart.length}`;
+            if (selectAllCheck) {
+                selectAllCheck.disabled = false;
+                selectAllCheck.checked = (selectedCount === cart.length && cart.length > 0);
+            }
+
+            if (window.lucide) window.lucide.createIcons();
+            syncProductCardButtons();
+        }
+
+        function updateCartItemQty(index, delta) {
+            const cart = getCart();
+            if (!cart[index]) return;
+            let current = cart[index].qty || 1;
+            let next = current + delta;
+            if (next < 1) next = 1;
+            cart[index].qty = next;
+            saveCart(cart);
+            renderCartModal();
+        }
+
+        function setCartItemQty(index, value) {
+            const cart = getCart();
+            if (!cart[index]) return;
+            let val = parseInt(value, 10);
+            if (isNaN(val) || val < 1) val = 1;
+            cart[index].qty = val;
+            saveCart(cart);
+            renderCartModal();
+        }
+
+        function toggleCartItemSelection(index, checked) {
+            const cart = getCart();
+            if (!cart[index]) return;
+            cart[index].selected = checked;
+            saveCart(cart);
+            renderCartModal();
+        }
+
+        function toggleCartSelectAll(checked) {
+            const cart = getCart();
+            cart.forEach(item => { item.selected = checked; });
+            saveCart(cart);
+            renderCartModal();
+        }
+
+        function removeCartItem(index) {
+            const cart = getCart();
+            if (!cart[index]) return;
+            cart.splice(index, 1);
+            saveCart(cart);
+            renderCartModal();
+        }
+
+        function deleteSelectedCartItems() {
+            let cart = getCart();
+            cart = cart.filter(item => item.selected === false);
+            saveCart(cart);
+            renderCartModal();
         }
 
         function toggleWishlist(prodId, event) {
@@ -1306,9 +1544,10 @@
                 totalPrice += (item.price || 0) * q;
             });
 
-            const cartCountEl = document.getElementById('headerCartCount');
+            document.querySelectorAll('#headerCartCount, #cart-count, .cart-count').forEach(el => {
+                el.textContent = totalQty;
+            });
             const cartTotalEl = document.getElementById('headerCartTotal');
-            if (cartCountEl) cartCountEl.textContent = totalQty;
             if (cartTotalEl) cartTotalEl.textContent = `${totalPrice.toLocaleString()} ₴`;
 
             let wishlistCount = 3;
@@ -1384,11 +1623,11 @@
 
             let html = '';
             filtered.forEach(prod => {
-                const isInCart = cart.some(item => item.name === prod.name);
+                const isInCart = cart.some(item => (item.id === prod.id || item.name === prod.name));
                 const inCartClass = isInCart ? 'in-cart' : '';
                 const inCartText = isInCart 
-                    ? `<i data-lucide="trash-2" class="w-3.5 h-3.5"></i> <span>Прибрати з кошика</span>` 
-                    : `<i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i> <span>Додати в кошик</span>`;
+                    ? `<i data-lucide="check" class="w-3.5 h-3.5"></i> <span>В кошику</span>` 
+                    : `<i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i> <span>Купити</span>`;
 
                 html += `
                 <div class="ecom-prod-card product-card group">
@@ -1402,7 +1641,7 @@
                             </button>
                         </div>
 
-                        <a href="product.html?id=${prod.id}" class="product-image-box mb-3 rounded-[2px] block" title="${prod.name}">
+                        <a href="product.html?id=${prod.id}" class="product-image-box mb-3 rounded-[2px]" title="${prod.name}">
                             <img src="${prod.image}" alt="${prod.name}" class="product-card-img" loading="lazy">
                             <span class="absolute bottom-2 left-2 text-[10px] font-mono text-zinc-400 bg-white/80 dark:bg-black/60 px-1 rounded">Код: 00${prod.id}</span>
                         </a>
@@ -1462,6 +1701,10 @@
 
             const catMap = {
                 'all': 'Всі категорії',
+                'parts': 'Запчастини',
+                'equip': 'Екіпірування та захист',
+                'tuning': 'Комфорт та тюнінг',
+                'acc': 'Аксесуари та кріплення',
                 'helmets': 'Шоломи',
                 'gloves': 'Рукавиці та дощовики',
                 'brakes': 'Гальмівні колодки',
@@ -1579,17 +1822,31 @@
         // Ініціалізація сторінки
         document.addEventListener('DOMContentLoaded', () => {
             updateHeaderBadges();
-            renderProducts();
-            if (window.lucide) window.lucide.createIcons();
 
-            // Автоматичний редирект, якщо перейшли за старим посиланням ?product=id або ?id=id
+            // Перевірка URL параметрів (категорія / пошук / старий редирект на товар)
             try {
                 const urlParams = new URLSearchParams(window.location.search);
                 const pId = urlParams.get('product') || urlParams.get('id');
                 if (pId) {
                     window.location.replace('product.html?id=' + pId);
+                    return;
+                }
+
+                const urlCat = urlParams.get('cat');
+                if (urlCat) {
+                    filterByCategory(urlCat);
+                }
+
+                const urlSearch = urlParams.get('search');
+                if (urlSearch) {
+                    const sInput = document.getElementById('mainSearchInput');
+                    if (sInput) sInput.value = urlSearch;
+                    searchQuery = urlSearch;
                 }
             } catch (e) {}
+
+            renderProducts();
+            if (window.lucide) window.lucide.createIcons();
 
             const burger = document.getElementById('burger-btn');
             const mobileMenu = document.getElementById('mobile-menu');
@@ -1598,8 +1855,15 @@
                     mobileMenu.classList.toggle('hidden');
                 });
             }
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closeCartModal();
+                }
+            });
         });
     </script>
+    <script src="cart-modal.js"></script>
 </body>
 
 </html>
