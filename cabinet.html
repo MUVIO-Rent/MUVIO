@@ -942,11 +942,22 @@
                             </label>
                             <input type="tel" id="checkoutPhone" required placeholder="+380 (99) 000-00-00" class="ecom-input w-full font-mono">
                         </div>
-                        <div>
+                        <div class="relative" id="cityAutocompleteWrapper">
                             <label for="checkoutCity" class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1">
                                 Населений пункт / Місто <span class="text-rose-500">*</span>
                             </label>
-                            <input type="text" id="checkoutCity" list="uaCitiesList" required placeholder="Одеса" class="ecom-input w-full">
+                            <div class="relative">
+                                <input type="text" id="checkoutCity" required autocomplete="off" placeholder="Введіть місто (від 2 літер, напр. Київ)" class="ecom-input w-full pr-8">
+                                <div id="checkoutCitySpinner" class="absolute right-2.5 top-1/2 -translate-y-1/2 hidden pointer-events-none">
+                                    <svg class="animate-spin h-3.5 w-3.5 text-[#1AB370]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <!-- Випадаючий список міст Нової Пошти -->
+                            <div id="checkoutCityDropdown" class="absolute left-0 right-0 top-full mt-1 bg-white dark:bg-[#181C22] border border-zinc-300 dark:border-white/10 shadow-2xl z-50 max-h-56 overflow-y-auto hidden" style="border-radius: 2px;">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -995,11 +1006,35 @@
                         </div>
                     </div>
 
-                    <div>
-                        <label for="checkoutAddress" class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1">
-                            Номер відділення / поштомату / адреса <span class="text-rose-500">*</span>
-                        </label>
-                        <input type="text" id="checkoutAddress" required placeholder="Відділення №45 (вул. Корольова, 24) або адреса доставки" class="ecom-input w-full">
+                    <!-- Вибір відділення / поштомату / адреси з живим Nova Poshta API -->
+                    <div id="checkoutWarehouseSection" class="space-y-1.5 pt-1">
+                        <div class="flex items-center justify-between">
+                            <label id="checkoutWarehouseLabel" for="checkoutWarehouseSelect" class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300">
+                                Відділення Нової Пошти <span class="text-rose-500">*</span>
+                            </label>
+                            <button type="button" id="toggleManualWarehouseBtn" onclick="toggleManualWarehouseMode()" class="text-[11px] text-[#1AB370] hover:underline font-medium">
+                                Ввести вручну
+                            </button>
+                        </div>
+
+                        <!-- Випадаючий список з API -->
+                        <div id="checkoutWarehouseSelectWrapper" class="relative">
+                            <select id="checkoutWarehouseSelect" class="ecom-input w-full pr-8 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed">
+                                <option value="" disabled selected>Спочатку оберіть місто вище...</option>
+                            </select>
+                            <div id="checkoutWarehouseSpinner" class="absolute right-3 top-1/2 -translate-y-1/2 hidden pointer-events-none">
+                                <svg class="animate-spin h-3.5 w-3.5 text-[#1AB370]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <!-- Ручне поле введення (для кур'єра або якщо API офлайн) -->
+                        <div id="checkoutManualAddressWrapper" class="hidden">
+                            <input type="text" id="checkoutAddress" placeholder="Номер відділення або адреса" class="ecom-input w-full">
+                            <p id="checkoutManualHint" class="text-[11px] text-zinc-500 mt-1">Введіть номер відділення або адресу доставки вручну.</p>
+                        </div>
                     </div>
                 </div>
 
@@ -1068,30 +1103,7 @@
         </div>
     </div>
 
-    <!-- Автопідказки міст для Нової Пошти -->
-    <datalist id="uaCitiesList">
-        <option value="Київ">
-        <option value="Одеса">
-        <option value="Львів">
-        <option value="Харків">
-        <option value="Дніпро">
-        <option value="Запоріжжя">
-        <option value="Вінниця">
-        <option value="Кривий Ріг">
-        <option value="Миколаїв">
-        <option value="Полтава">
-        <option value="Чернігів">
-        <option value="Черкаси">
-        <option value="Хмельницький">
-        <option value="Житомир">
-        <option value="Чернівці">
-        <option value="Суми">
-        <option value="Рівне">
-        <option value="Івано-Франківськ">
-        <option value="Тернопіль">
-        <option value="Луцьк">
-        <option value="Ужгород">
-    </datalist>
+
 
     <!-- ==================== 4. МОДАЛЬНЕ ВІКНО ПІДТВЕРДЖЕННЯ (СТРОГИЙ BRUTALIST ДИЗАЙН) ==================== -->
     <div id="orderSuccessModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto hidden">
@@ -1484,7 +1496,317 @@
             }
         }
 
-        // ==================== 4. МОДАЛЬНЕ ВІКНО CHECKOUT ====================
+        // ==================== 4. NOVA POSHTA API ІНТЕГРАЦІЯ ТА CHECKOUT ====================
+
+        const NOVA_POSHTA_API_KEY = "c10f0414538c2d16a9c27420e1507cf2";
+
+        let selectedCityRef = "";
+        let selectedSettlementRef = "";
+        let selectedCityName = "";
+        let isManualWarehouseMode = false;
+        let cityDebounceTimer = null;
+
+        // Пошук міст через офіційне API Нової Пошти (searchSettlements)
+        async function searchNovaPoshtaCities(queryText) {
+            const dropdown = document.getElementById('checkoutCityDropdown');
+            const spinner = document.getElementById('checkoutCitySpinner');
+
+            if (!queryText || queryText.length < 2) {
+                if (dropdown) dropdown.classList.add('hidden');
+                if (spinner) spinner.classList.add('hidden');
+                return;
+            }
+
+            if (spinner) spinner.classList.remove('hidden');
+
+            try {
+                const response = await fetch("https://api.novaposhta.ua/v2.0/json/", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        apiKey: NOVA_POSHTA_API_KEY,
+                        modelName: "Address",
+                        calledMethod: "searchSettlements",
+                        methodProperties: {
+                            CityName: queryText,
+                            Limit: "7"
+                        }
+                    })
+                });
+
+                if (spinner) spinner.classList.add('hidden');
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                if (data.success && data.data && data.data[0] && data.data[0].Addresses && data.data[0].Addresses.length > 0) {
+                    const addresses = data.data[0].Addresses;
+                    let html = '';
+                    addresses.forEach(addr => {
+                        const cityName = addr.MainDescription || addr.Present;
+                        const regionInfo = addr.Present || `${addr.Area ? addr.Area + ' обл.' : ''}${addr.Region ? ', ' + addr.Region + ' р-н' : ''}`;
+                        const cityRef = addr.DeliveryCity || addr.Ref;
+                        const settlementRef = addr.Ref;
+
+                        const safeCityName = encodeURIComponent(cityName);
+                        const safeCityRef = encodeURIComponent(cityRef);
+                        const safeSettlementRef = encodeURIComponent(settlementRef);
+
+                        html += `
+                            <div class="px-3 py-2 hover:bg-zinc-100 dark:hover:bg-white/10 cursor-pointer border-b border-zinc-100 dark:border-white/5 transition-colors city-suggestion-item"
+                                 data-city-name="${safeCityName}"
+                                 data-city-ref="${safeCityRef}"
+                                 data-settlement-ref="${safeSettlementRef}">
+                                <div class="font-bold text-xs text-zinc-900 dark:text-white">${cityName}</div>
+                                <div class="text-[11px] text-zinc-500 dark:text-zinc-400">${regionInfo}</div>
+                            </div>
+                        `;
+                    });
+
+                    if (dropdown) {
+                        dropdown.innerHTML = html;
+                        dropdown.classList.remove('hidden');
+
+                        dropdown.querySelectorAll('.city-suggestion-item').forEach(item => {
+                            item.addEventListener('click', () => {
+                                const cityName = decodeURIComponent(item.dataset.cityName);
+                                const cityRef = decodeURIComponent(item.dataset.cityRef);
+                                const settlementRef = decodeURIComponent(item.dataset.settlementRef);
+
+                                const cityInput = document.getElementById('checkoutCity');
+                                if (cityInput) cityInput.value = cityName;
+
+                                selectedCityName = cityName;
+                                selectedCityRef = cityRef;
+                                selectedSettlementRef = settlementRef;
+
+                                dropdown.classList.add('hidden');
+
+                                // Автоматично активувати поле відділення та завантажити список для цього міста
+                                loadNovaPoshtaWarehouses(selectedCityRef);
+                            });
+                        });
+                    }
+                } else {
+                    if (dropdown) {
+                        dropdown.innerHTML = `
+                            <div class="px-3 py-2 text-xs text-zinc-500 dark:text-zinc-400">
+                                Місто не знайдено в базі НП. Можна ввести вручну.
+                            </div>
+                        `;
+                        dropdown.classList.remove('hidden');
+                    }
+                }
+            } catch (err) {
+                console.warn("Nova Poshta API searchSettlements error:", err);
+                if (spinner) spinner.classList.add('hidden');
+                if (dropdown) dropdown.classList.add('hidden');
+            }
+        }
+
+        // Завантаження відділень / поштоматів для обраного міста (getWarehouses)
+        async function loadNovaPoshtaWarehouses(cityRef) {
+            const targetCityRef = cityRef || selectedCityRef;
+            if (!targetCityRef) return;
+
+            const deliveryInput = document.querySelector('input[name="checkoutDeliveryType"]:checked');
+            const deliveryType = deliveryInput ? deliveryInput.value : 'Нова Пошта (Відділення)';
+            const isPostomate = (deliveryType === 'Нова Пошта (Поштомат)');
+            const isCourier = (deliveryType === "Кур'єрська доставка Нової Пошти");
+
+            if (isCourier) {
+                toggleManualWarehouseMode(true);
+                return;
+            }
+
+            const selectEl = document.getElementById('checkoutWarehouseSelect');
+            const selectWrapper = document.getElementById('checkoutWarehouseSelectWrapper');
+            const spinner = document.getElementById('checkoutWarehouseSpinner');
+
+            if (!selectEl) return;
+
+            if (selectWrapper) selectWrapper.classList.remove('hidden');
+            toggleManualWarehouseMode(false);
+            selectEl.disabled = true;
+            selectEl.innerHTML = `<option value="" disabled selected>Завантаження ${isPostomate ? 'поштоматів' : 'відділень'}...</option>`;
+            if (spinner) spinner.classList.remove('hidden');
+
+            try {
+                const methodProperties = {
+                    CityRef: targetCityRef,
+                    Limit: "100"
+                };
+                if (isPostomate) {
+                    methodProperties.TypeOfWarehouseRef = "f9316480-5f2d-425d-bc2c-ac7cd29decf0";
+                }
+
+                const response = await fetch("https://api.novaposhta.ua/v2.0/json/", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        apiKey: NOVA_POSHTA_API_KEY,
+                        modelName: "AddressGeneral",
+                        calledMethod: "getWarehouses",
+                        methodProperties: methodProperties
+                    })
+                });
+
+                if (spinner) spinner.classList.add('hidden');
+                selectEl.disabled = false;
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                if (data.success && data.data && data.data.length > 0) {
+                    let list = data.data;
+
+                    if (isPostomate) {
+                        const postomats = list.filter(w => (w.Description && w.Description.includes('Поштомат')) || w.TypeOfWarehouse === "f9316480-5f2d-425d-bc2c-ac7cd29decf0");
+                        if (postomats.length > 0) {
+                            list = postomats;
+                        }
+                    } else {
+                        list = list.filter(w => !w.Description || !w.Description.includes('Поштомат'));
+                    }
+
+                    if (list.length > 0) {
+                        let optionsHtml = `<option value="" disabled selected>Оберіть ${isPostomate ? 'поштомат' : 'відділення'} (${list.length} знайдено)...</option>`;
+                        list.forEach(w => {
+                            optionsHtml += `<option value="${w.Description}">${w.Description}</option>`;
+                        });
+                        selectEl.innerHTML = optionsHtml;
+                    } else {
+                        selectEl.innerHTML = `<option value="" disabled selected>Для міста немає ${isPostomate ? 'поштоматів' : 'відділень'}. Введіть вручну</option>`;
+                        toggleManualWarehouseMode(true);
+                    }
+                } else {
+                    selectEl.innerHTML = `<option value="" disabled selected>Відділень не знайдено. Введіть вручну</option>`;
+                    toggleManualWarehouseMode(true);
+                }
+            } catch (err) {
+                console.warn("Nova Poshta API getWarehouses error:", err);
+                if (spinner) spinner.classList.add('hidden');
+                if (selectEl) {
+                    selectEl.disabled = false;
+                    selectEl.innerHTML = `<option value="" disabled selected>Помилка зв'язку з НП. Введіть адресу вручну</option>`;
+                }
+                toggleManualWarehouseMode(true);
+                const hint = document.getElementById('checkoutManualHint');
+                if (hint) {
+                    hint.textContent = "Сервіс Нової Пошти тимчасово недоступний. Введіть номер відділення вручну.";
+                    hint.classList.add('text-amber-500');
+                }
+            }
+        }
+
+        // Перемикання між API-списком та ручним введенням
+        function toggleManualWarehouseMode(forceManual = null) {
+            if (forceManual !== null) {
+                isManualWarehouseMode = forceManual;
+            } else {
+                isManualWarehouseMode = !isManualWarehouseMode;
+            }
+
+            const selectWrapper = document.getElementById('checkoutWarehouseSelectWrapper');
+            const manualWrapper = document.getElementById('checkoutManualAddressWrapper');
+            const toggleBtn = document.getElementById('toggleManualWarehouseBtn');
+
+            if (isManualWarehouseMode) {
+                if (selectWrapper) selectWrapper.classList.add('hidden');
+                if (manualWrapper) manualWrapper.classList.remove('hidden');
+                if (toggleBtn) toggleBtn.textContent = 'Обрати зі списку';
+                const addressInput = document.getElementById('checkoutAddress');
+                if (addressInput && !addressInput.value) {
+                    const selectEl = document.getElementById('checkoutWarehouseSelect');
+                    if (selectEl && selectEl.value) addressInput.value = selectEl.value;
+                }
+            } else {
+                if (selectWrapper) selectWrapper.classList.remove('hidden');
+                if (manualWrapper) manualWrapper.classList.add('hidden');
+                if (toggleBtn) toggleBtn.textContent = 'Ввести вручну';
+            }
+        }
+
+        // Оновлення полів при зміні радіокнопки доставки
+        function handleDeliveryTypeChange() {
+            const deliveryInput = document.querySelector('input[name="checkoutDeliveryType"]:checked');
+            const type = deliveryInput ? deliveryInput.value : 'Нова Пошта (Відділення)';
+            const label = document.getElementById('checkoutWarehouseLabel');
+            const toggleBtn = document.getElementById('toggleManualWarehouseBtn');
+            const addressInput = document.getElementById('checkoutAddress');
+
+            if (type === "Кур'єрська доставка Нової Пошти") {
+                if (label) label.innerHTML = 'Адреса доставки (вулиця, будинок, кв.) <span class="text-rose-500">*</span>';
+                if (toggleBtn) toggleBtn.classList.add('hidden');
+                if (addressInput) addressInput.placeholder = "вул. Хрещатик, 1, кв. 10";
+                toggleManualWarehouseMode(true);
+            } else if (type === "Нова Пошта (Поштомат)") {
+                if (label) label.innerHTML = 'Поштомат Нової Пошти <span class="text-rose-500">*</span>';
+                if (toggleBtn) {
+                    toggleBtn.classList.remove('hidden');
+                    toggleBtn.textContent = isManualWarehouseMode ? 'Обрати зі списку' : 'Ввести вручну';
+                }
+                if (addressInput) addressInput.placeholder = "Поштомат №... (вул. ...)";
+                if (!isManualWarehouseMode && selectedCityRef) {
+                    loadNovaPoshtaWarehouses(selectedCityRef);
+                }
+            } else {
+                if (label) label.innerHTML = 'Відділення Нової Пошти <span class="text-rose-500">*</span>';
+                if (toggleBtn) {
+                    toggleBtn.classList.remove('hidden');
+                    toggleBtn.textContent = isManualWarehouseMode ? 'Обрати зі списку' : 'Ввести вручну';
+                }
+                if (addressInput) addressInput.placeholder = "Відділення №... (вул. ...)";
+                if (!isManualWarehouseMode && selectedCityRef) {
+                    loadNovaPoshtaWarehouses(selectedCityRef);
+                }
+            }
+        }
+
+        // Ініціалізація автокомпліту міст
+        function initNovaPoshtaCheckout() {
+            const cityInput = document.getElementById('checkoutCity');
+            if (cityInput) {
+                cityInput.addEventListener('input', (e) => {
+                    const query = e.target.value.trim();
+                    if (cityDebounceTimer) clearTimeout(cityDebounceTimer);
+
+                    if (query.length < 2) {
+                        const dropdown = document.getElementById('checkoutCityDropdown');
+                        const spinner = document.getElementById('checkoutCitySpinner');
+                        if (dropdown) dropdown.classList.add('hidden');
+                        if (spinner) spinner.classList.add('hidden');
+                        selectedCityRef = '';
+                        selectedCityName = '';
+                        const selectEl = document.getElementById('checkoutWarehouseSelect');
+                        if (selectEl) {
+                            selectEl.disabled = true;
+                            selectEl.innerHTML = '<option value="" disabled selected>Спочатку оберіть місто вище...</option>';
+                        }
+                        return;
+                    }
+
+                    cityDebounceTimer = setTimeout(() => {
+                        searchNovaPoshtaCities(query);
+                    }, 250);
+                });
+            }
+
+            // Закриття випадаючого списку при кліку поза полем
+            document.addEventListener('click', (e) => {
+                const wrapper = document.getElementById('cityAutocompleteWrapper');
+                const dropdown = document.getElementById('checkoutCityDropdown');
+                if (wrapper && dropdown && !wrapper.contains(e.target)) {
+                    dropdown.classList.add('hidden');
+                }
+            });
+        }
 
         function openCheckoutModal() {
             const cart = getCartFromStorage();
@@ -1526,6 +1848,9 @@
                 }
             } catch (e) {}
 
+            // Налаштовуємо початковий стан полів доставки
+            handleDeliveryTypeChange();
+
             const modal = document.getElementById('checkoutModal');
             if (modal) {
                 modal.classList.remove('hidden');
@@ -1540,6 +1865,8 @@
                 modal.classList.add('hidden');
                 document.body.style.overflow = '';
             }
+            const dropdown = document.getElementById('checkoutCityDropdown');
+            if (dropdown) dropdown.classList.add('hidden');
         }
 
         // ==================== 5. ОБРОБКА ЗАМОВЛЕННЯ (ЧЕСНИЙ CHECKOUT) ====================
@@ -1550,7 +1877,6 @@
             const fullName = document.getElementById('checkoutFullName').value.trim();
             const phone = document.getElementById('checkoutPhone').value.trim();
             const city = document.getElementById('checkoutCity').value.trim();
-            const address = document.getElementById('checkoutAddress').value.trim();
 
             const deliveryInput = document.querySelector('input[name="checkoutDeliveryType"]:checked');
             const deliveryType = deliveryInput ? deliveryInput.value : 'Нова Пошта (Відділення)';
@@ -1558,8 +1884,23 @@
             const paymentInput = document.querySelector('input[name="checkoutPaymentType"]:checked');
             const paymentMethod = paymentInput ? paymentInput.value : 'Накладений платіж (при отриманні на пошті)';
 
-            if (!fullName || !phone || !city || !address) {
-                alert("Будь ласка, заповніть усі обов'язкові поля!");
+            // Визначаємо точне відділення / адресу
+            let warehouseAddress = '';
+            const selectEl = document.getElementById('checkoutWarehouseSelect');
+            const manualInput = document.getElementById('checkoutAddress');
+
+            if (isManualWarehouseMode || deliveryType === "Кур'єрська доставка Нової Пошти") {
+                warehouseAddress = manualInput ? manualInput.value.trim() : '';
+            } else {
+                if (selectEl && selectEl.value && !selectEl.disabled) {
+                    warehouseAddress = selectEl.value.trim();
+                } else if (manualInput && manualInput.value.trim()) {
+                    warehouseAddress = manualInput.value.trim();
+                }
+            }
+
+            if (!fullName || !phone || !city || !warehouseAddress) {
+                alert("Будь ласка, заповніть усі обов'язкові поля та оберіть відділення або введіть адресу доставки!");
                 return;
             }
 
@@ -1586,7 +1927,9 @@
             // Закриваємо модалку форми
             closeCheckoutModal();
 
-            // Створюємо чесний об'єкт замовлення зі статусом «В обробці»
+            // 4. СОХРАНЕНИЕ В ЗАКАЗ:
+            // - Выбранный город и точное название отделения записывать в объект созданного заказа в поле delivery_point.
+            // - Очищать корзину, ставить статус «В обробці».
             const randomTtn = "2045" + Math.floor(1000000000 + Math.random() * 9000000000);
             const newOrder = {
                 id: orderId,
@@ -1596,9 +1939,10 @@
                 total: total,
                 status: "В обробці",
                 deliveryType: deliveryType,
-                deliveryAddress: address,
+                delivery_point: `${city}, ${warehouseAddress}`,
+                deliveryAddress: warehouseAddress,
                 city: city,
-                warehouse: address,
+                warehouse: warehouseAddress,
                 ttn: randomTtn,
                 paymentMethod: paymentMethod,
                 customer: {
@@ -1633,11 +1977,11 @@
             if (numEl) numEl.textContent = orderId;
             if (totalEl) totalEl.textContent = `${total.toLocaleString()} ₴`;
             if (recipEl) recipEl.textContent = `${fullName} (${phone})`;
-            if (delivEl) delivEl.textContent = `${deliveryType}: ${city}, ${address}`;
+            if (delivEl) delivEl.textContent = `${deliveryType}: ${city}, ${warehouseAddress}`;
             if (payEl) payEl.textContent = paymentMethod;
 
             if (tgBtn) {
-                const tgText = encodeURIComponent(`Доброго дня! Замовлення ${orderId} на суму ${total} ₴ прийнято. Мій телефон: ${phone}. Доставка: ${city}, ${address}. Спосіб оплати: ${paymentMethod}.`);
+                const tgText = encodeURIComponent(`Доброго дня! Замовлення ${orderId} на суму ${total} ₴ прийнято. Мій телефон: ${phone}. Доставка: ${city}, ${warehouseAddress}. Спосіб оплати: ${paymentMethod}.`);
                 tgBtn.href = `https://t.me/muviobot?text=${tgText}`;
             }
 
@@ -1797,6 +2141,10 @@
                         }
                     }
                 });
+
+                if (e.target.name === 'checkoutDeliveryType') {
+                    handleDeliveryTypeChange();
+                }
             }
         });
 
@@ -1804,6 +2152,7 @@
             if (window.lucide) window.lucide.createIcons();
 
             initUserProfile();
+            initNovaPoshtaCheckout();
             renderOrders();
             renderCart();
             switchCabinetTab('orders');
