@@ -88,7 +88,7 @@
         }
 
         html.dark .store-top-bar-container {
-            background: #111418 !important;
+            background: #0d0d0d !important;
             border-color: rgba(255, 255, 255, 0.08) !important;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
         }
@@ -104,7 +104,7 @@
         .user-profile-compact .user-avatar-badge {
             width: 32px;
             height: 32px;
-            background-color: #10B981;
+            background-color: #1AB370;
             color: #FFFFFF;
             font-weight: 800;
             font-family: monospace;
@@ -132,7 +132,7 @@
             display: flex;
             align-items: center;
             flex: 1;
-            max-width: 580px;
+            max-width: 440px;
             gap: 8px;
             margin: 0 auto;
             box-sizing: border-box;
@@ -153,34 +153,34 @@
         }
 
         .store-search-form .store-search-input:focus {
-            border-color: #10B981;
+            border-color: #1AB370;
         }
 
         html.dark .store-search-form .store-search-input {
-            background-color: #161B22 !important;
+            background-color: #000000 !important;
             border-color: rgba(255, 255, 255, 0.15) !important;
             color: #FFFFFF !important;
         }
 
         .store-search-form .store-search-btn {
+            width: 40px;
             height: 40px;
-            padding: 0 20px;
-            background: #10B981;
+            padding: 0;
+            background: #1AB370;
             color: #FFFFFF;
             font-weight: 700;
             border: none;
             border-radius: 2px;
             cursor: pointer;
-            font-size: 13px;
-            letter-spacing: 0.05em;
-            font-family: monospace;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             transition: background-color 0.15s ease;
-            white-space: nowrap;
             flex-shrink: 0;
         }
 
         .store-search-form .store-search-btn:hover {
-            background: #059669;
+            background: #169B60;
         }
 
         .store-action-icons {
@@ -209,19 +209,19 @@
         }
 
         .action-icon-btn:hover {
-            border-color: #10B981;
-            color: #10B981;
+            border-color: #1AB370;
+            color: #1AB370;
         }
 
         html.dark .action-icon-btn {
-            background: #161B22 !important;
+            background: #0d0d0d !important;
             border-color: rgba(255, 255, 255, 0.12) !important;
             color: #CBD5E1 !important;
         }
 
         html.dark .action-icon-btn:hover {
-            border-color: #10B981 !important;
-            color: #10B981 !important;
+            border-color: #1AB370 !important;
+            color: #1AB370 !important;
         }
 
         .action-icon-btn .badge-count {
@@ -231,7 +231,7 @@
             min-width: 17px;
             height: 17px;
             padding: 0 4px;
-            background-color: #10B981;
+            background-color: #1AB370;
             color: #FFFFFF;
             font-size: 10px;
             font-weight: 800;
@@ -390,7 +390,7 @@
         }
 
         html.dark .ecom-prod-card {
-            background-color: #111418;
+            background-color: #0d0d0d;
             border-color: rgba(255, 255, 255, 0.08);
         }
 
@@ -414,7 +414,7 @@
         }
 
         html.dark .product-image-box {
-            background: #14181D !important;
+            background: #000000 !important;
             border-bottom-color: rgba(255, 255, 255, 0.08) !important;
         }
 
@@ -439,7 +439,7 @@
             letter-spacing: 0.04em;
             padding: 9px 14px;
             border-radius: 2px;
-            border: none;
+            border: 1px solid transparent;
             cursor: pointer;
             transition: all 0.15s ease;
             display: inline-flex;
@@ -454,12 +454,27 @@
         }
 
         .add-to-cart-btn.in-cart {
-            background-color: #0F172A;
+            background-color: #18181B;
+            border-color: #3F3F46;
+            color: #E4E4E7 !important;
+        }
+
+        .add-to-cart-btn.in-cart:hover {
+            background-color: #DC2626 !important;
+            border-color: #DC2626 !important;
             color: #FFFFFF !important;
         }
 
         html.dark .add-to-cart-btn.in-cart {
-            background-color: #27272A;
+            background-color: #18181B;
+            border-color: rgba(255, 255, 255, 0.18);
+            color: #F4F4F5 !important;
+        }
+
+        html.dark .add-to-cart-btn.in-cart:hover {
+            background-color: #DC2626 !important;
+            border-color: #DC2626 !important;
+            color: #FFFFFF !important;
         }
 
         /* ТОСТ ПОВІДОМЛЕННЯ */
@@ -630,8 +645,13 @@
 
             <!-- ЦЕНТР: СТРОКА ПОИСКА -->
             <form class="store-search-form" onsubmit="event.preventDefault(); handleSearchSubmit();">
-                <input type="text" id="mainSearchInput" placeholder="Шукати товари (шолом, колодки, ручки...)" class="store-search-input" oninput="handleSearchInput(this.value)">
-                <button type="submit" class="store-search-btn">ЗНАЙТИ</button>
+                <input type="text" id="mainSearchInput" placeholder="Шукати товари (колодки, підігрів, тримач...)" class="store-search-input" oninput="handleSearchInput(this.value)">
+                <button type="submit" class="store-search-btn" title="Шукати" aria-label="Шукати">
+                    <svg style="width: 17px; height: 17px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
             </form>
 
             <!-- ПРАВАЯ ЧАСТЬ: 3 ЗНАЧКА БЕЗ НАДПИСЕЙ -->
@@ -1026,15 +1046,23 @@
             } catch (e) {}
         }
 
-        function addToCart(prodId) {
+        function toggleCart(prodId) {
             const prod = PRODUCTS_DB.find(p => p.id === prodId);
             if (!prod) return;
 
-            const cart = getCart();
-            const existing = cart.find(item => item.name === prod.name);
+            let cart = getCart();
+            const existingIndex = cart.findIndex(item => item.name === prod.name);
+            const btn = document.getElementById(`addToCartBtn-${prodId}`);
 
-            if (existing) {
-                existing.qty = (existing.qty || 1) + 1;
+            if (existingIndex > -1) {
+                cart.splice(existingIndex, 1);
+                saveCart(cart);
+                showToast(`«${prod.name}» прибрано з кошика`);
+
+                if (btn) {
+                    btn.classList.remove('in-cart');
+                    btn.innerHTML = `<i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i> <span>Додати в кошик</span>`;
+                }
             } else {
                 cart.push({
                     name: prod.name,
@@ -1043,17 +1071,20 @@
                     image: prod.image,
                     icon: 'package'
                 });
+                saveCart(cart);
+                showToast(`«${prod.name}» додано в кошик!`);
+
+                if (btn) {
+                    btn.classList.add('in-cart');
+                    btn.innerHTML = `<i data-lucide="trash-2" class="w-3.5 h-3.5"></i> <span>Прибрати з кошика</span>`;
+                }
             }
 
-            saveCart(cart);
-            showToast(`«${prod.name}» додано в кошик!`);
+            if (window.lucide) window.lucide.createIcons();
+        }
 
-            const btn = document.getElementById(`addToCartBtn-${prodId}`);
-            if (btn) {
-                btn.classList.add('in-cart');
-                btn.innerHTML = `<i data-lucide="check" class="w-3.5 h-3.5"></i> <span>В кошику ✓</span>`;
-                if (window.lucide) window.lucide.createIcons();
-            }
+        function addToCart(prodId) {
+            toggleCart(prodId);
         }
 
         function toggleWishlist(prodId, event) {
@@ -1187,23 +1218,20 @@
             filtered.forEach(prod => {
                 const isInCart = cart.some(item => item.name === prod.name);
                 const inCartClass = isInCart ? 'in-cart' : '';
-                const inCartText = isInCart ? `<i data-lucide="check" class="w-3.5 h-3.5"></i> <span>В кошику ✓</span>` : `<i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i> <span>Додати в кошик</span>`;
+                const inCartText = isInCart 
+                    ? `<i data-lucide="trash-2" class="w-3.5 h-3.5"></i> <span>Прибрати з кошика</span>` 
+                    : `<i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i> <span>Додати в кошик</span>`;
 
                 html += `
                 <div class="ecom-prod-card product-card group">
                     <div>
-                        <div class="flex items-center justify-between gap-2 mb-3">
-                            <span class="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 bg-zinc-100 dark:bg-white/5 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-white/10 rounded-[2px]">
-                                ${prod.badge || prod.categoryTitle}
-                            </span>
-                            <div class="flex items-center gap-1 text-zinc-400">
-                                <button type="button" onclick="toggleCompare(${prod.id}, event)" class="p-1 hover:text-[#1AB370] transition-colors" title="Порівняти">
-                                    <i data-lucide="scale" class="w-4 h-4"></i>
-                                </button>
-                                <button type="button" onclick="toggleWishlist(${prod.id}, event)" class="p-1 hover:text-rose-500 transition-colors" title="В обране">
-                                    <i data-lucide="heart" class="w-4 h-4"></i>
-                                </button>
-                            </div>
+                        <div class="flex items-center justify-end gap-1 mb-2 text-zinc-400">
+                            <button type="button" onclick="toggleCompare(${prod.id}, event)" class="p-1 hover:text-[#1AB370] transition-colors" title="Порівняти">
+                                <i data-lucide="scale" class="w-4 h-4"></i>
+                            </button>
+                            <button type="button" onclick="toggleWishlist(${prod.id}, event)" class="p-1 hover:text-rose-500 transition-colors" title="В обране">
+                                <i data-lucide="heart" class="w-4 h-4"></i>
+                            </button>
                         </div>
 
                         <div class="product-image-box mb-3 rounded-[2px]">
@@ -1234,7 +1262,7 @@
                             </span>
                         </div>
 
-                        <button type="button" id="addToCartBtn-${prod.id}" onclick="addToCart(${prod.id})" class="add-to-cart-btn ${inCartClass}">
+                        <button type="button" id="addToCartBtn-${prod.id}" onclick="toggleCart(${prod.id})" class="add-to-cart-btn ${inCartClass}">
                             ${inCartText}
                         </button>
                     </div>

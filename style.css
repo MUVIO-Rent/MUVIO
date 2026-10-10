@@ -3523,7 +3523,7 @@ html.dark .clean-icon-action-btn:hover {
 }
 
 html.dark .store-top-bar-container {
-    background: #111418 !important;
+    background: #0d0d0d !important;
     border-color: rgba(255, 255, 255, 0.08) !important;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
 }
@@ -3539,7 +3539,7 @@ html.dark .store-top-bar-container {
 .user-profile-compact .user-avatar-badge {
     width: 32px;
     height: 32px;
-    background-color: #10B981;
+    background-color: #1AB370;
     color: #FFFFFF;
     font-weight: 800;
     font-family: monospace;
@@ -3567,7 +3567,7 @@ html.dark .user-profile-compact .user-display-name {
     display: flex;
     align-items: center;
     flex: 1;
-    max-width: 580px;
+    max-width: 440px;
     gap: 8px;
     margin: 0 auto;
     box-sizing: border-box;
@@ -3588,34 +3588,34 @@ html.dark .user-profile-compact .user-display-name {
 }
 
 .store-search-form .store-search-input:focus {
-    border-color: #10B981;
+    border-color: #1AB370;
 }
 
 html.dark .store-search-form .store-search-input {
-    background-color: #161B22 !important;
+    background-color: #000000 !important;
     border-color: rgba(255, 255, 255, 0.15) !important;
     color: #FFFFFF !important;
 }
 
 .store-search-form .store-search-btn {
+    width: 40px;
     height: 40px;
-    padding: 0 20px;
-    background: #10B981;
+    padding: 0;
+    background: #1AB370;
     color: #FFFFFF;
     font-weight: 700;
     border: none;
     border-radius: 2px;
     cursor: pointer;
-    font-size: 13px;
-    letter-spacing: 0.05em;
-    font-family: monospace;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     transition: background-color 0.15s ease;
-    white-space: nowrap;
     flex-shrink: 0;
 }
 
 .store-search-form .store-search-btn:hover {
-    background: #059669;
+    background: #169B60;
 }
 
 .store-action-icons {
@@ -3644,19 +3644,19 @@ html.dark .store-search-form .store-search-input {
 }
 
 .action-icon-btn:hover {
-    border-color: #10B981;
-    color: #10B981;
+    border-color: #1AB370;
+    color: #1AB370;
 }
 
 html.dark .action-icon-btn {
-    background: #161B22 !important;
+    background: #0d0d0d !important;
     border-color: rgba(255, 255, 255, 0.12) !important;
     color: #CBD5E1 !important;
 }
 
 html.dark .action-icon-btn:hover {
-    border-color: #10B981 !important;
-    color: #10B981 !important;
+    border-color: #1AB370 !important;
+    color: #1AB370 !important;
 }
 
 .action-icon-btn .badge-count {
@@ -3666,7 +3666,7 @@ html.dark .action-icon-btn:hover {
     min-width: 17px;
     height: 17px;
     padding: 0 4px;
-    background-color: #10B981;
+    background-color: #1AB370;
     color: #FFFFFF;
     font-size: 10px;
     font-weight: 800;
