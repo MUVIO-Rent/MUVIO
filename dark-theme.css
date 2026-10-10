@@ -204,9 +204,9 @@ header,
     overflow: visible !important;
 }
 
-header,
-.site-header-synced,
-.header {
+header:not(.header-3tier),
+.site-header-synced:not(.header-3tier),
+.header:not(.header-3tier) {
     width: 100% !important;
     box-sizing: border-box !important;
     padding: 0 24px !important;
@@ -219,6 +219,18 @@ header,
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
+}
+
+header.header-3tier,
+.header-3tier {
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    display: block !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    position: static !important;
+    background: transparent !important;
 }
 
 .header-actions,

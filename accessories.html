@@ -38,11 +38,19 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <!-- Global Styles & Dark Theme -->
-    <link rel="stylesheet" href="./style.css?v=3.9">
-    <link rel="stylesheet" href="./dark-theme.css?v=3.3">
+    <link rel="stylesheet" href="./style.css?v=4.0">
+    <link rel="stylesheet" href="./dark-theme.css?v=3.4">
 
     <style>
-        /* БАЗОВА ПІДКЛАДКА ТА ШРИФТИ */
+        /* БАЗОВА ПІДКЛАДКА */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            overflow-x: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+        }
+
         body {
             background-color: #F8FAFC;
             color: #0F172A;
@@ -50,9 +58,6 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
         }
 
         html.dark body {
@@ -60,44 +65,43 @@
             color: #F8FAFC !important;
         }
 
-        /* ==================== 1. ДВОРІВНЕВА ШАПКА (INDUSTRIAL / BRUTALIST) ==================== */
-        .header-main {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            padding: 12px 24px;
-            border-bottom: 1px solid #E2E8F0;
-            background-color: #FFFFFF;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            width: 100%;
-            box-sizing: border-box;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+        /* ==================== 1. СТРОГА 3-РІВНЕВА ШАПКА ==================== */
+        header.header-3tier,
+        .header-3tier {
+            width: 100% !important;
+            height: auto !important;
+            min-height: auto !important;
+            max-height: none !important;
+            display: block !important;
+            position: static !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            background: transparent !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            border: none !important;
+            box-shadow: none !important;
+            box-sizing: border-box !important;
         }
 
-        html.dark .header-main {
-            background-color: #080A0C !important;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-            box-shadow: none;
-        }
-
-        /* 1.1 ВЕРХНІЙ РЯД / ГОЛОВНА СТРОКА (ЗЕЛЕНА ЛІНІЯ) */
-        .header-top-row {
+        /* 1.1 УРОВЕНЬ 1: СТАНДАРТНАЯ ШАПКА КАК НА ВСЕХ ВКЛАДКАХ */
+        .header-tier-1 {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 12px 24px;
+            border-bottom: 1px solid #E2E8F0;
             width: 100%;
-            gap: 16px;
+            box-sizing: border-box;
+            background: #FFFFFF;
         }
 
-        .header-nav {
-            display: flex;
-            align-items: center;
-            gap: 22px;
+        html.dark .header-tier-1 {
+            background: #080A0C !important;
+            border-bottom-color: rgba(255, 255, 255, 0.08) !important;
         }
 
-        .header-nav .nav-link {
+        .tier1-nav-link {
             font-size: 12px;
             font-weight: 700;
             letter-spacing: 0.06em;
@@ -108,58 +112,41 @@
             white-space: nowrap;
         }
 
-        html.dark .header-nav .nav-link {
+        html.dark .tier1-nav-link {
             color: #FFFFFF !important;
         }
 
-        .header-nav .nav-link:hover {
+        .tier1-nav-link:hover {
             color: #1AB370 !important;
         }
 
-        .header-nav-divider {
-            width: 1px;
-            height: 14px;
-            background-color: #CBD5E1;
-        }
-
-        html.dark .header-nav-divider {
-            background-color: rgba(255, 255, 255, 0.15);
-        }
-
-        /* ПРАВИЙ БЛОК ВЕРХНЬОГО РЯДУ */
-        .header-user-actions {
+        /* 1.2 УРОВЕНЬ 2: СТРОКА ПРОФИЛЯ И БЫСТРЫХ ДЕЙСТВИЙ */
+        .header-tier-2 {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 20px;
-            flex-shrink: 0;
+            padding: 10px 24px;
+            background: #F8FAFC;
+            border-bottom: 1px solid #E2E8F0;
+            width: 100%;
+            box-sizing: border-box;
         }
 
-        /* БЛОК КОРИСТУВАЧА «МАКСИМ» З БЕЙДЖЕМ «ПОКУПЕЦЬ» */
+        html.dark .header-tier-2 {
+            background: #111418 !important;
+            border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+        }
+
         .user-profile-badge-link {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
             text-decoration: none;
-            padding: 4px 10px;
-            border: 1px solid #E2E8F0;
-            border-radius: 2px;
-            background-color: #F8FAFC;
-            transition: all 0.15s ease;
-        }
-
-        .user-profile-badge-link:hover {
-            border-color: #1AB370;
-            background-color: rgba(26, 179, 112, 0.05);
-        }
-
-        html.dark .user-profile-badge-link {
-            background-color: #111418;
-            border-color: rgba(255, 255, 255, 0.1);
         }
 
         .user-avatar-mini {
-            width: 26px;
-            height: 26px;
+            width: 28px;
+            height: 28px;
             background-color: #1AB370;
             color: #FFFFFF !important;
             display: flex;
@@ -172,16 +159,9 @@
             flex-shrink: 0;
         }
 
-        /* ГРУПА: ІМ'Я + БЕЙДЖ З ЧІТКИМ gap: 10px БЕЗ ЗЛИПАНИЯ */
-        .user-info-group {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px !important;
-        }
-
         .user-name-label {
             font-weight: 700;
-            font-size: 13px;
+            font-size: 14px;
             color: #0F172A;
             white-space: nowrap;
             line-height: 1;
@@ -195,18 +175,19 @@
             display: inline-flex;
             align-items: center;
             gap: 5px;
-            padding: 2px 6px;
+            padding: 2px 7px;
             font-size: 10px;
             font-weight: 800;
             font-family: monospace;
             letter-spacing: 0.05em;
             border-radius: 2px;
             border: 1px solid #1AB370;
-            background-color: rgba(26, 179, 112, 0.1);
+            background-color: rgba(26, 179, 112, 0.08);
             color: #1AB370 !important;
             text-transform: uppercase;
             line-height: 1.2;
             white-space: nowrap;
+            margin-left: 2px;
         }
 
         .buyer-dot {
@@ -217,120 +198,92 @@
             display: inline-block;
         }
 
-        /* ФУНКЦІОНАЛЬНІ ІКОНКИ: ПОРІВНЯННЯ, ОБРАНЕ, КОШИК */
-        .header-quick-actions {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .action-icon-btn {
+        .tier2-action-btn {
             display: inline-flex;
             align-items: center;
-            justify-content: center;
-            width: 36px;
-            height: 36px;
-            border-radius: 2px;
+            gap: 6px;
+            padding: 6px 12px;
             border: 1px solid #E2E8F0;
-            background-color: #F8FAFC;
+            border-radius: 2px;
+            background-color: #FFFFFF;
             color: #0F172A;
-            position: relative;
+            font-size: 12px;
+            font-weight: 600;
             text-decoration: none;
             transition: all 0.15s ease;
-            box-sizing: border-box;
+            position: relative;
         }
 
-        .action-icon-btn:hover {
+        .tier2-action-btn:hover {
             border-color: #1AB370;
             color: #1AB370;
-            background-color: rgba(26, 179, 112, 0.06);
         }
 
-        html.dark .action-icon-btn {
-            background-color: #111418;
+        html.dark .tier2-action-btn {
+            background-color: #181D22;
             border-color: rgba(255, 255, 255, 0.1);
             color: #FFFFFF !important;
         }
 
-        .action-cart-btn {
-            width: auto;
-            padding: 0 12px;
-            gap: 8px;
+        .tier2-cart-btn {
+            background-color: #1AB370 !important;
+            border-color: #1AB370 !important;
+            color: #FFFFFF !important;
+        }
+
+        .tier2-cart-btn:hover {
+            background-color: #169B60 !important;
+        }
+
+        .tier2-badge {
             background-color: #0F172A;
-            border-color: #0F172A;
-            color: #FFFFFF !important;
-        }
-
-        .action-cart-btn:hover {
-            background-color: #1AB370;
-            border-color: #1AB370;
-            color: #FFFFFF !important;
-        }
-
-        html.dark .action-cart-btn {
-            background-color: #1AB370;
-            border-color: #1AB370;
-            color: #FFFFFF !important;
-        }
-
-        .cart-total-text {
-            font-family: monospace;
-            font-size: 12px;
-            font-weight: 700;
-            color: #FFFFFF !important;
-        }
-
-        .icon-counter-badge {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background-color: #1AB370;
             color: #FFFFFF !important;
             font-size: 10px;
             font-weight: 800;
             font-family: monospace;
-            padding: 0.5px 5px;
-            border-radius: 999px;
-            min-width: 16px;
-            text-align: center;
-            line-height: 1.3;
-            border: 1px solid #FFFFFF;
+            padding: 1px 5px;
+            border-radius: 2px;
         }
 
-        html.dark .icon-counter-badge {
-            border-color: #080A0C;
+        .tier2-cart-btn .tier2-badge {
+            background-color: #FFFFFF;
+            color: #0F172A !important;
         }
 
-        /* ==================== 1.2 ДРУГИЙ РЯД / ПОШУКОВА СТРОКА (ЧЕРВОНА ЛІНІЯ) ==================== */
-        .header-search-row {
+        /* 1.3 УРОВЕНЬ 3: ПОИСКОВАЯ СТРОКА */
+        .header-tier-3 {
             display: flex;
-            justify-content: flex-end;
+            justify-content: center;
+            padding: 14px 24px;
+            background: #FFFFFF;
+            border-bottom: 1px solid #E2E8F0;
             width: 100%;
-            padding: 8px 0 0 0;
-            border-top: 1px solid #F1F5F9;
+            box-sizing: border-box;
         }
 
-        html.dark .header-search-row {
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        html.dark .header-tier-3 {
+            background: #080A0C !important;
+            border-bottom-color: rgba(255, 255, 255, 0.08) !important;
         }
 
-        .search-form {
+        .tier3-search-form {
             width: 100%;
-            max-width: 400px;
+            max-width: 720px;
             display: flex;
             gap: 8px;
+            box-sizing: border-box;
         }
 
-        .search-input-container {
+        .tier3-input-wrapper {
             position: relative;
             flex: 1;
         }
 
-        .search-input-field {
+        .tier3-search-input {
             width: 100%;
-            height: 38px;
-            padding: 0 12px 0 36px;
-            font-size: 13px;
+            height: 42px;
+            padding: 0 14px 0 40px;
+            font-size: 14px;
             color: #0F172A !important;
             background-color: #FFFFFF !important;
             border: 1px solid #CBD5E1;
@@ -340,32 +293,32 @@
             box-sizing: border-box;
         }
 
-        .search-input-field:focus {
+        .tier3-search-input:focus {
             border-color: #1AB370;
             box-shadow: 0 0 0 2px rgba(26, 179, 112, 0.15);
         }
 
-        html.dark .search-input-field {
+        html.dark .tier3-search-input {
             background-color: #111418 !important;
             border-color: rgba(255, 255, 255, 0.12) !important;
             color: #FFFFFF !important;
         }
 
-        .search-icon {
+        .tier3-search-icon {
             position: absolute;
-            left: 11px;
+            left: 12px;
             top: 50%;
             transform: translateY(-50%);
             color: #94A3B8;
             pointer-events: none;
         }
 
-        .search-btn {
-            height: 38px;
-            padding: 0 16px;
+        .tier3-search-btn {
+            height: 42px;
+            padding: 0 22px;
             background-color: #1AB370;
             color: #FFFFFF !important;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.04em;
@@ -376,15 +329,21 @@
             white-space: nowrap;
         }
 
-        .search-btn:hover {
+        .tier3-search-btn:hover {
             background-color: #169B60;
         }
 
-        /* ==================== 2. ДВУХКОЛОНОЧНИЙ МАКЕТ ==================== */
+        /* ==================== 2. ДВУХКОЛОНОЧНЫЙ МАКЕТ КАТАЛОГА ==================== */
+        .catalog-main {
+            margin-top: 24px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
         .ecom-layout-container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 24px 20px;
+            padding: 0 20px 40px 20px;
             width: 100%;
             display: grid;
             grid-template-columns: 280px 1fr;
@@ -397,14 +356,10 @@
             .ecom-layout-container {
                 grid-template-columns: 1fr;
             }
-            .header-search-row {
-                justify-content: stretch;
-            }
-            .search-form {
-                max-width: 100%;
-            }
-            .header-user-actions {
-                gap: 12px;
+            .header-tier-2 {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
             }
         }
 
@@ -415,7 +370,7 @@
             border-radius: 2px;
             overflow: hidden;
             position: sticky;
-            top: 130px;
+            top: 24px;
         }
 
         html.dark .category-sidebar {
@@ -586,13 +541,12 @@
 
 <body>
 
-    <!-- ==================== 1. ДВОРІВНЕВА ШАПКА (HEADER) ==================== -->
-    <header class="header-main">
-        <!-- 1.1 ВЕРХНІЙ РЯД / ГОЛОВНА СТРОКА (ЗЕЛЕНА ЛІНІЯ) -->
-        <div class="header-top-row">
-            <!-- Слева: оригінальний логотип MUVIO (одна емблема без текстового дубля) -->
+    <!-- ==================== СТРОГА 3-РІВНЕВА ШАПКА ==================== -->
+    <header class="header-3tier">
+        <!-- 1. УРОВЕНЬ 1: САМЫЙ ВЕРХ (СТАНДАРТНАЯ ШАПКА) -->
+        <div class="header-tier-1">
+            <!-- Слева: только оригинальный векторный логотип MUVIO (без дублирующего текста) -->
             <div class="flex items-center gap-3 shrink-0">
-                <!-- Кнопка мобільного меню -->
                 <button id="burger-btn" type="button" aria-label="Меню"
                     class="lg:hidden flex items-center justify-center w-8 h-8 p-1 text-zinc-700 dark:text-zinc-200 hover:text-[#1AB370] transition-colors focus:outline-none">
                     <svg class="w-5 h-5 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -607,122 +561,120 @@
                 </a>
             </div>
 
-            <!-- По центру: навигаційне меню (ОРЕНДА, СЕРВІС, КАЛЬКУЛЯТОР, УМОВИ, FAQ) та перемикачі (Мова, Тема) -->
-            <nav class="hidden lg:flex items-center gap-6 xl:gap-7 header-nav">
-                <a href="catalog.html" class="nav-link">ОРЕНДА</a>
-                <a href="service.html" class="nav-link">СЕРВІС</a>
-                <a href="calculator.html" class="nav-link">КАЛЬКУЛЯТОР</a>
-                <a href="terms.html" class="nav-link">УМОВИ</a>
-                <a href="faq.html" class="nav-link">FAQ</a>
-
-                <div class="header-nav-divider"></div>
-
-                <!-- Перемикачі: Мова та Тема -->
-                <div class="flex items-center gap-3">
-                    <div class="lang-switch flex items-center gap-1 font-mono text-xs font-bold text-zinc-500 dark:text-zinc-400">
-                        <button type="button" id="authLangUa" onclick="setSiteLanguage('ua')" class="lang-btn active text-[#1AB370]">UA</button>
-                        <span class="text-zinc-300 dark:text-zinc-600">|</span>
-                        <button type="button" id="authLangEn" onclick="setSiteLanguage('en')" class="lang-btn hover:text-[#1AB370]">EN</button>
-                    </div>
-
-                    <button id="theme-toggle" class="theme-toggle-btn text-zinc-600 dark:text-zinc-300 hover:text-[#1AB370] transition-colors p-1"
-                        type="button" onclick="toggleAuthTheme()" aria-label="Змінити тему" title="Змінити тему">
-                        <i data-lucide="sun-moon" class="w-4 h-4"></i>
-                    </button>
-                </div>
+            <!-- По центру: навигационные ссылки -->
+            <nav class="hidden lg:flex items-center gap-7">
+                <a href="catalog.html" class="tier1-nav-link">ОРЕНДА</a>
+                <a href="service.html" class="tier1-nav-link">СЕРВІС</a>
+                <a href="calculator.html" class="tier1-nav-link">КАЛЬКУЛЯТОР</a>
+                <a href="terms.html" class="tier1-nav-link">УМОВИ</a>
+                <a href="faq.html" class="tier1-nav-link">FAQ</a>
             </nav>
 
-            <!-- Справа: блок користувача «Максим» + функціональні іконки («Порівняння», «Обране», «Кошик») -->
-            <div class="header-user-actions">
-                <!-- Блок користувача: «Максим» з чітким прямокутним бейджем «ПОКУПЕЦЬ» (gap: 10px, без злиття!) -->
-                <a href="cabinet.html" class="user-profile-badge-link" title="Особистий кабінет">
-                    <div class="user-avatar-mini" id="headerUserAvatar">
-                        M
-                    </div>
-                    <div class="user-info-group">
-                        <span id="headerUserNameText" class="user-name-label">Максим</span>
-                        <span class="buyer-pill-badge">
-                            <span class="buyer-dot"></span>
-                            <span>ПОКУПЕЦЬ</span>
-                        </span>
-                    </div>
-                </a>
-
-                <!-- Функціональні іконки: «Порівняння», «Обране», «Кошик» -->
-                <div class="header-quick-actions">
-                    <a href="cabinet.html" onclick="saveTabTarget('compare')" class="action-icon-btn" title="Порівняння товарів">
-                        <i data-lucide="scale" class="w-4 h-4"></i>
-                        <span id="headerCompareCount" class="icon-counter-badge">2</span>
-                    </a>
-
-                    <a href="cabinet.html" onclick="saveTabTarget('wishlist')" class="action-icon-btn" title="Список бажань">
-                        <i data-lucide="heart" class="w-4 h-4"></i>
-                        <span id="headerWishlistCount" class="icon-counter-badge">3</span>
-                    </a>
-
-                    <a href="cabinet.html" onclick="saveTabTarget('cart')" class="action-icon-btn action-cart-btn" title="Кошик покупок">
-                        <div class="relative flex items-center">
-                            <i data-lucide="shopping-cart" class="w-4 h-4"></i>
-                            <span id="headerCartCount" class="icon-counter-badge">2</span>
-                        </div>
-                        <span id="headerCartTotal" class="cart-total-text hidden sm:inline">3 550 ₴</span>
-                    </a>
+            <!-- Справа: переключатели UA | EN и смена темы -->
+            <div class="flex items-center gap-4 shrink-0">
+                <div class="lang-switch flex items-center gap-1 font-mono text-xs font-bold text-zinc-500 dark:text-zinc-400">
+                    <button type="button" id="authLangUa" onclick="setSiteLanguage('ua')" class="lang-btn active text-[#1AB370]">UA</button>
+                    <span class="text-zinc-300 dark:text-zinc-600">|</span>
+                    <button type="button" id="authLangEn" onclick="setSiteLanguage('en')" class="lang-btn hover:text-[#1AB370]">EN</button>
                 </div>
+
+                <button id="theme-toggle" class="theme-toggle-btn text-zinc-600 dark:text-zinc-300 hover:text-[#1AB370] transition-colors p-1"
+                    type="button" onclick="toggleAuthTheme()" aria-label="Змінити тему" title="Змінити тему">
+                    <i data-lucide="sun-moon" class="w-4 h-4"></i>
+                </button>
             </div>
         </div>
 
-        <!-- 1.2 ДРУГИЙ РЯД / ПОШУКОВА СТРОКА (ЧЕРВОНА ЛІНІЯ) -->
-        <div class="header-search-row">
-            <form class="search-form" onsubmit="event.preventDefault(); handleSearchSubmit();">
-                <div class="search-input-container">
-                    <i data-lucide="search" class="w-4 h-4 search-icon"></i>
-                    <input type="text" id="mainSearchInput" placeholder="Шукати товари (шолом, колодки, ручки...)"
-                        autocomplete="off" class="search-input-field font-sans" oninput="handleSearchInput(this.value)">
+        <!-- 2. УРОВЕНЬ 2: СТРОКА ПРОФИЛЯ И БЫСТРЫХ ДЕЙСТВИЙ -->
+        <div class="header-tier-2">
+            <!-- Слева: блок профиля пользователя (аватар/иконка M, имя «Максим», прямоугольный бейдж «ПОКУПЕЦЬ») -->
+            <a href="cabinet.html" class="user-profile-badge-link" title="Особистий кабінет">
+                <div class="user-avatar-mini" id="headerUserAvatar">
+                    M
                 </div>
-                <button type="submit" class="search-btn font-mono">
+                <div class="flex items-center gap-2.5">
+                    <span id="headerUserNameText" class="user-name-label">Максим</span>
+                    <span class="buyer-pill-badge">
+                        <span class="buyer-dot"></span>
+                        <span>ПОКУПЕЦЬ</span>
+                    </span>
+                </div>
+            </a>
+
+            <!-- С правого края: блок действий (Порівняння [2], Обране [3], Кошик [2 • сумма]) -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <a href="cabinet.html" onclick="saveTabTarget('compare')" class="tier2-action-btn" title="Порівняння товарів">
+                    <i data-lucide="scale" class="w-4 h-4"></i>
+                    <span class="hidden sm:inline">Порівняння</span>
+                    <span id="headerCompareCount" class="tier2-badge">2</span>
+                </a>
+
+                <a href="cabinet.html" onclick="saveTabTarget('wishlist')" class="tier2-action-btn" title="Список бажань">
+                    <i data-lucide="heart" class="w-4 h-4"></i>
+                    <span class="hidden sm:inline">Обране</span>
+                    <span id="headerWishlistCount" class="tier2-badge">3</span>
+                </a>
+
+                <a href="cabinet.html" onclick="saveTabTarget('cart')" class="tier2-action-btn tier2-cart-btn" title="Кошик покупок">
+                    <i data-lucide="shopping-cart" class="w-4 h-4 text-white"></i>
+                    <span class="font-bold">Кошик</span>
+                    <span id="headerCartCount" class="tier2-badge">2</span>
+                    <span id="headerCartTotal" class="hidden md:inline font-mono text-xs text-emerald-100 ml-1">3 550 ₴</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- 3. УРОВЕНЬ 3: ПОИСКОВАЯ СТРОКА -->
+        <div class="header-tier-3">
+            <form class="tier3-search-form" onsubmit="event.preventDefault(); handleSearchSubmit();">
+                <div class="tier3-input-wrapper">
+                    <i data-lucide="search" class="w-4 h-4 tier3-search-icon"></i>
+                    <input type="text" id="mainSearchInput" placeholder="Шукати товари (шолом, колодки, ручки...)"
+                        autocomplete="off" class="tier3-search-input" oninput="handleSearchInput(this.value)">
+                </div>
+                <button type="submit" class="tier3-search-btn font-mono">
                     Знайти
                 </button>
             </form>
         </div>
 
-        <!-- Мобільне меню -->
+        <!-- Выпадающее меню для мобильных экранов -->
         <div id="mobile-menu" data-mobile-menu="true"
-            class="hidden lg:hidden w-full border-t border-zinc-200 dark:border-white/10 pt-3 pb-2 space-y-2">
+            class="hidden lg:hidden w-full border-b border-zinc-200 dark:border-white/10 p-4 bg-white dark:bg-[#111418] space-y-2">
             <div class="grid grid-cols-2 gap-2 text-xs font-semibold">
-                <a href="catalog.html" class="p-2 rounded bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-white">ОРЕНДА</a>
-                <a href="service.html" class="p-2 rounded bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-white">СЕРВІС</a>
-                <a href="calculator.html" class="p-2 rounded bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-white">КАЛЬКУЛЯТОР</a>
-                <a href="terms.html" class="p-2 rounded bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-white">УМОВИ</a>
-                <a href="faq.html" class="p-2 rounded bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-white col-span-2">FAQ</a>
+                <a href="catalog.html" class="p-2.5 rounded-[2px] bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-white">ОРЕНДА</a>
+                <a href="service.html" class="p-2.5 rounded-[2px] bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-white">СЕРВІС</a>
+                <a href="calculator.html" class="p-2.5 rounded-[2px] bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-white">КАЛЬКУЛЯТОР</a>
+                <a href="terms.html" class="p-2.5 rounded-[2px] bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-white">УМОВИ</a>
+                <a href="faq.html" class="p-2.5 rounded-[2px] bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-white col-span-2">FAQ</a>
             </div>
         </div>
     </header>
 
-    <!-- ==================== 2. ГОЛОВНИЙ ДВУХКОЛОНОЧНИЙ МАКЕТ ==================== -->
-    <main class="flex-1">
-        <!-- Заголовок сторінки всередині контентної зони (строго #0F172A в світлій темі) -->
-        <div class="max-w-[1400px] mx-auto px-5 pt-8 pb-4">
-            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-zinc-200 dark:border-white/10 pb-4">
-                <div>
-                    <div class="inline-flex items-center gap-2 px-2 py-0.5 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-300 dark:border-emerald-800/60 text-[#1AB370] text-[10px] font-mono font-bold uppercase mb-2">
-                        <span class="w-1.5 h-1.5 bg-[#1AB370]"></span>
-                        <span>MUVIO STORE & PARTS</span>
-                    </div>
-                    <h1 class="text-2xl sm:text-3xl font-extrabold uppercase tracking-tight text-[#0F172A] dark:text-white leading-tight">
-                        Магазин аксесуарів та запчастин
-                    </h1>
-                    <p class="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 mt-1 max-w-2xl">
-                        Оригінальне екіпірування, компоненти та комплектуючі з офіційною гарантією та доставкою Новою Поштою.
-                    </p>
+    <!-- ==================== 4. КОНТЕНТ КАТАЛОГА (HERO И ТОВАРЫ СТРОГО НИЖЕ ШАПКИ) ==================== -->
+    <main class="catalog-main">
+        <!-- Заголовок страницы строго на всю ширину внутри контентной зоны без обрезания -->
+        <div class="max-w-[1400px] w-full mx-auto px-5 pb-6">
+            <div class="w-full border-b border-zinc-200 dark:border-white/10 pb-5">
+                <div class="inline-flex items-center gap-2 px-2 py-0.5 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-300 dark:border-emerald-800/60 text-[#1AB370] text-[10px] font-mono font-bold uppercase mb-2 rounded-[2px]">
+                    <span class="w-1.5 h-1.5 bg-[#1AB370]"></span>
+                    <span>MUVIO STORE & PARTS</span>
                 </div>
-
-                <div class="flex items-center gap-2 self-start sm:self-auto font-mono text-xs text-zinc-500">
-                    <span id="productsFoundLabel" class="font-bold text-[#0F172A] dark:text-white">Знайдено: 12 товарів</span>
+                <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold uppercase tracking-tight text-[#0F172A] dark:text-white leading-tight">
+                    Магазин аксесуарів та запчастин
+                </h1>
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mt-2">
+                    <p class="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 max-w-2xl leading-relaxed">
+                        Оригінальне екіпірування, компоненти та комплектуючі з офіційною гарантією та доставкою Новою Поштою по всій Україні.
+                    </p>
+                    <span id="productsFoundLabel" class="font-mono text-xs font-bold text-[#0F172A] dark:text-white shrink-0 bg-zinc-100 dark:bg-zinc-800 px-3 py-1 rounded-[2px]">
+                        Знайдено: 12 товарів
+                    </span>
                 </div>
             </div>
         </div>
 
-        <!-- 2-Колоночна структура: Сайдбар 280px + Вітрина 1fr -->
+        <!-- 2-Колоночная структура: Сайдбар 280px + Витрина 1fr -->
         <div class="ecom-layout-container">
 
             <!-- ЛЕВАЯ КОЛОНКА: САЙДБАР КАТЕГОРИЙ (СТРОГИЙ INDUSTRIAL/ROZETKA-STYLE) -->
@@ -847,11 +799,11 @@
 
             <!-- ПРАВАЯ КОЛОНКА: ВИТРИНА ТОВАРОВ В СТРОГОЙ СЕТКЕ -->
             <section class="space-y-4">
-                <!-- Панель сортування та активного фільтра -->
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 bg-white dark:bg-[#111418] border border-zinc-200 dark:border-white/10 rounded">
+                <!-- Панель сортировки и активного фильтра -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 bg-white dark:bg-[#111418] border border-zinc-200 dark:border-white/10 rounded-[2px]">
                     <div class="flex items-center gap-2 flex-wrap">
                         <span class="text-xs text-zinc-500">Фільтр:</span>
-                        <span id="activeFilterBadge" class="text-xs font-bold font-mono px-2 py-0.5 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800/60 rounded">
+                        <span id="activeFilterBadge" class="text-xs font-bold font-mono px-2 py-0.5 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800/60 rounded-[2px]">
                             Всі категорії
                         </span>
                         <button type="button" id="clearFilterBtn" onclick="filterByCategory('all')" class="text-xs text-rose-500 hover:underline hidden">
@@ -862,7 +814,7 @@
                     <div class="flex items-center gap-2">
                         <label for="sortSelect" class="text-xs text-zinc-500">Сортування:</label>
                         <select id="sortSelect" onchange="handleSortChange(this.value)"
-                            class="text-xs font-semibold px-2.5 py-1.5 bg-zinc-50 dark:bg-[#161B20] border border-zinc-300 dark:border-white/10 rounded text-[#0F172A] dark:text-white outline-none cursor-pointer">
+                            class="text-xs font-semibold px-2.5 py-1.5 bg-zinc-50 dark:bg-[#161B20] border border-zinc-300 dark:border-white/10 rounded-[2px] text-[#0F172A] dark:text-white outline-none cursor-pointer">
                             <option value="popular">За популярністю</option>
                             <option value="cheap">Спочатку дешевші</option>
                             <option value="expensive">Спочатку дорожчі</option>
@@ -872,11 +824,11 @@
 
                 <!-- Сетка карточек товаров -->
                 <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <!-- Рендериться динамічно через renderProducts() -->
+                    <!-- Рендерится динамически через renderProducts() -->
                 </div>
 
-                <!-- Пустий стан якщо нічого не знайдено -->
-                <div id="noProductsFound" class="hidden p-12 text-center bg-white dark:bg-[#111418] border border-zinc-200 dark:border-white/10 rounded space-y-3">
+                <!-- Пустое состояние если ничего не найдено -->
+                <div id="noProductsFound" class="hidden p-12 text-center bg-white dark:bg-[#111418] border border-zinc-200 dark:border-white/10 rounded-[2px] space-y-3">
                     <div class="w-12 h-12 bg-zinc-100 dark:bg-zinc-800 rounded-full flex items-center justify-center mx-auto text-zinc-400">
                         <i data-lucide="search-x" class="w-6 h-6"></i>
                     </div>
@@ -885,7 +837,7 @@
                         За вашим запитом не знайдено товарів. Спробуйте змінити пошуковий запит або скинути фільтри.
                     </p>
                     <button type="button" onclick="resetAllFilters()"
-                        class="px-4 py-2 bg-[#1AB370] hover:bg-[#169B60] text-white font-bold text-xs uppercase tracking-wider rounded">
+                        class="px-4 py-2 bg-[#1AB370] hover:bg-[#169B60] text-white font-bold text-xs uppercase tracking-wider rounded-[2px]">
                         Скинути пошук та фільтри
                     </button>
                 </div>
@@ -893,7 +845,7 @@
         </div>
     </main>
 
-    <!-- ==================== 3. СТРОГИЙ E-COMMERCE FOOTER ==================== -->
+    <!-- ==================== 5. СТРОГИЙ E-COMMERCE FOOTER ==================== -->
     <footer class="bg-[#0F172A] text-white border-t border-white/10 pt-12 pb-8 mt-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 pb-10 border-b border-white/10">
@@ -930,7 +882,7 @@
                     <p class="text-xs text-zinc-400 mb-3">
                         Відстежуйте ваші замовлення Нової Пошти, керуйте кошиком та списком бажань.
                     </p>
-                    <a href="cabinet.html" class="inline-flex items-center gap-1.5 px-3 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase rounded transition-colors">
+                    <a href="cabinet.html" class="inline-flex items-center gap-1.5 px-3 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase rounded-[2px] transition-colors">
                         <i data-lucide="user" class="w-3.5 h-3.5"></i>
                         <span>Вхід до кабінету</span>
                     </a>
@@ -950,7 +902,7 @@
         <span id="toastMessage">Товар додано до кошика!</span>
     </div>
 
-    <!-- ==================== 4. JAVASCRIPT: КАТАЛОГ, КОШИК ТА ПОШУК ==================== -->
+    <!-- ==================== 6. JAVASCRIPT ==================== -->
     <script>
         // База товарів магазину MUVIO
         const PRODUCTS_DB = [
@@ -1104,7 +1056,6 @@
         let searchQuery = '';
         let currentSort = 'popular';
 
-        // 1. Отримання та оновлення кошика в localStorage
         function getCart() {
             try {
                 const c = localStorage.getItem('muvio_cart');
@@ -1142,7 +1093,6 @@
             saveCart(cart);
             showToast(`«${prod.name}» додано в кошик!`);
 
-            // Оновлюємо вигляд кнопки
             const btn = document.getElementById(`addToCartBtn-${prodId}`);
             if (btn) {
                 btn.classList.add('in-cart');
@@ -1151,7 +1101,6 @@
             }
         }
 
-        // 2. Список бажань (Wishlist)
         function toggleWishlist(prodId, event) {
             if (event) event.stopPropagation();
             const prod = PRODUCTS_DB.find(p => p.id === prodId);
@@ -1183,7 +1132,6 @@
             } catch (e) {}
         }
 
-        // 3. Порівняння (Compare)
         function toggleCompare(prodId, event) {
             if (event) event.stopPropagation();
             const prod = PRODUCTS_DB.find(p => p.id === prodId);
@@ -1193,9 +1141,7 @@
             updateHeaderBadges();
         }
 
-        // 4. Оновлення бейджів у шапці
         function updateHeaderBadges() {
-            // Кошик
             const cart = getCart();
             let totalQty = 0;
             let totalPrice = 0;
@@ -1210,7 +1156,6 @@
             if (cartCountEl) cartCountEl.textContent = totalQty;
             if (cartTotalEl) cartTotalEl.textContent = `${totalPrice.toLocaleString()} ₴`;
 
-            // Список бажань
             let wishlistCount = 3;
             try {
                 const w = localStorage.getItem('muvio_wishlist');
@@ -1219,11 +1164,9 @@
             const wishEl = document.getElementById('headerWishlistCount');
             if (wishEl) wishEl.textContent = wishlistCount;
 
-            // Порівняння
             const compEl = document.getElementById('headerCompareCount');
             if (compEl) compEl.textContent = "2";
 
-            // Ім'я користувача (за замовчуванням «Максим»)
             let userName = "Максим";
             try {
                 const active = localStorage.getItem('muvio_active_user');
@@ -1246,7 +1189,6 @@
             }
         }
 
-        // 5. Рендеринг товарів у правій колонці
         function renderProducts() {
             const grid = document.getElementById('productsGrid');
             const noFound = document.getElementById('noProductsFound');
@@ -1291,9 +1233,8 @@
                 html += `
                 <div class="ecom-prod-card group">
                     <div>
-                        <!-- Верхній бейдж + швидкі дії -->
                         <div class="flex items-center justify-between gap-2 mb-3">
-                            <span class="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 bg-zinc-100 dark:bg-white/5 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-white/10 rounded">
+                            <span class="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 bg-zinc-100 dark:bg-white/5 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-white/10 rounded-[2px]">
                                 ${prod.badge || prod.categoryTitle}
                             </span>
                             <div class="flex items-center gap-1 text-zinc-400">
@@ -1306,13 +1247,11 @@
                             </div>
                         </div>
 
-                        <!-- Іконка / Зображення товару -->
-                        <div class="w-full h-36 bg-zinc-50 dark:bg-[#14181D] border border-zinc-100 dark:border-white/5 rounded flex items-center justify-center mb-3 relative overflow-hidden group-hover:border-zinc-300 dark:group-hover:border-white/15 transition-colors">
+                        <div class="w-full h-36 bg-zinc-50 dark:bg-[#14181D] border border-zinc-100 dark:border-white/5 rounded-[2px] flex items-center justify-center mb-3 relative overflow-hidden group-hover:border-zinc-300 dark:group-hover:border-white/15 transition-colors">
                             <i data-lucide="${prod.icon || 'package'}" class="w-14 h-14 text-[#1AB370] opacity-85 transition-transform group-hover:scale-110"></i>
                             <span class="absolute bottom-2 left-2 text-[10px] font-mono text-zinc-400">Код: 00${prod.id}</span>
                         </div>
 
-                        <!-- Назва та опис -->
                         <div class="text-[11px] font-mono text-[#1AB370] mb-0.5 font-bold uppercase">
                             ${prod.categoryTitle}
                         </div>
@@ -1324,7 +1263,6 @@
                         </p>
                     </div>
 
-                    <!-- Ціна та кнопка покупки -->
                     <div class="mt-4 pt-3 border-t border-zinc-100 dark:border-white/5">
                         <div class="flex items-baseline justify-between mb-2.5">
                             <div>
@@ -1349,7 +1287,6 @@
             if (window.lucide) window.lucide.createIcons();
         }
 
-        // 6. Фільтрація по категорії
         function filterByCategory(cat) {
             currentCategory = cat;
 
@@ -1386,7 +1323,6 @@
             renderProducts();
         }
 
-        // 7. Живий пошук
         function handleSearchInput(query) {
             searchQuery = query;
             renderProducts();
@@ -1487,7 +1423,6 @@
             renderProducts();
             if (window.lucide) window.lucide.createIcons();
 
-            // Бургер меню для мобільних
             const burger = document.getElementById('burger-btn');
             const mobileMenu = document.getElementById('mobile-menu');
             if (burger && mobileMenu) {

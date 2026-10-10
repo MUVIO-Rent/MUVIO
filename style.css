@@ -316,9 +316,9 @@ html.theme-dark #hero::after {
 }
 
 /* ==================== 1. ФИКСАЦИЯ ШАПКИ ПРИ СКРОЛЛЕ (STICKY HEADER) ==================== */
-header,
-.site-header-synced,
-.header {
+header:not(.header-3tier),
+.site-header-synced:not(.header-3tier),
+.header:not(.header-3tier) {
     width: 100% !important;
     box-sizing: border-box !important;
     padding: 0 24px !important;
@@ -3159,73 +3159,189 @@ html:not(.dark) #wishlistCount {
 }
 
 /* ==========================================================================
-   ACCESSORIES E-COMMERCE TWO-LEVEL HEADER (INDUSTRIAL/BRUTALIST)
+   ACCESSORIES E-COMMERCE 3-TIER HEADER (INDUSTRIAL/BRUTALIST)
    ========================================================================== */
-.header-main {
+header.header-3tier,
+.header-3tier {
+    width: 100% !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    display: block !important;
+    position: static !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: none !important;
+    overflow: visible !important;
+    box-sizing: border-box !important;
+}
+
+/* УРОВЕНЬ 1 */
+.header-tier-1 {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
+    justify-content: space-between;
+    align-items: center;
     padding: 12px 24px;
     border-bottom: 1px solid #E2E8F0;
-    background-color: #FFFFFF;
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    width: 100%;
+    box-sizing: border-box;
+    background: #FFFFFF;
+}
+
+html.dark .header-tier-1,
+body.dark .header-tier-1,
+.dark .header-tier-1 {
+    background: #080A0C !important;
+    border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* УРОВЕНЬ 2 */
+.header-tier-2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 24px;
+    background: #F8FAFC;
+    border-bottom: 1px solid #E2E8F0;
     width: 100%;
     box-sizing: border-box;
 }
 
-html.dark .header-main,
-body.dark .header-main,
-.dark .header-main {
-    background-color: #080A0C !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+html.dark .header-tier-2,
+body.dark .header-tier-2,
+.dark .header-tier-2 {
+    background: #111418 !important;
+    border-bottom-color: rgba(255, 255, 255, 0.08) !important;
 }
 
-.header-top-row {
+/* УРОВЕНЬ 3 */
+.header-tier-3 {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center;
+    padding: 14px 24px;
+    background: #FFFFFF;
+    border-bottom: 1px solid #E2E8F0;
     width: 100%;
-    gap: 16px;
+    box-sizing: border-box;
 }
 
-.header-user-actions {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+html.dark .header-tier-3,
+body.dark .header-tier-3,
+.dark .header-tier-3 {
+    background: #080A0C !important;
+    border-bottom-color: rgba(255, 255, 255, 0.08) !important;
 }
 
-.header-search-row {
-    display: flex;
-    justify-content: flex-end;
+.tier3-search-form {
     width: 100%;
-    padding: 8px 0;
-    border-top: 1px solid #F1F5F9;
-}
-
-html.dark .header-search-row {
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.search-form {
-    width: 100%;
-    max-width: 400px;
+    max-width: 720px;
     display: flex;
     gap: 8px;
+    box-sizing: border-box;
 }
 
-.user-info-group {
+.tier3-input-wrapper {
+    position: relative;
+    flex: 1;
+}
+
+.tier3-search-input {
+    width: 100%;
+    height: 42px;
+    padding: 0 14px 0 40px;
+    font-size: 14px;
+    color: #0F172A !important;
+    background-color: #FFFFFF !important;
+    border: 1px solid #CBD5E1;
+    border-radius: 2px;
+    outline: none;
+    transition: all 0.15s ease;
+    box-sizing: border-box;
+}
+
+.tier3-search-input:focus {
+    border-color: #1AB370;
+    box-shadow: 0 0 0 2px rgba(26, 179, 112, 0.15);
+}
+
+html.dark .tier3-search-input {
+    background-color: #111418 !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    color: #FFFFFF !important;
+}
+
+.tier3-search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94A3B8;
+    pointer-events: none;
+}
+
+.tier3-search-btn {
+    height: 42px;
+    padding: 0 22px;
+    background-color: #1AB370;
+    color: #FFFFFF !important;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+    white-space: nowrap;
+}
+
+.tier3-search-btn:hover {
+    background-color: #169B60;
+}
+
+/* Элементы профиля и бейджей */
+.user-profile-badge-link {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
+    text-decoration: none;
+}
+
+.user-avatar-mini {
+    width: 28px;
+    height: 28px;
+    background-color: #1AB370;
+    color: #FFFFFF !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-family: monospace;
+    font-size: 13px;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+.user-name-label {
+    font-weight: 700;
+    font-size: 14px;
+    color: #0F172A;
+    white-space: nowrap;
+    line-height: 1;
+}
+
+html.dark .user-name-label {
+    color: #FFFFFF !important;
 }
 
 .buyer-pill-badge {
     display: inline-flex;
     align-items: center;
     gap: 5px;
-    padding: 2px 6px;
+    padding: 2px 7px;
     font-size: 10px;
     font-weight: 800;
     font-family: monospace;
@@ -3237,6 +3353,69 @@ html.dark .header-search-row {
     text-transform: uppercase;
     line-height: 1.2;
     white-space: nowrap;
+    margin-left: 2px;
 }
+
+.buyer-dot {
+    width: 5px;
+    height: 5px;
+    background-color: #1AB370;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+/* Действия Tier 2 */
+.tier2-action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border: 1px solid #E2E8F0;
+    border-radius: 2px;
+    background-color: #FFFFFF;
+    color: #0F172A;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.15s ease;
+    position: relative;
+}
+
+.tier2-action-btn:hover {
+    border-color: #1AB370;
+    color: #1AB370;
+}
+
+html.dark .tier2-action-btn {
+    background-color: #181D22;
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #FFFFFF !important;
+}
+
+.tier2-cart-btn {
+    background-color: #1AB370 !important;
+    border-color: #1AB370 !important;
+    color: #FFFFFF !important;
+}
+
+.tier2-cart-btn:hover {
+    background-color: #169B60 !important;
+}
+
+.tier2-badge {
+    background-color: #0F172A;
+    color: #FFFFFF !important;
+    font-size: 10px;
+    font-weight: 800;
+    font-family: monospace;
+    padding: 1px 5px;
+    border-radius: 2px;
+}
+
+.tier2-cart-btn .tier2-badge {
+    background-color: #FFFFFF;
+    color: #0F172A !important;
+}
+
 
 
