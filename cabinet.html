@@ -482,16 +482,16 @@
     <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
 
         <!-- 2.1 ШАПКА ПРОФІЛЮ ПОКУПЦЯ (СТРОГА ПРЯМОКУТНА РАМКА 1px solid #E2E8F0, БЕЗ ОВАЛІВ) -->
-        <div class="ecom-card p-5 sm:p-6 mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5" style="border: 1px solid #E2E8F0; border-radius: 4px;">
+        <div class="ecom-card p-5 sm:p-6 mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 relative" style="border: 1px solid #E2E8F0; border-radius: 4px;">
             <div class="flex items-center gap-4">
                 <!-- Аватарка з ініціалом: строгий прямокутник (border-radius: 3px) -->
                 <div id="userAvatar" class="w-12 h-12 bg-[#1AB370] text-white flex items-center justify-center font-extrabold text-xl font-mono shrink-0" style="border-radius: 3px;">
                     M
                 </div>
-                <div>
+                <div class="flex flex-col justify-center">
                     <div class="flex items-center gap-2.5 flex-wrap">
-                        <h1 id="userName" class="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900 dark:text-white leading-tight">
-                            Клієнт MUVIO
+                        <h1 id="userName" class="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900 dark:text-white leading-tight" style="position: static !important; margin: 0 !important; display: inline-block !important;">
+                            Максим
                         </h1>
                         <!-- Бейдж «Покупець»: компактний строгий прямокутник з тонкою рамкою, без овалів -->
                         <span class="inline-flex items-center gap-1.5 px-2 py-0.5 text-[11px] font-mono font-bold uppercase tracking-wider bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800/80" style="border-radius: 2px;">
@@ -2128,20 +2128,23 @@
                     user = JSON.parse(active);
                 }
 
-                if (user) {
-                    const name = user.name || user.login || "Клієнт MUVIO";
-                    const email = user.email || (user.phone ? user.phone : "customer@muvio.ua");
-                    
-                    const nameEl = document.getElementById('userName');
-                    const emailEl = document.getElementById('userEmail');
-                    const avatarEl = document.getElementById('userAvatar');
+                let name = "Максим";
+                let email = "customer@muvio.ua";
 
-                    if (nameEl) nameEl.textContent = name;
-                    if (emailEl) emailEl.textContent = email;
-                    if (avatarEl) {
-                        const firstChar = name.trim().charAt(0).toUpperCase() || 'M';
-                        avatarEl.textContent = firstChar;
-                    }
+                if (user) {
+                    name = user.name || user.login || "Максим";
+                    email = user.email || (user.phone ? user.phone : "customer@muvio.ua");
+                }
+                
+                const nameEl = document.getElementById('userName');
+                const emailEl = document.getElementById('userEmail');
+                const avatarEl = document.getElementById('userAvatar');
+
+                if (nameEl) nameEl.textContent = name;
+                if (emailEl) emailEl.textContent = email;
+                if (avatarEl) {
+                    const firstChar = name.trim().charAt(0).toUpperCase() || 'M';
+                    avatarEl.textContent = firstChar;
                 }
             } catch (e) {
                 console.error("Помилка завантаження профілю:", e);
@@ -2280,7 +2283,19 @@
             initNovaPoshtaCheckout();
             renderOrders();
             renderCart();
-            switchCabinetTab('orders');
+            let initialTab = 'orders';
+            try {
+                const target = localStorage.getItem('muvio_target_tab');
+                if (target) {
+                    initialTab = target;
+                    localStorage.removeItem('muvio_target_tab');
+                }
+                const hash = window.location.hash.replace('#', '');
+                if (['orders', 'parcels', 'wishlist', 'compare', 'messages', 'cart'].includes(hash)) {
+                    initialTab = hash;
+                }
+            } catch (e) {}
+            switchCabinetTab(initialTab);
 
             const burger = document.getElementById('burger-btn');
             const mobileMenu = document.getElementById('mobile-menu');

@@ -5,11 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0F1411">
-    <title>MUVIO — Магазин аксесуарів та запчастин | Шолом, АКБ, колодки, тримач</title>
+    <title>MUVIO Store — Магазин аксесуарів та запчастин | Шолом, колодки, АКБ, тюнінг</title>
     <meta name="description"
-        content="Магазин аксесуарів та запчастин MUVIO в Одесі. Шоломи інтеграл, ручки з підігрівом, гальмівні колодки, шини, тримачі для телефону та додаткові АКБ.">
-
-    <!-- Native System Fonts: Apple System / SF Pro Display / Segoe UI -->
+        content="Офіційний інтернет-магазин аксесуарів та запчастин для електроскутерів MUVIO. Шоломи, гальмівні колодки, шини, зарядні пристрої, тримачі смартфонів з доставкою Новою Поштою.">
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -19,18 +17,12 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#1D5D3B',
+                        primary: '#1AB370',
                         muvio: {
-                            green: '#1D5D3B',
-                            hover: '#24754A',
+                            green: '#1AB370',
+                            hover: '#169B60',
                             forest: '#123824',
-                            dark: '#111827',
-                            graphite: '#1F2937',
-                            slate: '#4B5563',
-                            light: '#F8FAFC',
-                            card: '#FFFFFF',
-                            border: '#1D5D3B',
-                            accent: '#10B981'
+                            dark: '#080A0C'
                         }
                     },
                     fontFamily: {
@@ -45,52 +37,300 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- MUVIO Styles & Dark Theme -->
-    <link rel="stylesheet" href="./style.css?v=3.8">
-    <link rel="stylesheet" href="./dark-theme.css?v=3.2">
+    <!-- Global Styles & Dark Theme -->
+    <link rel="stylesheet" href="./style.css?v=3.9">
+    <link rel="stylesheet" href="./dark-theme.css?v=3.3">
 
     <style>
-        html:not(.dark) h1,
-        html:not(.dark) .page-title,
-        body:not(.dark) h1,
-        body:not(.dark) .page-title {
-            color: #0F172A !important;
+        /* БАЗОВА ПІДКЛАДКА */
+        body {
+            background-color: #F8FAFC;
+            color: #0F172A;
+            transition: background-color 0.15s ease, color 0.15s ease;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
-        html.dark h1,
-        html.dark .page-title,
-        body.dark h1,
-        body.dark .page-title {
+
+        html.dark body {
+            background-color: #080A0C !important;
+            color: #F8FAFC !important;
+        }
+
+        /* ROZETKA-STYLE E-COMMERCE HEADER */
+        .rozetka-header {
+            background-color: #0F172A;
+            color: #FFFFFF;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        html:not(.dark) .rozetka-header {
+            background-color: #0F172A;
+            color: #FFFFFF;
+        }
+
+        /* ПОШУКОВИЙ РЯДОК */
+        .search-input-wrap {
+            position: relative;
+            flex: 1;
+            max-width: 680px;
+        }
+
+        .search-input {
+            width: 100%;
+            height: 40px;
+            padding: 0 110px 0 42px;
+            font-size: 14px;
+            color: #0F172A !important;
+            background-color: #FFFFFF !important;
+            border: 2px solid #1AB370;
+            border-radius: 4px;
+            outline: none;
+            transition: all 0.15s ease;
+        }
+
+        .search-input:focus {
+            box-shadow: 0 0 0 3px rgba(26, 179, 112, 0.25);
+        }
+
+        .search-submit-btn {
+            position: absolute;
+            right: 3px;
+            top: 3px;
+            bottom: 3px;
+            padding: 0 18px;
+            background-color: #1AB370;
+            color: #FFFFFF !important;
+            font-weight: 700;
+            font-size: 13px;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: background-color 0.15s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-submit-btn:hover {
+            background-color: #169B60;
+        }
+
+        /* КНОПКИ ДІЙ ПОКУПЦЯ (РОЗЕТКА) */
+        .ecom-action-btn {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 4px 10px;
+            color: #E2E8F0 !important;
+            text-decoration: none;
+            position: relative;
+            border-radius: 4px;
+            transition: color 0.15s ease, background-color 0.15s ease;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .ecom-action-btn:hover {
+            color: #FFFFFF !important;
+            background-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .badge-count {
+            position: absolute;
+            top: -2px;
+            right: 8px;
+            background-color: #1AB370;
+            color: #FFFFFF !important;
+            font-size: 10px;
+            font-weight: 800;
+            font-family: monospace;
+            padding: 1px 5px;
+            border-radius: 999px;
+            min-width: 17px;
+            text-align: center;
+            line-height: 1.2;
+            border: 1px solid #0F172A;
+        }
+
+        /* ДВУХКОЛОНОЧНИЙ МАКЕТ */
+        .ecom-layout-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 24px 20px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 24px;
+            align-items: start;
+        }
+
+        @media (max-width: 1024px) {
+            .ecom-layout-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* САЙДБАР КАТЕГОРИЙ */
+        .category-sidebar {
+            background-color: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 4px;
+            overflow: hidden;
+            position: sticky;
+            top: 76px;
+        }
+
+        html.dark .category-sidebar {
+            background-color: #111418;
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .cat-group-title {
+            padding: 12px 16px;
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            border-top: 1px solid #E2E8F0;
+            background-color: #F8FAFC;
+            color: #0F172A !important;
+            transition: background-color 0.15s ease;
+        }
+
+        html.dark .cat-group-title {
+            border-color: rgba(255, 255, 255, 0.06);
+            background-color: #14181D;
             color: #FFFFFF !important;
         }
 
-        .text-primary {
-            color: #1D5D3B;
+        .cat-group-title:first-child {
+            border-top: none;
         }
 
-        .chamfer-box {
-            clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+        .cat-item-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 16px 8px 32px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #334155 !important;
+            text-decoration: none;
+            transition: all 0.15s ease;
+            cursor: pointer;
+            border-left: 3px solid transparent;
         }
 
-        .chamfer-btn {
-            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-            transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        html.dark .cat-item-link {
+            color: #94A3B8 !important;
         }
 
-        .chamfer-btn:hover {
+        .cat-item-link:hover,
+        .cat-item-link.active {
+            color: #1AB370 !important;
+            background-color: rgba(26, 179, 112, 0.06);
+            border-left-color: #1AB370;
+            font-weight: 700;
+        }
+
+        /* КАРТОЧКА ТОВАРА */
+        .ecom-prod-card {
+            background-color: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 2px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+            position: relative;
+        }
+
+        .ecom-prod-card:hover {
+            border-color: #1AB370;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px -4px rgba(29, 93, 59, 0.35);
         }
 
-        .chamfer-badge {
-            clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+        html.dark .ecom-prod-card {
+            background-color: #111418;
+            border-color: rgba(255, 255, 255, 0.08);
         }
 
-        .acc-card {
-            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
+        html.dark .ecom-prod-card:hover {
+            border-color: #1AB370;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
         }
 
-        .acc-card:hover {
-            transform: translateY(-4px);
+        .add-to-cart-btn {
+            background-color: #1AB370;
+            color: #FFFFFF !important;
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            padding: 9px 14px;
+            border-radius: 2px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            width: 100%;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: #169B60;
+        }
+
+        .add-to-cart-btn.in-cart {
+            background-color: #0F172A;
+            color: #FFFFFF !important;
+        }
+
+        html.dark .add-to-cart-btn.in-cart {
+            background-color: #27272A;
+        }
+
+        /* ТОСТ ПОВІДОМЛЕННЯ */
+        #ecomToast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background-color: #0F172A;
+            color: #FFFFFF;
+            padding: 12px 18px;
+            border-radius: 4px;
+            border-left: 4px solid #1AB370;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+            z-index: 1000;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+        }
+
+        #ecomToast.show {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
         }
     </style>
 
@@ -102,10 +342,10 @@
                 var s = localStorage.getItem('muvio_site_settings');
                 var t = (p === 'dark' || p === 'light') ? p : (s ? JSON.parse(s).theme : (localStorage.getItem('muvio_theme') || 'light'));
                 if (t === 'dark') {
-                    document.documentElement.classList.add('dark', 'theme-dark', 'dark-theme');
+                    document.documentElement.classList.add('dark', 'theme-dark');
                     document.documentElement.setAttribute('data-theme', 'dark');
                 } else {
-                    document.documentElement.classList.remove('dark', 'theme-dark', 'dark-theme');
+                    document.documentElement.classList.remove('dark', 'theme-dark');
                     document.documentElement.setAttribute('data-theme', 'light');
                 }
             } catch (e) { }
@@ -113,651 +353,857 @@
     </script>
 </head>
 
-<body class="bg-[#F9FAFB] text-[#111827] font-sans antialiased selection:bg-[#1D5D3B] selection:text-white relative min-h-screen">
+<body>
 
-    <!-- ==================== ПРЕЛОАДЕР MUVIO ==================== -->
-    <div id="page-preloader"
-        class="fixed inset-0 z-[9999] flex items-center justify-center transition-opacity duration-300">
-        <div class="preloader-logo-wrap animate-pulse">
-            <svg class="preloader-m-logo w-16 h-16 sm:w-20 sm:h-20" viewBox="0 0 100 100" fill="currentColor">
-                <path
-                    d="M 50.0,54.38 L 24.87,5.0 L 32.43,39.58 L 21.33,39.66 L 47.47,95.0 L 40.15,55.75 L 50.0,59.37 L 59.85,55.75 L 52.53,95.0 L 78.67,39.66 L 67.57,39.58 L 75.13,5.0 Z" />
-            </svg>
-        </div>
-    </div>
-
-    <!-- ==================== 1. ХЕДЕР (НАВІГАЦІЯ) ==================== -->
-    <header class="site-header-synced header w-full"
-        style="width: 100% !important; max-width: 100vw !important; position: sticky !important; top: 0 !important; left: 0 !important; z-index: 100 !important; height: 46px !important; min-height: 46px !important; max-height: 46px !important; padding: 0 24px !important; padding-left: 24px !important; padding-right: 24px !important; overflow: visible !important; display: flex !important; align-items: center !important; justify-content: space-between !important; box-sizing: border-box !important;">
-
-        <!-- ЛІВА ЧАСТИНА: Бургер + Логотип -->
-        <div class="flex items-center gap-3 shrink-0 z-10" style="margin: 0 !important; padding: 0 !important; height: 100% !important;">
-            <button id="burger-btn" data-burger="true" type="button" aria-label="Меню"
-                class="header-action-btn md:hidden flex items-center justify-center w-8 h-8 p-1 text-[#1D5D3B] hover:text-[#16472d] dark:text-[#2E8B57] dark:hover:text-emerald-400 transition-colors focus:outline-none"
-                style="background: transparent !important; border: none !important;">
-                <svg class="w-5 h-5 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                    <line x1="3" y1="12" x2="21" y2="12"></line>
-                    <line x1="3" y1="18" x2="21" y2="18"></line>
-                </svg>
-            </button>
-
-            <a href="index.html"
-                style="display: inline-flex !important; align-items: center !important; text-decoration: none !important; background: transparent !important;"
-                class="header-logo logo group focus:outline-none" aria-label="MUVIO">
-                <img src="images/logo-header-trans.png" alt="MUVIO"
-                    style="height: 28px !important; width: auto !important; display: block !important; transition: opacity 0.2s; background: transparent !important;"
-                    class="header-logo-img group-hover:opacity-90" />
-            </a>
-        </div>
-
-        <!-- ЦЕНТРАЛЬНЕ МЕНЮ: Строго по центру шапки -->
-        <nav class="hidden md:flex items-center gap-7 lg:gap-8 absolute left-1/2 -translate-x-1/2" style="display: flex; align-items: center; margin: 0 !important; padding: 0 !important; top: 0 !important; bottom: 0 !important; height: 100% !important;">
-            <a href="catalog.html"
-                style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important;"
-                class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2 font-semibold">
-                <span class="lang-ua">ОРЕНДА</span>
-                <span class="lang-en">RENT</span>
-            </a>
-            <a href="accessories.html"
-                style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important;"
-                class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2 font-semibold">
-                <span class="lang-ua">АКСЕСУАРИ</span>
-                <span class="lang-en">ACCESSORIES</span>
-            </a>
-            <a href="calculator.html"
-                style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important;"
-                class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2 font-semibold">
-                <span class="lang-ua">КАЛЬКУЛЯТОР</span>
-                <span class="lang-en">CALCULATOR</span>
-            </a>
-            <a href="service.html"
-                style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important;"
-                class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2 font-semibold">
-                <span class="lang-ua">СЕРВІС</span>
-                <span class="lang-en">SERVICE</span>
-            </a>
-            <a href="terms.html"
-                style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important;"
-                class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2 font-semibold">
-                <span class="lang-ua">УМОВИ ОРЕНДИ</span>
-                <span class="lang-en">TERMS</span>
-            </a>
-            <a href="faq.html"
-                style="font-size: 12px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important;"
-                class="header-nav-link text-zinc-900 dark:text-white hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors py-1 px-2 font-semibold">
-                <span>FAQ</span>
-            </a>
-        </nav>
-
-        <!-- ПРАВИЙ БЛОК УПРАВЛІННЯ -->
-        <div class="header-right">
-            <a href="auth.html" class="header-user-btn" id="header-user-btn" title="Особистий кабінет" aria-label="Особистий кабінет">
-                <svg xmlns="http://www.w3.org/2000/svg" style="width: 15px !important; height: 15px !important; flex-shrink: 0;"
-                    fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
-                <span id="header-user-name" class="header-user-name">MUVIO</span>
-            </a>
-            <div class="lang-switch">
-                <button type="button" id="authLangUa" onclick="setSiteLanguage('ua')" class="lang-btn active">UA</button>
-                <span class="lang-divider">|</span>
-                <button type="button" id="authLangEn" onclick="setSiteLanguage('en')" class="lang-btn">EN</button>
+    <!-- ==================== 1. ПОЛНОЦЕННЫЙ ROZETKA-STYLE HEADER ==================== -->
+    <header class="rozetka-header w-full">
+        <!-- Верхня панель контактів та меню -->
+        <div class="border-b border-white/10 px-4 sm:px-6 lg:px-8 py-1.5 text-[11px] font-mono text-zinc-400 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <span>📍 Одеса, вул. Приморська, 22</span>
+                <span class="hidden sm:inline">🕒 Пн–Сб 09:00–19:00</span>
+                <span class="hidden md:inline">🚚 Доставка Новою Поштою по всій Україні</span>
             </div>
-            <button id="theme-toggle" class="theme-toggle-btn" type="button" onclick="toggleAuthTheme()" aria-label="Toggle theme">
-                <svg class="w-4 h-4 moon-icon block dark:hidden"
-                    style="width: 17px !important; height: 17px !important;" fill="none" stroke="currentColor"
-                    viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                </svg>
-                <svg class="w-4 h-4 sun-icon hidden dark:block text-yellow-400"
-                    style="width: 17px !important; height: 17px !important; color: #facc15 !important;" fill="none"
-                    stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
-            </button>
-        </div>
-
-        <!-- Mobile Drawer -->
-        <div id="mobile-menu" data-mobile-menu="true"
-            class="hidden md:hidden absolute top-full left-0 w-full border-t-2 border-[#1D5D3B] bg-white dark:bg-[#0B0E0C] px-6 py-4 space-y-2 shadow-2xl transition-all duration-200 z-50">
-            <div class="flex items-center justify-between pb-2 mb-1 border-b border-slate-100 dark:border-[#1F2E26]">
-                <span class="font-brand font-bold text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">
-                    <span class="lang-ua">МЕНЮ НАВІГАЦІЇ</span>
-                    <span class="lang-en">NAVIGATION MENU</span>
-                </span>
-                <button type="button" id="mobile-menu-close"
-                    class="p-1 text-slate-400 hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] transition-colors"
-                    aria-label="Закрити меню">
-                    <svg class="w-5 h-5 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
+            <div class="flex items-center gap-4">
+                <a href="catalog.html" class="hover:text-white transition-colors">ОРЕНДА</a>
+                <a href="service.html" class="hover:text-white transition-colors">СЕРВІС</a>
+                <a href="calculator.html" class="hover:text-white transition-colors">КАЛЬКУЛЯТОР</a>
+                <a href="terms.html" class="hover:text-white transition-colors">УМОВИ</a>
+                <a href="faq.html" class="hover:text-white transition-colors">FAQ</a>
+                <button type="button" onclick="toggleAuthTheme()" class="text-zinc-300 hover:text-white transition-colors flex items-center gap-1" title="Змінити тему">
+                    <i data-lucide="sun-moon" class="w-3.5 h-3.5"></i>
+                    <span>ТЕМА</span>
                 </button>
             </div>
-            <a href="catalog.html"
-                class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-[#111827] dark:text-zinc-200 hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] py-2 px-2 transition-colors rounded">
-                <span class="lang-ua">ОРЕНДА</span>
-                <span class="lang-en">RENT</span>
+        </div>
+
+        <!-- Головний ряд e-commerce шапки -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4">
+            <!-- 1.1 Логотип MUVIO -->
+            <a href="index.html" class="flex items-center gap-2 shrink-0 group focus:outline-none" aria-label="MUVIO Головна">
+                <img src="images/logo-header-trans.png" alt="MUVIO" class="h-7 w-auto block group-hover:opacity-90 transition-opacity" style="filter: brightness(0) invert(1);">
+                <span class="font-mono text-[10px] tracking-widest text-[#1AB370] font-bold uppercase hidden sm:inline">STORE</span>
             </a>
-            <a href="accessories.html"
-                class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-[#111827] dark:text-zinc-200 hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] py-2 px-2 transition-colors rounded">
-                <span class="lang-ua">АКСЕСУАРИ</span>
-                <span class="lang-en">ACCESSORIES</span>
-            </a>
-            <a href="calculator.html"
-                class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-[#111827] dark:text-zinc-200 hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] py-2 px-2 transition-colors rounded">
-                <span class="lang-ua">КАЛЬКУЛЯТОР</span>
-                <span class="lang-en">CALCULATOR</span>
-            </a>
-            <a href="service.html"
-                class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-[#111827] dark:text-zinc-200 hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] py-2 px-2 transition-colors rounded">
-                <span class="lang-ua">СЕРВІС</span>
-                <span class="lang-en">SERVICE</span>
-            </a>
-            <a href="terms.html"
-                class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-[#111827] dark:text-zinc-200 hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] py-2 px-2 transition-colors rounded">
-                <span class="lang-ua">УМОВИ ОРЕНДИ</span>
-                <span class="lang-en">TERMS</span>
-            </a>
-            <a href="faq.html"
-                class="mobile-nav-link block font-brand font-semibold text-base tracking-wide text-[#111827] dark:text-zinc-200 hover:text-[#1D5D3B] dark:hover:text-[#2E8B57] py-2 px-2 transition-colors rounded">
-                <span>FAQ</span>
-            </a>
+
+            <!-- 1.2 Живий рядок пошуку Rozetka-style -->
+            <div class="search-input-wrap">
+                <i data-lucide="search" class="w-4 h-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+                <input type="text" id="mainSearchInput" placeholder="Я шукаю шолом, колодки, ручки, зарядний..."
+                    autocomplete="off" class="search-input font-sans" oninput="handleSearchInput(this.value)">
+                <button type="button" class="search-submit-btn font-mono" onclick="handleSearchSubmit()">
+                    <span>Знайти</span>
+                </button>
+            </div>
+
+            <!-- 1.3 Панель дій покупця Rozetka-style -->
+            <div class="flex items-center gap-1 sm:gap-2 shrink-0">
+                <!-- Профіль покупця: «Максим» -->
+                <a href="cabinet.html" class="ecom-action-btn" id="headerUserBtn" title="Особистий кабінет">
+                    <i data-lucide="user" class="w-5 h-5 mb-0.5"></i>
+                    <span id="headerUserNameText" class="text-[11px] truncate max-w-[80px]">Максим</span>
+                </a>
+
+                <!-- Порівняння -->
+                <a href="cabinet.html" onclick="saveTabTarget('compare')" class="ecom-action-btn" title="Порівняння товарів">
+                    <i data-lucide="scale" class="w-5 h-5 mb-0.5"></i>
+                    <span class="hidden sm:inline">Порівняння</span>
+                    <span id="headerCompareCount" class="badge-count">2</span>
+                </a>
+
+                <!-- Обране / Бажання -->
+                <a href="cabinet.html" onclick="saveTabTarget('wishlist')" class="ecom-action-btn" title="Список бажань">
+                    <i data-lucide="heart" class="w-5 h-5 mb-0.5"></i>
+                    <span class="hidden sm:inline">Обране</span>
+                    <span id="headerWishlistCount" class="badge-count">3</span>
+                </a>
+
+                <!-- Кошик -->
+                <a href="cabinet.html" onclick="saveTabTarget('cart')" class="ecom-action-btn bg-white/5 hover:bg-white/10 px-3 py-1.5" title="Кошик замовлення">
+                    <div class="relative">
+                        <i data-lucide="shopping-cart" class="w-5 h-5 mb-0.5 text-[#1AB370]"></i>
+                        <span id="headerCartCount" class="badge-count" style="top: -6px; right: -8px;">2</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <span class="hidden sm:inline font-bold">Кошик</span>
+                        <span id="headerCartTotal" class="hidden md:inline font-mono text-[11px] text-[#1AB370]">3 550 ₴</span>
+                    </div>
+                </a>
+            </div>
         </div>
     </header>
 
-    <!-- ==================== MAIN CONTENT ==================== -->
-    <main class="py-10 md:py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-            <!-- Заголовок сторінки -->
-            <div class="mb-10 text-center sm:text-left">
-                <div class="inline-flex items-center gap-2 px-3 py-1 mb-3 rounded border border-[#1D5D3B]/30 bg-[#1D5D3B]/5 dark:bg-[#1D5D3B]/20 text-[#1D5D3B] dark:text-[#2E8B57] text-xs font-mono font-semibold tracking-wider uppercase">
-                    <span class="w-1.5 h-1.5 rounded-full bg-[#1D5D3B] dark:bg-[#2E8B57]"></span>
-                    <span class="lang-ua">MUVIO STORE & PARTS</span>
-                    <span class="lang-en">MUVIO STORE & PARTS</span>
-                </div>
-                <h1 class="page-title text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#0F172A] dark:text-white uppercase">
-                    <span class="lang-ua">МАГАЗИН АКСЕСУАРІВ ТА ЗАПЧАСТИН</span>
-                    <span class="lang-en">ACCESSORIES & SPARE PARTS STORE</span>
-                </h1>
-                <p class="mt-3 text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-3xl leading-relaxed">
-                    <span class="lang-ua">Оригінальне екіпірування, компоненти та комплектуючі для кур'єрів і водіїв легкого електротранспорту. Всі позиції доступні для оренди або купівлі в пункті видачі (вул. Приморська, 22).</span>
-                    <span class="lang-en">Original equipment, components, and spares for couriers and e-transport riders. All items available for rent or purchase at our hub (22 Prymorska Str).</span>
-                </p>
-            </div>
-
-            <!-- Сетка карточек товаров (6 строго оформленных элементов) -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-
-                <!-- 1. Шолом інintegral -->
-                <div class="acc-card bg-white dark:bg-[#111814] border border-slate-200 dark:border-white/10 rounded-xl p-6 flex flex-col justify-between shadow-sm hover:border-[#1D5D3B] dark:hover:border-[#2E8B57]">
-                    <div>
-                        <div class="flex items-center justify-between gap-3 mb-4">
-                            <span class="chamfer-badge text-[11px] font-mono font-bold tracking-wider px-2.5 py-1 uppercase bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-white/10">
-                                <span class="lang-ua">Безпека</span>
-                                <span class="lang-en">Safety</span>
-                            </span>
-                            <span class="text-xs font-mono font-bold text-[#1D5D3B] dark:text-[#2E8B57]">
-                                <span class="lang-ua">Оренда: 150 ₴/тижд</span>
-                                <span class="lang-en">Rent: 150 ₴/wk</span>
-                            </span>
-                        </div>
-
-                        <!-- Neutral Icon / Placeholder -->
-                        <div class="w-full h-36 rounded-lg bg-slate-50 dark:bg-black/30 border border-slate-100 dark:border-white/5 flex items-center justify-center mb-5">
-                            <svg class="w-12 h-12 text-[#1D5D3B] dark:text-[#2E8B57] opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M12 2a9 9 0 0 0-9 9c0 4.1 2.8 7.6 6.7 8.7L10 22h4l.3-2.3C18.2 18.6 21 15.1 21 11a9 9 0 0 0-9-9z"/>
-                                <path d="M6 12h12"/>
-                            </svg>
-                        </div>
-
-                        <h2 class="text-lg font-bold text-slate-900 dark:text-white tracking-tight uppercase">
-                            <span class="lang-ua">Шолом інтеграл</span>
-                            <span class="lang-en">Full-face Helmet</span>
-                        </h2>
-                        <p class="mt-2 text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
-                            <span class="lang-ua">Закритий повнолицьовий захисний шолом з прозорим візором та регульованою вентиляцією. Сертифікація DOT / ECE 22.05.</span>
-                            <span class="lang-en">Full-face protective helmet with clear visor and adjustable ventilation. DOT / ECE 22.05 certified.</span>
-                        </p>
-                    </div>
-
-                    <div class="mt-6 pt-4 border-t border-slate-100 dark:border-white/5 flex items-center justify-between gap-3">
-                        <div>
-                            <span class="block text-[10px] uppercase font-mono text-slate-400">
-                                <span class="lang-ua">Купівля</span>
-                                <span class="lang-en">Purchase</span>
-                            </span>
-                            <span class="text-sm font-bold font-mono text-slate-900 dark:text-white">1 800 ₴</span>
-                        </div>
-                        <a href="https://t.me/Muvio_Odesa?text=%D0%94%D0%BE%D0%B1%D1%80%D0%B8%D0%B9%20%D0%B4%D0%B5%D0%BD%D1%8C!%20%D0%A6%D1%96%D0%BA%D0%B0%D0%B2%D0%B8%D1%82%D1%8C%20%D1%88%D0%BE%D0%BB%D0%BE%D0%BC%20%D1%96%D0%BD%D1%82%D0%B5%D0%B3%D1%80%D0%B0%D0%BB" target="_blank" rel="noopener noreferrer"
-                            class="chamfer-btn inline-flex items-center justify-center px-3.5 py-2 text-xs font-semibold uppercase tracking-wider text-white bg-[#1D5D3B] hover:bg-[#24754A] dark:bg-[#1D5D3B] dark:hover:bg-[#2E8B57]">
-                            <span class="lang-ua">Замовити / Наявність</span>
-                            <span class="lang-en">Order / In Stock</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- 2. Ручки з підігрівом -->
-                <div class="acc-card bg-white dark:bg-[#111814] border border-slate-200 dark:border-white/10 rounded-xl p-6 flex flex-col justify-between shadow-sm hover:border-[#1D5D3B] dark:hover:border-[#2E8B57]">
-                    <div>
-                        <div class="flex items-center justify-between gap-3 mb-4">
-                            <span class="chamfer-badge text-[11px] font-mono font-bold tracking-wider px-2.5 py-1 uppercase bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-white/10">
-                                <span class="lang-ua">Комфорт</span>
-                                <span class="lang-en">Comfort</span>
-                            </span>
-                            <span class="text-xs font-mono font-bold text-[#1D5D3B] dark:text-[#2E8B57]">
-                                <span class="lang-ua">З монтажем</span>
-                                <span class="lang-en">Installed</span>
-                            </span>
-                        </div>
-
-                        <div class="w-full h-36 rounded-lg bg-slate-50 dark:bg-black/30 border border-slate-100 dark:border-white/5 flex items-center justify-center mb-5">
-                            <svg class="w-12 h-12 text-[#1D5D3B] dark:text-[#2E8B57] opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M12 2v8"/>
-                                <path d="m4.93 10.93 1.41 1.41"/>
-                                <path d="M2 18h2"/>
-                                <path d="M20 18h2"/>
-                                <path d="m19.07 10.93-1.41 1.41"/>
-                                <path d="M22 22H2"/>
-                                <path d="m8 6 4-4 4 4"/>
-                                <path d="M16 18a4 4 0 0 0-8 0"/>
-                            </svg>
-                        </div>
-
-                        <h2 class="text-lg font-bold text-slate-900 dark:text-white tracking-tight uppercase">
-                            <span class="lang-ua">Ручки з підігрівом</span>
-                            <span class="lang-en">Heated Grips</span>
-                        </h2>
-                        <p class="mt-2 text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
-                            <span class="lang-ua">Ергономічні термогріпси з 4-позиційним регулятором температури для зимових кур'єрських змін. Живлення 12V-72V.</span>
-                            <span class="lang-en">Ergonomic heated grips with 4 temperature levels for cold-weather delivery shifts. 12V-72V compatible.</span>
-                        </p>
-                    </div>
-
-                    <div class="mt-6 pt-4 border-t border-slate-100 dark:border-white/5 flex items-center justify-between gap-3">
-                        <div>
-                            <span class="block text-[10px] uppercase font-mono text-slate-400">
-                                <span class="lang-ua">Купівля</span>
-                                <span class="lang-en">Purchase</span>
-                            </span>
-                            <span class="text-sm font-bold font-mono text-slate-900 dark:text-white">850 ₴</span>
-                        </div>
-                        <a href="https://t.me/Muvio_Odesa?text=%D0%94%D0%BE%D0%B1%D1%80%D0%B8%D0%B9%20%D0%B4%D0%B5%D0%BD%D1%8C!%20%D0%A6%D1%96%D0%BA%D0%B0%D0%B2%D0%BB%D1%8F%D1%82%D1%8C%20%D1%80%D1%83%D1%87%D0%BA%D0%B8%20%D0%B7%20%D0%BF%D1%96%D0%B4%D1%96%D0%B3%D1%80%D1%96%D0%B2%D0%BE%D0%BC" target="_blank" rel="noopener noreferrer"
-                            class="chamfer-btn inline-flex items-center justify-center px-3.5 py-2 text-xs font-semibold uppercase tracking-wider text-white bg-[#1D5D3B] hover:bg-[#24754A] dark:bg-[#1D5D3B] dark:hover:bg-[#2E8B57]">
-                            <span class="lang-ua">Замовити / Наявність</span>
-                            <span class="lang-en">Order / In Stock</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- 3. Гальмівні колодки -->
-                <div class="acc-card bg-white dark:bg-[#111814] border border-slate-200 dark:border-white/10 rounded-xl p-6 flex flex-col justify-between shadow-sm hover:border-[#1D5D3B] dark:hover:border-[#2E8B57]">
-                    <div>
-                        <div class="flex items-center justify-between gap-3 mb-4">
-                            <span class="chamfer-badge text-[11px] font-mono font-bold tracking-wider px-2.5 py-1 uppercase bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-white/10">
-                                <span class="lang-ua">Запчастини</span>
-                                <span class="lang-en">Parts</span>
-                            </span>
-                            <span class="text-xs font-mono font-bold text-[#1D5D3B] dark:text-[#2E8B57]">
-                                <span class="lang-ua">В наявності</span>
-                                <span class="lang-en">In stock</span>
-                            </span>
-                        </div>
-
-                        <div class="w-full h-36 rounded-lg bg-slate-50 dark:bg-black/30 border border-slate-100 dark:border-white/5 flex items-center justify-center mb-5">
-                            <svg class="w-12 h-12 text-[#1D5D3B] dark:text-[#2E8B57] opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="12" cy="12" r="9"/>
-                                <circle cx="12" cy="12" r="3"/>
-                                <path d="M12 3v3"/>
-                                <path d="M12 18v3"/>
-                                <path d="M3 12h3"/>
-                                <path d="M18 12h3"/>
-                            </svg>
-                        </div>
-
-                        <h2 class="text-lg font-bold text-slate-900 dark:text-white tracking-tight uppercase">
-                            <span class="lang-ua">Гальмівні колодки</span>
-                            <span class="lang-en">Brake Pads</span>
-                        </h2>
-                        <p class="mt-2 text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
-                            <span class="lang-ua">Посилені керамічні та напівметалеві колодки під гідравлічні гальма Crosser, Aima та ADO. Стійкі до перегріву.</span>
-                            <span class="lang-en">Heavy-duty ceramic and semi-metallic pads for hydraulic systems of Crosser, Aima, and ADO. Heat fade resistant.</span>
-                        </p>
-                    </div>
-
-                    <div class="mt-6 pt-4 border-t border-slate-100 dark:border-white/5 flex items-center justify-between gap-3">
-                        <div>
-                            <span class="block text-[10px] uppercase font-mono text-slate-400">
-                                <span class="lang-ua">Комплект</span>
-                                <span class="lang-en">Set</span>
-                            </span>
-                            <span class="text-sm font-bold font-mono text-slate-900 dark:text-white">250 ₴</span>
-                        </div>
-                        <a href="https://t.me/Muvio_Odesa?text=%D0%94%D0%BE%D0%B1%D1%80%D0%B8%D0%B9%20%D0%B4%D0%B5%D0%BD%D1%8C!%20%D0%A6%D1%96%D0%BA%D0%B0%D0%B2%D0%BB%D1%8F%D1%82%D1%8C%20%D0%B3%D0%B0%D0%BB%D1%8C%D0%BC%D1%96%D0%B2%D0%BD%D1%96%20%D0%BA%D0%BE%D0%BB%D0%BE%D0%B4%D0%BA%D0%B8" target="_blank" rel="noopener noreferrer"
-                            class="chamfer-btn inline-flex items-center justify-center px-3.5 py-2 text-xs font-semibold uppercase tracking-wider text-white bg-[#1D5D3B] hover:bg-[#24754A] dark:bg-[#1D5D3B] dark:hover:bg-[#2E8B57]">
-                            <span class="lang-ua">Замовити / Наявність</span>
-                            <span class="lang-en">Order / In Stock</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- 4. Покришки -->
-                <div class="acc-card bg-white dark:bg-[#111814] border border-slate-200 dark:border-white/10 rounded-xl p-6 flex flex-col justify-between shadow-sm hover:border-[#1D5D3B] dark:hover:border-[#2E8B57]">
-                    <div>
-                        <div class="flex items-center justify-between gap-3 mb-4">
-                            <span class="chamfer-badge text-[11px] font-mono font-bold tracking-wider px-2.5 py-1 uppercase bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-white/10">
-                                <span class="lang-ua">Шиномонтаж</span>
-                                <span class="lang-en">Tires</span>
-                            </span>
-                            <span class="text-xs font-mono font-bold text-[#1D5D3B] dark:text-[#2E8B57]">
-                                <span class="lang-ua">10" / 12" / 20"</span>
-                                <span class="lang-en">10" / 12" / 20"</span>
-                            </span>
-                        </div>
-
-                        <div class="w-full h-36 rounded-lg bg-slate-50 dark:bg-black/30 border border-slate-100 dark:border-white/5 flex items-center justify-center mb-5">
-                            <svg class="w-12 h-12 text-[#1D5D3B] dark:text-[#2E8B57] opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="12" cy="12" r="10"/>
-                                <circle cx="12" cy="12" r="6"/>
-                                <circle cx="12" cy="12" r="2"/>
-                            </svg>
-                        </div>
-
-                        <h2 class="text-lg font-bold text-slate-900 dark:text-white tracking-tight uppercase">
-                            <span class="lang-ua">Покришки</span>
-                            <span class="lang-en">Tires</span>
-                        </h2>
-                        <p class="mt-2 text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
-                            <span class="lang-ua">Антипрокольні безкамерні шини підвищеної зносостійкості з глибоким протектором для міських умов і бруківки.</span>
-                            <span class="lang-en">Puncture-resistant tubeless tires with reinforced compound and deep tread for urban asphalt and cobblestones.</span>
-                        </p>
-                    </div>
-
-                    <div class="mt-6 pt-4 border-t border-slate-100 dark:border-white/5 flex items-center justify-between gap-3">
-                        <div>
-                            <span class="block text-[10px] uppercase font-mono text-slate-400">
-                                <span class="lang-ua">Ціна</span>
-                                <span class="lang-en">Price</span>
-                            </span>
-                            <span class="text-sm font-bold font-mono text-slate-900 dark:text-white">від 650 ₴</span>
-                        </div>
-                        <a href="https://t.me/Muvio_Odesa?text=%D0%94%D0%BE%D0%B1%D1%80%D0%B8%D0%B9%20%D0%B4%D0%B5%D0%BD%D1%8C!%20%D0%A6%D1%96%D0%BA%D0%B0%D0%B2%D0%BB%D1%8F%D1%82%D1%8C%20%D0%BF%D0%BE%D0%BA%D1%80%D0%B8%D1%88%D0%BA%D0%B8" target="_blank" rel="noopener noreferrer"
-                            class="chamfer-btn inline-flex items-center justify-center px-3.5 py-2 text-xs font-semibold uppercase tracking-wider text-white bg-[#1D5D3B] hover:bg-[#24754A] dark:bg-[#1D5D3B] dark:hover:bg-[#2E8B57]">
-                            <span class="lang-ua">Замовити / Наявність</span>
-                            <span class="lang-en">Order / In Stock</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- 5. Тримач для телефону -->
-                <div class="acc-card bg-white dark:bg-[#111814] border border-slate-200 dark:border-white/10 rounded-xl p-6 flex flex-col justify-between shadow-sm hover:border-[#1D5D3B] dark:hover:border-[#2E8B57]">
-                    <div>
-                        <div class="flex items-center justify-between gap-3 mb-4">
-                            <span class="chamfer-badge text-[11px] font-mono font-bold tracking-wider px-2.5 py-1 uppercase bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-white/10">
-                                <span class="lang-ua">Аксесуари</span>
-                                <span class="lang-en">Accessories</span>
-                            </span>
-                            <span class="text-xs font-mono font-bold text-[#1D5D3B] dark:text-[#2E8B57]">
-                                <span class="lang-ua">Оренда: 50 ₴/тижд</span>
-                                <span class="lang-en">Rent: 50 ₴/wk</span>
-                            </span>
-                        </div>
-
-                        <div class="w-full h-36 rounded-lg bg-slate-50 dark:bg-black/30 border border-slate-100 dark:border-white/5 flex items-center justify-center mb-5">
-                            <svg class="w-12 h-12 text-[#1D5D3B] dark:text-[#2E8B57] opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                <rect width="14" height="20" x="5" y="2" rx="2" ry="2"/>
-                                <path d="M12 18h.01"/>
-                            </svg>
-                        </div>
-
-                        <h2 class="text-lg font-bold text-slate-900 dark:text-white tracking-tight uppercase">
-                            <span class="lang-ua">Тримач для телефону</span>
-                            <span class="lang-en">Phone Mount</span>
-                        </h2>
-                        <p class="mt-2 text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
-                            <span class="lang-ua">Алюмінієвий посилений тримач смартфона з надійним фіксатором, віброгасником та опціональною USB-зарядкою.</span>
-                            <span class="lang-en">Reinforced aluminum handlebar phone mount with vibration dampener and optional USB charging port.</span>
-                        </p>
-                    </div>
-
-                    <div class="mt-6 pt-4 border-t border-slate-100 dark:border-white/5 flex items-center justify-between gap-3">
-                        <div>
-                            <span class="block text-[10px] uppercase font-mono text-slate-400">
-                                <span class="lang-ua">Купівля</span>
-                                <span class="lang-en">Purchase</span>
-                            </span>
-                            <span class="text-sm font-bold font-mono text-slate-900 dark:text-white">450 ₴</span>
-                        </div>
-                        <a href="https://t.me/Muvio_Odesa?text=%D0%94%D0%BE%D0%B1%D1%80%D0%B8%D0%B9%20%D0%B4%D0%B5%D0%BD%D1%8C!%20%D0%A6%D1%96%D0%BA%D0%B0%D0%B2%D0%B8%D1%82%D1%8C%20%D1%82%D1%80%D0%B8%D0%BC%D0%B0%D1%87%20%D0%B4%D0%BB%D1%8F%20%D1%82%D0%B5%D0%BB%D0%B5%D1%84%D0%BE%D0%BD%D1%83" target="_blank" rel="noopener noreferrer"
-                            class="chamfer-btn inline-flex items-center justify-center px-3.5 py-2 text-xs font-semibold uppercase tracking-wider text-white bg-[#1D5D3B] hover:bg-[#24754A] dark:bg-[#1D5D3B] dark:hover:bg-[#2E8B57]">
-                            <span class="lang-ua">Замовити / Наявність</span>
-                            <span class="lang-en">Order / In Stock</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- 6. Додатковий акумулятор (АКБ) -->
-                <div class="acc-card bg-white dark:bg-[#111814] border border-slate-200 dark:border-white/10 rounded-xl p-6 flex flex-col justify-between shadow-sm hover:border-[#1D5D3B] dark:hover:border-[#2E8B57]">
-                    <div>
-                        <div class="flex items-center justify-between gap-3 mb-4">
-                            <span class="chamfer-badge text-[11px] font-mono font-bold tracking-wider px-2.5 py-1 uppercase bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-white/10">
-                                <span class="lang-ua">Енергія</span>
-                                <span class="lang-en">Energy</span>
-                            </span>
-                            <span class="text-xs font-mono font-bold text-[#1D5D3B] dark:text-[#2E8B57]">
-                                <span class="lang-ua">Оренда: від 350 ₴/тижд</span>
-                                <span class="lang-en">Rent: from 350 ₴/wk</span>
-                            </span>
-                        </div>
-
-                        <div class="w-full h-36 rounded-lg bg-slate-50 dark:bg-black/30 border border-slate-100 dark:border-white/5 flex items-center justify-center mb-5">
-                            <svg class="w-12 h-12 text-[#1D5D3B] dark:text-[#2E8B57] opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                <rect width="16" height="10" x="2" y="7" rx="2" ry="2"/>
-                                <line x1="22" x2="22" y1="11" y2="13"/>
-                                <line x1="6" x2="6" y1="11" y2="13"/>
-                                <line x1="10" x2="10" y1="11" y2="13"/>
-                            </svg>
-                        </div>
-
-                        <h2 class="text-lg font-bold text-slate-900 dark:text-white tracking-tight uppercase">
-                            <span class="lang-ua">Додатковий акумулятор (АКБ)</span>
-                            <span class="lang-en">Extra Battery Pack</span>
-                        </h2>
-                        <p class="mt-2 text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
-                            <span class="lang-ua">Знімний тяговий літієвий акумулятор 60V або 72V для подвоєння робочого пробігу без простою на зарядку.</span>
-                            <span class="lang-en">Quick-swap lithium traction battery 60V / 72V to double courier shift range without charging downtime.</span>
-                        </p>
-                    </div>
-
-                    <div class="mt-6 pt-4 border-t border-slate-100 dark:border-white/5 flex items-center justify-between gap-3">
-                        <div>
-                            <span class="block text-[10px] uppercase font-mono text-slate-400">
-                                <span class="lang-ua">Запас ходу</span>
-                                <span class="lang-en">Extra range</span>
-                            </span>
-                            <span class="text-sm font-bold font-mono text-slate-900 dark:text-white">+80–120 км</span>
-                        </div>
-                        <a href="https://t.me/Muvio_Odesa?text=%D0%94%D0%BE%D0%B1%D1%80%D0%B8%D0%B9%20%D0%B4%D0%B5%D0%BD%D1%8C!%20%D0%A6%D1%96%D0%BA%D0%B0%D0%B2%D0%B8%D1%82%D1%8C%20%D0%B4%D0%BE%D0%B4%D0%B0%D1%82%D0%BA%D0%BE%D0%B2%D0%B8%D0%B9%20%D0%B0%D0%BA%D1%83%D0%BC%D1%83%D0%BB%D1%8F%D1%82%D0%BE%D1%80" target="_blank" rel="noopener noreferrer"
-                            class="chamfer-btn inline-flex items-center justify-center px-3.5 py-2 text-xs font-semibold uppercase tracking-wider text-white bg-[#1D5D3B] hover:bg-[#24754A] dark:bg-[#1D5D3B] dark:hover:bg-[#2E8B57]">
-                            <span class="lang-ua">Замовити / Наявність</span>
-                            <span class="lang-en">Order / In Stock</span>
-                        </a>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Дополнительная информационная секция -->
-            <div class="mt-14 p-6 sm:p-8 bg-slate-100 dark:bg-[#111814] border border-slate-200 dark:border-white/10 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6">
+    <!-- ==================== 2. ГОЛОВНИЙ ДВУХКОЛОНОЧНИЙ МАКЕТ ==================== -->
+    <main class="flex-1">
+        <!-- Заголовок сторінки всередині контентної зони (строго #0F172A) -->
+        <div class="max-w-[1400px] mx-auto px-5 pt-8 pb-4">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-zinc-200 dark:border-white/10 pb-4">
                 <div>
-                    <h3 class="text-lg sm:text-xl font-bold uppercase text-slate-900 dark:text-white">
-                        <span class="lang-ua">Потрібна рідкісна деталь або спецзамовлення?</span>
-                        <span class="lang-en">Looking for a specific part or custom order?</span>
-                    </h3>
-                    <p class="mt-1 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
-                        <span class="lang-ua">Наш сервісний центр замовляє та встановлює оригінальні комплектуючі з гарантією.</span>
-                        <span class="lang-en">Our service center orders and installs certified OEM components with guarantee.</span>
+                    <div class="inline-flex items-center gap-2 px-2 py-0.5 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-300 dark:border-emerald-800/60 text-[#1AB370] text-[10px] font-mono font-bold uppercase mb-2">
+                        <span class="w-1.5 h-1.5 bg-[#1AB370]"></span>
+                        <span>MUVIO STORE & PARTS</span>
+                    </div>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold uppercase tracking-tight text-[#0F172A] dark:text-white leading-tight">
+                        Магазин аксесуарів та запчастин
+                    </h1>
+                    <p class="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 mt-1 max-w-2xl">
+                        Оригінальне екіпірування, компоненти та комплектуючі з офіційною гарантією та доставкою Новою Поштою.
                     </p>
                 </div>
-                <div class="flex items-center gap-3 shrink-0">
-                    <a href="service.html"
-                        class="chamfer-btn inline-flex items-center justify-center px-5 py-3 text-xs font-semibold uppercase tracking-wider text-slate-900 dark:text-white border border-slate-300 dark:border-white/20 hover:bg-white dark:hover:bg-white/5">
-                        <span class="lang-ua">Сервісний центр</span>
-                        <span class="lang-en">Service Center</span>
-                    </a>
-                    <a href="https://t.me/Muvio_Odesa" target="_blank" rel="noopener noreferrer"
-                        class="chamfer-btn inline-flex items-center justify-center px-5 py-3 text-xs font-semibold uppercase tracking-wider text-white bg-[#1D5D3B] hover:bg-[#24754A]">
-                        <span class="lang-ua">Написати в Telegram</span>
-                        <span class="lang-en">Telegram Chat</span>
-                    </a>
+
+                <div class="flex items-center gap-2 self-start sm:self-auto font-mono text-xs text-zinc-500">
+                    <span id="productsFoundLabel" class="font-bold text-[#0F172A] dark:text-white">Знайдено: 12 товарів</span>
                 </div>
             </div>
+        </div>
 
+        <!-- 2-Колоночна структура: Сайдбар 280px + Вітрина 1fr -->
+        <div class="ecom-layout-container">
+
+            <!-- ЛЕВАЯ КОЛОНКА: САЙДБАР КАТЕГОРИЙ (СТРОГИЙ ROZETKA-STYLE) -->
+            <aside class="category-sidebar">
+                <div class="p-4 border-b border-zinc-200 dark:border-white/10 flex items-center justify-between bg-zinc-50 dark:bg-[#14181D]">
+                    <span class="font-bold text-xs uppercase tracking-wider text-[#0F172A] dark:text-white flex items-center gap-2">
+                        <i data-lucide="layers" class="w-4 h-4 text-[#1AB370]"></i>
+                        <span>Каталог товарів</span>
+                    </span>
+                    <button type="button" onclick="filterByCategory('all')" class="text-[11px] text-[#1AB370] hover:underline font-semibold font-mono">
+                        Скинути
+                    </button>
+                </div>
+
+                <!-- Всі товари -->
+                <div onclick="filterByCategory('all')" class="cat-item-link active" data-cat="all" style="padding-left: 16px;">
+                    <span class="flex items-center gap-2">
+                        <i data-lucide="grid" class="w-4 h-4 text-zinc-400"></i>
+                        <span>Всі категорії</span>
+                    </span>
+                    <span class="text-xs font-mono text-zinc-400">12</span>
+                </div>
+
+                <!-- 1. Екіпірування та одяг -->
+                <div>
+                    <div class="cat-group-title" onclick="toggleSidebarGroup('groupEquip')">
+                        <span class="flex items-center gap-2">
+                            <span>📁 Екіпірування та одяг</span>
+                        </span>
+                        <i data-lucide="chevron-down" id="icon-groupEquip" class="w-4 h-4 transition-transform"></i>
+                    </div>
+                    <div id="groupEquip" class="py-1">
+                        <div onclick="filterByCategory('helmets')" class="cat-item-link" data-cat="helmets">
+                            <span>Шоломи (інтеграл, відкриті)</span>
+                            <span class="text-[11px] font-mono text-zinc-400">2</span>
+                        </div>
+                        <div onclick="filterByCategory('gloves')" class="cat-item-link" data-cat="gloves">
+                            <span>Рукавиці та дощовики</span>
+                            <span class="text-[11px] font-mono text-zinc-400">2</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Запчастини (активний / розкритий) -->
+                <div>
+                    <div class="cat-group-title" onclick="toggleSidebarGroup('groupParts')">
+                        <span class="flex items-center gap-2">
+                            <span>📁 Запчастини</span>
+                        </span>
+                        <i data-lucide="chevron-down" id="icon-groupParts" class="w-4 h-4 transition-transform rotate-180"></i>
+                    </div>
+                    <div id="groupParts" class="py-1">
+                        <div onclick="filterByCategory('brakes')" class="cat-item-link" data-cat="brakes">
+                            <span>Гальмівні колодки</span>
+                            <span class="text-[11px] font-mono text-zinc-400">1</span>
+                        </div>
+                        <div onclick="filterByCategory('tires')" class="cat-item-link" data-cat="tires">
+                            <span>Покришки та камери</span>
+                            <span class="text-[11px] font-mono text-zinc-400">1</span>
+                        </div>
+                        <div onclick="filterByCategory('batteries')" class="cat-item-link" data-cat="batteries">
+                            <span>Акумулятори та зарядні</span>
+                            <span class="text-[11px] font-mono text-zinc-400">2</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Комфорт та тюнінг -->
+                <div>
+                    <div class="cat-group-title" onclick="toggleSidebarGroup('groupTuning')">
+                        <span class="flex items-center gap-2">
+                            <span>📁 Комфорт та тюнінг</span>
+                        </span>
+                        <i data-lucide="chevron-down" id="icon-groupTuning" class="w-4 h-4 transition-transform"></i>
+                    </div>
+                    <div id="groupTuning" class="py-1">
+                        <div onclick="filterByCategory('grips')" class="cat-item-link" data-cat="grips">
+                            <span>Ручки з підігрівом</span>
+                            <span class="text-[11px] font-mono text-zinc-400">1</span>
+                        </div>
+                        <div onclick="filterByCategory('mirrors')" class="cat-item-link" data-cat="mirrors">
+                            <span>Дзеркала заднього виду</span>
+                            <span class="text-[11px] font-mono text-zinc-400">1</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Аксесуари -->
+                <div>
+                    <div class="cat-group-title" onclick="toggleSidebarGroup('groupAcc')">
+                        <span class="flex items-center gap-2">
+                            <span>📁 Аксесуари</span>
+                        </span>
+                        <i data-lucide="chevron-down" id="icon-groupAcc" class="w-4 h-4 transition-transform"></i>
+                    </div>
+                    <div id="groupAcc" class="py-1">
+                        <div onclick="filterByCategory('holders')" class="cat-item-link" data-cat="holders">
+                            <span>Тримачі смартфона (з вібророзв'язкою)</span>
+                            <span class="text-[11px] font-mono text-zinc-400">1</span>
+                        </div>
+                        <div onclick="filterByCategory('locks')" class="cat-item-link" data-cat="locks">
+                            <span>Протиугінні замки та сирени</span>
+                            <span class="text-[11px] font-mono text-zinc-400">1</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Блок допомоги та зв'язку -->
+                <div class="p-4 bg-zinc-50 dark:bg-[#14181D] border-t border-zinc-200 dark:border-white/10 text-xs space-y-2">
+                    <span class="font-bold text-[#0F172A] dark:text-white block">Потрібна допомога у виборі?</span>
+                    <p class="text-zinc-500 text-[11px] leading-relaxed">
+                        Підберемо сумісні запчастини та аксесуари до вашої моделі скутера онлайн.
+                    </p>
+                    <a href="https://t.me/muviobot?text=%D0%94%D0%BE%D0%B1%D1%80%D0%BE%D0%B3%D0%BE%20%D0%B4%D0%BD%D1%8F!%20%D0%9F%D1%96%D0%B4%D0%BA%D0%B0%D0%B6%D1%96%D1%82%D1%8C%20%D0%BF%D0%BE%20%D1%81%D1%83%D0%BC%D1%96%D1%81%D0%BD%D0%BE%D1%81%D1%82%D1%96%20%D0%B7%D0%B0%D0%BF%D1%87%D0%B0%D1%81%D1%82%D0%B8%D0%BD"
+                        target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center gap-1.5 font-bold text-[#229ED9] hover:underline text-xs">
+                        <span>Написати в Telegram</span>
+                        <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+            </aside>
+
+            <!-- ПРАВАЯ КОЛОНКА: ВИТРИНА ТОВАРОВ В СТРОГОЙ СЕТКЕ -->
+            <section class="space-y-4">
+                <!-- Панель сортування та активного фільтра -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 bg-white dark:bg-[#111418] border border-zinc-200 dark:border-white/10 rounded">
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <span class="text-xs text-zinc-500">Фільтр:</span>
+                        <span id="activeFilterBadge" class="text-xs font-bold font-mono px-2 py-0.5 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800/60 rounded">
+                            Всі категорії
+                        </span>
+                        <button type="button" id="clearFilterBtn" onclick="filterByCategory('all')" class="text-xs text-rose-500 hover:underline hidden">
+                            Скинути ✕
+                        </button>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <label for="sortSelect" class="text-xs text-zinc-500">Сортування:</label>
+                        <select id="sortSelect" onchange="handleSortChange(this.value)"
+                            class="text-xs font-semibold px-2.5 py-1.5 bg-zinc-50 dark:bg-[#161B20] border border-zinc-300 dark:border-white/10 rounded text-[#0F172A] dark:text-white outline-none cursor-pointer">
+                            <option value="popular">За популярністю</option>
+                            <option value="cheap">Спочатку дешевші</option>
+                            <option value="expensive">Спочатку дорожчі</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Сетка карточек товаров -->
+                <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Рендериться динамічно через renderProducts() -->
+                </div>
+
+                <!-- Пустий стан якщо нічого не знайдено -->
+                <div id="noProductsFound" class="hidden p-12 text-center bg-white dark:bg-[#111418] border border-zinc-200 dark:border-white/10 rounded space-y-3">
+                    <div class="w-12 h-12 bg-zinc-100 dark:bg-zinc-800 rounded-full flex items-center justify-center mx-auto text-zinc-400">
+                        <i data-lucide="search-x" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-bold text-base text-[#0F172A] dark:text-white">Нічого не знайдено</h3>
+                    <p class="text-xs text-zinc-500 max-w-sm mx-auto">
+                        За вашим запитом не знайдено товарів. Спробуйте змінити пошуковий запит або скинути фільтри.
+                    </p>
+                    <button type="button" onclick="resetAllFilters()"
+                        class="px-4 py-2 bg-[#1AB370] hover:bg-[#169B60] text-white font-bold text-xs uppercase tracking-wider rounded">
+                        Скинути пошук та фільтри
+                    </button>
+                </div>
+            </section>
         </div>
     </main>
 
-    <!-- ==================== FOOTER ==================== -->
-    <footer class="bg-[#0F1411] text-white border-t border-emerald-950 pt-16 pb-12 mt-16 font-sans">
+    <!-- ==================== 3. СТРОГИЙ E-COMMERCE FOOTER ==================== -->
+    <footer class="bg-[#0F172A] text-white border-t border-white/10 pt-12 pb-8 mt-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-white/10">
-
-                <div class="space-y-4">
-                    <div class="flex items-center gap-2">
-                        <img src="images/logo-header-trans.png" alt="MUVIO" class="h-7 w-auto" />
-                    </div>
-                    <p class="text-xs text-emerald-100/70 leading-relaxed font-mono">
-                        <span class="lang-ua">Платформа комерційного електротранспорту для кур'єрів та міського бізнесу в Одесі.</span>
-                        <span class="lang-en">Commercial e-transport platform for couriers and urban mobility in Odesa.</span>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 pb-10 border-b border-white/10">
+                <div>
+                    <img src="images/logo-header-trans.png" alt="MUVIO" class="h-7 w-auto mb-3" style="filter: brightness(0) invert(1);">
+                    <p class="text-xs text-zinc-400 leading-relaxed">
+                        Офіційний магазин сервісу легкого електротранспорту MUVIO. Продаж та оренда якісних аксесуарів, акумуляторів та запчастин.
                     </p>
                 </div>
 
                 <div>
-                    <h4 class="font-mono text-xs uppercase tracking-widest text-[#1AB370] font-bold mb-4">
-                        <span class="lang-ua">Навігація</span>
-                        <span class="lang-en">Navigation</span>
-                    </h4>
-                    <ul class="space-y-2.5 text-xs text-emerald-100/80">
-                        <li><a href="catalog.html" class="hover:text-white transition-colors"><span class="lang-ua">Оренда</span><span class="lang-en">Rent</span></a></li>
-                        <li><a href="accessories.html" class="hover:text-white transition-colors text-white font-semibold"><span class="lang-ua">Аксесуари</span><span class="lang-en">Accessories</span></a></li>
-                        <li><a href="calculator.html" class="hover:text-white transition-colors"><span class="lang-ua">Калькулятор</span><span class="lang-en">Calculator</span></a></li>
-                        <li><a href="service.html" class="hover:text-white transition-colors"><span class="lang-ua">Сервісний центр</span><span class="lang-en">Service center</span></a></li>
-                        <li><a href="terms.html" class="hover:text-white transition-colors"><span class="lang-ua">Умови оренди</span><span class="lang-en">Terms</span></a></li>
-                        <li><a href="faq.html" class="hover:text-white transition-colors">FAQ</a></li>
+                    <h4 class="font-mono text-xs uppercase tracking-widest text-[#1AB370] font-bold mb-3">Каталог</h4>
+                    <ul class="space-y-1.5 text-xs text-zinc-400 font-sans">
+                        <li><a href="javascript:void(0)" onclick="filterByCategory('helmets')" class="hover:text-white transition-colors">Шоломи та захист</a></li>
+                        <li><a href="javascript:void(0)" onclick="filterByCategory('brakes')" class="hover:text-white transition-colors">Гальмівні системи</a></li>
+                        <li><a href="javascript:void(0)" onclick="filterByCategory('batteries')" class="hover:text-white transition-colors">Акумулятори та зарядки</a></li>
+                        <li><a href="javascript:void(0)" onclick="filterByCategory('grips')" class="hover:text-white transition-colors">Ручки з підігрівом</a></li>
+                        <li><a href="javascript:void(0)" onclick="filterByCategory('holders')" class="hover:text-white transition-colors">Тримачі смартфонів</a></li>
                     </ul>
                 </div>
 
                 <div>
-                    <h4 class="font-mono text-xs uppercase tracking-widest text-[#1AB370] font-bold mb-4">
-                        <span class="lang-ua">Контакти</span>
-                        <span class="lang-en">Contacts</span>
-                    </h4>
-                    <ul class="space-y-2 text-xs text-emerald-100/80 font-mono">
-                        <li>вул. Приморська, 22, Одеса</li>
-                        <li>Пн-Нд: 09:00 - 19:00</li>
-                        <li><a href="tel:+380931707070" class="hover:text-white transition-colors">+380 93 170 70 70</a></li>
-                        <li><a href="https://t.me/Muvio_Odesa" class="text-[#1AB370] hover:underline" target="_blank">Telegram: @Muvio_Odesa</a></li>
+                    <h4 class="font-mono text-xs uppercase tracking-widest text-[#1AB370] font-bold mb-3">Контакти та пункт видачі</h4>
+                    <ul class="space-y-1.5 text-xs text-zinc-400 font-mono">
+                        <li>м. Одеса, вул. Приморська, 22</li>
+                        <li>Графік: Пн–Сб 09:00–19:00</li>
+                        <li>Телефон: +380 93 170 70 70</li>
+                        <li>Telegram: <a href="https://t.me/muviobot" target="_blank" class="text-[#1AB370] hover:underline">@muviobot</a></li>
                     </ul>
                 </div>
 
                 <div>
-                    <h4 class="font-mono text-xs uppercase tracking-widest text-[#1AB370] font-bold mb-4">
-                        <span class="lang-ua">Партнерство</span>
-                        <span class="lang-en">Partnership</span>
-                    </h4>
-                    <p class="text-xs text-emerald-100/70 mb-3">
-                        <span class="lang-ua">Корпоративна оренда для кур'єрських служб, ресторанів та франшиза.</span>
-                        <span class="lang-en">Fleet leases for delivery services, restaurants, and franchise.</span>
+                    <h4 class="font-mono text-xs uppercase tracking-widest text-[#1AB370] font-bold mb-3">Особистий кабінет</h4>
+                    <p class="text-xs text-zinc-400 mb-3">
+                        Відстежуйте ваші замовлення Нової Пошти, керуйте кошиком та списком бажань.
                     </p>
-                    <a href="franchise.html" class="text-xs font-mono text-[#1AB370] hover:underline">
-                        <span class="lang-ua">Дізнатися про франшизу →</span>
-                        <span class="lang-en">Franchise details →</span>
+                    <a href="cabinet.html" class="inline-flex items-center gap-1.5 px-3 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase rounded transition-colors">
+                        <i data-lucide="user" class="w-3.5 h-3.5"></i>
+                        <span>Вхід до кабінету</span>
                     </a>
                 </div>
-
             </div>
 
-            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-emerald-200 gap-4 font-mono">
-                <div>
-                    <span class="lang-ua">© 2026 MUVIO Rent. Одеса, вул. Приморська, 22.</span>
-                    <span class="lang-en">© 2026 MUVIO Rent. Odesa, 22 Prymorska Str.</span>
-                </div>
-                <div class="text-[11px]">
-                    <span class="lang-ua">Комерційний та кур’єрський легкий електротранспорт</span>
-                    <span class="lang-en">Commercial and courier light electric transport</span>
-                </div>
+            <div class="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 font-mono gap-3">
+                <div>© 2026 MUVIO Store. Всі права захищено.</div>
+                <div>Доставка по всій Україні через Нову Пошту</div>
             </div>
         </div>
     </footer>
 
-    <!-- ==================== JAVASCRIPT ==================== -->
+    <!-- Тост-сповіщення про додавання товару -->
+    <div id="ecomToast">
+        <i data-lucide="check-circle" class="w-4 h-4 text-[#1AB370]"></i>
+        <span id="toastMessage">Товар додано до кошика!</span>
+    </div>
+
+    <!-- ==================== 4. JAVASCRIPT: КАТАЛОГ, КОШИК ТА ПОШУК ==================== -->
     <script>
-        // Мобільне меню
-        const burgerBtn = document.getElementById('burger-btn') || document.querySelector('[data-burger]') || document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobile-menu') || document.getElementById('mobileMenu');
-        if (burgerBtn && mobileMenu) {
-            burgerBtn.onclick = (e) => {
-                e.stopPropagation();
-                mobileMenu.classList.toggle('hidden');
-            };
-            mobileMenu.querySelectorAll('.mobile-nav-link, a, button').forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
-                });
-            });
-        }
-
-        // Єдина синхронізація імені користувача в шапці (muvio_active_user)
-        function updateHeaderUserName() {
-            let name = '';
-            try {
-                const activeSaved = localStorage.getItem('muvio_active_user');
-                if (activeSaved) {
-                    const active = JSON.parse(activeSaved);
-                    const login = (active.login || '').trim();
-                    if (login) name = login.toUpperCase();
-                } else {
-                    const saved = localStorage.getItem('muvio_user');
-                    if (saved) {
-                        const u = JSON.parse(saved);
-                        const n = (u.login || u.name || u.first_name || u.username || '').trim();
-                        if (n) name = n.toUpperCase();
-                    }
-                }
-            } catch (e) {
-                console.error('Error reading active user:', e);
+        // База товарів магазину MUVIO
+        const PRODUCTS_DB = [
+            {
+                id: 1,
+                name: "Шолом інтеграл MUVIO Shield Pro",
+                category: "helmets",
+                categoryTitle: "Шоломи",
+                group: "equip",
+                price: 2800,
+                rating: 4.9,
+                badge: "Топ продажів",
+                icon: "shield",
+                desc: "Закритий повнолицьовий шолом з подвійним візором (сонцезахисний + прозорий) та сертифікатом DOT / ECE 22.05."
+            },
+            {
+                id: 2,
+                name: "Шолом міський відкритий Open-Face Air",
+                category: "helmets",
+                categoryTitle: "Шоломи",
+                group: "equip",
+                price: 1650,
+                rating: 4.7,
+                badge: "Літо",
+                icon: "shield",
+                desc: "Полегшений шолом відкритого типу з широким візором та регульованою вентиляцією для міських кур'єрських змін."
+            },
+            {
+                id: 3,
+                name: "Терморукавиці водонепроникні Winter Pro",
+                category: "gloves",
+                categoryTitle: "Рукавиці",
+                group: "equip",
+                price: 850,
+                rating: 4.8,
+                badge: "Зима",
+                icon: "hand",
+                desc: "Вітро- та вологозахисні рукавиці з мембраною, посиленими долонями та сенсорними пальцями для смартфона."
+            },
+            {
+                id: 4,
+                name: "Колодки гальмівні керамічні MUVIO Ceramic Stop",
+                category: "brakes",
+                categoryTitle: "Гальмівні колодки",
+                group: "parts",
+                price: 450,
+                rating: 5.0,
+                badge: "Оригінал",
+                icon: "disc",
+                desc: "Посилений керамічний компаунд для електроскутерів. Довговічність +300%, ефективне гальмування за будь-якої погоди."
+            },
+            {
+                id: 5,
+                name: "Покришка безкамерна 12\" GripMax All-Season",
+                category: "tires",
+                categoryTitle: "Покришки",
+                group: "parts",
+                price: 950,
+                rating: 4.8,
+                badge: "Всесезон",
+                icon: "circle",
+                desc: "Зносостійка безкамерна гума з глибоким водовідвідним протектором для безпечного руху мокрим асфальтом."
+            },
+            {
+                id: 6,
+                name: "Швидкий зарядний пристрій 72V 10A Pro-Charge",
+                category: "batteries",
+                categoryTitle: "Зарядні пристрої",
+                group: "parts",
+                price: 1450,
+                rating: 4.9,
+                badge: "Швидка зарядка",
+                icon: "zap",
+                desc: "Інтелектуальне заряджання з активним кулером та захистом від перегріву й перезаряду. Заряджає 40Ah за 4 години."
+            },
+            {
+                id: 7,
+                name: "Акумуляторна батарея Li-ion 72V 40Ah Samsung",
+                category: "batteries",
+                categoryTitle: "Акумулятори",
+                group: "parts",
+                price: 18500,
+                rating: 5.0,
+                badge: "Premium",
+                icon: "battery-charging",
+                desc: "Тяговий акумулятор на оригінальних елементах Samsung з розумною Smart-BMS платою. Запас ходу до 100 км."
+            },
+            {
+                id: 8,
+                name: "Ручки з 4-рівневим підігрівом HeatGrip-4",
+                category: "grips",
+                categoryTitle: "Ручки з підігрівом",
+                group: "tuning",
+                price: 1200,
+                rating: 4.8,
+                badge: "Комфорт",
+                icon: "flame",
+                desc: "Ергономічні термогріпси з водонепроникним перемикачем та 4 рівнями температури (45°C - 75°C). 12V-72V."
+            },
+            {
+                id: 9,
+                name: "Дзеркала заднього виду антиблікові Stealth",
+                category: "mirrors",
+                categoryTitle: "Дзеркала",
+                group: "tuning",
+                price: 620,
+                rating: 4.6,
+                badge: "Антиблік",
+                icon: "eye",
+                desc: "Алюмінієві корпуси, синє антиблікове скло та універсальне кріплення на кермо M8/M10."
+            },
+            {
+                id: 10,
+                name: "Тримач смартфона з вібророзв'язкою MetalLock",
+                category: "holders",
+                categoryTitle: "Тримачі смартфона",
+                group: "acc",
+                price: 890,
+                rating: 4.9,
+                badge: "Хіт",
+                icon: "smartphone",
+                desc: "Металевий тримач із демпфером вібрацій для захисту камер iPhone/Samsung та бездротовим затискачем."
+            },
+            {
+                id: 11,
+                name: "Замок на гальмівний диск із сиреною 110dB AlarmLock",
+                category: "locks",
+                categoryTitle: "Протиугінні замки",
+                group: "acc",
+                price: 780,
+                rating: 4.7,
+                badge: "Безпека",
+                icon: "lock",
+                desc: "Загартована сталь, датчик удару та гучна сирена 110 дБ, що реагує на спробу зрушити скутер з місця."
+            },
+            {
+                id: 12,
+                name: "Дощовик-пончо світловідбивний MUVIO Courier Dry",
+                category: "gloves",
+                categoryTitle: "Дощовики",
+                group: "equip",
+                price: 690,
+                rating: 4.7,
+                badge: "Вологозахист",
+                icon: "umbrella",
+                desc: "Щільний Oxford 300D матеріал, що повністю закриває водія та рюкзак доставки. Яскраві світловідбивні смуги."
             }
-            document.querySelectorAll('.header-user-name, #header-user-name').forEach(el => {
-                if (name) {
-                    el.textContent = name;
-                } else {
-                    el.innerHTML = '<span class="lang-ua">ВХІД</span><span class="lang-en">LOGIN</span>';
-                }
-            });
-            const btns = document.querySelectorAll('.header-user-btn, #header-user-btn');
-            btns.forEach(btn => {
-                btn.setAttribute('href', name ? 'cabinet.html' : 'auth.html');
-            });
-        }
-        window.addEventListener('storage', updateHeaderUserName);
+        ];
 
-        document.addEventListener('DOMContentLoaded', () => {
-            updateHeaderUserName();
+        let currentCategory = 'all';
+        let searchQuery = '';
+        let currentSort = 'popular';
+
+        // 1. Отримання та оновлення кошика в localStorage
+        function getCart() {
             try {
-                if (window.lucide) {
-                    window.lucide.createIcons();
+                const c = localStorage.getItem('muvio_cart');
+                return c ? JSON.parse(c) : [];
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function saveCart(cart) {
+            try {
+                localStorage.setItem('muvio_cart', JSON.stringify(cart));
+                updateHeaderBadges();
+            } catch (e) {}
+        }
+
+        function addToCart(prodId) {
+            const prod = PRODUCTS_DB.find(p => p.id === prodId);
+            if (!prod) return;
+
+            const cart = getCart();
+            const existing = cart.find(item => item.name === prod.name);
+
+            if (existing) {
+                existing.qty = (existing.qty || 1) + 1;
+            } else {
+                cart.push({
+                    name: prod.name,
+                    price: prod.price,
+                    qty: 1,
+                    icon: prod.icon || 'package'
+                });
+            }
+
+            saveCart(cart);
+            showToast(`«${prod.name}» додано в кошик!`);
+
+            // Оновлюємо вигляд кнопки
+            const btn = document.getElementById(`addToCartBtn-${prodId}`);
+            if (btn) {
+                btn.classList.add('in-cart');
+                btn.innerHTML = `<i data-lucide="check" class="w-3.5 h-3.5"></i> <span>В кошику ✓</span>`;
+                if (window.lucide) window.lucide.createIcons();
+            }
+        }
+
+        // 2. Список бажань (Wishlist)
+        function toggleWishlist(prodId, event) {
+            if (event) event.stopPropagation();
+            const prod = PRODUCTS_DB.find(p => p.id === prodId);
+            if (!prod) return;
+
+            let wishlist = [];
+            try {
+                const w = localStorage.getItem('muvio_wishlist');
+                wishlist = w ? JSON.parse(w) : [];
+            } catch (e) {}
+
+            const idx = wishlist.findIndex(item => item.name === prod.name);
+            if (idx > -1) {
+                wishlist.splice(idx, 1);
+                showToast(`«${prod.name}» видалено з обраного`);
+            } else {
+                wishlist.push({
+                    name: prod.name,
+                    price: prod.price,
+                    icon: prod.icon || 'shield'
+                });
+                showToast(`«${prod.name}» додано в обране ❤️`);
+            }
+
+            try {
+                localStorage.setItem('muvio_wishlist', JSON.stringify(wishlist));
+                updateHeaderBadges();
+                renderProducts();
+            } catch (e) {}
+        }
+
+        // 3. Порівняння (Compare)
+        function toggleCompare(prodId, event) {
+            if (event) event.stopPropagation();
+            const prod = PRODUCTS_DB.find(p => p.id === prodId);
+            if (!prod) return;
+
+            showToast(`«${prod.name}» додано до порівняння ⚖️`);
+            updateHeaderBadges();
+        }
+
+        // 4. Оновлення бейджів у шапці Rozetka-style
+        function updateHeaderBadges() {
+            // Кошик
+            const cart = getCart();
+            let totalQty = 0;
+            let totalPrice = 0;
+            cart.forEach(item => {
+                const q = item.qty || 1;
+                totalQty += q;
+                totalPrice += (item.price || 0) * q;
+            });
+
+            const cartCountEl = document.getElementById('headerCartCount');
+            const cartTotalEl = document.getElementById('headerCartTotal');
+            if (cartCountEl) cartCountEl.textContent = totalQty;
+            if (cartTotalEl) cartTotalEl.textContent = `${totalPrice.toLocaleString()} ₴`;
+
+            // Список бажань
+            let wishlistCount = 3;
+            try {
+                const w = localStorage.getItem('muvio_wishlist');
+                if (w) wishlistCount = JSON.parse(w).length;
+            } catch (e) {}
+            const wishEl = document.getElementById('headerWishlistCount');
+            if (wishEl) wishEl.textContent = wishlistCount;
+
+            // Порівняння
+            const compEl = document.getElementById('headerCompareCount');
+            if (compEl) compEl.textContent = "2";
+
+            // Ім'я користувача (за замовчуванням «Максим»)
+            let userName = "Максим";
+            try {
+                const active = localStorage.getItem('muvio_active_user');
+                const saved = localStorage.getItem('muvio_user');
+                if (saved) {
+                    const u = JSON.parse(saved);
+                    userName = u.name || u.login || "Максим";
+                } else if (active) {
+                    const u = JSON.parse(active);
+                    userName = u.name || u.login || "Максим";
                 }
-            } catch (e) { console.error('Lucide error:', e); }
+            } catch (e) {}
+
+            const userTextEl = document.getElementById('headerUserNameText');
+            if (userTextEl) userTextEl.textContent = userName;
+        }
+
+        // 5. Рендеринг товарів у правій колонці
+        function renderProducts() {
+            const grid = document.getElementById('productsGrid');
+            const noFound = document.getElementById('noProductsFound');
+            const countLabel = document.getElementById('productsFoundLabel');
+            if (!grid) return;
+
+            let filtered = PRODUCTS_DB.filter(prod => {
+                // Фільтр категорії
+                const matchCat = (currentCategory === 'all') || (prod.category === currentCategory) || (prod.group === currentCategory);
+                // Фільтр пошуку
+                const q = searchQuery.toLowerCase().trim();
+                const matchSearch = !q || prod.name.toLowerCase().includes(q) || prod.desc.toLowerCase().includes(q) || prod.categoryTitle.toLowerCase().includes(q);
+                return matchCat && matchSearch;
+            });
+
+            // Сортування
+            if (currentSort === 'cheap') {
+                filtered.sort((a, b) => a.price - b.price);
+            } else if (currentSort === 'expensive') {
+                filtered.sort((a, b) => b.price - a.price);
+            } else {
+                filtered.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+            }
+
+            if (countLabel) {
+                countLabel.textContent = `Знайдено: ${filtered.length} товарів`;
+            }
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                if (noFound) noFound.classList.remove('hidden');
+                return;
+            }
+
+            if (noFound) noFound.classList.add('hidden');
+
+            const cart = getCart();
+
+            let html = '';
+            filtered.forEach(prod => {
+                const isInCart = cart.some(item => item.name === prod.name);
+                const inCartClass = isInCart ? 'in-cart' : '';
+                const inCartText = isInCart ? `<i data-lucide="check" class="w-3.5 h-3.5"></i> <span>В кошику ✓</span>` : `<i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i> <span>Додати в кошик</span>`;
+
+                html += `
+                <div class="ecom-prod-card group">
+                    <div>
+                        <!-- Верхній бейдж + швидкі дії -->
+                        <div class="flex items-center justify-between gap-2 mb-3">
+                            <span class="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 bg-zinc-100 dark:bg-white/5 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-white/10 rounded">
+                                ${prod.badge || prod.categoryTitle}
+                            </span>
+                            <div class="flex items-center gap-1 text-zinc-400">
+                                <button type="button" onclick="toggleCompare(${prod.id}, event)" class="p-1 hover:text-[#1AB370] transition-colors" title="Порівняти">
+                                    <i data-lucide="scale" class="w-4 h-4"></i>
+                                </button>
+                                <button type="button" onclick="toggleWishlist(${prod.id}, event)" class="p-1 hover:text-rose-500 transition-colors" title="В обране">
+                                    <i data-lucide="heart" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Іконка / Зображення товару -->
+                        <div class="w-full h-36 bg-zinc-50 dark:bg-[#14181D] border border-zinc-100 dark:border-white/5 rounded flex items-center justify-center mb-3 relative overflow-hidden group-hover:border-zinc-300 dark:group-hover:border-white/15 transition-colors">
+                            <i data-lucide="${prod.icon || 'package'}" class="w-14 h-14 text-[#1AB370] opacity-85 transition-transform group-hover:scale-110"></i>
+                            <span class="absolute bottom-2 left-2 text-[10px] font-mono text-zinc-400">Код: 00${prod.id}</span>
+                        </div>
+
+                        <!-- Назва та опис -->
+                        <div class="text-[11px] font-mono text-[#1AB370] mb-0.5 font-bold uppercase">
+                            ${prod.categoryTitle}
+                        </div>
+                        <h3 class="font-bold text-sm text-[#0F172A] dark:text-white leading-snug line-clamp-2">
+                            ${prod.name}
+                        </h3>
+                        <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1 line-clamp-2 leading-relaxed">
+                            ${prod.desc}
+                        </p>
+                    </div>
+
+                    <!-- Ціна та кнопка покупки -->
+                    <div class="mt-4 pt-3 border-t border-zinc-100 dark:border-white/5">
+                        <div class="flex items-baseline justify-between mb-2.5">
+                            <div>
+                                <span class="text-[10px] text-zinc-400 uppercase font-mono block">Ціна:</span>
+                                <span class="text-lg font-bold font-mono text-[#0F172A] dark:text-white">${prod.price.toLocaleString()} ₴</span>
+                            </div>
+                            <span class="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 flex items-center gap-1 font-semibold">
+                                <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
+                                В наявності
+                            </span>
+                        </div>
+
+                        <button type="button" id="addToCartBtn-${prod.id}" onclick="addToCart(${prod.id})" class="add-to-cart-btn ${inCartClass}">
+                            ${inCartText}
+                        </button>
+                    </div>
+                </div>
+                `;
+            });
+
+            grid.innerHTML = html;
+            if (window.lucide) window.lucide.createIcons();
+        }
+
+        // 6. Фільтрація по категорії
+        function filterByCategory(cat) {
+            currentCategory = cat;
+
+            // Оновлюємо активний стан у сайдбарі
+            document.querySelectorAll('.cat-item-link').forEach(el => {
+                if (el.getAttribute('data-cat') === cat) {
+                    el.classList.add('active');
+                } else {
+                    el.classList.remove('active');
+                }
+            });
+
+            // Оновлюємо бейдж активного фільтра
+            const badge = document.getElementById('activeFilterBadge');
+            const clearBtn = document.getElementById('clearFilterBtn');
+
+            const catMap = {
+                'all': 'Всі категорії',
+                'helmets': 'Шоломи',
+                'gloves': 'Рукавиці та дощовики',
+                'brakes': 'Гальмівні колодки',
+                'tires': 'Покришки та камери',
+                'batteries': 'Акумулятори та зарядні',
+                'grips': 'Ручки з підігрівом',
+                'mirrors': 'Дзеркала заднього виду',
+                'holders': 'Тримачі смартфона',
+                'locks': 'Протиугінні замки'
+            };
+
+            if (badge) badge.textContent = catMap[cat] || cat;
+            if (clearBtn) {
+                if (cat !== 'all') clearBtn.classList.remove('hidden');
+                else clearBtn.classList.add('hidden');
+            }
+
+            renderProducts();
+        }
+
+        // 7. Живий пошук
+        function handleSearchInput(query) {
+            searchQuery = query;
+            renderProducts();
+        }
+
+        function handleSearchSubmit() {
+            const input = document.getElementById('mainSearchInput');
+            if (input) {
+                searchQuery = input.value;
+                renderProducts();
+            }
+        }
+
+        function resetAllFilters() {
+            searchQuery = '';
+            currentCategory = 'all';
+            const input = document.getElementById('mainSearchInput');
+            if (input) input.value = '';
+            filterByCategory('all');
+        }
+
+        function handleSortChange(val) {
+            currentSort = val;
+            renderProducts();
+        }
+
+        function toggleSidebarGroup(groupId) {
+            const group = document.getElementById(groupId);
+            const icon = document.getElementById(`icon-${groupId}`);
+            if (group) {
+                group.classList.toggle('hidden');
+                if (icon) icon.classList.toggle('rotate-180');
+            }
+        }
+
+        function saveTabTarget(tab) {
+            try {
+                localStorage.setItem('muvio_target_tab', tab);
+            } catch (e) {}
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('ecomToast');
+            const toastMsg = document.getElementById('toastMessage');
+            if (toast && toastMsg) {
+                toastMsg.textContent = msg;
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 2400);
+            }
+        }
+
+        function toggleAuthTheme() {
+            const isDark = document.documentElement.classList.contains('dark') ||
+                document.documentElement.classList.contains('theme-dark') ||
+                document.documentElement.getAttribute('data-theme') === 'dark';
+            const nextTheme = isDark ? 'light' : 'dark';
+
+            if (nextTheme === 'dark') {
+                document.documentElement.classList.add('dark', 'theme-dark');
+                document.documentElement.setAttribute('data-theme', 'dark');
+            } else {
+                document.documentElement.classList.remove('dark', 'theme-dark');
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+
+            try {
+                localStorage.setItem('muvio_theme', nextTheme);
+                const s = localStorage.getItem('muvio_site_settings');
+                const settings = s ? JSON.parse(s) : {};
+                settings.theme = nextTheme;
+                localStorage.setItem('muvio_site_settings', JSON.stringify(settings));
+            } catch (e) {}
+        }
+
+        // Ініціалізація сторінки
+        document.addEventListener('DOMContentLoaded', () => {
+            updateHeaderBadges();
+            renderProducts();
+            if (window.lucide) window.lucide.createIcons();
         });
     </script>
-    <!-- MUVIO Theme & Settings Module -->
-    <script src="./theme-settings.js?v=3.0"></script>
 </body>
 
 </html>
