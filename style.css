@@ -963,24 +963,47 @@ html.theme-dark .sun-icon,
     background: none !important;
 }
 
-#hero-section h1 {
-    color: var(--text-main) !important;
+/* ==================== HERO SECTION STRICT WHITE TEXT & STYLES ==================== */
+#hero-section,
+.hero-section {
+    color: #FFFFFF !important;
 }
 
-#hero-section p {
-    color: var(--text-muted) !important;
+#hero-section h1,
+#hero-section h1 *,
+.hero-section h1,
+.hero-section h1 *,
+#hero-section .hero-text-content h1,
+#hero-section .hero-text-content h1 * {
+    color: #FFFFFF !important;
+    text-shadow: 0 4px 16px rgba(0, 0, 0, 0.8) !important;
+    filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.8)) !important;
 }
 
-/* Light theme: transparent background, slate-300 border, dark-slate text */
+#hero-section p,
+#hero-section p *,
+.hero-section p,
+.hero-section p *,
+#hero-section .hero-subtitle,
+#hero-section .hero-subtitle *,
+#hero-section .hero-text-content p,
+#hero-section .hero-text-content p * {
+    color: #E2E8F0 !important;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8) !important;
+}
+
 #hero-section .hero-calc-btn {
-    border-color: #CBD5E1 !important;
-    color: #0F172A !important;
-    background-color: transparent !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    color: #FFFFFF !important;
+    background-color: rgba(0, 0, 0, 0.4) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
 }
 
 #hero-section .hero-calc-btn:hover {
-    border-color: #1D5D3B !important;
-    color: #1D5D3B !important;
+    border-color: rgba(255, 255, 255, 0.4) !important;
+    color: #FFFFFF !important;
+    background-color: rgba(0, 0, 0, 0.6) !important;
 }
 
 /* ==========================================================================
@@ -1405,40 +1428,40 @@ img.promo-scooter-img,
 /* ==========================================================================
    1. STRICT LIGHT MODE HIGH CONTRAST TYPOGRAPHY & CATALOG ENGINE
    ========================================================================== */
-html:not(.dark) h1,
-html:not(.dark) h2,
-html:not(.dark) h3,
+html:not(.dark) section:not(#hero-section):not(.hero) h1,
+html:not(.dark) h2:not(#hero-section *),
+html:not(.dark) h3:not(#hero-section *),
 html:not(.dark) .catalog-title,
 html:not(.dark) .section-title,
-body:not(.dark) h1,
-body:not(.dark) h2,
-body:not(.dark) h3,
+body:not(.dark) section:not(#hero-section):not(.hero) h1,
+body:not(.dark) h2:not(#hero-section *),
+body:not(.dark) h3:not(#hero-section *),
 body:not(.dark) .catalog-title,
 body:not(.dark) .section-title,
-html:not(.theme-dark) h1,
-html:not(.theme-dark) h2,
-html:not(.theme-dark) h3,
+html:not(.theme-dark) section:not(#hero-section):not(.hero) h1,
+html:not(.theme-dark) h2:not(#hero-section *),
+html:not(.theme-dark) h3:not(#hero-section *),
 html:not(.theme-dark) .catalog-title,
 html:not(.theme-dark) .section-title,
-[data-theme="light"] h1,
-[data-theme="light"] h2,
-[data-theme="light"] h3,
+[data-theme="light"] section:not(#hero-section):not(.hero) h1,
+[data-theme="light"] h2:not(#hero-section *),
+[data-theme="light"] h3:not(#hero-section *),
 [data-theme="light"] .catalog-title,
 [data-theme="light"] .section-title {
     color: #0F172A !important; /* Глубокий темный цвет */
 }
 
 html:not(.dark) .catalog-subtitle,
-html:not(.dark) p,
+html:not(.dark) p:not(#hero-section *):not(.hero *),
 html:not(.dark) .section-desc,
 body:not(.dark) .catalog-subtitle,
-body:not(.dark) p,
+body:not(.dark) p:not(#hero-section *):not(.hero *),
 body:not(.dark) .section-desc,
 html:not(.theme-dark) .catalog-subtitle,
-html:not(.theme-dark) p,
+html:not(.theme-dark) p:not(#hero-section *):not(.hero *),
 html:not(.theme-dark) .section-desc,
 [data-theme="light"] .catalog-subtitle,
-[data-theme="light"] p,
+[data-theme="light"] p:not(#hero-section *):not(.hero *),
 [data-theme="light"] .section-desc {
     color: #475569 !important; /* Четкий темно-серый читаемый цвет */
 }
@@ -3422,19 +3445,55 @@ html.dark .tier2-action-btn {
     background-color: #169B60 !important;
 }
 
-.tier2-badge {
-    background-color: #0F172A;
-    color: #FFFFFF !important;
-    font-size: 10px;
-    font-weight: 800;
-    font-family: monospace;
-    padding: 1px 5px;
-    border-radius: 2px;
+.clean-icon-action-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
+    width: 36px !important;
+    height: 36px !important;
+    border: 1px solid #CBD5E1 !important;
+    border-radius: 4px !important;
+    background-color: #FFFFFF !important;
+    color: #334155 !important;
+    transition: all 0.15s ease !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+    flex-shrink: 0 !important;
 }
 
-.tier2-cart-btn .tier2-badge {
-    background-color: #FFFFFF;
-    color: #0F172A !important;
+.clean-icon-action-btn:hover {
+    border-color: #10B981 !important;
+    color: #10B981 !important;
+}
+
+html.dark .clean-icon-action-btn {
+    background-color: #111418 !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    color: #CBD5E1 !important;
+}
+
+html.dark .clean-icon-action-btn:hover {
+    border-color: #10B981 !important;
+    color: #10B981 !important;
+}
+
+.action-count-pill {
+    position: absolute !important;
+    top: -5px !important;
+    right: -5px !important;
+    min-width: 16px !important;
+    height: 16px !important;
+    padding: 0 4px !important;
+    background-color: #10B981 !important;
+    color: #FFFFFF !important;
+    font-size: 10px !important;
+    font-weight: 800 !important;
+    font-family: monospace !important;
+    line-height: 16px !important;
+    text-align: center !important;
+    border-radius: 9999px !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) !important;
 }
 
 

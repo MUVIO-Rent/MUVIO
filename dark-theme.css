@@ -1383,19 +1383,19 @@ html.theme-dark #hero::after {
 
 html.theme-dark #hero-section h1,
 body.dark #hero-section h1 {
-    color: var(--text-main) !important;
+    color: #FFFFFF !important;
 }
 
 html.theme-dark #hero-section p,
 body.dark #hero-section p {
-    color: var(--text-muted) !important;
+    color: #E2E8F0 !important;
 }
 
 html.theme-dark #hero-section .hero-calc-btn,
 body.dark #hero-section .hero-calc-btn {
-    border-color: #3F3F46 !important;
-    color: #E4E4E7 !important;
-    background-color: rgba(24, 24, 27, 0.5) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    color: #FFFFFF !important;
+    background-color: rgba(0, 0, 0, 0.4) !important;
 }
 
 html.theme-dark #hero-section .hero-calc-btn:hover,
