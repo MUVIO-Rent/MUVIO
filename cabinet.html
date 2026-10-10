@@ -271,6 +271,83 @@
         .order-highlight {
             animation: highlightPulse 2.5s ease-out;
         }
+
+        /* ==================== УЛЬТИМАТИВНИЙ ЗАХИСТ ВІД БІЛОГО ТЕКСТУ ТА СТИЛІ КРЕСТИКА ==================== */
+        .modal-close-btn {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            line-height: 1;
+            color: #0F172A;
+            background: transparent;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            z-index: 100;
+            transition: background-color 0.15s ease, color 0.15s ease;
+        }
+
+        .modal-close-btn:hover {
+            background-color: rgba(15, 23, 42, 0.08);
+        }
+
+        html.dark .modal-close-btn,
+        body.dark .modal-close-btn,
+        .dark .modal-close-btn {
+            color: #FFFFFF !important;
+        }
+
+        html.dark .modal-close-btn:hover,
+        body.dark .modal-close-btn:hover,
+        .dark .modal-close-btn:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        html:not(.dark) body,
+        html:not(.dark) h1, html:not(.dark) h2, html:not(.dark) h3, html:not(.dark) h4, html:not(.dark) h5, html:not(.dark) h6,
+        html:not(.dark) p,
+        html:not(.dark) span:not(.muvio-btn-primary):not([class*="bg-[#1AB370]"]):not([class*="bg-[#229ED9]"]):not([class*="bg-[#1D5D3B]"]):not([class*="bg-emerald"]):not([class*="bg-blue"]):not([class*="bg-amber"]):not([class*="bg-zinc-800"]):not(.text-white-force),
+        html:not(.dark) a:not(.btn-primary):not([class*="bg-[#1AB370]"]):not([class*="bg-[#229ED9]"]):not([class*="bg-[#1D5D3B]"]):not([class*="bg-[#169B60]"]),
+        html:not(.dark) div:not([class*="bg-[#1AB370]"]):not([class*="bg-[#229ED9]"]):not([class*="bg-[#1D5D3B]"]):not([class*="bg-[#169B60]"]):not(#userAvatar),
+        html:not(.dark) label, html:not(.dark) li,
+        html:not(.dark) .tab-content, html:not(.dark) .order-item, html:not(.dark) .cabinet-card {
+            color: #0F172A !important;
+        }
+
+        html:not(.dark) .text-muted, html:not(.dark) .section-desc, html:not(.dark) p.desc {
+            color: #475569 !important;
+        }
+
+        html:not(.dark) input, html:not(.dark) select, html:not(.dark) textarea {
+            color: #0F172A !important;
+            background-color: #FFFFFF !important;
+        }
+
+        html:not(.dark) button.bg-\[\#1AB370\],
+        html:not(.dark) button.bg-\[\#1AB370\] *,
+        html:not(.dark) a.bg-\[\#1AB370\],
+        html:not(.dark) a.bg-\[\#1AB370\] *,
+        html:not(.dark) button.bg-\[\#229ED9\],
+        html:not(.dark) button.bg-\[\#229ED9\] *,
+        html:not(.dark) a.bg-\[\#229ED9\],
+        html:not(.dark) a.bg-\[\#229ED9\] *,
+        html:not(.dark) button.bg-\[\#1D5D3B\],
+        html:not(.dark) button.bg-\[\#1D5D3B\] *,
+        html:not(.dark) a.bg-\[\#1D5D3B\],
+        html:not(.dark) a.bg-\[\#1D5D3B\] *,
+        html:not(.dark) #userAvatar,
+        html:not(.dark) #ordersCountBadge,
+        html:not(.dark) #cartCount,
+        html:not(.dark) #wishlistCount {
+            color: #FFFFFF !important;
+        }
     </style>
 
     <script>
@@ -904,126 +981,138 @@
 
     <!-- ==================== 3. ЧЕСНЕ МОДАЛЬНЕ ВІКНО ОФОРМЛЕННЯ (CHECKOUT) ==================== -->
     <div id="checkoutModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto hidden">
-        <div class="ecom-card bg-white dark:bg-[#111418] border border-zinc-300 dark:border-white/10 shadow-xl max-w-xl w-full my-8 overflow-hidden" style="border-radius: 4px;">
+        <div class="ecom-card bg-white dark:bg-[#111418] border border-zinc-300 dark:border-white/10 shadow-xl max-w-xl w-full my-8 overflow-hidden relative" style="border-radius: 4px;">
+            <!-- Фізичний крестик закриття модалки -->
+            <button class="modal-close-btn" type="button" aria-label="Закрити" onclick="closeCheckoutModal()">&times;</button>
+
             <!-- Шапка модального вікна (Строгий стиль) -->
-            <div class="p-4 sm:p-5 border-b border-zinc-200 dark:border-white/10 flex items-center justify-between">
-                <div>
-                    <h3 class="font-bold text-base text-zinc-900 dark:text-white uppercase tracking-wider">
-                        Оформлення замовлення
-                    </h3>
-                    <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">
-                        Доставка Новою Поштою по всій Україні
-                    </p>
-                </div>
-                <button type="button" onclick="closeCheckoutModal()" class="text-zinc-400 hover:text-zinc-700 dark:hover:text-white p-1 transition-colors" aria-label="Закрити">
-                    <i data-lucide="x" class="w-5 h-5"></i>
-                </button>
+            <div class="p-4 sm:p-5 border-b border-zinc-200 dark:border-white/10 pr-12">
+                <h3 class="font-bold text-base text-zinc-900 dark:text-white uppercase tracking-wider">
+                    Оформлення замовлення
+                </h3>
+                <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">
+                    Офіційне API Нової Пошти • Швидка доставка по всій Україні
+                </p>
             </div>
 
             <!-- Форма чекаута -->
             <form onsubmit="handleCheckoutSubmit(event)" class="p-4 sm:p-5 space-y-5">
-                <!-- 1. Контактні дані -->
+                <!-- БЛОК 1: ДАНІ ОТРИМУВАЧА -->
                 <div class="space-y-3">
-                    <span class="text-xs font-mono font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 block border-b border-zinc-100 dark:border-white/5 pb-1">
-                        1. Контактні дані
+                    <span class="text-xs font-mono font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 block border-b border-zinc-200 dark:border-white/10 pb-1">
+                        БЛОК 1: ДАНІ ОТРИМУВАЧА
                     </span>
-
-                    <div>
-                        <label for="checkoutFullName" class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1">
-                            Прізвище, Ім'я, По батькові <span class="text-rose-500">*</span>
-                        </label>
-                        <input type="text" id="checkoutFullName" required placeholder="Шевченко Олександр Іванович" class="ecom-input w-full">
-                    </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
-                            <label for="checkoutPhone" class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1">
+                            <label for="checkoutFullName" class="block text-xs font-semibold text-zinc-900 dark:text-zinc-200 mb-1">
+                                Прізвище та Ім'я <span class="text-rose-500">*</span>
+                            </label>
+                            <input type="text" id="checkoutFullName" required placeholder="Шевченко Олександр" class="ecom-input w-full">
+                        </div>
+                        <div>
+                            <label for="checkoutPhone" class="block text-xs font-semibold text-zinc-900 dark:text-zinc-200 mb-1">
                                 Номер телефону (+380...) <span class="text-rose-500">*</span>
                             </label>
                             <input type="tel" id="checkoutPhone" required placeholder="+380 (99) 000-00-00" class="ecom-input w-full font-mono">
                         </div>
-                        <div class="relative" id="cityAutocompleteWrapper">
-                            <label for="checkoutCity" class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1">
-                                Населений пункт / Місто <span class="text-rose-500">*</span>
-                            </label>
-                            <div class="relative">
-                                <input type="text" id="checkoutCity" required autocomplete="off" placeholder="Введіть місто (від 2 літер, напр. Київ)" class="ecom-input w-full pr-8">
-                                <div id="checkoutCitySpinner" class="absolute right-2.5 top-1/2 -translate-y-1/2 hidden pointer-events-none">
-                                    <svg class="animate-spin h-3.5 w-3.5 text-[#1AB370]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
-                                    </svg>
-                                </div>
-                            </div>
-                            <!-- Випадаючий список міст Нової Пошти -->
-                            <div id="checkoutCityDropdown" class="absolute left-0 right-0 top-full mt-1 bg-white dark:bg-[#181C22] border border-zinc-300 dark:border-white/10 shadow-2xl z-50 max-h-56 overflow-y-auto hidden" style="border-radius: 2px;">
-                            </div>
-                        </div>
                     </div>
                 </div>
 
-                <!-- 2. Спосіб доставки Нова Пошта -->
-                <div class="space-y-3">
-                    <span class="text-xs font-mono font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 block border-b border-zinc-100 dark:border-white/5 pb-1">
-                        2. Спосіб доставки (Нова Пошта)
+                <!-- БЛОК 2: ДОСТАВКА НОВОЮ ПОШТОЮ (ВИДІЛЕНИЙ БЛОК) -->
+                <div class="space-y-4 p-4 bg-slate-50 dark:bg-[#151A20] border-2 border-slate-300 dark:border-white/15" style="border-radius: 4px;">
+                    <span class="text-xs font-mono font-bold uppercase tracking-wider text-emerald-700 dark:text-[#1AB370] block border-b border-slate-200 dark:border-white/10 pb-1 flex items-center justify-between">
+                        <span>БЛОК 2: ДОСТАВКА НОВОЮ ПОШТОЮ</span>
+                        <span class="text-[10px] font-normal text-zinc-500 font-sans">Офіційне API</span>
                     </span>
 
-                    <div class="space-y-2">
-                        <div>
-                            <input type="radio" id="deliveryBranch" name="checkoutDeliveryType" value="Нова Пошта (Відділення)" checked class="choice-radio-input hidden">
-                            <label for="deliveryBranch" class="choice-radio-label">
-                                <div class="mt-0.5 w-3.5 h-3.5 border border-zinc-400 flex items-center justify-center shrink-0" style="border-radius: 2px;">
-                                    <div class="w-2 h-2 bg-[#1AB370]"></div>
-                                </div>
-                                <div class="flex-1">
-                                    <span class="font-bold text-xs text-zinc-900 dark:text-white">Нова Пошта (Відділення)</span>
-                                </div>
-                            </label>
+                    <!-- Поле №1 (САМЕ ПЕРШЕ І ЗАМЕТНЕ): Місто / Населений пункт -->
+                    <div class="relative w-full" id="cityAutocompleteWrapper">
+                        <label for="checkoutCity" class="block text-sm font-bold text-zinc-900 dark:text-white mb-1.5 flex items-center justify-between">
+                            <span>1. Введіть ваше місто <span class="text-rose-500">*</span></span>
+                            <span class="text-[11px] font-normal text-zinc-500 font-sans">Пошук по базі НП від 2 літер</span>
+                        </label>
+                        <div class="relative">
+                            <input type="text" id="checkoutCity" required autocomplete="off" placeholder="Почніть вводити назву міста (напр. Київ, Одеса, Львів)..." 
+                                class="ecom-input w-full pr-10 text-sm font-semibold border-2 border-[#CBD5E1] dark:border-zinc-600 focus:border-[#1AB370] dark:focus:border-[#1AB370] py-2.5 px-3 bg-white dark:bg-[#1A1F26] text-zinc-900 dark:text-white"
+                                style="border: 2px solid #CBD5E1;">
+                            <div id="checkoutCitySpinner" class="absolute right-3 top-1/2 -translate-y-1/2 hidden pointer-events-none">
+                                <svg class="animate-spin h-4 w-4 text-[#1AB370]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                                </svg>
+                            </div>
                         </div>
-
-                        <div>
-                            <input type="radio" id="deliveryPostomate" name="checkoutDeliveryType" value="Нова Пошта (Поштомат)" class="choice-radio-input hidden">
-                            <label for="deliveryPostomate" class="choice-radio-label">
-                                <div class="mt-0.5 w-3.5 h-3.5 border border-zinc-400 flex items-center justify-center shrink-0" style="border-radius: 2px;">
-                                    <div class="w-2 h-2 bg-transparent"></div>
-                                </div>
-                                <div class="flex-1">
-                                    <span class="font-bold text-xs text-zinc-900 dark:text-white">Нова Пошта (Поштомат)</span>
-                                </div>
-                            </label>
-                        </div>
-
-                        <div>
-                            <input type="radio" id="deliveryCourier" name="checkoutDeliveryType" value="Кур'єрська доставка Нової Пошти" class="choice-radio-input hidden">
-                            <label for="deliveryCourier" class="choice-radio-label">
-                                <div class="mt-0.5 w-3.5 h-3.5 border border-zinc-400 flex items-center justify-center shrink-0" style="border-radius: 2px;">
-                                    <div class="w-2 h-2 bg-transparent"></div>
-                                </div>
-                                <div class="flex-1">
-                                    <span class="font-bold text-xs text-zinc-900 dark:text-white">Кур'єрська доставка Нової Пошти</span>
-                                </div>
-                            </label>
+                        <!-- Випадаючий список міст Нової Пошти -->
+                        <div id="checkoutCityDropdown" class="absolute left-0 right-0 top-full mt-1 bg-white dark:bg-[#181C22] border-2 border-slate-300 dark:border-zinc-700 shadow-2xl z-50 max-h-56 overflow-y-auto hidden" style="border-radius: 3px;">
                         </div>
                     </div>
 
-                    <!-- Вибір відділення / поштомату / адреси з живим Nova Poshta API -->
+                    <!-- Поле №2: Оберіть тип доставки -->
+                    <div class="space-y-2 pt-1">
+                        <label class="block text-xs font-bold text-zinc-900 dark:text-zinc-200 uppercase tracking-wider">
+                            2. Оберіть тип доставки
+                        </label>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                            <div>
+                                <input type="radio" id="deliveryBranch" name="checkoutDeliveryType" value="Нова Пошта (Відділення)" checked class="choice-radio-input hidden">
+                                <label for="deliveryBranch" class="choice-radio-label h-full">
+                                    <div class="mt-0.5 w-3.5 h-3.5 border border-zinc-400 flex items-center justify-center shrink-0" style="border-radius: 2px;">
+                                        <div class="w-2 h-2 bg-[#1AB370]"></div>
+                                    </div>
+                                    <div class="flex-1">
+                                        <span class="font-bold text-xs text-zinc-900 dark:text-white block">Відділення</span>
+                                        <span class="text-[10px] text-zinc-500">До 30 / 1100 кг</span>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div>
+                                <input type="radio" id="deliveryPostomate" name="checkoutDeliveryType" value="Нова Пошта (Поштомат)" class="choice-radio-input hidden">
+                                <label for="deliveryPostomate" class="choice-radio-label h-full">
+                                    <div class="mt-0.5 w-3.5 h-3.5 border border-zinc-400 flex items-center justify-center shrink-0" style="border-radius: 2px;">
+                                        <div class="w-2 h-2 bg-transparent"></div>
+                                    </div>
+                                    <div class="flex-1">
+                                        <span class="font-bold text-xs text-zinc-900 dark:text-white block">Поштомат</span>
+                                        <span class="text-[10px] text-zinc-500">24/7 видача</span>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div>
+                                <input type="radio" id="deliveryCourier" name="checkoutDeliveryType" value="Кур'єрська доставка Нової Пошти" class="choice-radio-input hidden">
+                                <label for="deliveryCourier" class="choice-radio-label h-full">
+                                    <div class="mt-0.5 w-3.5 h-3.5 border border-zinc-400 flex items-center justify-center shrink-0" style="border-radius: 2px;">
+                                        <div class="w-2 h-2 bg-transparent"></div>
+                                    </div>
+                                    <div class="flex-1">
+                                        <span class="font-bold text-xs text-zinc-900 dark:text-white block">Кур'єр</span>
+                                        <span class="text-[10px] text-zinc-500">До дверей</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Поле №3: Оберіть номер відділення або поштомату -->
                     <div id="checkoutWarehouseSection" class="space-y-1.5 pt-1">
                         <div class="flex items-center justify-between">
-                            <label id="checkoutWarehouseLabel" for="checkoutWarehouseSelect" class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300">
-                                Відділення Нової Пошти <span class="text-rose-500">*</span>
+                            <label id="checkoutWarehouseLabel" for="checkoutWarehouseSelect" class="block text-xs font-bold text-zinc-900 dark:text-zinc-200 uppercase tracking-wider">
+                                3. Оберіть номер відділення або поштомату <span class="text-rose-500">*</span>
                             </label>
-                            <button type="button" id="toggleManualWarehouseBtn" onclick="toggleManualWarehouseMode()" class="text-[11px] text-[#1AB370] hover:underline font-medium">
+                            <button type="button" id="toggleManualWarehouseBtn" onclick="toggleManualWarehouseMode()" class="text-[11px] text-[#1AB370] hover:underline font-semibold">
                                 Ввести вручну
                             </button>
                         </div>
 
                         <!-- Випадаючий список з API -->
                         <div id="checkoutWarehouseSelectWrapper" class="relative">
-                            <select id="checkoutWarehouseSelect" class="ecom-input w-full pr-8 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed">
-                                <option value="" disabled selected>Спочатку оберіть місто вище...</option>
+                            <select id="checkoutWarehouseSelect" class="ecom-input w-full pr-8 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed border-2 border-slate-300 dark:border-zinc-600 py-2.5 px-3 bg-white dark:bg-[#1A1F26] text-sm text-zinc-900 dark:text-white">
+                                <option value="" disabled selected>Спочатку введіть місто у полі №1 вище...</option>
                             </select>
                             <div id="checkoutWarehouseSpinner" class="absolute right-3 top-1/2 -translate-y-1/2 hidden pointer-events-none">
-                                <svg class="animate-spin h-3.5 w-3.5 text-[#1AB370]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <svg class="animate-spin h-4 w-4 text-[#1AB370]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                                     <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
                                 </svg>
@@ -1032,16 +1121,16 @@
 
                         <!-- Ручне поле введення (для кур'єра або якщо API офлайн) -->
                         <div id="checkoutManualAddressWrapper" class="hidden">
-                            <input type="text" id="checkoutAddress" placeholder="Номер відділення або адреса" class="ecom-input w-full">
-                            <p id="checkoutManualHint" class="text-[11px] text-zinc-500 mt-1">Введіть номер відділення або адресу доставки вручну.</p>
+                            <input type="text" id="checkoutAddress" placeholder="Введіть номер відділення або адресу" class="ecom-input w-full border-2 border-slate-300 dark:border-zinc-600 py-2.5 px-3 bg-white dark:bg-[#1A1F26] text-sm text-zinc-900 dark:text-white">
+                            <p id="checkoutManualHint" class="text-[11px] text-zinc-500 mt-1">Введіть номер відділення або адресу вручну.</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- 3. Спосіб оплати (Чесний вибір) -->
+                <!-- БЛОК 3: СПОСІБ ОПЛАТИ (ЧЕСНИЙ ВИБІР) -->
                 <div class="space-y-3">
-                    <span class="text-xs font-mono font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 block border-b border-zinc-100 dark:border-white/5 pb-1">
-                        3. Спосіб оплати
+                    <span class="text-xs font-mono font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 block border-b border-zinc-200 dark:border-white/10 pb-1">
+                        БЛОК 3: СПОСІБ ОПЛАТИ
                     </span>
 
                     <div class="space-y-2">
@@ -1103,13 +1192,14 @@
         </div>
     </div>
 
-
-
     <!-- ==================== 4. МОДАЛЬНЕ ВІКНО ПІДТВЕРДЖЕННЯ (СТРОГИЙ BRUTALIST ДИЗАЙН) ==================== -->
     <div id="orderSuccessModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto hidden">
-        <div class="ecom-card bg-white dark:bg-[#111418] border border-zinc-300 dark:border-white/10 shadow-xl max-w-lg w-full p-5 sm:p-6 space-y-5 my-8 text-left" style="border-radius: 4px;">
-            <!-- Строгий заголовок без гігантських круглих плашок -->
-            <div class="border-b border-zinc-200 dark:border-white/10 pb-4">
+        <div class="ecom-card bg-white dark:bg-[#111418] border border-zinc-300 dark:border-white/10 shadow-xl max-w-lg w-full p-5 sm:p-6 space-y-5 my-8 text-left relative" style="border-radius: 4px;">
+            <!-- Фізичний крестик закриття модалки -->
+            <button class="modal-close-btn" type="button" aria-label="Закрити" onclick="closeSuccessModal()">&times;</button>
+
+            <!-- Строгий заголовок -->
+            <div class="border-b border-zinc-200 dark:border-white/10 pb-4 pr-10">
                 <span class="inline-block px-2 py-0.5 text-[11px] font-mono font-bold uppercase tracking-wider bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800/80 mb-2" style="border-radius: 2px;">
                     ЗАМОВЛЕННЯ ПРИЙНЯТО
                 </span>
@@ -1854,6 +1944,7 @@
             const modal = document.getElementById('checkoutModal');
             if (modal) {
                 modal.classList.remove('hidden');
+                modal.style.display = 'flex';
                 document.body.style.overflow = 'hidden';
             }
             if (window.lucide) window.lucide.createIcons();
@@ -1863,6 +1954,7 @@
             const modal = document.getElementById('checkoutModal');
             if (modal) {
                 modal.classList.add('hidden');
+                modal.style.display = 'none';
                 document.body.style.overflow = '';
             }
             const dropdown = document.getElementById('checkoutCityDropdown');
@@ -1987,6 +2079,7 @@
 
             if (successModal) {
                 successModal.classList.remove('hidden');
+                successModal.style.display = 'flex';
                 document.body.style.overflow = 'hidden';
             }
 
@@ -1997,6 +2090,7 @@
             const modal = document.getElementById('orderSuccessModal');
             if (modal) {
                 modal.classList.add('hidden');
+                modal.style.display = 'none';
                 document.body.style.overflow = '';
             }
         }
@@ -2145,6 +2239,37 @@
                 if (e.target.name === 'checkoutDeliveryType') {
                     handleDeliveryTypeChange();
                 }
+            }
+        });
+
+        // ==================== ЗАКРИТТЯ МОДАЛЬНИХ ОКОН (КРЕСТИК, BACKDROP, ESCAPE) ====================
+        document.addEventListener('click', (e) => {
+            const closeBtn = e.target.closest('.modal-close-btn');
+            if (closeBtn) {
+                closeCheckoutModal();
+                closeSuccessModal();
+                const parentModal = closeBtn.closest('#checkoutModal, #orderSuccessModal, [id*="Modal"]');
+                if (parentModal) {
+                    parentModal.classList.add('hidden');
+                    parentModal.style.display = 'none';
+                    document.body.style.overflow = '';
+                }
+                return;
+            }
+
+            // Клік по темному фону (backdrop / overlay)
+            if (e.target && e.target.id === 'checkoutModal') {
+                closeCheckoutModal();
+            }
+            if (e.target && e.target.id === 'orderSuccessModal') {
+                closeSuccessModal();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' || e.keyCode === 27) {
+                closeCheckoutModal();
+                closeSuccessModal();
             }
         });
 

@@ -391,7 +391,8 @@
 
     <!-- ==================== МОДАЛЬНЕ ВІКНО ПІДТВЕРДЖЕННЯ ==================== -->
     <div id="leadSuccessModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white border-2 border-[#1D5D3B] max-w-lg w-full p-8 chamfer-box text-center space-y-6 shadow-2xl">
+        <div class="bg-white border-2 border-[#1D5D3B] max-w-lg w-full p-8 chamfer-box text-center space-y-6 shadow-2xl relative">
+            <button class="modal-close-btn" type="button" aria-label="Закрити" onclick="closeSuccessModal()">&times;</button>
             <div class="w-16 h-16 bg-[#1D5D3B]/10 border-2 border-[#1D5D3B] mx-auto flex items-center justify-center chamfer-badge text-[#1D5D3B]">
                 <i data-lucide="check" class="w-8 h-8"></i>
             </div>
@@ -524,6 +525,18 @@
             const modal = document.getElementById('leadSuccessModal');
             if (modal) modal.classList.add('hidden');
         }
+
+        document.addEventListener('click', (e) => {
+            if (e.target && e.target.id === 'leadSuccessModal') {
+                closeSuccessModal();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' || e.keyCode === 27) {
+                closeSuccessModal();
+            }
+        });
 
         document.addEventListener('DOMContentLoaded', () => {
             if (window.lucide) window.lucide.createIcons();

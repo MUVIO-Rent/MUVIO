@@ -3077,30 +3077,84 @@ body.dark .hero-crosser-badge,
    STRICT LIGHT MODE: NO WHITE TEXT IN LIGHT THEME
    ========================================================================== */
 html:not(.dark) h1,
-html:not(.dark) h2,
-html:not(.dark) h3,
-html:not(.dark) h4,
-html:not(.dark) h5,
-html:not(.dark) h6,
-html:not(.dark) .catalog-title,
-html:not(.dark) .page-title,
-html:not(.dark) .section-title,
-body:not(.dark) h1,
-body:not(.dark) h2,
-body:not(.dark) h3,
-body:not(.dark) h4,
-body:not(.dark) h5,
-body:not(.dark) h6,
-body:not(.dark) .catalog-title,
-body:not(.dark) .page-title,
-body:not(.dark) .section-title {
+/* ==========================================================================
+   ULTIMATE LIGHT THEME TEXT CONTRAST & MODAL CLOSE BUTTON STYLES
+   ========================================================================== */
+.modal-close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 1;
+    color: #0F172A;
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    z-index: 100;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.modal-close-btn:hover {
+    background-color: rgba(15, 23, 42, 0.08);
+}
+
+html.dark .modal-close-btn,
+body.dark .modal-close-btn,
+.dark .modal-close-btn {
+    color: #FFFFFF !important;
+}
+
+html.dark .modal-close-btn:hover,
+body.dark .modal-close-btn:hover,
+.dark .modal-close-btn:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* ТОТАЛЬНИЙ ЗАХИСТ ВІД БІЛОГО ТЕКСТУ В СВІТЛІЙ ТЕМІ */
+html:not(.dark) body,
+html:not(.dark) h1, html:not(.dark) h2, html:not(.dark) h3, html:not(.dark) h4, html:not(.dark) h5, html:not(.dark) h6,
+html:not(.dark) p,
+html:not(.dark) span:not(.muvio-btn-primary):not([class*="bg-[#1AB370]"]):not([class*="bg-[#229ED9]"]):not([class*="bg-[#1D5D3B]"]):not([class*="bg-emerald"]):not([class*="bg-blue"]):not([class*="bg-amber"]):not([class*="bg-zinc-800"]):not(.text-white-force),
+html:not(.dark) a:not(.btn-primary):not([class*="bg-[#1AB370]"]):not([class*="bg-[#229ED9]"]):not([class*="bg-[#1D5D3B]"]):not([class*="bg-[#169B60]"]),
+html:not(.dark) div:not([class*="bg-[#1AB370]"]):not([class*="bg-[#229ED9]"]):not([class*="bg-[#1D5D3B]"]):not([class*="bg-[#169B60]"]):not(#userAvatar),
+html:not(.dark) label, html:not(.dark) li,
+html:not(.dark) .tab-content, html:not(.dark) .order-item, html:not(.dark) .cabinet-card {
     color: #0F172A !important;
 }
 
-html:not(.dark) p,
-html:not(.dark) .section-desc,
-body:not(.dark) p,
-body:not(.dark) .section-desc {
-    color: #334155 !important;
+html:not(.dark) .text-muted, html:not(.dark) .section-desc, html:not(.dark) p.desc {
+    color: #475569 !important;
+}
+
+html:not(.dark) input, html:not(.dark) select, html:not(.dark) textarea {
+    color: #0F172A !important;
+    background-color: #FFFFFF !important;
+}
+
+/* Збереження білого тексту на кольорових кнопках та бейджах у світлій темі */
+html:not(.dark) button.bg-\[\#1AB370\],
+html:not(.dark) button.bg-\[\#1AB370\] *,
+html:not(.dark) a.bg-\[\#1AB370\],
+html:not(.dark) a.bg-\[\#1AB370\] *,
+html:not(.dark) button.bg-\[\#229ED9\],
+html:not(.dark) button.bg-\[\#229ED9\] *,
+html:not(.dark) a.bg-\[\#229ED9\],
+html:not(.dark) a.bg-\[\#229ED9\] *,
+html:not(.dark) button.bg-\[\#1D5D3B\],
+html:not(.dark) button.bg-\[\#1D5D3B\] *,
+html:not(.dark) a.bg-\[\#1D5D3B\],
+html:not(.dark) a.bg-\[\#1D5D3B\] *,
+html:not(.dark) #userAvatar,
+html:not(.dark) #ordersCountBadge,
+html:not(.dark) #cartCount,
+html:not(.dark) #wishlistCount {
+    color: #FFFFFF !important;
 }
 

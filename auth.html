@@ -538,9 +538,7 @@
     <!-- ==================== МОДАЛЬНЕ ВІКНО: ВІДНОВЛЕННЯ ПАРОЛЮ ==================== -->
     <div id="resetPasswordModal" class="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
         <div class="bg-white dark:bg-[#0B0E11] border border-zinc-200 dark:border-white/10 rounded-2xl p-6 sm:p-8 shadow-2xl max-w-[400px] w-full space-y-5 relative">
-            <button type="button" onclick="closeResetPasswordModal()" class="absolute top-5 right-5 text-zinc-400 hover:text-zinc-800 dark:hover:text-white transition-colors p-1" aria-label="Закрити">
-                <i data-lucide="x" class="w-5 h-5"></i>
-            </button>
+            <button class="modal-close-btn" type="button" aria-label="Закрити" onclick="closeResetPasswordModal()">&times;</button>
 
             <div>
                 <h3 class="font-extrabold text-2xl text-zinc-900 dark:text-white tracking-tight">
@@ -874,6 +872,18 @@
                 if (errBox) errBox.classList.add('hidden');
             }
         }
+
+        document.addEventListener('click', (e) => {
+            if (e.target && e.target.id === 'resetPasswordModal') {
+                closeResetPasswordModal();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' || e.keyCode === 27) {
+                closeResetPasswordModal();
+            }
+        });
 
         function handleSendResetEmail(e) {
             if (e && e.preventDefault) e.preventDefault();
