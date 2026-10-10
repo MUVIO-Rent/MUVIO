@@ -422,9 +422,9 @@ header:not(.header-3tier),
 }
 
 @media (max-width: 640px) {
-    header,
-    .site-header-synced,
-    .header,
+    header:not(.header-3tier),
+    .site-header-synced:not(.header-3tier),
+    .header:not(.header-3tier),
     .header-container {
         padding-left: 16px !important;
         padding-right: 16px !important;
@@ -432,7 +432,7 @@ header:not(.header-3tier),
 }
 
 /* ==================== НАВИГАЦИОННОЕ МЕНЮ (СТРОГО ПО ЦЕНТРУ ШАПКИ) ==================== */
-header nav,
+header:not(.header-3tier) nav,
 .site-header-synced nav {
     display: flex;
     align-items: center !important;
@@ -441,7 +441,7 @@ header nav,
 }
 
 @media (min-width: 768px) {
-    header nav,
+    header:not(.header-3tier) nav,
     .site-header-synced nav {
         display: flex !important;
         align-items: center !important;
@@ -457,7 +457,7 @@ header nav,
 }
 
 @media (max-width: 767px) {
-    header nav,
+    header:not(.header-3tier) nav,
     .site-header-synced nav {
         display: none !important;
     }
@@ -514,16 +514,16 @@ header .header-nav-link:hover,
 }
 
 /* ==================== ТЕМНАЯ ТЕМА: ШАПКА И КОНТРАСТ ==================== */
-html.dark header,
-html.theme-dark header,
-.dark header,
-.theme-dark header,
-[data-theme="dark"] header,
-html.dark .site-header-synced,
-html.theme-dark .site-header-synced,
-.dark .site-header-synced,
-.theme-dark .site-header-synced,
-[data-theme="dark"] .site-header-synced {
+html.dark header:not(.header-3tier),
+html.theme-dark header:not(.header-3tier),
+.dark header:not(.header-3tier),
+.theme-dark header:not(.header-3tier),
+[data-theme="dark"] header:not(.header-3tier),
+html.dark .site-header-synced:not(.header-3tier),
+html.theme-dark .site-header-synced:not(.header-3tier),
+.dark .site-header-synced:not(.header-3tier),
+.theme-dark .site-header-synced:not(.header-3tier),
+[data-theme="dark"] .site-header-synced:not(.header-3tier) {
     background: rgba(11, 14, 12, 0.92) !important;
     background-color: rgba(11, 14, 12, 0.92) !important;
     backdrop-filter: blur(12px) !important;
@@ -3189,6 +3189,26 @@ header.header-3tier,
     width: 100%;
     box-sizing: border-box;
     background: #FFFFFF;
+}
+
+.header-tier-1 nav,
+.header-3tier nav {
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+@media (max-width: 1023px) {
+    .header-tier-1 nav {
+        display: none !important;
+    }
 }
 
 html.dark .header-tier-1,
