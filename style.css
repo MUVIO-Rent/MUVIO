@@ -3563,17 +3563,21 @@ html.dark .user-profile-compact .user-display-name {
     color: #FFFFFF !important;
 }
 
-.store-search-form {
+.store-search-form,
+.search-bar,
+.search-container {
     display: flex;
     align-items: center;
     flex: 1;
-    max-width: 440px;
+    width: 100%;
     gap: 8px;
-    margin: 0 auto;
+    margin: 0;
     box-sizing: border-box;
 }
 
-.store-search-form .store-search-input {
+.store-search-form .store-search-input,
+.search-input {
+    flex: 1;
     width: 100%;
     height: 40px;
     padding: 0 14px;
@@ -3587,11 +3591,13 @@ html.dark .user-profile-compact .user-display-name {
     transition: border-color 0.15s ease;
 }
 
-.store-search-form .store-search-input:focus {
+.store-search-form .store-search-input:focus,
+.search-input:focus {
     border-color: #1AB370;
 }
 
-html.dark .store-search-form .store-search-input {
+html.dark .store-search-form .store-search-input,
+html.dark .search-input {
     background-color: #000000 !important;
     border-color: rgba(255, 255, 255, 0.15) !important;
     color: #FFFFFF !important;

@@ -1,0 +1,2320 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0F1411">
+    <title>MUVIO Store — Сторінка товару | Аксесуари та запчастини</title>
+    <meta name="description"
+        content="Офіційний інтернет-магазин аксесуарів та запчастин для електроскутерів MUVIO. Швидка доставка Новою Поштою по всій Україні.">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: ['class', '.dark'],
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1AB370',
+                        muvio: {
+                            green: '#1AB370',
+                            hover: '#169B60',
+                            forest: '#123824',
+                            dark: '#080A0C'
+                        }
+                    },
+                    fontFamily: {
+                        brand: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'sans-serif'],
+                        sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'sans-serif']
+                    }
+                }
+            }
+        };
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Global Styles & Dark Theme -->
+    <link rel="stylesheet" href="./style.css?v=4.0">
+    <link rel="stylesheet" href="./dark-theme.css?v=3.4">
+
+    <style>
+        /* БАЗОВА ПІДКЛАДКА */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            overflow-x: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+        }
+
+        body {
+            background-color: #F8FAFC;
+            color: #0F172A;
+            transition: background-color 0.15s ease, color 0.15s ease;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        html.dark body {
+            background-color: #000000 !important;
+            color: #FFFFFF !important;
+        }
+
+        /* 1. TOP BAR */
+        .store-top-bar {
+            margin: 16px auto 20px auto;
+            max-width: 1240px;
+            padding: 0 16px;
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        .store-top-bar-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 4px;
+            padding: 10px 20px;
+            box-sizing: border-box;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        }
+
+        html.dark .store-top-bar-container {
+            background: #0d0d0d !important;
+            border-color: #222222 !important;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4) !important;
+        }
+
+        .user-profile-compact {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+            text-decoration: none;
+        }
+
+        .user-profile-compact .user-avatar-badge {
+            width: 32px;
+            height: 32px;
+            background-color: #1AB370;
+            color: #FFFFFF;
+            font-weight: 800;
+            font-family: monospace;
+            font-size: 14px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .user-profile-compact .user-display-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: #0F172A;
+            line-height: 1;
+            white-space: nowrap;
+        }
+
+        html.dark .user-profile-compact .user-display-name {
+            color: #FFFFFF !important;
+        }
+
+        /* РАСТЯНУТАЯ ПОИСКОВАЯ СТРОКА */
+        .store-search-form,
+        .search-bar,
+        .search-container {
+            display: flex;
+            align-items: center;
+            flex: 1;
+            width: 100%;
+            gap: 8px;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .store-search-form .store-search-input,
+        .search-input {
+            flex: 1;
+            width: 100%;
+            height: 40px;
+            padding: 0 14px;
+            border: 1px solid #CBD5E1;
+            border-radius: 2px;
+            color: #0F172A;
+            background-color: #FFFFFF;
+            outline: none;
+            box-sizing: border-box;
+            font-size: 14px;
+            transition: border-color 0.15s ease;
+        }
+
+        .store-search-form .store-search-input:focus,
+        .search-input:focus {
+            border-color: #1AB370;
+        }
+
+        html.dark .store-search-form .store-search-input,
+        html.dark .search-input {
+            background-color: #000000 !important;
+            border-color: #222222 !important;
+            color: #FFFFFF !important;
+        }
+
+        .store-search-form .store-search-btn {
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            background: #1AB370;
+            color: #FFFFFF;
+            font-weight: 700;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.15s ease;
+            flex-shrink: 0;
+        }
+
+        .store-search-form .store-search-btn:hover {
+            background: #169B60;
+        }
+
+        .store-action-icons {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
+        .action-icon-btn {
+            width: 40px;
+            height: 40px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #E2E8F0;
+            border-radius: 2px;
+            background: #FFFFFF;
+            cursor: pointer;
+            font-size: 16px;
+            color: #334155;
+            text-decoration: none;
+            transition: all 0.15s ease;
+            flex-shrink: 0;
+        }
+
+        .action-icon-btn:hover {
+            border-color: #1AB370;
+            color: #1AB370;
+        }
+
+        html.dark .action-icon-btn {
+            background: #0d0d0d !important;
+            border-color: #222222 !important;
+            color: #CBD5E1 !important;
+        }
+
+        html.dark .action-icon-btn:hover {
+            border-color: #1AB370 !important;
+            color: #1AB370 !important;
+        }
+
+        .action-icon-btn .badge-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            min-width: 17px;
+            height: 17px;
+            padding: 0 4px;
+            background-color: #1AB370;
+            color: #FFFFFF;
+            font-size: 10px;
+            font-weight: 800;
+            font-family: monospace;
+            line-height: 17px;
+            text-align: center;
+            border-radius: 9999px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+        }
+
+        @media (max-width: 768px) {
+            .store-top-bar-container {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+            }
+            .store-search-form {
+                order: 2;
+            }
+            .user-profile-compact {
+                order: 1;
+            }
+            .store-action-icons {
+                order: 3;
+                justify-content: flex-end;
+            }
+        }
+
+        /* 2. PRODUCT PAGE CONTAINER */
+        .pd-page-container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 16px 60px 16px;
+            box-sizing: border-box;
+            width: 100%;
+            flex: 1;
+        }
+
+        /* Хлебные крошки */
+        .pd-breadcrumbs-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px 18px;
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 4px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        html.dark .pd-breadcrumbs-bar {
+            background: #0d0d0d !important;
+            border-color: #222222 !important;
+        }
+
+        .pd-breadcrumbs {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: #64748B;
+            flex-wrap: wrap;
+            min-width: 0;
+        }
+
+        html.dark .pd-breadcrumbs {
+            color: #A0A0A0 !important;
+        }
+
+        .pd-back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 700;
+            color: #1AB370;
+            text-decoration: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: background 0.15s ease;
+            white-space: nowrap;
+        }
+
+        .pd-back-btn:hover {
+            background: rgba(26, 179, 112, 0.1);
+        }
+
+        .pd-crumb-sep {
+            color: #CBD5E1;
+            font-size: 12px;
+        }
+
+        html.dark .pd-crumb-sep {
+            color: #444444;
+        }
+
+        .pd-crumb-cat {
+            color: #64748B;
+            font-weight: 500;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        html.dark .pd-crumb-cat {
+            color: #A0A0A0;
+        }
+
+        .pd-crumb-cat:hover {
+            color: #1AB370;
+        }
+
+        .pd-crumb-title {
+            color: #0F172A;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 400px;
+        }
+
+        html.dark .pd-crumb-title {
+            color: #FFFFFF;
+        }
+
+        /* Табы навигации по товару */
+        .pd-nav-tabs {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0 16px;
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 4px;
+            margin-bottom: 24px;
+            overflow-x: auto;
+        }
+
+        html.dark .pd-nav-tabs {
+            background: #0d0d0d !important;
+            border-color: #222222 !important;
+        }
+
+        .pd-tab-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 18px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #64748B;
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            white-space: nowrap;
+        }
+
+        html.dark .pd-tab-btn {
+            color: #A0A0A0;
+        }
+
+        .pd-tab-btn:hover {
+            color: #1AB370;
+        }
+
+        .pd-tab-btn.active {
+            color: #1AB370 !important;
+            border-bottom-color: #1AB370 !important;
+        }
+
+        .pd-tab-badge {
+            padding: 1px 6px;
+            font-size: 10px;
+            font-weight: 800;
+            font-family: monospace;
+            border-radius: 9999px;
+            background: rgba(26, 179, 112, 0.15);
+            color: #1AB370;
+        }
+
+        /* 3. HERO 2-COLUMN GRID */
+        .pd-hero-grid {
+            display: grid;
+            grid-template-columns: 500px 1fr;
+            gap: 32px;
+            align-items: start;
+            margin-bottom: 36px;
+        }
+
+        @media (max-width: 1024px) {
+            .pd-hero-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+        }
+
+        /* Left Column: Media Gallery */
+        .pd-media-col {
+            position: sticky;
+            top: 20px;
+        }
+
+        .pd-main-img-box {
+            position: relative;
+            width: 100%;
+            height: 440px;
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            cursor: zoom-in;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        html.dark .pd-main-img-box {
+            background: #0d0d0d !important;
+            border-color: #222222 !important;
+        }
+
+        .pd-main-img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        .pd-slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            z-index: 10;
+        }
+
+        .pd-slider-btn:hover {
+            background: #1AB370;
+            border-color: #1AB370;
+        }
+
+        .pd-slider-btn.prev {
+            left: 12px;
+        }
+
+        .pd-slider-btn.next {
+            right: 12px;
+        }
+
+        .pd-img-counter {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            background: rgba(0, 0, 0, 0.65);
+            color: #FFFFFF;
+            font-family: monospace;
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            pointer-events: none;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .pd-thumbs-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 14px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+
+        .pd-thumb-btn {
+            width: 72px;
+            height: 72px;
+            flex-shrink: 0;
+            border-radius: 4px;
+            border: 2px solid #E2E8F0;
+            background: #FFFFFF;
+            padding: 4px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        html.dark .pd-thumb-btn {
+            background: #0d0d0d !important;
+            border-color: #222222 !important;
+        }
+
+        .pd-thumb-btn.active {
+            border-color: #1AB370 !important;
+            box-shadow: 0 0 0 1px #1AB370;
+        }
+
+        .pd-thumb-img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        /* Right Column: Buy & Info */
+        .pd-buy-col {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .pd-sku {
+            font-family: monospace;
+            font-size: 12px;
+            color: #94A3B8;
+        }
+
+        html.dark .pd-sku {
+            color: #71717A !important;
+        }
+
+        .pd-stock-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #1AB370;
+        }
+
+        .pd-title {
+            font-size: 26px;
+            font-weight: 800;
+            line-height: 1.3;
+            color: #0F172A;
+            margin: 6px 0 10px 0;
+        }
+
+        html.dark .pd-title {
+            color: #FFFFFF !important;
+        }
+
+        .pd-rating-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+        }
+
+        .pd-stars {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .pd-rating-val {
+            font-weight: 800;
+            font-family: monospace;
+            color: #0F172A;
+        }
+
+        html.dark .pd-rating-val {
+            color: #FFFFFF;
+        }
+
+        .pd-rating-count {
+            color: #64748B;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        html.dark .pd-rating-count {
+            color: #A0A0A0;
+        }
+
+        .pd-rating-count:hover {
+            color: #1AB370;
+            text-decoration: underline;
+        }
+
+        /* Price Card */
+        .pd-price-card {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 4px;
+            padding: 20px 24px;
+        }
+
+        html.dark .pd-price-card {
+            background: #0d0d0d !important;
+            border-color: #222222 !important;
+        }
+
+        .pd-old-price-line {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 4px;
+        }
+
+        .pd-old-price {
+            font-family: monospace;
+            font-size: 15px;
+            color: #94A3B8;
+            text-decoration: line-through;
+        }
+
+        .pd-discount-badge {
+            font-family: monospace;
+            font-size: 11px;
+            font-weight: 800;
+            background: #EF4444;
+            color: #FFFFFF;
+            padding: 2px 6px;
+            border-radius: 2px;
+        }
+
+        .pd-price {
+            font-family: monospace;
+            font-size: 34px;
+            font-weight: 900;
+            color: #0F172A;
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+
+        html.dark .pd-price {
+            color: #FFFFFF !important;
+        }
+
+        .pd-action-btns {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .pd-buy-btn {
+            flex: 1;
+            height: 50px;
+            background: #1AB370;
+            color: #FFFFFF !important;
+            font-weight: 800;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-radius: 4px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.15s ease;
+        }
+
+        .pd-buy-btn:hover {
+            background: #169B60;
+        }
+
+        .pd-buy-btn.in-cart {
+            background: #18181B;
+            border-color: #3F3F46;
+            color: #E4E4E7 !important;
+        }
+
+        .pd-buy-btn.in-cart:hover {
+            background: #DC2626 !important;
+            border-color: #DC2626 !important;
+            color: #FFFFFF !important;
+        }
+
+        html.dark .pd-buy-btn.in-cart {
+            background: #18181B;
+            border-color: rgba(255, 255, 255, 0.18);
+            color: #F4F4F5 !important;
+        }
+
+        html.dark .pd-buy-btn.in-cart:hover {
+            background: #DC2626 !important;
+            border-color: #DC2626 !important;
+            color: #FFFFFF !important;
+        }
+
+        .pd-icon-action-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 4px;
+            border: 1px solid #E2E8F0;
+            background: #FFFFFF;
+            color: #64748B;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            flex-shrink: 0;
+        }
+
+        html.dark .pd-icon-action-btn {
+            background: #141414 !important;
+            border-color: #222222 !important;
+            color: #A0A0A0 !important;
+        }
+
+        .pd-icon-action-btn:hover {
+            border-color: #1AB370;
+            color: #1AB370;
+        }
+
+        .pd-icon-action-btn.active-heart {
+            color: #EF4444 !important;
+            border-color: #EF4444 !important;
+            background: rgba(239, 68, 68, 0.08) !important;
+        }
+
+        /* Delivery / Payment / Guarantee Blocks */
+        .pd-conditions-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .pd-condition-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 16px;
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 4px;
+        }
+
+        html.dark .pd-condition-item {
+            background: #0d0d0d !important;
+            border-color: #222222 !important;
+        }
+
+        .pd-cond-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 4px;
+            background: rgba(26, 179, 112, 0.12);
+            color: #1AB370;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .pd-cond-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #0F172A;
+            line-height: 1.2;
+            margin-bottom: 2px;
+        }
+
+        html.dark .pd-cond-title {
+            color: #FFFFFF !important;
+        }
+
+        .pd-cond-text {
+            font-size: 12px;
+            color: #64748B;
+            line-height: 1.4;
+        }
+
+        html.dark .pd-cond-text {
+            color: #A0A0A0 !important;
+        }
+
+        /* Lower Sections */
+        .pd-section {
+            margin-top: 36px;
+            padding-top: 24px;
+            border-top: 1px solid #E2E8F0;
+        }
+
+        html.dark .pd-section {
+            border-top-color: #222222 !important;
+        }
+
+        .pd-section-header {
+            margin-bottom: 16px;
+        }
+
+        .pd-section-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: #0F172A;
+            margin: 0;
+        }
+
+        html.dark .pd-section-title {
+            color: #FFFFFF !important;
+        }
+
+        /* Description with read more */
+        .pd-desc-wrapper {
+            position: relative;
+            overflow: hidden;
+            max-height: 120px;
+            transition: max-height 0.3s ease;
+        }
+
+        .pd-desc-wrapper.expanded {
+            max-height: 1600px;
+        }
+
+        .pd-desc-content {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #334155;
+        }
+
+        html.dark .pd-desc-content {
+            color: #CBD5E1 !important;
+        }
+
+        .pd-desc-fade {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 48px;
+            background: linear-gradient(to bottom, transparent, #F8FAFC);
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+
+        html.dark .pd-desc-fade {
+            background: linear-gradient(to bottom, transparent, #000000) !important;
+        }
+
+        .pd-desc-wrapper.expanded .pd-desc-fade {
+            opacity: 0;
+        }
+
+        .pd-read-more-btn {
+            margin-top: 10px;
+            background: none;
+            border: none;
+            color: #1AB370;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            padding: 4px 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .pd-read-more-btn:hover {
+            text-decoration: underline;
+        }
+
+        /* Dot-leader Specs Table */
+        .pd-specs-table {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 4px;
+            padding: 16px 20px;
+        }
+
+        html.dark .pd-specs-table {
+            background: #0d0d0d !important;
+            border-color: #222222 !important;
+        }
+
+        .pd-spec-row {
+            display: flex;
+            align-items: baseline;
+            padding: 8px 0;
+            font-size: 13px;
+        }
+
+        .pd-spec-key {
+            color: #64748B;
+            flex-shrink: 0;
+            font-weight: 500;
+        }
+
+        html.dark .pd-spec-key {
+            color: #A0A0A0 !important;
+        }
+
+        .pd-spec-dots {
+            flex: 1;
+            margin: 0 8px;
+            border-bottom: 1px dotted #CBD5E1;
+            height: 1px;
+            align-self: flex-end;
+            margin-bottom: 4px;
+        }
+
+        html.dark .pd-spec-dots {
+            border-bottom-color: rgba(255, 255, 255, 0.15) !important;
+        }
+
+        .pd-spec-val {
+            color: #0F172A;
+            font-weight: 700;
+            text-align: right;
+        }
+
+        html.dark .pd-spec-val {
+            color: #FFFFFF !important;
+        }
+
+        /* Reviews block */
+        .pd-reviews-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .pd-review-card {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 4px;
+            padding: 16px 18px;
+        }
+
+        html.dark .pd-review-card {
+            background: #0d0d0d !important;
+            border-color: #222222 !important;
+        }
+
+        .pd-review-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .pd-review-author {
+            font-size: 13px;
+            font-weight: 700;
+            color: #0F172A;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        html.dark .pd-review-author {
+            color: #FFFFFF;
+        }
+
+        .pd-review-verified {
+            font-size: 11px;
+            color: #1AB370;
+            font-weight: 600;
+        }
+
+        .pd-review-date {
+            font-size: 11px;
+            font-family: monospace;
+            color: #94A3B8;
+        }
+
+        .pd-review-text {
+            font-size: 13px;
+            color: #475569;
+            line-height: 1.5;
+        }
+
+        html.dark .pd-review-text {
+            color: #CBD5E1;
+        }
+
+        .pd-add-review-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #0F172A;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        html.dark .pd-add-review-btn {
+            background: #141414 !important;
+            border-color: #222222 !important;
+            color: #FFFFFF !important;
+        }
+
+        .pd-add-review-btn:hover {
+            border-color: #1AB370;
+            color: #1AB370;
+        }
+
+        /* Similar Products Grid */
+        .pd-similar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 16px;
+        }
+
+        .pd-similar-card {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 4px;
+            padding: 14px;
+            text-decoration: none;
+            transition: all 0.15s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        html.dark .pd-similar-card {
+            background: #0d0d0d !important;
+            border-color: #222222 !important;
+        }
+
+        .pd-similar-card:hover {
+            border-color: #1AB370;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        html.dark .pd-similar-card:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+        }
+
+        .pd-similar-img-box {
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            overflow: hidden;
+            background: #FFFFFF;
+        }
+
+        html.dark .pd-similar-img-box {
+            background: #000000;
+        }
+
+        .pd-similar-img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: transform 0.2s ease;
+        }
+
+        .pd-similar-card:hover .pd-similar-img {
+            transform: scale(1.05);
+        }
+
+        .pd-similar-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #0F172A;
+            line-height: 1.3;
+            margin-bottom: 6px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        html.dark .pd-similar-title {
+            color: #FFFFFF;
+        }
+
+        .pd-similar-price {
+            font-family: monospace;
+            font-size: 15px;
+            font-weight: 800;
+            color: #0F172A;
+        }
+
+        html.dark .pd-similar-price {
+            color: #FFFFFF;
+        }
+
+        /* Тост-сповіщення */
+        #ecomToast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background-color: #0F172A;
+            color: #FFFFFF;
+            padding: 12px 18px;
+            border-radius: 2px;
+            border-left: 4px solid #1AB370;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+            z-index: 1000;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+        }
+
+        #ecomToast.show {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+    </style>
+
+    <!-- Anti-flicker Settings Loader -->
+    <script>
+        (function () {
+            try {
+                var p = (new URLSearchParams(window.location.search)).get('theme');
+                var s = localStorage.getItem('muvio_site_settings');
+                var t = (p === 'dark' || p === 'light') ? p : (s ? JSON.parse(s).theme : (localStorage.getItem('muvio_theme') || 'light'));
+                if (t === 'dark') {
+                    document.documentElement.classList.add('dark', 'theme-dark');
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark', 'theme-dark');
+                    document.documentElement.setAttribute('data-theme', 'light');
+                }
+            } catch (e) {}
+        })();
+    </script>
+</head>
+
+<body>
+    <!-- ==================== HEADER (MUVIO STORE) ==================== -->
+    <header class="w-full bg-white dark:bg-[#0B0E11] border-b border-zinc-200 dark:border-white/10 sticky top-0 z-40 transition-colors">
+        <!-- Верхня панель контактів та мови -->
+        <div class="border-b border-zinc-100 dark:border-white/5 py-1.5 text-xs text-zinc-500 font-sans">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+                <div class="flex items-center gap-6">
+                    <span class="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 font-medium">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                        Магазин відкрито: 09:00 — 20:00
+                    </span>
+                    <a href="tel:+380931707070" class="hover:text-[#1AB370] transition-colors hidden sm:inline-flex items-center gap-1 font-mono">
+                        <i data-lucide="phone" class="w-3 h-3"></i>
+                        +38 (093) 170-70-70
+                    </a>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <button type="button" onclick="toggleAuthTheme()" class="hover:text-[#1AB370] transition-colors flex items-center gap-1" title="Перемкнути тему">
+                        <i data-lucide="moon" class="w-3.5 h-3.5 hidden dark:inline-block"></i>
+                        <i data-lucide="sun" class="w-3.5 h-3.5 inline-block dark:hidden"></i>
+                        <span class="hidden md:inline">Тема</span>
+                    </button>
+                    <span class="text-zinc-300 dark:text-zinc-700">|</span>
+                    <div class="flex items-center gap-1 font-mono text-[11px]">
+                        <button type="button" id="authLangUa" onclick="setSiteLanguage('uk')" class="font-bold text-[#1AB370]">UA</button>
+                        <span>/</span>
+                        <button type="button" id="authLangEn" onclick="setSiteLanguage('en')" class="hover:text-[#1AB370] text-zinc-400">EN</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- UNIFIED STORE TOP BAR С РАСТЯНУТЫМ ПОИСКОМ -->
+    <div class="store-top-bar">
+        <div class="store-top-bar-container">
+            <!-- 1. Профиль / аватарка -->
+            <a href="accessories.html" class="user-profile-compact" title="Повернутися до магазину">
+                <div class="user-avatar-badge" id="headerUserAvatar">M</div>
+                <div class="user-display-name" id="headerUserNameText">Максим</div>
+            </a>
+
+            <!-- 2. Поисковая строка на всю ширину -->
+            <form class="store-search-form" action="accessories.html" method="GET">
+                <input type="text" name="search" id="mainSearchInput" class="store-search-input"
+                    placeholder="Пошук аксесуарів, колодок, шоломів..." autocomplete="off">
+                <button type="submit" class="store-search-btn" title="Шукати">
+                    <i data-lucide="search" class="w-4 h-4"></i>
+                </button>
+            </form>
+
+            <!-- 3. Иконки действий -->
+            <div class="store-action-icons">
+                <a href="accessories.html" class="action-icon-btn" title="Порівняння товарів">
+                    <i data-lucide="scale" class="w-4 h-4"></i>
+                    <span class="badge-count" id="headerCompareCount">2</span>
+                </a>
+                <a href="accessories.html" class="action-icon-btn" title="Список бажань">
+                    <i data-lucide="heart" class="w-4 h-4"></i>
+                    <span class="badge-count" id="headerWishlistCount">3</span>
+                </a>
+                <a href="accessories.html" class="action-icon-btn" title="Кошик покупок">
+                    <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+                    <span class="badge-count" id="headerCartCount">0</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== ОСНОВНАЯ СТРАНИЦА ТОВАРА ==================== -->
+    <main class="pd-page-container">
+        <!-- Хлебные крошки с кнопкой возврата назад -->
+        <div class="pd-breadcrumbs-bar">
+            <div class="pd-breadcrumbs">
+                <a href="accessories.html" class="pd-back-btn" onclick="if (window.history.length > 1) { window.history.back(); return false; }">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                    <span>Назад до каталогу</span>
+                </a>
+                <span class="pd-crumb-sep">/</span>
+                <a href="accessories.html" class="pd-crumb-cat" id="pdCrumbCat">Запчастини</a>
+                <span class="pd-crumb-sep">/</span>
+                <span class="pd-crumb-title" id="pdCrumbTitle">Назва товару</span>
+            </div>
+        </div>
+
+        <!-- Табы навигации по товару -->
+        <div class="pd-nav-tabs">
+            <button type="button" class="pd-tab-btn active" data-tab="about" onclick="switchProductTab('about')">
+                <i data-lucide="package" class="w-4 h-4"></i>
+                <span>Про товар</span>
+            </button>
+            <button type="button" class="pd-tab-btn" data-tab="specs" onclick="switchProductTab('specs')">
+                <i data-lucide="list" class="w-4 h-4"></i>
+                <span>Характеристики</span>
+            </button>
+            <button type="button" class="pd-tab-btn" data-tab="reviews" onclick="switchProductTab('reviews')">
+                <i data-lucide="message-square" class="w-4 h-4"></i>
+                <span>Відгуки та питання</span>
+                <span class="pd-tab-badge" id="pdTabReviewsCount">14</span>
+            </button>
+        </div>
+
+        <!-- TAB CONTENT: ABOUT (MAIN VIEW) -->
+        <div id="pdTabContentAbout">
+            <!-- 2-COLUMN HERO GRID -->
+            <div class="pd-hero-grid">
+                <!-- LEFTHAND MEDIA GALLERY -->
+                <div class="pd-media-col">
+                    <div class="pd-main-img-box" id="pdMainImgBox">
+                        <img id="pdMainImg" src="" alt="Товар MUVIO" class="pd-main-img">
+                        <button type="button" class="pd-slider-btn prev" onclick="prevProductImage()" title="Попереднє фото">
+                            <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                        </button>
+                        <button type="button" class="pd-slider-btn next" onclick="nextProductImage()" title="Наступне фото">
+                            <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                        </button>
+                        <div class="pd-img-counter" id="pdImgCounter">1 / 1</div>
+                    </div>
+
+                    <!-- THUMBNAILS ROW -->
+                    <div class="pd-thumbs-row" id="pdThumbsRow">
+                        <!-- Динамический рендер -->
+                    </div>
+                </div>
+
+                <!-- RIGHTHAND PURCHASE & CONDITIONS -->
+                <div class="pd-buy-col">
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-1.5">
+                            <span class="pd-sku" id="pdSku">Артикул: 001</span>
+                            <span class="pd-stock-badge">
+                                <span class="w-2 h-2 rounded-full bg-[#1AB370]"></span>
+                                <span>В наявності</span>
+                            </span>
+                        </div>
+                        <h1 class="pd-title" id="pdTitle">Назва товару</h1>
+                        <div class="pd-rating-row">
+                            <div class="pd-stars">
+                                <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+                                <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+                            </div>
+                            <span class="pd-rating-val" id="pdRatingVal">4.9</span>
+                            <span class="pd-rating-count" id="pdRatingCount" onclick="switchProductTab('reviews')">(14 відгуків)</span>
+                        </div>
+                    </div>
+
+                    <!-- PRICE & ACTION BLOCK -->
+                    <div class="pd-price-card">
+                        <div class="pd-old-price-line" id="pdOldPriceLine">
+                            <span class="pd-old-price" id="pdOldPrice">420 ₴</span>
+                            <span class="pd-discount-badge" id="pdDiscountBadge">-17%</span>
+                        </div>
+                        <div class="pd-price" id="pdPrice">350 ₴</div>
+
+                        <div class="pd-action-btns">
+                            <button type="button" id="pdBuyBtn" class="pd-buy-btn" onclick="handlePageBuyToggle()">
+                                <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+                                <span id="pdBuyBtnText">Купити</span>
+                            </button>
+                            <button type="button" id="pdWishlistBtn" class="pd-icon-action-btn" onclick="handlePageWishlistToggle()" title="Додати до списку бажань">
+                                <i data-lucide="heart" class="w-5 h-5"></i>
+                            </button>
+                            <button type="button" id="pdCompareBtn" class="pd-icon-action-btn" onclick="handlePageCompareToggle()" title="Порівняти товар">
+                                <i data-lucide="scale" class="w-5 h-5"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- CONDITIONS (PAYMENT, DELIVERY, WARRANTY) -->
+                    <div class="pd-conditions-grid">
+                        <div class="pd-condition-item">
+                            <div class="pd-cond-icon"><i data-lucide="credit-card" class="w-4 h-4"></i></div>
+                            <div>
+                                <div class="pd-cond-title">Зручна оплата</div>
+                                <div class="pd-cond-text">Apple Pay, Google Pay, онлайн-карткою на сайті або готівкою / післяплатою при отриманні.</div>
+                            </div>
+                        </div>
+                        <div class="pd-condition-item">
+                            <div class="pd-cond-icon"><i data-lucide="truck" class="w-4 h-4"></i></div>
+                            <div>
+                                <div class="pd-cond-title">Швидка доставка</div>
+                                <div class="pd-cond-text">Нова Пошта (1–2 дні по всій Україні до відділення / поштомату) або самовивіз у Києві безкоштовно.</div>
+                            </div>
+                        </div>
+                        <div class="pd-condition-item">
+                            <div class="pd-cond-icon"><i data-lucide="shield-check" class="w-4 h-4"></i></div>
+                            <div>
+                                <div class="pd-cond-title">Офіційна гарантія</div>
+                                <div class="pd-cond-text">Офіційна гарантія якості MUVIO. 14 днів на легкий обмін або повернення згідно із законодавством.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION: ОПИС ТОВАРУ -->
+            <div class="pd-section" id="pdSectionDesc">
+                <div class="pd-section-header">
+                    <h2 class="pd-section-title">Опис товару</h2>
+                </div>
+                <div class="pd-desc-wrapper" id="pdDescWrapper">
+                    <div class="pd-desc-content" id="pdDescContent">
+                        <!-- Динамический текст -->
+                    </div>
+                    <div class="pd-desc-fade" id="pdDescFade"></div>
+                </div>
+                <button type="button" class="pd-read-more-btn" id="pdReadMoreBtn" onclick="toggleDescriptionExpand()">
+                    <span id="pdReadMoreText">Читати повністю ↓</span>
+                </button>
+            </div>
+
+            <!-- SECTION: ХАРАКТЕРИСТИКИ (PREVIEW) -->
+            <div class="pd-section" id="pdSectionSpecs">
+                <div class="pd-section-header flex items-center justify-between">
+                    <h2 class="pd-section-title">Основні характеристики</h2>
+                    <button type="button" onclick="switchProductTab('specs')" class="text-xs font-bold text-[#1AB370] hover:underline">
+                        Всі характеристики →
+                    </button>
+                </div>
+                <div class="pd-specs-table" id="pdSpecsTable">
+                    <!-- Динамический список -->
+                </div>
+            </div>
+
+            <!-- SECTION: ВІДГУКИ ТА ПИТАННЯ (PREVIEW) -->
+            <div class="pd-section" id="pdSectionReviews">
+                <div class="pd-section-header flex items-center justify-between">
+                    <h2 class="pd-section-title">Відгуки покупців</h2>
+                    <button type="button" onclick="openReviewPrompt()" class="pd-add-review-btn">
+                        <i data-lucide="message-square-plus" class="w-4 h-4"></i>
+                        <span>Залишити відгук</span>
+                    </button>
+                </div>
+                <div class="pd-reviews-list" id="pdReviewsList">
+                    <!-- Динамические отзывы -->
+                </div>
+            </div>
+
+            <!-- SECTION: СХОЖІ ТОВАРИ (СЕТКА) -->
+            <div class="pd-section" id="pdSectionSimilar">
+                <div class="pd-section-header">
+                    <h2 class="pd-section-title">Схожі товари</h2>
+                    <span class="text-xs text-zinc-400 font-mono">Товари з цієї ж категорії</span>
+                </div>
+                <div class="pd-similar-grid" id="pdSimilarGrid">
+                    <!-- Динамические товары -->
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB CONTENT: FULL SPECS -->
+        <div id="pdTabContentSpecs" class="hidden">
+            <div class="pd-section mt-4 pt-4 border-t-0">
+                <div class="pd-section-header mb-4">
+                    <h2 class="pd-section-title">Повні технічні характеристики та сумісність</h2>
+                </div>
+                <div class="pd-specs-table" id="pdSpecsTableFull">
+                    <!-- Полные характеристики -->
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB CONTENT: FULL REVIEWS -->
+        <div id="pdTabContentReviews" class="hidden">
+            <div class="pd-section mt-4 pt-4 border-t-0">
+                <div class="pd-section-header flex items-center justify-between mb-4">
+                    <div>
+                        <h2 class="pd-section-title">Відгуки та запитання покупців</h2>
+                        <p class="text-xs text-zinc-500 mt-0.5">Діліться враженнями від покупки або ставте запитання фахівцям MUVIO</p>
+                    </div>
+                    <button type="button" onclick="openReviewPrompt()" class="pd-add-review-btn">
+                        <i data-lucide="message-square-plus" class="w-4 h-4"></i>
+                        <span>Залишити відгук</span>
+                    </button>
+                </div>
+                <div class="pd-reviews-list" id="pdReviewsListFull">
+                    <!-- Полные отзывы -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#0F172A] text-white border-t border-white/10 pt-12 pb-8 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 pb-10 border-b border-white/10">
+                <div>
+                    <img src="images/logo-header-trans.png" alt="MUVIO" class="h-7 w-auto mb-3" style="filter: brightness(0) invert(1);">
+                    <p class="text-xs text-zinc-400 leading-relaxed">
+                        Офіційний магазин сервісу легкого електротранспорту MUVIO. Продаж якісних аксесуарів, акумуляторів та запчастин.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-mono text-xs uppercase tracking-widest text-[#1AB370] font-bold mb-3">Каталог</h4>
+                    <ul class="space-y-1.5 text-xs text-zinc-400 font-sans">
+                        <li><a href="accessories.html" class="hover:text-white transition-colors">Всі аксесуари</a></li>
+                        <li><a href="accessories.html" class="hover:text-white transition-colors">Гальмівні системи</a></li>
+                        <li><a href="accessories.html" class="hover:text-white transition-colors">Тримачі та кронштейни</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-mono text-xs uppercase tracking-widest text-[#1AB370] font-bold mb-3">Сервіс</h4>
+                    <ul class="space-y-1.5 text-xs text-zinc-400 font-sans">
+                        <li><a href="index.html" class="hover:text-white transition-colors">Оренда скутерів</a></li>
+                        <li><a href="service.html" class="hover:text-white transition-colors">Ремонт та ТО</a></li>
+                        <li><a href="franchise.html" class="hover:text-white transition-colors">Франшиза MUVIO</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-mono text-xs uppercase tracking-widest text-[#1AB370] font-bold mb-3">Контакти</h4>
+                    <p class="text-xs text-zinc-400 leading-relaxed">
+                        Київ, вул. Велика Васильківська<br>
+                        Щодня: 09:00 — 20:00<br>
+                        <a href="tel:+380931707070" class="text-white font-mono hover:text-[#1AB370]">+38 (093) 170-70-70</a>
+                    </p>
+                </div>
+            </div>
+            <div class="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 font-mono gap-3">
+                <div>© 2026 MUVIO Store. Всі права захищено.</div>
+                <div>Доставка по всій Україні через Нову Пошту</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Тост-сповіщення -->
+    <div id="ecomToast">
+        <i data-lucide="check-circle" class="w-4 h-4 text-[#1AB370]"></i>
+        <span id="toastMessage">Товар додано до кошика!</span>
+    </div>
+
+    <!-- ==================== JAVASCRIPT ==================== -->
+    <script>
+        // База товарів магазину MUVIO
+        const PRODUCTS_DB = [
+            {
+                id: 1,
+                name: "Гальмівні колодки для AIMA (дискові)",
+                category: "brakes",
+                categoryTitle: "Гальмівні колодки",
+                group: "parts",
+                price: 350,
+                oldPrice: 420,
+                rating: 4.9,
+                reviewsCount: 18,
+                badge: "AIMA Оригінал",
+                image: "images/kolodkiaima.jpg",
+                images: ["images/kolodkiaima.jpg", "images/kolodkibaraban.jpg", "images/kolodkilikebike.jpg"],
+                desc: "Оригінальні дискові гальмівні колодки підвищеної зносостійкості для електроскутерів AIMA.",
+                longDesc: "Фірмові дискові гальмівні колодки для електричних скутерів модельного ряду AIMA (серії A700, A715, F606, Mine). Виготовлені з високоякісного напівметалевого композиту з додаванням мідних волокон, що гарантує стабільний коефіцієнт тертя навіть при інтенсивному нагріванні. Не пошкоджують гальмівний диск, забезпечують безшумне й прогнозоване гальмування за будь-якої погоди (як у сухих умовах, так і під дощем). Комплект повністю готовий до швидкої заміни.",
+                specs: {
+                    "Тип запчастини": "Дискові гальмівні колодки",
+                    "Сумісність": "AIMA A700, A715, F606, Mine, Mine Plus",
+                    "Матеріал фрикційного шару": "Напівметал (Semi-Metallic) з термостійкими волокнами",
+                    "Комплектація": "2 колодки (комплект на 1 гальмівний супорт)",
+                    "Розрахунковий ресурс": "До 5 000 – 7 000 км міського пробігу",
+                    "Виробник": "AIMA Genuine Parts (Оригінал OEM)",
+                    "Країна виробництва": "Китай",
+                    "Стан": "Новий",
+                    "Гарантія": "12 місяців"
+                }
+            },
+            {
+                id: 2,
+                name: "Гальмівні колодки для Like.Bike",
+                category: "brakes",
+                categoryTitle: "Гальмівні колодки",
+                group: "parts",
+                price: 380,
+                oldPrice: 450,
+                rating: 4.8,
+                reviewsCount: 14,
+                badge: "Like.Bike",
+                image: "images/kolodkilikebike.jpg",
+                images: ["images/kolodkilikebike.jpg", "images/kolodkiaima.jpg", "images/kolodkibaraban.jpg"],
+                desc: "Фірмові напівметалеві гальмівні колодки для модельного ряду Like.Bike. Відмінне зчеплення та ресурс.",
+                longDesc: "Оригінальні колодки для гідравлічних і механічних дискових гальм електроскутерів Like.Bike (Bruiser, N5, City та сумісні). Відрізняються підвищеною щільністю компаунда, що запобігає передчасному стиранню при щоденних кур'єрських навантаженнях. Зменшують гальмівний шлях на 15% у порівнянні з базовими аналогами. Оснащені міцною сталевою опорною пластиною з антикорозійним покриттям.",
+                specs: {
+                    "Тип запчастини": "Гальмівні колодки супорта",
+                    "Сумісність": "Like.Bike Bruiser, Like.Bike N5, City",
+                    "Матеріал фрикційного шару": "Органічний компаунд із мідною крихтою",
+                    "Комплектація": "Комплект із 2 колодок + притискна пружина",
+                    "Розрахунковий ресурс": "До 6 000 км",
+                    "Виробник": "Like.Bike OEM Parts",
+                    "Країна виробництва": "Китай",
+                    "Стан": "Новий",
+                    "Гарантія": "12 місяців"
+                }
+            },
+            {
+                id: 3,
+                name: "Гальмівні колодки барабанні",
+                category: "brakes",
+                categoryTitle: "Гальмівні колодки",
+                group: "parts",
+                price: 290,
+                oldPrice: 350,
+                rating: 4.7,
+                reviewsCount: 11,
+                badge: "Барабанні",
+                image: "images/kolodkibaraban.jpg",
+                images: ["images/kolodkibaraban.jpg", "images/kolodkiaima.jpg"],
+                desc: "Надійні барабанні колодки для заднього барабанного гальма скутерів. Плавне й безпечне гальмування.",
+                longDesc: "Зносостійкі барабанні колодки для заднього гальмівного механізму скутерів з барабаном діаметром 110 мм. Виготовлені з литої алюмінієвої основи та безазбестової фрикційної накладки. Забезпечують плавне наростання гальмівного зусилля без різких ривків і блокування колеса. Стійкі до потрапляння пилу, вологи та бруду всередину барабана.",
+                specs: {
+                    "Тип запчастини": "Барабанні гальмівні колодки",
+                    "Сумісність": "Електроскутери з гальмівним барабаном 110 мм (AIMA, Like.Bike)",
+                    "Матеріал": "Алюмінієвий сплав + безазбестовий фрикційний шар",
+                    "Комплектація": "2 напівкруглі колодки, 2 пружини стяжки",
+                    "Діаметр барабана": "110 мм",
+                    "Виробник": "MUVIO Parts",
+                    "Країна виробництва": "Китай",
+                    "Стан": "Новий",
+                    "Гарантія": "12 місяців"
+                }
+            },
+            {
+                id: 4,
+                name: "Ручки керма з підігрівом",
+                category: "grips",
+                categoryTitle: "Ручки з підігрівом",
+                group: "tuning",
+                price: 1150,
+                oldPrice: 1390,
+                rating: 4.9,
+                reviewsCount: 23,
+                badge: "Підігрів",
+                image: "images/podogrev.jpg",
+                images: ["images/podogrev.jpg", "images/dershatel.jpg", "images/dershatel2.jpg"],
+                desc: "Ергономічні термогріпси з регулюванням нагріву для комфортного керування електроскутером у холодну погоду.",
+                longDesc: "Преміальні ергономічні ручки керма з вбудованим електричним підігрівом для комфортної та безпечної їзди в холодний сезон (осінь, зима, рання весна). Мають 4 температурні режими (від 45°C до 75°C) зі зручною світлодіодною індикацією на лівій ручці. Виготовлені зі зносостійкої силіконової термогуми TPU, що не ковзає в рукавицях. Мають повний вологозахист стандарту IP67.",
+                specs: {
+                    "Тип товару": "Гріпси керма з підігрівом (терморучки)",
+                    "Посадковий діаметр": "22 мм (стандартне кермо)",
+                    "Кількість режимів": "4 рівні температури (45°C, 55°C, 65°C, 75°C)",
+                    "Робоча напруга": "12V (підключення через перетворювач скутера)",
+                    "Ступінь захисту": "IP67 (герметичні перемикачі та проводи)",
+                    "Матеріал": "Антиковзка термостійка гума TPU",
+                    "Виробник": "MUVIO Moto",
+                    "Стан": "Новий",
+                    "Гарантія": "12 місяців"
+                }
+            },
+            {
+                id: 5,
+                name: "Алюмінієвий тримач смартфона",
+                category: "holders",
+                categoryTitle: "Тримачі смартфона",
+                group: "acc",
+                price: 590,
+                oldPrice: 720,
+                rating: 4.9,
+                reviewsCount: 31,
+                badge: "Метал",
+                image: "images/dershatel.jpg",
+                images: ["images/dershatel.jpg", "images/dershatel2.jpg", "images/cronsthein.jpg"],
+                desc: "Суцільнометалевий затискач з міцного авіаційного алюмінію для безпечного кріплення телефону на кермі.",
+                longDesc: "Надійний суцільнометалевий тримач для смартфонів, розроблений спеціально для їзди по бруківці та нерівностях. Механічний гвинтовий затискач надійно фіксує телефон будь-яких розмірів (від 4.7 до 7.2 дюймів), повністю виключаючи його випадання навіть при сильних ударах і вібраціях. Силіконові демпферні накладки захищають грані смартфона від подряпин. Можливість обертання на 360° для вертикальної чи горизонтальної навігації.",
+                specs: {
+                    "Тип кріплення": "Гвинтовий затискач на кермо (22 – 31.8 мм)",
+                    "Матеріал корпусу": "Анодований авіаційний алюміній AL6063",
+                    "Сумісні діагоналі": "4.7″ – 7.2″ (ширина телефону 58–100 мм)",
+                    "Кут обертання": "360 градусів (шарнірне кріплення)",
+                    "Захист від вібрацій": "Силіконові демпферні накладки в комплекті",
+                    "Вага": "145 г",
+                    "Виробник": "MUVIO Accessories",
+                    "Стан": "Новий",
+                    "Гарантія": "24 місяці"
+                }
+            },
+            {
+                id: 6,
+                name: "Кронштейн-подовжувач / тримач на дзеркало заднього виду",
+                category: "holders",
+                categoryTitle: "Кронштейни та кріплення",
+                group: "acc",
+                price: 320,
+                oldPrice: 390,
+                rating: 4.7,
+                reviewsCount: 16,
+                badge: "На дзеркало",
+                image: "images/dershatel2.jpg",
+                images: ["images/dershatel2.jpg", "images/cronsthein.jpg", "images/dershatel.jpg"],
+                desc: "Зручний монтажний кронштейн для швидкої установки навісних аксесуарів під кріплення бічного дзеркала.",
+                longDesc: "Універсальний перехідник-кронштейн з міцного алюмінієвого сплаву, що монтується під різьбову ніжку дзеркала заднього виду (різьба M8 або M10). Дозволяє зручно розмістити тримач телефону, додатковий ліхтар, USB-зарядку або екшн-камеру прямо в зоні видимості керма без свердління чи доопрацювання обшивки скутера.",
+                specs: {
+                    "Тип кріплення": "Під шток дзеркала заднього виду (M8 / M10)",
+                    "Матеріал": "Алюмінієвий сплав з матовим порошковим покриттям",
+                    "Діаметр виносного штока": "22 мм (стандарт для вело/мото кріплень)",
+                    "Виліт кронштейна": "85 мм",
+                    "Колір": "Чорний матовий (Graphite Black)",
+                    "Виробник": "MUVIO",
+                    "Стан": "Новий",
+                    "Гарантія": "24 місяці"
+                }
+            },
+            {
+                id: 7,
+                name: "Додатковий кронштейн кріплення",
+                category: "holders",
+                categoryTitle: "Кронштейни та кріплення",
+                group: "acc",
+                price: 250,
+                oldPrice: 310,
+                rating: 4.6,
+                reviewsCount: 9,
+                badge: "Універсальний",
+                image: "images/cronsthein.jpg",
+                images: ["images/cronsthein.jpg", "images/dershatel2.jpg", "images/dershatel.jpg"],
+                desc: "Універсальний перехідник і тримач для фіксації навісного обладнання, фар, ліхтарів та гаджетів.",
+                longDesc: "Компактний розширювальний кронштейн для організації робочого простору на кермі електроскутера. Дозволяє винести навісне обладнання вперед, звільняючи простір для рук і панелі приладів. Витримує навантаження до 1.5 кг, стійкий до корозії та вібрацій.",
+                specs: {
+                    "Тип монтажу": "Затискний хомут на кермо 22–25.4 мм",
+                    "Матеріал": "Полегшений алюміній AL-alloy",
+                    "Довжина планки": "100 мм",
+                    "Комплектація": "Кронштейн, гвинти фіксації, ключ-шестигранник",
+                    "Виробник": "MUVIO",
+                    "Стан": "Новий",
+                    "Гарантія": "12 місяців"
+                }
+            },
+            {
+                id: 8,
+                name: "Мотоперчатки захисні (чорні)",
+                category: "gloves",
+                categoryTitle: "Рукавиці захисні",
+                group: "equip",
+                price: 650,
+                oldPrice: 790,
+                rating: 4.8,
+                reviewsCount: 27,
+                badge: "Захист",
+                image: "images/blackperchatki.jpg",
+                images: ["images/blackperchatki.jpg", "images/whiteperchatki.jpg"],
+                desc: "Міцні мотоперчатки з вентиляцією, анатомічними захисними накладками суглобів та сенсорними вставками.",
+                longDesc: "Повнопалі захисні рукавиці для безпечного щоденного пересування містом на електроскутері або електробайку. Оснащені анатомічними карбоновими протекторами суглобів пальців і кисті, посиленою замшевою вставкою на долоні та дихаючою 3D-сіткою. Сенсорні вставки Touch Screen на великому та вказівному пальцях дозволяють користуватися навігатором і смартфоном, не знімаючи рукавиць.",
+                specs: {
+                    "Тип екіпірування": "Захисні рукавиці (мотоперчатки)",
+                    "Сезонність": "Весна / Літо / Осінь",
+                    "Захист кісточок": "Анатомічні карбонові накладки",
+                    "Сенсорний екран": "Touch Screen покриття пальців",
+                    "Матеріал": "Зносостійкий нейлон, мікрофібра, 3D-Mesh сітка",
+                    "Доступні розміри": "M, L, XL (уточнюються при замовленні)",
+                    "Виробник": "MUVIO Shield",
+                    "Стан": "Новий",
+                    "Гарантія": "6 місяців"
+                }
+            },
+            {
+                id: 9,
+                name: "Мотоперчатки захисні (білі / комбіновані)",
+                category: "gloves",
+                categoryTitle: "Рукавиці захисні",
+                group: "equip",
+                price: 680,
+                oldPrice: 830,
+                rating: 4.8,
+                reviewsCount: 19,
+                badge: "Стиль",
+                image: "images/whiteperchatki.jpg",
+                images: ["images/whiteperchatki.jpg", "images/blackperchatki.jpg"],
+                desc: "Спортивні захисні рукавиці в стильному контрастному біло-чорному забарвленні з протиковзкою долонею.",
+                longDesc: "Спортивна версія захисних рукавиць MUVIO в яскравому біло-чорному дизайні зі світловідбивними елементами для кращої видимості водія в сутінках і вночі. Мають посилене зчеплення з гріпсами завдяки силіконовому мікронанесенню на долоні. Відмінна вентиляція та надійна застібка на зап'ясті Velcro.",
+                specs: {
+                    "Тип екіпірування": "Спортивні мотоперчатки",
+                    "Колір": "Контрастний біло-чорний (White & Black Edition)",
+                    "Захист": "Ударопоглинаючі вставки TPR + посилена долоня",
+                    "Світловідбивні елементи": "Так (світловідбивні смуги на тильній стороні)",
+                    "Сенсорні пальці": "Підтримка ємнісних екранів",
+                    "Матеріали": "Поліестер, композитна шкіра, неопрен",
+                    "Доступні розміри": "M, L, XL",
+                    "Виробник": "MUVIO Shield",
+                    "Стан": "Новий",
+                    "Гарантія": "6 місяців"
+                }
+            },
+            {
+                id: 10,
+                name: "Золотник для безкамерних шин",
+                category: "tires",
+                categoryTitle: "Шини та колеса",
+                group: "parts",
+                price: 90,
+                oldPrice: 120,
+                rating: 4.9,
+                reviewsCount: 15,
+                badge: "Безкамерні",
+                image: "images/zolotnik.jpg",
+                images: ["images/zolotnik.jpg", "images/remkomlekt.jpg"],
+                desc: "Латунний ніпель високого тиску для безкамерних дисків електроскутерів із герметичним ковпачком.",
+                longDesc: "Високоякісний вентиль (золотник) прямого типу для колісних дисків безкамерних шин tubeless скутерів. Виготовлений із суцільної латуні з антикорозійним нікелевим покриттям і якісним гумовим ущільнювачем EPDM, стійким до олив, солей та перепадів температур від -40°C до +100°C. Надійно тримає робочий тиск до 4.5 бар.",
+                specs: {
+                    "Тип деталі": "Вентиль безкамерної шини у зборі (TR412 / кутовий)",
+                    "Матеріал корпусу": "Латунь + атмосферостійка гума EPDM",
+                    "Робочий тиск": "До 4.5 Bar (65 PSI)",
+                    "Посадковий діаметр отвору": "11.5 мм (стандарт для скутерних дисків)",
+                    "Комплектація": "Корпус вентиля, сердечник високого тиску, ковпачок",
+                    "Виробник": "MUVIO Wheel",
+                    "Стан": "Новий",
+                    "Гарантія": "12 місяців"
+                }
+            },
+            {
+                id: 11,
+                name: "Ремкомплект для ремонту безкамерних шин",
+                category: "tires",
+                categoryTitle: "Ремкомплекти",
+                group: "parts",
+                price: 220,
+                oldPrice: 280,
+                rating: 5.0,
+                reviewsCount: 22,
+                badge: "Ремкомплект",
+                image: "images/remkomlekt.jpg",
+                images: ["images/remkomlekt.jpg", "images/zolotnik.jpg"],
+                desc: "Швидкий польовий ремонт проколів без демонтажу колеса: якісні джгути, спіральне шило, голка та клей.",
+                longDesc: "Незамінний дорожній набір для екстреного усунення проколів безкамерної гуми скутера прямо на дорозі за 3-5 хвилин без зняття колеса. У комплект входять ергономічне спіральне шило-рашпіль, голка з Т-подібною ручкою для встановлення джгутів, 5 самовулканізуючих сирих джгутів та активатор-клей. Дозволяє миттєво відновити герметичність колеса та продовжити рух.",
+                specs: {
+                    "Тип набору": "Польовий ремкомплект безкамерної гуми",
+                    "Час усунення проколу": "3–5 хвилин",
+                    "Комплектація": "Шило спіральне, голка монтажна, 5 джгутів сирої гуми, тюбик клею-вулканізатора",
+                    "Тип покришок": "Будь-які безкамерні шини (Tubeless)",
+                    "Матеріал інструментів": "Загартована сталь + ударостійкий пластик",
+                    "Виробник": "MUVIO Repair",
+                    "Стан": "Новий",
+                    "Гарантія": "12 місяців"
+                }
+            }
+        ];
+
+        let currentProductId = 1;
+        let currentImageIndex = 0;
+        let currentProductGallery = [];
+
+        function getCart() {
+            try {
+                const c = localStorage.getItem('muvio_cart');
+                return c ? JSON.parse(c) : [];
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function saveCart(cart) {
+            try {
+                localStorage.setItem('muvio_cart', JSON.stringify(cart));
+                updateHeaderBadges();
+            } catch (e) {}
+        }
+
+        function updateHeaderBadges() {
+            const cart = getCart();
+            let totalQty = 0;
+            let totalPrice = 0;
+            cart.forEach(item => {
+                const q = item.qty || 1;
+                totalQty += q;
+                totalPrice += (item.price || 0) * q;
+            });
+
+            const cartCountEl = document.getElementById('headerCartCount');
+            if (cartCountEl) cartCountEl.textContent = totalQty;
+
+            let wishlistCount = 3;
+            try {
+                const w = localStorage.getItem('muvio_wishlist');
+                if (w) wishlistCount = JSON.parse(w).length;
+            } catch (e) {}
+            const wishEl = document.getElementById('headerWishlistCount');
+            if (wishEl) wishEl.textContent = wishlistCount;
+
+            const compEl = document.getElementById('headerCompareCount');
+            if (compEl) compEl.textContent = "2";
+
+            let userName = "Максим";
+            try {
+                const active = localStorage.getItem('muvio_active_user');
+                const saved = localStorage.getItem('muvio_user');
+                if (saved) {
+                    const u = JSON.parse(saved);
+                    userName = u.name || u.login || "Максим";
+                } else if (active) {
+                    const u = JSON.parse(active);
+                    userName = u.name || u.login || "Максим";
+                }
+            } catch (e) {}
+
+            const userTextEl = document.getElementById('headerUserNameText');
+            if (userTextEl) userTextEl.textContent = userName;
+
+            const userAvatarChar = document.getElementById('headerUserAvatar');
+            if (userAvatarChar) {
+                userAvatarChar.textContent = userName.trim().charAt(0).toUpperCase() || 'M';
+            }
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('ecomToast');
+            const toastMsg = document.getElementById('toastMessage');
+            if (toast && toastMsg) {
+                toastMsg.textContent = msg;
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 2400);
+            }
+        }
+
+        function initProductPage() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const idParam = parseInt(urlParams.get('id') || urlParams.get('product'), 10);
+            const prod = PRODUCTS_DB.find(p => p.id === idParam) || PRODUCTS_DB[0];
+
+            currentProductId = prod.id;
+            currentImageIndex = 0;
+            currentProductGallery = (prod.images && prod.images.length) ? prod.images : [prod.image];
+
+            document.title = `${prod.name} — Магазин MUVIO Store`;
+
+            // Breadcrumbs
+            const crumbCat = document.getElementById('pdCrumbCat');
+            const crumbTitle = document.getElementById('pdCrumbTitle');
+            if (crumbCat) crumbCat.textContent = prod.categoryTitle;
+            if (crumbTitle) crumbTitle.textContent = prod.name;
+
+            // Details
+            document.getElementById('pdSku').textContent = `Артикул: 00${prod.id}`;
+            document.getElementById('pdTitle').textContent = prod.name;
+            document.getElementById('pdRatingVal').textContent = (prod.rating || 4.9).toFixed(1);
+            document.getElementById('pdRatingCount').textContent = `(${prod.reviewsCount || 14} відгуків)`;
+            document.getElementById('pdTabReviewsCount').textContent = prod.reviewsCount || 14;
+
+            // Price
+            document.getElementById('pdPrice').textContent = `${prod.price.toLocaleString()} ₴`;
+            const oldPriceLine = document.getElementById('pdOldPriceLine');
+            if (prod.oldPrice && prod.oldPrice > prod.price) {
+                oldPriceLine.style.display = 'flex';
+                document.getElementById('pdOldPrice').textContent = `${prod.oldPrice.toLocaleString()} ₴`;
+                const discountPercent = Math.round((1 - (prod.price / prod.oldPrice)) * 100);
+                document.getElementById('pdDiscountBadge').textContent = `-${discountPercent}%`;
+            } else {
+                oldPriceLine.style.display = 'none';
+            }
+
+            // Button state
+            updateBuyButtonState(prod);
+            updateWishlistButtonState(prod);
+
+            // Gallery
+            updateGalleryUI();
+
+            // Description
+            document.getElementById('pdDescContent').innerHTML = `<p>${prod.longDesc || prod.desc}</p>`;
+
+            // Specs
+            renderSpecs(prod);
+
+            // Reviews
+            renderReviews();
+
+            // Similar
+            renderSimilarProducts(prod);
+
+            // Zoom effect
+            initZoomEffect();
+
+            if (window.lucide) window.lucide.createIcons();
+        }
+
+        function updateBuyButtonState(prod) {
+            const btn = document.getElementById('pdBuyBtn');
+            const cart = getCart();
+            const isInCart = cart.some(item => item.name === prod.name);
+
+            if (isInCart) {
+                btn.classList.add('in-cart');
+                btn.innerHTML = `<i data-lucide="trash-2" class="w-5 h-5"></i> <span>Прибрати з кошика</span>`;
+            } else {
+                btn.classList.remove('in-cart');
+                btn.innerHTML = `<i data-lucide="shopping-cart" class="w-5 h-5"></i> <span>Купити</span>`;
+            }
+        }
+
+        function handlePageBuyToggle() {
+            const prod = PRODUCTS_DB.find(p => p.id === currentProductId);
+            if (!prod) return;
+
+            let cart = getCart();
+            const existingIndex = cart.findIndex(item => item.name === prod.name);
+
+            if (existingIndex > -1) {
+                cart.splice(existingIndex, 1);
+                saveCart(cart);
+                showToast(`«${prod.name}» прибрано з кошика`);
+            } else {
+                cart.push({
+                    name: prod.name,
+                    price: prod.price,
+                    qty: 1,
+                    image: prod.image,
+                    icon: 'package'
+                });
+                saveCart(cart);
+                showToast(`«${prod.name}» додано в кошик!`);
+            }
+
+            updateBuyButtonState(prod);
+            if (window.lucide) window.lucide.createIcons();
+        }
+
+        function updateWishlistButtonState(prod) {
+            const btn = document.getElementById('pdWishlistBtn');
+            let wishlist = [];
+            try {
+                const w = localStorage.getItem('muvio_wishlist');
+                wishlist = w ? JSON.parse(w) : [];
+            } catch (e) {}
+
+            const isInWishlist = wishlist.some(item => item.name === prod.name);
+            if (isInWishlist) {
+                btn.classList.add('active-heart');
+                btn.innerHTML = `<i data-lucide="heart" class="w-5 h-5 fill-rose-500 text-rose-500"></i>`;
+            } else {
+                btn.classList.remove('active-heart');
+                btn.innerHTML = `<i data-lucide="heart" class="w-5 h-5"></i>`;
+            }
+        }
+
+        function handlePageWishlistToggle() {
+            const prod = PRODUCTS_DB.find(p => p.id === currentProductId);
+            if (!prod) return;
+
+            let wishlist = [];
+            try {
+                const w = localStorage.getItem('muvio_wishlist');
+                wishlist = w ? JSON.parse(w) : [];
+            } catch (e) {}
+
+            const idx = wishlist.findIndex(item => item.name === prod.name);
+            if (idx > -1) {
+                wishlist.splice(idx, 1);
+                showToast(`«${prod.name}» видалено з обраного`);
+            } else {
+                wishlist.push({
+                    name: prod.name,
+                    price: prod.price,
+                    image: prod.image,
+                    icon: 'heart'
+                });
+                showToast(`«${prod.name}» додано в обране ❤️`);
+            }
+
+            try {
+                localStorage.setItem('muvio_wishlist', JSON.stringify(wishlist));
+                updateHeaderBadges();
+            } catch (e) {}
+
+            updateWishlistButtonState(prod);
+            if (window.lucide) window.lucide.createIcons();
+        }
+
+        function handlePageCompareToggle() {
+            const prod = PRODUCTS_DB.find(p => p.id === currentProductId);
+            if (!prod) return;
+            showToast(`«${prod.name}» додано до порівняння ⚖️`);
+            updateHeaderBadges();
+        }
+
+        function updateGalleryUI() {
+            const mainImg = document.getElementById('pdMainImg');
+            const counter = document.getElementById('pdImgCounter');
+            const thumbsRow = document.getElementById('pdThumbsRow');
+
+            if (mainImg && currentProductGallery.length > 0) {
+                mainImg.src = currentProductGallery[currentImageIndex];
+            }
+            if (counter) {
+                counter.textContent = `${currentImageIndex + 1} / ${currentProductGallery.length}`;
+            }
+
+            if (thumbsRow) {
+                thumbsRow.innerHTML = currentProductGallery.map((imgSrc, idx) => `
+                    <button type="button" class="pd-thumb-btn ${idx === currentImageIndex ? 'active' : ''}" onclick="setMainImage(${idx})" title="Фото ${idx + 1}">
+                        <img src="${imgSrc}" alt="Мініатюра ${idx + 1}" class="pd-thumb-img">
+                    </button>
+                `).join('');
+            }
+        }
+
+        function setMainImage(index) {
+            if (index < 0 || index >= currentProductGallery.length) return;
+            currentImageIndex = index;
+            document.getElementById('pdMainImg').src = currentProductGallery[currentImageIndex];
+            document.getElementById('pdImgCounter').textContent = `${currentImageIndex + 1} / ${currentProductGallery.length}`;
+
+            document.querySelectorAll('.pd-thumb-btn').forEach((btn, idx) => {
+                if (idx === index) btn.classList.add('active');
+                else btn.classList.remove('active');
+            });
+        }
+
+        function prevProductImage() {
+            if (currentProductGallery.length <= 1) return;
+            const nextIdx = (currentImageIndex - 1 + currentProductGallery.length) % currentProductGallery.length;
+            setMainImage(nextIdx);
+        }
+
+        function nextProductImage() {
+            if (currentProductGallery.length <= 1) return;
+            const nextIdx = (currentImageIndex + 1) % currentProductGallery.length;
+            setMainImage(nextIdx);
+        }
+
+        function initZoomEffect() {
+            const imgBox = document.getElementById('pdMainImgBox');
+            if (!imgBox) return;
+
+            imgBox.addEventListener('mousemove', (e) => {
+                const rect = imgBox.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                const img = document.getElementById('pdMainImg');
+                if (img) {
+                    img.style.transformOrigin = `${x}% ${y}%`;
+                    img.style.transform = 'scale(1.65)';
+                }
+            });
+
+            imgBox.addEventListener('mouseleave', () => {
+                const img = document.getElementById('pdMainImg');
+                if (img) {
+                    img.style.transformOrigin = 'center center';
+                    img.style.transform = 'scale(1)';
+                }
+            });
+        }
+
+        function switchProductTab(tabId) {
+            document.querySelectorAll('.pd-tab-btn').forEach(btn => {
+                if (btn.getAttribute('data-tab') === tabId) btn.classList.add('active');
+                else btn.classList.remove('active');
+            });
+
+            const paneAbout = document.getElementById('pdTabContentAbout');
+            const paneSpecs = document.getElementById('pdTabContentSpecs');
+            const paneReviews = document.getElementById('pdTabContentReviews');
+
+            if (paneAbout) paneAbout.classList.toggle('hidden', tabId !== 'about');
+            if (paneSpecs) paneSpecs.classList.toggle('hidden', tabId !== 'specs');
+            if (paneReviews) paneReviews.classList.toggle('hidden', tabId !== 'reviews');
+
+            if (window.lucide) window.lucide.createIcons();
+        }
+
+        function toggleDescriptionExpand() {
+            const wrapper = document.getElementById('pdDescWrapper');
+            const btnText = document.getElementById('pdReadMoreText');
+            if (!wrapper) return;
+
+            const isExpanded = wrapper.classList.toggle('expanded');
+            if (btnText) {
+                btnText.textContent = isExpanded ? 'Згорнути ↑' : 'Читати повністю ↓';
+            }
+        }
+
+        function renderSpecs(prod) {
+            const tablePreview = document.getElementById('pdSpecsTable');
+            const tableFull = document.getElementById('pdSpecsTableFull');
+            if (!prod.specs) return;
+
+            const entries = Object.entries(prod.specs);
+            const previewRows = entries.slice(0, 6).map(([k, v]) => `
+                <div class="pd-spec-row">
+                    <span class="pd-spec-key">${k}</span>
+                    <span class="pd-spec-dots"></span>
+                    <span class="pd-spec-val">${v}</span>
+                </div>
+            `).join('');
+
+            const fullRows = entries.map(([k, v]) => `
+                <div class="pd-spec-row">
+                    <span class="pd-spec-key">${k}</span>
+                    <span class="pd-spec-dots"></span>
+                    <span class="pd-spec-val">${v}</span>
+                </div>
+            `).join('');
+
+            if (tablePreview) tablePreview.innerHTML = previewRows;
+            if (tableFull) tableFull.innerHTML = fullRows;
+        }
+
+        function renderReviews() {
+            const listPreview = document.getElementById('pdReviewsList');
+            const listFull = document.getElementById('pdReviewsListFull');
+
+            const sampleReviews = [
+                {
+                    author: "Олександр К.",
+                    date: "04 жовтня 2026",
+                    verified: true,
+                    rating: 5,
+                    text: `Замовляв для щоденної їзди. Встановив без жодних проблем, деталь повністю оригінальна та якісна. Сервіс MUVIO дуже оперативний, відправили в день замовлення!`
+                },
+                {
+                    author: "Дмитро В.",
+                    date: "28 вересня 2026",
+                    verified: true,
+                    rating: 5,
+                    text: `Товар повністю відповідає опису та характеристикам на сайті. Надійна якість матеріалів, працює відмінно. Рекомендую всім власникам електроскутерів.`
+                },
+                {
+                    author: "Сергій М.",
+                    date: "15 вересня 2026",
+                    verified: true,
+                    rating: 5,
+                    text: `Гарна якість за адекватну ціну. Доставили Новою Поштою наступного дня. Дуже задоволений покупкою та підтримкою в Telegram.`
+                }
+            ];
+
+            const html = sampleReviews.map(rev => `
+                <div class="pd-review-card">
+                    <div class="pd-review-top">
+                        <div class="pd-review-author">
+                            <span>${rev.author}</span>
+                            ${rev.verified ? `<span class="pd-review-verified">✓ Підтверджена покупка</span>` : ''}
+                        </div>
+                        <span class="pd-review-date">${rev.date}</span>
+                    </div>
+                    <div class="flex items-center gap-1 mb-2">
+                        <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                        <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                        <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                        <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                        <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400"></i>
+                    </div>
+                    <p class="pd-review-text">${rev.text}</p>
+                </div>
+            `).join('');
+
+            if (listPreview) listPreview.innerHTML = html;
+            if (listFull) listFull.innerHTML = html;
+        }
+
+        function renderSimilarProducts(prod) {
+            const grid = document.getElementById('pdSimilarGrid');
+            if (!grid) return;
+
+            let similar = PRODUCTS_DB.filter(p => p.id !== prod.id && (p.category === prod.category || p.group === prod.group));
+            if (similar.length < 3) {
+                const others = PRODUCTS_DB.filter(p => p.id !== prod.id && !similar.includes(p));
+                similar = similar.concat(others.slice(0, 4 - similar.length));
+            } else {
+                similar = similar.slice(0, 4);
+            }
+
+            grid.innerHTML = similar.map(sim => `
+                <a href="product.html?id=${sim.id}" class="pd-similar-card" title="${sim.name}">
+                    <div>
+                        <div class="pd-similar-img-box">
+                            <img src="${sim.image}" alt="${sim.name}" class="pd-similar-img" loading="lazy">
+                        </div>
+                        <div class="text-[10px] font-mono text-[#1AB370] font-bold uppercase mb-1">${sim.categoryTitle}</div>
+                        <h4 class="pd-similar-title">${sim.name}</h4>
+                    </div>
+                    <div class="flex items-center justify-between pt-2 border-t border-zinc-100 dark:border-white/5 mt-2">
+                        <span class="pd-similar-price">${sim.price.toLocaleString()} ₴</span>
+                        <span class="text-[11px] font-bold text-[#1AB370]">Купити →</span>
+                    </div>
+                </a>
+            `).join('');
+        }
+
+        function openReviewPrompt() {
+            showToast("Дякуємо! Форма відгуку доступна для зареєстрованих покупців.");
+        }
+
+        function setSiteLanguage(lang) {
+            document.documentElement.setAttribute('lang', lang);
+            const btnUa = document.getElementById('authLangUa');
+            const btnEn = document.getElementById('authLangEn');
+            if (btnUa && btnEn) {
+                if (lang === 'en') {
+                    btnEn.classList.add('active', 'text-[#1AB370]');
+                    btnUa.classList.remove('active', 'text-[#1AB370]');
+                } else {
+                    btnUa.classList.add('active', 'text-[#1AB370]');
+                    btnEn.classList.remove('active', 'text-[#1AB370]');
+                }
+            }
+            try {
+                localStorage.setItem('muvio_lang', lang);
+            } catch (e) {}
+        }
+
+        function toggleAuthTheme() {
+            const isDark = document.documentElement.classList.contains('dark') ||
+                document.documentElement.classList.contains('theme-dark') ||
+                document.documentElement.getAttribute('data-theme') === 'dark';
+            const nextTheme = isDark ? 'light' : 'dark';
+
+            if (nextTheme === 'dark') {
+                document.documentElement.classList.add('dark', 'theme-dark');
+                document.documentElement.setAttribute('data-theme', 'dark');
+            } else {
+                document.documentElement.classList.remove('dark', 'theme-dark');
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+
+            try {
+                localStorage.setItem('muvio_theme', nextTheme);
+                const s = localStorage.getItem('muvio_site_settings');
+                const settings = s ? JSON.parse(s) : {};
+                settings.theme = nextTheme;
+                localStorage.setItem('muvio_site_settings', JSON.stringify(settings));
+            } catch (e) {}
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateHeaderBadges();
+            initProductPage();
+            if (window.lucide) window.lucide.createIcons();
+        });
+    </script>
+</body>
+
+</html>
