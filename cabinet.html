@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#080A0C">
     <title>Особистий кабінет покупця — MUVIO Store</title>
-    <meta name="description" content="Кабінет покупця магазину електротранспорту та аксесуарів MUVIO: замовлення, посилки, список бажань та підтримка.">
+    <meta name="description" content="Кабінет покупця магазину електротранспорту та аксесуарів MUVIO: замовлення, посилки Нової Пошти, кошик, список бажань та пряма підтримка в Telegram.">
 
     <!-- Перевірка сесії: якщо не залогінений — перенаправлення на auth.html -->
     <script>
@@ -211,6 +211,35 @@
             box-shadow: 0 0 0 2px rgba(26, 179, 112, 0.25);
         }
 
+        /* РАДІО КАРТКИ ОПЛАТИ */
+        .payment-radio-label {
+            cursor: pointer;
+            border-radius: 10px;
+            padding: 14px 16px;
+            border: 1.5px solid rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        html.dark .payment-radio-label,
+        html.theme-dark .payment-radio-label,
+        [data-theme="dark"] .payment-radio-label {
+            border-color: rgba(255, 255, 255, 0.12);
+            background-color: #151A20;
+        }
+        .payment-radio-label:hover {
+            border-color: #1AB370;
+        }
+        .payment-radio-input:checked + .payment-radio-label {
+            border-color: #1AB370;
+            background-color: rgba(26, 179, 112, 0.05);
+        }
+        html.dark .payment-radio-input:checked + .payment-radio-label {
+            background-color: rgba(26, 179, 112, 0.12);
+            border-color: #1AB370;
+        }
+
         /* ШАПКА */
         html:not(.dark) .site-header-synced {
             background-color: #FFFFFF !important;
@@ -235,6 +264,15 @@
         html.theme-dark .header-logo-img,
         [data-theme="dark"] .header-logo-img {
             filter: brightness(0) invert(1) !important;
+        }
+
+        /* Анімація підсвічування нового замовлення */
+        @keyframes highlightPulse {
+            0% { background-color: rgba(26, 179, 112, 0.25); }
+            100% { background-color: transparent; }
+        }
+        .order-highlight {
+            animation: highlightPulse 3s ease-out;
         }
     </style>
 
@@ -395,13 +433,24 @@
                 </div>
             </div>
 
-            <!-- Кнопка «Вийти з акаунта» -->
-            <button onclick="logoutUser()"
-                class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 border border-rose-200 dark:border-rose-900/50 transition-colors shrink-0">
-                <i data-lucide="log-out" class="w-4 h-4"></i>
-                <span class="lang-ua">Вийти з акаунта</span>
-                <span class="lang-en">Log Out</span>
-            </button>
+            <!-- Праві дії: Швидка підтримка в Telegram + Вийти з акаунта -->
+            <div class="flex items-center gap-3 w-full sm:w-auto">
+                <a href="https://t.me/muviobot?text=%D0%94%D0%BE%D0%B1%D1%80%D0%BE%D0%B3%D0%BE%20%D0%B4%D0%BD%D1%8F!%20%D0%9F%D0%BE%D1%82%D1%80%D1%96%D0%B1%D0%BD%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D1%96%D1%8F%20MUVIO%20Store"
+                    target="_blank" rel="noopener noreferrer"
+                    class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider text-[#229ED9] bg-sky-50 dark:bg-sky-950/40 hover:bg-sky-100 dark:hover:bg-sky-900/40 border border-sky-200 dark:border-sky-800/50 transition-colors shrink-0">
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+                    </svg>
+                    <span>Підтримка в Telegram</span>
+                </a>
+
+                <button onclick="logoutUser()"
+                    class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 border border-rose-200 dark:border-rose-900/50 transition-colors shrink-0">
+                    <i data-lucide="log-out" class="w-4 h-4"></i>
+                    <span class="lang-ua">Вийти</span>
+                    <span class="lang-en">Log Out</span>
+                </button>
+            </div>
         </div>
 
         <!-- 2.2 ГОРИЗОНТАЛЬНІ НАВІГАЦІЙНІ ВКЛАДКИ (ТАБИ) -->
@@ -411,11 +460,12 @@
                     <i data-lucide="package" class="w-4 h-4"></i>
                     <span class="lang-ua">Мої замовлення</span>
                     <span class="lang-en">My Orders</span>
+                    <span id="ordersCountBadge" class="ml-1 text-[11px] px-1.5 py-0.2 rounded-full bg-zinc-800 text-white dark:bg-white dark:text-zinc-900 font-mono">3</span>
                 </button>
                 <button onclick="switchCabinetTab('parcels')" id="tabBtn-parcels" class="tab-btn">
                     <i data-lucide="truck" class="w-4 h-4"></i>
-                    <span class="lang-ua">Мої посилки</span>
-                    <span class="lang-en">My Parcels</span>
+                    <span class="lang-ua">Мої посилки (Нова Пошта)</span>
+                    <span class="lang-en">Parcels</span>
                 </button>
                 <button onclick="switchCabinetTab('wishlist')" id="tabBtn-wishlist" class="tab-btn">
                     <i data-lucide="heart" class="w-4 h-4"></i>
@@ -425,19 +475,20 @@
                 </button>
                 <button onclick="switchCabinetTab('compare')" id="tabBtn-compare" class="tab-btn">
                     <i data-lucide="columns-2" class="w-4 h-4"></i>
-                    <span class="lang-ua">Порівняння товарів</span>
+                    <span class="lang-ua">Порівняння</span>
                     <span class="lang-en">Compare</span>
                 </button>
                 <button onclick="switchCabinetTab('messages')" id="tabBtn-messages" class="tab-btn">
-                    <i data-lucide="message-square" class="w-4 h-4"></i>
-                    <span class="lang-ua">Повідомлення</span>
-                    <span class="lang-en">Messages</span>
+                    <i data-lucide="message-circle" class="w-4 h-4"></i>
+                    <span class="lang-ua">Підтримка (Telegram)</span>
+                    <span class="lang-en">Support</span>
+                    <span class="w-2 h-2 rounded-full bg-[#229ED9] animate-pulse"></span>
                 </button>
                 <button onclick="switchCabinetTab('cart')" id="tabBtn-cart" class="tab-btn">
                     <i data-lucide="shopping-cart" class="w-4 h-4"></i>
                     <span class="lang-ua">Кошик</span>
                     <span class="lang-en">Cart</span>
-                    <span id="cartCount" class="ml-1 text-[11px] px-1.5 py-0.2 rounded-full bg-zinc-800 dark:bg-white dark:text-zinc-900 text-white font-mono">2</span>
+                    <span id="cartCount" class="ml-1 text-[11px] px-1.5 py-0.2 rounded-full bg-emerald-600 text-white font-mono font-bold">2</span>
                 </button>
             </div>
         </div>
@@ -450,26 +501,32 @@
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div class="ecom-card p-5">
                     <span class="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">Всього замовлень</span>
-                    <p class="text-2xl font-bold text-zinc-900 dark:text-white mt-2">3</p>
+                    <p id="statsTotalOrders" class="text-2xl font-bold text-zinc-900 dark:text-white mt-2">3</p>
                 </div>
                 <div class="ecom-card p-5">
                     <span class="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">У дорозі / обробці</span>
-                    <p class="text-2xl font-bold text-amber-600 dark:text-amber-400 mt-2">1</p>
+                    <p id="statsProcessingOrders" class="text-2xl font-bold text-amber-600 dark:text-amber-400 mt-2">1</p>
                 </div>
                 <div class="ecom-card p-5">
                     <span class="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">Виконано та отримано</span>
-                    <p class="text-2xl font-bold text-emerald-600 dark:text-emerald-400 mt-2">2</p>
+                    <p id="statsCompletedOrders" class="text-2xl font-bold text-emerald-600 dark:text-emerald-400 mt-2">2</p>
                 </div>
             </div>
 
             <!-- Таблиця історії замовлень -->
             <div class="ecom-card overflow-hidden">
-                <div class="p-5 border-b border-zinc-100 dark:border-white/5 flex items-center justify-between">
-                    <h2 class="font-bold text-base text-zinc-900 dark:text-white">
-                        <span class="lang-ua">Історія замовлень</span>
-                        <span class="lang-en">Order History</span>
-                    </h2>
-                    <span class="text-xs font-mono text-zinc-500">Останнє оновлення: Сьогодні</span>
+                <div class="p-5 border-b border-zinc-100 dark:border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div>
+                        <h2 class="font-bold text-base text-zinc-900 dark:text-white">
+                            <span class="lang-ua">Історія та статус замовлень</span>
+                            <span class="lang-en">Order History & Status</span>
+                        </h2>
+                        <p class="text-xs text-zinc-500 mt-0.5">Всі оформлені замовлення в інтернет-магазині MUVIO з доставкою Новою Поштою.</p>
+                    </div>
+                    <button onclick="switchCabinetTab('cart')" class="text-xs font-bold text-[#1AB370] hover:underline flex items-center gap-1.5 self-start sm:self-auto">
+                        <i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i>
+                        <span>Перейти до кошика →</span>
+                    </button>
                 </div>
 
                 <div class="overflow-x-auto">
@@ -481,70 +538,12 @@
                                 <th>Товари</th>
                                 <th>Сума</th>
                                 <th>Статус</th>
+                                <th>Доставка / Оплата</th>
                                 <th class="text-right">Дія</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <!-- Замовлення 1 -->
-                            <tr>
-                                <td class="font-mono font-bold text-[#1AB370]">#MU-84920</td>
-                                <td class="text-zinc-500 font-mono">08.10.2026</td>
-                                <td>
-                                    <div class="font-semibold">Шолом інтеграл MUVIO Shield Pro</div>
-                                    <div class="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">+ Швидкий зарядний пристрій 72V 10A</div>
-                                </td>
-                                <td class="font-mono font-bold text-zinc-900 dark:text-white">4 250 ₴</td>
-                                <td>
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-900/60">
-                                        Обробляється
-                                    </span>
-                                </td>
-                                <td class="text-right">
-                                    <button onclick="switchCabinetTab('parcels')" class="text-xs font-bold text-[#1AB370] hover:underline">
-                                        Відстежити →
-                                    </button>
-                                </td>
-                            </tr>
-                            <!-- Замовлення 2 -->
-                            <tr>
-                                <td class="font-mono font-bold text-[#1AB370]">#MU-81044</td>
-                                <td class="text-zinc-500 font-mono">28.09.2026</td>
-                                <td>
-                                    <div class="font-semibold">Гальмівні колодки керамічні CR-Series</div>
-                                    <div class="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">Комплект (2 пари)</div>
-                                </td>
-                                <td class="font-mono font-bold text-zinc-900 dark:text-white">780 ₴</td>
-                                <td>
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-900/60">
-                                        Відправлено
-                                    </span>
-                                </td>
-                                <td class="text-right">
-                                    <a href="https://novaposhta.ua" target="_blank" class="text-xs font-bold text-[#1AB370] hover:underline">
-                                        ТТН: 2045...
-                                    </a>
-                                </td>
-                            </tr>
-                            <!-- Замовлення 3 -->
-                            <tr>
-                                <td class="font-mono font-bold text-[#1AB370]">#MU-77291</td>
-                                <td class="text-zinc-500 font-mono">12.09.2026</td>
-                                <td>
-                                    <div class="font-semibold">Тримач телефона з вібророзв'язкою</div>
-                                    <div class="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">+ Дзеркала заднього виду алюмінієві</div>
-                                </td>
-                                <td class="font-mono font-bold text-zinc-900 dark:text-white">1 540 ₴</td>
-                                <td>
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-900/60">
-                                        Виконано
-                                    </span>
-                                </td>
-                                <td class="text-right">
-                                    <button onclick="reorderItems('MU-77291')" class="text-xs font-bold text-zinc-500 hover:text-zinc-900 dark:hover:text-white">
-                                        Повторити
-                                    </button>
-                                </td>
-                            </tr>
+                        <tbody id="ordersTableBody">
+                            <!-- Рендериться динамічно через renderOrders() -->
                         </tbody>
                     </table>
                 </div>
@@ -556,11 +555,11 @@
             <!-- Пошук посилки за номером -->
             <div class="ecom-card p-6">
                 <h2 class="font-bold text-base text-zinc-900 dark:text-white mb-2">
-                    <span class="lang-ua">Швидке відстеження посилки</span>
+                    <span class="lang-ua">Швидке відстеження посилки Нової Пошти</span>
                     <span class="lang-en">Quick Parcel Tracking</span>
                 </h2>
                 <p class="text-xs text-zinc-500 dark:text-zinc-400 mb-4">
-                    Введіть номер експрес-накладної (ТТН) Нової Пошти або внутрішній номер трекінгу MUVIO.
+                    Введіть номер експрес-накладної (ТТН) Нової Пошти з вашого замовлення MUVIO Store.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-3 max-w-xl">
                     <input type="text" id="ttnSearchInput" value="20450918234891" placeholder="20450918234891" class="ecom-input flex-1 font-mono">
@@ -575,7 +574,7 @@
             <div class="ecom-card p-6 space-y-6">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-100 dark:border-white/5">
                     <div>
-                        <span class="text-xs font-mono font-bold text-zinc-400 uppercase tracking-wider">Нова Пошта • Відправлення</span>
+                        <span class="text-xs font-mono font-bold text-zinc-400 uppercase tracking-wider">Нова Пошта • Експрес-відправлення</span>
                         <h3 class="text-lg font-bold text-zinc-900 dark:text-white font-mono mt-0.5">ТТН: 20450918234891</h3>
                     </div>
                     <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-900/60 self-start sm:self-auto">
@@ -593,7 +592,7 @@
                     <div class="space-y-1">
                         <span class="text-zinc-400 uppercase font-bold tracking-wider text-[10px]">Пункт прибуття</span>
                         <p class="font-semibold text-zinc-800 dark:text-zinc-200">м. Одеса, Відділення Нової Пошти №24</p>
-                        <p class="text-[11px] text-zinc-500">Очікувана дата доставки: <strong class="text-zinc-900 dark:text-white">11.10.2026</strong></p>
+                        <p class="text-[11px] text-zinc-500">Очікувана дата доставки: <strong class="text-zinc-900 dark:text-white">Сьогодні / Завтра</strong></p>
                     </div>
                 </div>
 
@@ -622,7 +621,7 @@
                 <div class="pt-2 flex justify-end">
                     <a href="https://novaposhta.ua/tracking/?cargo_number=20450918234891" target="_blank" rel="noopener noreferrer"
                         class="text-xs font-bold text-[#1AB370] hover:underline flex items-center gap-1.5">
-                        <span>Відкрити на сайті Нової Пошти</span>
+                        <span>Відкрити на офіційному сайті Нової Пошти</span>
                         <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
                     </a>
                 </div>
@@ -636,7 +635,7 @@
                     <span class="lang-ua">Збережені товари та аксесуари</span>
                     <span class="lang-en">Saved Items & Accessories</span>
                 </h2>
-                <span class="text-xs text-zinc-500 font-mono">3 товари у списку</span>
+                <span id="wishlistHeaderCount" class="text-xs text-zinc-500 font-mono">3 товари у списку</span>
             </div>
 
             <!-- Сетка відкладених товарів -->
@@ -649,11 +648,11 @@
                             <span class="absolute top-2 right-2 text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-400">В наявності</span>
                         </div>
                         <h3 class="font-bold text-sm text-zinc-900 dark:text-white leading-snug">Шолом інтеграл MUVIO Shield Pro</h3>
-                        <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Сертифікований DOT / ECE 22.05 з прозорим візором.</p>
+                        <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Сертифікований DOT / ECE 22.05 з подвійним візором.</p>
                         <div class="mt-3 font-mono font-extrabold text-base text-zinc-900 dark:text-white">2 800 ₴</div>
                     </div>
                     <div class="mt-5 pt-3 border-t border-zinc-100 dark:border-white/5 flex gap-2">
-                        <button onclick="moveToCart('Шолом інтеграл MUVIO Shield Pro', 2800)" class="flex-1 bg-[#1AB370] hover:bg-[#169B60] text-white font-bold text-xs uppercase tracking-wider py-2 rounded-lg transition-colors flex items-center justify-center gap-1.5">
+                        <button onclick="moveToCart('Шолом інтеграл MUVIO Shield Pro', 2800, 'shield')" class="flex-1 bg-[#1AB370] hover:bg-[#169B60] text-white font-bold text-xs uppercase tracking-wider py-2 rounded-lg transition-colors flex items-center justify-center gap-1.5">
                             <i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i>
                             <span>У кошик</span>
                         </button>
@@ -675,7 +674,7 @@
                         <div class="mt-3 font-mono font-extrabold text-base text-zinc-900 dark:text-white">1 450 ₴</div>
                     </div>
                     <div class="mt-5 pt-3 border-t border-zinc-100 dark:border-white/5 flex gap-2">
-                        <button onclick="moveToCart('Швидкий зарядний пристрій 72V 10A', 1450)" class="flex-1 bg-[#1AB370] hover:bg-[#169B60] text-white font-bold text-xs uppercase tracking-wider py-2 rounded-lg transition-colors flex items-center justify-center gap-1.5">
+                        <button onclick="moveToCart('Швидкий зарядний пристрій 72V 10A', 1450, 'zap')" class="flex-1 bg-[#1AB370] hover:bg-[#169B60] text-white font-bold text-xs uppercase tracking-wider py-2 rounded-lg transition-colors flex items-center justify-center gap-1.5">
                             <i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i>
                             <span>У кошик</span>
                         </button>
@@ -697,7 +696,7 @@
                         <div class="mt-3 font-mono font-extrabold text-base text-zinc-900 dark:text-white">1 900 ₴</div>
                     </div>
                     <div class="mt-5 pt-3 border-t border-zinc-100 dark:border-white/5 flex gap-2">
-                        <button onclick="moveToCart('Комплект всесезонної гуми 12 GripMax', 1900)" class="flex-1 bg-[#1AB370] hover:bg-[#169B60] text-white font-bold text-xs uppercase tracking-wider py-2 rounded-lg transition-colors flex items-center justify-center gap-1.5">
+                        <button onclick="moveToCart('Комплект всесезонної гуми 12 GripMax', 1900, 'disc')" class="flex-1 bg-[#1AB370] hover:bg-[#169B60] text-white font-bold text-xs uppercase tracking-wider py-2 rounded-lg transition-colors flex items-center justify-center gap-1.5">
                             <i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i>
                             <span>У кошик</span>
                         </button>
@@ -751,11 +750,6 @@
                                 <td>Одинарний прозорий візор</td>
                             </tr>
                             <tr>
-                                <td class="font-semibold text-zinc-500">Система вентиляції</td>
-                                <td>4 регульованих вхідних канали</td>
-                                <td>2 відкритих отвори</td>
-                            </tr>
-                            <tr>
                                 <td class="font-semibold text-zinc-500">Вага</td>
                                 <td class="font-mono">1 350 г</td>
                                 <td class="font-mono">980 г</td>
@@ -768,12 +762,12 @@
                             <tr>
                                 <td></td>
                                 <td>
-                                    <button onclick="moveToCart('Шолом Shield Pro', 2800)" class="w-full bg-[#1AB370] hover:bg-[#169B60] text-white font-bold text-xs uppercase tracking-wider py-2.5 rounded-lg transition-colors">
+                                    <button onclick="moveToCart('Шолом Shield Pro', 2800, 'shield')" class="w-full bg-[#1AB370] hover:bg-[#169B60] text-white font-bold text-xs uppercase tracking-wider py-2.5 rounded-lg transition-colors">
                                         Купити
                                     </button>
                                 </td>
                                 <td>
-                                    <button onclick="moveToCart('Шолом Open-Face', 1650)" class="w-full bg-zinc-800 hover:bg-zinc-700 text-white font-bold text-xs uppercase tracking-wider py-2.5 rounded-lg transition-colors">
+                                    <button onclick="moveToCart('Шолом Open-Face', 1650, 'shield')" class="w-full bg-zinc-800 hover:bg-zinc-700 text-white font-bold text-xs uppercase tracking-wider py-2.5 rounded-lg transition-colors">
                                         Купити
                                     </button>
                                 </td>
@@ -784,90 +778,127 @@
             </div>
         </div>
 
-        <!-- 5. ТАБ: ПОВІДОМЛЕННЯ (ЧАТ З МАГАЗИНОМ) -->
+        <!-- 5. ТАБ: ПІДТРИМКА ТА ЧАТ (ПРЯМИЙ TELEGRAM) -->
         <div id="tabContent-messages" class="hidden space-y-6">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <!-- Ліва частина: Чат із менеджером -->
-                <div class="lg:col-span-2 ecom-card flex flex-col h-[520px]">
-                    <div class="p-4 border-b border-zinc-100 dark:border-white/5 flex items-center justify-between">
-                        <div class="flex items-center gap-3">
-                            <div class="w-9 h-9 rounded-full bg-[#1AB370] text-white flex items-center justify-center font-bold text-sm">
-                                M
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-sm text-zinc-900 dark:text-white leading-tight">Служба клієнтської підтримки MUVIO</h3>
-                                <span class="text-[11px] text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+            <!-- Головна картка зв'язку з підтримкою -->
+            <div class="ecom-card p-6 sm:p-8">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-zinc-100 dark:border-white/5">
+                    <div class="flex items-start gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-[#229ED9]/10 text-[#229ED9] flex items-center justify-center shrink-0">
+                            <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <h2 class="text-xl font-bold text-zinc-900 dark:text-white">Служба підтримки MUVIO Store</h2>
+                                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/60">
+                                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                                     Менеджер онлайн
                                 </span>
                             </div>
+                            <p class="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 mt-1">
+                                Офіційний контакт клієнтської підтримки: консультації щодо замовлень, наявності та доставки Новою Поштою.
+                            </p>
                         </div>
                     </div>
 
-                    <!-- Повідомлення -->
-                    <div id="chatMessages" class="flex-1 p-5 overflow-y-auto space-y-4 text-xs">
-                        <div class="flex items-start gap-2.5 max-w-[80%]">
-                            <div class="w-7 h-7 rounded-full bg-[#1AB370] text-white flex items-center justify-center text-[10px] font-bold shrink-0">
-                                M
-                            </div>
-                            <div class="bg-zinc-100 dark:bg-[#161B20] p-3 rounded-xl rounded-tl-none border border-zinc-200 dark:border-white/5">
-                                <p class="text-zinc-800 dark:text-zinc-200">Вітаємо у MUVIO Store! Ваше замовлення #MU-84920 вже скомплектовано та передано кур'єрській службі для відправки.</p>
-                                <span class="text-[10px] text-zinc-400 block mt-1">10:45</span>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start justify-end gap-2.5 ml-auto max-w-[80%]">
-                            <div class="bg-[#1AB370] text-white p-3 rounded-xl rounded-tr-none">
-                                <p>Доброго дня! Чи можна додати до посилки ще один тримач для смартфона?</p>
-                                <span class="text-[10px] text-white/70 block mt-1 text-right">10:52</span>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start gap-2.5 max-w-[80%]">
-                            <div class="w-7 h-7 rounded-full bg-[#1AB370] text-white flex items-center justify-center text-[10px] font-bold shrink-0">
-                                M
-                            </div>
-                            <div class="bg-zinc-100 dark:bg-[#161B20] p-3 rounded-xl rounded-tl-none border border-zinc-200 dark:border-white/5">
-                                <p class="text-zinc-800 dark:text-zinc-200">Так, звичайно! Додали позицію до замовлення. Фінальний чек оновиться у розділі «Мої замовлення».</p>
-                                <span class="text-[10px] text-zinc-400 block mt-1">11:04</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Введення повідомлення -->
-                    <form onsubmit="handleSendChatMessage(event)" class="p-3 border-t border-zinc-100 dark:border-white/5 flex gap-2">
-                        <input type="text" id="chatInput" placeholder="Напишіть ваше повідомлення менеджерові..." class="ecom-input flex-1">
-                        <button type="submit" class="bg-[#1AB370] hover:bg-[#169B60] text-white px-5 rounded-lg font-bold text-xs uppercase tracking-wider transition-colors flex items-center justify-center">
-                            <i data-lucide="send" class="w-4 h-4"></i>
-                        </button>
-                    </form>
+                    <!-- Головна кнопка Telegram -->
+                    <a href="https://t.me/muviobot?text=%D0%94%D0%BE%D0%B1%D1%80%D0%BE%D0%B3%D0%BE%20%D0%B4%D0%BD%D1%8F!%20%D0%9F%D0%BE%D1%82%D1%80%D1%96%D0%B1%D0%BD%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D1%96%D1%8F%20MUVIO%20Store"
+                        target="_blank" rel="noopener noreferrer"
+                        class="bg-[#229ED9] hover:bg-[#1E8BC0] text-white font-bold text-sm uppercase tracking-wider py-3.5 px-6 rounded-xl flex items-center justify-center gap-2.5 transition-all shadow-lg shadow-sky-500/20 shrink-0">
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+                        </svg>
+                        <span>Написати в Telegram (@muviobot)</span>
+                    </a>
                 </div>
 
-                <!-- Права частина: Швидкий контакт з Telegram -->
-                <div class="ecom-card p-6 flex flex-col justify-between">
-                    <div>
-                        <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-500 flex items-center justify-center mb-4">
-                            <i data-lucide="send" class="w-6 h-6"></i>
-                        </div>
-                        <h3 class="font-bold text-base text-zinc-900 dark:text-white">Швидкий зв'язок у Telegram</h3>
-                        <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-2 leading-relaxed">
-                            Отримайте миттєву відповідь менеджера з питань підбору запчастин, статусів відправлень чи повернення товару.
-                        </p>
-                        <ul class="mt-4 space-y-2 text-xs text-zinc-600 dark:text-zinc-300">
-                            <li class="flex items-center gap-2">✓ Відповідь протягом 2-5 хвилин</li>
-                            <li class="flex items-center gap-2">✓ Фото-консультація по сумісності</li>
-                            <li class="flex items-center gap-2">✓ Підтримка Пн-Сб: 09:00 - 19:00</li>
-                        </ul>
-                    </div>
+                <!-- Швидкі теми для звернення (готовий стартовий текст) -->
+                <div class="mt-8">
+                    <h3 class="font-bold text-sm text-zinc-900 dark:text-white uppercase tracking-wider mb-4">
+                        Оберіть тематику звернення для швидкого старту діалогу:
+                    </h3>
 
-                    <div class="mt-6 pt-4 border-t border-zinc-100 dark:border-white/5">
-                        <a href="https://t.me/muviobot" target="_blank" rel="noopener noreferrer"
-                            class="w-full bg-[#229ED9] hover:bg-[#1E8BC0] text-white font-bold text-xs uppercase tracking-wider py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors">
-                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
-                            </svg>
-                            <span>Написати в Telegram менеджеру</span>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <!-- Тема 1 -->
+                        <a href="https://t.me/muviobot?text=%D0%94%D0%BE%D0%B1%D1%80%D0%BE%D0%B3%D0%BE%20%D0%B4%D0%BD%D1%8F!%20%D0%9C%D0%B0%D1%8E%20%D0%BF%D0%B8%D1%82%D0%B0%D0%BD%D0%BD%D1%8F%20%D1%89%D0%BE%D0%B4%D0%BE%20%D1%81%D1%82%D0%B0%D1%82%D1%83%D1%81%D1%83%20%D1%82%D0%B0%20%D0%B4%D0%BE%D1%81%D1%82%D0%B0%D0%B2%D0%BA%D0%B8%20%D0%BC%D0%BE%D1%94%D0%B3%D0%BE%20%D0%B7%D0%B0%D0%BC%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%BD%D1%8F"
+                            target="_blank" rel="noopener noreferrer"
+                            class="p-4 rounded-xl border border-zinc-200 dark:border-white/10 hover:border-[#229ED9] bg-zinc-50 dark:bg-[#161B20] transition-colors group flex flex-col justify-between">
+                            <div>
+                                <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-500 flex items-center justify-center mb-3">
+                                    <i data-lucide="package" class="w-4 h-4"></i>
+                                </div>
+                                <h4 class="font-bold text-sm text-zinc-900 dark:text-white group-hover:text-[#229ED9] transition-colors">
+                                    Статус замовлення та Нова Пошта
+                                </h4>
+                                <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1 leading-relaxed">
+                                    Уточнити номер ТТН, змінити відділення або перевірити дату прибуття посилки.
+                                </p>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-zinc-200/60 dark:border-white/5 flex items-center justify-between text-xs font-bold text-[#229ED9]">
+                                <span>Відкрити в Telegram</span>
+                                <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
+                            </div>
                         </a>
+
+                        <!-- Тема 2 -->
+                        <a href="https://t.me/muviobot?text=%D0%94%D0%BE%D0%B1%D1%80%D0%BE%D0%B3%D0%BE%20%D0%B4%D0%BD%D1%8F!%20%D0%9F%D0%BE%D1%82%D1%80%D1%96%D0%B1%D0%BD%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D1%96%D1%8F%20%D1%89%D0%BE%D0%B4%D0%BE%20%D0%BF%D1%96%D0%B4%D0%B1%D0%BE%D1%80%D1%83%20%D1%82%D0%BE%D0%B2%D0%B0%D1%80%D1%96%D0%B2%2C%20%D1%88%D0%BE%D0%BB%D0%BE%D0%BC%D1%96%D0%B2%20%D1%82%D0%B0%20%D0%B0%D0%BA%D1%81%D0%B5%D1%81%D1%83%D0%B0%D1%80%D1%96%D0%B2"
+                            target="_blank" rel="noopener noreferrer"
+                            class="p-4 rounded-xl border border-zinc-200 dark:border-white/10 hover:border-[#1AB370] bg-zinc-50 dark:bg-[#161B20] transition-colors group flex flex-col justify-between">
+                            <div>
+                                <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-[#1AB370] flex items-center justify-center mb-3">
+                                    <i data-lucide="help-circle" class="w-4 h-4"></i>
+                                </div>
+                                <h4 class="font-bold text-sm text-zinc-900 dark:text-white group-hover:text-[#1AB370] transition-colors">
+                                    Консультація та підбір товарів
+                                </h4>
+                                <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1 leading-relaxed">
+                                    Підбір розміру шолома, сумісність зарядних пристроїв, гальмівних колодок та гуми.
+                                </p>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-zinc-200/60 dark:border-white/5 flex items-center justify-between text-xs font-bold text-[#1AB370]">
+                                <span>Запитати менеджера</span>
+                                <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
+                            </div>
+                        </a>
+
+                        <!-- Тема 3 -->
+                        <a href="https://t.me/muviobot?text=%D0%94%D0%BE%D0%B1%D1%80%D0%BE%D0%B3%D0%BE%20%D0%B4%D0%BD%D1%8F!%20%D0%9C%D0%B0%D1%8E%20%D0%BF%D0%B8%D1%82%D0%B0%D0%BD%D0%BD%D1%8F%20%D1%89%D0%BE%D0%B4%D0%BE%20%D0%B3%D0%B0%D1%80%D0%B0%D0%BD%D1%82%D1%96%D1%97%2C%20%D0%BE%D0%B1%D0%BC%D1%96%D0%BD%D1%83%20%D1%82%D0%B0%20%D0%BF%D0%BE%D0%B2%D0%B5%D1%80%D0%BD%D0%B5%D0%BD%D0%BD%D1%8F%20%D1%82%D0%BE%D0%B2%D0%B0%D1%80%D1%83"
+                            target="_blank" rel="noopener noreferrer"
+                            class="p-4 rounded-xl border border-zinc-200 dark:border-white/10 hover:border-amber-500 bg-zinc-50 dark:bg-[#161B20] transition-colors group flex flex-col justify-between">
+                            <div>
+                                <div class="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-500 flex items-center justify-center mb-3">
+                                    <i data-lucide="shield-check" class="w-4 h-4"></i>
+                                </div>
+                                <h4 class="font-bold text-sm text-zinc-900 dark:text-white group-hover:text-amber-500 transition-colors">
+                                    Гарантія, обмін та повернення
+                                </h4>
+                                <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1 leading-relaxed">
+                                    14 днів на повернення згідно із законодавством України, гарантійне обслуговування.
+                                </p>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-zinc-200/60 dark:border-white/5 flex items-center justify-between text-xs font-bold text-amber-500">
+                                <span>Надіслати запит</span>
+                                <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Інформаційні деталі -->
+                <div class="mt-8 pt-6 border-t border-zinc-100 dark:border-white/5 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs text-zinc-600 dark:text-zinc-400">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="clock" class="w-4 h-4 text-[#1AB370]"></i>
+                        <span>Графік: Пн–Сб 09:00–19:00 (Нд: черговий)</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="zap" class="w-4 h-4 text-[#1AB370]"></i>
+                        <span>Середній час відповіді: 2–5 хвилин</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="phone" class="w-4 h-4 text-[#1AB370]"></i>
+                        <span>Пряма лінія: +38 (093) 170-00-00</span>
                     </div>
                 </div>
             </div>
@@ -878,81 +909,57 @@
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <!-- Список товарів у кошику -->
                 <div class="lg:col-span-2 ecom-card p-6 space-y-5">
-                    <h2 class="font-bold text-lg text-zinc-900 dark:text-white border-b border-zinc-100 dark:border-white/5 pb-3">
-                        <span class="lang-ua">Поточний кошик</span>
-                        <span class="lang-en">Current Cart</span>
-                    </h2>
+                    <div class="flex items-center justify-between border-b border-zinc-100 dark:border-white/5 pb-3">
+                        <h2 class="font-bold text-lg text-zinc-900 dark:text-white">
+                            <span class="lang-ua">Поточний кошик</span>
+                            <span class="lang-en">Current Cart</span>
+                        </h2>
+                        <span id="cartItemsCountLabel" class="text-xs font-mono text-zinc-500">2 товари</span>
+                    </div>
 
+                    <!-- Контейнер списку товарів (рендериться з JS) -->
                     <div id="cartItemsList" class="space-y-4">
-                        <!-- Товар 1 -->
-                        <div class="flex items-center justify-between gap-4 py-3 border-b border-zinc-100 dark:border-white/5">
-                            <div class="flex items-center gap-3">
-                                <div class="w-12 h-12 rounded-lg bg-zinc-100 dark:bg-[#161B20] flex items-center justify-center shrink-0 text-[#1AB370]">
-                                    <i data-lucide="shield" class="w-6 h-6"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-xs sm:text-sm text-zinc-900 dark:text-white">Шолом інтеграл MUVIO Shield Pro</h4>
-                                    <span class="text-xs text-zinc-500 font-mono">2 800 ₴</span>
-                                </div>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <span class="font-mono text-xs font-semibold px-2 py-1 bg-zinc-100 dark:bg-[#161B20] rounded">1 шт.</span>
-                                <span class="font-mono font-bold text-sm text-zinc-900 dark:text-white">2 800 ₴</span>
-                                <button onclick="removeCartItem(this, 2800)" class="text-zinc-400 hover:text-rose-500 p-1">
-                                    <i data-lucide="x" class="w-4 h-4"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Товар 2 -->
-                        <div class="flex items-center justify-between gap-4 py-3 border-b border-zinc-100 dark:border-white/5">
-                            <div class="flex items-center gap-3">
-                                <div class="w-12 h-12 rounded-lg bg-zinc-100 dark:bg-[#161B20] flex items-center justify-center shrink-0 text-[#1AB370]">
-                                    <i data-lucide="smartphone" class="w-6 h-6"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-xs sm:text-sm text-zinc-900 dark:text-white">Тримач смартфона з вібророзв'язкою</h4>
-                                    <span class="text-xs text-zinc-500 font-mono">750 ₴</span>
-                                </div>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <span class="font-mono text-xs font-semibold px-2 py-1 bg-zinc-100 dark:bg-[#161B20] rounded">1 шт.</span>
-                                <span class="font-mono font-bold text-sm text-zinc-900 dark:text-white">750 ₴</span>
-                                <button onclick="removeCartItem(this, 750)" class="text-zinc-400 hover:text-rose-500 p-1">
-                                    <i data-lucide="x" class="w-4 h-4"></i>
-                                </button>
-                            </div>
-                        </div>
+                        <!-- Динамічні елементи кошика -->
                     </div>
                 </div>
 
                 <!-- Підсумок замовлення -->
                 <div class="ecom-card p-6 flex flex-col justify-between">
                     <div class="space-y-4">
-                        <h3 class="font-bold text-base text-zinc-900 dark:text-white border-b border-zinc-100 dark:border-white/5 pb-3">Підсумок</h3>
+                        <h3 class="font-bold text-base text-zinc-900 dark:text-white border-b border-zinc-100 dark:border-white/5 pb-3">
+                            Підсумок замовлення
+                        </h3>
                         
-                        <div class="space-y-2 text-xs">
+                        <div class="space-y-2.5 text-xs">
                             <div class="flex justify-between text-zinc-500">
                                 <span>Вартість товарів:</span>
                                 <span id="cartSubtotal" class="font-mono font-bold text-zinc-900 dark:text-white">3 550 ₴</span>
                             </div>
                             <div class="flex justify-between text-zinc-500">
-                                <span>Доставка Новою Поштою:</span>
-                                <span class="font-mono text-emerald-600 font-semibold">Безкоштовно</span>
+                                <span class="flex items-center gap-1.5">
+                                    <span>Доставка Новою Поштою:</span>
+                                </span>
+                                <span class="font-mono text-emerald-600 dark:text-emerald-400 font-bold">Безкоштовно</span>
+                            </div>
+                            <div class="text-[11px] text-zinc-400">
+                                🚚 Безкоштовно на всі замовлення від 1 000 ₴
                             </div>
                         </div>
 
-                        <div class="pt-3 border-t border-zinc-100 dark:border-white/5 flex justify-between items-baseline">
+                        <div class="pt-4 border-t border-zinc-100 dark:border-white/5 flex justify-between items-baseline">
                             <span class="font-bold text-sm text-zinc-900 dark:text-white">До сплати:</span>
-                            <span id="cartTotal" class="font-mono font-black text-xl text-[#1AB370]">3 550 ₴</span>
+                            <span id="cartTotal" class="font-mono font-black text-2xl text-[#1AB370]">3 550 ₴</span>
                         </div>
                     </div>
 
-                    <div class="mt-6 pt-4 border-t border-zinc-100 dark:border-white/5">
-                        <button onclick="checkoutOrderAction()" class="w-full bg-[#1AB370] hover:bg-[#169B60] text-white font-bold text-xs uppercase tracking-wider py-3.5 rounded-lg transition-colors flex items-center justify-center gap-2">
+                    <div class="mt-6 pt-4 border-t border-zinc-100 dark:border-white/5 space-y-2">
+                        <button id="checkoutOpenBtn" onclick="openCheckoutModal()" class="w-full bg-[#1AB370] hover:bg-[#169B60] text-white font-bold text-xs uppercase tracking-wider py-3.5 rounded-lg transition-colors flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/10">
                             <i data-lucide="check" class="w-4 h-4"></i>
                             <span>Оформити замовлення</span>
                         </button>
+                        <div class="text-center">
+                            <span class="text-[11px] text-zinc-400">Швидке оформлення • Відправка сьогодні</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -960,7 +967,342 @@
 
     </main>
 
-    <!-- ==================== 3. ПІДВАЛ (FOOTER) ==================== -->
+    <!-- ==================== 3. МОДАЛЬНЕ ОКНО ОФОРМЛЕННЯ ЗАКАЗА (CHECKOUT) ==================== -->
+    <div id="checkoutModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto hidden">
+        <div class="ecom-card bg-white dark:bg-[#111418] border border-zinc-200 dark:border-white/10 shadow-2xl rounded-2xl max-w-2xl w-full my-8 overflow-hidden">
+            <!-- Шапка модального вікна -->
+            <div class="p-5 sm:p-6 border-b border-zinc-100 dark:border-white/5 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-[#1AB370] flex items-center justify-center">
+                        <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg text-zinc-900 dark:text-white leading-tight">
+                            Оформлення замовлення
+                        </h3>
+                        <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">
+                            Доставка Новою Поштою по всій Україні
+                        </p>
+                    </div>
+                </div>
+                <button type="button" onclick="closeCheckoutModal()" class="text-zinc-400 hover:text-zinc-700 dark:hover:text-white p-1.5 rounded-lg transition-colors" aria-label="Закрити">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <!-- Форма чекаута -->
+            <form onsubmit="handleCheckoutSubmit(event)" class="p-5 sm:p-6 space-y-6">
+                <!-- ШАГ 1: Контактні дані -->
+                <div>
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="w-6 h-6 rounded-full bg-[#1AB370] text-white flex items-center justify-center text-xs font-bold font-mono">1</span>
+                        <h4 class="font-bold text-sm text-zinc-900 dark:text-white uppercase tracking-wider">
+                            Контактні дані отримувача
+                        </h4>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="sm:col-span-2">
+                            <label for="checkoutName" class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1.5">
+                                Ім'я та Прізвище <span class="text-rose-500">*</span>
+                            </label>
+                            <div class="relative">
+                                <input type="text" id="checkoutName" required placeholder="Олександр Шевченко" class="ecom-input w-full pl-9">
+                                <i data-lucide="user" class="w-4 h-4 text-zinc-400 absolute left-3 top-3"></i>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="checkoutPhone" class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1.5">
+                                Номер телефону (+380...) <span class="text-rose-500">*</span>
+                            </label>
+                            <div class="relative">
+                                <input type="tel" id="checkoutPhone" required placeholder="+380 (99) 000-00-00" class="ecom-input w-full pl-9 font-mono">
+                                <i data-lucide="phone" class="w-4 h-4 text-zinc-400 absolute left-3 top-3"></i>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="checkoutEmail" class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1.5">
+                                Email <span class="text-rose-500">*</span>
+                            </label>
+                            <div class="relative">
+                                <input type="email" id="checkoutEmail" required placeholder="name@example.com" class="ecom-input w-full pl-9">
+                                <i data-lucide="mail" class="w-4 h-4 text-zinc-400 absolute left-3 top-3"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ШАГ 2: Доставка (Нова Пошта) -->
+                <div class="pt-2 border-t border-zinc-100 dark:border-white/5">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center gap-2">
+                            <span class="w-6 h-6 rounded-full bg-[#1AB370] text-white flex items-center justify-center text-xs font-bold font-mono">2</span>
+                            <h4 class="font-bold text-sm text-zinc-900 dark:text-white uppercase tracking-wider">
+                                Доставка (Нова Пошта)
+                            </h4>
+                        </div>
+                        <span class="inline-flex items-center gap-1 text-[11px] font-bold text-red-600 dark:text-red-400 uppercase tracking-wider">
+                            <span class="w-2 h-2 rounded-full bg-red-600"></span>
+                            Нова Пошта
+                        </span>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label for="checkoutCity" class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1.5">
+                                Місто доставки <span class="text-rose-500">*</span>
+                            </label>
+                            <div class="relative">
+                                <input type="text" id="checkoutCity" list="uaCitiesList" required placeholder="Оберіть або почніть вводити місто (наприклад: Одеса, Київ...)" class="ecom-input w-full pl-9">
+                                <i data-lucide="map-pin" class="w-4 h-4 text-zinc-400 absolute left-3 top-3"></i>
+                            </div>
+                            <!-- Список автопідказок міст -->
+                            <datalist id="uaCitiesList">
+                                <option value="Київ">
+                                <option value="Одеса">
+                                <option value="Львів">
+                                <option value="Харків">
+                                <option value="Дніпро">
+                                <option value="Запоріжжя">
+                                <option value="Вінниця">
+                                <option value="Кривий Ріг">
+                                <option value="Миколаїв">
+                                <option value="Полтава">
+                                <option value="Чернігів">
+                                <option value="Черкаси">
+                                <option value="Хмельницький">
+                                <option value="Житомир">
+                                <option value="Чернівці">
+                                <option value="Суми">
+                                <option value="Рівне">
+                                <option value="Івано-Франківськ">
+                                <option value="Тернопіль">
+                                <option value="Луцьк">
+                                <option value="Ужгород">
+                                <option value="Біла Церква">
+                                <option value="Кременчук">
+                            </datalist>
+                        </div>
+
+                        <div>
+                            <label for="checkoutWarehouse" class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1.5">
+                                Номер відділення або поштомату <span class="text-rose-500">*</span>
+                            </label>
+                            <div class="relative">
+                                <input type="text" id="checkoutWarehouse" required placeholder="Наприклад: Відділення №45 (вул. Академіка Корольова, 24) або Поштомат №8120" class="ecom-input w-full pl-9">
+                                <i data-lucide="truck" class="w-4 h-4 text-zinc-400 absolute left-3 top-3"></i>
+                            </div>
+                        </div>
+
+                        <div class="p-3 bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/40 rounded-lg flex items-center gap-2.5 text-xs text-emerald-800 dark:text-emerald-300">
+                            <i data-lucide="gift" class="w-4 h-4 text-[#1AB370] shrink-0"></i>
+                            <span>Безкоштовна доставка для вашого замовлення від 1 000 ₴. Відправлення протягом 24 годин.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ШАГ 3: Спосіб оплати -->
+                <div class="pt-2 border-t border-zinc-100 dark:border-white/5">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="w-6 h-6 rounded-full bg-[#1AB370] text-white flex items-center justify-center text-xs font-bold font-mono">3</span>
+                        <h4 class="font-bold text-sm text-zinc-900 dark:text-white uppercase tracking-wider">
+                            Спосіб оплати
+                        </h4>
+                    </div>
+
+                    <div class="space-y-3">
+                        <!-- Опція 1: Онлайн оплата -->
+                        <div>
+                            <input type="radio" id="payMethodOnline" name="checkoutPayment" value="online" checked class="payment-radio-input hidden">
+                            <label for="payMethodOnline" class="payment-radio-label">
+                                <div class="mt-0.5 w-4 h-4 rounded-full border-2 border-emerald-500 flex items-center justify-center shrink-0">
+                                    <div class="w-2 h-2 rounded-full bg-[#1AB370]"></div>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                                        <span class="font-bold text-xs sm:text-sm text-zinc-900 dark:text-white">
+                                            Оплата онлайн (Apple Pay / Google Pay / Картка Visa/Mastercard)
+                                        </span>
+                                        <!-- Іконки оплат -->
+                                        <div class="flex items-center gap-1.5 shrink-0">
+                                            <span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-zinc-900 text-white font-mono">Pay</span>
+                                            <span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-zinc-100 text-zinc-800 border border-zinc-300 font-mono">GPay</span>
+                                            <span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-blue-700 text-white font-mono">VISA</span>
+                                            <span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-red-600 text-white font-mono">MC</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
+                                        Миттєве зарахування через платіжний шлюз Monobank / WayForPay з підтримкою 3D-Secure.
+                                    </p>
+                                </div>
+                            </label>
+                        </div>
+
+                        <!-- Опція 2: Накладений платіж -->
+                        <div>
+                            <input type="radio" id="payMethodCod" name="checkoutPayment" value="cod" class="payment-radio-input hidden">
+                            <label for="payMethodCod" class="payment-radio-label">
+                                <div class="mt-0.5 w-4 h-4 rounded-full border-2 border-zinc-400 dark:border-zinc-600 flex items-center justify-center shrink-0">
+                                    <div class="w-2 h-2 rounded-full bg-transparent"></div>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between gap-2">
+                                        <span class="font-bold text-xs sm:text-sm text-zinc-900 dark:text-white">
+                                            Оплата при отриманні (Накладений платіж у відділенні)
+                                        </span>
+                                        <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300">
+                                            При отриманні
+                                        </span>
+                                    </div>
+                                    <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
+                                        Сплата готівкою або банківською карткою після перевірки та огляду посилки у відділенні Нової Пошти.
+                                    </p>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Підсумок чекауту -->
+                <div class="p-4 bg-zinc-50 dark:bg-[#151A20] rounded-xl border border-zinc-200 dark:border-white/5 space-y-2">
+                    <div class="flex justify-between text-xs text-zinc-500">
+                        <span>Кількість позицій:</span>
+                        <span id="checkoutSummaryQty" class="font-mono font-bold text-zinc-900 dark:text-white">2 шт.</span>
+                    </div>
+                    <div class="flex justify-between text-xs text-zinc-500">
+                        <span>Доставка Новою Поштою:</span>
+                        <span class="font-mono text-emerald-600 font-bold">Безкоштовно</span>
+                    </div>
+                    <div class="pt-2 border-t border-zinc-200 dark:border-white/10 flex justify-between items-baseline">
+                        <span class="font-bold text-sm text-zinc-900 dark:text-white">Сума до сплати:</span>
+                        <span id="checkoutSummaryTotal" class="font-mono font-black text-xl text-[#1AB370]">3 550 ₴</span>
+                    </div>
+                </div>
+
+                <!-- Кнопка відправки -->
+                <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                    <button type="button" onclick="closeCheckoutModal()" class="w-full sm:w-1/3 py-3 rounded-lg border border-zinc-300 dark:border-white/10 text-xs font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-white/5 transition-colors">
+                        Скасувати
+                    </button>
+                    <button type="submit" id="confirmOrderBtn" class="w-full sm:w-2/3 bg-[#1AB370] hover:bg-[#169B60] text-white font-bold text-xs uppercase tracking-wider py-3.5 rounded-lg transition-colors flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20">
+                        <i data-lucide="lock" class="w-4 h-4"></i>
+                        <span>Підтвердити замовлення</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== 4. СИМУЛЯЦІЯ ОНЛАЙН ПЛАТІЖНОГО ШЛЮЗУ (3D-SECURE / MONOBANK / WAYFORPAY) ==================== -->
+    <div id="paymentGatewayModal" class="fixed inset-0 z-[60] bg-black/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
+        <div class="ecom-card bg-white dark:bg-[#111418] border border-zinc-200 dark:border-white/10 shadow-2xl rounded-2xl max-w-md w-full p-6 text-center space-y-6">
+            <!-- Логотипи платіжної безпеки -->
+            <div class="flex items-center justify-center gap-3 text-xs font-mono text-zinc-400">
+                <span class="font-bold text-zinc-800 dark:text-white">MUVIO Pay</span>
+                <span>•</span>
+                <span>3D-Secure 2.0</span>
+                <span>•</span>
+                <span class="text-emerald-500 font-bold">256-bit SSL</span>
+            </div>
+
+            <!-- Анімація обробки -->
+            <div id="paymentProcessingState" class="space-y-4">
+                <div class="relative w-20 h-20 mx-auto flex items-center justify-center">
+                    <div class="w-16 h-16 rounded-full border-4 border-emerald-500/20 border-t-[#1AB370] animate-spin"></div>
+                    <i data-lucide="shield" class="w-6 h-6 text-[#1AB370] absolute"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-base text-zinc-900 dark:text-white">Авторизація платежу...</h3>
+                    <p class="text-xs text-zinc-500 mt-1">Зв'язок із платіжним шлюзом банку (Monobank / WayForPay)</p>
+                </div>
+                <div class="p-3 bg-zinc-50 dark:bg-[#151A20] rounded-xl font-mono text-xs text-zinc-600 dark:text-zinc-300">
+                    <div>Сума транзакції: <strong id="gatewayAmount" class="text-zinc-900 dark:text-white font-bold">3 550 ₴</strong></div>
+                    <div class="text-[11px] text-zinc-400 mt-0.5">Комісія: 0 ₴ • Apple Pay / Google Pay</div>
+                </div>
+            </div>
+
+            <!-- Стан успіху після обробки -->
+            <div id="paymentSuccessState" class="space-y-4 hidden">
+                <div class="w-16 h-16 rounded-full bg-emerald-500/10 text-[#1AB370] flex items-center justify-center mx-auto">
+                    <i data-lucide="check-circle" class="w-10 h-10"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg text-emerald-600 dark:text-emerald-400">Оплату успішно підтверджено!</h3>
+                    <p class="text-xs text-zinc-500 mt-1">Кошти списано. Електронний чек сформовано.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== 5. МОДАЛЬНЕ ВІКНО ПІДТВЕРДЖЕННЯ (ЗАМОВЛЕННЯ ПРИЙНЯТО) ==================== -->
+    <div id="orderSuccessModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto hidden">
+        <div class="ecom-card bg-white dark:bg-[#111418] border border-zinc-200 dark:border-white/10 shadow-2xl rounded-2xl max-w-lg w-full p-6 sm:p-7 space-y-6 my-8 text-center">
+            <!-- Зелена галочка -->
+            <div class="w-16 h-16 rounded-2xl bg-emerald-500/10 text-[#1AB370] flex items-center justify-center mx-auto">
+                <i data-lucide="check" class="w-8 h-8 stroke-[3]"></i>
+            </div>
+
+            <div>
+                <span class="text-xs font-mono font-bold uppercase tracking-wider text-[#1AB370]">Замовлення успішно прийнято</span>
+                <h3 id="successModalTitle" class="text-xl font-extrabold text-zinc-900 dark:text-white mt-1">
+                    Дякуємо! Ваше замовлення #MU-00000 успішно прийнято
+                </h3>
+                <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-2">
+                    Ми вже передали товари на склад для комплектації та відправлення Новою Поштою.
+                </p>
+            </div>
+
+            <!-- Деталі створеного замовлення -->
+            <div class="p-4 bg-zinc-50 dark:bg-[#151A20] rounded-xl border border-zinc-200 dark:border-white/5 text-left text-xs space-y-2.5">
+                <div class="flex justify-between">
+                    <span class="text-zinc-500">Номер замовлення:</span>
+                    <span id="successOrderNum" class="font-mono font-bold text-[#1AB370]">#MU-00000</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-zinc-500">Сума:</span>
+                    <span id="successOrderTotal" class="font-mono font-bold text-zinc-900 dark:text-white">0 ₴</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-zinc-500">Статус оплати:</span>
+                    <span id="successOrderStatus" class="font-bold px-2 py-0.5 rounded-full text-[11px] bg-emerald-50 text-emerald-700 border border-emerald-200">
+                        Оплачено
+                    </span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-zinc-500">Отримувач:</span>
+                    <span id="successOrderRecipient" class="font-semibold text-zinc-900 dark:text-white">Клієнт</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-zinc-500">Доставка:</span>
+                    <span id="successOrderDelivery" class="font-semibold text-zinc-900 dark:text-white text-right">Нова Пошта</span>
+                </div>
+            </div>
+
+            <!-- Кнопки дій -->
+            <div class="space-y-2.5 pt-2">
+                <button onclick="goToOrdersAfterCheckout()" class="w-full bg-[#1AB370] hover:bg-[#169B60] text-white font-bold text-xs uppercase tracking-wider py-3.5 rounded-lg transition-colors flex items-center justify-center gap-2">
+                    <i data-lucide="package" class="w-4 h-4"></i>
+                    <span>Переглянути у «Мої замовлення»</span>
+                </button>
+
+                <a id="successTelegramBtn" href="https://t.me/muviobot" target="_blank" rel="noopener noreferrer"
+                    class="w-full bg-[#229ED9] hover:bg-[#1E8BC0] text-white font-bold text-xs uppercase tracking-wider py-3 rounded-lg transition-colors flex items-center justify-center gap-2">
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+                    </svg>
+                    <span>Відкрити замовлення в Telegram</span>
+                </a>
+
+                <button onclick="closeSuccessModal()" class="w-full py-2.5 text-xs font-semibold text-zinc-500 hover:text-zinc-800 dark:hover:text-white transition-colors">
+                    Продовжити покупки в магазині
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== 6. ПІДВАЛ (FOOTER) ==================== -->
     <footer class="py-6 px-4 text-center select-none mt-auto">
         <div class="max-w-md mx-auto text-xs text-zinc-400 dark:text-zinc-500 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-center">
             <span>MUVIO Store &copy; 2026</span>
@@ -968,12 +1310,587 @@
             <a href="terms.html" class="hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors">Умови магазину</a>
             <span class="text-zinc-300 dark:text-zinc-700">&middot;</span>
             <a href="accessories.html" class="hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors">Каталог товарів</a>
+            <span class="text-zinc-300 dark:text-zinc-700">&middot;</span>
+            <a href="https://t.me/muviobot" target="_blank" rel="noopener noreferrer" class="hover:text-[#229ED9] transition-colors">Telegram підтримка</a>
         </div>
     </footer>
 
     <!-- ==================== JAVASCRIPT ЛОГІКА ==================== -->
     <script>
-        // Ініціалізація даних користувача з localStorage
+        // ==================== 1. БАЗА ДАНИХ ТА СТАН ====================
+
+        // Початкові замовлення за замовчуванням
+        const DEFAULT_ORDERS_DATA = [
+            {
+                id: "#MU-84920",
+                date: "08.10.2026",
+                items: [
+                    { name: "Шолом інтеграл MUVIO Shield Pro", price: 2800, qty: 1 },
+                    { name: "Швидкий зарядний пристрій 72V 10A", price: 1450, qty: 1 }
+                ],
+                itemsSummary: "Шолом інтеграл MUVIO Shield Pro + Швидкий зарядний пристрій",
+                total: 4250,
+                status: "Обробляється",
+                statusClass: "amber",
+                paymentMethod: "Оплата онлайн",
+                city: "м. Одеса",
+                warehouse: "Відділення №24",
+                ttn: "20450918234891"
+            },
+            {
+                id: "#MU-81044",
+                date: "28.09.2026",
+                items: [
+                    { name: "Гальмівні колодки керамічні CR-Series", price: 780, qty: 1 }
+                ],
+                itemsSummary: "Гальмівні колодки керамічні CR-Series (Комплект)",
+                total: 780,
+                status: "Відправлено",
+                statusClass: "blue",
+                paymentMethod: "Оплата онлайн",
+                city: "м. Київ",
+                warehouse: "Відділення №11",
+                ttn: "20450918231204"
+            },
+            {
+                id: "#MU-77291",
+                date: "12.09.2026",
+                items: [
+                    { name: "Тримач телефона з вібророзв'язкою", price: 750, qty: 1 },
+                    { name: "Дзеркала заднього виду алюмінієві", price: 790, qty: 1 }
+                ],
+                itemsSummary: "Тримач телефона + Дзеркала заднього виду",
+                total: 1540,
+                status: "Виконано",
+                statusClass: "emerald",
+                paymentMethod: "Накладений платіж",
+                city: "м. Львів",
+                warehouse: "Відділення №5",
+                ttn: "20450892019482"
+            }
+        ];
+
+        // Початкові товари в кошику
+        const DEFAULT_CART_DATA = [
+            { id: "item-1", name: "Шолом інтеграл MUVIO Shield Pro", price: 2800, qty: 1, icon: "shield" },
+            { id: "item-2", name: "Тримач смартфона з вібророзв'язкою", price: 750, qty: 1, icon: "smartphone" }
+        ];
+
+        // Отримання замовлень з localStorage
+        function getOrdersFromStorage() {
+            try {
+                const stored = localStorage.getItem('muvio_orders_db');
+                if (stored) {
+                    return JSON.parse(stored);
+                }
+            } catch (e) {
+                console.error("Помилка читання замовлень з localStorage:", e);
+            }
+            // Зберігаємо дефолтні, якщо порожньо
+            localStorage.setItem('muvio_orders_db', JSON.stringify(DEFAULT_ORDERS_DATA));
+            return DEFAULT_ORDERS_DATA;
+        }
+
+        // Збереження замовлень
+        function saveOrdersToStorage(orders) {
+            try {
+                localStorage.setItem('muvio_orders_db', JSON.stringify(orders));
+            } catch (e) {
+                console.error("Помилка збереження замовлень:", e);
+            }
+        }
+
+        // Отримання товарів кошика
+        function getCartFromStorage() {
+            try {
+                const stored = localStorage.getItem('muvio_cart_items');
+                if (stored !== null) {
+                    return JSON.parse(stored);
+                }
+            } catch (e) {
+                console.error("Помилка читання кошика з localStorage:", e);
+            }
+            localStorage.setItem('muvio_cart_items', JSON.stringify(DEFAULT_CART_DATA));
+            return DEFAULT_CART_DATA;
+        }
+
+        // Збереження кошика
+        function saveCartToStorage(cart) {
+            try {
+                localStorage.setItem('muvio_cart_items', JSON.stringify(cart));
+            } catch (e) {
+                console.error("Помилка збереження кошика:", e);
+            }
+        }
+
+        // ==================== 2. РЕНДЕРИНГ ЗАМОВЛЕНЬ ====================
+
+        function renderOrders(highlightId = null) {
+            const orders = getOrdersFromStorage();
+            const tbody = document.getElementById('ordersTableBody');
+            if (!tbody) return;
+
+            tbody.innerHTML = '';
+
+            let processingCount = 0;
+            let completedCount = 0;
+
+            orders.forEach(order => {
+                if (order.status === 'Виконано') {
+                    completedCount++;
+                } else {
+                    processingCount++;
+                }
+
+                let badgeHtml = '';
+                if (order.status === 'Оплачено' || order.status === 'Виконано') {
+                    badgeHtml = `
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-900/60">
+                            ${order.status}
+                        </span>`;
+                } else if (order.status === 'Очікує відправки' || order.status === 'Відправлено') {
+                    badgeHtml = `
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-900/60">
+                            ${order.status}
+                        </span>`;
+                } else {
+                    badgeHtml = `
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-900/60">
+                            ${order.status}
+                        </span>`;
+                }
+
+                const tr = document.createElement('tr');
+                if (highlightId && order.id === highlightId) {
+                    tr.className = 'order-highlight';
+                }
+
+                tr.innerHTML = `
+                    <td class="font-mono font-bold text-[#1AB370]">${order.id}</td>
+                    <td class="text-zinc-500 font-mono">${order.date}</td>
+                    <td>
+                        <div class="font-semibold text-zinc-900 dark:text-white">${order.itemsSummary || (order.items && order.items[0] ? order.items[0].name : 'Товари MUVIO')}</div>
+                        <div class="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">Кількість: ${order.items ? order.items.reduce((acc, i) => acc + (i.qty || 1), 0) : 1} шт.</div>
+                    </td>
+                    <td class="font-mono font-bold text-zinc-900 dark:text-white">${Number(order.total).toLocaleString()} ₴</td>
+                    <td>${badgeHtml}</td>
+                    <td>
+                        <div class="text-xs font-semibold text-zinc-800 dark:text-zinc-200">${order.city || 'м. Одеса'}, ${order.warehouse || 'Нова Пошта'}</div>
+                        <div class="text-[11px] text-zinc-500">${order.paymentMethod || 'Оплата онлайн'}</div>
+                    </td>
+                    <td class="text-right">
+                        <button onclick="viewOrderTracking('${order.ttn || '20450918234891'}')" class="text-xs font-bold text-[#1AB370] hover:underline">
+                            Відстежити →
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            // Оновлюємо статистичні плашки
+            const totalEl = document.getElementById('statsTotalOrders');
+            const procEl = document.getElementById('statsProcessingOrders');
+            const compEl = document.getElementById('statsCompletedOrders');
+            const badgeEl = document.getElementById('ordersCountBadge');
+
+            if (totalEl) totalEl.textContent = orders.length;
+            if (procEl) procEl.textContent = processingCount;
+            if (compEl) compEl.textContent = completedCount;
+            if (badgeEl) badgeEl.textContent = orders.length;
+
+            if (window.lucide) window.lucide.createIcons();
+        }
+
+        // ==================== 3. РЕНДЕРИНГ КОШИКА ====================
+
+        function renderCart() {
+            const cart = getCartFromStorage();
+            const list = document.getElementById('cartItemsList');
+            const subtotalEl = document.getElementById('cartSubtotal');
+            const totalEl = document.getElementById('cartTotal');
+            const cartCountEl = document.getElementById('cartCount');
+            const itemsCountLabel = document.getElementById('cartItemsCountLabel');
+            const checkoutBtn = document.getElementById('checkoutOpenBtn');
+
+            if (!list) return;
+
+            let total = 0;
+            let totalItemsCount = 0;
+
+            if (cart.length === 0) {
+                list.innerHTML = `
+                    <div class="py-12 text-center space-y-3">
+                        <div class="w-16 h-16 rounded-full bg-zinc-100 dark:bg-[#161B20] text-zinc-400 flex items-center justify-center mx-auto">
+                            <i data-lucide="shopping-cart" class="w-8 h-8"></i>
+                        </div>
+                        <h4 class="font-bold text-base text-zinc-900 dark:text-white">Ваш кошик порожній</h4>
+                        <p class="text-xs text-zinc-500 max-w-sm mx-auto">
+                            Додайте аксесуари або запчастини зі списку бажань або каталогу товарів MUVIO.
+                        </p>
+                        <div class="pt-2">
+                            <a href="accessories.html" class="inline-flex items-center gap-2 bg-[#1AB370] hover:bg-[#169B60] text-white text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-lg transition-colors">
+                                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                                <span>Перейти до товарів</span>
+                            </a>
+                        </div>
+                    </div>
+                `;
+                if (checkoutBtn) {
+                    checkoutBtn.disabled = true;
+                    checkoutBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                }
+            } else {
+                list.innerHTML = '';
+                if (checkoutBtn) {
+                    checkoutBtn.disabled = false;
+                    checkoutBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                }
+
+                cart.forEach((item, index) => {
+                    const itemTotal = (item.price || 0) * (item.qty || 1);
+                    total += itemTotal;
+                    totalItemsCount += (item.qty || 1);
+
+                    const iconName = item.icon || 'package';
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'flex items-center justify-between gap-4 py-3.5 border-b border-zinc-100 dark:border-white/5';
+                    itemDiv.innerHTML = `
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-lg bg-zinc-100 dark:bg-[#161B20] flex items-center justify-center shrink-0 text-[#1AB370]">
+                                <i data-lucide="${iconName}" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-xs sm:text-sm text-zinc-900 dark:text-white leading-snug">${item.name}</h4>
+                                <span class="text-xs text-zinc-500 font-mono">${Number(item.price).toLocaleString()} ₴ / шт.</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 shrink-0">
+                            <span class="font-mono text-xs font-semibold px-2 py-1 bg-zinc-100 dark:bg-[#161B20] rounded">${item.qty || 1} шт.</span>
+                            <span class="font-mono font-bold text-sm text-zinc-900 dark:text-white">${itemTotal.toLocaleString()} ₴</span>
+                            <button onclick="removeCartItemById('${item.id || index}')" class="text-zinc-400 hover:text-rose-500 p-1 transition-colors" title="Видалити товар">
+                                <i data-lucide="x" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    `;
+                    list.appendChild(itemDiv);
+                });
+            }
+
+            if (subtotalEl) subtotalEl.textContent = `${total.toLocaleString()} ₴`;
+            if (totalEl) totalEl.textContent = `${total.toLocaleString()} ₴`;
+            if (cartCountEl) cartCountEl.textContent = totalItemsCount;
+            if (itemsCountLabel) itemsCountLabel.textContent = `${totalItemsCount} ${totalItemsCount === 1 ? 'товар' : 'товари'}`;
+
+            if (window.lucide) window.lucide.createIcons();
+        }
+
+        // Додавання товару до кошика
+        function moveToCart(itemName, price, icon = 'package') {
+            const cart = getCartFromStorage();
+            const existing = cart.find(i => i.name === itemName);
+
+            if (existing) {
+                existing.qty = (existing.qty || 1) + 1;
+            } else {
+                cart.push({
+                    id: 'item-' + Date.now(),
+                    name: itemName,
+                    price: price,
+                    qty: 1,
+                    icon: icon
+                });
+            }
+
+            saveCartToStorage(cart);
+            renderCart();
+            switchCabinetTab('cart');
+
+            // Спливаюче сповіщення
+            alert(`Товар "${itemName}" додано в кошик!`);
+        }
+
+        // Видалення товару за ID
+        function removeCartItemById(id) {
+            let cart = getCartFromStorage();
+            cart = cart.filter((item, index) => item.id !== id && String(index) !== String(id));
+            saveCartToStorage(cart);
+            renderCart();
+        }
+
+        function removeFromWishlist(btn) {
+            const card = btn.closest('.ecom-card');
+            if (card) {
+                card.remove();
+                const countEl = document.getElementById('wishlistCount');
+                const headerCountEl = document.getElementById('wishlistHeaderCount');
+                if (countEl) {
+                    const cur = parseInt(countEl.textContent, 10) || 0;
+                    const newCount = Math.max(0, cur - 1);
+                    countEl.textContent = newCount;
+                    if (headerCountEl) headerCountEl.textContent = `${newCount} товари у списку`;
+                }
+            }
+        }
+
+        // ==================== 4. МОДАЛЬНЕ ВІКНО CHECKOUT ====================
+
+        function openCheckoutModal() {
+            const cart = getCartFromStorage();
+            if (cart.length === 0) {
+                alert("Ваш кошик порожній! Будь ласка, додайте товари перед оформленням.");
+                return;
+            }
+
+            let total = 0;
+            let qty = 0;
+            cart.forEach(item => {
+                total += (item.price || 0) * (item.qty || 1);
+                qty += (item.qty || 1);
+            });
+
+            // Оновлюємо підсумок у формі
+            const summaryQty = document.getElementById('checkoutSummaryQty');
+            const summaryTotal = document.getElementById('checkoutSummaryTotal');
+            if (summaryQty) summaryQty.textContent = `${qty} шт.`;
+            if (summaryTotal) summaryTotal.textContent = `${total.toLocaleString()} ₴`;
+
+            // Підставляємо дані користувача з localStorage, якщо вони збережені
+            try {
+                let user = null;
+                const active = localStorage.getItem('muvio_active_user');
+                const saved = localStorage.getItem('muvio_user');
+                if (saved) user = JSON.parse(saved);
+                else if (active) user = JSON.parse(active);
+
+                if (user) {
+                    const nameInput = document.getElementById('checkoutName');
+                    const phoneInput = document.getElementById('checkoutPhone');
+                    const emailInput = document.getElementById('checkoutEmail');
+
+                    if (nameInput && !nameInput.value) nameInput.value = user.name || user.login || '';
+                    if (phoneInput && !phoneInput.value && user.phone) phoneInput.value = user.phone;
+                    if (emailInput && !emailInput.value && user.email) emailInput.value = user.email;
+                }
+            } catch (e) {}
+
+            const modal = document.getElementById('checkoutModal');
+            if (modal) {
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+            if (window.lucide) window.lucide.createIcons();
+        }
+
+        function closeCheckoutModal() {
+            const modal = document.getElementById('checkoutModal');
+            if (modal) {
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+        }
+
+        // ==================== 5. ОБРОБКА ЗАМОВЛЕННЯ ====================
+
+        function handleCheckoutSubmit(e) {
+            if (e && e.preventDefault) e.preventDefault();
+
+            const name = document.getElementById('checkoutName').value.trim();
+            const phone = document.getElementById('checkoutPhone').value.trim();
+            const email = document.getElementById('checkoutEmail').value.trim();
+            const city = document.getElementById('checkoutCity').value.trim();
+            const warehouse = document.getElementById('checkoutWarehouse').value.trim();
+            const paymentMethodInput = document.querySelector('input[name="checkoutPayment"]:checked');
+            const isOnlinePayment = paymentMethodInput ? paymentMethodInput.value === 'online' : true;
+
+            if (!name || !phone || !email || !city || !warehouse) {
+                alert("Будь ласка, заповніть усі обов'язкові поля форми оформлення!");
+                return;
+            }
+
+            const cart = getCartFromStorage();
+            if (cart.length === 0) {
+                alert("Помилка: кошик порожній.");
+                return;
+            }
+
+            // Підрахунок суми
+            let total = 0;
+            cart.forEach(item => {
+                total += (item.price || 0) * (item.qty || 1);
+            });
+
+            // Формування назви товарів
+            const itemsSummary = cart.map(i => i.name).join(' + ');
+
+            // Генерація унікального номера замовлення #MU-XXXXX
+            const randomNum = Math.floor(10000 + Math.random() * 90000);
+            const orderId = `#MU-${randomNum}`;
+
+            // Поточна дата (DD.MM.YYYY)
+            const now = new Date();
+            const dateStr = `${String(now.getDate()).padStart(2, '0')}.${String(now.getMonth() + 1).padStart(2, '0')}.${now.getFullYear()}`;
+
+            // Закриваємо модалку оформлення
+            closeCheckoutModal();
+
+            if (isOnlinePayment) {
+                // Симуляція платіжного шлюзу (Apple Pay / Monobank / WayForPay)
+                const gatewayModal = document.getElementById('paymentGatewayModal');
+                const procState = document.getElementById('paymentProcessingState');
+                const succState = document.getElementById('paymentSuccessState');
+                const amountEl = document.getElementById('gatewayAmount');
+
+                if (amountEl) amountEl.textContent = `${total.toLocaleString()} ₴`;
+                if (procState) procState.classList.remove('hidden');
+                if (succState) succState.classList.add('hidden');
+                if (gatewayModal) gatewayModal.classList.remove('hidden');
+
+                // Через 1.8 секунди показуємо галочку успіху
+                setTimeout(() => {
+                    if (procState) procState.classList.add('hidden');
+                    if (succState) succState.classList.remove('hidden');
+
+                    // Через ще 0.8 секунди завершуємо транзакцію і показуємо екран замовлення
+                    setTimeout(() => {
+                        if (gatewayModal) gatewayModal.classList.add('hidden');
+                        finalizeOrder({
+                            orderId,
+                            dateStr,
+                            cart,
+                            itemsSummary,
+                            total,
+                            status: "Оплачено",
+                            statusClass: "emerald",
+                            paymentMethodName: "Оплата онлайн (Apple Pay / Картка)",
+                            name,
+                            phone,
+                            email,
+                            city,
+                            warehouse
+                        });
+                    }, 800);
+                }, 1800);
+            } else {
+                // Накладений платіж
+                finalizeOrder({
+                    orderId,
+                    dateStr,
+                    cart,
+                    itemsSummary,
+                    total,
+                    status: "Очікує відправки",
+                    statusClass: "blue",
+                    paymentMethodName: "Накладений платіж у відділенні",
+                    name,
+                    phone,
+                    email,
+                    city,
+                    warehouse
+                });
+            }
+        }
+
+        // Фіксація замовлення в базі та вивід модалки успіху
+        function finalizeOrder(data) {
+            // Створюємо об'єкт замовлення
+            const randomTtn = "2045" + Math.floor(1000000000 + Math.random() * 9000000000);
+            const newOrder = {
+                id: data.orderId,
+                date: data.dateStr,
+                items: data.cart,
+                itemsSummary: data.itemsSummary,
+                total: data.total,
+                status: data.status,
+                statusClass: data.statusClass,
+                paymentMethod: data.paymentMethodName,
+                city: data.city,
+                warehouse: data.warehouse,
+                ttn: randomTtn,
+                customer: {
+                    name: data.name,
+                    phone: data.phone,
+                    email: data.email
+                }
+            };
+
+            // Додаємо в localStorage на самий початок
+            const orders = getOrdersFromStorage();
+            orders.unshift(newOrder);
+            saveOrdersToStorage(orders);
+
+            // Очищаємо кошик
+            saveCartToStorage([]);
+            renderCart();
+
+            // Оновлюємо таблицю замовлень з підсвічуванням нового
+            renderOrders(data.orderId);
+
+            // Заповнюємо модалку успішного замовлення
+            const successModal = document.getElementById('orderSuccessModal');
+            const titleEl = document.getElementById('successModalTitle');
+            const numEl = document.getElementById('successOrderNum');
+            const totalEl = document.getElementById('successOrderTotal');
+            const statusEl = document.getElementById('successOrderStatus');
+            const recipEl = document.getElementById('successOrderRecipient');
+            const delivEl = document.getElementById('successOrderDelivery');
+            const tgBtn = document.getElementById('successTelegramBtn');
+
+            if (titleEl) titleEl.textContent = `Дякуємо! Ваше замовлення ${data.orderId} успішно прийнято`;
+            if (numEl) numEl.textContent = data.orderId;
+            if (totalEl) totalEl.textContent = `${data.total.toLocaleString()} ₴`;
+            if (statusEl) {
+                statusEl.textContent = data.status;
+                if (data.status === 'Оплачено') {
+                    statusEl.className = 'font-bold px-2 py-0.5 rounded-full text-[11px] bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800';
+                } else {
+                    statusEl.className = 'font-bold px-2 py-0.5 rounded-full text-[11px] bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-800';
+                }
+            }
+            if (recipEl) recipEl.textContent = `${data.name} (${data.phone})`;
+            if (delivEl) delivEl.textContent = `Нова Пошта: ${data.city}, ${data.warehouse}`;
+
+            if (tgBtn) {
+                const tgText = encodeURIComponent(`Доброго дня! Моє замовлення ${data.orderId} на суму ${data.total} ₴ успішно оформлено. Статус: ${data.status}. Доставка: ${data.city}, ${data.warehouse}.`);
+                tgBtn.href = `https://t.me/muviobot?text=${tgText}`;
+            }
+
+            if (successModal) {
+                successModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+
+            if (window.lucide) window.lucide.createIcons();
+        }
+
+        function closeSuccessModal() {
+            const modal = document.getElementById('orderSuccessModal');
+            if (modal) {
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function goToOrdersAfterCheckout() {
+            closeSuccessModal();
+            switchCabinetTab('orders');
+        }
+
+        function viewOrderTracking(ttn) {
+            const input = document.getElementById('ttnSearchInput');
+            if (input) input.value = ttn;
+            switchCabinetTab('parcels');
+        }
+
+        function trackTtnAction() {
+            const input = document.getElementById('ttnSearchInput');
+            const val = input ? input.value.trim() : '';
+            if (val) {
+                window.open(`https://novaposhta.ua/tracking/?cargo_number=${val}`, '_blank');
+            }
+        }
+
+        // ==================== 6. ПРОФІЛЬ ТА НАВІГАЦІЯ ====================
+
         function initUserProfile() {
             try {
                 let user = null;
@@ -1006,7 +1923,6 @@
             }
         }
 
-        // Перемикання вкладок кабінету
         function switchCabinetTab(tabId) {
             const tabs = ['orders', 'parcels', 'wishlist', 'compare', 'messages', 'cart'];
             
@@ -1026,151 +1942,12 @@
             if (window.lucide) window.lucide.createIcons();
         }
 
-        // Вихід з акаунта
         function logoutUser() {
             try {
                 localStorage.removeItem('muvio_active_user');
                 localStorage.removeItem('muvio_user');
             } catch (e) {}
             window.location.href = 'auth.html';
-        }
-
-        // Дії кошика та списку бажань
-        let currentCartTotal = 3550;
-
-        function moveToCart(itemName, price) {
-            const list = document.getElementById('cartItemsList');
-            if (list) {
-                const itemDiv = document.createElement('div');
-                itemDiv.className = 'flex items-center justify-between gap-4 py-3 border-b border-zinc-100 dark:border-white/5';
-                itemDiv.innerHTML = `
-                    <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 rounded-lg bg-zinc-100 dark:bg-[#161B20] flex items-center justify-center shrink-0 text-[#1AB370]">
-                            <i data-lucide="package" class="w-6 h-6"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-xs sm:text-sm text-zinc-900 dark:text-white">${itemName}</h4>
-                            <span class="text-xs text-zinc-500 font-mono">${price.toLocaleString()} ₴</span>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <span class="font-mono text-xs font-semibold px-2 py-1 bg-zinc-100 dark:bg-[#161B20] rounded">1 шт.</span>
-                        <span class="font-mono font-bold text-sm text-zinc-900 dark:text-white">${price.toLocaleString()} ₴</span>
-                        <button onclick="removeCartItem(this, ${price})" class="text-zinc-400 hover:text-rose-500 p-1">
-                            <i data-lucide="x" class="w-4 h-4"></i>
-                        </button>
-                    </div>
-                `;
-                list.appendChild(itemDiv);
-                
-                currentCartTotal += price;
-                updateCartTotals();
-
-                // Оновлюємо лічильник кошика
-                const cartCountEl = document.getElementById('cartCount');
-                if (cartCountEl) {
-                    const currentCount = parseInt(cartCountEl.textContent, 10) || 0;
-                    cartCountEl.textContent = currentCount + 1;
-                }
-
-                alert(`Товар "${itemName}" додано в кошик!`);
-                switchCabinetTab('cart');
-            }
-        }
-
-        function removeCartItem(btn, price) {
-            const row = btn.closest('.flex.items-center.justify-between');
-            if (row) {
-                row.remove();
-                currentCartTotal = Math.max(0, currentCartTotal - price);
-                updateCartTotals();
-                
-                const cartCountEl = document.getElementById('cartCount');
-                if (cartCountEl) {
-                    const currentCount = parseInt(cartCountEl.textContent, 10) || 0;
-                    cartCountEl.textContent = Math.max(0, currentCount - 1);
-                }
-            }
-        }
-
-        function updateCartTotals() {
-            const subtotalEl = document.getElementById('cartSubtotal');
-            const totalEl = document.getElementById('cartTotal');
-            if (subtotalEl) subtotalEl.textContent = `${currentCartTotal.toLocaleString()} ₴`;
-            if (totalEl) totalEl.textContent = `${currentCartTotal.toLocaleString()} ₴`;
-        }
-
-        function removeFromWishlist(btn) {
-            const card = btn.closest('.ecom-card');
-            if (card) {
-                card.remove();
-                const countEl = document.getElementById('wishlistCount');
-                if (countEl) {
-                    const cur = parseInt(countEl.textContent, 10) || 0;
-                    countEl.textContent = Math.max(0, cur - 1);
-                }
-            }
-        }
-
-        function checkoutOrderAction() {
-            alert("Замовлення успішно передано в обробку! Менеджер зв'яжеться з вами для підтвердження.");
-            switchCabinetTab('orders');
-        }
-
-        function reorderItems(orderNum) {
-            alert(`Товари із замовлення ${orderNum} додано до кошика!`);
-            switchCabinetTab('cart');
-        }
-
-        function trackTtnAction() {
-            const input = document.getElementById('ttnSearchInput');
-            const val = input ? input.value.trim() : '';
-            if (val) {
-                window.open(`https://novaposhta.ua/tracking/?cargo_number=${val}`, '_blank');
-            }
-        }
-
-        // Чат із менеджером
-        function handleSendChatMessage(e) {
-            if (e && e.preventDefault) e.preventDefault();
-            const input = document.getElementById('chatInput');
-            const msg = input ? input.value.trim() : '';
-            if (!msg) return;
-
-            const chat = document.getElementById('chatMessages');
-            if (chat) {
-                const now = new Date();
-                const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
-                
-                const userBubble = document.createElement('div');
-                userBubble.className = 'flex items-start justify-end gap-2.5 ml-auto max-w-[80%]';
-                userBubble.innerHTML = `
-                    <div class="bg-[#1AB370] text-white p-3 rounded-xl rounded-tr-none">
-                        <p>${msg}</p>
-                        <span class="text-[10px] text-white/70 block mt-1 text-right">${timeStr}</span>
-                    </div>
-                `;
-                chat.appendChild(userBubble);
-                input.value = '';
-                chat.scrollTop = chat.scrollHeight;
-
-                // Автоматична відповідь бота
-                setTimeout(() => {
-                    const botBubble = document.createElement('div');
-                    botBubble.className = 'flex items-start gap-2.5 max-w-[80%]';
-                    botBubble.innerHTML = `
-                        <div class="w-7 h-7 rounded-full bg-[#1AB370] text-white flex items-center justify-center text-[10px] font-bold shrink-0">
-                            M
-                        </div>
-                        <div class="bg-zinc-100 dark:bg-[#161B20] p-3 rounded-xl rounded-tl-none border border-zinc-200 dark:border-white/5">
-                            <p class="text-zinc-800 dark:text-zinc-200">Дякуємо за звернення! Менеджер MUVIO Store перегляне ваше запитання та відповість найближчим часом.</p>
-                            <span class="text-[10px] text-zinc-400 block mt-1">${timeStr}</span>
-                        </div>
-                    `;
-                    chat.appendChild(botBubble);
-                    chat.scrollTop = chat.scrollHeight;
-                }, 1000);
-            }
         }
 
         // Перемикач мови
@@ -1216,10 +1993,31 @@
             } catch (e) {}
         }
 
+        // Слухачі зміни радіо-кнопок оплати для візуального перемикання
+        document.addEventListener('change', (e) => {
+            if (e.target && e.target.name === 'checkoutPayment') {
+                const labels = document.querySelectorAll('.payment-radio-label');
+                labels.forEach(lbl => {
+                    const dot = lbl.querySelector('.rounded-full div');
+                    const parent = lbl.querySelector('.rounded-full');
+                    if (lbl.previousElementSibling && lbl.previousElementSibling.checked) {
+                        if (dot) dot.className = 'w-2 h-2 rounded-full bg-[#1AB370]';
+                        if (parent) parent.className = 'mt-0.5 w-4 h-4 rounded-full border-2 border-emerald-500 flex items-center justify-center shrink-0';
+                    } else {
+                        if (dot) dot.className = 'w-2 h-2 rounded-full bg-transparent';
+                        if (parent) parent.className = 'mt-0.5 w-4 h-4 rounded-full border-2 border-zinc-400 dark:border-zinc-600 flex items-center justify-center shrink-0';
+                    }
+                });
+            }
+        });
+
+        // Ініціалізація при завантаженні сторінки
         document.addEventListener('DOMContentLoaded', () => {
             if (window.lucide) window.lucide.createIcons();
 
             initUserProfile();
+            renderOrders();
+            renderCart();
             switchCabinetTab('orders');
 
             // Мобільне меню
