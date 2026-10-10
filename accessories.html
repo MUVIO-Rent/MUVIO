@@ -65,29 +65,50 @@
             color: #F8FAFC !important;
         }
 
-        /* ==================== 1. ПЛАШКИ ПОЛЬЗОВАТЕЛЯ И ПОИСКА ==================== */
-        .user-actions-bar {
+        /* ==================== 1. СТУПЕНЧАТАЯ ШАПКА МАГАЗИНА (ДВЕ КАРТОЧКИ) ==================== */
+        .store-header-wrapper {
             width: 100%;
+            padding: 0 16px;
             box-sizing: border-box;
-            background: transparent;
-            padding: 14px 24px 6px 24px;
         }
 
-        .user-identity-group {
-            display: inline-flex;
+        /* А) ВЕРХНЯЯ ПОЛОСА (max-width: 1140px, margin: 16px auto 12px auto) */
+        .store-user-card {
+            max-width: 1140px;
+            width: 100%;
+            margin: 16px auto 12px auto;
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 4px;
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 10px;
+            box-sizing: border-box;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        }
+
+        html.dark .store-user-card {
+            background: #111418 !important;
+            border-color: rgba(255, 255, 255, 0.08) !important;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        .store-user-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
             text-decoration: none;
         }
 
-        .user-avatar-badge {
-            width: 28px;
-            height: 28px;
+        .store-user-avatar {
+            width: 32px;
+            height: 32px;
             background-color: #10B981;
             color: #FFFFFF;
             font-weight: 800;
             font-family: monospace;
-            font-size: 13px;
+            font-size: 14px;
             border-radius: 4px;
             display: flex;
             align-items: center;
@@ -95,22 +116,22 @@
             flex-shrink: 0;
         }
 
-        .user-display-name {
+        .store-user-name {
             font-weight: 700;
             font-size: 14px;
             color: #0F172A;
-            white-space: nowrap;
             line-height: 1;
+            white-space: nowrap;
         }
 
-        html.dark .user-display-name {
+        html.dark .store-user-name {
             color: #FFFFFF !important;
         }
 
-        .buyer-status-badge {
+        .store-user-badge {
             display: inline-flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
             padding: 3px 8px;
             font-size: 10px;
             font-weight: 800;
@@ -125,14 +146,20 @@
             white-space: nowrap;
         }
 
-        .clean-icon-action-btn {
+        .store-user-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .store-icon-btn {
             display: inline-flex !important;
             align-items: center !important;
             justify-content: center !important;
             position: relative !important;
-            width: 36px !important;
-            height: 36px !important;
-            border: 1px solid #CBD5E1 !important;
+            width: 38px !important;
+            height: 38px !important;
+            border: 1px solid #E2E8F0 !important;
             border-radius: 4px !important;
             background-color: #FFFFFF !important;
             color: #334155 !important;
@@ -142,97 +169,96 @@
             flex-shrink: 0 !important;
         }
 
-        .clean-icon-action-btn:hover {
+        .store-icon-btn:hover {
             border-color: #10B981 !important;
             color: #10B981 !important;
         }
 
-        html.dark .clean-icon-action-btn {
-            background-color: #111418 !important;
+        html.dark .store-icon-btn {
+            background-color: #161B22 !important;
             border-color: rgba(255, 255, 255, 0.12) !important;
             color: #CBD5E1 !important;
         }
 
-        html.dark .clean-icon-action-btn:hover {
+        html.dark .store-icon-btn:hover {
             border-color: #10B981 !important;
             color: #10B981 !important;
         }
 
-        .action-count-pill {
+        .store-count-badge {
             position: absolute !important;
             top: -5px !important;
             right: -5px !important;
-            min-width: 16px !important;
-            height: 16px !important;
+            min-width: 17px !important;
+            height: 17px !important;
             padding: 0 4px !important;
             background-color: #10B981 !important;
             color: #FFFFFF !important;
             font-size: 10px !important;
             font-weight: 800 !important;
             font-family: monospace !important;
-            line-height: 16px !important;
+            line-height: 17px !important;
             text-align: center !important;
             border-radius: 9999px !important;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) !important;
         }
 
-        /* 1.2 СТРОКА ПОИСКА */
-        .store-search-bar {
+        /* Б) НИЖНЯЯ ПОЛОСА (СТРОКА ПОИСКА, max-width: 620px, margin: 0 auto 24px auto) */
+        .store-search-card {
+            max-width: 620px;
             width: 100%;
-            box-sizing: border-box;
-            background: transparent;
-            padding: 10px 24px 20px 24px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .store-search-form {
-            width: 100%;
-            max-width: 760px;
+            margin: 0 auto 24px auto;
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 4px;
+            padding: 4px 6px 4px 12px;
             display: flex;
             align-items: center;
             gap: 8px;
-            margin: 0 auto;
             box-sizing: border-box;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
         }
 
-        .search-field-wrapper {
-            position: relative;
-            flex: 1;
+        html.dark .store-search-card {
+            background: #111418 !important;
+            border-color: rgba(255, 255, 255, 0.08) !important;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        .store-search-icon-btn {
+            color: #10B981;
             display: flex;
             align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+            background: transparent;
+            border: none;
+            padding: 0;
         }
 
-        .store-search-input {
-            width: 100%;
-            height: 42px;
-            padding: 0 14px 0 42px;
+        .store-search-card-input {
+            flex: 1;
+            border: none !important;
+            outline: none !important;
+            background: transparent !important;
             font-size: 14px;
             color: #0F172A;
-            background-color: #FFFFFF;
-            border: 1px solid #CBD5E1;
-            border-radius: 4px;
-            outline: none;
-            transition: border-color 0.15s ease, box-shadow 0.15s ease;
+            padding: 8px 4px;
             box-sizing: border-box;
+            min-width: 0;
         }
 
-        .store-search-input:focus {
-            border-color: #10B981 !important;
-            box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.15) !important;
-        }
-
-        html.dark .store-search-input {
-            background-color: #111418 !important;
-            border-color: rgba(255, 255, 255, 0.15) !important;
+        html.dark .store-search-card-input {
             color: #FFFFFF !important;
         }
 
-        .store-search-submit-btn {
-            height: 42px;
-            padding: 0 24px;
+        .store-search-btn-green {
+            height: 38px;
+            padding: 0 20px;
             background-color: #10B981;
-            color: #FFFFFF;
+            color: #FFFFFF !important;
             font-size: 13px;
             font-weight: 700;
             text-transform: uppercase;
@@ -243,9 +269,10 @@
             transition: background-color 0.15s ease;
             white-space: nowrap;
             font-family: monospace;
+            flex-shrink: 0;
         }
 
-        .store-search-submit-btn:hover {
+        .store-search-btn-green:hover {
             background-color: #059669 !important;
         }
 
@@ -256,6 +283,14 @@
             position: static !important;
             clear: both !important;
             box-sizing: border-box !important;
+        }
+
+        .catalog-header-container {
+            max-width: 1140px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 16px 20px 16px;
+            box-sizing: border-box;
         }
 
         .catalog-page-title {
@@ -272,12 +307,12 @@
         }
 
         .ecom-layout-container {
-            max-width: 1400px;
+            max-width: 1140px;
             margin: 0 auto;
-            padding: 0 20px 40px 20px;
+            padding: 0 16px 40px 16px;
             width: 100%;
             display: grid;
-            grid-template-columns: 280px 1fr;
+            grid-template-columns: 260px 1fr;
             gap: 24px;
             align-items: start;
             box-sizing: border-box;
@@ -582,85 +617,82 @@
         </div>
     </header>
 
-    <!-- ==================== СТРОКА 2 В ACCESSORIES.HTML (СТРОКА ПОЛЬЗОВАТЕЛЯ И ДЕЙСТВИЙ) ==================== -->
-    <div class="user-actions-bar">
-        <div class="max-w-[1400px] w-full mx-auto px-5 flex items-center justify-between" style="box-sizing: border-box;">
-            <!-- Слева: [M] Максим [• ПОКУПЕЦЬ] с нормальным зазором gap: 10px -->
-            <a href="cabinet.html" class="user-identity-group" title="Особистий кабінет" style="text-decoration: none; display: inline-flex; align-items: center; gap: 10px;">
-                <div class="user-avatar-badge" id="headerUserAvatar">M</div>
-                <div style="display: flex; align-items: center; gap: 10px;">
-                    <span id="headerUserNameText" class="user-display-name">Максим</span>
-                    <span class="buyer-status-badge">
+    <!-- ==================== СТУПЕНЧАТЫЕ БЕЛЫЕ КАРТОЧКИ ШАПКИ МАГАЗИНА ==================== -->
+    <div class="store-header-wrapper">
+        <!-- А) ВЕРХНЯЯ ПОЛОСА (В 2 РАЗА ШИРЕ ПОИСКА, max-width: 1140px, margin: 16px auto 12px auto) -->
+        <div class="store-user-card">
+            <!-- СЛЕВА: Аватар с буквой «M» в зеленом квадрате, Имя «Максим», Бейдж «• ПОКУПЕЦЬ» (gap: 12px) -->
+            <a href="cabinet.html" class="store-user-left" title="Особистий кабінет">
+                <div class="store-user-avatar" id="headerUserAvatar">M</div>
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <span id="headerUserNameText" class="store-user-name">Максим</span>
+                    <span class="store-user-badge">
                         <span style="width: 6px; height: 6px; border-radius: 50%; background-color: #10B981; display: inline-block;"></span>
                         <span>ПОКУПЕЦЬ</span>
                     </span>
                 </div>
             </a>
 
-            <!-- С правого края: РОВНО 3 ЧИСТЫХ ЗНАЧКА БЕЗ ТЕКСТА -->
-            <div style="display: flex; align-items: center; gap: 10px;">
-                <!-- 1) Весы (Порівняння) — только контурная иконка без подписей и без черных квадратов -->
-                <a href="cabinet.html" onclick="saveTabTarget('compare')" class="clean-icon-action-btn" title="Порівняння товарів">
-                    <svg style="width: 16px; height: 16px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <!-- СПРАВА: РОВНО 3 ЗНАЧКА БЕЗ СЛОВ И БЕЗ НАДПИСЕЙ -->
+            <div class="store-user-right">
+                <!-- 1. Весы (Порівняння) — только иконка ⚖️ со счетчиком в кружке -->
+                <a href="cabinet.html" onclick="saveTabTarget('compare')" class="store-icon-btn" title="Порівняння товарів">
+                    <svg style="width: 17px; height: 17px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path>
                         <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path>
                         <path d="M7 21h10"></path>
                         <path d="M12 3v18"></path>
                         <path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"></path>
                     </svg>
-                    <span id="headerCompareCount" class="action-count-pill">2</span>
+                    <span id="headerCompareCount" class="store-count-badge">2</span>
                 </a>
 
-                <!-- 2) Сердечко (Обране) — только контурная иконка -->
-                <a href="cabinet.html" onclick="saveTabTarget('wishlist')" class="clean-icon-action-btn" title="Список бажань">
-                    <svg style="width: 16px; height: 16px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <!-- 2. Сердечко (Обране) — только контурная иконка ♡ со счетчиком -->
+                <a href="cabinet.html" onclick="saveTabTarget('wishlist')" class="store-icon-btn" title="Список бажань">
+                    <svg style="width: 17px; height: 17px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
                     </svg>
-                    <span id="headerWishlistCount" class="action-count-pill">3</span>
+                    <span id="headerWishlistCount" class="store-count-badge">3</span>
                 </a>
 
-                <!-- 3) Корзина (Кошик) — только иконка корзины с цифрой счетчика -->
-                <a href="cabinet.html" onclick="saveTabTarget('cart')" class="clean-icon-action-btn" title="Кошик покупок">
-                    <svg style="width: 16px; height: 16px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <!-- 3. Корзина (Кошик) — только иконка 🛒 со счетчиком в зеленом кружке -->
+                <a href="cabinet.html" onclick="saveTabTarget('cart')" class="store-icon-btn" title="Кошик покупок">
+                    <svg style="width: 17px; height: 17px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="8" cy="21" r="1"></circle>
                         <circle cx="19" cy="21" r="1"></circle>
                         <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
                     </svg>
-                    <span id="headerCartCount" class="action-count-pill">2</span>
+                    <span id="headerCartCount" class="store-count-badge">2</span>
                 </a>
             </div>
         </div>
-    </div>
 
-    <!-- ==================== СТРОКА 3 В ACCESSORIES.HTML (СТРОКА ПОИСКА) ==================== -->
-    <div class="store-search-bar">
-        <form class="store-search-form" onsubmit="event.preventDefault(); handleSearchSubmit();">
-            <div class="search-field-wrapper">
-                <span style="position: absolute; left: 14px; display: flex; align-items: center; justify-content: center; pointer-events: none; color: #10B981; z-index: 2;">
-                    <svg style="width: 16px; height: 16px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    </svg>
-                </span>
-                <input type="text" id="mainSearchInput" placeholder="Шукати товари (шолом, колодки, ручки...)"
-                    autocomplete="off" class="store-search-input" oninput="handleSearchInput(this.value)">
-            </div>
-            <button type="submit" class="store-search-submit-btn">
+        <!-- Б) НИЖНЯЯ ПОЛОСА (СТРОКА ПОИСКА, max-width: 620px, margin: 0 auto 24px auto) -->
+        <form class="store-search-card" onsubmit="event.preventDefault(); handleSearchSubmit();">
+            <span class="store-search-icon-btn" aria-hidden="true">
+                <svg style="width: 17px; height: 17px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </span>
+            <input type="text" id="mainSearchInput" placeholder="Шукати товари (шолом, колодки, ручки...)"
+                autocomplete="off" class="store-search-card-input" oninput="handleSearchInput(this.value)">
+            <button type="submit" class="store-search-btn-green">
                 ЗНАЙТИ
             </button>
         </form>
     </div>
 
-    <!-- ==================== 5. КАТАЛОГ И ЗАГОЛОВОК ==================== -->
-    <main class="catalog-main" style="margin-top: 10px !important; width: 100% !important; display: block !important; position: static !important; clear: both !important; box-sizing: border-box !important;">
-        <!-- Заголовок «МАГАЗИН АКСЕСУАРІВ ТА ЗАПЧАСТИН» строго ниже строки поиска без обрезания справа -->
-        <div class="catalog-header-container max-w-[1400px] w-full mx-auto px-5 pb-6" style="box-sizing: border-box !important; width: 100% !important;">
+    <!-- ==================== 3. КАТАЛОГ ТОВАРОВ ==================== -->
+    <main class="catalog-main" style="width: 100% !important; display: block !important; position: static !important; clear: both !important; box-sizing: border-box !important;">
+        <!-- Заголовок H1 «МАГАЗИН АКСЕСУАРІВ ТА ЗАПЧАСТИН» строго по центру сетки 1140px без обрезания -->
+        <div class="catalog-header-container">
             <div class="w-full border-b border-zinc-200 dark:border-white/10 pb-5" style="box-sizing: border-box !important; width: 100% !important;">
                 <div class="inline-flex items-center gap-2 px-2 py-0.5 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-300 dark:border-emerald-800/60 text-[#1AB370] text-[10px] font-mono font-bold uppercase mb-2 rounded-[2px]">
                     <span class="w-1.5 h-1.5 bg-[#1AB370]"></span>
                     <span>MUVIO STORE & PARTS</span>
                 </div>
-                <h1 class="catalog-page-title text-2xl sm:text-3xl lg:text-4xl font-extrabold uppercase tracking-tight leading-tight" style="color: #0F172A; width: 100% !important; max-width: 100% !important; display: block !important; word-break: normal !important; overflow-wrap: break-word !important; margin: 0 !important; padding: 0 !important;">
+                <h1 class="catalog-page-title text-2xl sm:text-3xl lg:text-4xl font-extrabold uppercase tracking-tight leading-tight" style="color: #0F172A !important; width: 100% !important; display: block !important; margin: 0 !important; padding: 0 !important;">
                     МАГАЗИН АКСЕСУАРІВ ТА ЗАПЧАСТИН
                 </h1>
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mt-2" style="width: 100% !important;">

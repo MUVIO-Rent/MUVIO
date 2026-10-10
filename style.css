@@ -974,10 +974,12 @@ html.theme-dark .sun-icon,
 .hero-section h1,
 .hero-section h1 *,
 #hero-section .hero-text-content h1,
-#hero-section .hero-text-content h1 * {
+#hero-section .hero-text-content h1 *,
+.hero-text-content h1,
+.hero-text-content h1 * {
     color: #FFFFFF !important;
-    text-shadow: 0 4px 16px rgba(0, 0, 0, 0.8) !important;
-    filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.8)) !important;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7) !important;
+    filter: none !important;
 }
 
 #hero-section p,
@@ -987,9 +989,12 @@ html.theme-dark .sun-icon,
 #hero-section .hero-subtitle,
 #hero-section .hero-subtitle *,
 #hero-section .hero-text-content p,
-#hero-section .hero-text-content p * {
-    color: #E2E8F0 !important;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8) !important;
+#hero-section .hero-text-content p *,
+.hero-text-content p,
+.hero-text-content p * {
+    color: #FFFFFF !important;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7) !important;
+    filter: none !important;
 }
 
 #hero-section .hero-calc-btn {
