@@ -285,34 +285,66 @@
             box-sizing: border-box !important;
         }
 
-        .catalog-header-container {
-            max-width: 1140px;
-            width: 100%;
+        .catalog-container {
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 0 16px 20px 16px;
+            padding: 0 24px;
             box-sizing: border-box;
+            width: 100%;
         }
 
-        .catalog-page-title {
-            color: #0F172A !important;
+        .catalog-header {
+            margin: 0 0 24px 0 !important;
+            padding: 0 0 16px 0 !important;
+            border-bottom: 1px solid #E2E8F0 !important;
+            box-sizing: border-box !important;
             width: 100% !important;
-            max-width: 100% !important;
-            word-break: normal !important;
-            overflow-wrap: break-word !important;
-            line-height: 1.15 !important;
+            position: static !important;
         }
 
-        html.dark .catalog-page-title {
+        html.dark .catalog-header {
+            border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+        }
+
+        h1.catalog-title {
+            font-size: 26px !important;
+            font-weight: 800 !important;
+            color: #0F172A !important;
+            text-transform: uppercase !important;
+            letter-spacing: -0.02em !important;
+            margin: 0 0 8px 0 !important;
+            padding: 0 !important;
+            text-align: left !important;
+            line-height: 1.2 !important;
+            display: block !important;
+            position: static !important;
+        }
+
+        html.dark h1.catalog-title {
             color: #FFFFFF !important;
         }
 
+        p.catalog-subtitle {
+            font-size: 14px !important;
+            color: #475569 !important;
+            margin: 0 0 20px 0 !important;
+            max-width: 640px !important;
+            line-height: 1.5 !important;
+            display: block !important;
+            position: static !important;
+            text-align: left !important;
+        }
+
+        html.dark p.catalog-subtitle {
+            color: #94A3B8 !important;
+        }
+
         .ecom-layout-container {
-            max-width: 1140px;
-            margin: 0 auto;
-            padding: 0 16px 40px 16px;
             width: 100%;
+            margin: 0 auto;
+            padding: 0 0 40px 0;
             display: grid;
-            grid-template-columns: 260px 1fr;
+            grid-template-columns: 280px 1fr;
             gap: 24px;
             align-items: start;
             box-sizing: border-box;
@@ -685,29 +717,26 @@
 
     <!-- ==================== 3. КАТАЛОГ ТОВАРОВ ==================== -->
     <main class="catalog-main" style="width: 100% !important; display: block !important; position: static !important; clear: both !important; box-sizing: border-box !important;">
-        <!-- Заголовок H1 «МАГАЗИН АКСЕСУАРІВ ТА ЗАПЧАСТИН» строго по центру сетки 1140px без обрезания -->
-        <div class="catalog-header-container">
-            <div class="w-full border-b border-zinc-200 dark:border-white/10 pb-5" style="box-sizing: border-box !important; width: 100% !important;">
-                <div class="inline-flex items-center gap-2 px-2 py-0.5 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-300 dark:border-emerald-800/60 text-[#1AB370] text-[10px] font-mono font-bold uppercase mb-2 rounded-[2px]">
-                    <span class="w-1.5 h-1.5 bg-[#1AB370]"></span>
-                    <span>MUVIO STORE & PARTS</span>
-                </div>
-                <h1 class="catalog-page-title text-2xl sm:text-3xl lg:text-4xl font-extrabold uppercase tracking-tight leading-tight" style="color: #0F172A !important; width: 100% !important; display: block !important; margin: 0 !important; padding: 0 !important;">
-                    МАГАЗИН АКСЕСУАРІВ ТА ЗАПЧАСТИН
-                </h1>
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mt-2" style="width: 100% !important;">
-                    <p class="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 max-w-2xl leading-relaxed">
-                        Оригінальне екіпірування, компоненти та комплектуючі з офіційною гарантією та доставкою Новою Поштою по всій Україні.
-                    </p>
-                    <span id="productsFoundLabel" class="font-mono text-xs font-bold text-[#0F172A] dark:text-white shrink-0 bg-zinc-100 dark:bg-zinc-800 px-3 py-1 rounded-[2px]">
+        <div class="catalog-container">
+            <!-- Контейнер заголовка (.catalog-header) строго по одной вертикальной линии с боковым меню -->
+            <header class="catalog-header">
+                <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+                    <div>
+                        <h1 class="catalog-title">
+                            МАГАЗИН АКСЕСУАРІВ ТА ЗАПЧАСТИН
+                        </h1>
+                        <p class="catalog-subtitle">
+                            Оригінальне екіпірування, компоненти та комплектуючі з офіційною гарантією та доставкою Новою Поштою по всій Україні.
+                        </p>
+                    </div>
+                    <span id="productsFoundLabel" class="font-mono text-xs font-bold text-[#0F172A] dark:text-white shrink-0 bg-zinc-100 dark:bg-zinc-800 px-3 py-1.5 rounded-[2px] border border-zinc-200 dark:border-zinc-700 self-start sm:self-center mt-1">
                         Знайдено: 12 товарів
                     </span>
                 </div>
-            </div>
-        </div>
+            </header>
 
-        <!-- 2-Колоночная структура: Сайдбар 280px + Витрина 1fr -->
-        <div class="ecom-layout-container">
+            <!-- 2-Колоночная структура: Сайдбар 280px + Витрина 1fr -->
+            <div class="ecom-layout-container">
 
             <!-- ЛЕВАЯ КОЛОНКА: САЙДБАР КАТЕГОРИЙ (СТРОГИЙ INDUSTRIAL/ROZETKA-STYLE) -->
             <aside class="category-sidebar">
@@ -874,6 +903,7 @@
                     </button>
                 </div>
             </section>
+        </div>
         </div>
     </main>
 
