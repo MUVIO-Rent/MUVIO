@@ -15,6 +15,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
+            darkMode: ['class', '.dark'],
             theme: {
                 extend: {
                     colors: {
@@ -45,10 +46,23 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <!-- MUVIO Styles & Dark Theme -->
-    <link rel="stylesheet" href="./style.css?v=3.7">
-    <link rel="stylesheet" href="./dark-theme.css?v=3.0">
+    <link rel="stylesheet" href="./style.css?v=3.8">
+    <link rel="stylesheet" href="./dark-theme.css?v=3.2">
 
     <style>
+        html:not(.dark) h1,
+        html:not(.dark) .page-title,
+        body:not(.dark) h1,
+        body:not(.dark) .page-title {
+            color: #0F172A !important;
+        }
+        html.dark h1,
+        html.dark .page-title,
+        body.dark h1,
+        body.dark .page-title {
+            color: #FFFFFF !important;
+        }
+
         .text-primary {
             color: #1D5D3B;
         }
@@ -269,7 +283,7 @@
                     <span class="lang-ua">MUVIO STORE & PARTS</span>
                     <span class="lang-en">MUVIO STORE & PARTS</span>
                 </div>
-                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-900 dark:text-white uppercase">
+                <h1 class="page-title text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[#0F172A] dark:text-white uppercase">
                     <span class="lang-ua">МАГАЗИН АКСЕСУАРІВ ТА ЗАПЧАСТИН</span>
                     <span class="lang-en">ACCESSORIES & SPARE PARTS STORE</span>
                 </h1>

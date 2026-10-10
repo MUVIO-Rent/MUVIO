@@ -3072,3 +3072,35 @@ body.dark .hero-crosser-badge,
     display: block !important;
     filter: none !important;
 }
+
+/* ==========================================================================
+   STRICT LIGHT MODE: NO WHITE TEXT IN LIGHT THEME
+   ========================================================================== */
+html:not(.dark) h1,
+html:not(.dark) h2,
+html:not(.dark) h3,
+html:not(.dark) h4,
+html:not(.dark) h5,
+html:not(.dark) h6,
+html:not(.dark) .catalog-title,
+html:not(.dark) .page-title,
+html:not(.dark) .section-title,
+body:not(.dark) h1,
+body:not(.dark) h2,
+body:not(.dark) h3,
+body:not(.dark) h4,
+body:not(.dark) h5,
+body:not(.dark) h6,
+body:not(.dark) .catalog-title,
+body:not(.dark) .page-title,
+body:not(.dark) .section-title {
+    color: #0F172A !important;
+}
+
+html:not(.dark) p,
+html:not(.dark) .section-desc,
+body:not(.dark) p,
+body:not(.dark) .section-desc {
+    color: #334155 !important;
+}
+
