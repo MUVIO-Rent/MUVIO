@@ -3696,3 +3696,35 @@ html.dark .action-icon-btn:hover {
     }
 }
 
+/* ==================== PRODUCT CARDS IMAGES ==================== */
+.product-image-box {
+    width: 100%;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFFFFF;
+    border-bottom: 1px solid #E2E8F0;
+    overflow: hidden;
+    padding: 12px;
+    box-sizing: border-box;
+}
+
+html.dark .product-image-box {
+    background: #14181D !important;
+    border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.product-card-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition: transform 0.2s ease;
+}
+
+.product-card:hover .product-card-img,
+.ecom-prod-card:hover .product-card-img {
+    transform: scale(1.04);
+}
+
+

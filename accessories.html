@@ -399,6 +399,37 @@
             box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
         }
 
+        .product-image-box {
+            width: 100%;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #FFFFFF;
+            border-bottom: 1px solid #E2E8F0;
+            overflow: hidden;
+            padding: 12px;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        html.dark .product-image-box {
+            background: #14181D !important;
+            border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+        }
+
+        .product-card-img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: transform 0.2s ease;
+        }
+
+        .product-card:hover .product-card-img,
+        .ecom-prod-card:hover .product-card-img {
+            transform: scale(1.04);
+        }
+
         .add-to-cart-btn {
             background-color: #1AB370;
             color: #FFFFFF !important;
@@ -642,24 +673,20 @@
                         <i data-lucide="grid" class="w-4 h-4 text-zinc-400"></i>
                         <span>Всі категорії</span>
                     </span>
-                    <span class="text-xs font-mono text-zinc-400">12</span>
+                    <span class="text-xs font-mono text-zinc-400">11</span>
                 </div>
 
                 <!-- 1. Екіпірування та одяг -->
                 <div>
                     <div class="cat-group-title" onclick="toggleSidebarGroup('groupEquip')">
                         <span class="flex items-center gap-2">
-                            <span>📁 Екіпірування та одяг</span>
+                            <span>📁 Екіпірування та захист</span>
                         </span>
                         <i data-lucide="chevron-down" id="icon-groupEquip" class="w-4 h-4 transition-transform"></i>
                     </div>
                     <div id="groupEquip" class="py-1">
-                        <div onclick="filterByCategory('helmets')" class="cat-item-link" data-cat="helmets">
-                            <span>Шоломи (інтеграл, відкриті)</span>
-                            <span class="text-[11px] font-mono text-zinc-400">2</span>
-                        </div>
                         <div onclick="filterByCategory('gloves')" class="cat-item-link" data-cat="gloves">
-                            <span>Рукавиці та дощовики</span>
+                            <span>Мотоперчатки захисні</span>
                             <span class="text-[11px] font-mono text-zinc-400">2</span>
                         </div>
                     </div>
@@ -676,14 +703,10 @@
                     <div id="groupParts" class="py-1">
                         <div onclick="filterByCategory('brakes')" class="cat-item-link" data-cat="brakes">
                             <span>Гальмівні колодки</span>
-                            <span class="text-[11px] font-mono text-zinc-400">1</span>
+                            <span class="text-[11px] font-mono text-zinc-400">3</span>
                         </div>
                         <div onclick="filterByCategory('tires')" class="cat-item-link" data-cat="tires">
-                            <span>Покришки та камери</span>
-                            <span class="text-[11px] font-mono text-zinc-400">1</span>
-                        </div>
-                        <div onclick="filterByCategory('batteries')" class="cat-item-link" data-cat="batteries">
-                            <span>Акумулятори та зарядні</span>
+                            <span>Шини, золотники, ремкомплекти</span>
                             <span class="text-[11px] font-mono text-zinc-400">2</span>
                         </div>
                     </div>
@@ -699,11 +722,7 @@
                     </div>
                     <div id="groupTuning" class="py-1">
                         <div onclick="filterByCategory('grips')" class="cat-item-link" data-cat="grips">
-                            <span>Ручки з підігрівом</span>
-                            <span class="text-[11px] font-mono text-zinc-400">1</span>
-                        </div>
-                        <div onclick="filterByCategory('mirrors')" class="cat-item-link" data-cat="mirrors">
-                            <span>Дзеркала заднього виду</span>
+                            <span>Ручки керма з підігрівом</span>
                             <span class="text-[11px] font-mono text-zinc-400">1</span>
                         </div>
                     </div>
@@ -713,18 +732,14 @@
                 <div>
                     <div class="cat-group-title" onclick="toggleSidebarGroup('groupAcc')">
                         <span class="flex items-center gap-2">
-                            <span>📁 Аксесуари</span>
+                            <span>📁 Аксесуари та кріплення</span>
                         </span>
                         <i data-lucide="chevron-down" id="icon-groupAcc" class="w-4 h-4 transition-transform"></i>
                     </div>
                     <div id="groupAcc" class="py-1">
                         <div onclick="filterByCategory('holders')" class="cat-item-link" data-cat="holders">
-                            <span>Тримачі смартфона (з вібророзв'язкою)</span>
-                            <span class="text-[11px] font-mono text-zinc-400">1</span>
-                        </div>
-                        <div onclick="filterByCategory('locks')" class="cat-item-link" data-cat="locks">
-                            <span>Протиугінні замки та сирени</span>
-                            <span class="text-[11px] font-mono text-zinc-400">1</span>
+                            <span>Тримачі смартфона та кронштейни</span>
+                            <span class="text-[11px] font-mono text-zinc-400">3</span>
                         </div>
                     </div>
                 </div>
@@ -754,7 +769,7 @@
                             Всі категорії
                         </span>
                         <span id="productsFoundLabel" class="text-xs font-mono text-zinc-500 dark:text-zinc-400 font-semibold ml-2">
-                            Знайдено: 12 товарів
+                            Знайдено: 11 товарів
                         </span>
                         <button type="button" id="clearFilterBtn" onclick="filterByCategory('all')" class="text-xs text-rose-500 hover:underline hidden">
                             Скинути ✕
@@ -859,147 +874,135 @@
         const PRODUCTS_DB = [
             {
                 id: 1,
-                name: "Шолом інтеграл MUVIO Shield Pro",
-                category: "helmets",
-                categoryTitle: "Шоломи",
-                group: "equip",
-                price: 2800,
-                rating: 4.9,
-                badge: "Топ продажів",
-                icon: "shield",
-                desc: "Закритий повнолицьовий шолом з подвійним візором (сонцезахисний + прозорий) та сертифікатом DOT / ECE 22.05."
-            },
-            {
-                id: 2,
-                name: "Шолом міський відкритий Open-Face Air",
-                category: "helmets",
-                categoryTitle: "Шоломи",
-                group: "equip",
-                price: 1650,
-                rating: 4.7,
-                badge: "Літо",
-                icon: "shield",
-                desc: "Полегшений шолом відкритого типу з широким візором та регульованою вентиляцією для міських кур'єрських змін."
-            },
-            {
-                id: 3,
-                name: "Терморукавиці водонепроникні Winter Pro",
-                category: "gloves",
-                categoryTitle: "Рукавиці",
-                group: "equip",
-                price: 850,
-                rating: 4.8,
-                badge: "Зима",
-                icon: "hand",
-                desc: "Вітро- та вологозахисні рукавиці з мембраною, посиленими долонями та сенсорними пальцями для смартфона."
-            },
-            {
-                id: 4,
-                name: "Колодки гальмівні керамічні MUVIO Ceramic Stop",
+                name: "Гальмівні колодки для AIMA (дискові)",
                 category: "brakes",
                 categoryTitle: "Гальмівні колодки",
                 group: "parts",
-                price: 450,
-                rating: 5.0,
-                badge: "Оригінал",
-                icon: "disc",
-                desc: "Посилений керамічний компаунд для електроскутерів. Довговічність +300%, ефективне гальмування за будь-якої погоди."
-            },
-            {
-                id: 5,
-                name: "Покришка безкамерна 12\" GripMax All-Season",
-                category: "tires",
-                categoryTitle: "Покришки",
-                group: "parts",
-                price: 950,
-                rating: 4.8,
-                badge: "Всесезон",
-                icon: "circle",
-                desc: "Зносостійка безкамерна гума з глибоким водовідвідним протектором для безпечного руху мокрим асфальтом."
-            },
-            {
-                id: 6,
-                name: "Швидкий зарядний пристрій 72V 10A Pro-Charge",
-                category: "batteries",
-                categoryTitle: "Зарядні пристрої",
-                group: "parts",
-                price: 1450,
+                price: 350,
                 rating: 4.9,
-                badge: "Швидка зарядка",
-                icon: "zap",
-                desc: "Інтелектуальне заряджання з активним кулером та захистом від перегріву й перезаряду. Заряджає 40Ah за 4 години."
+                badge: "AIMA Оригінал",
+                image: "images/kolodkiaima.jpg",
+                desc: "Оригінальні дискові гальмівні колодки підвищеної зносостійкості для електроскутерів AIMA."
             },
             {
-                id: 7,
-                name: "Акумуляторна батарея Li-ion 72V 40Ah Samsung",
-                category: "batteries",
-                categoryTitle: "Акумулятори",
+                id: 2,
+                name: "Гальмівні колодки для Like.Bike",
+                category: "brakes",
+                categoryTitle: "Гальмівні колодки",
                 group: "parts",
-                price: 18500,
-                rating: 5.0,
-                badge: "Premium",
-                icon: "battery-charging",
-                desc: "Тяговий акумулятор на оригінальних елементах Samsung з розумною Smart-BMS платою. Запас ходу до 100 км."
+                price: 380,
+                rating: 4.8,
+                badge: "Like.Bike",
+                image: "images/kolodkilikebike.jpg",
+                desc: "Фірмові напівметалеві гальмівні колодки для модельного ряду Like.Bike. Відмінне зчеплення та ресурс."
             },
             {
-                id: 8,
-                name: "Ручки з 4-рівневим підігрівом HeatGrip-4",
+                id: 3,
+                name: "Гальмівні колодки барабанні",
+                category: "brakes",
+                categoryTitle: "Гальмівні колодки",
+                group: "parts",
+                price: 290,
+                rating: 4.7,
+                badge: "Барабанні",
+                image: "images/kolodkibaraban.jpg",
+                desc: "Надійні барабанні колодки для заднього барабанного гальма скутерів. Плавне й безпечне гальмування."
+            },
+            {
+                id: 4,
+                name: "Ручки керма з підігрівом",
                 category: "grips",
                 categoryTitle: "Ручки з підігрівом",
                 group: "tuning",
-                price: 1200,
-                rating: 4.8,
-                badge: "Комфорт",
-                icon: "flame",
-                desc: "Ергономічні термогріпси з водонепроникним перемикачем та 4 рівнями температури (45°C - 75°C). 12V-72V."
+                price: 1150,
+                rating: 4.9,
+                badge: "Підігрів",
+                image: "images/podogrev.jpg",
+                desc: "Ергономічні термогріпси з регулюванням нагріву для комфортного керування електроскутером у холодну погоду."
             },
             {
-                id: 9,
-                name: "Дзеркала заднього виду антиблікові Stealth",
-                category: "mirrors",
-                categoryTitle: "Дзеркала",
-                group: "tuning",
-                price: 620,
-                rating: 4.6,
-                badge: "Антиблік",
-                icon: "eye",
-                desc: "Алюмінієві корпуси, синє антиблікове скло та універсальне кріплення на кермо M8/M10."
-            },
-            {
-                id: 10,
-                name: "Тримач смартфона з вібророзв'язкою MetalLock",
+                id: 5,
+                name: "Алюмінієвий тримач смартфона",
                 category: "holders",
                 categoryTitle: "Тримачі смартфона",
                 group: "acc",
-                price: 890,
+                price: 590,
                 rating: 4.9,
-                badge: "Хіт",
-                icon: "smartphone",
-                desc: "Металевий тримач із демпфером вібрацій для захисту камер iPhone/Samsung та бездротовим затискачем."
+                badge: "Метал",
+                image: "images/dershatel.jpg",
+                desc: "Суцільнометалевий затискач з міцного авіаційного алюмінію для безпечного кріплення телефону на кермі."
+            },
+            {
+                id: 6,
+                name: "Кронштейн-подовжувач / тримач на дзеркало заднього виду",
+                category: "holders",
+                categoryTitle: "Кронштейни та кріплення",
+                group: "acc",
+                price: 320,
+                rating: 4.7,
+                badge: "На дзеркало",
+                image: "images/dershatel2.jpg",
+                desc: "Зручний монтажний кронштейн для швидкої установки навісних аксесуарів під кріплення бічного дзеркала."
+            },
+            {
+                id: 7,
+                name: "Додатковий кронштейн кріплення",
+                category: "holders",
+                categoryTitle: "Кронштейни та кріплення",
+                group: "acc",
+                price: 250,
+                rating: 4.6,
+                badge: "Універсальний",
+                image: "images/cronsthein.jpg",
+                desc: "Універсальний перехідник і тримач для фіксації навісного обладнання, фар, ліхтарів та гаджетів."
+            },
+            {
+                id: 8,
+                name: "Мотоперчатки захисні (чорні)",
+                category: "gloves",
+                categoryTitle: "Рукавиці захисні",
+                group: "equip",
+                price: 650,
+                rating: 4.8,
+                badge: "Захист",
+                image: "images/blackperchatki.jpg",
+                desc: "Міцні мотоперчатки з вентиляцією, анатомічними захисними накладками суглобів та сенсорними вставками."
+            },
+            {
+                id: 9,
+                name: "Мотоперчатки захисні (білі / комбіновані)",
+                category: "gloves",
+                categoryTitle: "Рукавиці захисні",
+                group: "equip",
+                price: 680,
+                rating: 4.8,
+                badge: "Стиль",
+                image: "images/whiteperchatki.jpg",
+                desc: "Спортивні захисні рукавиці в стильному контрастному біло-чорному забарвленні з протиковзкою долонею."
+            },
+            {
+                id: 10,
+                name: "Золотник для безкамерних шин",
+                category: "tires",
+                categoryTitle: "Шини та колеса",
+                group: "parts",
+                price: 90,
+                rating: 4.9,
+                badge: "Безкамерні",
+                image: "images/zolotnik.jpg",
+                desc: "Латунний ніпель високого тиску для безкамерних дисків електроскутерів із герметичним ковпачком."
             },
             {
                 id: 11,
-                name: "Замок на гальмівний диск із сиреною 110dB AlarmLock",
-                category: "locks",
-                categoryTitle: "Протиугінні замки",
-                group: "acc",
-                price: 780,
-                rating: 4.7,
-                badge: "Безпека",
-                icon: "lock",
-                desc: "Загартована сталь, датчик удару та гучна сирена 110 дБ, що реагує на спробу зрушити скутер з місця."
-            },
-            {
-                id: 12,
-                name: "Дощовик-пончо світловідбивний MUVIO Courier Dry",
-                category: "gloves",
-                categoryTitle: "Дощовики",
-                group: "equip",
-                price: 690,
-                rating: 4.7,
-                badge: "Вологозахист",
-                icon: "umbrella",
-                desc: "Щільний Oxford 300D матеріал, що повністю закриває водія та рюкзак доставки. Яскраві світловідбивні смуги."
+                name: "Ремкомплект для ремонту безкамерних шин",
+                category: "tires",
+                categoryTitle: "Ремкомплекти",
+                group: "parts",
+                price: 220,
+                rating: 5.0,
+                badge: "Ремкомплект",
+                image: "images/remkomlekt.jpg",
+                desc: "Швидкий польовий ремонт проколів без демонтажу колеса: якісні джгути, спіральне шило, голка та клей."
             }
         ];
 
@@ -1037,7 +1040,8 @@
                     name: prod.name,
                     price: prod.price,
                     qty: 1,
-                    icon: prod.icon || 'package'
+                    image: prod.image,
+                    icon: 'package'
                 });
             }
 
@@ -1071,7 +1075,8 @@
                 wishlist.push({
                     name: prod.name,
                     price: prod.price,
-                    icon: prod.icon || 'shield'
+                    image: prod.image,
+                    icon: 'heart'
                 });
                 showToast(`«${prod.name}» додано в обране ❤️`);
             }
@@ -1185,7 +1190,7 @@
                 const inCartText = isInCart ? `<i data-lucide="check" class="w-3.5 h-3.5"></i> <span>В кошику ✓</span>` : `<i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i> <span>Додати в кошик</span>`;
 
                 html += `
-                <div class="ecom-prod-card group">
+                <div class="ecom-prod-card product-card group">
                     <div>
                         <div class="flex items-center justify-between gap-2 mb-3">
                             <span class="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 bg-zinc-100 dark:bg-white/5 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-white/10 rounded-[2px]">
@@ -1201,9 +1206,9 @@
                             </div>
                         </div>
 
-                        <div class="w-full h-36 bg-zinc-50 dark:bg-[#14181D] border border-zinc-100 dark:border-white/5 rounded-[2px] flex items-center justify-center mb-3 relative overflow-hidden group-hover:border-zinc-300 dark:group-hover:border-white/15 transition-colors">
-                            <i data-lucide="${prod.icon || 'package'}" class="w-14 h-14 text-[#1AB370] opacity-85 transition-transform group-hover:scale-110"></i>
-                            <span class="absolute bottom-2 left-2 text-[10px] font-mono text-zinc-400">Код: 00${prod.id}</span>
+                        <div class="product-image-box mb-3 rounded-[2px]">
+                            <img src="${prod.image}" alt="${prod.name}" class="product-card-img" loading="lazy">
+                            <span class="absolute bottom-2 left-2 text-[10px] font-mono text-zinc-400 bg-white/80 dark:bg-black/60 px-1 rounded">Код: 00${prod.id}</span>
                         </div>
 
                         <div class="text-[11px] font-mono text-[#1AB370] mb-0.5 font-bold uppercase">
