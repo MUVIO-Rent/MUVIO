@@ -3158,3 +3158,85 @@ html:not(.dark) #wishlistCount {
     color: #FFFFFF !important;
 }
 
+/* ==========================================================================
+   ACCESSORIES E-COMMERCE TWO-LEVEL HEADER (INDUSTRIAL/BRUTALIST)
+   ========================================================================== */
+.header-main {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px 24px;
+    border-bottom: 1px solid #E2E8F0;
+    background-color: #FFFFFF;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+html.dark .header-main,
+body.dark .header-main,
+.dark .header-main {
+    background-color: #080A0C !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.header-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 16px;
+}
+
+.header-user-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.header-search-row {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding: 8px 0;
+    border-top: 1px solid #F1F5F9;
+}
+
+html.dark .header-search-row {
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.search-form {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    gap: 8px;
+}
+
+.user-info-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.buyer-pill-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 2px 6px;
+    font-size: 10px;
+    font-weight: 800;
+    font-family: monospace;
+    letter-spacing: 0.05em;
+    border-radius: 2px;
+    border: 1px solid #1AB370;
+    background-color: rgba(26, 179, 112, 0.08);
+    color: #1AB370 !important;
+    text-transform: uppercase;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+

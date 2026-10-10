@@ -42,7 +42,7 @@
     <link rel="stylesheet" href="./dark-theme.css?v=3.3">
 
     <style>
-        /* БАЗОВА ПІДКЛАДКА */
+        /* БАЗОВА ПІДКЛАДКА ТА ШРИФТИ */
         body {
             background-color: #F8FAFC;
             color: #0F172A;
@@ -50,6 +50,9 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
         }
 
         html.dark body {
@@ -57,109 +60,327 @@
             color: #F8FAFC !important;
         }
 
-        /* ROZETKA-STYLE E-COMMERCE HEADER */
-        .rozetka-header {
-            background-color: #0F172A;
-            color: #FFFFFF;
+        /* ==================== 1. ДВОРІВНЕВА ШАПКА (INDUSTRIAL / BRUTALIST) ==================== */
+        .header-main {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 12px 24px;
+            border-bottom: 1px solid #E2E8F0;
+            background-color: #FFFFFF;
             position: sticky;
             top: 0;
             z-index: 100;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        html:not(.dark) .rozetka-header {
-            background-color: #0F172A;
-            color: #FFFFFF;
-        }
-
-        /* ПОШУКОВИЙ РЯДОК */
-        .search-input-wrap {
-            position: relative;
-            flex: 1;
-            max-width: 680px;
-        }
-
-        .search-input {
             width: 100%;
-            height: 40px;
-            padding: 0 110px 0 42px;
-            font-size: 14px;
-            color: #0F172A !important;
-            background-color: #FFFFFF !important;
-            border: 2px solid #1AB370;
-            border-radius: 4px;
-            outline: none;
-            transition: all 0.15s ease;
+            box-sizing: border-box;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
         }
 
-        .search-input:focus {
-            box-shadow: 0 0 0 3px rgba(26, 179, 112, 0.25);
+        html.dark .header-main {
+            background-color: #080A0C !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+            box-shadow: none;
         }
 
-        .search-submit-btn {
-            position: absolute;
-            right: 3px;
-            top: 3px;
-            bottom: 3px;
-            padding: 0 18px;
-            background-color: #1AB370;
-            color: #FFFFFF !important;
-            font-weight: 700;
-            font-size: 13px;
-            border: none;
-            border-radius: 2px;
-            cursor: pointer;
-            transition: background-color 0.15s ease;
+        /* 1.1 ВЕРХНІЙ РЯД / ГОЛОВНА СТРОКА (ЗЕЛЕНА ЛІНІЯ) */
+        .header-top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            gap: 16px;
+        }
+
+        .header-nav {
             display: flex;
             align-items: center;
-            justify-content: center;
+            gap: 22px;
         }
 
-        .search-submit-btn:hover {
-            background-color: #169B60;
-        }
-
-        /* КНОПКИ ДІЙ ПОКУПЦЯ (РОЗЕТКА) */
-        .ecom-action-btn {
-            display: inline-flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 4px 10px;
-            color: #E2E8F0 !important;
+        .header-nav .nav-link {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: #0F172A;
             text-decoration: none;
-            position: relative;
-            border-radius: 4px;
-            transition: color 0.15s ease, background-color 0.15s ease;
-            font-size: 11px;
-            font-weight: 600;
-            cursor: pointer;
+            transition: color 0.15s ease;
             white-space: nowrap;
         }
 
-        .ecom-action-btn:hover {
+        html.dark .header-nav .nav-link {
             color: #FFFFFF !important;
-            background-color: rgba(255, 255, 255, 0.08);
         }
 
-        .badge-count {
+        .header-nav .nav-link:hover {
+            color: #1AB370 !important;
+        }
+
+        .header-nav-divider {
+            width: 1px;
+            height: 14px;
+            background-color: #CBD5E1;
+        }
+
+        html.dark .header-nav-divider {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        /* ПРАВИЙ БЛОК ВЕРХНЬОГО РЯДУ */
+        .header-user-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-shrink: 0;
+        }
+
+        /* БЛОК КОРИСТУВАЧА «МАКСИМ» З БЕЙДЖЕМ «ПОКУПЕЦЬ» */
+        .user-profile-badge-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            padding: 4px 10px;
+            border: 1px solid #E2E8F0;
+            border-radius: 2px;
+            background-color: #F8FAFC;
+            transition: all 0.15s ease;
+        }
+
+        .user-profile-badge-link:hover {
+            border-color: #1AB370;
+            background-color: rgba(26, 179, 112, 0.05);
+        }
+
+        html.dark .user-profile-badge-link {
+            background-color: #111418;
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .user-avatar-mini {
+            width: 26px;
+            height: 26px;
+            background-color: #1AB370;
+            color: #FFFFFF !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-family: monospace;
+            font-size: 13px;
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+
+        /* ГРУПА: ІМ'Я + БЕЙДЖ З ЧІТКИМ gap: 10px БЕЗ ЗЛИПАНИЯ */
+        .user-info-group {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px !important;
+        }
+
+        .user-name-label {
+            font-weight: 700;
+            font-size: 13px;
+            color: #0F172A;
+            white-space: nowrap;
+            line-height: 1;
+        }
+
+        html.dark .user-name-label {
+            color: #FFFFFF !important;
+        }
+
+        .buyer-pill-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 2px 6px;
+            font-size: 10px;
+            font-weight: 800;
+            font-family: monospace;
+            letter-spacing: 0.05em;
+            border-radius: 2px;
+            border: 1px solid #1AB370;
+            background-color: rgba(26, 179, 112, 0.1);
+            color: #1AB370 !important;
+            text-transform: uppercase;
+            line-height: 1.2;
+            white-space: nowrap;
+        }
+
+        .buyer-dot {
+            width: 5px;
+            height: 5px;
+            background-color: #1AB370;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        /* ФУНКЦІОНАЛЬНІ ІКОНКИ: ПОРІВНЯННЯ, ОБРАНЕ, КОШИК */
+        .header-quick-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .action-icon-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 2px;
+            border: 1px solid #E2E8F0;
+            background-color: #F8FAFC;
+            color: #0F172A;
+            position: relative;
+            text-decoration: none;
+            transition: all 0.15s ease;
+            box-sizing: border-box;
+        }
+
+        .action-icon-btn:hover {
+            border-color: #1AB370;
+            color: #1AB370;
+            background-color: rgba(26, 179, 112, 0.06);
+        }
+
+        html.dark .action-icon-btn {
+            background-color: #111418;
+            border-color: rgba(255, 255, 255, 0.1);
+            color: #FFFFFF !important;
+        }
+
+        .action-cart-btn {
+            width: auto;
+            padding: 0 12px;
+            gap: 8px;
+            background-color: #0F172A;
+            border-color: #0F172A;
+            color: #FFFFFF !important;
+        }
+
+        .action-cart-btn:hover {
+            background-color: #1AB370;
+            border-color: #1AB370;
+            color: #FFFFFF !important;
+        }
+
+        html.dark .action-cart-btn {
+            background-color: #1AB370;
+            border-color: #1AB370;
+            color: #FFFFFF !important;
+        }
+
+        .cart-total-text {
+            font-family: monospace;
+            font-size: 12px;
+            font-weight: 700;
+            color: #FFFFFF !important;
+        }
+
+        .icon-counter-badge {
             position: absolute;
-            top: -2px;
-            right: 8px;
+            top: -5px;
+            right: -5px;
             background-color: #1AB370;
             color: #FFFFFF !important;
             font-size: 10px;
             font-weight: 800;
             font-family: monospace;
-            padding: 1px 5px;
+            padding: 0.5px 5px;
             border-radius: 999px;
-            min-width: 17px;
+            min-width: 16px;
             text-align: center;
-            line-height: 1.2;
-            border: 1px solid #0F172A;
+            line-height: 1.3;
+            border: 1px solid #FFFFFF;
         }
 
-        /* ДВУХКОЛОНОЧНИЙ МАКЕТ */
+        html.dark .icon-counter-badge {
+            border-color: #080A0C;
+        }
+
+        /* ==================== 1.2 ДРУГИЙ РЯД / ПОШУКОВА СТРОКА (ЧЕРВОНА ЛІНІЯ) ==================== */
+        .header-search-row {
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+            padding: 8px 0 0 0;
+            border-top: 1px solid #F1F5F9;
+        }
+
+        html.dark .header-search-row {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .search-form {
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .search-input-container {
+            position: relative;
+            flex: 1;
+        }
+
+        .search-input-field {
+            width: 100%;
+            height: 38px;
+            padding: 0 12px 0 36px;
+            font-size: 13px;
+            color: #0F172A !important;
+            background-color: #FFFFFF !important;
+            border: 1px solid #CBD5E1;
+            border-radius: 2px;
+            outline: none;
+            transition: all 0.15s ease;
+            box-sizing: border-box;
+        }
+
+        .search-input-field:focus {
+            border-color: #1AB370;
+            box-shadow: 0 0 0 2px rgba(26, 179, 112, 0.15);
+        }
+
+        html.dark .search-input-field {
+            background-color: #111418 !important;
+            border-color: rgba(255, 255, 255, 0.12) !important;
+            color: #FFFFFF !important;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 11px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94A3B8;
+            pointer-events: none;
+        }
+
+        .search-btn {
+            height: 38px;
+            padding: 0 16px;
+            background-color: #1AB370;
+            color: #FFFFFF !important;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: background-color 0.15s ease;
+            white-space: nowrap;
+        }
+
+        .search-btn:hover {
+            background-color: #169B60;
+        }
+
+        /* ==================== 2. ДВУХКОЛОНОЧНИЙ МАКЕТ ==================== */
         .ecom-layout-container {
             max-width: 1400px;
             margin: 0 auto;
@@ -169,11 +390,21 @@
             grid-template-columns: 280px 1fr;
             gap: 24px;
             align-items: start;
+            box-sizing: border-box;
         }
 
         @media (max-width: 1024px) {
             .ecom-layout-container {
                 grid-template-columns: 1fr;
+            }
+            .header-search-row {
+                justify-content: stretch;
+            }
+            .search-form {
+                max-width: 100%;
+            }
+            .header-user-actions {
+                gap: 12px;
             }
         }
 
@@ -181,10 +412,10 @@
         .category-sidebar {
             background-color: #FFFFFF;
             border: 1px solid #E2E8F0;
-            border-radius: 4px;
+            border-radius: 2px;
             overflow: hidden;
             position: sticky;
-            top: 76px;
+            top: 130px;
         }
 
         html.dark .category-sidebar {
@@ -313,7 +544,7 @@
             background-color: #0F172A;
             color: #FFFFFF;
             padding: 12px 18px;
-            border-radius: 4px;
+            border-radius: 2px;
             border-left: 4px solid #1AB370;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
             z-index: 1000;
@@ -355,86 +586,121 @@
 
 <body>
 
-    <!-- ==================== 1. ПОЛНОЦЕННЫЙ ROZETKA-STYLE HEADER ==================== -->
-    <header class="rozetka-header w-full">
-        <!-- Верхня панель контактів та меню -->
-        <div class="border-b border-white/10 px-4 sm:px-6 lg:px-8 py-1.5 text-[11px] font-mono text-zinc-400 flex items-center justify-between">
-            <div class="flex items-center gap-4">
-                <span>📍 Одеса, вул. Приморська, 22</span>
-                <span class="hidden sm:inline">🕒 Пн–Сб 09:00–19:00</span>
-                <span class="hidden md:inline">🚚 Доставка Новою Поштою по всій Україні</span>
-            </div>
-            <div class="flex items-center gap-4">
-                <a href="catalog.html" class="hover:text-white transition-colors">ОРЕНДА</a>
-                <a href="service.html" class="hover:text-white transition-colors">СЕРВІС</a>
-                <a href="calculator.html" class="hover:text-white transition-colors">КАЛЬКУЛЯТОР</a>
-                <a href="terms.html" class="hover:text-white transition-colors">УМОВИ</a>
-                <a href="faq.html" class="hover:text-white transition-colors">FAQ</a>
-                <button type="button" onclick="toggleAuthTheme()" class="text-zinc-300 hover:text-white transition-colors flex items-center gap-1" title="Змінити тему">
-                    <i data-lucide="sun-moon" class="w-3.5 h-3.5"></i>
-                    <span>ТЕМА</span>
+    <!-- ==================== 1. ДВОРІВНЕВА ШАПКА (HEADER) ==================== -->
+    <header class="header-main">
+        <!-- 1.1 ВЕРХНІЙ РЯД / ГОЛОВНА СТРОКА (ЗЕЛЕНА ЛІНІЯ) -->
+        <div class="header-top-row">
+            <!-- Слева: оригінальний логотип MUVIO (одна емблема без текстового дубля) -->
+            <div class="flex items-center gap-3 shrink-0">
+                <!-- Кнопка мобільного меню -->
+                <button id="burger-btn" type="button" aria-label="Меню"
+                    class="lg:hidden flex items-center justify-center w-8 h-8 p-1 text-zinc-700 dark:text-zinc-200 hover:text-[#1AB370] transition-colors focus:outline-none">
+                    <svg class="w-5 h-5 stroke-current" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
                 </button>
+
+                <a href="index.html" class="flex items-center shrink-0 group focus:outline-none" aria-label="MUVIO Головна">
+                    <img src="images/logo-header-trans.png" alt="MUVIO" class="header-logo-img h-7 w-auto block group-hover:opacity-90 transition-opacity">
+                </a>
+            </div>
+
+            <!-- По центру: навигаційне меню (ОРЕНДА, СЕРВІС, КАЛЬКУЛЯТОР, УМОВИ, FAQ) та перемикачі (Мова, Тема) -->
+            <nav class="hidden lg:flex items-center gap-6 xl:gap-7 header-nav">
+                <a href="catalog.html" class="nav-link">ОРЕНДА</a>
+                <a href="service.html" class="nav-link">СЕРВІС</a>
+                <a href="calculator.html" class="nav-link">КАЛЬКУЛЯТОР</a>
+                <a href="terms.html" class="nav-link">УМОВИ</a>
+                <a href="faq.html" class="nav-link">FAQ</a>
+
+                <div class="header-nav-divider"></div>
+
+                <!-- Перемикачі: Мова та Тема -->
+                <div class="flex items-center gap-3">
+                    <div class="lang-switch flex items-center gap-1 font-mono text-xs font-bold text-zinc-500 dark:text-zinc-400">
+                        <button type="button" id="authLangUa" onclick="setSiteLanguage('ua')" class="lang-btn active text-[#1AB370]">UA</button>
+                        <span class="text-zinc-300 dark:text-zinc-600">|</span>
+                        <button type="button" id="authLangEn" onclick="setSiteLanguage('en')" class="lang-btn hover:text-[#1AB370]">EN</button>
+                    </div>
+
+                    <button id="theme-toggle" class="theme-toggle-btn text-zinc-600 dark:text-zinc-300 hover:text-[#1AB370] transition-colors p-1"
+                        type="button" onclick="toggleAuthTheme()" aria-label="Змінити тему" title="Змінити тему">
+                        <i data-lucide="sun-moon" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </nav>
+
+            <!-- Справа: блок користувача «Максим» + функціональні іконки («Порівняння», «Обране», «Кошик») -->
+            <div class="header-user-actions">
+                <!-- Блок користувача: «Максим» з чітким прямокутним бейджем «ПОКУПЕЦЬ» (gap: 10px, без злиття!) -->
+                <a href="cabinet.html" class="user-profile-badge-link" title="Особистий кабінет">
+                    <div class="user-avatar-mini" id="headerUserAvatar">
+                        M
+                    </div>
+                    <div class="user-info-group">
+                        <span id="headerUserNameText" class="user-name-label">Максим</span>
+                        <span class="buyer-pill-badge">
+                            <span class="buyer-dot"></span>
+                            <span>ПОКУПЕЦЬ</span>
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Функціональні іконки: «Порівняння», «Обране», «Кошик» -->
+                <div class="header-quick-actions">
+                    <a href="cabinet.html" onclick="saveTabTarget('compare')" class="action-icon-btn" title="Порівняння товарів">
+                        <i data-lucide="scale" class="w-4 h-4"></i>
+                        <span id="headerCompareCount" class="icon-counter-badge">2</span>
+                    </a>
+
+                    <a href="cabinet.html" onclick="saveTabTarget('wishlist')" class="action-icon-btn" title="Список бажань">
+                        <i data-lucide="heart" class="w-4 h-4"></i>
+                        <span id="headerWishlistCount" class="icon-counter-badge">3</span>
+                    </a>
+
+                    <a href="cabinet.html" onclick="saveTabTarget('cart')" class="action-icon-btn action-cart-btn" title="Кошик покупок">
+                        <div class="relative flex items-center">
+                            <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+                            <span id="headerCartCount" class="icon-counter-badge">2</span>
+                        </div>
+                        <span id="headerCartTotal" class="cart-total-text hidden sm:inline">3 550 ₴</span>
+                    </a>
+                </div>
             </div>
         </div>
 
-        <!-- Головний ряд e-commerce шапки -->
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4">
-            <!-- 1.1 Логотип MUVIO -->
-            <a href="index.html" class="flex items-center gap-2 shrink-0 group focus:outline-none" aria-label="MUVIO Головна">
-                <img src="images/logo-header-trans.png" alt="MUVIO" class="h-7 w-auto block group-hover:opacity-90 transition-opacity" style="filter: brightness(0) invert(1);">
-                <span class="font-mono text-[10px] tracking-widest text-[#1AB370] font-bold uppercase hidden sm:inline">STORE</span>
-            </a>
-
-            <!-- 1.2 Живий рядок пошуку Rozetka-style -->
-            <div class="search-input-wrap">
-                <i data-lucide="search" class="w-4 h-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
-                <input type="text" id="mainSearchInput" placeholder="Я шукаю шолом, колодки, ручки, зарядний..."
-                    autocomplete="off" class="search-input font-sans" oninput="handleSearchInput(this.value)">
-                <button type="button" class="search-submit-btn font-mono" onclick="handleSearchSubmit()">
-                    <span>Знайти</span>
+        <!-- 1.2 ДРУГИЙ РЯД / ПОШУКОВА СТРОКА (ЧЕРВОНА ЛІНІЯ) -->
+        <div class="header-search-row">
+            <form class="search-form" onsubmit="event.preventDefault(); handleSearchSubmit();">
+                <div class="search-input-container">
+                    <i data-lucide="search" class="w-4 h-4 search-icon"></i>
+                    <input type="text" id="mainSearchInput" placeholder="Шукати товари (шолом, колодки, ручки...)"
+                        autocomplete="off" class="search-input-field font-sans" oninput="handleSearchInput(this.value)">
+                </div>
+                <button type="submit" class="search-btn font-mono">
+                    Знайти
                 </button>
-            </div>
+            </form>
+        </div>
 
-            <!-- 1.3 Панель дій покупця Rozetka-style -->
-            <div class="flex items-center gap-1 sm:gap-2 shrink-0">
-                <!-- Профіль покупця: «Максим» -->
-                <a href="cabinet.html" class="ecom-action-btn" id="headerUserBtn" title="Особистий кабінет">
-                    <i data-lucide="user" class="w-5 h-5 mb-0.5"></i>
-                    <span id="headerUserNameText" class="text-[11px] truncate max-w-[80px]">Максим</span>
-                </a>
-
-                <!-- Порівняння -->
-                <a href="cabinet.html" onclick="saveTabTarget('compare')" class="ecom-action-btn" title="Порівняння товарів">
-                    <i data-lucide="scale" class="w-5 h-5 mb-0.5"></i>
-                    <span class="hidden sm:inline">Порівняння</span>
-                    <span id="headerCompareCount" class="badge-count">2</span>
-                </a>
-
-                <!-- Обране / Бажання -->
-                <a href="cabinet.html" onclick="saveTabTarget('wishlist')" class="ecom-action-btn" title="Список бажань">
-                    <i data-lucide="heart" class="w-5 h-5 mb-0.5"></i>
-                    <span class="hidden sm:inline">Обране</span>
-                    <span id="headerWishlistCount" class="badge-count">3</span>
-                </a>
-
-                <!-- Кошик -->
-                <a href="cabinet.html" onclick="saveTabTarget('cart')" class="ecom-action-btn bg-white/5 hover:bg-white/10 px-3 py-1.5" title="Кошик замовлення">
-                    <div class="relative">
-                        <i data-lucide="shopping-cart" class="w-5 h-5 mb-0.5 text-[#1AB370]"></i>
-                        <span id="headerCartCount" class="badge-count" style="top: -6px; right: -8px;">2</span>
-                    </div>
-                    <div class="flex items-center gap-1">
-                        <span class="hidden sm:inline font-bold">Кошик</span>
-                        <span id="headerCartTotal" class="hidden md:inline font-mono text-[11px] text-[#1AB370]">3 550 ₴</span>
-                    </div>
-                </a>
+        <!-- Мобільне меню -->
+        <div id="mobile-menu" data-mobile-menu="true"
+            class="hidden lg:hidden w-full border-t border-zinc-200 dark:border-white/10 pt-3 pb-2 space-y-2">
+            <div class="grid grid-cols-2 gap-2 text-xs font-semibold">
+                <a href="catalog.html" class="p-2 rounded bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-white">ОРЕНДА</a>
+                <a href="service.html" class="p-2 rounded bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-white">СЕРВІС</a>
+                <a href="calculator.html" class="p-2 rounded bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-white">КАЛЬКУЛЯТОР</a>
+                <a href="terms.html" class="p-2 rounded bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-white">УМОВИ</a>
+                <a href="faq.html" class="p-2 rounded bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-white col-span-2">FAQ</a>
             </div>
         </div>
     </header>
 
     <!-- ==================== 2. ГОЛОВНИЙ ДВУХКОЛОНОЧНИЙ МАКЕТ ==================== -->
     <main class="flex-1">
-        <!-- Заголовок сторінки всередині контентної зони (строго #0F172A) -->
+        <!-- Заголовок сторінки всередині контентної зони (строго #0F172A в світлій темі) -->
         <div class="max-w-[1400px] mx-auto px-5 pt-8 pb-4">
             <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-zinc-200 dark:border-white/10 pb-4">
                 <div>
@@ -459,7 +725,7 @@
         <!-- 2-Колоночна структура: Сайдбар 280px + Вітрина 1fr -->
         <div class="ecom-layout-container">
 
-            <!-- ЛЕВАЯ КОЛОНКА: САЙДБАР КАТЕГОРИЙ (СТРОГИЙ ROZETKA-STYLE) -->
+            <!-- ЛЕВАЯ КОЛОНКА: САЙДБАР КАТЕГОРИЙ (СТРОГИЙ INDUSTRIAL/ROZETKA-STYLE) -->
             <aside class="category-sidebar">
                 <div class="p-4 border-b border-zinc-200 dark:border-white/10 flex items-center justify-between bg-zinc-50 dark:bg-[#14181D]">
                     <span class="font-bold text-xs uppercase tracking-wider text-[#0F172A] dark:text-white flex items-center gap-2">
@@ -927,7 +1193,7 @@
             updateHeaderBadges();
         }
 
-        // 4. Оновлення бейджів у шапці Rozetka-style
+        // 4. Оновлення бейджів у шапці
         function updateHeaderBadges() {
             // Кошик
             const cart = getCart();
@@ -973,6 +1239,11 @@
 
             const userTextEl = document.getElementById('headerUserNameText');
             if (userTextEl) userTextEl.textContent = userName;
+
+            const userAvatarChar = document.getElementById('headerUserAvatar');
+            if (userAvatarChar) {
+                userAvatarChar.textContent = userName.trim().charAt(0).toUpperCase() || 'M';
+            }
         }
 
         // 5. Рендеринг товарів у правій колонці
@@ -983,15 +1254,12 @@
             if (!grid) return;
 
             let filtered = PRODUCTS_DB.filter(prod => {
-                // Фільтр категорії
                 const matchCat = (currentCategory === 'all') || (prod.category === currentCategory) || (prod.group === currentCategory);
-                // Фільтр пошуку
                 const q = searchQuery.toLowerCase().trim();
                 const matchSearch = !q || prod.name.toLowerCase().includes(q) || prod.desc.toLowerCase().includes(q) || prod.categoryTitle.toLowerCase().includes(q);
                 return matchCat && matchSearch;
             });
 
-            // Сортування
             if (currentSort === 'cheap') {
                 filtered.sort((a, b) => a.price - b.price);
             } else if (currentSort === 'expensive') {
@@ -1085,7 +1353,6 @@
         function filterByCategory(cat) {
             currentCategory = cat;
 
-            // Оновлюємо активний стан у сайдбарі
             document.querySelectorAll('.cat-item-link').forEach(el => {
                 if (el.getAttribute('data-cat') === cat) {
                     el.classList.add('active');
@@ -1094,7 +1361,6 @@
                 }
             });
 
-            // Оновлюємо бейдж активного фільтра
             const badge = document.getElementById('activeFilterBadge');
             const clearBtn = document.getElementById('clearFilterBtn');
 
@@ -1174,6 +1440,24 @@
             }
         }
 
+        function setSiteLanguage(lang) {
+            document.documentElement.setAttribute('lang', lang);
+            const btnUa = document.getElementById('authLangUa');
+            const btnEn = document.getElementById('authLangEn');
+            if (btnUa && btnEn) {
+                if (lang === 'en') {
+                    btnEn.classList.add('active', 'text-[#1AB370]');
+                    btnUa.classList.remove('active', 'text-[#1AB370]');
+                } else {
+                    btnUa.classList.add('active', 'text-[#1AB370]');
+                    btnEn.classList.remove('active', 'text-[#1AB370]');
+                }
+            }
+            try {
+                localStorage.setItem('muvio_lang', lang);
+            } catch (e) {}
+        }
+
         function toggleAuthTheme() {
             const isDark = document.documentElement.classList.contains('dark') ||
                 document.documentElement.classList.contains('theme-dark') ||
@@ -1202,6 +1486,15 @@
             updateHeaderBadges();
             renderProducts();
             if (window.lucide) window.lucide.createIcons();
+
+            // Бургер меню для мобільних
+            const burger = document.getElementById('burger-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (burger && mobileMenu) {
+                burger.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
         });
     </script>
 </body>
