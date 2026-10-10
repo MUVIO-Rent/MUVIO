@@ -3500,6 +3500,199 @@ html.dark .clean-icon-action-btn:hover {
     border-radius: 9999px !important;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) !important;
 }
+/* ==================== UNIFIED STORE TOP BAR ==================== */
+.store-top-bar {
+    margin: 16px auto 20px auto;
+    max-width: 1240px;
+    padding: 0 16px;
+    box-sizing: border-box;
+    width: 100%;
+}
 
+.store-top-bar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 4px;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
 
+html.dark .store-top-bar-container {
+    background: #111418 !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+.user-profile-compact {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    text-decoration: none;
+}
+
+.user-profile-compact .user-avatar-badge {
+    width: 32px;
+    height: 32px;
+    background-color: #10B981;
+    color: #FFFFFF;
+    font-weight: 800;
+    font-family: monospace;
+    font-size: 14px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.user-profile-compact .user-display-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0F172A;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+html.dark .user-profile-compact .user-display-name {
+    color: #FFFFFF !important;
+}
+
+.store-search-form {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    max-width: 580px;
+    gap: 8px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.store-search-form .store-search-input {
+    width: 100%;
+    height: 40px;
+    padding: 0 14px;
+    border: 1px solid #CBD5E1;
+    border-radius: 2px;
+    color: #0F172A;
+    background-color: #FFFFFF;
+    outline: none;
+    box-sizing: border-box;
+    font-size: 14px;
+    transition: border-color 0.15s ease;
+}
+
+.store-search-form .store-search-input:focus {
+    border-color: #10B981;
+}
+
+html.dark .store-search-form .store-search-input {
+    background-color: #161B22 !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    color: #FFFFFF !important;
+}
+
+.store-search-form .store-search-btn {
+    height: 40px;
+    padding: 0 20px;
+    background: #10B981;
+    color: #FFFFFF;
+    font-weight: 700;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    font-family: monospace;
+    transition: background-color 0.15s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.store-search-form .store-search-btn:hover {
+    background: #059669;
+}
+
+.store-action-icons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.action-icon-btn {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #E2E8F0;
+    border-radius: 2px;
+    background: #FFFFFF;
+    cursor: pointer;
+    font-size: 16px;
+    color: #334155;
+    text-decoration: none;
+    transition: all 0.15s ease;
+    flex-shrink: 0;
+}
+
+.action-icon-btn:hover {
+    border-color: #10B981;
+    color: #10B981;
+}
+
+html.dark .action-icon-btn {
+    background: #161B22 !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    color: #CBD5E1 !important;
+}
+
+html.dark .action-icon-btn:hover {
+    border-color: #10B981 !important;
+    color: #10B981 !important;
+}
+
+.action-icon-btn .badge-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    min-width: 17px;
+    height: 17px;
+    padding: 0 4px;
+    background-color: #10B981;
+    color: #FFFFFF;
+    font-size: 10px;
+    font-weight: 800;
+    font-family: monospace;
+    line-height: 17px;
+    text-align: center;
+    border-radius: 9999px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 768px) {
+    .store-top-bar-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+    .store-search-form {
+        max-width: 100%;
+        order: 2;
+    }
+    .user-profile-compact {
+        order: 1;
+    }
+    .store-action-icons {
+        order: 3;
+        justify-content: flex-end;
+    }
+}
 

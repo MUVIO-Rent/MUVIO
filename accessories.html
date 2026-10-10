@@ -65,43 +65,43 @@
             color: #F8FAFC !important;
         }
 
-        /* ==================== 1. СТУПЕНЧАТАЯ ШАПКА МАГАЗИНА (ДВЕ КАРТОЧКИ) ==================== */
-        .store-header-wrapper {
-            width: 100%;
+        /* ==================== 1. UNIFIED STORE TOP BAR ==================== */
+        .store-top-bar {
+            margin: 16px auto 20px auto;
+            max-width: 1240px;
             padding: 0 16px;
             box-sizing: border-box;
+            width: 100%;
         }
 
-        /* А) ВЕРХНЯЯ ПОЛОСА (max-width: 1140px, margin: 16px auto 12px auto) */
-        .store-user-card {
-            max-width: 1140px;
-            width: 100%;
-            margin: 16px auto 12px auto;
+        .store-top-bar-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
             background: #FFFFFF;
             border: 1px solid #E2E8F0;
             border-radius: 4px;
-            padding: 12px 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            padding: 10px 20px;
             box-sizing: border-box;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
         }
 
-        html.dark .store-user-card {
+        html.dark .store-top-bar-container {
             background: #111418 !important;
             border-color: rgba(255, 255, 255, 0.08) !important;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
         }
 
-        .store-user-left {
+        .user-profile-compact {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
+            flex-shrink: 0;
             text-decoration: none;
         }
 
-        .store-user-avatar {
+        .user-profile-compact .user-avatar-badge {
             width: 32px;
             height: 32px;
             background-color: #10B981;
@@ -116,167 +116,152 @@
             flex-shrink: 0;
         }
 
-        .store-user-name {
+        .user-profile-compact .user-display-name {
+            font-size: 16px;
             font-weight: 700;
-            font-size: 14px;
             color: #0F172A;
             line-height: 1;
             white-space: nowrap;
         }
 
-        html.dark .store-user-name {
+        html.dark .user-profile-compact .user-display-name {
             color: #FFFFFF !important;
         }
 
-        .store-user-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 3px 8px;
-            font-size: 10px;
-            font-weight: 800;
-            font-family: monospace;
-            letter-spacing: 0.05em;
-            border-radius: 4px;
-            border: 1px solid #10B981;
-            background-color: rgba(16, 185, 129, 0.08);
-            color: #10B981 !important;
-            text-transform: uppercase;
-            line-height: 1.2;
-            white-space: nowrap;
-        }
-
-        .store-user-right {
+        .store-search-form {
             display: flex;
             align-items: center;
-            gap: 10px;
+            flex: 1;
+            max-width: 580px;
+            gap: 8px;
+            margin: 0 auto;
+            box-sizing: border-box;
         }
 
-        .store-icon-btn {
-            display: inline-flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            position: relative !important;
-            width: 38px !important;
-            height: 38px !important;
-            border: 1px solid #E2E8F0 !important;
-            border-radius: 4px !important;
-            background-color: #FFFFFF !important;
-            color: #334155 !important;
-            transition: all 0.15s ease !important;
-            text-decoration: none !important;
-            cursor: pointer !important;
-            flex-shrink: 0 !important;
+        .store-search-form .store-search-input {
+            width: 100%;
+            height: 40px;
+            padding: 0 14px;
+            border: 1px solid #CBD5E1;
+            border-radius: 2px;
+            color: #0F172A;
+            background-color: #FFFFFF;
+            outline: none;
+            box-sizing: border-box;
+            font-size: 14px;
+            transition: border-color 0.15s ease;
         }
 
-        .store-icon-btn:hover {
-            border-color: #10B981 !important;
-            color: #10B981 !important;
+        .store-search-form .store-search-input:focus {
+            border-color: #10B981;
         }
 
-        html.dark .store-icon-btn {
+        html.dark .store-search-form .store-search-input {
             background-color: #161B22 !important;
+            border-color: rgba(255, 255, 255, 0.15) !important;
+            color: #FFFFFF !important;
+        }
+
+        .store-search-form .store-search-btn {
+            height: 40px;
+            padding: 0 20px;
+            background: #10B981;
+            color: #FFFFFF;
+            font-weight: 700;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 13px;
+            letter-spacing: 0.05em;
+            font-family: monospace;
+            transition: background-color 0.15s ease;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .store-search-form .store-search-btn:hover {
+            background: #059669;
+        }
+
+        .store-action-icons {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
+        .action-icon-btn {
+            width: 40px;
+            height: 40px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #E2E8F0;
+            border-radius: 2px;
+            background: #FFFFFF;
+            cursor: pointer;
+            font-size: 16px;
+            color: #334155;
+            text-decoration: none;
+            transition: all 0.15s ease;
+            flex-shrink: 0;
+        }
+
+        .action-icon-btn:hover {
+            border-color: #10B981;
+            color: #10B981;
+        }
+
+        html.dark .action-icon-btn {
+            background: #161B22 !important;
             border-color: rgba(255, 255, 255, 0.12) !important;
             color: #CBD5E1 !important;
         }
 
-        html.dark .store-icon-btn:hover {
+        html.dark .action-icon-btn:hover {
             border-color: #10B981 !important;
             color: #10B981 !important;
         }
 
-        .store-count-badge {
-            position: absolute !important;
-            top: -5px !important;
-            right: -5px !important;
-            min-width: 17px !important;
-            height: 17px !important;
-            padding: 0 4px !important;
-            background-color: #10B981 !important;
-            color: #FFFFFF !important;
-            font-size: 10px !important;
-            font-weight: 800 !important;
-            font-family: monospace !important;
-            line-height: 17px !important;
-            text-align: center !important;
-            border-radius: 9999px !important;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) !important;
-        }
-
-        /* Б) НИЖНЯЯ ПОЛОСА (СТРОКА ПОИСКА, max-width: 620px, margin: 0 auto 24px auto) */
-        .store-search-card {
-            max-width: 620px;
-            width: 100%;
-            margin: 0 auto 24px auto;
-            background: #FFFFFF;
-            border: 1px solid #E2E8F0;
-            border-radius: 4px;
-            padding: 4px 6px 4px 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            box-sizing: border-box;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-        }
-
-        html.dark .store-search-card {
-            background: #111418 !important;
-            border-color: rgba(255, 255, 255, 0.08) !important;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
-        }
-
-        .store-search-icon-btn {
-            color: #10B981;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 24px;
-            height: 24px;
-            flex-shrink: 0;
-            background: transparent;
-            border: none;
-            padding: 0;
-        }
-
-        .store-search-card-input {
-            flex: 1;
-            border: none !important;
-            outline: none !important;
-            background: transparent !important;
-            font-size: 14px;
-            color: #0F172A;
-            padding: 8px 4px;
-            box-sizing: border-box;
-            min-width: 0;
-        }
-
-        html.dark .store-search-card-input {
-            color: #FFFFFF !important;
-        }
-
-        .store-search-btn-green {
-            height: 38px;
-            padding: 0 20px;
+        .action-icon-btn .badge-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            min-width: 17px;
+            height: 17px;
+            padding: 0 4px;
             background-color: #10B981;
-            color: #FFFFFF !important;
-            font-size: 13px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            border: none;
-            border-radius: 2px;
-            cursor: pointer;
-            transition: background-color 0.15s ease;
-            white-space: nowrap;
+            color: #FFFFFF;
+            font-size: 10px;
+            font-weight: 800;
             font-family: monospace;
-            flex-shrink: 0;
+            line-height: 17px;
+            text-align: center;
+            border-radius: 9999px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
         }
 
-        .store-search-btn-green:hover {
-            background-color: #059669 !important;
+        @media (max-width: 768px) {
+            .store-top-bar-container {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+            }
+            .store-search-form {
+                max-width: 100%;
+                order: 2;
+            }
+            .user-profile-compact {
+                order: 1;
+            }
+            .store-action-icons {
+                order: 3;
+                justify-content: flex-end;
+            }
         }
 
-        /* 1.3 КАТАЛОГ И ЗАГОЛОВОК */
+        /* 1.2 КАТАЛОГ */
         .catalog-main {
             width: 100% !important;
             display: block !important;
@@ -291,52 +276,6 @@
             padding: 0 24px;
             box-sizing: border-box;
             width: 100%;
-        }
-
-        .catalog-header {
-            margin: 0 0 24px 0 !important;
-            padding: 0 0 16px 0 !important;
-            border-bottom: 1px solid #E2E8F0 !important;
-            box-sizing: border-box !important;
-            width: 100% !important;
-            position: static !important;
-        }
-
-        html.dark .catalog-header {
-            border-bottom-color: rgba(255, 255, 255, 0.1) !important;
-        }
-
-        h1.catalog-title {
-            font-size: 26px !important;
-            font-weight: 800 !important;
-            color: #0F172A !important;
-            text-transform: uppercase !important;
-            letter-spacing: -0.02em !important;
-            margin: 0 0 8px 0 !important;
-            padding: 0 !important;
-            text-align: left !important;
-            line-height: 1.2 !important;
-            display: block !important;
-            position: static !important;
-        }
-
-        html.dark h1.catalog-title {
-            color: #FFFFFF !important;
-        }
-
-        p.catalog-subtitle {
-            font-size: 14px !important;
-            color: #475569 !important;
-            margin: 0 0 20px 0 !important;
-            max-width: 640px !important;
-            line-height: 1.5 !important;
-            display: block !important;
-            position: static !important;
-            text-align: left !important;
-        }
-
-        html.dark p.catalog-subtitle {
-            color: #94A3B8 !important;
         }
 
         .ecom-layout-container {
@@ -649,92 +588,39 @@
         </div>
     </header>
 
-    <!-- ==================== СТУПЕНЧАТЫЕ БЕЛЫЕ КАРТОЧКИ ШАПКИ МАГАЗИНА ==================== -->
-    <div class="store-header-wrapper">
-        <!-- А) ВЕРХНЯЯ ПОЛОСА (В 2 РАЗА ШИРЕ ПОИСКА, max-width: 1140px, margin: 16px auto 12px auto) -->
-        <div class="store-user-card">
-            <!-- СЛЕВА: Аватар с буквой «M» в зеленом квадрате, Имя «Максим», Бейдж «• ПОКУПЕЦЬ» (gap: 12px) -->
-            <a href="cabinet.html" class="store-user-left" title="Особистий кабінет">
-                <div class="store-user-avatar" id="headerUserAvatar">M</div>
-                <div style="display: flex; align-items: center; gap: 12px;">
-                    <span id="headerUserNameText" class="store-user-name">Максим</span>
-                    <span class="store-user-badge">
-                        <span style="width: 6px; height: 6px; border-radius: 50%; background-color: #10B981; display: inline-block;"></span>
-                        <span>ПОКУПЕЦЬ</span>
-                    </span>
-                </div>
+    <!-- ==================== ЕДИНАЯ СТРОКА ШАПКИ МАГАЗИНА (ПРОФИЛЬ + ПОИСК + ИКОНКИ) ==================== -->
+    <div class="store-top-bar">
+        <div class="store-top-bar-container">
+            <!-- ЛЕВАЯ ЧАСТЬ: ТОЛЬКО ПРОФИЛЬ -->
+            <a href="cabinet.html" class="user-profile-compact" title="Особистий кабінет">
+                <div class="user-avatar-badge" id="headerUserAvatar">M</div>
+                <span class="user-display-name" id="headerUserNameText">Максим</span>
             </a>
 
-            <!-- СПРАВА: РОВНО 3 ЗНАЧКА БЕЗ СЛОВ И БЕЗ НАДПИСЕЙ -->
-            <div class="store-user-right">
-                <!-- 1. Весы (Порівняння) — только иконка ⚖️ со счетчиком в кружке -->
-                <a href="cabinet.html" onclick="saveTabTarget('compare')" class="store-icon-btn" title="Порівняння товарів">
-                    <svg style="width: 17px; height: 17px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path>
-                        <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path>
-                        <path d="M7 21h10"></path>
-                        <path d="M12 3v18"></path>
-                        <path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"></path>
-                    </svg>
-                    <span id="headerCompareCount" class="store-count-badge">2</span>
-                </a>
+            <!-- ЦЕНТР: СТРОКА ПОИСКА -->
+            <form class="store-search-form" onsubmit="event.preventDefault(); handleSearchSubmit();">
+                <input type="text" id="mainSearchInput" placeholder="Шукати товари (шолом, колодки, ручки...)" class="store-search-input" oninput="handleSearchInput(this.value)">
+                <button type="submit" class="store-search-btn">ЗНАЙТИ</button>
+            </form>
 
-                <!-- 2. Сердечко (Обране) — только контурная иконка ♡ со счетчиком -->
-                <a href="cabinet.html" onclick="saveTabTarget('wishlist')" class="store-icon-btn" title="Список бажань">
-                    <svg style="width: 17px; height: 17px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
-                    </svg>
-                    <span id="headerWishlistCount" class="store-count-badge">3</span>
-                </a>
-
-                <!-- 3. Корзина (Кошик) — только иконка 🛒 со счетчиком в зеленом кружке -->
-                <a href="cabinet.html" onclick="saveTabTarget('cart')" class="store-icon-btn" title="Кошик покупок">
-                    <svg style="width: 17px; height: 17px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="8" cy="21" r="1"></circle>
-                        <circle cx="19" cy="21" r="1"></circle>
-                        <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
-                    </svg>
-                    <span id="headerCartCount" class="store-count-badge">2</span>
-                </a>
+            <!-- ПРАВАЯ ЧАСТЬ: 3 ЗНАЧКА БЕЗ НАДПИСЕЙ -->
+            <div class="store-action-icons">
+                <button type="button" onclick="saveTabTarget('compare'); window.location.href='cabinet.html';" class="action-icon-btn" title="Порівняння" aria-label="Порівняння">
+                    ⚖️ <span class="badge-count" id="headerCompareCount">2</span>
+                </button>
+                <button type="button" onclick="saveTabTarget('wishlist'); window.location.href='cabinet.html';" class="action-icon-btn" title="Обране" aria-label="Обране">
+                    ♡ <span class="badge-count" id="headerWishlistCount">3</span>
+                </button>
+                <button type="button" onclick="saveTabTarget('cart'); window.location.href='cabinet.html';" class="action-icon-btn" title="Кошик" aria-label="Кошик">
+                    🛒 <span class="badge-count badge-cart" id="headerCartCount">0</span>
+                </button>
             </div>
         </div>
-
-        <!-- Б) НИЖНЯЯ ПОЛОСА (СТРОКА ПОИСКА, max-width: 620px, margin: 0 auto 24px auto) -->
-        <form class="store-search-card" onsubmit="event.preventDefault(); handleSearchSubmit();">
-            <span class="store-search-icon-btn" aria-hidden="true">
-                <svg style="width: 17px; height: 17px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                </svg>
-            </span>
-            <input type="text" id="mainSearchInput" placeholder="Шукати товари (шолом, колодки, ручки...)"
-                autocomplete="off" class="store-search-card-input" oninput="handleSearchInput(this.value)">
-            <button type="submit" class="store-search-btn-green">
-                ЗНАЙТИ
-            </button>
-        </form>
     </div>
 
-    <!-- ==================== 3. КАТАЛОГ ТОВАРОВ ==================== -->
+    <!-- ==================== ОСНОВНОЙ КАТАЛОГ ТОВАРОВ ==================== -->
     <main class="catalog-main" style="width: 100% !important; display: block !important; position: static !important; clear: both !important; box-sizing: border-box !important;">
         <div class="catalog-container">
-            <!-- Контейнер заголовка (.catalog-header) строго по одной вертикальной линии с боковым меню -->
-            <header class="catalog-header">
-                <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
-                    <div>
-                        <h1 class="catalog-title">
-                            МАГАЗИН АКСЕСУАРІВ ТА ЗАПЧАСТИН
-                        </h1>
-                        <p class="catalog-subtitle">
-                            Оригінальне екіпірування, компоненти та комплектуючі з офіційною гарантією та доставкою Новою Поштою по всій Україні.
-                        </p>
-                    </div>
-                    <span id="productsFoundLabel" class="font-mono text-xs font-bold text-[#0F172A] dark:text-white shrink-0 bg-zinc-100 dark:bg-zinc-800 px-3 py-1.5 rounded-[2px] border border-zinc-200 dark:border-zinc-700 self-start sm:self-center mt-1">
-                        Знайдено: 12 товарів
-                    </span>
-                </div>
-            </header>
-
             <!-- 2-Колоночная структура: Сайдбар 280px + Витрина 1fr -->
             <div class="ecom-layout-container">
 
@@ -866,6 +752,9 @@
                         <span class="text-xs text-zinc-500">Фільтр:</span>
                         <span id="activeFilterBadge" class="text-xs font-bold font-mono px-2 py-0.5 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800/60 rounded-[2px]">
                             Всі категорії
+                        </span>
+                        <span id="productsFoundLabel" class="text-xs font-mono text-zinc-500 dark:text-zinc-400 font-semibold ml-2">
+                            Знайдено: 12 товарів
                         </span>
                         <button type="button" id="clearFilterBtn" onclick="filterByCategory('all')" class="text-xs text-rose-500 hover:underline hidden">
                             Скинути ✕
