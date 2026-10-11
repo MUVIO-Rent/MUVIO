@@ -3780,8 +3780,8 @@ html.dark .product-image-box {
     max-height: 90vh;
     background: #0d0d0d;
     border: 1px solid #222222;
-    border-radius: 6px;
-    box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.95), 0 0 0 1px rgba(255, 255, 255, 0.04);
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -3851,20 +3851,30 @@ html.dark .product-image-box {
     background: transparent;
     border: 1px solid #2a2a2a;
     color: #A0A0A0;
-    padding: 6px 10px;
+    padding: 6px 12px;
     border-radius: 4px;
     font-size: 12px;
+    font-weight: 600;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
-    gap: 5px;
+    gap: 6px;
     transition: all 0.15s ease;
 }
 
-.cart-delete-selected-btn:hover {
+.cart-delete-selected-btn:hover:not(:disabled) {
     border-color: #EF4444;
     color: #EF4444;
     background: rgba(239, 68, 68, 0.08);
+}
+
+.cart-delete-selected-btn:disabled {
+    opacity: 0.35 !important;
+    cursor: not-allowed !important;
+    border-color: #222222 !important;
+    color: #555555 !important;
+    background: transparent !important;
+    pointer-events: none !important;
 }
 
 .cart-modal-close-btn {
@@ -3898,6 +3908,20 @@ html.dark .product-image-box {
     gap: 12px;
 }
 
+.cart-modal-body::-webkit-scrollbar {
+    width: 6px;
+}
+.cart-modal-body::-webkit-scrollbar-track {
+    background: #0d0d0d;
+}
+.cart-modal-body::-webkit-scrollbar-thumb {
+    background: #262626;
+    border-radius: 3px;
+}
+.cart-modal-body::-webkit-scrollbar-thumb:hover {
+    background: #333333;
+}
+
 .cart-empty-state {
     text-align: center;
     padding: 48px 20px;
@@ -3911,12 +3935,12 @@ html.dark .product-image-box {
     padding: 12px 14px;
     background: #141414;
     border: 1px solid #222222;
-    border-radius: 4px;
+    border-radius: 6px;
     transition: border-color 0.15s ease;
 }
 
 .cart-item-card:hover {
-    border-color: #2e2e2e;
+    border-color: #333333;
 }
 
 .cart-item-check {
@@ -3930,7 +3954,7 @@ html.dark .product-image-box {
 .cart-item-thumb-box {
     width: 64px;
     height: 64px;
-    background: #000000;
+    background: #050505;
     border: 1px solid #222222;
     border-radius: 4px;
     display: flex !important;
@@ -3959,13 +3983,14 @@ html.dark .product-image-box {
     font-size: 13px;
     font-weight: 700;
     color: #FFFFFF;
-    line-height: 1.3;
+    line-height: 1.35;
     margin-bottom: 4px;
     text-decoration: none;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    transition: color 0.15s ease;
 }
 
 .cart-item-title:hover {
@@ -3976,6 +4001,13 @@ html.dark .product-image-box {
     font-size: 11px;
     font-family: monospace;
     color: #888888;
+}
+
+.cart-item-bottom-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-left: auto;
 }
 
 .cart-item-stepper {
@@ -4000,16 +4032,23 @@ html.dark .product-image-box {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    transition: background 0.15s ease;
+    transition: all 0.15s ease;
 }
 
-.cart-step-btn:hover {
+.cart-step-btn:hover:not(:disabled) {
     background: #1f1f1f;
     color: #1AB370;
 }
 
+.cart-step-btn:disabled {
+    opacity: 0.35 !important;
+    cursor: not-allowed !important;
+    color: #555555 !important;
+    background: transparent !important;
+}
+
 .cart-step-input {
-    width: 34px;
+    width: 36px;
     height: 28px;
     background: transparent;
     border: none;
@@ -4022,6 +4061,13 @@ html.dark .product-image-box {
     text-align: center;
     outline: none;
     padding: 0;
+    -moz-appearance: textfield;
+}
+
+.cart-step-input::-webkit-outer-spin-button,
+.cart-step-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 .cart-item-price-block {
@@ -4045,8 +4091,8 @@ html.dark .product-image-box {
 }
 
 .cart-item-del-btn {
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
     border-radius: 4px;
     background: transparent;
     border: none;
@@ -4061,7 +4107,7 @@ html.dark .product-image-box {
 
 .cart-item-del-btn:hover {
     color: #EF4444;
-    background: rgba(239, 68, 68, 0.1);
+    background: rgba(239, 68, 68, 0.12);
 }
 
 /* Footer */
@@ -4139,18 +4185,20 @@ html.dark .product-image-box {
     transition: all 0.15s ease;
 }
 
-.cart-checkout-btn:hover {
+.cart-checkout-btn:hover:not(.disabled):not(:disabled) {
     background: #179b61;
     transform: translateY(-1px);
     box-shadow: 0 4px 14px rgba(26, 179, 112, 0.4);
 }
 
+.cart-checkout-btn.disabled,
 .cart-checkout-btn:disabled {
-    background: #2a2a2a !important;
+    background: #222222 !important;
     color: #666666 !important;
     cursor: not-allowed !important;
     transform: none !important;
     box-shadow: none !important;
+    pointer-events: none !important;
 }
 
 @media (max-width: 640px) {
@@ -4174,6 +4222,14 @@ html.dark .product-image-box {
         font-size: 11px !important;
     }
 
+    .cart-del-btn-text {
+        display: none !important;
+    }
+
+    .cart-delete-selected-btn {
+        padding: 6px 8px !important;
+    }
+
     .cart-modal-body {
         padding: 12px 14px !important;
         gap: 10px !important;
@@ -4185,8 +4241,17 @@ html.dark .product-image-box {
         flex-wrap: wrap !important;
     }
 
+    .cart-item-thumb-box {
+        width: 52px !important;
+        height: 52px !important;
+    }
+
     .cart-item-info {
-        flex: 1 1 calc(100% - 110px) !important;
+        flex: 1 1 calc(100% - 130px) !important;
+    }
+
+    .cart-item-title {
+        font-size: 12px !important;
     }
 
     .cart-item-bottom-row {
@@ -4194,8 +4259,10 @@ html.dark .product-image-box {
         display: flex !important;
         align-items: center !important;
         justify-content: space-between !important;
-        padding-top: 6px !important;
+        padding-top: 8px !important;
         border-top: 1px dashed rgba(255, 255, 255, 0.08) !important;
+        margin-top: 4px !important;
+        margin-left: 0 !important;
     }
 
     .cart-modal-footer {
@@ -4228,6 +4295,68 @@ html.dark .product-image-box {
         width: 100% !important;
         justify-content: center !important;
     }
+}
+
+/* ==========================================================================
+   MUVIO STORE — КАТАЛОГ ДЕТАЛЕЙ, РЕКОМЕНДАЦІЇ ТА МАТОВІ ФІЛЬТРИ
+   ========================================================================== */
+.filter-active-pill {
+    background-color: #1c1c1c !important;
+    border: 1px solid #2c2c2c !important;
+    color: #E0E0E0 !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    padding: 3px 8px !important;
+    border-radius: 3px !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    transition: background-color 0.15s ease, border-color 0.15s ease !important;
+}
+
+.filter-clear-pill-btn {
+    color: #8E8E93 !important;
+    transition: color 0.15s ease !important;
+    background: transparent !important;
+    border: none !important;
+    cursor: pointer !important;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    text-shadow: none !important;
+    outline: none !important;
+}
+
+.filter-clear-pill-btn:hover {
+    color: #FFFFFF !important;
+    text-decoration: underline !important;
+}
+
+.filter-chk-item {
+    transition: background-color 0.12s ease !important;
+}
+
+.part-filter-checkbox {
+    accent-color: #1AB370 !important;
+    cursor: pointer !important;
+}
+
+#recommendationsTrack::-webkit-scrollbar {
+    height: 4px !important;
+}
+
+#recommendationsTrack::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.03) !important;
+}
+
+#recommendationsTrack::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15) !important;
+    border-radius: 2px !important;
+}
+
+#recommendationsTrack::-webkit-scrollbar-thumb:hover {
+    background: #1AB370 !important;
 }
 
 

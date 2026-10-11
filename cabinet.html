@@ -18,6 +18,19 @@
                     window.location.replace('auth.html');
                 }
             } catch (e) {}
+
+            // Миттєва міжвкладочна синхронізація виходу з аккаунту
+            window.addEventListener('storage', function (e) {
+                if (e.key === 'muvio_active_user' || e.key === 'muvio_user') {
+                    try {
+                        var act = localStorage.getItem('muvio_active_user');
+                        var sav = localStorage.getItem('muvio_user');
+                        if (!act && !sav) {
+                            window.location.replace('auth.html');
+                        }
+                    } catch (err) {}
+                }
+            });
         })();
     </script>
 
@@ -561,6 +574,11 @@
                     <span class="lang-en">Cart</span>
                     <span id="cartCount" class="ml-1 text-[11px] px-1.5 py-0.2 bg-[#1AB370] text-white font-mono font-bold" style="border-radius: 2px;">2</span>
                 </button>
+                <button onclick="switchCabinetTab('profile')" id="tabBtn-profile" class="tab-btn">
+                    <i data-lucide="user" class="w-4 h-4"></i>
+                    <span class="lang-ua">Профіль</span>
+                    <span class="lang-en">Profile</span>
+                </button>
             </div>
         </div>
 
@@ -974,6 +992,87 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- 7. ТАБ: ПРОФІЛЬ (PROFILE) -->
+        <div id="tabContent-profile" class="hidden space-y-6">
+            <div class="ecom-card p-6 sm:p-8 max-w-2xl bg-white dark:bg-[#111418] border border-zinc-200 dark:border-white/10 rounded-[4px] space-y-6">
+                <div class="border-b border-zinc-100 dark:border-white/5 pb-4">
+                    <h2 class="font-bold text-lg text-zinc-900 dark:text-white uppercase tracking-wide flex items-center gap-2">
+                        <i data-lucide="user-check" class="w-5 h-5 text-[#1AB370]"></i>
+                        <span>Особисті дані профілю</span>
+                    </h2>
+                    <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
+                        Керуйте своїми персональними даними для швидкого оформлення замовлень та доставки Новою Поштою.
+                    </p>
+                </div>
+
+                <!-- Повідомлення про успішне збереження -->
+                <div id="profileSaveSuccess" class="hidden p-3.5 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-900/60 text-emerald-800 dark:text-emerald-300 text-xs rounded-[3px] flex items-center gap-2">
+                    <i data-lucide="check-circle-2" class="w-4 h-4 shrink-0 text-[#1AB370]"></i>
+                    <span>Дані профілю успішно збережено та оновлено!</span>
+                </div>
+
+                <form id="profileForm" onsubmit="event.preventDefault(); handleProfileSave(event);" class="space-y-5">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <!-- 1. Ім'я -->
+                        <div>
+                            <label for="profileFirstName" class="block text-xs font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 mb-1.5">
+                                Ім'я <span class="text-rose-500">*</span>
+                            </label>
+                            <input type="text" id="profileFirstName" required placeholder="Ваше ім'я"
+                                class="ecom-input w-full">
+                        </div>
+
+                        <!-- 2. Прізвище -->
+                        <div>
+                            <label for="profileLastName" class="block text-xs font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 mb-1.5">
+                                Прізвище <span class="text-rose-500">*</span>
+                            </label>
+                            <input type="text" id="profileLastName" required placeholder="Ваше прізвище"
+                                class="ecom-input w-full">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <!-- 3. Номер телефону (маска +380 (__) ___-__-__) -->
+                        <div>
+                            <label for="profilePhone" class="block text-xs font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 mb-1.5">
+                                Номер телефону <span class="text-rose-500">*</span>
+                            </label>
+                            <input type="tel" id="profilePhone" required placeholder="+380 (__) ___-__-__"
+                                class="ecom-input w-full font-mono">
+                        </div>
+
+                        <!-- 4. Дата народження (date picker) -->
+                        <div>
+                            <label for="profileBirthDate" class="block text-xs font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 mb-1.5">
+                                Дата народження <span class="text-rose-500">*</span>
+                            </label>
+                            <input type="date" id="profileBirthDate" required
+                                class="ecom-input w-full font-mono">
+                        </div>
+                    </div>
+
+                    <!-- Email (тільки читання / прив'язка акаунту) -->
+                    <div>
+                        <label for="profileEmailDisplay" class="block text-xs font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 mb-1.5">
+                            Email (прив'язка акаунту)
+                        </label>
+                        <input type="email" id="profileEmailDisplay" readonly
+                            class="ecom-input w-full font-mono bg-zinc-100 dark:bg-[#1a2026] text-zinc-500 cursor-not-allowed">
+                    </div>
+
+                    <!-- Кнопка збереження -->
+                    <div class="pt-2">
+                        <button type="submit" id="saveProfileBtn"
+                            class="ecom-btn bg-[#1AB370] hover:bg-[#169B60] text-white font-bold text-xs uppercase tracking-wider px-6 py-3 transition-colors flex items-center justify-center gap-2">
+                            <i data-lucide="save" class="w-4 h-4"></i>
+                            <span>Зберегти зміни</span>
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
 
@@ -2116,6 +2215,34 @@
 
         // ==================== 6. ПРОФІЛЬ ТА НАВІГАЦІЯ ====================
 
+        // ==================== 6. ПРОФІЛЬ ТА НАВІГАЦІЯ ====================
+
+        function applyPhoneMask(input) {
+            if (!input) return;
+            input.addEventListener('input', function () {
+                let digits = this.value.replace(/\D/g, '');
+                if (digits.startsWith('380')) {
+                    digits = digits.slice(3);
+                } else if (digits.startsWith('0')) {
+                    digits = digits.slice(1);
+                }
+                digits = digits.slice(0, 9);
+
+                let formatted = '+380';
+                if (digits.length > 0) formatted += ' (' + digits.slice(0, 2);
+                if (digits.length >= 2) formatted += ') ' + digits.slice(2, 5);
+                if (digits.length >= 5) formatted += '-' + digits.slice(5, 7);
+                if (digits.length >= 7) formatted += '-' + digits.slice(7, 9);
+                this.value = formatted;
+            });
+
+            input.addEventListener('focus', function () {
+                if (!this.value || this.value.trim() === '') {
+                    this.value = '+380 (';
+                }
+            });
+        }
+
         function initUserProfile() {
             try {
                 let user = null;
@@ -2130,10 +2257,18 @@
 
                 let name = "Максим";
                 let email = "customer@muvio.ua";
+                let phone = "+380 (99) 123-45-67";
+                let birthDate = "1998-05-15";
+                let firstName = "Максим";
+                let lastName = "Коваленко";
 
                 if (user) {
-                    name = user.name || user.login || "Максим";
                     email = user.email || (user.phone ? user.phone : "customer@muvio.ua");
+                    firstName = user.first_name || user.firstName || (user.name ? user.name.split(' ')[0] : (user.login || "Максим"));
+                    lastName = user.last_name || user.lastName || (user.name ? user.name.split(' ').slice(1).join(' ') : "");
+                    name = (firstName + ' ' + lastName).trim() || user.name || user.login || "Максим";
+                    phone = user.phone || phone;
+                    birthDate = user.birth_date || user.birthDate || birthDate;
                 }
                 
                 const nameEl = document.getElementById('userName');
@@ -2146,13 +2281,110 @@
                     const firstChar = name.trim().charAt(0).toUpperCase() || 'M';
                     avatarEl.textContent = firstChar;
                 }
+
+                // Заповнення полів вкладки «Профіль»
+                const fNameInp = document.getElementById('profileFirstName');
+                const lNameInp = document.getElementById('profileLastName');
+                const phoneInp = document.getElementById('profilePhone');
+                const birthInp = document.getElementById('profileBirthDate');
+                const emailInp = document.getElementById('profileEmailDisplay');
+
+                if (fNameInp) fNameInp.value = firstName;
+                if (lNameInp) lNameInp.value = lastName;
+                if (phoneInp) {
+                    phoneInp.value = phone;
+                    applyPhoneMask(phoneInp);
+                }
+                if (birthInp) birthInp.value = birthDate;
+                if (emailInp) emailInp.value = email;
+
             } catch (e) {
                 console.error("Помилка завантаження профілю:", e);
             }
         }
 
+        function handleProfileSave(e) {
+            if (e && e.preventDefault) e.preventDefault();
+
+            const fNameInp = document.getElementById('profileFirstName');
+            const lNameInp = document.getElementById('profileLastName');
+            const phoneInp = document.getElementById('profilePhone');
+            const birthInp = document.getElementById('profileBirthDate');
+            const successBox = document.getElementById('profileSaveSuccess');
+
+            const fName = fNameInp ? fNameInp.value.trim() : '';
+            const lName = lNameInp ? lNameInp.value.trim() : '';
+            const phoneVal = phoneInp ? phoneInp.value.trim() : '';
+            const birthVal = birthInp ? birthInp.value : '';
+
+            if (!fName || !lName || !phoneVal || !birthVal) {
+                alert("Будь ласка, заповніть усі обов'язкові поля профілю.");
+                return;
+            }
+
+            const fullName = `${fName} ${lName}`.trim();
+
+            let currentUser = {};
+            try {
+                const s = localStorage.getItem('muvio_user');
+                if (s) currentUser = JSON.parse(s);
+            } catch (err) {}
+
+            const updatedUser = {
+                ...currentUser,
+                name: fullName,
+                first_name: fName,
+                last_name: lName,
+                firstName: fName,
+                lastName: lName,
+                phone: phoneVal,
+                birth_date: birthVal,
+                birthDate: birthVal
+            };
+
+            try {
+                localStorage.setItem('muvio_user', JSON.stringify(updatedUser));
+                localStorage.setItem('muvio_active_user', JSON.stringify({
+                    login: fullName,
+                    email: updatedUser.email || "customer@muvio.ua"
+                }));
+
+                // Синхронізація в базі muvio_users_db
+                const usersDbRaw = localStorage.getItem('muvio_users_db');
+                if (usersDbRaw) {
+                    const usersDb = JSON.parse(usersDbRaw);
+                    const idx = usersDb.findIndex(u => u.email && updatedUser.email && u.email.toLowerCase() === updatedUser.email.toLowerCase());
+                    if (idx > -1) {
+                        usersDb[idx].name = fullName;
+                        usersDb[idx].first_name = fName;
+                        usersDb[idx].last_name = lName;
+                        usersDb[idx].phone = phoneVal;
+                        usersDb[idx].birth_date = birthVal;
+                        localStorage.setItem('muvio_users_db', JSON.stringify(usersDb));
+                    }
+                }
+            } catch (err) {
+                console.error("Помилка збереження даних профілю:", err);
+            }
+
+            // Оновлення шапки профілю
+            const nameEl = document.getElementById('userName');
+            const avatarEl = document.getElementById('userAvatar');
+            if (nameEl) nameEl.textContent = fullName;
+            if (avatarEl) avatarEl.textContent = fullName.trim().charAt(0).toUpperCase() || 'M';
+
+            // Відображення успіху
+            if (successBox) {
+                successBox.classList.remove('hidden');
+                setTimeout(() => {
+                    successBox.classList.add('hidden');
+                }, 3500);
+            }
+            if (window.lucide) window.lucide.createIcons();
+        }
+
         function switchCabinetTab(tabId) {
-            const tabs = ['orders', 'parcels', 'wishlist', 'compare', 'messages', 'cart'];
+            const tabs = ['orders', 'parcels', 'wishlist', 'compare', 'messages', 'cart', 'profile'];
             
             tabs.forEach(t => {
                 const btn = document.getElementById(`tabBtn-${t}`);
@@ -2285,13 +2517,18 @@
             renderCart();
             let initialTab = 'orders';
             try {
+                const urlParams = new URLSearchParams(window.location.search);
+                const tabParam = urlParams.get('tab');
+                if (['orders', 'parcels', 'wishlist', 'compare', 'messages', 'cart', 'profile'].includes(tabParam)) {
+                    initialTab = tabParam;
+                }
                 const target = localStorage.getItem('muvio_target_tab');
                 if (target) {
                     initialTab = target;
                     localStorage.removeItem('muvio_target_tab');
                 }
                 const hash = window.location.hash.replace('#', '');
-                if (['orders', 'parcels', 'wishlist', 'compare', 'messages', 'cart'].includes(hash)) {
+                if (['orders', 'parcels', 'wishlist', 'compare', 'messages', 'cart', 'profile'].includes(hash)) {
                     initialTab = hash;
                 }
             } catch (e) {}

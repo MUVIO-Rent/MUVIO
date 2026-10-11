@@ -436,18 +436,7 @@
                 </h1>
 
                 <form id="registerForm" onsubmit="event.preventDefault(); handleRegisterSubmit(event);" class="space-y-4">
-                    <!-- Поле 1: Ім'я -->
-                    <div>
-                        <label for="regName" class="text-xs font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 mb-1.5 block text-left">
-                            <span class="lang-ua">Ім'я</span>
-                            <span class="lang-en">Full Name</span>
-                        </label>
-                        <input type="text" id="regName" required
-                            placeholder="Ваше ім'я"
-                            class="auth-input-tesla w-full px-3.5 py-2.5 text-sm outline-none">
-                    </div>
-
-                    <!-- Поле 2: Email -->
+                    <!-- Поле 1: Email -->
                     <div>
                         <label for="regEmail" class="text-xs font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 mb-1.5 block text-left">
                             <span class="lang-ua">Email</span>
@@ -458,7 +447,7 @@
                             class="auth-input-tesla w-full px-3.5 py-2.5 text-sm outline-none">
                     </div>
 
-                    <!-- Поле 3: Пароль -->
+                    <!-- Поле 2: Пароль -->
                     <div>
                         <label for="regPassword" class="text-xs font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 mb-1.5 block text-left">
                             <span class="lang-ua">Пароль</span>
@@ -466,17 +455,6 @@
                         </label>
                         <input type="password" id="regPassword" required minlength="3"
                             placeholder="Придумайте пароль"
-                            class="auth-input-tesla w-full px-3.5 py-2.5 text-sm outline-none">
-                    </div>
-
-                    <!-- Поле 4: Повтор пароля -->
-                    <div>
-                        <label for="regPasswordConfirm" class="text-xs font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 mb-1.5 block text-left">
-                            <span class="lang-ua">Повтор пароля</span>
-                            <span class="lang-en">Confirm Password</span>
-                        </label>
-                        <input type="password" id="regPasswordConfirm" required minlength="3"
-                            placeholder="Повторіть пароль"
                             class="auth-input-tesla w-full px-3.5 py-2.5 text-sm outline-none">
                     </div>
 
@@ -775,28 +753,19 @@
             }, 300);
         }
 
-        // Обробка реєстрації (Ім'я, Email, Пароль, Повтор пароля)
+        // Обробка реєстрації (тільки обов'язкові Email та Пароль)
         async function handleRegisterSubmit(e) {
             if (e && e.preventDefault) e.preventDefault();
             hideAuthAlerts();
 
-            const nameInput = document.getElementById('regName');
             const emailInput = document.getElementById('regEmail');
             const passInput = document.getElementById('regPassword');
-            const passConfirmInput = document.getElementById('regPasswordConfirm');
 
-            const nameVal = nameInput ? nameInput.value.trim() : '';
             const emailVal = emailInput ? emailInput.value.trim() : '';
             const passVal = passInput ? passInput.value.trim() : '';
-            const passConfirmVal = passConfirmInput ? passConfirmInput.value.trim() : '';
 
-            if (!nameVal || !emailVal || !passVal || !passConfirmVal) {
-                showAuthError("Будь ласка, заповніть усі поля.");
-                return;
-            }
-
-            if (passVal !== passConfirmVal) {
-                showAuthError("Паролі не співпадають. Перевірте введення.");
+            if (!emailVal || !passVal) {
+                showAuthError("Будь ласка, вкажіть ваш email та пароль.");
                 return;
             }
 
@@ -817,9 +786,15 @@
                     return;
                 }
 
+                // Автоматично створюємо базовий профіль для подальшого заповнення у вкладці «Профіль»
+                const defaultName = emailVal.split('@')[0] || "Користувач";
                 const newUser = {
-                    name: nameVal,
+                    name: defaultName,
+                    first_name: "",
+                    last_name: "",
                     email: emailVal,
+                    phone: "",
+                    birth_date: "",
                     password: passVal
                 };
                 users.push(newUser);
@@ -831,16 +806,18 @@
                 const profileSession = {
                     id: newUser.email,
                     name: newUser.name,
-                    first_name: newUser.name,
+                    first_name: "",
+                    last_name: "",
                     username: newUser.name,
                     email: newUser.email,
-                    phone: ''
+                    phone: "",
+                    birth_date: ""
                 };
                 localStorage.setItem('muvio_user', JSON.stringify(profileSession));
 
                 showAuthSuccess("Акаунт успішно створено! Перенаправлення в кабінет...");
                 setTimeout(() => {
-                    window.location.href = 'cabinet.html';
+                    window.location.href = 'cabinet.html?tab=profile';
                 }, 500);
             }, 300);
         }
