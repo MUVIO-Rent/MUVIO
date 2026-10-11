@@ -4359,5 +4359,177 @@ html.dark .product-image-box {
     background: #1AB370 !important;
 }
 
+/* ==================== КАТАЛОГ: ПРАВИЛА ВЕРСТКИ ТА КОМПАКТНІ РЕКОМЕНДАЦІЇ ==================== */
+.catalog-main {
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+}
+
+.catalog-container {
+    max-width: 1280px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+}
+
+.ecom-layout-container {
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+}
+
+#viewedRecommendationsSection {
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+}
+
+#recommendationsTrack {
+    display: flex !important;
+    gap: 12px !important;
+    overflow-x: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    scroll-snap-type: x mandatory !important;
+    box-sizing: border-box !important;
+    padding-bottom: 8px !important;
+    scrollbar-width: thin !important;
+}
+
+.recommendation-card {
+    flex: 0 0 190px !important;
+    width: 190px !important;
+    max-width: 190px !important;
+    scroll-snap-align: start !important;
+    background-color: #0d0d0d !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 4px !important;
+    padding: 10px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    box-sizing: border-box !important;
+    transition: border-color 0.15s ease !important;
+}
+
+html:not(.dark) .recommendation-card {
+    background-color: #FFFFFF !important;
+    border-color: #E2E8F0 !important;
+}
+
+.recommendation-card:hover {
+    border-color: #1AB370 !important;
+}
+
+.recommendation-img-box {
+    width: 100% !important;
+    height: 120px !important;
+    max-height: 120px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #141414 !important;
+    border-radius: 3px !important;
+    padding: 8px !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    position: relative !important;
+    margin-bottom: 8px !important;
+}
+
+html:not(.dark) .recommendation-img-box {
+    background: #F8FAFC !important;
+}
+
+.recommendation-img {
+    max-height: 100% !important;
+    max-width: 100% !important;
+    object-fit: contain !important;
+    transition: transform 0.15s ease !important;
+}
+
+.recommendation-card:hover .recommendation-img {
+    transform: scale(1.05) !important;
+}
+
+.recommendation-cat {
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    font-family: monospace !important;
+    text-transform: uppercase !important;
+    color: #1AB370 !important;
+    margin-bottom: 2px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+.recommendation-title {
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    line-height: 1.3 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    color: #FFFFFF !important;
+    margin: 0 !important;
+    height: 34px !important;
+}
+
+html:not(.dark) .recommendation-title {
+    color: #0F172A !important;
+}
+
+.recommendation-footer {
+    margin-top: 10px !important;
+    padding-top: 8px !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+}
+
+html:not(.dark) .recommendation-footer {
+    border-top-color: #F1F5F9 !important;
+}
+
+.recommendation-price {
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    font-family: monospace !important;
+    color: #FFFFFF !important;
+}
+
+html:not(.dark) .recommendation-price {
+    color: #0F172A !important;
+}
+
+.recommendation-buy-btn {
+    height: 34px !important;
+    font-size: 12px !important;
+    padding: 0 10px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    background-color: #1AB370 !important;
+    color: #FFFFFF !important;
+    border: none !important;
+    border-radius: 3px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    cursor: pointer !important;
+    transition: background-color 0.15s ease !important;
+    white-space: nowrap !important;
+}
+
+.recommendation-buy-btn:hover {
+    background-color: #169B60 !important;
+}
+
+
 
 
