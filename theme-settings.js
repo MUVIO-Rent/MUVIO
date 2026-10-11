@@ -389,6 +389,35 @@
         } catch (err) {}
         document.documentElement.setAttribute('lang', initialLang);
 
+        // Автоматичне очищення тестового запису privalovm08@gmail.com
+        try {
+            const targetEmail = 'privalovm08@gmail.com';
+            const rawUsers = localStorage.getItem('muvio_users_db');
+            if (rawUsers) {
+                let uList = JSON.parse(rawUsers);
+                if (Array.isArray(uList)) {
+                    const filtered = uList.filter(u => !u.email || u.email.trim().toLowerCase() !== targetEmail);
+                    if (filtered.length !== uList.length) {
+                        localStorage.setItem('muvio_users_db', JSON.stringify(filtered));
+                    }
+                }
+            }
+            const activeUserRaw = localStorage.getItem('muvio_active_user');
+            if (activeUserRaw) {
+                const activeUser = JSON.parse(activeUserRaw);
+                if (activeUser && activeUser.email && activeUser.email.trim().toLowerCase() === targetEmail) {
+                    localStorage.removeItem('muvio_active_user');
+                }
+            }
+            const userRaw = localStorage.getItem('muvio_user');
+            if (userRaw) {
+                const u = JSON.parse(userRaw);
+                if (u && u.email && u.email.trim().toLowerCase() === targetEmail) {
+                    localStorage.removeItem('muvio_user');
+                }
+            }
+        } catch (e) {}
+
         const initS = getSiteSettings();
         if (initS.theme === 'dark') {
             document.documentElement.classList.add('dark', 'theme-dark', 'dark-theme');

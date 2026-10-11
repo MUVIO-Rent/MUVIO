@@ -458,6 +458,17 @@
                             class="auth-input-tesla w-full px-3.5 py-2.5 text-sm outline-none">
                     </div>
 
+                    <!-- Поле 3: Повторіть пароль -->
+                    <div>
+                        <label for="regConfirmPassword" class="text-xs font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 mb-1.5 block text-left">
+                            <span class="lang-ua">Повторіть пароль</span>
+                            <span class="lang-en">Confirm Password</span>
+                        </label>
+                        <input type="password" id="regConfirmPassword" name="confirm_password" required minlength="3"
+                            placeholder="Повторіть пароль"
+                            class="auth-input-tesla w-full px-3.5 py-2.5 text-sm outline-none">
+                    </div>
+
                     <!-- Кнопка: Створити акаунт (#1AB370) -->
                     <button type="submit" id="registerSubmitBtn"
                         class="bg-[#1AB370] hover:bg-[#169B60] text-white font-bold text-xs uppercase tracking-wider py-3 w-full rounded-lg shadow-sm transition-all text-center mt-2 flex items-center justify-center">
@@ -556,6 +567,37 @@
 
     <!-- ==================== JAVASCRIPT ЛОГІКА ==================== -->
     <script>
+        // Автоматичне очищення тестового користувача privalovm08@gmail.com
+        (function cleanupTestUser() {
+            try {
+                const targetEmail = 'privalovm08@gmail.com';
+                const raw = localStorage.getItem('muvio_users_db');
+                if (raw) {
+                    let users = JSON.parse(raw);
+                    if (Array.isArray(users)) {
+                        const filtered = users.filter(u => !u.email || u.email.trim().toLowerCase() !== targetEmail);
+                        if (filtered.length !== users.length) {
+                            localStorage.setItem('muvio_users_db', JSON.stringify(filtered));
+                        }
+                    }
+                }
+                const activeUserRaw = localStorage.getItem('muvio_active_user');
+                if (activeUserRaw) {
+                    const activeUser = JSON.parse(activeUserRaw);
+                    if (activeUser && activeUser.email && activeUser.email.trim().toLowerCase() === targetEmail) {
+                        localStorage.removeItem('muvio_active_user');
+                    }
+                }
+                const userRaw = localStorage.getItem('muvio_user');
+                if (userRaw) {
+                    const u = JSON.parse(userRaw);
+                    if (u && u.email && u.email.trim().toLowerCase() === targetEmail) {
+                        localStorage.removeItem('muvio_user');
+                    }
+                }
+            } catch (e) {}
+        })();
+
         // База користувачів за замовчуванням
         const DEFAULT_USERS_DB = [
             { name: "MUVIO", email: "muvio@muvio.ua", password: "123" },
@@ -753,24 +795,31 @@
             }, 300);
         }
 
-        // Обробка реєстрації (тільки обов'язкові Email та Пароль)
+        // Обробка реєстрації (Email, Пароль, Повторіть пароль)
         async function handleRegisterSubmit(e) {
             if (e && e.preventDefault) e.preventDefault();
             hideAuthAlerts();
 
             const emailInput = document.getElementById('regEmail');
             const passInput = document.getElementById('regPassword');
+            const confirmPassInput = document.getElementById('regConfirmPassword');
 
             const emailVal = emailInput ? emailInput.value.trim() : '';
             const passVal = passInput ? passInput.value.trim() : '';
+            const confirmPassVal = confirmPassInput ? confirmPassInput.value.trim() : '';
 
-            if (!emailVal || !passVal) {
-                showAuthError("Будь ласка, вкажіть ваш email та пароль.");
+            if (!emailVal || !passVal || !confirmPassVal) {
+                showAuthError("Будь ласка, заповніть усі обов'язкові поля.");
                 return;
             }
 
             if (passVal.length < 3) {
                 showAuthError("Пароль повинен містити щонайменше 3 символи.");
+                return;
+            }
+
+            if (passVal !== confirmPassVal) {
+                showAuthError("Паролі не співпадають");
                 return;
             }
 

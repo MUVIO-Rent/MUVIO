@@ -42,27 +42,47 @@
     <link rel="stylesheet" href="./dark-theme.css?v=3.4">
 
     <style>
+        /* ==================== ТЕМАТИЧНІ ЗМІННІ (LIGHT / DARK) ==================== */
+        :root,
+        [data-theme="light"],
+        html:not(.dark):not(.theme-dark),
+        body.light-theme,
+        body.light {
+            --bg-main: #F7F7F8;
+            --bg-card: #FFFFFF;
+            --text-primary: #111111;
+            --text-secondary: #666666;
+            --border-color: #E2E2E2;
+        }
+
+        [data-theme="dark"],
+        html.dark,
+        html.theme-dark,
+        body.dark-theme,
+        body.dark {
+            --bg-main: #000000;
+            --bg-card: #0d0d0d;
+            --text-primary: #FFFFFF;
+            --text-secondary: #A0A0A0;
+            --border-color: #222222;
+        }
+
         /* БАЗОВА ПІДКЛАДКА */
         html, body {
             margin: 0;
             padding: 0;
             width: 100%;
-            overflow-x: hidden;
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+            overflow-x: clip;
         }
 
         body {
-            background-color: #F8FAFC;
-            color: #0F172A;
+            background-color: var(--bg-main) !important;
+            color: var(--text-primary) !important;
             transition: background-color 0.15s ease, color 0.15s ease;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-        }
-
-        html.dark body {
-            background-color: #080A0C !important;
-            color: #F8FAFC !important;
         }
 
         /* ==================== 1. UNIFIED STORE TOP BAR ==================== */
@@ -79,18 +99,12 @@
             align-items: center;
             justify-content: space-between;
             gap: 20px;
-            background: #FFFFFF;
-            border: 1px solid #E2E8F0;
+            background: var(--bg-card) !important;
+            border: 1px solid var(--border-color) !important;
             border-radius: 4px;
             padding: 10px 20px;
             box-sizing: border-box;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-        }
-
-        html.dark .store-top-bar-container {
-            background: #0d0d0d !important;
-            border-color: rgba(255, 255, 255, 0.08) !important;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
         }
 
         .user-profile-compact {
@@ -276,7 +290,7 @@
             position: static !important;
             clear: both !important;
             box-sizing: border-box !important;
-            overflow-x: hidden !important;
+            overflow: visible !important;
         }
 
         .catalog-container {
@@ -286,6 +300,7 @@
             margin: 0 auto;
             padding: 0 24px;
             box-sizing: border-box;
+            overflow: visible !important;
         }
 
         .ecom-layout-container {
@@ -299,6 +314,7 @@
             gap: 24px;
             align-items: start;
             box-sizing: border-box;
+            overflow: visible !important;
         }
 
         @media (max-width: 1024px) {
@@ -315,19 +331,34 @@
             }
         }
 
-        /* САЙДБАР КАТЕГОРИЙ */
+        /* САЙДБАР КАТЕГОРИЙ (STICKY) */
         .category-sidebar {
-            background-color: #FFFFFF;
-            border: 1px solid #E2E8F0;
-            border-radius: 2px;
-            overflow: hidden;
-            position: sticky;
-            top: 24px;
+            background-color: var(--bg-card) !important;
+            border: 1px solid var(--border-color) !important;
+            border-radius: 4px;
+            position: -webkit-sticky !important;
+            position: sticky !important;
+            top: 60px !important;
+            align-self: flex-start !important;
+            max-height: calc(100vh - 75px) !important;
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+            z-index: 20 !important;
+            scrollbar-width: thin !important;
         }
 
-        html.dark .category-sidebar {
-            background-color: #111418;
-            border-color: rgba(255, 255, 255, 0.08);
+        .category-sidebar::-webkit-scrollbar {
+            width: 4px !important;
+        }
+        .category-sidebar::-webkit-scrollbar-track {
+            background: transparent !important;
+        }
+        .category-sidebar::-webkit-scrollbar-thumb {
+            background: rgba(150, 150, 150, 0.3) !important;
+            border-radius: 2px !important;
+        }
+        .category-sidebar::-webkit-scrollbar-thumb:hover {
+            background: #1AB370 !important;
         }
 
         .cat-group-title {
@@ -340,20 +371,23 @@
             align-items: center;
             justify-content: space-between;
             cursor: pointer;
-            border-top: 1px solid #E2E8F0;
-            background-color: #F8FAFC;
-            color: #0F172A !important;
+            width: 100%;
+            border: none;
+            border-top: 1px solid var(--border-color) !important;
+            background-color: var(--bg-card) !important;
+            color: var(--text-primary) !important;
             transition: background-color 0.15s ease;
+            box-sizing: border-box;
         }
-
-        html.dark .cat-group-title {
-            border-color: rgba(255, 255, 255, 0.06);
-            background-color: #14181D;
-            color: #FFFFFF !important;
+        .cat-group-title:hover {
+            background-color: var(--bg-main) !important;
+        }
+        .cat-group-title span {
+            color: var(--text-primary) !important;
         }
 
         .cat-group-title:first-child {
-            border-top: none;
+            border-top: none !important;
         }
 
         .cat-item-link {
@@ -529,6 +563,12 @@
             min-width: 0 !important;
             box-sizing: border-box !important;
             overflow: hidden !important;
+            background-color: var(--bg-card) !important;
+            border: 1px solid var(--border-color) !important;
+        }
+
+        #viewedRecommendationsSection h3 {
+            color: var(--text-primary) !important;
         }
 
         #recommendationsTrack {
@@ -539,7 +579,7 @@
             max-width: 100% !important;
             scroll-snap-type: x mandatory !important;
             box-sizing: border-box !important;
-            padding-bottom: 8px !important;
+            padding-bottom: 6px !important;
             scrollbar-width: thin !important;
         }
 
@@ -547,10 +587,10 @@
             height: 4px !important;
         }
         #recommendationsTrack::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.03) !important;
+            background: rgba(150, 150, 150, 0.05) !important;
         }
         #recommendationsTrack::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.15) !important;
+            background: rgba(150, 150, 150, 0.25) !important;
             border-radius: 2px !important;
         }
         #recommendationsTrack::-webkit-scrollbar-thumb:hover {
@@ -562,41 +602,40 @@
             width: 190px !important;
             max-width: 190px !important;
             scroll-snap-align: start !important;
-            background-color: #0d0d0d !important;
-            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            background-color: var(--bg-card) !important;
+            border: 1px solid var(--border-color) !important;
             border-radius: 4px !important;
-            padding: 10px !important;
+            padding: 8px 10px !important;
             display: flex !important;
             flex-direction: column !important;
             justify-content: space-between !important;
             box-sizing: border-box !important;
             transition: border-color 0.15s ease !important;
         }
-        html:not(.dark) .recommendation-card {
-            background-color: #FFFFFF !important;
-            border-color: #E2E8F0 !important;
-        }
         .recommendation-card:hover {
             border-color: #1AB370 !important;
         }
+
         .recommendation-img-box {
             width: 100% !important;
-            height: 120px !important;
-            max-height: 120px !important;
+            height: 95px !important;
+            max-height: 95px !important;
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
             background: #141414 !important;
             border-radius: 3px !important;
-            padding: 8px !important;
+            padding: 6px !important;
             box-sizing: border-box !important;
             overflow: hidden !important;
             position: relative !important;
-            margin-bottom: 8px !important;
+            margin-bottom: 6px !important;
         }
-        html:not(.dark) .recommendation-img-box {
+        html:not(.dark) .recommendation-img-box,
+        [data-theme="light"] .recommendation-img-box {
             background: #F8FAFC !important;
         }
+
         .recommendation-img {
             max-height: 100% !important;
             max-width: 100% !important;
@@ -606,6 +645,7 @@
         .recommendation-card:hover .recommendation-img {
             transform: scale(1.05) !important;
         }
+
         .recommendation-cat {
             font-size: 10px !important;
             font-weight: 700 !important;
@@ -617,6 +657,7 @@
             overflow: hidden !important;
             text-overflow: ellipsis !important;
         }
+
         .recommendation-title {
             font-size: 13px !important;
             font-weight: 500 !important;
@@ -625,36 +666,34 @@
             -webkit-line-clamp: 2 !important;
             -webkit-box-orient: vertical !important;
             overflow: hidden !important;
-            color: #FFFFFF !important;
+            color: var(--text-primary) !important;
             margin: 0 !important;
             height: 34px !important;
         }
-        html:not(.dark) .recommendation-title {
-            color: #0F172A !important;
-        }
+
         .recommendation-footer {
-            margin-top: 10px !important;
-            padding-top: 8px !important;
-            border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+            margin-top: 6px !important;
+            padding-top: 6px !important;
+            border-top: 1px solid var(--border-color) !important;
             display: flex !important;
             align-items: center !important;
             justify-content: space-between !important;
         }
-        html:not(.dark) .recommendation-footer {
-            border-top-color: #F1F5F9 !important;
-        }
+
+        /* ТОЧНИЙ ЗБІГ ШРИФТУ ЦІН ДЛЯ РЕКОМЕНДАЦІЙ ТА КАТАЛОГУ */
+        .product-price,
         .recommendation-price {
-            font-size: 15px !important;
+            font-size: 18px !important;
             font-weight: 700 !important;
-            font-family: monospace !important;
-            color: #FFFFFF !important;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
+            color: var(--text-primary) !important;
+            letter-spacing: -0.02em !important;
+            line-height: 1 !important;
         }
-        html:not(.dark) .recommendation-price {
-            color: #0F172A !important;
-        }
+
         .recommendation-buy-btn {
-            height: 34px !important;
-            font-size: 12px !important;
+            height: 32px !important;
+            font-size: 11px !important;
             padding: 0 10px !important;
             font-weight: 700 !important;
             text-transform: uppercase !important;
@@ -671,6 +710,47 @@
         }
         .recommendation-buy-btn:hover {
             background-color: #169B60 !important;
+        }
+
+        /* КАРТКИ КАТАЛОГУ ТА ЗАГАЛЬНІ ЕЛЕМЕНТИ */
+        .ecom-prod-card,
+        .product-card {
+            background-color: var(--bg-card) !important;
+            border: 1px solid var(--border-color) !important;
+        }
+        .product-image-box {
+            background-color: var(--bg-card) !important;
+            border-bottom: 1px solid var(--border-color) !important;
+        }
+        .ecom-prod-card h3,
+        .product-card h3 {
+            color: var(--text-primary) !important;
+        }
+        .ecom-prod-card p,
+        .product-card p {
+            color: var(--text-secondary) !important;
+        }
+        .filter-panel-box {
+            background-color: var(--bg-card) !important;
+            border: 1px solid var(--border-color) !important;
+        }
+        .sort-select-box {
+            background-color: var(--bg-main) !important;
+            border: 1px solid var(--border-color) !important;
+            color: var(--text-primary) !important;
+        }
+        #productsFoundLabel {
+            color: var(--text-secondary) !important;
+        }
+        #noProductsFound {
+            background-color: var(--bg-card) !important;
+            border: 1px solid var(--border-color) !important;
+        }
+        #noProductsFound h3 {
+            color: var(--text-primary) !important;
+        }
+        #noProductsFound p {
+            color: var(--text-secondary) !important;
         }
 
         </style>
@@ -977,13 +1057,12 @@
             </aside>
 
             <!-- ПРАВАЯ КОЛОНКА: ВИТРИНА ТОВАРОВ В СТРОГОЙ СЕТКЕ -->
-            <section class="space-y-5 min-w-0 max-w-full w-full box-border overflow-hidden">
+            <section class="space-y-4 min-w-0 max-w-full w-full box-border overflow-hidden">
                 <!-- 1. СВЕРХУ НАД КАТАЛОГОМ: РЕКОМЕНДАЦІЇ НА ОСНОВІ ВАШИХ ПЕРЕГЛЯДІВ -->
-                <div id="viewedRecommendationsSection" class="p-4 sm:p-5 bg-white dark:bg-[#111418] border border-zinc-200 dark:border-white/10 rounded-[2px] space-y-3 w-full max-w-full min-w-0 box-border overflow-hidden">
+                <div id="viewedRecommendationsSection" class="p-3 sm:p-3.5 rounded-[2px] space-y-2 w-full max-w-full min-w-0 box-border overflow-hidden">
                     <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-2">
-                            <i data-lucide="sparkles" class="w-4 h-4 text-[#1AB370]"></i>
-                            <h3 class="font-bold text-xs sm:text-sm uppercase tracking-wider text-[#0F172A] dark:text-white">
+                        <div>
+                            <h3 class="font-bold text-xs sm:text-sm uppercase tracking-wider">
                                 Рекомендації на основі ваших переглядів
                             </h3>
                         </div>
@@ -998,7 +1077,7 @@
                     </div>
 
                     <!-- Горизонтальна карусель карток переглянутих товарів -->
-                    <div id="recommendationsTrack" class="flex gap-3 overflow-x-auto scroll-smooth pb-2 pt-1 scrollbar-thin w-full max-w-full min-w-0 box-border">
+                    <div id="recommendationsTrack" class="flex gap-3 overflow-x-auto scroll-smooth pb-1.5 pt-0.5 scrollbar-thin w-full max-w-full min-w-0 box-border">
                         <!-- Рендериться динамически через renderViewedRecommendations() -->
                     </div>
                 </div>
@@ -1601,7 +1680,7 @@
                         </a>
                     </div>
                     <div class="recommendation-footer">
-                        <span class="recommendation-price">${prod.price.toLocaleString()} ₴</span>
+                        <span class="product-price recommendation-price">${prod.price.toLocaleString()} ₴</span>
                         <button type="button" onclick="addToCart(${prod.id})" class="recommendation-buy-btn" title="Купити">
                             <i data-lucide="shopping-cart" style="width: 13px; height: 13px;"></i>
                             <span>Купити</span>
@@ -1827,7 +1906,7 @@
                         <div class="flex items-baseline justify-between mb-2.5">
                             <div>
                                 <span class="text-[10px] text-zinc-400 uppercase font-mono block">Ціна:</span>
-                                <span class="text-lg font-bold font-mono text-[#0F172A] dark:text-white">${prod.price.toLocaleString()} ₴</span>
+                                <span class="product-price">${prod.price.toLocaleString()} ₴</span>
                             </div>
                             <span class="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 flex items-center gap-1 font-semibold">
                                 <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
@@ -1965,11 +2044,23 @@
             const nextTheme = isDark ? 'light' : 'dark';
 
             if (nextTheme === 'dark') {
-                document.documentElement.classList.add('dark', 'theme-dark');
+                document.documentElement.classList.add('dark', 'theme-dark', 'dark-theme');
+                document.documentElement.classList.remove('light', 'theme-light', 'light-theme');
                 document.documentElement.setAttribute('data-theme', 'dark');
+                if (document.body) {
+                    document.body.classList.add('dark', 'theme-dark', 'dark-theme');
+                    document.body.classList.remove('light', 'theme-light', 'light-theme');
+                    document.body.setAttribute('data-theme', 'dark');
+                }
             } else {
-                document.documentElement.classList.remove('dark', 'theme-dark');
+                document.documentElement.classList.remove('dark', 'theme-dark', 'dark-theme');
+                document.documentElement.classList.add('light', 'theme-light', 'light-theme');
                 document.documentElement.setAttribute('data-theme', 'light');
+                if (document.body) {
+                    document.body.classList.remove('dark', 'theme-dark', 'dark-theme');
+                    document.body.classList.add('light', 'theme-light', 'light-theme');
+                    document.body.setAttribute('data-theme', 'light');
+                }
             }
 
             try {
@@ -1980,6 +2071,37 @@
                 localStorage.setItem('muvio_site_settings', JSON.stringify(settings));
             } catch (e) {}
         }
+
+        // Автоматичне очищення тестового користувача privalovm08@gmail.com
+        (function cleanupTestUser() {
+            try {
+                const targetEmail = 'privalovm08@gmail.com';
+                const raw = localStorage.getItem('muvio_users_db');
+                if (raw) {
+                    let users = JSON.parse(raw);
+                    if (Array.isArray(users)) {
+                        const filtered = users.filter(u => !u.email || u.email.trim().toLowerCase() !== targetEmail);
+                        if (filtered.length !== users.length) {
+                            localStorage.setItem('muvio_users_db', JSON.stringify(filtered));
+                        }
+                    }
+                }
+                const activeUserRaw = localStorage.getItem('muvio_active_user');
+                if (activeUserRaw) {
+                    const activeUser = JSON.parse(activeUserRaw);
+                    if (activeUser && activeUser.email && activeUser.email.trim().toLowerCase() === targetEmail) {
+                        localStorage.removeItem('muvio_active_user');
+                    }
+                }
+                const userRaw = localStorage.getItem('muvio_user');
+                if (userRaw) {
+                    const u = JSON.parse(userRaw);
+                    if (u && u.email && u.email.trim().toLowerCase() === targetEmail) {
+                        localStorage.removeItem('muvio_user');
+                    }
+                }
+            } catch (e) {}
+        })();
 
         // Ініціалізація сторінки
         document.addEventListener('DOMContentLoaded', () => {
